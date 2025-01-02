@@ -7,7 +7,6 @@ export async function fetchUser() {
     try {
         await connectDB();
         const session = await getServerSession();
-        console.log(session)
 
         // Find user and farmer with associated emails
         const user = await User.findOne({ email: session?.user.email });

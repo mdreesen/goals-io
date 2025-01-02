@@ -28,7 +28,7 @@ export default async function RootLayout({
     ]
     const userNavigation = [
         { name: 'Your Profile', href: '/groupawesome/profile' },
-        { component: <ButtonAuth /> }
+        { component_name: 'Log Out', component: <ButtonAuth /> }
     ]
 
     return (
@@ -40,7 +40,7 @@ export default async function RootLayout({
                             <div className="flex h-16 items-center justify-between px-4 sm:px-0">
                                 <div className="flex items-center">
                                     <div className="shrink-0">
-                                        <Link href={'/groupawesome/'}>
+                                        <Link href={'/dashboard'}>
                                             <Image
                                                 alt="White Raven Logo"
                                                 width={100}
@@ -93,14 +93,18 @@ export default async function RootLayout({
                                                 className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
                                             >
                                                 {userNavigation.map((item) => (
-                                                    <MenuItem key={item.name}>
-                                                        <a
-                                                            href={item.href}
-                                                            className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:outline-none"
-                                                        >
-                                                            {item.name}
-                                                        </a>
-                                                    </MenuItem>
+                                                    <div key={item.component_name ?? item.name}>
+                                                        <MenuItem>
+                                                            <a
+                                                                href={item.href}
+                                                                className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:outline-none"
+                                                            >
+                                                                {item.name}
+                                                            </a>
+                                                        </MenuItem>
+                                                        {item.component}
+
+                                                    </div>
                                                 ))}
                                             </MenuItems>
                                         </Menu>
@@ -151,9 +155,8 @@ export default async function RootLayout({
                             </div>
                             <div className="mt-3 space-y-1 px-2">
                                 {userNavigation.map((item) => (
-                                    <>
-                                    <div key={item.name}>
-                                    <DisclosureButton
+                                    <div key={item.component_name ?? item.name}>
+                                        <DisclosureButton
                                             key={item.name}
                                             as="a"
                                             href={item.href}
@@ -161,21 +164,19 @@ export default async function RootLayout({
                                         >
                                             {item.name}
                                         </DisclosureButton>
-
                                         {item.component}
                                     </div>
-                                    </>
                                 ))}
                             </div>
                         </div>
                     </DisclosurePanel>
                 </Disclosure>
-                <header className="py-10">
+                <div className="py-10">
                     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                         <h1 className="text-3xl font-bold tracking-tight text-white">Dashboard</h1>
                         <p className="text-xl font-bold tracking-tight text-white">{useUser.email}</p>
                     </div>
-                </header>
+                </div>
             </div>
 
             <main className="-mt-32">
