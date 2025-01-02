@@ -1,0 +1,16 @@
+{
+  "node": {
+    "00aaff3a770018f35d91d88857a53e30b11fef7bc4": {
+      "workers": {
+        "app/dashboard/books/page": {
+          "moduleId": "[project]/.next-internal/server/app/dashboard/books/page/actions.js { ACTIONS_MODULE0 => \"[project]/actions/user.ts [app-rsc] (ecmascript)\" } [app-rsc] (ecmascript)",
+          "async": false
+        }
+      },
+      "layer": {
+        "app/dashboard/books/page": "rsc"
+      }
+    }
+  },
+  "edge": {}
+}

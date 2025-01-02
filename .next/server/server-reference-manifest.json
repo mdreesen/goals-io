@@ -1,5 +1,17 @@
 {
-  "node": {},
+  "node": {
+    "00aaff3a770018f35d91d88857a53e30b11fef7bc4": {
+      "workers": {
+        "app/dashboard/page": {
+          "moduleId": "[project]/.next-internal/server/app/dashboard/page/actions.js { ACTIONS_MODULE0 => \"[project]/actions/user.ts [app-rsc] (ecmascript)\" } [app-rsc] (ecmascript)",
+          "async": false
+        }
+      },
+      "layer": {
+        "app/dashboard/page": "rsc"
+      }
+    }
+  },
   "edge": {},
   "encryptionKey": "L5WjKOh7xtFX0c9rvW9LPXeuf4KCUUU9K8VUmwkbqgo="
 }
