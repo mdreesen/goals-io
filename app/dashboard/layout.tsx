@@ -3,6 +3,7 @@ import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuIt
 import { Bars3Icon, BellIcon, XMarkIcon, Cog6ToothIcon } from '@heroicons/react/24/outline';
 import Link from "next/link";
 import { fetchUser } from '@/actions/user';
+import ButtonAuth from "@/components/buttons/ButtonAuth";
 
 function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(' ')
@@ -22,15 +23,11 @@ export default async function RootLayout({
 
     const navigation = [
         { name: 'Dashboard', href: '/dashboard', current: false },
-        { name: 'Customers', href: '/groupawesome/customers', current: false },
-        { name: 'Expenses', href: '/groupawesome/expenses', current: false },
-        { name: 'Invoices', href: '/groupawesome/invoices', current: false },
-        { name: 'Revenue', href: '/groupawesome/revenue', current: false },
-        { name: 'Team', href: '/groupawesome/team', current: false },
+        { name: 'Books', href: '/dashboard/books', current: false },
     ]
     const userNavigation = [
         { name: 'Your Profile', href: '/groupawesome/profile' },
-        { name: 'Sign out', href: '/' },
+        { component_name: 'Sign out', component: <ButtonAuth /> },
     ]
 
     return (
@@ -53,7 +50,7 @@ export default async function RootLayout({
                                         </Link>
                                     </div>
                                     {navigation.map((item) => (
-                                        <div 
+                                        <div
                                             key={item.name}
                                             className="hidden md:block">
                                             <div className="ml-10 flex items-baseline space-x-4">
@@ -95,14 +92,18 @@ export default async function RootLayout({
                                                 className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
                                             >
                                                 {userNavigation.map((item) => (
-                                                    <MenuItem key={item.name}>
-                                                        <a
-                                                            href={item.href}
-                                                            className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:outline-none"
-                                                        >
-                                                            {item.name}
-                                                        </a>
-                                                    </MenuItem>
+                                                    <div key={item.component_name ?? item.name}>
+                                                        <MenuItem>
+                                                            <a
+                                                                href={item.href}
+                                                                className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:outline-none"
+                                                            >
+                                                                {item.name}
+                                                            </a>
+                                                        </MenuItem>
+                                                        {item.component}
+                                                    </div>
+
                                                 ))}
                                             </MenuItems>
                                         </Menu>
@@ -153,14 +154,17 @@ export default async function RootLayout({
                             </div>
                             <div className="mt-3 space-y-1 px-2">
                                 {userNavigation.map((item) => (
-                                    <DisclosureButton
-                                        key={item.name}
-                                        as="a"
-                                        href={item.href}
-                                        className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
-                                    >
-                                        {item.name}
-                                    </DisclosureButton>
+                                    <div key={item.component_name ?? item.name}>
+                                        <DisclosureButton
+                                            as="a"
+                                            href={item.href}
+                                            className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
+                                        >
+                                            {item.name}
+                                        </DisclosureButton>
+                                        {item.component}
+
+                                    </div>
                                 ))}
                             </div>
                         </div>
