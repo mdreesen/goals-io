@@ -21,7 +21,7 @@ export default async function RootLayout({
     };
 
     const navigation = [
-        { name: 'Dashboard', href: '/groupawesome', current: false },
+        { name: 'Dashboard', href: '/dashboard', current: false },
         { name: 'Customers', href: '/groupawesome/customers', current: false },
         { name: 'Expenses', href: '/groupawesome/expenses', current: false },
         { name: 'Invoices', href: '/groupawesome/invoices', current: false },
@@ -166,12 +166,12 @@ export default async function RootLayout({
                         </div>
                     </DisclosurePanel>
                 </Disclosure>
-                <div className="py-10">
+                <header className="py-10">
                     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                         <h1 className="text-3xl font-bold tracking-tight text-white">Dashboard</h1>
                         <p className="text-xl font-bold tracking-tight text-white">{useUser.email}</p>
                     </div>
-                </div>
+                </header>
             </div>
 
             <main className="-mt-32">
