@@ -30,13 +30,13 @@ export default function Page() {
     <div className="flex min-h-full flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <Image
-         alt="White Raven Logo"
-         src="/assets/logo.webp"
-         className="mx-auto h-12 w-auto rounded-full object-cover scale-75"
-         height={200}
-         width={200}
+          alt="White Raven Logo"
+          src="/assets/logo.webp"
+          className="mx-auto h-12 w-auto rounded-full object-cover scale-75"
+          height={200}
+          width={200}
         />
-                <h2 className="mt-6 text-center text-3xl/9 font-bold tracking-tight text-gray-900">
+        <h2 className="mt-6 text-center text-3xl/9 font-bold tracking-tight text-gray-900">
           Welcome to Goals IO
         </h2>
         <h2 className="mt-6 text-center text-2xl/9 font-bold tracking-tight text-gray-900">
@@ -133,6 +133,8 @@ export default function Page() {
             </div>
           </form>
 
+          <div className="text-red-500">{error}</div>
+
           <div>
             {/* <div className="relative mt-10">
               <div aria-hidden="true" className="absolute inset-0 flex items-center">
@@ -186,7 +188,7 @@ export default function Page() {
 
             <p className="mt-10 text-center text-sm text-gray-900">
               <Link href="/authentication/signup" className="leading-6 block text-sm/6 font-medium text-gray-900">
-                Don't have an account?
+                Do not have an account?
               </Link>
             </p>
 

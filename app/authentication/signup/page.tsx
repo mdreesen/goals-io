@@ -150,6 +150,8 @@ export default function Page() {
             </div>
           </form>
 
+          <div className="text-red-500">{error}</div>
+
           <div>
             {/* <div className="relative mt-10">
               <div aria-hidden="true" className="absolute inset-0 flex items-center">
