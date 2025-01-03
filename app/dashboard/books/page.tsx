@@ -29,12 +29,10 @@ export default async function Page() {
                             <img alt="" src={item.imageUrl} className="size-10 rounded-full" />
                         </div> */}
                             <div className="min-w-0 flex-1">
-                                <a href="#" className="focus:outline-none">
-                                    <span aria-hidden="true" className="absolute inset-0" />
-                                    <p className="text-sm font-medium text-gray-900">{item.book_title}</p>
-                                    <p className="truncate text-sm text-gray-500">{item.book_author}</p>
-                                    <p className="truncate text-sm text-gray-500">{item.kind_of_book}</p>
-                                </a>
+                                <span aria-hidden="true" className="absolute inset-0" />
+                                <p className="text-sm font-medium text-gray-900">{item.book_title}</p>
+                                <p className="truncate text-sm text-gray-500">{item.book_author}</p>
+                                <p className="truncate text-sm text-gray-500">{item.kind_of_book}</p>
                             </div>
                         </Link>
                     </div>

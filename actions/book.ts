@@ -54,3 +54,23 @@ export async function editBook(values: any) {
     }
 };
 
+export async function deleteBook(values: any) {
+    const { id } = values;
+
+    try {
+        await connectDB();
+
+        await User.findOneAndUpdate(
+            { 'books._id': id },
+            { $pull: { 'books': { _id: id } } },
+            { new: true });
+
+        revalidatePath('/dashboard/books');
+
+
+    } catch (e) {
+        console.log(e)
+        return e
+    }
+};
+

@@ -5,10 +5,11 @@ import { editBook } from "@/actions/book";
 import { useSession } from "next-auth/react";
 import { ChevronDownIcon } from '@heroicons/react/16/solid';
 import Link from 'next/link';
+import ButtonDeleteBook from "@/components/buttons/ButtonDeleteBook";
 
 export default function Page({ params }: { params: Promise<{ id: string }> }) {
     const { id } = use(params);
-  
+
     const { data } = useSession();
     const userData = data?.user;
 
@@ -21,20 +22,20 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
 
     const handleSubmit = async (formData: FormData) => {
         try {
-          const r = await editBook({
-            _id: findBook?._id,
-            book_title: formData.get("book_title"),
-            kind_of_book: formData.get("kind_of_book"),
-            book_author: formData.get("book_author"),
-          });
-          console.log(r)
-          router.refresh
-          router.push(`/dashboard/books`);
+            const r = await editBook({
+                _id: findBook?._id,
+                book_title: formData.get("book_title"),
+                kind_of_book: formData.get("kind_of_book"),
+                book_author: formData.get("book_author"),
+            });
+            console.log(r)
+            router.refresh
+            router.push(`/dashboard/books`);
         } catch (error) {
-          setError(error as string)
-          console.log(error);
+            setError(error as string)
+            console.log(error);
         }
-      };
+    };
 
     const form = (
         <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
@@ -111,18 +112,21 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
                 </div>
             </div>
 
-            <div className="mt-6 flex items-center justify-end gap-x-6">
-                <Link href={'/dashboard/books'}>
-                    <button type="button" className="text-sm/6 font-semibold text-gray-900">
-                        Cancel
+            <div className="mt-6 flex items-center gap-x-6 justify-between">
+                <div><ButtonDeleteBook data={findBook} /></div>
+                <div className="flex gap-x-6 items-center">
+                    <Link href={'/dashboard/books'}>
+                        <button type="button" className="text-sm/6 font-semibold text-gray-900 justify-end">
+                            Cancel
+                        </button>
+                    </Link>
+                    <button
+                        type="submit"
+                        className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                    >
+                        Save
                     </button>
-                </Link>
-                <button
-                    type="submit"
-                    className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-                >
-                    Save
-                </button>
+                </div>
             </div>
 
             {error && <span className='block text-sm/6 font-medium text-red-500'>{error}</span>}
