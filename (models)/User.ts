@@ -3,6 +3,13 @@ import mongoose, { Schema } from "mongoose";
 mongoose.connect(`${process.env.MONGO_URI}`);
 mongoose.Promise = global.Promise;
 
+const bookSchema = new Schema(
+    {
+        book_title: String || undefined,
+        kind_of_book: String || undefined,
+        book_author: String || undefined,
+    }, { timestamps: false });
+
 const userSchema = new Schema(
     {
         first_name: String,
@@ -20,6 +27,7 @@ const userSchema = new Schema(
         postalCode: String,
         state: String,
         county: String,
+        books: [bookSchema],
         resetPasswordToken: String,
         createdAt: String,
         updatedAt: String

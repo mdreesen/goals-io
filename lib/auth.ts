@@ -13,6 +13,7 @@ declare module "next-auth" {
       _id: string;
       email: string;
       password: string;
+      books: [],
   
       createdAt: string,
       updatedAt: string,
@@ -27,6 +28,7 @@ declare module "next-auth" {
     _id: string;
     email: string;
     password: string;
+    books: [],
 
     createdAt: string,
     updatedAt: string,
@@ -42,6 +44,7 @@ declare module "next-auth/jwt" {
     _id: string;
     email: string;
     password: string;
+    books: [],
 
     createdAt: string,
     updatedAt: string,

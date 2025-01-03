@@ -24,6 +24,7 @@ export default async function RootLayout({
     const navigation = [
         { name: 'Dashboard', href: '/dashboard', current: false },
         { name: 'Books', href: '/dashboard/books', current: false },
+        { name: 'Nutrition', href: '/dashboard/nutrition', current: false },
     ]
     const userNavigation = [
         { name: 'Your Profile', href: '/groupawesome/profile' },
@@ -39,7 +40,7 @@ export default async function RootLayout({
                             <div className="flex h-16 items-center justify-between px-4 sm:px-0">
                                 <div className="flex items-center">
                                     <div className="shrink-0">
-                                        <Link href={'/groupawesome/'}>
+                                        <Link href={'/dashboard'}>
                                             <Image
                                                 alt="White Raven Logo"
                                                 width={100}
