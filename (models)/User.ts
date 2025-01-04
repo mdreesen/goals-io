@@ -8,6 +8,8 @@ const bookSchema = new Schema(
         book_title: String || undefined,
         kind_of_book: String || undefined,
         book_author: String || undefined,
+        book_start_date: String || undefined,
+        book_end_date: String || undefined
     }, { timestamps: false });
 
 const userSchema = new Schema(

@@ -19,10 +19,6 @@ export default function FastingTimer() {
             const newDate = new Date();
             const setNewDate = newDate.setHours(newDate.getHours() + 16);
 
-
-
-            console.log('Blarg', newDate, setNewDate);
-
             const timeHours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const timeMinutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
             const timeSeconds = Math.floor((difference % (1000 * 60)) / 1000);

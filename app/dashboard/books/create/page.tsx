@@ -3,6 +3,8 @@ import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { addBook } from "@/actions/book";
 import { ChevronDownIcon } from '@heroicons/react/16/solid';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 import Link from 'next/link';
 
 export default function Page() {
@@ -11,6 +13,8 @@ export default function Page() {
     const ref = useRef(null);
 
     const [error, setError] = useState<string>();
+    const [selectedStartDate, setSelectedStartDate] = useState(new Date());
+    const [selectedEndDate, setSelectedEndDate] = useState(new Date());
 
     const handleSubmit = async (formData: FormData) => {
         try {
@@ -18,6 +22,8 @@ export default function Page() {
             book_title: formData.get("book_title"),
             kind_of_book: formData.get("kind_of_book"),
             book_author: formData.get("book_author"),
+            book_start_date: selectedStartDate,
+            book_end_date: selectedEndDate
           });
           router.refresh
           router.push(`/dashboard/books`);
@@ -26,6 +32,14 @@ export default function Page() {
           console.log(error);
         }
       };
+
+      const handleStartDateChange = (date: any) => {
+        setSelectedStartDate(date);
+    };
+
+    const handleEndDateChange = (date: any) => {
+        setSelectedEndDate(date);
+    };
 
     const form = (
         <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
@@ -88,6 +102,30 @@ export default function Page() {
         </div>
     );
 
+    const datePickers = (
+        <div className="flex justify-between">
+            <div>
+                <label className="block text-sm/6 font-medium text-gray-900">Start Date</label>
+                <DatePicker
+                    className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
+                    selected={selectedStartDate}
+                    onChange={handleStartDateChange}
+                    dateFormat="yyyy-MM-dd"
+                />
+            </div>
+
+            <div>
+            <label className="block text-sm/6 font-medium text-gray-900">End Date</label>
+                <DatePicker
+                    className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
+                    selected={selectedEndDate}
+                    onChange={handleEndDateChange}
+                    dateFormat="yyyy-MM-dd"
+                />
+            </div>
+        </div>
+    )
+
 
     return (
         <form ref={ref} action={handleSubmit}>
@@ -97,6 +135,7 @@ export default function Page() {
                     <p className="mt-1 text-sm/6 text-gray-600">Name and details of book.</p>
 
                     {form}
+                    {datePickers}
                 </div>
             </div>
 
