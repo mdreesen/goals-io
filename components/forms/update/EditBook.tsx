@@ -1,21 +1,16 @@
 'use client';
-import { use, useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { editBook } from "@/actions/book";
-import { useSession } from "next-auth/react";
 import { ChevronDownIcon } from '@heroicons/react/16/solid';
 import Link from 'next/link';
 import ButtonDeleteBook from "@/components/buttons/ButtonDeleteBook";
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
-export default function Page({ params }: { params: Promise<{ id: string }> }) {
-    const { id } = use(params);
+export default function EditBook(values: any) {
 
-    const { data } = useSession();
-    const userData = data?.user;
-
-    const findBook = userData?.books.find((item: any) => item._id === id) as any;
+    const findBook = values;
 
     const router = useRouter();
     const ref = useRef(null);

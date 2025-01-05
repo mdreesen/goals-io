@@ -3,6 +3,7 @@ import { connectDB } from "@/lib/mongodb";
 import User from "@/(models)/User";
 import { getServerSession } from "next-auth/next";
 import { revalidatePath } from 'next/cache';
+import { ObjectId } from "mongodb";
 
 export const fetchBooks = async () => {
 
@@ -72,6 +73,24 @@ export async function deleteBook(values: any) {
     } catch (e) {
         console.log(e)
         return e
+    }
+};
+
+export const fetchBookById = async (values: any) => {
+    const { id } = values;
+    try {
+        await connectDB();
+        const session = await getServerSession();
+
+        const user = await User.findOne({ email: session?.user.email });
+
+        const books = user.books.filter((item: any) => item._id.toString() === id)
+
+        return books[0]
+
+    } catch (e) {
+        console.log(e);
+        return e;
     }
 };
 
