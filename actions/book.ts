@@ -84,7 +84,10 @@ export const fetchBookById = async (values: any) => {
 
         const user = await User.findOne({ email: session?.user.email });
 
-        const books = user.books.filter((item: any) => item._id.toString() === id)
+        const books = user.books.filter((item: any) => {
+            const idToString = item.id.toString()
+            return idToString.includes(id)
+        });
 
         return books[0]
 

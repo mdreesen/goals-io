@@ -8,22 +8,20 @@ import ButtonDeleteBook from "@/components/buttons/ButtonDeleteBook";
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
-export default function EditBook(values: any) {
-
-    const findBook = values;
+export default function EditBook({ data }: any) {
 
     const router = useRouter();
     const ref = useRef(null);
 
     const [error, setError] = useState<string>();
-    const [selectedStartDate, setSelectedStartDate] = useState(findBook?.book_start_date);
-    const [selectedEndDate, setSelectedEndDate] = useState(findBook?.book_end_date);
+    const [selectedStartDate, setSelectedStartDate] = useState(data?.book_start_date);
+    const [selectedEndDate, setSelectedEndDate] = useState(data?.book_end_date);
 
 
     const handleSubmit = async (formData: FormData) => {
         try {
             const r = await editBook({
-                _id: findBook?._id,
+                _id: data?._id,
                 book_title: formData.get("book_title"),
                 kind_of_book: formData.get("kind_of_book"),
                 book_author: formData.get("book_author"),
@@ -61,7 +59,7 @@ export default function EditBook(values: any) {
                         type="text"
                         autoComplete="book_title"
                         placeholder="Book title"
-                        defaultValue={findBook?.book_title}
+                        defaultValue={data?.book_title}
                         required
                         className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-900 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
                     />
@@ -77,7 +75,7 @@ export default function EditBook(values: any) {
                         id="kind_of_book"
                         name="kind_of_book"
                         autoComplete="kind_of_book"
-                        defaultValue={findBook?.kind_of_book}
+                        defaultValue={data?.kind_of_book}
                         className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pl-3 pr-8 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
                     >
                         <option>Audiobook</option>
@@ -102,7 +100,7 @@ export default function EditBook(values: any) {
                         type="text"
                         autoComplete="book_author"
                         placeholder="Author of book"
-                        defaultValue={findBook?.book_author}
+                        defaultValue={data?.book_author}
                         className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
                     />
                 </div>
@@ -148,7 +146,7 @@ export default function EditBook(values: any) {
             </div>
 
             <div className="mt-6 flex items-center gap-x-6 justify-between">
-                <div><ButtonDeleteBook data={findBook} /></div>
+                <div><ButtonDeleteBook data={data} /></div>
                 <div className="flex gap-x-6 items-center">
                     <Link href={'/dashboard/books'}>
                         <button type="button" className="text-sm/6 font-semibold text-gray-900 justify-end">
