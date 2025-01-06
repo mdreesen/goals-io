@@ -24,9 +24,10 @@ export default async function RootLayout({
     const navigation = [
         { name: 'Dashboard', href: '/dashboard', current: false },
         { name: 'Books', href: '/dashboard/books', current: false },
+        { name: 'Weight', href: '/dashboard/weight', current: false },
     ]
     const userNavigation = [
-        { name: 'Your Profile', href: '/groupawesome/profile' },
+        { name: 'Your Profile', href: '/dashboard/profile' },
         { component_name: 'Sign out', component: <ButtonAuth /> },
     ]
 

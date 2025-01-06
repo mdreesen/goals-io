@@ -12,6 +12,12 @@ const bookSchema = new Schema(
         book_end_date: String || undefined
     }, { timestamps: false });
 
+const weightSchema = new Schema(
+    {
+        weight: String || undefined,
+        weight_date: String || undefined,
+    }, { timestamps: false });
+
 const userSchema = new Schema(
     {
         first_name: String,
@@ -30,6 +36,7 @@ const userSchema = new Schema(
         state: String,
         county: String,
         books: [bookSchema],
+        weight: [weightSchema],
         resetPasswordToken: String,
         createdAt: String,
         updatedAt: String
