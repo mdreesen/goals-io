@@ -9,11 +9,19 @@ declare module "next-auth" {
   
   interface Session extends DefaultSession {
     user: {
-      username: string; // the user will now have the property
-      _id: string;
-      email: string;
-      password: string;
+      username: string,
+      first_name: string,
+      last_name: string,
+      email: string,
+      phone: string,
+      password: string,
+      country: string,
+      street_address: string,
+      city: string,
+      region: string,
+      postal_code: string,
       books: [],
+      weight: [],
   
       createdAt: string,
       updatedAt: string,
@@ -24,11 +32,19 @@ declare module "next-auth" {
   }
 
   interface User extends DefaultUser {
-    username: string; // the user will now have the property
-    _id: string;
-    email: string;
-    password: string;
+    username: string,
+    first_name: string,
+    last_name: string,
+    email: string,
+    phone: string,
+    password: string,
+    country: string,
+    street_address: string,
+    city: string,
+    region: string,
+    postal_code: string,
     books: [],
+    weight: [],
 
     createdAt: string,
     updatedAt: string,
@@ -40,11 +56,19 @@ declare module "next-auth" {
 
 declare module "next-auth/jwt" {
   interface JWT extends DefaultJWT {
-    username: string; // the user will now have the property
-    _id: string;
-    email: string;
-    password: string;
+    username: string,
+    first_name: string,
+    last_name: string,
+    email: string,
+    phone: string,
+    password: string,
+    country: string,
+    street_address: string,
+    city: string,
+    region: string,
+    postal_code: string,
     books: [],
+    weight: [],
 
     createdAt: string,
     updatedAt: string,

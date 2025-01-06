@@ -80,6 +80,7 @@ export default function WeightForm({ data }: any) {
                     </button>
                 </div>
             </div>
+            {error && <span className='block text-sm/6 font-medium text-red-500'>{error}</span>}
         </form>
     )
 }

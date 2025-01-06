@@ -18,7 +18,7 @@ export default async function RootLayout({
     const useUser = await fetchUser();
 
     const user = {
-        name: useUser.group_name,
+        name: useUser?.username ? useUser?.username : useUser?.email,
     };
 
     const navigation = [
@@ -174,7 +174,7 @@ export default async function RootLayout({
                 <header className="py-10">
                     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                         <h1 className="text-3xl font-bold tracking-tight text-white">Dashboard</h1>
-                        <p className="text-xl font-bold tracking-tight text-white">{useUser.email}</p>
+                        <p className="text-xl font-bold tracking-tight text-white">{user.name}</p>
                     </div>
                 </header>
             </div>
