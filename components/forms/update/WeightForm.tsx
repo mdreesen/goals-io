@@ -44,7 +44,7 @@ export default function WeightForm({ data }: any) {
                         type="text"
                         placeholder="155"
                         defaultValue={data.weight}
-                        className="block min-w-0 grow py-1.5 pl-1 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6"
+                        className="block min-w-0 grow py-1.5 pl-1 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6"
                     />
                     <div className="shrink-0 px-2 select-none text-base text-gray-500 sm:text-sm/6">lbs</div>
                 </div>
@@ -67,7 +67,7 @@ export default function WeightForm({ data }: any) {
             <div className="mt-6 flex items-center gap-x-6 justify-between">
                 <div><ButtonDeleteWeight data={data} /></div>
                 <div className="flex gap-x-6 items-center">
-                    <Link href={'/dashboard/books'}>
+                    <Link href={'/dashboard/weight'}>
                         <button type="button" className="text-sm/6 font-semibold text-gray-900 justify-end">
                             Cancel
                         </button>
