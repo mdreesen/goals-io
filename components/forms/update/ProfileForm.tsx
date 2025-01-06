@@ -3,11 +3,9 @@ import { ChevronDownIcon } from '@heroicons/react/16/solid';
 import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { editProfile } from "@/actions/profile";
-import { formatDateAndTime } from "@/lib/formatters";
 import Link from 'next/link';
 
 export default function ProfileForm({ data }: any) {
-    console.log(data)
 
     const router = useRouter();
     const ref = useRef(null);
@@ -218,6 +216,8 @@ export default function ProfileForm({ data }: any) {
                     Save
                 </button>
             </div>
+
+            {error && <span className='block text-sm/6 font-medium text-red-500'>{error}</span>}
         </form>
     )
 }

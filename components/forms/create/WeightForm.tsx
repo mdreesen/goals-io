@@ -5,7 +5,9 @@ import { addWeight } from "@/actions/weight";
 import { formatDateAndTime } from "@/lib/formatters";
 import Link from 'next/link';
 
-export default function WeightForm() {
+export default function WeightForm({ data }: any) {
+    // User data checks
+    const useStartingWeight = data?.weight?.length === 0;
 
     const router = useRouter();
     const ref = useRef(null);
@@ -15,17 +17,20 @@ export default function WeightForm() {
 
     const handleSubmit = async (formData: FormData) => {
         try {
-          await addWeight({
-            weight: formData.get("weight"),
-            weight_date: formatDateAndTime(new Date()),
-          });
-          router.refresh
-          router.push(`/dashboard/weight`);
+
+            await addWeight({
+                weight: formData.get("weight"),
+                weight_date: formatDateAndTime(new Date()),
+                starting_weight: useStartingWeight
+            });
+
+            router.refresh
+            router.push(`/dashboard/weight`);
         } catch (error) {
-          setError(error as string)
-          console.log(error);
+            setError(error as string)
+            console.log(error);
         }
-      };
+    };
 
     // Expense name and expense value
     const personInfo = (
@@ -33,7 +38,7 @@ export default function WeightForm() {
 
             <div className="sm:col-span-3">
                 <label htmlFor="first-name" className="block text-sm/6 font-medium text-gray-900">
-                    Weight
+                    Weight {useStartingWeight && ' - Please enter your starting weight'}
                 </label>
                 <div className="flex items-center w-[100px] rounded-md bg-white pl-3 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-gray-900">
                     <input
@@ -56,7 +61,6 @@ export default function WeightForm() {
                 <div className="border-b border-gray-900/10 pb-12">
                     <h2 className="text-base/7 font-semibold text-gray-900">Weight Information</h2>
                     <p className="mt-1 text-sm/6 text-gray-600">Insert your weight.</p>
-
                     {personInfo}
                 </div>
             </div>

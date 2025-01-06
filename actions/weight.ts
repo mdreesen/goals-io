@@ -21,7 +21,6 @@ export const fetchWeight = async () => {
 };
 
 export const addWeight = async (values: any) => {
-    console.log(values)
 
     const session = await getServerSession();
 

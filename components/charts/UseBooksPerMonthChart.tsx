@@ -14,8 +14,8 @@ export const UseBooksPerMonthChart = ({ data }: any) => {
           <YAxis />
           <Tooltip />
           <Legend />
-          <Line type="monotone" dataKey="start_date" stroke="#c18d21" dot={false} />
-          <Line type="monotone" dataKey="end_date" stroke="#102945" dot={false} />
+          <Line name="Books Started" type="monotone" dataKey="start_date" stroke="#c18d21" dot={false} />
+          <Line name="Books Ended" type="monotone" dataKey="end_date" stroke="#102945" dot={false} />
         </LineChart>
       </ResponsiveContainer>
     </>

@@ -44,12 +44,12 @@ export default async function Page() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">
-                {useWeight.length > 0 ? useWeight.map((item: any, index: number) => (
+                {useWeight.length > 0 ? useWeight.reverse().map((item: any, index: number) => (
                   <tr key={`${item.weight}-${index}`}>
                     <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
-                      {`${item.weight} lbs`}
+                      {`${item.weight} lbs ${item.starting_weight ? ' - Starting Weight' : ''}`}
                     </td>
-                    <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{formatDateAndTime(item.weight_date)}</td>
+                    <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{formatDateAndTime(item.weight_date)}{item.starting_weight ? ' - Starting Date' : ''}</td>
                     <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
                       <a href={`/dashboard/weight/edit/${item.id}`} className="text-gray-900 hover:text-gray-900">
                         Edit<span className="sr-only">, {item.id}</span>

@@ -16,6 +16,7 @@ const weightSchema = new Schema(
     {
         weight: String || undefined,
         weight_date: String || undefined,
+        starting_weight: Boolean || undefined
     }, { timestamps: false });
 
 const userSchema = new Schema(

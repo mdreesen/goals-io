@@ -2,7 +2,7 @@ import ProfileForm from '@/components/forms/update/ProfileForm';
 import { fetchUser } from '@/actions/user';
 
 
-export default async function Page({ params }: any) {
+export default async function Page() {
     const useUser = await fetchUser();
 
 
