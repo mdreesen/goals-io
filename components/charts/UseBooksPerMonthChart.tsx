@@ -15,7 +15,7 @@ export const UseBooksPerMonthChart = ({ data }: any) => {
           <Tooltip />
           <Legend />
           <Line name="Books Started" type="monotone" dataKey="start_date" stroke="#c18d21" dot={false} />
-          <Line name="Books Ended" type="monotone" dataKey="end_date" stroke="#102945" dot={false} />
+          <Line name="Books Finished" type="monotone" dataKey="end_date" stroke="#102945" dot={false} />
         </LineChart>
       </ResponsiveContainer>
     </>
