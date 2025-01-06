@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { editWeight } from "@/actions/weight";
 import Link from 'next/link';
 import { formatDateAndTime } from "@/lib/formatters";
+import ButtonDeleteWeight from "@/components/buttons/ButtonDeleteWeight";
 
 export default function WeightForm({ data }: any) {
 
@@ -63,19 +64,21 @@ export default function WeightForm({ data }: any) {
                 </div>
             </div>
 
-            <div className="mt-6 flex items-center justify-end gap-x-6">
-                <Link href={'/dashboard/weight'}>
-                    <button type="button" className="text-sm/6 font-semibold text-gray-900">
-                        Cancel
+            <div className="mt-6 flex items-center gap-x-6 justify-between">
+                <div><ButtonDeleteWeight data={data} /></div>
+                <div className="flex gap-x-6 items-center">
+                    <Link href={'/dashboard/books'}>
+                        <button type="button" className="text-sm/6 font-semibold text-gray-900 justify-end">
+                            Cancel
+                        </button>
+                    </Link>
+                    <button
+                        type="submit"
+                        className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                    >
+                        Save
                     </button>
-                </Link>
-                <button
-                    type="submit"
-                    className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-                >
-                    Save
-                </button>
-                {error && <span className='block text-sm/6 font-medium text-red-500'>{error}</span>}
+                </div>
             </div>
         </form>
     )

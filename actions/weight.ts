@@ -56,6 +56,26 @@ export async function editWeight(values: any) {
     }
 };
 
+export async function deleteWeight(values: any) {
+    const { id } = values;
+
+    try {
+        await connectDB();
+
+        await User.findOneAndUpdate(
+            { 'weight._id': id },
+            { $pull: { 'weight': { _id: id } } },
+            { new: true });
+
+        revalidatePath('/dashboard/weight');
+
+
+    } catch (e) {
+        console.log(e)
+        return e
+    }
+};
+
 export const fetchWeightById = async (values: any) => {
     const { id } = values;
     try {
