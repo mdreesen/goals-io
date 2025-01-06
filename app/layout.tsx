@@ -3,7 +3,7 @@ import { Provider } from "./provider";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Goals IO",
+  title: "Ascend",
   description: "Set goals. Achieve greatness.",
 };
 

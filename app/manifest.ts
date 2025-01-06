@@ -2,9 +2,9 @@ import type { MetadataRoute } from 'next'
  
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'Goals IO',
-    short_name: 'Goals IO',
-    description: 'A Progressive Web App built with Next.js',
+    name: 'Ascend',
+    short_name: 'Ascend',
+    description: 'Set goals. Achieve greatness.',
     start_url: '/',
     display: 'standalone',
     background_color: '#ffffff',
