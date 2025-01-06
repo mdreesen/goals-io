@@ -23,7 +23,7 @@ export default async function Page() {
                 {books.length > 0 ? books?.map((item: any, index: number) => {
 
                     const useBookStartDate = item.book_start_date ? `Start Date ${formatDateAndTime(item.book_start_date)}` : '';
-                    const useBookEndDate = item.book_end_date ? `End Date ${formatDateAndTime(item.book_end_date)}` : '';
+                    const useBookEndDate = item.book_end_date ? `End Date ${formatDateAndTime(item.book_end_date)}` : 'Currently Reading';
 
                     return (
                         <div
@@ -39,7 +39,6 @@ export default async function Page() {
                                     <div className='flex'>
                                         <p className="truncate text-sm text-gray-500">{useBookStartDate}</p>
                                         <p className="truncate text-sm text-gray-500 px-4">{useBookEndDate}</p>
-
                                     </div>
                                 </div>
                             </a>
