@@ -37,7 +37,7 @@ export default function Page() {
           width={200}
         />
         <h2 className="mt-6 text-center text-3xl/9 font-bold tracking-tight text-gray-900">
-          Welcome to Goals IO
+          Welcome to Ascend
         </h2>
         <h2 className="mt-6 text-center text-2xl/9 font-bold tracking-tight text-gray-900">
           Sign in to your account
@@ -116,11 +116,11 @@ export default function Page() {
                 </label>
               </div>
 
-              <div className="text-sm/6">
+              {/* <div className="text-sm/6">
                 <a href="#" className="font-semibold text-gray-900 hover:text-gray-900">
                   Forgot password?
                 </a>
-              </div>
+              </div> */}
             </div>
 
             <div>
