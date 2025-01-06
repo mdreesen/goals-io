@@ -1,9 +1,10 @@
 import { fetchWeight } from "@/actions/weight"
+import { formatDateAndTime } from "@/lib/formatters";
+import Link from "next/link";
 
 export default async function Page() {
 
   const useWeight = await fetchWeight() ?? [];
-  console.log(useWeight);
 
   return (
     <div className="px-4 sm:px-6 lg:px-8">
@@ -14,13 +15,15 @@ export default async function Page() {
             Weight tracked.
           </p>
         </div>
-        <div className="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-          <button
-            type="button"
-            className="block rounded-md bg-gray-800 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-          >
-            Add weight
-          </button>
+        <div className="flex justify-end mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
+          <Link href={`/dashboard/weight/create`}>
+            <button
+              type="button"
+              className="block rounded-md bg-gray-800 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            >
+              Add weight
+            </button>
+          </Link>
         </div>
       </div>
       <div className="mt-8 flow-root">
@@ -32,28 +35,28 @@ export default async function Page() {
                   <th scope="col" className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">
                     weight
                   </th>
-                  {/* <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                  <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                     Date
-                  </th> */}
+                  </th>
                   <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-0">
                     <span className="sr-only">Edit</span>
                   </th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">
-                {/* {useWeight.map((item: any) => (
-                  <tr key={item.email}>
+                {useWeight.length > 0 ? useWeight.map((item: any, index: number) => (
+                  <tr key={`${item.weight}-${index}`}>
                     <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
-                      {item.weight}
+                      {`${item.weight} lbs`}
                     </td>
-                    <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{item.weight_date}</td>
+                    <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{formatDateAndTime(item.weight_date)}</td>
                     <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
-                      <a href="#" className="text-indigo-600 hover:text-indigo-900">
-                        Edit<span className="sr-only">, {item.name}</span>
+                      <a href={`/dashboard/weight/edit/${item.id}`} className="text-gray-900 hover:text-gray-900">
+                        Edit<span className="sr-only">, {item.id}</span>
                       </a>
                     </td>
                   </tr>
-                ))} */}
+                )) : <h3 className="py-2">No weight recorded</h3>}
               </tbody>
             </table>
           </div>

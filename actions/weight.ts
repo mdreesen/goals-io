@@ -21,6 +21,7 @@ export const fetchWeight = async () => {
 };
 
 export const addWeight = async (values: any) => {
+    console.log(values)
 
     const session = await getServerSession();
 
@@ -52,5 +53,26 @@ export async function editWeight(values: any) {
     } catch (e) {
         console.log(e)
         return e
+    }
+};
+
+export const fetchWeightById = async (values: any) => {
+    const { id } = values;
+    try {
+        await connectDB();
+        const session = await getServerSession();
+
+        const user = await User.findOne({ email: session?.user.email });
+
+        const weight = user.weight.filter((item: any) => {
+            const idToString = item.id.toString()
+            return idToString.includes(id)
+        });
+
+        return weight[0]
+
+    } catch (e) {
+        console.log(e);
+        return e;
     }
 };

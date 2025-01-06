@@ -112,3 +112,19 @@ export const booksByMonth = async () => {
         return e;
     }
 };
+
+export const weightByMonth = async () => {
+
+    try {
+        await connectDB();
+        const session = await getServerSession();
+
+        const user = await User.findOne({ email: session?.user.email });
+
+        return user?.weight ?? [];
+       
+    } catch (e) {
+        console.log(e);
+        return e;
+    }
+};

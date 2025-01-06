@@ -1,16 +1,16 @@
 export function formatCurrency(number: number | string) {
-    return `$${number}`
+  return `$${number}`
 }
 
 export function removeSpacesAndCaps(str: string) {
-    return str.replace(/\s/g, '').toLowerCase();
-  };
+  return str.replace(/\s/g, '').toLowerCase();
+};
 
-  export function formatDateAndTime(date: any) {
+export function formatDateAndTime(date: any) {
 
-    const convertDate = new Date(date)
+  const convertDate = new Date(date)
 
-      const converted = convertDate.toLocaleDateString()
+  const converted = convertDate.toLocaleDateString()
 
-    return converted.toString();
-  };
+  return converted.toString();
+};

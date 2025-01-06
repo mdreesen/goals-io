@@ -1,10 +1,10 @@
-import BookForm from '@/components/forms/create/BookForm';
+import WeightForm from '@/components/forms/create/WeightForm';
 
 export default async function Page() {
 
     return (
         <div>
-            <BookForm />
+            <WeightForm />
         </div>
     )
 }

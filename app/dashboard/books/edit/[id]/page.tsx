@@ -1,5 +1,5 @@
 import { fetchBookById } from '@/actions/book';
-import EditBook from '@/components/forms/update/EditBook';
+import BookForm from '@/components/forms/update/BookForm';
 
 export default async function Page({ params }: any) {
     const { id } = await params;
@@ -7,7 +7,7 @@ export default async function Page({ params }: any) {
 
     return (
         <div>
-            <EditBook data={JSON.parse(JSON.stringify(bookData))} />
+            <BookForm data={JSON.parse(JSON.stringify(bookData))} />
         </div>
     )
 }
