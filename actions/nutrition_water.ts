@@ -18,7 +18,7 @@ export const fetchWaterIntakeToday = async () => {
 
         const waterIntakeToday = user?.water?.find((item: any) => item.date.includes(today));
 
-        return waterIntakeToday ?? [];
+        return waterIntakeToday ?? {};
 
     } catch (e) {
         console.log(e);
@@ -73,16 +73,48 @@ export const fetchWaterIntakeToOz = async () => {
         // Find weight recorded today
         const user = await User.findOne({ email: session?.user.email });
         const userWeight = user.weight;
-        const findWeightDate = userWeight.find((item: any) => item.weight_date.includes(today));
+        const findWeightToday = userWeight.find((item: any) => item.weight_date.includes(today));
 
         // Find latest recorded weight
         const latestUserWeight = user.weight.reverse();
         const latestRecordedWeight = latestUserWeight[0] ?? [];
 
-
         // If user has a recorded date, use this
         // Otherwise, use date from what was last recorded
-        return convertWaterIntake(findWeightDate) ?? convertWaterIntake(latestRecordedWeight);
+        switch(true) {
+            case findWeightToday !== undefined:
+                return findWeightToday?.weight;
+                break
+            case latestRecordedWeight !== undefined:
+                return latestRecordedWeight?.weight;
+                break
+            default:
+                return;
+        }
+    } catch (error) {
+        console.log(error)
+        return error
+    }
+};
+
+// Total weight and convert to oz for water intake
+export const fetchAllWaterForToday = async () => {
+    try {
+        await connectDB();
+
+        const useConvertToOz = await fetchWaterIntakeToOz();
+        const useWaterIntakeToday = await fetchWaterIntakeToday();
+        console.log(useConvertToOz)
+
+        // Convert water data to numbers for math
+        const totalWater = Number(useConvertToOz);
+        const waterToday = Number(useWaterIntakeToday?.water_intake);
+
+        // Take numbers and have a total of progress so far
+        const currentProgress = (waterToday / totalWater) * 100;
+        
+        return currentProgress.toString() ?? '';
+
     } catch (error) {
         console.log(error)
         return error

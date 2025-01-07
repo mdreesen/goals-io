@@ -1,9 +1,14 @@
 import Link from "next/link";
-import { fetchWaterIntakeToOz } from "@/actions/nutrition_water";
+import { fetchWaterIntakeToday, fetchWaterIntakeToOz, fetchAllWaterForToday } from "@/actions/nutrition_water";
 
 export default async function Page() {
 
   const useWaterIntake = await fetchWaterIntakeToOz();
+  const useWaterIntakeToday = await fetchWaterIntakeToday();
+  const useAllWaterForToday = await fetchAllWaterForToday();
+
+  // Conditionals
+  const formatWaterIntakeToday = useWaterIntakeToday ? `${useWaterIntakeToday?.water_intake}oz.` : '';
 
   const water = (
     <div>
@@ -20,15 +25,18 @@ export default async function Page() {
 
       <h4 className="sr-only">Water Intake</h4>
       <p className="text-sm font-medium text-gray-900">Water Intake</p>
+      <p className="text-sm font-medium text-gray-900">{formatWaterIntakeToday}</p>
       <div aria-hidden="true" className="mt-6">
         <div className="overflow-hidden rounded-full bg-gray-200">
-          <div style={{ width: '37.5%' }} className="h-2 rounded-full bg-[#c18d21]" />
+          <div style={{ width: `${useAllWaterForToday}%` }} className="h-2 rounded-full bg-[#c18d21]" />
         </div>
         <div className="mt-6 hidden grid-cols-4 text-sm font-medium text-gray-600 sm:grid">
-          <div className="text-gray-900">Getting started</div>
-          <div className="text-center text-gray-900">Keep going</div>
+          <div>Getting started</div>
+          <div className="text-center">Keep going</div>
           <div className="text-center">Almost there</div>
-          <div className="text-right">Winner winner chicken dinner</div>
+          <div className="text-right flex justify-end">
+            {/* <span className='flex flex-col w-[62px] justify-center text-center'>Nice job!<br/>{useWaterIntake}oz.</span> */}
+          </div>
         </div>
       </div>
     </div>

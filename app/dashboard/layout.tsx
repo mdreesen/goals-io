@@ -21,6 +21,9 @@ export default async function RootLayout({
         name: useUser?.username ? useUser?.username : useUser?.email,
     };
 
+    // Conditionals
+    const hasUserFirstLast = useUser?.first_name && useUser?.last_name ? `${useUser?. first_name} ${useUser?.last_name}` : 'Dashboard';
+
     const navigation = [
         { name: 'Dashboard', href: '/dashboard', current: false },
         { name: 'Books', href: '/dashboard/books', current: false },
@@ -174,7 +177,7 @@ export default async function RootLayout({
                 </Disclosure>
                 <header className="py-10">
                     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                        <h1 className="text-3xl font-bold tracking-tight text-white">Dashboard</h1>
+                        <h1 className="text-3xl font-bold tracking-tight text-white">{hasUserFirstLast}</h1>
                         <p className="text-xl font-bold tracking-tight text-white">{user.name}</p>
                     </div>
                 </header>
