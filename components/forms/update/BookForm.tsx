@@ -28,7 +28,6 @@ export default function EditBook({ data }: any) {
                 book_start_date: selectedStartDate,
                 book_end_date: selectedEndDate
             });
-            console.log(r)
             router.refresh
             router.push(`/dashboard/books`);
         } catch (error) {

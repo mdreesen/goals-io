@@ -104,7 +104,6 @@ export const fetchAllWaterForToday = async () => {
 
         const useConvertToOz = await fetchWaterIntakeToOz();
         const useWaterIntakeToday = await fetchWaterIntakeToday();
-        console.log(useConvertToOz)
 
         // Convert water data to numbers for math
         const totalWater = Number(useConvertToOz);
