@@ -2,8 +2,13 @@
 import { connectDB } from "@/lib/mongodb";
 import User from "@/(models)/User";
 import { getServerSession } from "next-auth/next";
-import { formatDateAndTime, convertWaterIntake } from "@/lib/formatters";
+import { formatDateAndTime } from "@/lib/formatters";
 import { revalidatePath } from 'next/cache';
+
+type Current_Water = {
+    currentProgress: string
+    totalWater: string
+}
 
 export const fetchWaterIntakeToday = async () => {
 
@@ -98,7 +103,7 @@ export const fetchWaterIntakeToOz = async () => {
 };
 
 // Total weight and convert to oz for water intake
-export const fetchAllWaterForToday = async () => {
+export async function fetchAllWaterForToday() {
     try {
         await connectDB();
 
@@ -106,13 +111,18 @@ export const fetchAllWaterForToday = async () => {
         const useWaterIntakeToday = await fetchWaterIntakeToday();
 
         // Convert water data to numbers for math
-        const totalWater = Number(useConvertToOz);
+        const totalWater = Number(useConvertToOz) / 2;
         const waterToday = Number(useWaterIntakeToday?.water_intake);
 
         // Take numbers and have a total of progress so far
         const currentProgress = (waterToday / totalWater) * 100;
+
+        const config: Current_Water = {
+            currentProgress: currentProgress.toString() ?? '',
+            totalWater: totalWater.toString() ?? ''
+        };
         
-        return currentProgress.toString() ?? '';
+        return config
 
     } catch (error) {
         console.log(error)

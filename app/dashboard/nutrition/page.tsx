@@ -5,11 +5,11 @@ export default async function Page() {
 
   const useTotalWaterIntake = await fetchWaterIntakeToOz();
   const useWaterIntakeToday = await fetchWaterIntakeToday();
-  const useAllWaterForToday = await fetchAllWaterForToday();
+  const useAllWaterForToday = await fetchAllWaterForToday() as any;
 
   // Conditionals
   const formatWaterIntakeToday = useWaterIntakeToday ? `${useWaterIntakeToday?.water_intake}oz.` : '';
-  const formatTotalWaterIntake = useTotalWaterIntake ? `${useTotalWaterIntake}oz.` : '';
+  const formatTotalWaterIntake = useAllWaterForToday?.totalWater ? `${useAllWaterForToday?.totalWater}oz.` : '';
 
   const water = (
     <div>
@@ -32,7 +32,7 @@ export default async function Page() {
       </div>
       <div aria-hidden="true" className="mt-6">
         <div className="overflow-hidden rounded-full bg-gray-200">
-          <div style={{ width: `${useAllWaterForToday}%` }} className="h-2 rounded-full bg-[#c18d21]" />
+          <div style={{ width: `${useAllWaterForToday?.currentProgress}%` }} className="h-2 rounded-full bg-[#c18d21]" />
         </div>
         <div className="mt-6 hidden grid-cols-4 text-sm font-medium text-gray-600 sm:grid">
           <div>Getting started</div>
