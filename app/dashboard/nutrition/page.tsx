@@ -1,15 +1,17 @@
 import Link from "next/link";
-import { fetchWaterIntakeToday, fetchWaterIntakeToOz, fetchAllWaterForToday } from "@/actions/nutrition_water";
+import { fetchWaterIntakeToday, fetchAllWaterForToday } from "@/actions/nutrition_water";
 
 export default async function Page() {
 
-  const useTotalWaterIntake = await fetchWaterIntakeToOz();
   const useWaterIntakeToday = await fetchWaterIntakeToday();
   const useAllWaterForToday = await fetchAllWaterForToday() as any;
 
   // Conditionals
   const formatWaterIntakeToday = useWaterIntakeToday ? `${useWaterIntakeToday?.water_intake}oz.` : '';
-  const formatTotalWaterIntake = useAllWaterForToday?.totalWater ? `${useAllWaterForToday?.totalWater}oz.` : '';
+  const formatTotalWaterIntake = useAllWaterForToday?.total_water ? `${useAllWaterForToday?.total_water}oz.` : '';
+  const buttonName = useWaterIntakeToday ? 'Update water' : 'Add water'
+
+  console.log(useWaterIntakeToday)
 
   const water = (
     <div>
@@ -19,7 +21,7 @@ export default async function Page() {
             type="button"
             className="block rounded-md bg-gray-800 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
           >
-            Add water
+            {buttonName}
           </button>
         </Link>
       </div>
@@ -32,7 +34,7 @@ export default async function Page() {
       </div>
       <div aria-hidden="true" className="mt-6">
         <div className="overflow-hidden rounded-full bg-gray-200">
-          <div style={{ width: `${useAllWaterForToday?.currentProgress}%` }} className="h-2 rounded-full bg-[#c18d21]" />
+          <div style={{ width: `${useAllWaterForToday?.current_progress}%` }} className="h-2 rounded-full bg-[#c18d21]" />
         </div>
         <div className="mt-6 hidden grid-cols-4 text-sm font-medium text-gray-600 sm:grid">
           <div>Getting started</div>

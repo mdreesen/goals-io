@@ -6,8 +6,8 @@ import { formatDateAndTime } from "@/lib/formatters";
 import { revalidatePath } from 'next/cache';
 
 type Current_Water = {
-    currentProgress: string
-    totalWater: string
+    current_progress: string
+    total_water: string
 }
 
 export const fetchWaterIntakeToday = async () => {
@@ -118,8 +118,8 @@ export async function fetchAllWaterForToday() {
         const currentProgress = (waterToday / totalWater) * 100;
 
         const config: Current_Water = {
-            currentProgress: currentProgress.toString() ?? '',
-            totalWater: totalWater.toString() ?? ''
+            current_progress: currentProgress.toString() ?? '',
+            total_water: totalWater.toString() ?? '',
         };
         
         return config
