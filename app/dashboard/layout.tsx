@@ -24,6 +24,7 @@ export default async function RootLayout({
     const navigation = [
         { name: 'Dashboard', href: '/dashboard', current: false },
         { name: 'Books', href: '/dashboard/books', current: false },
+        { name: 'Nutrition', href: '/dashboard/nutrition', current: false },
         { name: 'Weight', href: '/dashboard/weight', current: false },
     ]
     const userNavigation = [

@@ -19,6 +19,12 @@ const weightSchema = new Schema(
         starting_weight: Boolean || undefined
     }, { timestamps: false });
 
+    const waterIntakeSchema = new Schema(
+        {
+            water_intake: String || undefined,
+            date: String || undefined,
+        }, { timestamps: false });
+
 const userSchema = new Schema(
     {
         username: String,
@@ -34,6 +40,7 @@ const userSchema = new Schema(
         postal_code: String,
         books: [bookSchema],
         weight: [weightSchema],
+        water: [waterIntakeSchema],
         resetPasswordToken: String,
         createdAt: String,
         updatedAt: String

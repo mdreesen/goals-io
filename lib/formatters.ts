@@ -14,3 +14,13 @@ export function formatDateAndTime(date: any) {
 
   return converted.toString();
 };
+
+export function convertWaterIntake(data: any) {
+  const convertStringToNumber = Number(data.weight);
+
+  // Need to convert weight into oz.
+  // Rule of thumb is...
+  // divide your body weight in half and drink that many ounces of water per day.
+  const convertWeightToWaterOz = convertStringToNumber / 2;
+  return convertWeightToWaterOz.toString();
+};
