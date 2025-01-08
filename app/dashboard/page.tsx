@@ -3,8 +3,8 @@ import { booksByMonth, weightByMonth } from "@/actions/charts";
 import { ChartSkeleton } from '@/components/loaders/Skeletons';
 
 // Charts
-import {UseBooksPerMonthChart}  from "@/components/charts/UseBooksPerMonthChart";
-import {UseWeightPerDay}  from "@/components/charts/UseWeightPerDay";
+import { UseBooksPerMonthChart }  from "@/components/charts/UseBooksPerMonthChart";
+import { UseWeightPerDay }  from "@/components/charts/UseWeightPerDay";
 
 export default async function Page() {
 
@@ -16,7 +16,7 @@ export default async function Page() {
         <div className="relative lg:col-span-3 border-solid rounded-md p-2 content-center">
             <h2 className="text-base/7 font-semibold text-indigo-900">Books Per Month</h2>
             <Suspense fallback={<ChartSkeleton/>}>
-                <UseBooksPerMonthChart data={booksPerMonth} />
+                <UseBooksPerMonthChart data={JSON.parse(JSON.stringify(booksPerMonth))} />
             </Suspense>
         </div>
     );

@@ -13,8 +13,6 @@ export default async function Page() {
   const formatTotalWaterIntake = `${useAllWaterForToday.total_water}oz.`;
   const buttonName = useWaterIntakeToday.date === formatDateAndTime(date_today()) ? 'Update water' : 'Add water';
 
-  console.log(formatWaterIntakeToday)
-
   const water = (
     <div>
       <div className="flex justify-end mt-4 sm:ml-16 sm:mt-0 sm:flex-none">

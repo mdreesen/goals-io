@@ -58,7 +58,7 @@ export default function WaterForm({ data }: any) {
                         id="water"
                         name="water"
                         type="text"
-                        placeholder="24"
+                        placeholder={data?.water_intake ?? ''}
                         defaultValue={data?.water_intake ?? ''}
                         className="block min-w-0 grow py-1.5 pl-1 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6"
                     />

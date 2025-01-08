@@ -2,7 +2,7 @@
 import { connectDB } from "@/lib/mongodb";
 import User from "@/(models)/User";
 import { getServerSession } from "next-auth/next";
-import { revalidatePath } from 'next/cache';
+import { current_year } from '@/lib/date_time';
 
 export const booksByMonth = async () => {
 
@@ -15,7 +15,7 @@ export const booksByMonth = async () => {
         const books = user?.books ?? [];
 
         // Get current year, conver to string
-        const currentYear = new Date().getFullYear().toString();
+        const currentYear = current_year();
 
         // book_start_date by month to current year
         const january_start = books?.filter((item: any) => item?.book_start_date?.includes('Jan') && item?.book_start_date?.includes(currentYear)).length
