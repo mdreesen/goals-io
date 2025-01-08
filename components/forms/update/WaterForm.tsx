@@ -18,7 +18,7 @@ export default function WaterForm({ data }: any) {
 
         // There there is no entry from today, create new entry
         // Otherwise, update the entry that has been made today
-        if (data?.water_intake === '0') {
+        if (data?.date !== formatDateAndTime(date_today())) {
             try {
                 await createWaterIntake({
                     water_intake: formData.get("water"),
