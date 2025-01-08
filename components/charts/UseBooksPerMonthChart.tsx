@@ -1,23 +1,31 @@
 "use client"
 
 import React from "react"
-import { CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import { Bar, BarChart, CartesianGrid, Legend, Rectangle, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 
 export const UseBooksPerMonthChart = ({ data }: any) => {
 
   return (
-    <>
-      <ResponsiveContainer width='100%' height={300}>
-        <LineChart width={500} height={300} data={data}>
-          <CartesianGrid stroke="white" />
-          <XAxis dataKey="name" stroke="black" />
-          <YAxis />
-          <Tooltip />
-          <Legend />
-          <Line name="Books Started" type="monotone" dataKey="start_date" stroke="#c18d21" dot={false} />
-          <Line name="Books Finished" type="monotone" dataKey="end_date" stroke="#102945" dot={false} />
-        </LineChart>
-      </ResponsiveContainer>
-    </>
+    <ResponsiveContainer width='100%' height={300}>
+      <BarChart
+        width={600}
+        height={300}
+        data={data}
+        margin={{
+          top: 5,
+          right: 5,
+          left: 8,
+          bottom: 5,
+        }}
+      >
+        <CartesianGrid stroke="white" />
+        <XAxis dataKey="name" />
+        <YAxis />
+        <Tooltip />
+        <Legend />
+        <Bar name="Books Started" dataKey="start_date" fill="#c18d21" activeBar={<Rectangle fill="#c18d21" stroke="black" />} />
+        <Bar name="Books Finished" dataKey="end_date" fill="#102945" activeBar={<Rectangle fill="#102945" stroke="black" />} />
+      </BarChart>
+    </ResponsiveContainer>
   )
 }
