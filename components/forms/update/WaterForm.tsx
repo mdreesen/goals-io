@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { editWaterIntake, createWaterIntake } from "@/actions/nutrition_water";
 import Link from 'next/link';
 import { formatDateAndTime } from "@/lib/formatters";
+import { date_today } from "@/lib/date_time";
 
 export default function WaterForm({ data }: any) {
 
@@ -21,7 +22,7 @@ export default function WaterForm({ data }: any) {
             try {
                 await createWaterIntake({
                     water_intake: formData.get("water"),
-                    date: formatDateAndTime(new Date()),
+                    date: formatDateAndTime(date_today()),
                 });
                 router.refresh
                 router.push(`/dashboard/nutrition`);
@@ -34,7 +35,7 @@ export default function WaterForm({ data }: any) {
                 await editWaterIntake({
                     _id: data?._id,
                     water_intake: formData.get("water"),
-                    date: formatDateAndTime(new Date()),
+                    date: formatDateAndTime(date_today()),
                 });
                 router.refresh
                 router.push(`/dashboard/nutrition`);

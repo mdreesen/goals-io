@@ -5,6 +5,7 @@ import { editWeight } from "@/actions/weight";
 import Link from 'next/link';
 import { formatDateAndTime } from "@/lib/formatters";
 import ButtonDeleteWeight from "@/components/buttons/ButtonDeleteWeight";
+import { date_today } from "@/lib/date_time";
 
 export default function WeightForm({ data }: any) {
 
@@ -19,7 +20,7 @@ export default function WeightForm({ data }: any) {
           await editWeight({
             _id: data?._id,
             weight: formData.get("weight"),
-            weight_date: formatDateAndTime(new Date()),
+            weight_date: formatDateAndTime(date_today()),
           });
           router.refresh
           router.push(`/dashboard/weight`);

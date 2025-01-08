@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { addWeight } from "@/actions/weight";
 import { formatDateAndTime } from "@/lib/formatters";
 import Link from 'next/link';
+import { date_today } from "@/lib/date_time";
 
 export default function WeightForm({ data }: any) {
     // User data checks
@@ -20,7 +21,7 @@ export default function WeightForm({ data }: any) {
 
             await addWeight({
                 weight: formData.get("weight"),
-                weight_date: formatDateAndTime(new Date()),
+                weight_date: formatDateAndTime(date_today()),
                 starting_weight: useStartingWeight
             });
 

@@ -4,6 +4,7 @@ import User from "@/(models)/User";
 import { getServerSession } from "next-auth/next";
 import { formatDateAndTime } from "@/lib/formatters";
 import { revalidatePath } from 'next/cache';
+import {date_today} from '@/lib/date_time';
 
 type Current_Water = {
     current_progress: string
@@ -17,7 +18,7 @@ export const fetchWaterIntakeToday = async () => {
         const session = await getServerSession();
 
         // Get today's date
-        const today = formatDateAndTime(new Date());
+        const today = formatDateAndTime(date_today());
 
         const user = await User.findOne({ email: session?.user.email });
 
@@ -73,7 +74,7 @@ export const fetchWaterIntakeToOz = async () => {
         const session = await getServerSession();
 
         // Get today's date
-        const today = formatDateAndTime(new Date());
+        const today = formatDateAndTime(date_today());
 
         // Find weight recorded today
         const user = await User.findOne({ email: session?.user.email });
@@ -94,7 +95,7 @@ export const fetchWaterIntakeToOz = async () => {
                 return latestRecordedWeight?.weight;
                 break
             default:
-                return;
+                return '0';
         }
     } catch (error) {
         console.log(error)
