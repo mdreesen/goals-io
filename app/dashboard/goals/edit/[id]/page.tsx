@@ -1,4 +1,5 @@
 import { fetchGoalsById } from '@/actions/goals';
+import { parse } from '@/lib/formatters';
 import GoalForm from '@/components/forms/update/GoalForm';
 
 export default async function Page({ params }: any) {
@@ -7,7 +8,7 @@ export default async function Page({ params }: any) {
 
     return (
         <div>
-            <GoalForm data={JSON.parse(JSON.stringify(goalData))} />
+            <GoalForm data={parse(goalData)} />
         </div>
     )
 }

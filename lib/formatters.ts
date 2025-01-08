@@ -24,3 +24,7 @@ export function convertWaterIntake(data: any) {
   const convertWeightToWaterOz = convertStringToNumber / 2;
   return convertWeightToWaterOz.toString();
 };
+
+export function parse(data: any) {
+  return JSON.parse(JSON.stringify(data))
+}

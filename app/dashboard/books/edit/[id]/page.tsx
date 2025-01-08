@@ -1,5 +1,6 @@
 import { fetchBookById } from '@/actions/book';
 import BookForm from '@/components/forms/update/BookForm';
+import { parse } from '@/lib/formatters';
 
 export default async function Page({ params }: any) {
     const { id } = await params;
@@ -7,7 +8,7 @@ export default async function Page({ params }: any) {
 
     return (
         <div>
-            <BookForm data={JSON.parse(JSON.stringify(bookData))} />
+            <BookForm data={parse(bookData)} />
         </div>
     )
 }

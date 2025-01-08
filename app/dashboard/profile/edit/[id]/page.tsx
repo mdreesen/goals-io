@@ -1,5 +1,6 @@
 import ProfileForm from '@/components/forms/update/ProfileForm';
 import { fetchUser } from '@/actions/user';
+import { parse } from '@/lib/formatters';
 
 
 export default async function Page() {
@@ -8,7 +9,7 @@ export default async function Page() {
 
     return (
         <div>
-            <ProfileForm data={JSON.parse(JSON.stringify(useUser))} />
+            <ProfileForm data={parse(useUser)} />
         </div>
     )
 }

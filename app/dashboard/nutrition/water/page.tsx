@@ -1,5 +1,6 @@
 import { fetchWaterIntakeToday } from '@/actions/nutrition_water';
 import WaterForm from '@/components/forms/update/WaterForm';
+import { parse } from '@/lib/formatters';
 
 export default async function Page() {
 
@@ -7,7 +8,7 @@ export default async function Page() {
 
     return (
         <div>
-            <WaterForm data={JSON.parse(JSON.stringify(useWaterIntake))} />
+            <WaterForm data={parse(useWaterIntake)} />
         </div>
     )
 }

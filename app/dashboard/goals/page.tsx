@@ -2,6 +2,7 @@ import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { EllipsisVerticalIcon } from '@heroicons/react/20/solid'
 import { fetchGoals } from '@/actions/goals';
 import { statusColors } from '@/lib/statusColors';
+import { parse } from '@/lib/formatters';
 import ButtonDeleteGoal from "@/components/buttons/ButtonDeleteGoal";
 import Link from 'next/link';
 
@@ -50,14 +51,14 @@ export default async function Page() {
                                 >
                                     <MenuItem>
                                         <Link
-                                            href={`/dashboard/goals/edit/${JSON.parse(JSON.stringify(item._id))}`}
+                                            href={`/dashboard/goals/edit/${parse(item._id)}`}
                                             className="block px-3 py-1 text-sm/6 text-gray-900 data-[focus]:bg-gray-50 data-[focus]:outline-none"
                                         >
                                             Edit<span className="sr-only">, {item.name}</span>
                                         </Link>
                                     </MenuItem>
                                     <MenuItem>
-                                        <ButtonDeleteGoal data={JSON.parse(JSON.stringify(item._id))} />
+                                        <ButtonDeleteGoal data={parse(item._id)} />
                                     </MenuItem>
                                 </MenuItems>
                             </Menu>

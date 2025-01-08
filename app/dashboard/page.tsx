@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import { booksByMonth, weightByMonth } from "@/actions/charts";
 import { ChartSkeleton } from '@/components/loaders/Skeletons';
+import {parse} from '@/lib/formatters';
 
 // Charts
 import { UseBooksPerMonthChart }  from "@/components/charts/UseBooksPerMonthChart";
@@ -16,7 +17,7 @@ export default async function Page() {
         <div className="relative lg:col-span-3 border-solid rounded-md p-2 content-center">
             <h2 className="text-base/7 font-semibold text-indigo-900">Books Per Month</h2>
             <Suspense fallback={<ChartSkeleton/>}>
-                <UseBooksPerMonthChart data={JSON.parse(JSON.stringify(booksPerMonth))} />
+                <UseBooksPerMonthChart data={parse(booksPerMonth)} />
             </Suspense>
         </div>
     );
@@ -25,7 +26,7 @@ export default async function Page() {
         <div className="relative lg:col-span-3 border-solid rounded-md p-2 content-center">
             <h2 className="text-base/7 font-semibold text-indigo-900">Weight Per Day</h2>
             <Suspense fallback={<ChartSkeleton/>}>
-                <UseWeightPerDay data={JSON.parse(JSON.stringify(weightPerMonth))} />
+                <UseWeightPerDay data={parse(weightPerMonth)} />
             </Suspense>
         </div>
     );
