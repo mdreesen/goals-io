@@ -1,4 +1,5 @@
 export function statusColors(data: any) {
+
   switch (true) {
     case data.status === 'Active':
       return 'text-yellow-600 bg-yellow-50 ring-yellow-500/10';
@@ -10,6 +11,6 @@ export function statusColors(data: any) {
       return 'text-red-600 bg-red-50 ring-red-500/10'
       break
     default:
-      return 'text-yellow-600 bg-white ring-yellow-500/10'
+      return 'text-white-600 bg-white ring-white-500/10'
   }
 }

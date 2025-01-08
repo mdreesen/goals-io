@@ -5,10 +5,6 @@ import { statusColors } from '@/lib/statusColors';
 import ButtonDeleteGoal from "@/components/buttons/ButtonDeleteGoal";
 import Link from 'next/link';
 
-function classNames(...classes: string[]) {
-    return classes.filter(Boolean).join(' ')
-}
-
 export default async function Page() {
     const useGoals = await fetchGoals();
 
@@ -30,11 +26,7 @@ export default async function Page() {
                         <div className="min-w-0">
                             <div className="flex items-start gap-x-3">
                                 <p className="text-sm/6 font-semibold text-gray-900">{item.title}</p>
-                                <p
-                                    className={classNames(
-                                        `${statusColors(item)} mt-0.5 whitespace-nowrap rounded-md px-1.5 py-0.5 text-xs font-medium ring-1 ring-inset`,
-                                    )}
-                                >
+                                <p className={`mt-0.5 whitespace-nowrap rounded-md px-1.5 py-0.5 text-xs font-medium ring-1 ring-inset ${statusColors(item)}`}>
                                     {item.status}
                                 </p>
                             </div>
@@ -42,9 +34,6 @@ export default async function Page() {
                                 <p className="whitespace-nowrap">
                                     {item.kind && `${item.kind} goal`}
                                 </p>
-                                {/* <svg viewBox="0 0 2 2" className="size-0.5 fill-current">
-                                    <circle r={1} cx={1} cy={1} />
-                                </svg> */}
                             </div>
                         </div>
                         <div className="flex flex-none items-center gap-x-4">
@@ -78,7 +67,7 @@ export default async function Page() {
                             </Menu>
                         </div>
                     </li>
-                )): <h3>Add your first goal!</h3>}
+                )) : <h3>Add your first goal!</h3>}
             </ul>
         </div>
     )
