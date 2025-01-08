@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import { booksByMonth, weightByMonth } from "@/actions/charts";
 import { ChartSkeleton } from '@/components/loaders/Skeletons';
-import {parse} from '@/lib/formatters';
+import { parse } from '@/lib/formatters';
 
 // Charts
 import { UseBooksPerMonthChart }  from "@/components/charts/UseBooksPerMonthChart";
