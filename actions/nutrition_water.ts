@@ -22,7 +22,7 @@ export const fetchWaterIntakeToday = async () => {
 
         const user = await User.findOne({ email: session?.user.email });
 
-        const waterIntakeToday = user?.water?.find((item: any) => item.date.includes(today));
+        const waterIntakeToday = user?.water?.find((item: any) => today.includes(item.date));
 
         return waterIntakeToday ?? { water_intake: '0' };
 

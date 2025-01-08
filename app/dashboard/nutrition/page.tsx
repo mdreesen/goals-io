@@ -7,9 +7,9 @@ export default async function Page() {
   const useAllWaterForToday = await fetchAllWaterForToday() as any;
 
   // Conditionals
-  const formatWaterIntakeToday = useWaterIntakeToday?.water_intake !== '0' ? `${useWaterIntakeToday?.water_intake}oz.` : '0 oz';
-  const formatTotalWaterIntake = useAllWaterForToday?.total_water ? `${useAllWaterForToday?.total_water}oz.` : '';
-  const buttonName = useWaterIntakeToday?.water_intake !== '0' ? 'Update water' : 'Add water';
+  const formatWaterIntakeToday = useWaterIntakeToday.water_intake !== '0' ? `${useWaterIntakeToday.water_intake}oz.` : '0 oz';
+  const formatTotalWaterIntake = useAllWaterForToday.total_water ? `${useAllWaterForToday.total_water}oz.` : '';
+  const buttonName = useWaterIntakeToday.water_intake !== '0' ? 'Update water' : 'Add water';
 
   const water = (
     <div>
@@ -32,7 +32,7 @@ export default async function Page() {
       </div>
       <div aria-hidden="true" className="mt-6">
         <div className="overflow-hidden rounded-full bg-gray-200">
-          <div style={{ width: `${useAllWaterForToday?.current_progress}%` }} className="h-2 rounded-full bg-[#c18d21]" />
+          <div style={{ width: `${useAllWaterForToday.current_progress}%` }} className="h-2 rounded-full bg-[#c18d21]" />
         </div>
         <div className="mt-6 hidden grid-cols-4 text-sm font-medium text-gray-600 sm:grid">
           <div>Getting started</div>
