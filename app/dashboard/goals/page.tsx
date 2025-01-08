@@ -10,6 +10,8 @@ export default async function Page() {
 
     return (
         <div>
+            <h2 className="text-3xl font-semibold text-gray-900">Goals</h2>
+
             <div className="flex justify-end mt-4 mb-4 sm:mt-0 sm:flex-none">
                 <Link href={'/dashboard/goals/create'}>
                     <button

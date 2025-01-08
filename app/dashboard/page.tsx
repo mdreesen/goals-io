@@ -42,6 +42,7 @@ export default async function Page() {
     return (
         <div className="bg-white py-12 sm:py-12">
             <div className="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8">
+            <h2 className="text-3xl font-semibold text-gray-900">Dashboard</h2>
                 <div className="mt-10 grid grid-cols-1 gap-4 sm:mt-16 lg:grid-cols-6 lg:grid-rows-2">
                     {bookSection}
                     {weightSection}

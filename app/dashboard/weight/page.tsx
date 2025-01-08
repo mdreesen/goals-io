@@ -10,10 +10,7 @@ export default async function Page() {
     <div className="px-4 sm:px-6 lg:px-8">
       <div className="sm:flex sm:items-center">
         <div className="sm:flex-auto">
-          <h1 className="text-base font-semibold text-gray-900">Weight</h1>
-          <p className="mt-2 text-sm text-gray-700">
-            Weight tracked.
-          </p>
+        <h2 className="text-3xl font-semibold text-gray-900">Weight</h2>
         </div>
         <div className="flex justify-end mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
           <Link href={`/dashboard/weight/create`}>

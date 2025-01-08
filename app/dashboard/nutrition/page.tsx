@@ -50,6 +50,8 @@ export default async function Page() {
 
   return (
     <div>
+      <h2 className="text-3xl font-semibold text-gray-900">Nutrition</h2>
+
       {water}
     </div>
   )
