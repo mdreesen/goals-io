@@ -12,18 +12,28 @@ const bookSchema = new Schema(
         book_end_date: String || undefined
     }, { timestamps: false });
 
+const goalsSchema = new Schema(
+    {
+        title: String || undefined,
+        description: String || undefined,
+        kind: String || undefined,
+        status: String || undefined,
+        date_start: String || undefined,
+        date_end: String || undefined
+    }, { timestamps: false });
+
+const waterIntakeSchema = new Schema(
+    {
+        water_intake: String || undefined,
+        date: String || undefined,
+    }, { timestamps: false });
+
 const weightSchema = new Schema(
     {
         weight: String || undefined,
         weight_date: String || undefined,
         starting_weight: Boolean || undefined
     }, { timestamps: false });
-
-    const waterIntakeSchema = new Schema(
-        {
-            water_intake: String || undefined,
-            date: String || undefined,
-        }, { timestamps: false });
 
 const userSchema = new Schema(
     {
@@ -41,6 +51,7 @@ const userSchema = new Schema(
         books: [bookSchema],
         weight: [weightSchema],
         water: [waterIntakeSchema],
+        goals: [goalsSchema],
         resetPasswordToken: String,
         createdAt: String,
         updatedAt: String

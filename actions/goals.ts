@@ -4,30 +4,29 @@ import User from "@/(models)/User";
 import { getServerSession } from "next-auth/next";
 import { revalidatePath } from 'next/cache';
 
-export const fetchBooks = async () => {
-
+export const fetchGoals = async () => {
     try {
         await connectDB();
         const session = await getServerSession();
 
+        // Find user and farmer with associated emails
         const user = await User.findOne({ email: session?.user.email });
 
-        return user?.books ?? [];
-
-    } catch (e) {
-        console.log(e);
-        return e;
+        return user.goals ?? []
+    } catch (error) {
+        console.log(error)
+        return error
     }
 };
 
-export const addBook = async (values: any) => {
+export const addGoal = async (values: any) => {
 
     const session = await getServerSession();
 
     try {
         await connectDB();
 
-        await User.findOneAndUpdate({ email: session?.user.email }, { $addToSet: { books: { ...values } } }, { new: true });
+        await User.findOneAndUpdate({ email: session?.user.email }, { $addToSet: { goals: { ...values } } }, { new: true });
 
     } catch (e) {
         console.log(e)
@@ -35,18 +34,18 @@ export const addBook = async (values: any) => {
     }
 };
 
-export async function editBook(values: any) {
+export async function editGoal(values: any) {
     const { _id } = values;
 
     try {
         await connectDB();
 
         await User.findOneAndUpdate(
-            { 'books._id': _id },
-            { $set: { 'books.$': { ...values } } },
+            { 'goals._id': _id },
+            { $set: { 'goals.$': { ...values } } },
             { new: true });
 
-        revalidatePath('/dashboard/books');
+        revalidatePath('/dashboard/goals');
 
 
     } catch (e) {
@@ -55,18 +54,18 @@ export async function editBook(values: any) {
     }
 };
 
-export async function deleteBook(values: any) {
+export async function deleteGoal(values: any) {
     const { id } = values;
 
     try {
         await connectDB();
 
         await User.findOneAndUpdate(
-            { 'books._id': id },
-            { $pull: { 'books': { _id: id } } },
+            { 'goals._id': id },
+            { $pull: { 'goals': { _id: id } } },
             { new: true });
 
-        revalidatePath('/dashboard/books');
+        revalidatePath('/dashboard/goals');
 
 
     } catch (e) {
@@ -75,7 +74,7 @@ export async function deleteBook(values: any) {
     }
 };
 
-export const fetchBookById = async (values: any) => {
+export const fetchGoalsById = async (values: any) => {
     const { id } = values;
     try {
         await connectDB();
@@ -83,12 +82,12 @@ export const fetchBookById = async (values: any) => {
 
         const user = await User.findOne({ email: session?.user.email });
 
-        const books = user.books.filter((item: any) => {
+        const goals = user.goals.filter((item: any) => {
             const idToString = item.id.toString()
             return idToString.includes(id)
         });
 
-        return books[0]
+        return goals[0]
 
     } catch (e) {
         console.log(e);

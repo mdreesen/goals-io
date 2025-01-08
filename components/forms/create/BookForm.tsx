@@ -6,7 +6,6 @@ import { ChevronDownIcon } from '@heroicons/react/16/solid';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import Link from 'next/link';
-import { formatDateAndTime } from '@/lib/formatters';
 
 export default function EditBook() {
 
