@@ -7,9 +7,9 @@ export default async function Page() {
   const useAllWaterForToday = await fetchAllWaterForToday() as any;
 
   // Conditionals
-  const formatWaterIntakeToday = useWaterIntakeToday ? `${useWaterIntakeToday?.water_intake}oz.` : '';
+  const formatWaterIntakeToday = useWaterIntakeToday?.water_intake !== '0' ? `${useWaterIntakeToday?.water_intake}oz.` : '0 oz';
   const formatTotalWaterIntake = useAllWaterForToday?.total_water ? `${useAllWaterForToday?.total_water}oz.` : '';
-  const buttonName = useWaterIntakeToday ? 'Update water' : 'Add water'
+  const buttonName = useWaterIntakeToday?.water_intake !== '0' ? 'Update water' : 'Add water';
 
   const water = (
     <div>

@@ -4,7 +4,7 @@ import User from "@/(models)/User";
 import { getServerSession } from "next-auth/next";
 import { formatDateAndTime } from "@/lib/formatters";
 import { revalidatePath } from 'next/cache';
-import {date_today} from '@/lib/date_time';
+import { date_today } from '@/lib/date_time';
 
 type Current_Water = {
     current_progress: string
@@ -24,7 +24,7 @@ export const fetchWaterIntakeToday = async () => {
 
         const waterIntakeToday = user?.water?.find((item: any) => item.date.includes(today));
 
-        return waterIntakeToday ?? {};
+        return waterIntakeToday ?? { water_intake: '0' };
 
     } catch (e) {
         console.log(e);
@@ -113,7 +113,7 @@ export async function fetchAllWaterForToday() {
 
         // Convert water data to numbers for math
         const totalWater = Number(useConvertToOz) / 2;
-        const waterToday = Number(useWaterIntakeToday?.water_intake);
+        const waterToday = Number(useWaterIntakeToday?.water_intake ?? 0);
 
         // Take numbers and have a total of progress so far
         const currentProgress = (waterToday / totalWater) * 100;
