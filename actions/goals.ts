@@ -9,7 +9,6 @@ export const fetchGoals = async () => {
         await connectDB();
         const session = await getServerSession();
 
-        // Find user and farmer with associated emails
         const user = await User.findOne({ email: session?.user.email });
 
         return user.goals ?? []
@@ -88,6 +87,34 @@ export const fetchGoalsById = async (values: any) => {
         });
 
         return goals[0]
+
+    } catch (e) {
+        console.log(e);
+        return e;
+    }
+};
+
+export const filterGoals = async () => {
+
+    try {
+        await connectDB();
+        const session = await getServerSession();
+
+        const user = await User.findOne({ email: session?.user.email });
+
+        const familyGoals = user.goals.filter((item: any) => item.kind.includes('Family'));
+        const personalGoals = user.goals.filter((item: any) => item.kind.includes('Personal'));
+        const communityGoals = user.goals.filter((item: any) => item.kind.includes('Community'));
+
+        return {
+            family_goals: familyGoals,
+            personal_goals: personalGoals,
+            community_goals: communityGoals,
+
+            use_family_goals: familyGoals.length > 0,
+            use_personal_goals: personalGoals.length > 0,
+            use_community_goals: communityGoals.length > 0,
+        }
 
     } catch (e) {
         console.log(e);
