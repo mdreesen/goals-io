@@ -4,7 +4,7 @@ import User from "@/(models)/User";
 import { getServerSession } from "next-auth/next";
 import { revalidatePath } from 'next/cache';
 
-export const fetchWeight = async () => {
+export async function fetchWeight() {
 
     try {
         await connectDB();
@@ -20,7 +20,7 @@ export const fetchWeight = async () => {
     }
 };
 
-export const addWeight = async (values: any) => {
+export async function addWeight(values: any) {
 
     const session = await getServerSession();
 
@@ -75,7 +75,7 @@ export async function deleteWeight(values: any) {
     }
 };
 
-export const fetchWeightById = async (values: any) => {
+export async function fetchWeightById(values: any) {
     const { id } = values;
     try {
         await connectDB();

@@ -22,6 +22,12 @@ const goalsSchema = new Schema(
         date_end: String || undefined
     }, { timestamps: false });
 
+    const settingsSchema = new Schema(
+        {
+            setting: String,
+            value: Boolean
+        }, { timestamps: true });
+
 const waterIntakeSchema = new Schema(
     {
         water_intake: String || undefined,
@@ -52,6 +58,7 @@ const userSchema = new Schema(
         weight: [weightSchema],
         water: [waterIntakeSchema],
         goals: [goalsSchema],
+        settings: [settingsSchema],
         resetPasswordToken: String,
         createdAt: String,
         updatedAt: String

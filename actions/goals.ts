@@ -4,7 +4,7 @@ import User from "@/(models)/User";
 import { getServerSession } from "next-auth/next";
 import { revalidatePath } from 'next/cache';
 
-export const fetchGoals = async () => {
+export async function fetchGoals() {
     try {
         await connectDB();
         const session = await getServerSession();
@@ -18,7 +18,7 @@ export const fetchGoals = async () => {
     }
 };
 
-export const addGoal = async (values: any) => {
+export async function addGoal(values: any) {
 
     const session = await getServerSession();
 
@@ -73,7 +73,7 @@ export async function deleteGoal(values: any) {
     }
 };
 
-export const fetchGoalsById = async (values: any) => {
+export async function fetchGoalsById(values: any) {
     const { id } = values;
     try {
         await connectDB();
@@ -94,7 +94,7 @@ export const fetchGoalsById = async (values: any) => {
     }
 };
 
-export const filterGoals = async () => {
+export async function filterGoals() {
 
     try {
         await connectDB();

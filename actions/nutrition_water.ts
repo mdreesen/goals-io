@@ -12,7 +12,7 @@ type Current_Water = {
     date: string
 }
 
-export const fetchWaterIntakeToday = async () => {
+export async function fetchWaterIntakeToday() {
 
     try {
         await connectDB();
@@ -69,7 +69,7 @@ export async function editWaterIntake(values: any) {
 };
 
 // Total weight and convert to oz for water intake
-export const fetchWaterIntakeToOz = async () => {
+export async function fetchWaterIntakeToOz() {
     try {
         await connectDB();
         const session = await getServerSession();

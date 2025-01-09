@@ -1,9 +1,13 @@
 import Link from 'next/link';
 import { fetchUser } from '@/actions/user';
+import { fetchSettings } from '@/actions/settings';
+import ToggleWithIcon from '@/components/toggles/ToggleWithIcon';
+import {parse} from '@/lib/formatters';
 
 
 export default async function Page() {
   const useUser = await fetchUser();
+  const useSettings = await fetchSettings();
 
   return (
     <div>
@@ -15,8 +19,14 @@ export default async function Page() {
         <dl className="divide-y divide-gray-100">
           <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
             <dt className="text-sm/6 font-medium text-gray-900">Update Information</dt>
-            <dd className="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0"><Link href={`/dashboard/profile/edit/${useUser._id}`}>Update</Link></dd>
+            <dd className="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0"><Link className='underline' href={`/dashboard/profile/edit/${useUser._id}`}>Update</Link></dd>
           </div>
+
+          <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <dt className="text-sm/6 font-medium text-gray-900">Nutrition</dt>
+            <dd className="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0"><ToggleWithIcon data={parse(useSettings)} /></dd>
+          </div>
+
           {/* <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
             <dt className="text-sm/6 font-medium text-gray-900">Application for</dt>
             <dd className="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">Backend Developer</dd>

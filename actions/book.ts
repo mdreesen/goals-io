@@ -4,7 +4,7 @@ import User from "@/(models)/User";
 import { getServerSession } from "next-auth/next";
 import { revalidatePath } from 'next/cache';
 
-export const fetchBooks = async () => {
+export async function fetchBooks() {
 
     try {
         await connectDB();
@@ -20,7 +20,7 @@ export const fetchBooks = async () => {
     }
 };
 
-export const addBook = async (values: any) => {
+export async function addBook(values: any) {
 
     const session = await getServerSession();
 
@@ -75,7 +75,7 @@ export async function deleteBook(values: any) {
     }
 };
 
-export const fetchBookById = async (values: any) => {
+export async function fetchBookById(values: any) {
     const { id } = values;
     try {
         await connectDB();

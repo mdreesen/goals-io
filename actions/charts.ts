@@ -4,7 +4,7 @@ import User from "@/(models)/User";
 import { getServerSession } from "next-auth/next";
 import { current_year } from '@/lib/date_time';
 
-export const booksByMonth = async () => {
+export async function booksByMonth() {
 
     try {
         await connectDB();
@@ -113,7 +113,7 @@ export const booksByMonth = async () => {
     }
 };
 
-export const weightByMonth = async () => {
+export async function weightByMonth() {
 
     try {
         await connectDB();

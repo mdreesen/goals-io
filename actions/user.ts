@@ -3,7 +3,7 @@ import { connectDB } from "@/lib/mongodb";
 import User from "@/(models)/User";
 import { getServerSession } from "next-auth/next";
 
-export const fetchUser = async () => {
+export async function fetchUser() {
     try {
         await connectDB();
         const session = await getServerSession();

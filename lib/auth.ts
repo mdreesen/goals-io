@@ -22,6 +22,7 @@ declare module "next-auth" {
       postal_code: string,
       books: [],
       weight: [],
+      settings: [],
   
       createdAt: string,
       updatedAt: string,
@@ -45,6 +46,7 @@ declare module "next-auth" {
     postal_code: string,
     books: [],
     weight: [],
+    settings: [],
 
     createdAt: string,
     updatedAt: string,
@@ -69,6 +71,7 @@ declare module "next-auth/jwt" {
     postal_code: string,
     books: [],
     weight: [],
+    settings: [],
 
     createdAt: string,
     updatedAt: string,
