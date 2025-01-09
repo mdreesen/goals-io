@@ -16,19 +16,19 @@ export default async function Page() {
     const renderCommunityGoals = filteredGoals.use_community_goals;
 
     const usePersonalGoals = renderPersonalGoals && (
-        <ul role="list" className="divide-y divide-gray-100 border border-amber-500">
+        <ul role="list" className="divide-y divide-gray-100 border border-amber-500 rounded-md">
             <GoalList data={personal_goals_arr} />
         </ul>
     );
 
     const useFamilyGoals = renderFamilyGoals && (
-        <ul role="list" className="divide-y divide-gray-100 border border-sky-600 my-6">
+        <ul role="list" className="divide-y divide-gray-100 border border-sky-600 my-6 rounded-md">
             <GoalList data={family_goals_arr} />
         </ul>
     );
 
     const useCommunityGoals = renderCommunityGoals && (
-        <ul role="list" className="divide-y divide-gray-100 border border-green-600 my-6">
+        <ul role="list" className="divide-y divide-gray-100 border border-green-600 my-6 rounded-md">
             <GoalList data={community_goals_arr} />
         </ul>
     );
