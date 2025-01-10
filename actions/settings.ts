@@ -4,15 +4,6 @@ import User from "@/(models)/User";
 import { getServerSession } from "next-auth/next";
 import { revalidatePath } from 'next/cache';
 
-type USER_SETTINGS = {
-    id: string,
-    userSettings: object
-    show_books: object,
-    show_goals: object,
-    show_nutrition: object,
-    show_weight: object
-}
-
 export async function fetchSettings() {
     try {
         await connectDB();
@@ -29,7 +20,7 @@ export async function fetchSettings() {
         //     show_weight: {show_weight: user.settings.showWeight},
         // }
 
-        return user.settings ?? []
+        return user.settings ?? [];
 
     } catch (error) {
         console.log(error)

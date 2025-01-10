@@ -32,7 +32,7 @@ export default function WaterForm({ data }: any) {
         } else {
             try {
                 await editWaterIntake({
-                    _id: data?._id,
+                    _id: data?.waterIntakeToday?._id,
                     water_intake: formData.get("water"),
                     date: formatDateAndTime(date_today()),
                 });
