@@ -1,7 +1,9 @@
-export function date_today() {
-    const today = new Date().toLocaleString();
+import { DateTime } from "luxon";
 
-    return today
+export function date_today() {
+    const dateTime = DateTime.local();
+
+    return dateTime.toLocaleString()
 };
 
 export function current_year() {
