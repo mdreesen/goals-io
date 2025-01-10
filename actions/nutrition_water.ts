@@ -19,13 +19,20 @@ export async function fetchWaterIntakeToday() {
         const session = await getServerSession();
 
         // Get today's date
-        const today = formatDateAndTime(date_today());
+        const today = date_today();
 
         const user = await User.findOne({ email: session?.user.email });
 
-        const waterIntakeToday = user.water.find((item: any) => today.includes(item.date));
+        const waterIntakeToday = user.water.find((item: any) => today.includes(item.date)) ?? {};
+        
+        const useWaterIntake = {
+            waterIntakeToday: waterIntakeToday,
+            default: { water_intake: '0', date: today },
+            create: today !== waterIntakeToday.date,
+            useDateToday: today
+        }
 
-        return waterIntakeToday ?? { water_intake: '0', date: today };
+        return useWaterIntake
 
     } catch (e) {
         console.log(e);
@@ -34,7 +41,7 @@ export async function fetchWaterIntakeToday() {
 };
 
 export async function createWaterIntake(values: any) {
-console.log('on create', values)
+
     const session = await getServerSession();
 
     try {
@@ -49,7 +56,6 @@ console.log('on create', values)
 };
 
 export async function editWaterIntake(values: any) {
-    console.log('on edit', values)
     const { _id } = values;
 
     try {
@@ -102,11 +108,11 @@ export async function fetchAllWaterForToday() {
         const useWaterIntakeToday = await fetchWaterIntakeToday();
 
         // Use today's date
-        const today = formatDateAndTime(date_today());
+        const today = date_today();
 
         // Convert water data to numbers for math
         const totalWater = Number(useConvertToOz) / 2;
-        const waterToday = Number(useWaterIntakeToday?.water_intake);
+        const waterToday = Number(useWaterIntakeToday?.waterIntakeToday?.water_intake ?? 0);
 
         // Take numbers and have a total of progress so far
         const currentProgress = (waterToday / totalWater) * 100;

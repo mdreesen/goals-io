@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { fetchWaterIntakeToday, fetchAllWaterForToday } from "@/actions/nutrition_water";
-import { date_today } from "@/lib/date_time";
 
 export default async function Page() {
 
@@ -8,11 +7,9 @@ export default async function Page() {
   const useAllWaterForToday = await fetchAllWaterForToday() as any;
 
   // Conditionals
-  const formatWaterIntakeToday = `${useWaterIntakeToday.water_intake}oz.`;
-  const formatTotalWaterIntake = `${useAllWaterForToday.total_water}oz.`;
-
-  const useCreateWater = date_today() === useWaterIntakeToday?.date && useWaterIntakeToday.water_intake === '0';
-  const buttonName = useCreateWater ? 'Add water' : 'Update water';
+  const formatWaterIntakeToday = `${useWaterIntakeToday.waterIntakeToday?.water_intake ?? '0'}oz.`;
+  const formatTotalWaterIntake = `${useAllWaterForToday?.total_water}oz.`;
+  const buttonName = useWaterIntakeToday.create ? 'Add water' : 'Update water';
 
   const water = (
     <div>
@@ -28,14 +25,14 @@ export default async function Page() {
       </div>
 
       <h4 className="sr-only">Water Intake</h4>
-      <p className="text-sm font-medium text-gray-900">Water Intake ({useWaterIntakeToday.date})</p>
+      <p className="text-sm font-medium text-gray-900">Water Intake ({useWaterIntakeToday.useDateToday})</p>
       <div className="flex justify-between">
         <p className="text-sm font-medium text-gray-900">{formatWaterIntakeToday}</p>
         <p className="text-sm font-medium text-gray-900">{formatTotalWaterIntake}</p>
       </div>
       <div aria-hidden="true" className="mt-6">
         <div className="overflow-hidden rounded-full bg-gray-200">
-          <div style={{ width: `${useAllWaterForToday.current_progress}%` }} className="h-2 rounded-full bg-[#c18d21]" />
+          <div style={{ width: `${useAllWaterForToday.current_progress ?? '0%'}%` }} className="h-2 rounded-full bg-[#c18d21]" />
         </div>
         <div className="mt-6 hidden grid-cols-4 text-sm font-medium text-gray-600 sm:grid">
           <div>Getting started</div>
@@ -52,7 +49,6 @@ export default async function Page() {
   return (
     <div>
       <h2 className="text-3xl font-semibold text-gray-900">Nutrition</h2>
-
       {water}
     </div>
   )

@@ -7,20 +7,17 @@ import { formatDateAndTime } from "@/lib/formatters";
 import { date_today } from "@/lib/date_time";
 
 export default function WaterForm({ data }: any) {
-    console.log(data)
 
     const router = useRouter();
     const ref = useRef(null);
 
     const [error, setError] = useState<string>();
 
-    const useCreateWater = date_today() === data?.date && data.water_intake === '0';
-
     const handleSubmit = async (formData: FormData) => {
 
         // There there is no entry from today, create new entry
         // Otherwise, update the entry that has been made today
-        if (useCreateWater) {
+        if (data.create) {
             try {
                 await createWaterIntake({
                     water_intake: formData.get("water"),
@@ -60,8 +57,8 @@ export default function WaterForm({ data }: any) {
                         id="water"
                         name="water"
                         type="text"
-                        placeholder={data?.water_intake ?? ''}
-                        defaultValue={data?.water_intake ?? ''}
+                        placeholder={data?.waterIntakeToday?.water_intake ?? '0'}
+                        defaultValue={data?.waterIntakeToday?.water_intake ?? '0'}
                         className="block min-w-0 grow py-1.5 pl-1 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6"
                     />
                     <div className="shrink-0 px-2 select-none text-base text-gray-500 sm:text-sm/6">oz.</div>
