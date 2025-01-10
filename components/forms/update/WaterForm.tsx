@@ -7,18 +7,20 @@ import { formatDateAndTime } from "@/lib/formatters";
 import { date_today } from "@/lib/date_time";
 
 export default function WaterForm({ data }: any) {
+    console.log(data)
 
     const router = useRouter();
     const ref = useRef(null);
 
     const [error, setError] = useState<string>();
 
+    const useCreateWater = date_today() === data?.date && data.water_intake === '0';
 
     const handleSubmit = async (formData: FormData) => {
 
         // There there is no entry from today, create new entry
         // Otherwise, update the entry that has been made today
-        if (data?.date !== formatDateAndTime(date_today())) {
+        if (useCreateWater) {
             try {
                 await createWaterIntake({
                     water_intake: formData.get("water"),

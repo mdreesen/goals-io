@@ -34,7 +34,7 @@ export async function fetchWaterIntakeToday() {
 };
 
 export async function createWaterIntake(values: any) {
-
+console.log('on create', values)
     const session = await getServerSession();
 
     try {
@@ -49,6 +49,7 @@ export async function createWaterIntake(values: any) {
 };
 
 export async function editWaterIntake(values: any) {
+    console.log('on edit', values)
     const { _id } = values;
 
     try {

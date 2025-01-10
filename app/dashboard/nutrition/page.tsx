@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { fetchWaterIntakeToday, fetchAllWaterForToday } from "@/actions/nutrition_water";
-import { formatDateAndTime } from "@/lib/formatters";
 import { date_today } from "@/lib/date_time";
 
 export default async function Page() {
@@ -11,7 +10,9 @@ export default async function Page() {
   // Conditionals
   const formatWaterIntakeToday = `${useWaterIntakeToday.water_intake}oz.`;
   const formatTotalWaterIntake = `${useAllWaterForToday.total_water}oz.`;
-  const buttonName = useWaterIntakeToday.date === formatDateAndTime(date_today()) ? 'Update water' : 'Add water';
+
+  const useCreateWater = date_today() === useWaterIntakeToday?.date && useWaterIntakeToday.water_intake === '0';
+  const buttonName = useCreateWater ? 'Add water' : 'Update water';
 
   const water = (
     <div>
