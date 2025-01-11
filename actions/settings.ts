@@ -11,16 +11,17 @@ export async function fetchSettings() {
 
         const user = await User.findOne({ email: session?.user.email });
 
-        // const user_settings: USER_SETTINGS = {
-        //     userSettings: user.settings,
-        //     id: user.settings._id,
-        //     show_books: {show_books: user.settings.showBooks},
-        //     show_goals: {show_goals: user.settings.showGoals},
-        //     show_nutrition: {show_nutrition: user.settings.showNutrition},
-        //     show_weight: {show_weight: user.settings.showWeight},
-        // }
+        const useShowBooks = user.settings.find((item: any) => item.setting.includes('showBooks') ?? {}) ?? [];
+        const useShowGoals = user.settings.find((item: any) => item.setting.includes('showGoals') ?? {}) ?? [];
+        const useShowNutrition = user.settings.find((item: any) => item.setting.includes('showNutrition') ?? {}) ?? [];
+        const useShowWeight = user.settings.find((item: any) => item.setting.includes('showWeight') ?? {}) ?? [];
 
-        return user.settings ?? [];
+        return {
+            useShowBooks: useShowBooks,
+            useShowGoals: useShowGoals,
+            useShowNutrition: useShowNutrition,
+            useShowWeight: useShowWeight
+        }
 
     } catch (error) {
         console.log(error)
@@ -29,16 +30,17 @@ export async function fetchSettings() {
 };
 
 export async function editSettings(values: any) {
-    const { id, data } = values;
-
-    const session = await getServerSession();
-    const user = await User.findOne({ email: session?.user.email });
+    const { id } = values;
 
     try {
         await connectDB();
 
-        console.log(values)
-
+        await User.findOneAndUpdate(
+            { 'settings._id': id },
+            { $set: { 'settings.$': { ...values } } },
+            { new: true });
+    
+        revalidatePath('/dashboard/profile');
 
     } catch (e) {
         console.log(e)

@@ -24,9 +24,10 @@ const goalsSchema = new Schema(
 
     const settingsSchema = new Schema(
         {
-            setting: String,
-            value: Boolean
-        }, { timestamps: true });
+            setting: String || undefined,
+            title: String  || undefined,
+            value: Boolean  || undefined
+        }, { timestamps: false });
 
 const waterIntakeSchema = new Schema(
     {

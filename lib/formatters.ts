@@ -26,5 +26,5 @@ export function convertWaterIntake(data: any) {
 };
 
 export function parse(data: any) {
-  return JSON.parse(JSON.stringify(data))
+  return data && JSON?.parse(JSON?.stringify(data))
 }

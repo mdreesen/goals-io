@@ -57,7 +57,6 @@ export async function createWaterIntake(values: any) {
 
 export async function editWaterIntake(values: any) {
     const { _id } = values;
-    console.log(values)
 
     try {
         await connectDB();

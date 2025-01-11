@@ -4,29 +4,23 @@ import { useState } from 'react'
 import { Switch } from '@headlessui/react'
 import { editSettings } from '@/actions/settings';
 
-export default function ToggleWithIcon({ id, data }: any) {
-  const value = Object.values(data)[0];
-  const key = Object.keys(data)[0];
-  const [enabled, setEnabled] = useState(value) as any;
+export default function ToggleWithIcon({ data }: any) {
+  const { _id, setting, title } = data;
+
+  const [enabled, setEnabled] = useState(data?.value ?? true) as any;
 
   const handleToggle = async () => {
-    const toggleData = {} as any;
 
     const newState = !enabled;
     setEnabled(newState);
 
-    // Make custome object
-    const isKey = key;
-    toggleData[isKey] = newState;
-
     try {
-      await editSettings(
-        { 
-          id: id,
-          data: toggleData,
-
-        }
-      );
+      await editSettings({
+        id: _id,
+        setting: setting,
+        title: title,
+        value: newState
+      });
     } catch (error) {
       console.error(error);
     }

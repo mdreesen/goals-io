@@ -6,13 +6,14 @@ import bcrypt from "bcryptjs";
 export async function settings() {
     try {
         
-        const useSettings = {
-            showBooks: true,
-            showGoals: true,
-            showNutrition: true,
-            showWeight: true,
-        }
-        return { ...useSettings }
+        const useSettings = [
+            {setting: 'showBooks', title: 'Show Books', value: true},
+            {setting: 'showGoals', title: 'Show Goals', value: true},
+            {setting: 'showNutrition', title: 'Show Nutrition', value: true},
+            {setting: 'showWeight', title: 'Show Weight', value: true},
+        ]
+        
+        return useSettings;
 
     } catch (e) {
         console.log(e);
@@ -43,7 +44,7 @@ export async function register(values: any) {
             settings: userSettings
         });
 
-        const savedUser = await user.save();
+        await user.save();
 
     } catch (e) {
         console.log(e);

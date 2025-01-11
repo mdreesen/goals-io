@@ -2,12 +2,14 @@ import Link from 'next/link';
 import { fetchUser } from '@/actions/user';
 import { fetchSettings } from '@/actions/settings';
 import ToggleWithIcon from '@/components/toggles/ToggleWithIcon';
-import {parse} from '@/lib/formatters';
+import { parse } from '@/lib/formatters';
 
 
 export default async function Page() {
   const useUser = await fetchUser();
-  const useSettings = await fetchSettings();
+  const useSettings = await fetchSettings() ?? [];
+
+  const { useShowBooks, useShowGoals, useShowNutrition, useShowWeight } = useSettings;
 
   return (
     <div>
@@ -23,8 +25,23 @@ export default async function Page() {
           </div>
 
           <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <dt className="text-sm/6 font-medium text-gray-900">Books</dt>
+            <dd className="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0"><ToggleWithIcon data={parse(useShowBooks) ?? {}} /></dd>
+          </div>
+
+          <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <dt className="text-sm/6 font-medium text-gray-900">Goals</dt>
+            <dd className="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0"><ToggleWithIcon data={parse(useShowGoals) ?? {}} /></dd>
+          </div>
+
+          <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
             <dt className="text-sm/6 font-medium text-gray-900">Nutrition</dt>
-            <dd className="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0"><ToggleWithIcon data={parse(useSettings)} /></dd>
+            <dd className="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0"><ToggleWithIcon data={parse(useShowNutrition) ?? {}} /></dd>
+          </div>
+
+          <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <dt className="text-sm/6 font-medium text-gray-900">Weight</dt>
+            <dd className="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0"><ToggleWithIcon data={parse(useShowWeight) ?? {}} /></dd>
           </div>
 
           {/* <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
