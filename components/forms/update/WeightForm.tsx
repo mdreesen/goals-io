@@ -20,7 +20,7 @@ export default function WeightForm({ data }: any) {
           await editWeight({
             _id: data?._id,
             weight: formData.get("weight"),
-            weight_date: formatDateAndTime(date_today()),
+            weight_date: date_today(),
           });
           router.refresh
           router.push(`/dashboard/weight`);

@@ -21,7 +21,7 @@ export default function WaterForm({ data }: any) {
             try {
                 await createWaterIntake({
                     water_intake: formData.get("water"),
-                    date: formatDateAndTime(date_today()),
+                    date: date_today(),
                 });
                 router.refresh
                 router.push(`/dashboard/nutrition`);
@@ -34,7 +34,7 @@ export default function WaterForm({ data }: any) {
                 await editWaterIntake({
                     _id: data?.waterIntakeToday?._id,
                     water_intake: formData.get("water"),
-                    date: formatDateAndTime(date_today()),
+                    date: date_today(),
                 });
                 router.refresh
                 router.push(`/dashboard/nutrition`);

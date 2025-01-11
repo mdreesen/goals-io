@@ -89,9 +89,10 @@ export async function fetchWaterIntakeToOz() {
         const user = await User.findOne({ email: session?.user.email });
         const userWeight = user.weight;
         const latestWeight = user.weight.reverse()[0];
-        const findWeightToday = userWeight.find((item: any) => item.weight_date.includes(today) ?? latestWeight);
 
-        return findWeightToday?.weight ?? '0';
+        const findWeightToday = userWeight.find((item: any) => item.weight_date.includes(today));
+
+        return findWeightToday?.weight ?? latestWeight.weight;
 
     } catch (error) {
         console.log(error)
