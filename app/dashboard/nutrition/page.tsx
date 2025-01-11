@@ -3,7 +3,8 @@ import { DateTime } from "luxon";
 import { fetchWaterIntakeToday, fetchAllWaterForToday } from "@/actions/nutrition_water";
 
 export default async function Page() {
-  const dateTime = DateTime.local().toString();
+  const dateTimeNow = DateTime.now().toString();
+  const dateTimeLocal = DateTime.local().toString();
 
 
   const useWaterIntakeToday = await fetchWaterIntakeToday();
@@ -29,7 +30,8 @@ export default async function Page() {
 
       <h4 className="sr-only">Water Intake</h4>
       <p className="text-sm font-medium text-gray-900">Water Intake ({useWaterIntakeToday.useDateToday})</p>
-      <p className="text-sm font-medium text-gray-900">{dateTime}</p>
+      <p className="text-sm font-medium text-gray-900">Now: {dateTimeNow}</p>
+      <p className="text-sm font-medium text-gray-900">Local: {dateTimeLocal}</p>
       <div className="flex justify-between">
         <p className="text-sm font-medium text-gray-900">{formatWaterIntakeToday}</p>
         <p className="text-sm font-medium text-gray-900">{formatTotalWaterIntake}</p>
