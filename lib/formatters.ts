@@ -15,14 +15,23 @@ export function formatDateAndTime(date: any) {
   return converted.toString();
 };
 
-export function convertWaterIntake(data: any) {
-  const convertStringToNumber = Number(data.weight);
+export function bodyWeightToWaterInOz(data: any) {
 
-  // Need to convert weight into oz.
-  // Rule of thumb is...
-  // divide your body weight in half and drink that many ounces of water per day.
+  // If string, convert to number, then convert back to string
+  const convertStringToNumber = Number(data);
   const convertWeightToWaterOz = convertStringToNumber / 2;
-  return convertWeightToWaterOz.toString();
+  const convertBackToString = convertWeightToWaterOz.toString();
+
+  // If number, divide by 2, convert back to string
+  const isNumberDivideByTwo = (data / 2).toString();
+
+  switch(true) {
+    case typeof data === 'string':
+      return convertBackToString;
+      break
+    default:
+      return isNumberDivideByTwo
+  }
 };
 
 export function parse(data: any) {

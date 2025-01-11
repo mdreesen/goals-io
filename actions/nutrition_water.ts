@@ -2,15 +2,9 @@
 import { connectDB } from "@/lib/mongodb";
 import User from "@/(models)/User";
 import { getServerSession } from "next-auth/next";
-import { formatDateAndTime } from "@/lib/formatters";
+import { formatDateAndTime, bodyWeightToWaterInOz } from "@/lib/formatters";
 import { revalidatePath } from 'next/cache';
 import { date_today } from '@/lib/date_time';
-
-type Current_Water = {
-    current_progress: string
-    total_water: string,
-    date: string
-}
 
 export async function fetchWaterIntakeToday() {
 
@@ -90,9 +84,16 @@ export async function fetchWaterIntakeToOz() {
         const userWeight = user.weight;
         const latestWeight = user.weight.reverse()[0];
 
+        // Find weight for today if recorded
         const findWeightToday = userWeight.find((item: any) => item.weight_date.includes(today));
 
-        return findWeightToday?.weight ?? latestWeight.weight;
+        // Either use weight found today, if not today, then use latest weight recoreded
+        const useWeight = findWeightToday?.weight ?? latestWeight?.weight;
+
+        // Convert weight found to oz
+        const hasWeight = bodyWeightToWaterInOz(useWeight);
+
+        return hasWeight;
 
     } catch (error) {
         console.log(error)
@@ -104,27 +105,35 @@ export async function fetchWaterIntakeToOz() {
 export async function fetchAllWaterForToday() {
     try {
         await connectDB();
+        const session = await getServerSession();
+
+        const user = await User.findOne({ email: session?.user.email });
 
         const useConvertToOz = await fetchWaterIntakeToOz();
-        const useWaterIntakeToday = await fetchWaterIntakeToday();
 
         // Use today's date
         const today = date_today();
 
+        // Find water recorded for today
+        const waterIntakeToday = user.water.find((item: any) => today.includes(item.date)) ?? '0';
+
         // Convert water data to numbers for math
-        const totalWater = Number(useConvertToOz) / 2;
-        const waterToday = Number(useWaterIntakeToday?.waterIntakeToday?.water_intake ?? 0);
+        const waterToday = Number(waterIntakeToday ?? 0);
 
         // Take numbers and have a total of progress so far
-        const currentProgress = (waterToday / totalWater) * 100;
+        const currentProgress = (waterToday / useConvertToOz) * 100;
 
-        const config: Current_Water = {
-            current_progress: currentProgress.toString() ?? '',
-            total_water: totalWater.toString() ?? '',
-            date: today
-        };
+        const useWaterIntake = {
+            waterIntakeToday: waterIntakeToday,
+            default: { water_intake: '0', date: today },
+            create: today !== waterIntakeToday.date,
+            useDateToday: today,
+            current_progress: currentProgress.toString() ?? '0',
+            total_water: useConvertToOz ?? '',
+            date: today,
+        }
 
-        return config
+        return useWaterIntake
 
     } catch (error) {
         console.log(error)

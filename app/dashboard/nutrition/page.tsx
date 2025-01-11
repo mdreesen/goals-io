@@ -1,19 +1,17 @@
 import Link from "next/link";
 import { DateTime } from "luxon";
-import { fetchWaterIntakeToday, fetchAllWaterForToday } from "@/actions/nutrition_water";
+import { fetchAllWaterForToday } from "@/actions/nutrition_water";
 
 export default async function Page() {
   const dateTimeNow = DateTime.now().toString();
   const dateTimeLocal = DateTime.local().toString();
 
-
-  const useWaterIntakeToday = await fetchWaterIntakeToday();
   const useAllWaterForToday = await fetchAllWaterForToday() as any;
 
   // Conditionals
-  const formatWaterIntakeToday = `${useWaterIntakeToday.waterIntakeToday?.water_intake ?? '0'}oz.`;
+  const formatWaterIntakeToday = `${useAllWaterForToday.waterIntakeToday?.water_intake ?? '0'}oz.`;
   const formatTotalWaterIntake = `${useAllWaterForToday?.total_water}oz.`;
-  const buttonName = useWaterIntakeToday.create ? 'Add water' : 'Update water';
+  const buttonName = useAllWaterForToday.create ? 'Add water' : 'Update water';
 
   const water = (
     <div>
@@ -29,9 +27,7 @@ export default async function Page() {
       </div>
 
       <h4 className="sr-only">Water Intake</h4>
-      <p className="text-sm font-medium text-gray-900">Water Intake ({useWaterIntakeToday.useDateToday})</p>
-      <p className="text-sm font-medium text-gray-900">Now: {dateTimeNow}</p>
-      <p className="text-sm font-medium text-gray-900">Local: {dateTimeLocal}</p>
+      <p className="text-sm font-medium text-gray-900">Water Intake ({useAllWaterForToday.useDateToday})</p>
       <div className="flex justify-between">
         <p className="text-sm font-medium text-gray-900">{formatWaterIntakeToday}</p>
         <p className="text-sm font-medium text-gray-900">{formatTotalWaterIntake}</p>
