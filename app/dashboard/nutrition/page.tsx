@@ -1,10 +1,7 @@
 import Link from "next/link";
-import { DateTime } from "luxon";
 import { fetchAllWaterForToday } from "@/actions/nutrition_water";
 
 export default async function Page() {
-  const dateTimeNow = DateTime.now().toString();
-  const dateTimeLocal = DateTime.local().toString();
 
   const useAllWaterForToday = await fetchAllWaterForToday() as any;
 

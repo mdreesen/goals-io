@@ -6,34 +6,6 @@ import { formatDateAndTime, bodyWeightToWaterInOz } from "@/lib/formatters";
 import { revalidatePath } from 'next/cache';
 import { date_today } from '@/lib/date_time';
 
-export async function fetchWaterIntakeToday() {
-
-    try {
-        await connectDB();
-        const session = await getServerSession();
-
-        // Get today's date
-        const today = date_today();
-
-        const user = await User.findOne({ email: session?.user.email });
-
-        const waterIntakeToday = user.water.find((item: any) => today.includes(item.date)) ?? {};
-        
-        const useWaterIntake = {
-            waterIntakeToday: waterIntakeToday,
-            default: { water_intake: '0', date: today },
-            create: today !== waterIntakeToday.date,
-            useDateToday: today
-        }
-
-        return useWaterIntake
-
-    } catch (e) {
-        console.log(e);
-        return e;
-    }
-};
-
 export async function createWaterIntake(values: any) {
 
     const session = await getServerSession();
@@ -118,7 +90,7 @@ export async function fetchAllWaterForToday() {
         const waterIntakeToday = user.water.find((item: any) => today.includes(item.date)) ?? '0';
 
         // Convert water data to numbers for math
-        const waterToday = Number(waterIntakeToday ?? 0);
+        const waterToday = Number(waterIntakeToday.water_intake ?? 0);
 
         // Take numbers and have a total of progress so far
         const currentProgress = (waterToday / useConvertToOz) * 100;
