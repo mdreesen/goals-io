@@ -3,6 +3,7 @@ import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuIt
 import { Bars3Icon, BellIcon, XMarkIcon, Cog6ToothIcon } from '@heroicons/react/24/outline';
 import Link from "next/link";
 import { fetchUser } from '@/actions/user';
+import { fetchSettings } from '@/actions/settings';
 import ButtonAuth from "@/components/buttons/ButtonAuth";
 
 function classNames(...classes: string[]) {
@@ -16,6 +17,9 @@ export default async function RootLayout({
 }>) {
 
     const useUser = await fetchUser();
+    const useSettings = await fetchSettings();
+
+    const { useShowBooks, useShowGoals, useShowNutrition, useShowWeight } = useSettings;
 
     const user = {
         name: useUser?.username ? useUser?.username : useUser?.email,
@@ -25,11 +29,11 @@ export default async function RootLayout({
     const hasUserFirstLast = useUser?.first_name && useUser?.last_name ? `${useUser?. first_name} ${useUser?.last_name}` : 'Dashboard';
 
     const navigation = [
-        { name: 'Dashboard', href: '/dashboard', current: false },
-        { name: 'Books', href: '/dashboard/books', current: false },
-        { name: 'Goals', href: '/dashboard/goals', current: false },
-        { name: 'Nutrition', href: '/dashboard/nutrition', current: false },
-        { name: 'Weight', href: '/dashboard/weight', current: false },
+        { name: 'Dashboard', href: '/dashboard', current: false, useNav: true },
+        { name: 'Books', href: '/dashboard/books', current: false, useNav: useShowBooks?.value },
+        { name: 'Goals', href: '/dashboard/goals', current: false, useNav: useShowGoals?.value },
+        { name: 'Nutrition', href: '/dashboard/nutrition', current: false, useNav: useShowNutrition?.value },
+        { name: 'Weight', href: '/dashboard/weight', current: false, useNav: useShowWeight?.value },
     ]
     const userNavigation = [
         { name: 'Your Profile', href: '/dashboard/profile' },
@@ -55,7 +59,7 @@ export default async function RootLayout({
                                             />
                                         </Link>
                                     </div>
-                                    {navigation.map((item) => (
+                                    {navigation.map((item) => item?.useNav && (
                                         <div
                                             key={item.name}
                                             className="hidden md:block">
@@ -130,7 +134,7 @@ export default async function RootLayout({
 
                     <DisclosurePanel className="border-b border-gray-700 md:hidden">
                         <div className="space-y-1 px-2 py-3 sm:px-3">
-                            {navigation.map((item) => (
+                            {navigation.map((item) => item?.useNav && (
                                 <DisclosureButton
                                     key={item.name}
                                     as="a"
