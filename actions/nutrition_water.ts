@@ -87,21 +87,20 @@ export async function fetchAllWaterForToday() {
         const today = date_today();
 
         // Find water recorded for today
-        const waterIntakeToday = user.water.find((item: any) => today.includes(item.date)) ?? '0';
+        const waterIntakeToday = user.water.reverse().find((item: any) => item.date.includes(today)) ?? { water_intake: '0', date: today };
 
         // Convert water data to numbers for math
-        const waterToday = Number(waterIntakeToday.water_intake ?? 0);
+        const waterToday = Number(waterIntakeToday.water_intake);
 
         // Take numbers and have a total of progress so far
         const currentProgress = (waterToday / useConvertToOz) * 100;
 
         const useWaterIntake = {
             waterIntakeToday: waterIntakeToday,
-            default: { water_intake: '0', date: today },
             create: today !== waterIntakeToday.date,
             useDateToday: today,
-            current_progress: currentProgress.toString() ?? '0',
-            total_water: useConvertToOz ?? '',
+            current_progress: currentProgress.toString(),
+            total_water: useConvertToOz,
             date: today,
         }
 
