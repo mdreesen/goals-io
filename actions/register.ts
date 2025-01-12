@@ -7,6 +7,7 @@ export async function settings() {
     try {
         
         const useSettings = [
+            {setting: 'showAffirmations', title: 'Show Affirmations', value: true},
             {setting: 'showBooks', title: 'Show Books', value: true},
             {setting: 'showGoals', title: 'Show Goals', value: true},
             {setting: 'showNutrition', title: 'Show Nutrition', value: true},

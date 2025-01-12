@@ -3,6 +3,13 @@ import mongoose, { Schema } from "mongoose";
 mongoose.connect(`${process.env.MONGO_URI}`);
 mongoose.Promise = global.Promise;
 
+const affirmationsSchema = new Schema(
+    {
+        affirmation: String || undefined,
+        kind: String || undefined,
+        date: String || undefined,
+    }, { timestamps: false });
+
 const bookSchema = new Schema(
     {
         book_title: String || undefined,
@@ -55,6 +62,7 @@ const userSchema = new Schema(
         city: String,
         region: String,
         postal_code: String,
+        affirmations: [affirmationsSchema],
         books: [bookSchema],
         weight: [weightSchema],
         water: [waterIntakeSchema],

@@ -9,7 +9,7 @@ export default async function Page() {
   const useUser = await fetchUser();
   const useSettings = await fetchSettings() ?? [];
 
-  const { useShowBooks, useShowGoals, useShowNutrition, useShowWeight } = useSettings;
+  const { useShowAffirmations, useShowBooks, useShowGoals, useShowNutrition, useShowWeight } = useSettings;
 
   return (
     <div>
@@ -22,6 +22,11 @@ export default async function Page() {
           <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
             <dt className="text-sm/6 font-medium text-gray-900">Update Information</dt>
             <dd className="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0"><Link className='underline' href={`/dashboard/profile/edit/${useUser._id}`}>Update</Link></dd>
+          </div>
+
+          <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <dt className="text-sm/6 font-medium text-gray-900">Affirmations</dt>
+            <dd className="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0"><ToggleWithIcon data={parse(useShowAffirmations) ?? {}} /></dd>
           </div>
 
           <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
