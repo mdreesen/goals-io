@@ -1,16 +1,14 @@
 import Link from "next/link";
 import { fetchAllWaterForToday } from "@/actions/nutrition_water";
-import { date_today, date_time_today } from "@/lib/date_time";
+import { date_time_today } from "@/lib/date_time";
 export default async function Page() {
 
   const useAllWaterForToday = await fetchAllWaterForToday() as any;
-
+console.log(useAllWaterForToday)
   // Conditionals
   const formatWaterIntakeToday = `${useAllWaterForToday.waterIntakeToday?.water_intake ?? '0'}oz.`;
   const formatTotalWaterIntake = `${useAllWaterForToday?.total_water}oz.`;
   const buttonName = useAllWaterForToday.create ? 'Add water' : 'Update water';
-
-  const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
   const water = (
     <div>
@@ -27,8 +25,7 @@ export default async function Page() {
 
       <h4 className="sr-only">Water Intake</h4>
       <p className="text-sm font-medium text-gray-900">Water Intake ({useAllWaterForToday.useDateToday})</p>
-      <p className="text-sm font-medium text-gray-900">Timezone ({timezone})</p>
-      <p className="text-sm font-medium text-gray-900">Date ({date_time_today()})</p>
+      <p className="text-sm font-medium text-gray-900">Date ({useAllWaterForToday.date_day_time})</p>
       <div className="flex justify-between">
         <p className="text-sm font-medium text-gray-900">{formatWaterIntakeToday}</p>
         <p className="text-sm font-medium text-gray-900">{formatTotalWaterIntake}</p>

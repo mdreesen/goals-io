@@ -4,7 +4,7 @@ import User from "@/(models)/User";
 import { getServerSession } from "next-auth/next";
 import { formatDateAndTime, bodyWeightToWaterInOz } from "@/lib/formatters";
 import { revalidatePath } from 'next/cache';
-import { date_today } from '@/lib/date_time';
+import { date_today, date_time_today } from '@/lib/date_time';
 
 export async function createWaterIntake(values: any) {
 
@@ -84,7 +84,8 @@ export async function fetchAllWaterForToday() {
         const useConvertToOz = await fetchWaterIntakeToOz();
 
         // Use today's date
-        const today = date_today();
+        const today = await date_today();
+        const date_time = await date_time_today()
 
         // Find water recorded for today
         const waterIntakeToday = user.water.reverse().find((item: any) => item.date.includes(today)) ?? { water_intake: '0' };
@@ -105,6 +106,7 @@ export async function fetchAllWaterForToday() {
             current_progress: currentProgress.toString(),
             total_water: useConvertToOz,
             date: today,
+            date_day_time: date_time
         }
 
         return useWaterIntake

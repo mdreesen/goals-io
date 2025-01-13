@@ -3,8 +3,6 @@ import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { editWaterIntake, createWaterIntake } from "@/actions/nutrition_water";
 import Link from 'next/link';
-import { formatDateAndTime } from "@/lib/formatters";
-import { date_today } from "@/lib/date_time";
 
 export default function WaterForm({ data }: any) {
 
@@ -21,7 +19,7 @@ export default function WaterForm({ data }: any) {
             try {
                 await createWaterIntake({
                     water_intake: formData.get("water"),
-                    date: date_today(),
+                    date: data?.useDateToday,
                 });
                 router.refresh
                 router.push(`/dashboard/nutrition`);
@@ -34,7 +32,7 @@ export default function WaterForm({ data }: any) {
                 await editWaterIntake({
                     _id: data?.waterIntakeToday?._id,
                     water_intake: formData.get("water"),
-                    date: date_today(),
+                    date: data?.useDateToday,
                 });
                 router.refresh
                 router.push(`/dashboard/nutrition`);
