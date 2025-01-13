@@ -1,17 +1,24 @@
 import { DateTime, Settings } from "luxon";
+import { fetchUser } from '@/actions/user';
 
-export function date_today() {
+export async function date_today() {
+    const useUser = await fetchUser();
+    Settings.defaultZone = "system";
+
     const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    const dateTime = DateTime.local().setZone(timezone);
+    const useTimeZone = useUser.time_zone ?? timezone;
+    const dateTime = DateTime.local().setZone(useTimeZone);
 
     return dateTime.toLocaleString();
 };
 
-export function date_time_today() {
+export async function date_time_today() {
+    const useUser = await fetchUser()
     Settings.defaultZone = "system";
 
     const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    const dateTime = DateTime.local().setZone(timezone);
+    const useTimeZone = useUser.time_zone ?? timezone;
+    const dateTime = DateTime.local().setZone(useTimeZone);
 
     return dateTime.toLocaleString(DateTime.DATETIME_FULL);
 };

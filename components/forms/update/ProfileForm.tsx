@@ -22,6 +22,7 @@ export default function ProfileForm({ data }: any) {
                 last_name: formData.get("last_name"),
                 email: formData.get("email"),
                 country: formData.get("country"),
+                time_zone: `America/${formData.get("time_zone")}`,
                 street_address: formData.get("street_address"),
                 city: formData.get("city"),
                 region: formData.get("region"),
@@ -124,6 +125,7 @@ export default function ProfileForm({ data }: any) {
                                     id="country"
                                     name="country"
                                     autoComplete="country-name"
+                                    defaultValue={data?.country ?? ''}
                                     className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pl-3 pr-8 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
                                 >
                                     <option>United States</option>
@@ -145,10 +147,11 @@ export default function ProfileForm({ data }: any) {
                                     id="time_zone"
                                     name="time_zone"
                                     autoComplete="time_zone-name"
+                                    defaultValue={data?.time_zone ?? ''}
                                     className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pl-3 pr-8 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
                                 >
-                                    <option>United States</option>
-                                    <option>Canada</option>
+                                    <option>Denver</option>
+                                    <option>New_York</option>
                                 </select>
                                 <ChevronDownIcon
                                     aria-hidden="true"
