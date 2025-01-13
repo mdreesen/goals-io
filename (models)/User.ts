@@ -62,6 +62,7 @@ const userSchema = new Schema(
         city: String,
         region: String,
         postal_code: String,
+        time_zone: String,
         affirmations: [affirmationsSchema],
         books: [bookSchema],
         weight: [weightSchema],

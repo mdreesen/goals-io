@@ -1,4 +1,4 @@
-import { DateTime } from "luxon";
+import { DateTime, Settings } from "luxon";
 
 export function date_today() {
     const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -8,6 +8,8 @@ export function date_today() {
 };
 
 export function date_time_today() {
+    Settings.defaultZone = "system";
+
     const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
     const dateTime = DateTime.local().setZone(timezone);
 

@@ -10,7 +10,7 @@ export default async function Page() {
   const formatTotalWaterIntake = `${useAllWaterForToday?.total_water}oz.`;
   const buttonName = useAllWaterForToday.create ? 'Add water' : 'Update water';
 
-  const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone
+  const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
   const water = (
     <div>

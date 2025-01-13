@@ -136,6 +136,27 @@ export default function ProfileForm({ data }: any) {
                             </div>
                         </div>
 
+                        <div className="sm:col-span-3">
+                            <label htmlFor="time_zone" className="block text-sm/6 font-medium text-gray-900">
+                                Time Zone
+                            </label>
+                            <div className="mt-2 grid grid-cols-1">
+                                <select
+                                    id="time_zone"
+                                    name="time_zone"
+                                    autoComplete="time_zone-name"
+                                    className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pl-3 pr-8 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
+                                >
+                                    <option>United States</option>
+                                    <option>Canada</option>
+                                </select>
+                                <ChevronDownIcon
+                                    aria-hidden="true"
+                                    className="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-500 sm:size-4"
+                                />
+                            </div>
+                        </div>
+
                         <div className="col-span-full">
                             <label htmlFor="street_address" className="block text-sm/6 font-medium text-gray-900">
                                 Street address
