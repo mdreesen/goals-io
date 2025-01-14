@@ -3,9 +3,7 @@ import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { editWeight } from "@/actions/weight";
 import Link from 'next/link';
-import { formatDateAndTime } from "@/lib/formatters";
 import ButtonDeleteWeight from "@/components/buttons/ButtonDeleteWeight";
-import { date_today } from "@/lib/date_time";
 
 export default function WeightForm({ data }: any) {
 
@@ -18,9 +16,9 @@ export default function WeightForm({ data }: any) {
     const handleSubmit = async (formData: FormData) => {
         try {
           await editWeight({
-            _id: data?._id,
+            _id: data?.weightData?._id,
             weight: formData.get("weight"),
-            weight_date: date_today(),
+            weight_date: data?.date,
           });
           router.refresh
           router.push(`/dashboard/weight`);
@@ -44,7 +42,7 @@ export default function WeightForm({ data }: any) {
                         name="weight"
                         type="text"
                         placeholder="155"
-                        defaultValue={data.weight}
+                        defaultValue={data.weightData.weight}
                         className="block min-w-0 grow py-1.5 pl-1 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6"
                     />
                     <div className="shrink-0 px-2 select-none text-base text-gray-500 sm:text-sm/6">lbs</div>
@@ -66,7 +64,7 @@ export default function WeightForm({ data }: any) {
             </div>
 
             <div className="mt-6 flex items-center gap-x-6 justify-between">
-                <div><ButtonDeleteWeight data={data} /></div>
+                <div><ButtonDeleteWeight data={data.weightData} /></div>
                 <div className="flex gap-x-6 items-center">
                     <Link href={'/dashboard/weight'}>
                         <button type="button" className="text-sm/6 font-semibold text-gray-900 justify-end">

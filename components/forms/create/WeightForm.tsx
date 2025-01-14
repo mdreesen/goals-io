@@ -3,11 +3,11 @@ import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { addWeight } from "@/actions/weight";
 import Link from 'next/link';
-import { date_today } from "@/lib/date_time";
 
 export default function WeightForm({ data }: any) {
+
     // User data checks
-    const useStartingWeight = data?.weight?.length === 0;
+    const useStartingWeight = data?.useUser?.weight?.length === 0;
 
     const router = useRouter();
     const ref = useRef(null);
@@ -20,7 +20,7 @@ export default function WeightForm({ data }: any) {
 
             await addWeight({
                 weight: formData.get("weight"),
-                weight_date: date_today(),
+                weight_date: data?.date,
                 starting_weight: useStartingWeight
             });
 

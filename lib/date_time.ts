@@ -1,8 +1,10 @@
 import { DateTime, Settings } from "luxon";
 import { fetchUser } from '@/actions/user';
+import { parse } from '@/lib/formatters'
 
 export async function date_today() {
-    const useUser = await fetchUser();
+    const user = await fetchUser();
+    const useUser = parse(user);
     Settings.defaultZone = "system";
 
     const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
