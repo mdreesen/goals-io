@@ -46,7 +46,7 @@ export default async function RootLayout({
             <div className="bg-gray-900 pb-32">
                 <Disclosure as="nav" className="bg-gray-900">
                     <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
-                        <div className="border-b border-gray-700">
+                        <div>
                             <div className="flex h-16 items-center justify-between px-4 sm:px-0">
                                 <div className="flex items-center">
                                     <div className="shrink-0">
