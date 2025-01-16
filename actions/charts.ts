@@ -18,31 +18,31 @@ export async function booksByMonth() {
         const currentYear = current_year();
 
         // book_start_date by month to current year
-        const january_start = books?.filter((item: any) => item?.book_start_date?.includes('Jan') && item?.book_start_date?.includes(currentYear)).length
-        const february_start = books?.filter((item: any) => item?.book_start_date?.includes('Feb') && item?.book_start_date?.includes(currentYear)).length
-        const march_start = books?.filter((item: any) => item?.book_start_date?.includes('Mar') && item?.book_start_date?.includes(currentYear)).length
-        const april_start = books?.filter((item: any) => item?.book_start_date?.includes('Apr') && item?.book_start_date?.includes(currentYear)).length
-        const may_start = books?.filter((item: any) => item?.book_start_date?.includes('May') && item?.book_start_date?.includes(currentYear)).length
-        const june_start = books?.filter((item: any) => item?.book_start_date?.includes('June') && item?.book_start_date?.includes(currentYear)).length
-        const july_start = books?.filter((item: any) => item?.book_start_date?.includes('July') && item?.book_start_date?.includes(currentYear)).length
-        const august_start = books?.filter((item: any) => item?.book_start_date?.includes('Aug') && item?.book_start_date?.includes(currentYear)).length
-        const september_start = books?.filter((item: any) => item?.book_start_date?.includes('Sept') && item?.book_start_date?.includes(currentYear)).length
-        const october_start = books?.filter((item: any) => item?.book_start_date?.includes('Oct') && item?.book_start_date?.includes(currentYear)).length
-        const november_start = books?.filter((item: any) => item?.book_start_date?.includes('Nov') && item?.book_start_date?.includes(currentYear)).length
-        const december_start = books?.filter((item: any) => item?.book_start_date?.includes('Dec') && item?.book_start_date?.includes(currentYear)).length
+        const january_start = books?.filter((item: any) => item?.book_start_date?.includes('Jan') && item?.book_start_date?.includes(currentYear)).length;
+        const february_start = books?.filter((item: any) => item?.book_start_date?.includes('Feb') && item?.book_start_date?.includes(currentYear)).length;
+        const march_start = books?.filter((item: any) => item?.book_start_date?.includes('Mar') && item?.book_start_date?.includes(currentYear)).length;
+        const april_start = books?.filter((item: any) => item?.book_start_date?.includes('Apr') && item?.book_start_date?.includes(currentYear)).length;
+        const may_start = books?.filter((item: any) => item?.book_start_date?.includes('May') && item?.book_start_date?.includes(currentYear)).length;
+        const june_start = books?.filter((item: any) => item?.book_start_date?.includes('June') && item?.book_start_date?.includes(currentYear)).length;
+        const july_start = books?.filter((item: any) => item?.book_start_date?.includes('July') && item?.book_start_date?.includes(currentYear)).length;
+        const august_start = books?.filter((item: any) => item?.book_start_date?.includes('Aug') && item?.book_start_date?.includes(currentYear)).length;
+        const september_start = books?.filter((item: any) => item?.book_start_date?.includes('Sept') && item?.book_start_date?.includes(currentYear)).length;
+        const october_start = books?.filter((item: any) => item?.book_start_date?.includes('Oct') && item?.book_start_date?.includes(currentYear)).length;
+        const november_start = books?.filter((item: any) => item?.book_start_date?.includes('Nov') && item?.book_start_date?.includes(currentYear)).length;
+        const december_start = books?.filter((item: any) => item?.book_start_date?.includes('Dec') && item?.book_start_date?.includes(currentYear)).length;
 
-        const january_end = books?.filter((item: any) => item?.book_end_date?.includes('Jan') && item?.book_start_date?.includes(currentYear)).length
-        const february_end = books?.filter((item: any) => item?.book_end_date?.includes('Feb') && item?.book_start_date?.includes(currentYear)).length
-        const march_end = books?.filter((item: any) => item?.book_end_date?.includes('Mar') && item?.book_start_date?.includes(currentYear)).length
-        const april_end = books?.filter((item: any) => item?.book_end_date?.includes('Apr') && item?.book_start_date?.includes(currentYear)).length
-        const may_end = books?.filter((item: any) => item?.book_end_date?.includes('May') && item?.book_start_date?.includes(currentYear)).length
-        const june_end = books?.filter((item: any) => item?.book_end_date?.includes('June') && item?.book_start_date?.includes(currentYear)).length
-        const july_end = books?.filter((item: any) => item?.book_end_date?.includes('July') && item?.book_start_date?.includes(currentYear)).length
-        const august_end = books?.filter((item: any) => item?.book_end_date?.includes('Aug') && item?.book_start_date?.includes(currentYear)).length
-        const september_end = books?.filter((item: any) => item?.book_end_date?.includes('Sept') && item?.book_start_date?.includes(currentYear)).length
-        const october_end = books?.filter((item: any) => item?.book_end_date?.includes('Oct') && item?.book_start_date?.includes(currentYear)).length
-        const november_end = books?.filter((item: any) => item?.book_end_date?.includes('Nov') && item?.book_start_date?.includes(currentYear)).length
-        const december_end = books?.filter((item: any) => item?.book_end_date?.includes('Dec') && item?.book_start_date?.includes(currentYear)).length
+        const january_end = books?.filter((item: any) => item?.book_end_date?.includes('Jan') && item?.book_end_date?.includes(currentYear)).length;
+        const february_end = books?.filter((item: any) => item?.book_end_date?.includes('Feb') && item?.book_end_date?.includes(currentYear)).length;
+        const march_end = books?.filter((item: any) => item?.book_end_date?.includes('Mar') && item?.book_end_date?.includes(currentYear)).length;
+        const april_end = books?.filter((item: any) => item?.book_end_date?.includes('Apr') && item?.book_end_date?.includes(currentYear)).length;
+        const may_end = books?.filter((item: any) => item?.book_end_date?.includes('May') && item?.book_end_date?.includes(currentYear)).length;
+        const june_end = books?.filter((item: any) => item?.book_end_date?.includes('June') && item?.book_end_date?.includes(currentYear)).length;
+        const july_end = books?.filter((item: any) => item?.book_end_date?.includes('July') && item?.book_end_date?.includes(currentYear)).length;
+        const august_end = books?.filter((item: any) => item?.book_end_date?.includes('Aug') && item?.book_end_date?.includes(currentYear)).length;
+        const september_end = books?.filter((item: any) => item?.book_end_date?.includes('Sept') && item?.book_end_date?.includes(currentYear)).length;
+        const october_end = books?.filter((item: any) => item?.book_end_date?.includes('Oct') && item?.book_end_date?.includes(currentYear)).length;
+        const november_end = books?.filter((item: any) => item?.book_end_date?.includes('Nov') && item?.book_end_date?.includes(currentYear)).length;
+        const december_end = books?.filter((item: any) => item?.book_end_date?.includes('Dec') && item?.book_end_date?.includes(currentYear)).length;
 
         return [
             {
@@ -57,7 +57,7 @@ export async function booksByMonth() {
             },
             {
                 name: 'March',
-                Start_date: march_start,
+                start_date: march_start,
                 end_date: march_end,
             },
             {
