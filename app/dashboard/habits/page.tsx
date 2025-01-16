@@ -3,35 +3,43 @@ import Link from 'next/link';
 import HabitList from '@/components/lists/HabitList';
 
 export default async function Page() {
-    const filteredGoals = await filterHabits() as any;
+    const filteredHabits = await filterHabits() as any;
 
     // Filtered Goals
-    const personal_goals_arr = filteredGoals?.personal_goals;
-    const family_goals_arr = filteredGoals?.family_goals;
-    const community_goals_arr = filteredGoals?.community_goals;
+    const personal_habits_arr = filteredHabits?.personal_habits;
+    const family_habits_arr = filteredHabits?.family_habits;
+    const marriage_habits_arr = filteredHabits?.marriage_habits;
+    const community_habits_arr = filteredHabits?.community_habits;
 
-    // Render goals sections
-    const renderPersonalGoals = filteredGoals.use_personal_goals;
-    const renderFamilyGoals = filteredGoals.use_family_goals;
-    const renderCommunityGoals = filteredGoals.use_community_goals;
+    // Render habits sections
+    const renderPersonalHabits = filteredHabits.use_personal_habits;
+    const renderFamilyHabits = filteredHabits.use_family_habits;
+    const renderMarriageHabits = filteredHabits.use_marriage_habits;
+    const renderCommunityHabits = filteredHabits.use_community_habits;
 
-    const none = renderPersonalGoals === false && renderFamilyGoals === false && renderCommunityGoals === false;
+    const none = renderPersonalHabits === false && renderFamilyHabits === false && renderCommunityHabits === false;
 
-    const usePersonalGoals = renderPersonalGoals && (
-        <ul role="list" className="divide-y divide-gray-100 border border-amber-500 rounded-md">
-            <HabitList data={personal_goals_arr} />
-        </ul>
-    );
-
-    const useFamilyGoals = renderFamilyGoals && (
-        <ul role="list" className="divide-y divide-gray-100 border border-sky-600 my-6 rounded-md">
-            <HabitList data={family_goals_arr} />
-        </ul>
-    );
-
-    const useCommunityGoals = renderCommunityGoals && (
+    const useCommunityHabits = renderCommunityHabits && (
         <ul role="list" className="divide-y divide-gray-100 border border-green-600 my-6 rounded-md">
-            <HabitList data={community_goals_arr} />
+            <HabitList data={community_habits_arr} />
+        </ul>
+    );
+
+    const useFamilyHabits = renderFamilyHabits && (
+        <ul role="list" className="divide-y divide-gray-100 border border-sky-600 my-6 rounded-md">
+            <HabitList data={family_habits_arr} />
+        </ul>
+    );
+
+    const useMarriageHabits = renderMarriageHabits && (
+        <ul role="list" className="divide-y divide-gray-100 border border-purple-600 my-6 rounded-md">
+            <HabitList data={marriage_habits_arr} />
+        </ul>
+    );
+
+    const usePersonalHabits = renderPersonalHabits && (
+        <ul role="list" className="divide-y divide-gray-100 border border-amber-500 rounded-md">
+            <HabitList data={personal_habits_arr} />
         </ul>
     );
 
@@ -50,9 +58,10 @@ export default async function Page() {
                 </Link>
             </div>
             {none && <h3>Add your Habits!</h3>}
-            {usePersonalGoals}
-            {useFamilyGoals}
-            {useCommunityGoals}
+            {usePersonalHabits}
+            {useFamilyHabits}
+            {useMarriageHabits}
+            {useCommunityHabits}
         </div>
     )
 }

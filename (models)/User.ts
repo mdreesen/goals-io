@@ -19,7 +19,7 @@ const bookSchema = new Schema(
         book_end_date: String || undefined
     }, { timestamps: false });
 
-const goalsSchema = new Schema(
+const habitsSchema = new Schema(
     {
         title: String || undefined,
         description: String || undefined,
@@ -67,7 +67,7 @@ const userSchema = new Schema(
         books: [bookSchema],
         weight: [weightSchema],
         water: [waterIntakeSchema],
-        goals: [goalsSchema],
+        habits: [habitsSchema],
         settings: [settingsSchema],
         resetPasswordToken: String,
         createdAt: String,

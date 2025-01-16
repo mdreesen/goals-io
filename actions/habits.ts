@@ -11,7 +11,7 @@ export async function fetchHabits() {
 
         const user = await User.findOne({ email: session?.user.email });
 
-        return user.goals ?? []
+        return user.habits ?? []
     } catch (error) {
         console.log(error)
         return error
@@ -25,7 +25,7 @@ export async function addHabit(values: any) {
     try {
         await connectDB();
 
-        await User.findOneAndUpdate({ email: session?.user.email }, { $addToSet: { goals: { ...values } } }, { new: true });
+        await User.findOneAndUpdate({ email: session?.user.email }, { $addToSet: { habits: { ...values } } }, { new: true });
 
     } catch (e) {
         console.log(e)
@@ -40,11 +40,11 @@ export async function editHabit(values: any) {
         await connectDB();
 
         await User.findOneAndUpdate(
-            { 'goals._id': _id },
-            { $set: { 'goals.$': { ...values } } },
+            { 'habits._id': _id },
+            { $set: { 'habits.$': { ...values } } },
             { new: true });
 
-        revalidatePath('/dashboard/goals');
+        revalidatePath('/dashboard/habits');
 
 
     } catch (e) {
@@ -60,11 +60,11 @@ export async function deleteHabit(values: any) {
         await connectDB();
 
         await User.findOneAndUpdate(
-            { 'goals._id': id },
-            { $pull: { 'goals': { _id: id } } },
+            { 'habits._id': id },
+            { $pull: { 'habits': { _id: id } } },
             { new: true });
 
-        revalidatePath('/dashboard/goals');
+        revalidatePath('/dashboard/habits');
 
 
     } catch (e) {
@@ -81,12 +81,12 @@ export async function fetchHabitsById(values: any) {
 
         const user = await User.findOne({ email: session?.user.email });
 
-        const goals = user.goals.filter((item: any) => {
+        const habits = user.habits.filter((item: any) => {
             const idToString = item.id.toString()
             return idToString.includes(id)
         });
 
-        return goals[0]
+        return habits[0]
 
     } catch (e) {
         console.log(e);
@@ -102,18 +102,21 @@ export async function filterHabits() {
 
         const user = await User.findOne({ email: session?.user.email });
 
-        const familyGoals = user.goals.filter((item: any) => item.kind.includes('Family'));
-        const personalGoals = user.goals.filter((item: any) => item.kind.includes('Personal'));
-        const communityGoals = user.goals.filter((item: any) => item.kind.includes('Community'));
+        const communityHabits = user.habits.filter((item: any) => item.kind.includes('Community')) ?? [];
+        const familyHabits = user.habits.filter((item: any) => item.kind.includes('Family')) ?? [];
+        const marriageHabits = user.habits.filter((item: any) => item.kind.includes('Marriage')) ?? [];
+        const personalHabits = user.habits.filter((item: any) => item.kind.includes('Personal')) ?? [];
 
         return {
-            family_goals: familyGoals,
-            personal_goals: personalGoals,
-            community_goals: communityGoals,
+            community_habits: communityHabits,
+            family_habits: familyHabits,
+            marriage_habits: marriageHabits,
+            personal_habits: personalHabits,
 
-            use_family_goals: familyGoals.length > 0,
-            use_personal_goals: personalGoals.length > 0,
-            use_community_goals: communityGoals.length > 0,
+            use_community_habits: communityHabits.length > 0,
+            use_family_habits: familyHabits.length > 0,
+            use_marriage_habits: marriageHabits.length > 0,
+            use_personal_habits: personalHabits.length > 0,
         }
 
     } catch (e) {

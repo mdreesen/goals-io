@@ -77,6 +77,7 @@ export default function HabitForm() {
                     >
                         <option>Community</option>
                         <option>Family</option>
+                        <option>Marriage</option>
                         <option>Personal</option>
                     </select>
                     <ChevronDownIcon

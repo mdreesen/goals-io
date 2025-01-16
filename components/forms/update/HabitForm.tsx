@@ -22,7 +22,7 @@ export default function HabitForm({ data }: any) {
                 status: formData.get("status"),
             });
             router.refresh
-            router.push(`/dashboard/goals`);
+            router.push(`/dashboard/habits`);
         } catch (error) {
             setError(error as string)
             console.log(error);
@@ -80,6 +80,7 @@ export default function HabitForm({ data }: any) {
                     >
                         <option>Community</option>
                         <option>Family</option>
+                        <option>Marriage</option>
                         <option>Personal</option>
                     </select>
                     <ChevronDownIcon
