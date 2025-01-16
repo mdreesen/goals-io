@@ -1,11 +1,11 @@
 'use client';
 import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { addGoal } from "@/actions/goals";
+import { addHabit } from "@/actions/habits";
 import { ChevronDownIcon } from '@heroicons/react/16/solid';
 import Link from 'next/link';
 
-export default function GoalForm() {
+export default function HabitForm() {
 
     const router = useRouter();
     const ref = useRef(null);
@@ -14,14 +14,14 @@ export default function GoalForm() {
 
     const handleSubmit = async (formData: FormData) => {
         try {
-            await addGoal({
+            await addHabit({
                 title: formData.get("title"),
                 description: formData.get("description"),
                 kind: formData.get("kind"),
                 status: formData.get("status"),
             });
             router.refresh
-            router.push(`/dashboard/goals`);
+            router.push(`/dashboard/habits`);
         } catch (error) {
             setError(error as string)
             console.log(error);
@@ -41,7 +41,7 @@ export default function GoalForm() {
                             id="title"
                             name="title"
                             type="text"
-                            placeholder="Goal Title"
+                            placeholder="Habit Title"
                             className="block min-w-0 grow py-1.5 pl-1 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6"
                         />
                     </div>
@@ -58,7 +58,7 @@ export default function GoalForm() {
                         name="description"
                         rows={3}
                         className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
-                        placeholder="About your goal"
+                        placeholder="About your habit"
                         defaultValue={''}
                     />
                 </div>
@@ -66,7 +66,7 @@ export default function GoalForm() {
 
             <div className="sm:col-span-3">
                 <label htmlFor="kind" className="block text-sm/6 font-medium text-gray-900">
-                    Kind of goal
+                    Kind of habit
                 </label>
                 <div className="mt-2 grid grid-cols-1">
                     <select
@@ -116,15 +116,15 @@ export default function GoalForm() {
         <form ref={ref} action={handleSubmit}>
             <div className="space-y-12">
                 <div className="border-b border-gray-900/10 pb-12">
-                    <h2 className="text-base/7 font-semibold text-gray-900">Goal information</h2>
-                    <p className="mt-1 text-sm/6 text-gray-600">Name and details of goal.</p>
+                    <h2 className="text-base/7 font-semibold text-gray-900">Habit information</h2>
+                    <p className="mt-1 text-sm/6 text-gray-600">Name and details of habit.</p>
 
                     {information}
                 </div>
             </div>
 
             <div className="mt-6 flex items-center justify-end gap-x-6">
-                <Link href={'/dashboard/goals'}>
+                <Link href={'/dashboard/habits'}>
                     <button type="button" className="text-sm/6 font-semibold text-gray-900">
                         Cancel
                     </button>

@@ -4,7 +4,7 @@ import User from "@/(models)/User";
 import { getServerSession } from "next-auth/next";
 import { revalidatePath } from 'next/cache';
 
-export async function fetchGoals() {
+export async function fetchHabits() {
     try {
         await connectDB();
         const session = await getServerSession();
@@ -18,7 +18,7 @@ export async function fetchGoals() {
     }
 };
 
-export async function addGoal(values: any) {
+export async function addHabit(values: any) {
 
     const session = await getServerSession();
 
@@ -33,7 +33,7 @@ export async function addGoal(values: any) {
     }
 };
 
-export async function editGoal(values: any) {
+export async function editHabit(values: any) {
     const { _id } = values;
 
     try {
@@ -53,7 +53,7 @@ export async function editGoal(values: any) {
     }
 };
 
-export async function deleteGoal(values: any) {
+export async function deleteHabit(values: any) {
     const { id } = values;
 
     try {
@@ -73,7 +73,7 @@ export async function deleteGoal(values: any) {
     }
 };
 
-export async function fetchGoalsById(values: any) {
+export async function fetchHabitsById(values: any) {
     const { id } = values;
     try {
         await connectDB();
@@ -94,7 +94,7 @@ export async function fetchGoalsById(values: any) {
     }
 };
 
-export async function filterGoals() {
+export async function filterHabits() {
 
     try {
         await connectDB();

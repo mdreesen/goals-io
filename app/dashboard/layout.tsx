@@ -32,7 +32,7 @@ export default async function RootLayout({
         { name: 'Dashboard', href: '/dashboard', current: false, useNav: true },
         { name: 'Affirmations', href: '/dashboard/affirmations', current: false, useNav: useShowAffirmations?.value },
         { name: 'Books', href: '/dashboard/books', current: false, useNav: useShowBooks?.value },
-        { name: 'Goals', href: '/dashboard/goals', current: false, useNav: useShowGoals?.value },
+        { name: 'Habits', href: '/dashboard/habits', current: false, useNav: useShowGoals?.value },
         { name: 'Nutrition', href: '/dashboard/nutrition', current: false, useNav: useShowNutrition?.value },
         { name: 'Weight', href: '/dashboard/weight', current: false, useNav: useShowWeight?.value },
     ]

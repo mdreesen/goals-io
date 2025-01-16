@@ -1,9 +1,9 @@
-import { filterGoals } from '@/actions/goals';
+import { filterHabits } from '@/actions/habits';
 import Link from 'next/link';
-import GoalList from '@/components/lists/GoalsList';
+import HabitList from '@/components/lists/HabitList';
 
 export default async function Page() {
-    const filteredGoals = await filterGoals() as any;
+    const filteredGoals = await filterHabits() as any;
 
     // Filtered Goals
     const personal_goals_arr = filteredGoals?.personal_goals;
@@ -19,33 +19,33 @@ export default async function Page() {
 
     const usePersonalGoals = renderPersonalGoals && (
         <ul role="list" className="divide-y divide-gray-100 border border-amber-500 rounded-md">
-            <GoalList data={personal_goals_arr} />
+            <HabitList data={personal_goals_arr} />
         </ul>
     );
 
     const useFamilyGoals = renderFamilyGoals && (
         <ul role="list" className="divide-y divide-gray-100 border border-sky-600 my-6 rounded-md">
-            <GoalList data={family_goals_arr} />
+            <HabitList data={family_goals_arr} />
         </ul>
     );
 
     const useCommunityGoals = renderCommunityGoals && (
         <ul role="list" className="divide-y divide-gray-100 border border-green-600 my-6 rounded-md">
-            <GoalList data={community_goals_arr} />
+            <HabitList data={community_goals_arr} />
         </ul>
     );
 
     return (
         <div>
-            <h2 className="text-3xl font-semibold text-gray-900">Goals</h2>
+            <h2 className="text-3xl font-semibold text-gray-900">Habits</h2>
 
             <div className="flex justify-end mt-4 mb-4 sm:mt-0 sm:flex-none">
-                <Link href={'/dashboard/goals/create'}>
+                <Link href={'/dashboard/habits/create'}>
                     <button
                         type="button"
                         className="block rounded-md bg-gray-800 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-900"
                     >
-                        Add goal
+                        Add habit
                     </button>
                 </Link>
             </div>

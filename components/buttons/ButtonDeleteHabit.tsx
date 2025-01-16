@@ -1,16 +1,16 @@
 'use client';
 import { useRouter } from "next/navigation";
-import { deleteGoal } from '@/actions/goals';
+import { deleteHabit } from '@/actions/habits';
 
-export default function ButtonDeleteGoal({ data }: any) {
+export default function ButtonDeleteHabit({ data }: any) {
     const router = useRouter();
 
     const handleSubmit = async (e: any) => {
         e.preventDefault();
         try {
-            await deleteGoal({ id: data });
+            await deleteHabit({ id: data });
             router.refresh
-            router.push(`/dashboard/goals`);
+            router.push(`/dashboard/habits`);
         } catch (error) {
             console.log(error)
         }

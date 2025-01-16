@@ -2,10 +2,10 @@ import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { EllipsisVerticalIcon } from '@heroicons/react/20/solid'
 import { statusColors } from '@/lib/statusColors';
 import { parse } from '@/lib/formatters';
-import ButtonDeleteGoal from "@/components/buttons/ButtonDeleteGoal";
+import ButtonDeleteHabit from "@/components/buttons/ButtonDeleteHabit";
 import Link from 'next/link';
 
-export default async function GoalList({ data }: any) {
+export default async function HabitList({ data }: any) {
 
     return data.length > 0 ? data?.map((item: any, index: number) => (
         <li key={`${item._id}-${index}`} className="flex items-center justify-between gap-x-6 p-5">
@@ -18,7 +18,7 @@ export default async function GoalList({ data }: any) {
                 </div>
                 <div className="mt-1 flex items-center gap-x-2 text-xs/5 text-gray-500">
                     <p className="whitespace-nowrap">
-                        {item.kind && `${item.kind} goal`}
+                        {item.kind && `${item.kind} habit`}
                     </p>
                 </div>
             </div>
@@ -34,18 +34,18 @@ export default async function GoalList({ data }: any) {
                     >
                         <MenuItem>
                             <Link
-                                href={`/dashboard/goals/edit/${parse(item._id)}`}
+                                href={`/dashboard/habits/edit/${parse(item._id)}`}
                                 className="block px-3 py-1 text-sm/6 text-gray-900 data-[focus]:bg-gray-50 data-[focus]:outline-none"
                             >
                                 Edit<span className="sr-only">, {item.name}</span>
                             </Link>
                         </MenuItem>
                         <MenuItem>
-                            <ButtonDeleteGoal data={parse(item._id)} />
+                            <ButtonDeleteHabit data={parse(item._id)} />
                         </MenuItem>
                     </MenuItems>
                 </Menu>
             </div>
         </li>
-    )) : <h3>Make your first goal!</h3>
+    )) : <h3>Make your first habit!</h3>
 }

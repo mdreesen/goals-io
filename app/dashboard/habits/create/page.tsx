@@ -1,10 +1,10 @@
-import GoalForm from '@/components/forms/create/GoalForm';
+import HabitForm from '@/components/forms/create/HabitForm';
 
 export default async function Page() {
 
     return (
         <div>
-            <GoalForm />
+            <HabitForm />
         </div>
     )
 }
