@@ -15,6 +15,8 @@ export default async function Page() {
     const renderFamilyGoals = filteredGoals.use_family_goals;
     const renderCommunityGoals = filteredGoals.use_community_goals;
 
+    const none = renderPersonalGoals === false && renderFamilyGoals === false && renderCommunityGoals === false;
+
     const usePersonalGoals = renderPersonalGoals && (
         <ul role="list" className="divide-y divide-gray-100 border border-amber-500 rounded-md">
             <GoalList data={personal_goals_arr} />
@@ -47,6 +49,7 @@ export default async function Page() {
                     </button>
                 </Link>
             </div>
+            {none && <h3>Add your Habits!</h3>}
             {usePersonalGoals}
             {useFamilyGoals}
             {useCommunityGoals}

@@ -145,7 +145,7 @@ export default function Page() {
                 type="submit"
                 className="flex w-full justify-center rounded-md bg-gray-900 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-gray-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900"
               >
-                Sign in
+                Sign up
               </button>
             </div>
           </form>
@@ -155,7 +155,7 @@ export default function Page() {
           <div>
 
             <p className="mt-10 text-center text-sm text-gray-900">
-              <Link href="/authentication/signup" className="leading-6 block text-sm/6 font-medium text-gray-900">
+              <Link href="/" className="leading-6 block text-sm/6 font-medium text-gray-900">
                Already have an account?
               </Link>
             </p>

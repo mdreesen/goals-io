@@ -46,7 +46,7 @@ export default async function Page() {
                             </a>
                         </div>
                     );
-                }) : <h3>Add your first book!</h3>}
+                }) : <h3>Add your books!</h3>}
             </div>
         </div>
     )

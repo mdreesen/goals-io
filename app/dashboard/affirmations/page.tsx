@@ -17,6 +17,8 @@ export default async function Page() {
     const renderPositivity = filteredAffirmations.use_positivity_affirmations;
     const renderSelfWorth = filteredAffirmations.use_selfWorth_affirmations;
 
+    const none = renderGrowth === false && renderMindfulness === false && renderPositivity === false && renderSelfWorth === false;
+
     const useGrowth = renderGrowth && (
         <ul role="list" className="divide-y divide-gray-100 border border-amber-500 rounded-md">
             <AffirmationsList data={growth} />
@@ -55,6 +57,7 @@ export default async function Page() {
                     </button>
                 </Link>
             </div>
+            {none && <h3>Add your Affirmations!</h3>}
             {useGrowth}
             {useMindfulness}
             {usePositivity}

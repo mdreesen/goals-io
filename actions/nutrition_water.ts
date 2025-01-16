@@ -104,7 +104,7 @@ export async function fetchAllWaterForToday() {
             create: waterCheck,
             useDateToday: today,
             current_progress: currentProgress.toString(),
-            total_water: useConvertToOz,
+            total_water: useConvertToOz === 'NaN' ? 'Please record your weight to get total!' : `${useConvertToOz} oz.`,
             date: today,
             date_day_time: date_time
         }
