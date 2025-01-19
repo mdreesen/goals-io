@@ -45,7 +45,7 @@ export default async function RootLayout({
     ]
 
     return (
-        <div className="min-h-full">
+        <div className="flex flex-col min-h-screen">
             <div className="bg-gray-900 pb-32">
                 <Disclosure as="nav" className="bg-gray-900">
                     <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
@@ -192,7 +192,7 @@ export default async function RootLayout({
                 </header>
             </div>
 
-            <main className="-mt-32">
+            <main className="-mt-32 grow">
                 <div className="mx-auto max-w-7xl px-4 pb-12 sm:px-6 lg:px-8">
                     <div className="rounded-lg bg-white px-5 py-6 shadow sm:px-6">
                         {children}
