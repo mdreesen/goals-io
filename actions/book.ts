@@ -10,9 +10,9 @@ export async function fetchBooks() {
         await connectDB();
         const session = await getServerSession();
 
-        const user = await User.findOne({ email: session?.user.email });
+        const data = await User.find({ email: session?.user.email }, 'books');
 
-        return user?.books ?? [];
+        return data[0].books ?? [];
 
     } catch (e) {
         console.log(e);

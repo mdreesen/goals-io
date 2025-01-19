@@ -9,9 +9,10 @@ export async function fetchHabits() {
         await connectDB();
         const session = await getServerSession();
 
-        const user = await User.findOne({ email: session?.user.email });
+        const data = await User.find({ email: session?.user.email }, 'habits');
 
-        return user.habits ?? []
+        return data[0].habits ?? [];
+
     } catch (error) {
         console.log(error)
         return error
@@ -100,12 +101,12 @@ export async function filterHabits() {
         await connectDB();
         const session = await getServerSession();
 
-        const user = await User.findOne({ email: session?.user.email });
+        const data = await User.find({ email: session?.user.email }, 'habits');
 
-        const communityHabits = user.habits.filter((item: any) => item.kind.includes('Community')) ?? [];
-        const familyHabits = user.habits.filter((item: any) => item.kind.includes('Family')) ?? [];
-        const marriageHabits = user.habits.filter((item: any) => item.kind.includes('Marriage')) ?? [];
-        const personalHabits = user.habits.filter((item: any) => item.kind.includes('Personal')) ?? [];
+        const communityHabits = data[0].habits.filter((item: any) => item.kind.includes('Community')) ?? [];
+        const familyHabits = data[0].habits.filter((item: any) => item.kind.includes('Family')) ?? [];
+        const marriageHabits = data[0].habits.filter((item: any) => item.kind.includes('Marriage')) ?? [];
+        const personalHabits = data[0].habits.filter((item: any) => item.kind.includes('Personal')) ?? [];
 
         return {
             community_habits: communityHabits,

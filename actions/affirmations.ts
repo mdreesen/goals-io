@@ -9,9 +9,9 @@ export async function fetchGoals() {
         await connectDB();
         const session = await getServerSession();
 
-        const user = await User.findOne({ email: session?.user.email });
+        const data = await User.find({ email: session?.user.email }, 'affirmations');
 
-        return user.goals ?? []
+        return data[0].affirmations ?? []
     } catch (error) {
         console.log(error)
         return error
@@ -100,12 +100,12 @@ export async function filterAffirmations() {
         await connectDB();
         const session = await getServerSession();
 
-        const user = await User.findOne({ email: session?.user.email });
+        const data = await User.find({ email: session?.user.email }, 'affirmations');
 
-        const growthAffirmations = user.affirmations?.filter((item: any) => item.kind.includes('Growth')) ?? [];
-        const mindfulnessAffirmations = user.affirmations?.filter((item: any) => item.kind.includes('Mindfulness'));
-        const positivityAffirmations = user.affirmations?.filter((item: any) => item.kind.includes('Positivity'));
-        const selfWorthAffirmations = user.affirmations?.filter((item: any) => item.kind.includes('Self Worth'));
+        const growthAffirmations = data[0].affirmations?.filter((item: any) => item.kind.includes('Growth')) ?? [];
+        const mindfulnessAffirmations = data[0].affirmations?.filter((item: any) => item.kind.includes('Mindfulness'));
+        const positivityAffirmations = data[0].affirmations?.filter((item: any) => item.kind.includes('Positivity'));
+        const selfWorthAffirmations = data[0].affirmations?.filter((item: any) => item.kind.includes('Self Worth'));
 
         return {
             growth_affirmations: growthAffirmations,
