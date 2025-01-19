@@ -5,6 +5,7 @@ import { addBible } from "@/actions/bible";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import bible_books from '@/lib/bible_books.json';
+import ButtonDeleteBible from "@/components/buttons/ButtonDeleteBible";
 
 export default function BibleForm({ data }: any) {
 
@@ -50,7 +51,6 @@ export default function BibleForm({ data }: any) {
                                 >
                                     {bible_books.map((item) => (
                                         <option key={`${item.book}`}>{item.book}</option>
-
                                     ))}
                                 </select>
                                 <ChevronDownIcon
@@ -116,6 +116,7 @@ export default function BibleForm({ data }: any) {
             </div>
 
             <div className="mt-6 flex items-center gap-x-6 justify-between">
+            <div><ButtonDeleteBible data={data} /></div>
                 <div className="flex gap-x-6 items-center">
                     <Link href={'/dashboard/bible'}>
                         <button type="button" className="text-sm/6 font-semibold text-gray-900 justify-end">
