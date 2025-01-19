@@ -12,7 +12,7 @@ export async function fetchBible() {
 
         const data = await User.find({ email: session?.user.email }, 'bibles');
 
-        return data[0].bibles ?? [];
+        return data[0].bibles.sort() ?? [];
 
     } catch (e) {
         console.log(e);
