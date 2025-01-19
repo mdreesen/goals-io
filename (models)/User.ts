@@ -10,6 +10,14 @@ const affirmationsSchema = new Schema(
         date: String || undefined,
     }, { timestamps: false });
 
+const bibleSchema = new Schema(
+    {
+        book_title: String || undefined,
+        chapter: String || undefined,
+        verses: String || undefined,
+        notes: String || undefined,
+    }, { timestamps: false });
+
 const bookSchema = new Schema(
     {
         book_title: String || undefined,
@@ -29,12 +37,12 @@ const habitsSchema = new Schema(
         date_end: String || undefined
     }, { timestamps: false });
 
-    const settingsSchema = new Schema(
-        {
-            setting: String || undefined,
-            title: String  || undefined,
-            value: Boolean  || undefined
-        }, { timestamps: false });
+const settingsSchema = new Schema(
+    {
+        setting: String || undefined,
+        title: String || undefined,
+        value: Boolean || undefined
+    }, { timestamps: false });
 
 const waterIntakeSchema = new Schema(
     {
@@ -64,6 +72,7 @@ const userSchema = new Schema(
         postal_code: String,
         time_zone: String,
         affirmations: [affirmationsSchema],
+        bibles: [bibleSchema],
         books: [bookSchema],
         weight: [weightSchema],
         water: [waterIntakeSchema],

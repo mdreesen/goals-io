@@ -12,6 +12,7 @@ export async function fetchSettings() {
         const user = await User.findOne({ email: session?.user.email });
 
         const useShowAffirmations = user.settings.find((item: any) => item.setting.includes('showAffirmations') ?? {}) ?? [];
+        const useShowBible = user.settings.find((item: any) => item.setting.includes('showBible') ?? {}) ?? [];
         const useShowBooks = user.settings.find((item: any) => item.setting.includes('showBooks') ?? {}) ?? [];
         const useShowGoals = user.settings.find((item: any) => item.setting.includes('showGoals') ?? {}) ?? [];
         const useShowNutrition = user.settings.find((item: any) => item.setting.includes('showNutrition') ?? {}) ?? [];
@@ -19,6 +20,7 @@ export async function fetchSettings() {
 
         return {
             useShowAffirmations: useShowAffirmations,
+            useShowBible: useShowBible,
             useShowBooks: useShowBooks,
             useShowGoals: useShowGoals,
             useShowNutrition: useShowNutrition,
