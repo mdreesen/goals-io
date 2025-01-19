@@ -5,6 +5,8 @@ import Link from "next/link";
 import { fetchUser } from '@/actions/user';
 import { fetchSettings } from '@/actions/settings';
 import ButtonAuth from "@/components/buttons/ButtonAuth";
+import { current_year } from "@/lib/date_time";
+import packagejson from '@/package.json';
 
 function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(' ')
@@ -26,7 +28,7 @@ export default async function RootLayout({
     };
 
     // Conditionals
-    const hasUserFirstLast = useUser?.first_name && useUser?.last_name ? `${useUser?. first_name} ${useUser?.last_name}` : 'Dashboard';
+    const hasUserFirstLast = useUser?.first_name && useUser?.last_name ? `${useUser?.first_name} ${useUser?.last_name}` : 'Dashboard';
 
     const navigation = [
         { name: 'Dashboard', href: '/dashboard', current: false, useNav: true },
@@ -196,6 +198,16 @@ export default async function RootLayout({
                     </div>
                 </div>
             </main>
+            <footer className="bg-gray-900">
+                <div className="mx-auto max-w-7xl px-6 py-12 md:flex md:items-center md:justify-between lg:px-8">
+                    <div className="flex justify-center gap-x-6 md:order-2">
+                        <span className="mt-8 text-center text-sm/6 text-gray-400 md:order-1 md:mt-0">Version {packagejson.version}</span>
+                    </div>
+                    <p className="mt-8 text-center text-sm/6 text-gray-400 md:order-1 md:mt-0">
+                        &copy; {current_year()} White Raven, Inc. All rights reserved.
+                    </p>
+                </div>
+            </footer>
         </div>
     )
 }
