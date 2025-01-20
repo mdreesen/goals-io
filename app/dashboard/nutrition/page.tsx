@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { fetchAllWaterForToday } from "@/actions/nutrition_water";
+import { parse } from '@/lib/formatters';
 export default async function Page() {
 
   const useAllWaterForToday = await fetchAllWaterForToday() as any;
@@ -8,6 +9,7 @@ export default async function Page() {
   const formatWaterIntakeToday = `${useAllWaterForToday.waterIntakeToday?.water_intake ?? '0'} oz.`;
   const formatTotalWaterIntake = `${useAllWaterForToday?.total_water}`;
   const buttonName = useAllWaterForToday.create ? 'Add water' : 'Update water';
+  const congratulations = useAllWaterForToday?.congrats;
 
   const water = (
     <div>
@@ -31,8 +33,8 @@ export default async function Page() {
       </div>
       <div aria-hidden="true" className="mt-6">
         <div className="overflow-hidden rounded-full bg-gray-200">
-          <div style={{ width: `${useAllWaterForToday.current_progress === "NaN" ? '0' : useAllWaterForToday.current_progress}%` }} className="h-2 rounded-full bg-[#c18d21]" />
         </div>
+          <div style={{ width: `${useAllWaterForToday.current_progress === "NaN" ? '0' : useAllWaterForToday.current_progress}%` }} className={`h-2 rounded-full ${congratulations ? 'bg-[#ffbd38]' : 'bg-[#c18d21]'}`} />
         <div className="mt-6 hidden grid-cols-4 text-sm font-medium text-gray-600 sm:grid">
           <div>Getting started</div>
           <div className="text-center">Keep going</div>

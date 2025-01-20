@@ -5,14 +5,18 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { InstallPrompt } from "@/components/prompts/InstallPrompt";
+import LoaderPacman from "@/components/loaders/LoaderPacman";
 
 export default function Page() {
 
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
   const router = useRouter();
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setLoading(true);
     const formData = new FormData(event.currentTarget);
     const res = await signIn("credentials", {
       email: formData.get("email"),
@@ -21,6 +25,7 @@ export default function Page() {
     });
     if (res?.error) {
       setError(res.error as string);
+      setLoading(false)
     }
     if (res?.ok) {
       return router.push("/dashboard");
@@ -44,7 +49,7 @@ export default function Page() {
           Sign in to your account
         </h2>
 
-        <InstallPrompt/>
+        <InstallPrompt />
       </div>
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-[480px]">
@@ -126,13 +131,17 @@ export default function Page() {
               </div> */}
             </div>
 
-            <div>
-              <button
-                type="submit"
-                className="flex w-full justify-center rounded-md bg-gray-900 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-gray-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900"
-              >
-                Sign in
-              </button>
+            <div className="flex justify-center">
+              {
+                loading ? <LoaderPacman /> : (
+                  <button
+                    type="submit"
+                    className="flex w-full justify-center rounded-md bg-gray-900 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-gray-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900"
+                  >
+                    Sign in
+                  </button>
+                )
+              }
             </div>
           </form>
 

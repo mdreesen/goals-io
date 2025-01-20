@@ -4,7 +4,7 @@ import Link from "next/link";
 export default async function Page({ params }: any) {
 
     const { id } = await params;
-    const details = await fetchBibleById({ id })
+    const details = await fetchBibleById({ id });
 
     return (
         <div className="space-y-12">
@@ -48,7 +48,7 @@ export default async function Page({ params }: any) {
                             Notes
                         </label>
                         <div className="mt-2">
-                            {details.notes}
+                            <p dangerouslySetInnerHTML={{ __html: details.notes }}></p>
                         </div>
                     </div>
                 </div>

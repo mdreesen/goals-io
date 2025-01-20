@@ -1,6 +1,6 @@
 {
   "name": "goals-io",
-  "version": "0.1.1",
+  "version": "0.1.1.1",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
@@ -29,6 +29,7 @@
     "react-datepicker": "^7.5.0",
     "react-day-picker": "^8.10.1",
     "react-dom": "^19.0.0",
+    "react-spinners": "^0.15.0",
     "recharts": "^2.15.0",
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7"

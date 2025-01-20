@@ -4,14 +4,17 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { register } from "@/actions/register";
+import LoaderPacman from "@/components/loaders/LoaderPacman";
 
 export default function Page() {
   const router = useRouter();
   const ref = useRef<HTMLFormElement>(null);
 
   const [error, setError] = useState<string>();
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (formData: FormData) => {
+    setLoading(true);
     const r = await register({
       email: formData.get("email"),
       password: formData.get("password"),
@@ -20,6 +23,7 @@ export default function Page() {
     ref.current?.reset();
     if (r?.error) {
       setError(r.error);
+      setLoading(false)
       return;
     }
     else {
@@ -140,13 +144,17 @@ export default function Page() {
               </div> */}
             </div>
 
-            <div>
-              <button
-                type="submit"
-                className="flex w-full justify-center rounded-md bg-gray-900 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-gray-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900"
-              >
-                Sign up
-              </button>
+            <div className="flex justify-center">
+              {
+                loading ? <LoaderPacman /> : (
+                  <button
+                    type="submit"
+                    className="flex w-full justify-center rounded-md bg-gray-900 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-gray-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900"
+                  >
+                    Sign up
+                  </button>
+                )
+              }
             </div>
           </form>
 
@@ -156,7 +164,7 @@ export default function Page() {
 
             <p className="mt-10 text-center text-sm text-gray-900">
               <Link href="/" className="leading-6 block text-sm/6 font-medium text-gray-900">
-               Already have an account?
+                Already have an account?
               </Link>
             </p>
 
