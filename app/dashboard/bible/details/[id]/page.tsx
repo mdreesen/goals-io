@@ -6,6 +6,8 @@ export default async function Page({ params }: any) {
     const { id } = await params;
     const details = await fetchBibleById({ id });
 
+    const formatDetails = details.notes;
+
     return (
         <div className="space-y-12">
             <div className="border-b border-gray-900/10 pb-12">
@@ -48,7 +50,7 @@ export default async function Page({ params }: any) {
                             Notes
                         </label>
                         <div className="mt-2">
-                            <p dangerouslySetInnerHTML={{ __html: details.notes }}></p>
+                            <p dangerouslySetInnerHTML={{ __html: formatDetails }}></p>
                         </div>
                     </div>
                 </div>
