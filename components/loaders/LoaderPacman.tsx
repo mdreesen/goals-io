@@ -5,7 +5,7 @@ export default function LoaderPacman() {
     // You can add any UI inside Loading, including a Skeleton.
     return (
         <div>
-            <PacmanLoader />
+            <PacmanLoader size={15} />
             <p>Please wait...</p>
         </div>
     )
