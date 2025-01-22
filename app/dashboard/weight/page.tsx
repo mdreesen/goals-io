@@ -1,4 +1,5 @@
 import { fetchWeight } from "@/actions/weight"
+import Pagination from "@/components/pagination/Pagination";
 import { formatDateAndTime } from "@/lib/formatters";
 import Link from "next/link";
 
@@ -10,7 +11,7 @@ export default async function Page() {
     <div className="px-4 sm:px-6 lg:px-8">
       <div className="sm:flex sm:items-center">
         <div className="sm:flex-auto">
-        <h2 className="text-3xl font-semibold text-gray-900">Weight</h2>
+          <h2 className="text-3xl font-semibold text-gray-900">Weight</h2>
         </div>
         <div className="flex justify-end mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
           <Link href={`/dashboard/weight/create`}>

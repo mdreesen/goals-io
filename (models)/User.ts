@@ -16,6 +16,7 @@ const bibleSchema = new Schema(
         chapter: String || undefined,
         verses: String || undefined,
         notes: String || undefined,
+        type: String || undefined
     }, { timestamps: false });
 
 const bookSchema = new Schema(

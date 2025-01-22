@@ -11,12 +11,12 @@ export async function fetchSettings() {
 
         const user = await User.findOne({ email: session?.user.email });
 
-        const useShowAffirmations = user.settings.find((item: any) => item.setting.includes('showAffirmations') ?? {}) ?? [];
-        const useShowBible = user.settings.find((item: any) => item.setting.includes('showBible') ?? {}) ?? [];
-        const useShowBooks = user.settings.find((item: any) => item.setting.includes('showBooks') ?? {}) ?? [];
-        const useShowGoals = user.settings.find((item: any) => item.setting.includes('showGoals') ?? {}) ?? [];
-        const useShowNutrition = user.settings.find((item: any) => item.setting.includes('showNutrition') ?? {}) ?? [];
-        const useShowWeight = user.settings.find((item: any) => item.setting.includes('showWeight') ?? {}) ?? [];
+        const useShowAffirmations = user?.settings.find((item: any) => item.setting.includes('showAffirmations') ?? {}) ?? [];
+        const useShowBible = user?.settings.find((item: any) => item.setting.includes('showBible') ?? {}) ?? [];
+        const useShowBooks = user?.settings.find((item: any) => item.setting.includes('showBooks') ?? {}) ?? [];
+        const useShowGoals = user?.settings.find((item: any) => item.setting.includes('showGoals') ?? {}) ?? [];
+        const useShowNutrition = user?.settings.find((item: any) => item.setting.includes('showNutrition') ?? {}) ?? [];
+        const useShowWeight = user?.settings.find((item: any) => item.setting.includes('showWeight') ?? {}) ?? [];
 
         return {
             useShowAffirmations: useShowAffirmations,

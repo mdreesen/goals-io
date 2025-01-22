@@ -12,7 +12,13 @@ export async function fetchBible() {
 
         const data = await User.find({ email: session?.user.email }, 'bibles');
 
-        return data[0].bibles.sort() ?? [];
+        const devotional = data[0].bibles.filter((item: any) => item?.type?.includes('Devotional')) ?? [];
+        const sermon = data[0].bibles.filter((item: any) => item?.type?.includes('Sermon')) ?? [];
+
+        return {
+            devotional: devotional,
+            sermon: sermon
+        }
 
     } catch (e) {
         console.log(e);

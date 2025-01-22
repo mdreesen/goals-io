@@ -10,9 +10,13 @@ export async function fetchWeight() {
         await connectDB();
         const session = await getServerSession();
 
+        // Getting just the weight
         const data = await User.find({ email: session?.user.email }, 'weight');
 
-        return data[0].weight ?? [];
+        // Getting weight and limiting
+        const limited = await User.find({ email: session?.user.email }, { weight:{ $slice: -10 } }).limit(10);
+
+        return limited[0].weight ?? [];
 
     } catch (e) {
         console.log(e);
