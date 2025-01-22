@@ -23,7 +23,7 @@ export default function BibleForm() {
             type: formData.get("type"),
           });
           router.refresh
-          router.push(`/dashboard/bible`);
+          router.push(`/dashboard/spirit`);
         } catch (error) {
           setError(error as string)
           console.log(error);
@@ -138,7 +138,7 @@ export default function BibleForm() {
 
             <div className="mt-6 flex items-center gap-x-6 justify-between">
                 <div className="flex gap-x-6 items-center">
-                    <Link href={'/dashboard/bible'}>
+                    <Link href={'/dashboard/spirit'}>
                         <button type="button" className="text-sm/6 font-semibold text-gray-900 justify-end">
                             Cancel
                         </button>

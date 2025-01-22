@@ -1,9 +1,8 @@
 import { fetchWeight } from "@/actions/weight"
-import Pagination from "@/components/pagination/Pagination";
 import { formatDateAndTime } from "@/lib/formatters";
 import Link from "next/link";
 
-export default async function Page() {
+export default async function Weight() {
 
   const useWeight = await fetchWeight() ?? [];
 

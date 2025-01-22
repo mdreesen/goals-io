@@ -2,7 +2,7 @@ import { filterHabits } from '@/actions/habits';
 import Link from 'next/link';
 import HabitList from '@/components/lists/HabitList';
 
-export default async function Page() {
+export default async function Habits() {
     const filteredHabits = await filterHabits() as any;
 
     // Filtered Goals

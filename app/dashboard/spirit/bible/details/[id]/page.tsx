@@ -58,9 +58,9 @@ export default async function Page({ params }: any) {
 
             <div className="mt-6 flex items-center gap-x-6 justify-between">
                 <div className="flex gap-x-6 items-center">
-                    <Link href={'/dashboard/bible'}>
+                    <Link href={'/dashboard/spirit'}>
                         <button type="button" className="text-sm/6 font-semibold text-gray-900 justify-end">
-                            Cancel
+                        ← Back
                         </button>
                     </Link>
                 </div>

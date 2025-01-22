@@ -22,7 +22,7 @@ export default function HabitForm({ data }: any) {
                 status: formData.get("status"),
             });
             router.refresh
-            router.push(`/dashboard/habits`);
+            router.push(`/dashboard/mind`);
         } catch (error) {
             setError(error as string)
             console.log(error);
@@ -129,7 +129,7 @@ export default function HabitForm({ data }: any) {
             </div>
 
             <div className="mt-6 flex items-center justify-end gap-x-6">
-                <Link href={'/dashboard/habits'}>
+                <Link href={'/dashboard/mind'}>
                     <button type="button" className="text-sm/6 font-semibold text-gray-900">
                         Cancel
                     </button>

@@ -2,7 +2,7 @@ import { filterAffirmations } from '@/actions/affirmations';
 import Link from 'next/link';
 import AffirmationsList from '@/components/lists/AffirmationsList';
 
-export default async function Page() {
+export default async function Affirmations() {
     const filteredAffirmations = await filterAffirmations() as any;
 
     // Filtered Goals

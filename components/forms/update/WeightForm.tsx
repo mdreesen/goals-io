@@ -21,7 +21,7 @@ export default function WeightForm({ data }: any) {
             weight_date: data?.date,
           });
           router.refresh
-          router.push(`/dashboard/weight`);
+          router.push(`/dashboard/body`);
         } catch (error) {
           setError(error as string)
           console.log(error);
@@ -66,7 +66,7 @@ export default function WeightForm({ data }: any) {
             <div className="mt-6 flex items-center gap-x-6 justify-between">
                 <div><ButtonDeleteWeight data={data.weightData} /></div>
                 <div className="flex gap-x-6 items-center">
-                    <Link href={'/dashboard/weight'}>
+                    <Link href={'/dashboard/body'}>
                         <button type="button" className="text-sm/6 font-semibold text-gray-900 justify-end">
                             Cancel
                         </button>
