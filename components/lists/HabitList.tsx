@@ -34,7 +34,7 @@ export default async function HabitList({ data }: any) {
                     >
                         <MenuItem>
                             <Link
-                                href={`/dashboard/habits/edit/${parse(item._id)}`}
+                                href={`/dashboard/mind/habits/edit/${parse(item._id)}`}
                                 className="block px-3 py-1 text-sm/6 text-gray-900 data-[focus]:bg-gray-50 data-[focus]:outline-none"
                             >
                                 Edit<span className="sr-only">, {item.name}</span>

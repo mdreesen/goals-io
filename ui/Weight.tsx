@@ -13,7 +13,7 @@ export default async function Weight() {
           <h2 className="text-3xl font-semibold text-gray-900">Weight</h2>
         </div>
         <div className="flex justify-end mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-          <Link href={`/dashboard/weight/create`}>
+          <Link href={`/dashboard/body/weight/create`}>
             <button
               type="button"
               className="block rounded-md bg-gray-800 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
@@ -48,7 +48,7 @@ export default async function Weight() {
                     </td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{formatDateAndTime(item.weight_date)}{item.starting_weight ? ' - Starting Date' : ''}</td>
                     <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
-                      <a href={`/dashboard/weight/edit/${item.id}`} className="text-gray-900 hover:text-gray-900">
+                      <a href={`/dashboard/body/weight/edit/${item.id}`} className="text-gray-900 hover:text-gray-900">
                         Edit<span className="sr-only">, {item.id}</span>
                       </a>
                     </td>

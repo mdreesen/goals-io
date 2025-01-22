@@ -43,7 +43,7 @@ export default async function Bible() {
                                 >
                                     <MenuItem>
                                         <Link
-                                            href={`/dashboard/bible/details/${item._id}`}
+                                            href={`/dashboard/spirit/bible/details/${item._id}`}
                                             className="block px-3 py-1 text-sm/6 text-gray-900 data-[focus]:bg-gray-50 data-[focus]:outline-none"
                                         >
                                             details<span className="sr-only">, {item.name}</span>
@@ -51,7 +51,7 @@ export default async function Bible() {
                                     </MenuItem>
                                     <MenuItem>
                                         <Link
-                                            href={`/dashboard/bible/edit/${item._id}`}
+                                            href={`/dashboard/spirit/bible/edit/${item._id}`}
                                             className="block px-3 py-1 text-sm/6 text-gray-900 data-[focus]:bg-gray-50 data-[focus]:outline-none"
                                         >
                                             Edit<span className="sr-only">, {item.name}</span>
@@ -101,7 +101,7 @@ export default async function Bible() {
                                 >
                                     <MenuItem>
                                         <Link
-                                            href={`/dashboard/bible/details/${item._id}`}
+                                            href={`/dashboard/spirit/bible/details/${item._id}`}
                                             className="block px-3 py-1 text-sm/6 text-gray-900 data-[focus]:bg-gray-50 data-[focus]:outline-none"
                                         >
                                             details<span className="sr-only">, {item.name}</span>
@@ -109,7 +109,7 @@ export default async function Bible() {
                                     </MenuItem>
                                     <MenuItem>
                                         <Link
-                                            href={`/dashboard/bible/edit/${item._id}`}
+                                            href={`/dashboard/spirit/bible/edit/${item._id}`}
                                             className="block px-3 py-1 text-sm/6 text-gray-900 data-[focus]:bg-gray-50 data-[focus]:outline-none"
                                         >
                                             Edit<span className="sr-only">, {item.name}</span>
@@ -130,7 +130,7 @@ export default async function Bible() {
             <h2 className="text-3xl font-semibold text-gray-900">Bible</h2>
 
             <div className="flex justify-end mt-4 mb-4 sm:mt-0 sm:flex-none">
-                <Link href={'/dashboard/bible/create'}>
+                <Link href={'/dashboard/spirit/bible/create'}>
                     <button
                         type="button"
                         className="block rounded-md bg-gray-800 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-900"

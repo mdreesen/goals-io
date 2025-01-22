@@ -48,7 +48,7 @@ export default async function Habits() {
             <h2 className="text-3xl font-semibold text-gray-900">Habits</h2>
 
             <div className="flex justify-end mt-4 mb-4 sm:mt-0 sm:flex-none">
-                <Link href={'/dashboard/habits/create'}>
+                <Link href={'/dashboard/mind/habits/create'}>
                     <button
                         type="button"
                         className="block rounded-md bg-gray-800 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-900"

@@ -48,7 +48,7 @@ export default async function Affirmations() {
             <h2 className="text-3xl font-semibold text-gray-900">Affirmations</h2>
 
             <div className="flex justify-end mt-4 mb-4 sm:mt-0 sm:flex-none">
-                <Link href={'/dashboard/affirmations/create'}>
+                <Link href={'/dashboard/mind/affirmations/create'}>
                     <button
                         type="button"
                         className="block rounded-md bg-gray-800 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-900"
