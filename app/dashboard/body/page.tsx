@@ -1,12 +1,12 @@
 import { Suspense } from "react";
 import Weight from '@/ui/Weight';
-import LoaderPropagate from "@/components/loaders/LoaderPropagate";
+import LoadingScale from "@/components/loaders/LoadingScale";
 
 export default async function Page() {
 
     return (
         <div>
-            <Suspense fallback={<LoaderPropagate />}>
+            <Suspense fallback={<LoadingScale />}>
                 <Weight />
             </Suspense>
         </div>

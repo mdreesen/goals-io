@@ -1,6 +1,11 @@
+'use client'
 import { ScaleLoader } from 'react-spinners';
 
-export default function LoadingScale({value}: any) {
+export default function LoadingScale() {
     // You can add any UI inside Loading, including a Skeleton.
-    return <ScaleLoader speedMultiplier={1} height={value} loading={true} />
+    return (
+        <div className='flex justify-center'>
+            <ScaleLoader speedMultiplier={1} loading={true} />
+        </div>
+    )
 }

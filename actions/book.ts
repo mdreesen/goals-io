@@ -10,7 +10,7 @@ export async function fetchBooks() {
         await connectDB();
         const session = await getServerSession();
 
-        const data = await User.find({ email: session?.user.email }, 'books');
+        const data = await User.find({ email: session?.user.email }, { books:{ $slice: -10 } }).limit(10);
 
         return data[0].books ?? [];
 

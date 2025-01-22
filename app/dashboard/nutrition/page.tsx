@@ -1,12 +1,12 @@
 import { Suspense } from "react";
 import NutritionWater from "@/ui/NutritionWater";
-import LoaderPropagate from "@/components/loaders/LoaderPropagate";
+import LoadingScale from "@/components/loaders/LoadingScale";
 
 export default async function Page() {
 
   return (
     <div className="flex flex-col gap-4">
-      <Suspense fallback={<LoaderPropagate />}>
+      <Suspense fallback={<LoadingScale />}>
         <NutritionWater />
       </Suspense>
     </div>

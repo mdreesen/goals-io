@@ -1,12 +1,12 @@
 import { Suspense } from "react";
 import Bible from '@/ui/Bible';
-import LoaderPropagate from "@/components/loaders/LoaderPropagate";
+import LoadingScale from "@/components/loaders/LoadingScale";
 
 export default async function Page() {
 
     return (
         <div>
-            <Suspense fallback={<LoaderPropagate />}>
+            <Suspense fallback={<LoadingScale />}>
                 <Bible />
             </Suspense>
         </div>
