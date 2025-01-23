@@ -48,7 +48,7 @@ export default async function NutritionWater() {
   );
 
   return (
-    <div className="px-4 sm:px-6 lg:px-8">
+    <div className="px-4 sm:px-2 lg:px-4">
       <h2 className="text-3xl font-semibold text-gray-900">Nutrition</h2>
       {water}
     </div>

@@ -7,7 +7,7 @@ export default async function Weight() {
   const useWeight = await fetchWeight() ?? [];
 
   return (
-    <div className="px-4 sm:px-6 lg:px-8">
+    <div className="px-4 sm:px-2 lg:px-4">
       <div className="sm:flex sm:items-center">
         <div className="sm:flex-auto">
           <h2 className="text-3xl font-semibold text-gray-900">Weight</h2>
