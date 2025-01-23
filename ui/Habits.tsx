@@ -44,7 +44,7 @@ export default async function Habits() {
     );
 
     return (
-        <div>
+        <div className="px-4 sm:px-6 lg:px-8">
             <h2 className="text-3xl font-semibold text-gray-900">Habits</h2>
 
             <div className="flex justify-end mt-4 mb-4 sm:mt-0 sm:flex-none">

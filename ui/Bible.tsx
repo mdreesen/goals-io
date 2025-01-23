@@ -11,7 +11,6 @@ export default async function Bible() {
 
     const sermonNotes = (
         <div>
-
             <ul role="list" className="divide-y divide-gray-100">
                 {useSermons?.length > 0 ? useSermons?.map((item: any) => (
                     <li key={item.id} className="flex items-center justify-between gap-x-6 py-5">
@@ -126,7 +125,7 @@ export default async function Bible() {
     );
 
     return (
-        <div>
+        <div className="px-4 sm:px-6 lg:px-8">
             <h2 className="text-3xl font-semibold text-gray-900">Bible</h2>
 
             <div className="flex justify-end mt-4 mb-4 sm:mt-0 sm:flex-none">

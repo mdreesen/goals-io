@@ -7,7 +7,7 @@ export default async function Books() {
     const books = await fetchBooks() ?? [];
 
     return (
-        <div>
+        <div className="px-4 sm:px-6 lg:px-8">
             <h2 className="text-3xl font-semibold text-gray-900">Books</h2>
 
             <div className="flex justify-end mt-4 mb-4 sm:mt-0 sm:flex-none">
