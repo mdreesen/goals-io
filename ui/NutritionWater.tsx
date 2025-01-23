@@ -14,7 +14,7 @@ export default async function NutritionWater() {
   const water = (
     <div>
       <div className="flex justify-end mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-        <Link href={`/dashboard/nutrition/water`}>
+        <Link href={`/dashboard/body/nutrition/water`}>
           <button
             type="button"
             className="block rounded-md bg-gray-800 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"

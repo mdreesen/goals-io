@@ -11,7 +11,7 @@ export default async function Books() {
             <h2 className="text-3xl font-semibold text-gray-900">Books</h2>
 
             <div className="flex justify-end mt-4 mb-4 sm:mt-0 sm:flex-none">
-                <Link href={'/dashboard/books/create'}>
+                <Link href={'/dashboard/mind/books/create'}>
                     <button
                         type="button"
                         className="block rounded-md bg-gray-800 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-900"
@@ -32,7 +32,7 @@ export default async function Books() {
                             key={`${item.book_title}-${index}`}
                             className="relative flex items-center space-x-3 rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-gray-900 focus-within:ring-offset-2 hover:border-gray-400"
                         >
-                            <a href={`/dashboard/mind/books/edit/${item.id}`}>
+                            <Link href={`/dashboard/mind/books/edit/${item.id}`}>
                                 <div className="min-w-0 flex-1">
                                     <span aria-hidden="true" className="absolute inset-0" />
                                     <p className="text-sm font-medium text-gray-900">{item.book_title}</p>
@@ -43,7 +43,7 @@ export default async function Books() {
                                         <p className="truncate text-sm text-gray-500 px-4">{useBookEndDate}</p>
                                     </div>
                                 </div>
-                            </a>
+                            </Link>
                         </div>
                     );
                 }) : <h3>Add your books!</h3>}
