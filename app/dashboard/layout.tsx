@@ -21,7 +21,7 @@ export default async function RootLayout({
     const useUser = await fetchUser();
     const useSettings = await fetchSettings();
 
-    const { useShowAffirmations, useShowBible, useShowBooks, useShowGoals, useShowNutrition, useShowWeight } = useSettings;
+    const { useShowBody, useShowMind, useShowSpirit } = useSettings;
 
     const user = {
         name: useUser?.username ? useUser?.username : useUser?.email,
@@ -32,9 +32,9 @@ export default async function RootLayout({
 
     const navigation = [
         { name: 'Dashboard', href: '/dashboard', current: false, useNav: true },
-        { name: 'Body', href: '/dashboard/body', current: false, useNav: useShowBooks?.value },
-        { name: 'Mind', href: '/dashboard/mind', current: false, useNav: useShowAffirmations?.value },
-        { name: 'Spirit', href: '/dashboard/spirit', current: false, useNav: useShowBible?.value },
+        { name: 'Body', href: '/dashboard/body', current: false, useNav: useShowBody },
+        { name: 'Mind', href: '/dashboard/mind', current: false, useNav: useShowMind },
+        { name: 'Spirit', href: '/dashboard/spirit', current: false, useNav: useShowSpirit },
     ]
     const userNavigation = [
         { name: 'Your Profile', href: '/dashboard/profile' },

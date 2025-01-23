@@ -10,7 +10,7 @@ export async function settings() {
             {setting: 'showAffirmations', title: 'Show Affirmations', value: true},
             {setting: 'showBible', title: 'Show Bible', value: true},
             {setting: 'showBooks', title: 'Show Books', value: true},
-            {setting: 'showGoals', title: 'Show Goals', value: true},
+            {setting: 'showHabits', title: 'Show Habits', value: true},
             {setting: 'showNutrition', title: 'Show Nutrition', value: true},
             {setting: 'showWeight', title: 'Show Weight', value: true},
         ]

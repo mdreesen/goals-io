@@ -1,6 +1,7 @@
 import { filterAffirmations } from '@/actions/affirmations';
 import Link from 'next/link';
 import AffirmationsList from '@/components/lists/AffirmationsList';
+import { fetchSettings } from '@/actions/settings';
 
 export default async function Affirmations() {
     const filteredAffirmations = await filterAffirmations() as any;

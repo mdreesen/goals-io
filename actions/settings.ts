@@ -14,17 +14,25 @@ export async function fetchSettings() {
         const useShowAffirmations = user?.settings.find((item: any) => item.setting.includes('showAffirmations') ?? {}) ?? [];
         const useShowBible = user?.settings.find((item: any) => item.setting.includes('showBible') ?? {}) ?? [];
         const useShowBooks = user?.settings.find((item: any) => item.setting.includes('showBooks') ?? {}) ?? [];
-        const useShowGoals = user?.settings.find((item: any) => item.setting.includes('showGoals') ?? {}) ?? [];
+        const useShowHabits = user?.settings.find((item: any) => item.setting.includes('showHabits') ?? {}) ?? [];
         const useShowNutrition = user?.settings.find((item: any) => item.setting.includes('showNutrition') ?? {}) ?? [];
         const useShowWeight = user?.settings.find((item: any) => item.setting.includes('showWeight') ?? {}) ?? [];
+
+        const useShowBody = useShowWeight.value || useShowNutrition.value;
+        const useShowMind = useShowAffirmations.value || useShowBooks.value || useShowHabits.value;
+        const useShowSpirit = useShowBible.value;
 
         return {
             useShowAffirmations: useShowAffirmations,
             useShowBible: useShowBible,
             useShowBooks: useShowBooks,
-            useShowGoals: useShowGoals,
+            useShowHabits: useShowHabits,
             useShowNutrition: useShowNutrition,
-            useShowWeight: useShowWeight
+            useShowWeight: useShowWeight,
+
+            useShowBody: useShowBody,
+            useShowMind: useShowMind,
+            useShowSpirit: useShowSpirit       
         }
 
     } catch (error) {
