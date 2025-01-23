@@ -26,7 +26,7 @@ export default function EditBook() {
             book_end_date: selectedEndDate
           });
           router.refresh
-          router.push(`/dashboard/books`);
+          router.push(`/dashboard/mind`);
         } catch (error) {
           setError(error as string)
           console.log(error);
@@ -140,7 +140,7 @@ export default function EditBook() {
 
             <div className="mt-6 flex items-center gap-x-6 justify-between">
                 <div className="flex gap-x-6 items-center">
-                    <Link href={'/dashboard/books'}>
+                    <Link href={'/dashboard/mind'}>
                         <button type="button" className="text-sm/6 font-semibold text-gray-900 justify-end">
                             Cancel
                         </button>

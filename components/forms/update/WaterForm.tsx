@@ -22,7 +22,7 @@ export default function WaterForm({ data }: any) {
                     date: data?.useDateToday,
                 });
                 router.refresh
-                router.push(`/dashboard/nutrition`);
+                router.push(`/dashboard/body`);
             } catch (error) {
                 setError(error as string)
                 console.log(error);
@@ -35,7 +35,7 @@ export default function WaterForm({ data }: any) {
                     date: data?.useDateToday,
                 });
                 router.refresh
-                router.push(`/dashboard/nutrition`);
+                router.push(`/dashboard/body`);
             } catch (error) {
                 setError(error as string)
                 console.log(error);
@@ -79,7 +79,7 @@ export default function WaterForm({ data }: any) {
 
             <div className="mt-6 flex items-center gap-x-6 justify-end">
                 <div className="flex gap-x-6 items-center">
-                    <Link href={'/dashboard/nutrition'}>
+                    <Link href={'/dashboard/body'}>
                         <button type="button" className="text-sm/6 font-semibold text-gray-900 justify-end">
                             Cancel
                         </button>

@@ -32,11 +32,9 @@ export default async function RootLayout({
 
     const navigation = [
         { name: 'Dashboard', href: '/dashboard', current: false, useNav: true },
-        { name: 'Books', href: '/dashboard/books', current: false, useNav: useShowBooks?.value },
         { name: 'Body', href: '/dashboard/body', current: false, useNav: useShowBooks?.value },
         { name: 'Mind', href: '/dashboard/mind', current: false, useNav: useShowAffirmations?.value },
         { name: 'Spirit', href: '/dashboard/spirit', current: false, useNav: useShowBible?.value },
-        { name: 'Nutrition', href: '/dashboard/nutrition', current: false, useNav: useShowNutrition?.value },
     ]
     const userNavigation = [
         { name: 'Your Profile', href: '/dashboard/profile' },
