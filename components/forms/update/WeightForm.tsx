@@ -36,14 +36,14 @@ export default function WeightForm({ data }: any) {
                 <label htmlFor="first-name" className="block text-sm/6 font-medium text-gray-900">
                     Weight
                 </label>
-                <div className="flex items-center w-[100px] rounded-md bg-white pl-3 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-gray-900">
+                <div className="flex items-center w-[100px] rounded-md bg-white pl-3 outline-1 -outline-offset-1 outline-gray-300 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-gray-900">
                     <input
                         id="weight"
                         name="weight"
                         type="text"
                         placeholder="155"
                         defaultValue={data.weightData.weight}
-                        className="block min-w-0 grow py-1.5 pl-1 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6"
+                        className="block min-w-0 grow py-1.5 pl-1 text-base text-gray-900 placeholder:text-gray-400 focus:outline-0 sm:text-sm/6"
                     />
                     <div className="shrink-0 px-2 select-none text-base text-gray-500 sm:text-sm/6">lbs</div>
                 </div>
@@ -73,7 +73,7 @@ export default function WeightForm({ data }: any) {
                     </Link>
                     <button
                         type="submit"
-                        className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                        className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
                     >
                         Save
                     </button>

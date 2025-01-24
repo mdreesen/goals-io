@@ -4,6 +4,11 @@ import Books from "@/ui/Books";
 import Habits from '@/ui/Habits';
 import LoadingScale from "@/components/loaders/LoadingScale";
 import { fetchSettings } from '@/actions/settings';
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Mind | Ascend",
+};
 
 export default async function Page() {
     const useSettings = await fetchSettings() ?? [];

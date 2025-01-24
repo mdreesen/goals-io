@@ -1,17 +1,19 @@
 import { Suspense } from "react";
-import { booksByMonth, weightByMonth } from "@/actions/charts";
+import { booksByMonth, weightByMonth, waterByday } from "@/actions/charts";
 import { ChartSkeleton } from '@/components/loaders/Skeletons';
 import { parse } from '@/lib/formatters';
 
 // Charts
 import { UseBooksPerMonthChart }  from "@/components/charts/UseBooksPerMonthChart";
 import { UseWeightPerDay }  from "@/components/charts/UseWeightPerDay";
+import { UseWaterPerDay }  from "@/components/charts/UseWaterPerDay";
 
 export default async function Page() {
 
     // Chart Data
     const booksPerMonth = await booksByMonth();
     const weightPerMonth = await weightByMonth();
+    const waterPerDay = await waterByday();
 
     const bookSection = (
         <div className="relative lg:col-span-3 border-solid rounded-md p-2 content-center">
@@ -27,6 +29,15 @@ export default async function Page() {
             <h2 className="text-base/7 font-semibold text-indigo-900">Weight Per Day</h2>
             <Suspense fallback={<ChartSkeleton/>}>
                 <UseWeightPerDay data={parse(weightPerMonth)} />
+            </Suspense>
+        </div>
+    );
+
+    const waterSection = (
+        <div className="relative lg:col-span-3 border-solid rounded-md p-2 content-center">
+            <h2 className="text-base/7 font-semibold text-indigo-900">Water Per Day</h2>
+            <Suspense fallback={<ChartSkeleton/>}>
+                <UseWaterPerDay data={parse(waterPerDay)} />
             </Suspense>
         </div>
     );
@@ -47,6 +58,7 @@ export default async function Page() {
                 <div className="mt-10 grid grid-cols-1 gap-4 sm:mt-16 lg:grid-cols-6 lg:grid-rows-2">
                     {bookSection}
                     {weightSection}
+                    {waterSection}
                 </div>
             </div>
         </div>

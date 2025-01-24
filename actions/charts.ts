@@ -128,3 +128,19 @@ export async function weightByMonth() {
         return e;
     }
 };
+
+export async function waterByday() {
+
+    try {
+        await connectDB();
+        const session = await getServerSession();
+
+        const data = await User.find({ email: session?.user.email }, 'water');
+
+        return data[0]?.water ?? [];
+       
+    } catch (e) {
+        console.log(e);
+        return e;
+    }
+};

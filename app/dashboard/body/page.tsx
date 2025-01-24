@@ -3,6 +3,11 @@ import Weight from '@/ui/Weight';
 import NutritionWater from "@/ui/NutritionWater";
 import LoadingScale from "@/components/loaders/LoadingScale";
 import { fetchSettings } from "@/actions/settings";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Body | Ascend",
+};
 
 export default async function Page() {
     const useSettings = await fetchSettings() ?? [];

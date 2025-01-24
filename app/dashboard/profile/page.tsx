@@ -3,6 +3,11 @@ import { fetchUser } from '@/actions/user';
 import { fetchSettings } from '@/actions/settings';
 import ToggleWithIcon from '@/components/toggles/ToggleWithIcon';
 import { parse } from '@/lib/formatters';
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Profile | Ascend",
+};
 
 
 export default async function Page() {

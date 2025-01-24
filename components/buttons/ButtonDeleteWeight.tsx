@@ -10,14 +10,14 @@ export default function ButtonDeleteWeight({ data }: any) {
         try {
             await deleteWeight({ id: data._id });
             router.refresh
-            router.push(`/dashboard/weight`);
+            router.push(`/dashboard/body`);
         } catch (error) {
             console.log(error)
         }
     };
 
     return (
-        <button type="submit" onClick={handleSubmit} className="rounded-md bg-[#7A3A30] px-3 py-2 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2">
+        <button type="submit" onClick={handleSubmit} className="rounded-md bg-[#7A3A30] px-3 py-2 text-sm font-semibold text-white shadow-sm focus-visible:outline-2 focus-visible:outline-offset-2">
             Delete
         </button>
     )
