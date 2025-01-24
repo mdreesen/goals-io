@@ -25,7 +25,7 @@ export function bodyWeightToWaterInOz(data: any) {
   // If number, divide by 2, convert back to string
   const isNumberDivideByTwo = (data / 2).toString();
 
-  switch(true) {
+  switch (true) {
     case typeof data === 'string':
       return convertBackToString;
       break
@@ -37,3 +37,9 @@ export function bodyWeightToWaterInOz(data: any) {
 export function parse(data: any) {
   return data && JSON?.parse(JSON?.stringify(data))
 }
+
+export function findHighestNumber(data: any) {
+  const highestNumber = Math.max(...data);
+
+  return highestNumber.toString()
+};

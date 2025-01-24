@@ -5,12 +5,16 @@ import Link from "next/link";
 export default async function Weight() {
 
   const useWeight = await fetchWeight() ?? [];
+  console.log(useWeight)
 
   return (
     <div className="px-4 sm:px-2 lg:px-4">
       <div className="sm:flex sm:items-center">
         <div className="sm:flex-auto">
           <h2 className="text-3xl font-semibold text-gray-900">Weight</h2>
+          <div>
+            <p>{useWeight.highestWeight && `Highest weight ${useWeight.highestWeight} lbs`}</p>
+          </div>
         </div>
         <div className="flex justify-end mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
           <Link href={`/dashboard/body/weight/create`}>
@@ -23,6 +27,7 @@ export default async function Weight() {
           </Link>
         </div>
       </div>
+
       <div className="mt-8 flow-root">
         <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
@@ -41,7 +46,7 @@ export default async function Weight() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">
-                {useWeight.length > 0 ? useWeight.reverse().map((item: any, index: number) => (
+                {useWeight.limited.length > 0 ? useWeight.limited.reverse().map((item: any, index: number) => (
                   <tr key={`${item.weight}-${index}`}>
                     <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
                       {`${item.weight} lbs ${item.starting_weight ? ' - Starting Weight' : ''}`}

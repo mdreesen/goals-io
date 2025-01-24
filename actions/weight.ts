@@ -3,6 +3,7 @@ import { connectDB } from "@/lib/mongodb";
 import User from "@/(models)/User";
 import { getServerSession } from "next-auth/next";
 import { revalidatePath } from 'next/cache';
+import { findHighestNumber } from '@/lib/formatters'
 
 export async function fetchWeight() {
 
@@ -11,9 +12,14 @@ export async function fetchWeight() {
         const session = await getServerSession();
 
         // Getting weight and limiting
+        const data = await User.find({ email: session?.user.email }, 'weight');
         const limited = await User.find({ email: session?.user.email }, { weight:{ $slice: -10 } }).limit(10);
+        const useNumber = data[0].weight.map((item: any) => Number(item.weight));
 
-        return limited[0].weight ?? [];
+        return {
+            limited: limited[0].weight ?? [],
+            highestWeight: findHighestNumber(useNumber)
+        }
 
     } catch (e) {
         console.log(e);
