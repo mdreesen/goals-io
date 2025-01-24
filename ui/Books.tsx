@@ -38,9 +38,9 @@ export default async function Books() {
                                     <p className="text-sm font-medium text-gray-900">{item.book_title}</p>
                                     <p className="truncate text-sm text-gray-500">{item.book_author}</p>
                                     <p className="truncate text-sm text-gray-500">{item.kind_of_book}</p>
-                                    <div className='flex'>
+                                    <div className='flex flex-col lg:flex-row lg:gap-4'>
                                         <p className="truncate text-sm text-gray-500">{useBookStartDate}</p>
-                                        <p className="truncate text-sm text-gray-500 px-4">{useBookEndDate}</p>
+                                        <p className="truncate text-sm text-gray-500">{useBookEndDate}</p>
                                     </div>
                                 </div>
                             </Link>
