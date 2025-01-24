@@ -119,9 +119,9 @@ export async function weightByMonth() {
         await connectDB();
         const session = await getServerSession();
 
-        const user = await User.findOne({ email: session?.user.email });
+        const data = await User.find({ email: session?.user.email }, 'weight');
 
-        return user?.weight ?? [];
+        return data[0]?.weight ?? [];
        
     } catch (e) {
         console.log(e);
