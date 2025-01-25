@@ -3,7 +3,7 @@ import { connectDB } from "@/lib/mongodb";
 import User from "@/(models)/User";
 import { getServerSession } from "next-auth/next";
 import { revalidatePath } from 'next/cache';
-import { findHighestNumber } from '@/lib/formatters'
+import { findHighestNumber, findAverageNumber } from '@/lib/formatters'
 
 export async function fetchWeight() {
 
@@ -15,10 +15,13 @@ export async function fetchWeight() {
         const data = await User.find({ email: session?.user.email }, 'weight');
         const limited = await User.find({ email: session?.user.email }, { weight:{ $slice: -10 } }).limit(10);
         const useNumber = data[0].weight.map((item: any) => Number(item.weight));
+        const startingWeight =  data[0].weight.find((item: any) => item.starting_weight === true);
 
         return {
             limited: limited[0].weight ?? [],
-            highestWeight: findHighestNumber(useNumber)
+            highestWeight: findHighestNumber(useNumber),
+            startingWeight: startingWeight,
+            averageWeight: findAverageNumber(useNumber)
         }
 
     } catch (e) {

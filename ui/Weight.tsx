@@ -5,7 +5,6 @@ import Link from "next/link";
 export default async function Weight() {
 
   const useWeight = await fetchWeight() ?? [];
-  console.log(useWeight)
 
   return (
     <div className="px-4 sm:px-2 lg:px-4">
@@ -13,7 +12,19 @@ export default async function Weight() {
         <div className="sm:flex-auto">
           <h2 className="text-3xl font-semibold text-gray-900">Weight</h2>
           <div>
-            <p>{useWeight.highestWeight && `Highest weight ${useWeight.highestWeight} lbs`}</p>
+            <th scope="col" className="py-2 text-left text-sm font-bold text-gray-900 sm:pl-0">
+              Notables
+            </th>
+            <p className="py-1 text-left text-sm font-semibold text-gray-900 sm:pl-0">
+              {useWeight.startingWeight && `Starting weight ${useWeight.startingWeight.weight} lbs`}
+            </p>
+            <p className="py-1 text-left text-sm font-semibold text-gray-900 sm:pl-0">
+              {useWeight.highestWeight && `Highest weight ${useWeight.highestWeight} lbs`}
+            </p>
+            <p className="py-1 text-left text-sm font-semibold text-gray-900 sm:pl-0">
+              {useWeight.averageWeight && `Average weight ${useWeight.averageWeight} lbs`}
+            </p>
+
           </div>
         </div>
         <div className="flex justify-end mt-4 sm:ml-16 sm:mt-0 sm:flex-none">

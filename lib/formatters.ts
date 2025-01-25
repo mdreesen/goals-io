@@ -43,3 +43,10 @@ export function findHighestNumber(data: any) {
 
   return highestNumber.toString()
 };
+
+export function findAverageNumber(data: any) {
+  const sum = data.reduce((acc: any, current: any) => acc + current, 0);
+  const average = sum / data.length;
+  const round = Math.round(average * 10) / 10
+  return round.toString();
+};

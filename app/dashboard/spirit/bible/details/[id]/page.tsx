@@ -50,7 +50,14 @@ export default async function Page({ params }: any) {
                             Notes
                         </label>
                         <div className="mt-2">
-                            <p dangerouslySetInnerHTML={{ __html: formatDetails }}></p>
+                            <textarea
+                                id="notes"
+                                name="notes"
+                                rows={20}
+                                readOnly={true}
+                                className="block h-full resize-none w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 sm:text-sm/6"
+                                value={formatDetails}
+                            />
                         </div>
                     </div>
                 </div>
@@ -60,7 +67,7 @@ export default async function Page({ params }: any) {
                 <div className="flex gap-x-6 items-center">
                     <Link href={'/dashboard/spirit'}>
                         <button type="button" className="text-sm/6 font-semibold text-gray-900 justify-end">
-                        ← Back
+                            ← Back
                         </button>
                     </Link>
                 </div>
