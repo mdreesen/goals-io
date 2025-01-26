@@ -1,7 +1,7 @@
 'use client';
 import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { addBible } from "@/actions/bible";
+import { editBible } from "@/actions/bible";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import bible_books from '@/lib/bible_books.json';
@@ -16,11 +16,13 @@ export default function BibleForm({ data }: any) {
 
     const handleSubmit = async (formData: FormData) => {
         try {
-          await addBible({
+          await editBible({
+            _id: data?._id,
             book_title: formData.get("book_title"),
             chapter: formData.get("chapter"),
             verses: formData.get("verses"),
             notes: formData.get("notes"),
+            type: formData.get("type"),
           });
           router.refresh
           router.push(`/dashboard/spirit`);
@@ -37,6 +39,30 @@ export default function BibleForm({ data }: any) {
                     <h2 className="text-base/7 font-semibold text-gray-900">Bible notes</h2>
 
                     <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+
+                    <div className="sm:col-span-3">
+                            <label htmlFor="type" className="block text-sm/6 font-medium text-gray-900">
+                                Type of note
+                            </label>
+                            <div className="mt-2 grid grid-cols-1">
+                                <select
+                                    id="type"
+                                    name="type"
+                                    autoComplete="type"
+                                    defaultValue={data?.type ?? ''}
+                                    className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pl-3 pr-8 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
+                                >
+                                        <option>Sermon note</option>
+                                        <option>Devotional note</option>
+
+                                </select>
+                                <ChevronDownIcon
+                                    aria-hidden="true"
+                                    className="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-500 sm:size-4"
+                                />
+                            </div>
+                        </div>
+
                         <div className="sm:col-span-3">
                             <label htmlFor="book_title" className="block text-sm/6 font-medium text-gray-900">
                                 Book of the Bible

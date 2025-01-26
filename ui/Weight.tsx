@@ -13,7 +13,7 @@ export default async function Weight() {
           <h2 className="text-3xl font-semibold text-gray-900">Weight</h2>
           <div>
             <th scope="col" className="py-2 text-left text-sm font-bold text-gray-900 sm:pl-0">
-              Notables
+              {useWeight.startingWeight && 'Notables'}
             </th>
             <p className="py-1 text-left text-sm font-semibold text-gray-900 sm:pl-0">
               {useWeight.startingWeight && `Starting weight ${useWeight.startingWeight.weight} lbs`}
@@ -23,6 +23,9 @@ export default async function Weight() {
             </p>
             <p className="py-1 text-left text-sm font-semibold text-gray-900 sm:pl-0">
               {useWeight.averageWeight && `Average weight ${useWeight.averageWeight} lbs`}
+            </p>
+            <p className="py-1 text-left text-sm font-semibold text-gray-900 sm:pl-0">
+              {useWeight.lossOrGain && `${useWeight.lossOrGain}`}
             </p>
 
           </div>
@@ -57,7 +60,7 @@ export default async function Weight() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">
-                {useWeight.limited.length > 0 ? useWeight.limited.reverse().map((item: any, index: number) => (
+                {useWeight?.limited?.length > 0 ? useWeight.limited.map((item: any, index: number) => (
                   <tr key={`${item.weight}-${index}`}>
                     <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
                       {`${item.weight} lbs ${item.starting_weight ? ' - Starting Weight' : ''}`}

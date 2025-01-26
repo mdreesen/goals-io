@@ -3,7 +3,7 @@ import { connectDB } from "@/lib/mongodb";
 import User from "@/(models)/User";
 import { getServerSession } from "next-auth/next";
 import { revalidatePath } from 'next/cache';
-import { findHighestNumber, findAverageNumber } from '@/lib/formatters'
+import { findHighestNumber, findAverageNumber, lossOrGain } from '@/lib/formatters'
 
 export async function fetchWeight() {
 
@@ -16,12 +16,16 @@ export async function fetchWeight() {
         const limited = await User.find({ email: session?.user.email }, { weight:{ $slice: -10 } }).limit(10);
         const useNumber = data[0].weight.map((item: any) => Number(item.weight));
         const startingWeight =  data[0].weight.find((item: any) => item.starting_weight === true);
+        const current = limited[0].weight.reverse()[0].weight ?? '0';
+        const lostOrGained = lossOrGain({ starting: startingWeight.weight, current: current });
+        const positiveInteger = Math.abs(Number(lostOrGained))
 
         return {
             limited: limited[0].weight ?? [],
             highestWeight: findHighestNumber(useNumber),
             startingWeight: startingWeight,
-            averageWeight: findAverageNumber(useNumber)
+            averageWeight: findAverageNumber(useNumber),
+            lossOrGain: lostOrGained.includes('-') ? `Gained ${positiveInteger.toString()} lbs` : `Lost ${lostOrGained} lbs`
         }
 
     } catch (e) {

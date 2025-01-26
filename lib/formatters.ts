@@ -50,3 +50,9 @@ export function findAverageNumber(data: any) {
   const round = Math.round(average * 10) / 10
   return round.toString();
 };
+
+export function lossOrGain({ starting, current }: any) {
+  const math = Number(starting) - Number(current);
+  const round = Math.round(math * 10) / 10;
+  return round.toString();
+};
