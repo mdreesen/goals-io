@@ -4,8 +4,11 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: 'Ascend',
     short_name: 'Ascend',
+    id: "Ascend",
     description: 'Set goals. Achieve greatness.',
     start_url: '/',
+    orientation: 'any',
+    lang: 'en',
     display: 'standalone',
     background_color: '#ffffff',
     theme_color: '#000000',
