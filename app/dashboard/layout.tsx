@@ -7,7 +7,6 @@ import { fetchSettings } from '@/actions/settings';
 import ButtonAuth from "@/components/buttons/ButtonAuth";
 import { current_year } from "@/lib/date_time";
 import packagejson from '@/package.json';
-import BannerComingSoon from "@/components/banners/BannerComingSoon";
 
 function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(' ')
