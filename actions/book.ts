@@ -3,6 +3,7 @@ import { connectDB } from "@/lib/mongodb";
 import User from "@/(models)/User";
 import { getServerSession } from "next-auth/next";
 import { revalidatePath } from 'next/cache';
+import { current_year } from "@/lib/date_time";
 
 export async function fetchBooks() {
 
@@ -89,6 +90,33 @@ export async function fetchBookById(values: any) {
         });
 
         return books[0]
+
+    } catch (e) {
+        console.log(e);
+        return e;
+    }
+};
+
+export async function booksByYear() {
+
+    try {
+        await connectDB();
+        const session = await getServerSession();
+
+        const user = await User.findOne({ email: session?.user.email });
+
+        const books = user?.books ?? [];
+
+        // Get current year, conver to string
+        const currentYear = current_year();
+
+        const booksStartedToYear = books?.filter((item: any) => item?.book_start_date?.includes(currentYear)).length;
+        const booksEndedToYear = books?.filter((item: any) => item?.book_end_date?.includes(currentYear)).length;
+
+        return {
+            booksStartedToYear: booksStartedToYear,
+            booksEndedToYear: booksEndedToYear
+        }
 
     } catch (e) {
         console.log(e);

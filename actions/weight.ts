@@ -22,10 +22,12 @@ export async function fetchWeight() {
 
         return {
             limited: limited[0].weight ?? [],
+            dataToDate:limited[0].weight[0],
             highestWeight: findHighestNumber(useNumber),
             startingWeight: startingWeight,
             averageWeight: findAverageNumber(useNumber),
-            lossOrGain: lostOrGained.includes('-') ? `Gained ${positiveInteger.toString()} lbs` : `Lost ${lostOrGained} lbs`
+            lossOrGain: lostOrGained.includes('-') ? `Gained ${positiveInteger.toString()} lbs` : `Lost ${lostOrGained} lbs`,
+            weightLGType: lostOrGained.includes('-') ? 'increase' : 'decrease'
         }
 
     } catch (e) {

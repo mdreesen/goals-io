@@ -8,6 +8,9 @@ import { UseBooksPerMonthChart }  from "@/components/charts/UseBooksPerMonthChar
 import { UseWeightPerDay }  from "@/components/charts/UseWeightPerDay";
 import { UseWaterPerDay }  from "@/components/charts/UseWaterPerDay";
 
+// Components
+import Overview from "@/ui/Overview";
+
 export default async function Page() {
 
     // Chart Data
@@ -24,7 +27,7 @@ export default async function Page() {
         </div>
     );
 
-    const weightSection = (
+    const weightSection = weightPerMonth.length > 0 && (
         <div className="relative lg:col-span-3 border-solid rounded-md p-2 content-center">
             <h2 className="text-base/7 font-semibold text-indigo-900">Weight Per Day</h2>
             <Suspense fallback={<ChartSkeleton/>}>
@@ -33,7 +36,7 @@ export default async function Page() {
         </div>
     );
 
-    const waterSection = (
+    const waterSection = waterPerDay.length > 0 && (
         <div className="relative lg:col-span-3 border-solid rounded-md p-2 content-center">
             <h2 className="text-base/7 font-semibold text-indigo-900">Water Per Day</h2>
             <Suspense fallback={<ChartSkeleton/>}>
@@ -42,19 +45,11 @@ export default async function Page() {
         </div>
     );
 
-    // const expensesChart = useSettings.showExpensesChart && (
-    //     <div className="relative lg:col-span-3 content-center">
-    //         <h2 className="text-base/7 font-semibold text-indigo-900">Expenses</h2>
-    //         <Suspense fallback={<div>Loading...</div>}>
-    //             <UseExpensesChart data={useExpenses} />
-    //         </Suspense>
-    //     </div>
-    // );
-
     return (
         <div className="bg-white py-12 sm:py-12">
             <div className="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8">
             <h2 className="text-3xl font-semibold text-gray-900">Dashboard</h2>
+            <Overview />
                 <div className="mt-10 grid grid-cols-1 gap-4 sm:mt-16 lg:grid-cols-6 lg:grid-rows-2">
                     {bookSection}
                     {weightSection}
