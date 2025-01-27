@@ -37,7 +37,7 @@ export default function Page() {
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <Image
           alt="White Raven Logo"
-          src="/assets/logo.webp"
+          src="/assets/logo.png"
           className="mx-auto h-12 w-auto rounded-full object-cover scale-75"
           height={200}
           width={200}

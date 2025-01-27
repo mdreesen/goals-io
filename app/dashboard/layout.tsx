@@ -56,7 +56,7 @@ export default async function RootLayout({
                                                 alt="White Raven Logo"
                                                 width={100}
                                                 height={100}
-                                                src={'/assets/logo.webp'}
+                                                src={'/assets/logo.png'}
                                                 className="h-14 w-14 rounded-full object-cover scale-75"
                                             />
                                         </Link>
