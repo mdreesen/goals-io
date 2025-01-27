@@ -58,7 +58,7 @@ export default async function Overview() {
         <div className="px-4 py-5 sm:p-6">
             <dt className="text-base font-normal text-gray-900">Water</dt>
             <dd className="mt-1 flex items-baseline justify-between md:block lg:flex">
-                <div className={`flex items-baseline text-2xl font-semibold text-indigo-900 ${useOverview.waterOverview?.congrats ? 'text-green-500' : 'text-indigo-900' }`}>
+                <div className={`flex items-baseline text-2xl font-semibold ${useOverview.waterOverview?.congrats ? 'text-green-500' : 'text-indigo-900' }`}>
                     {useOverview.waterOverview.waterIntakeToday?.water_intake && `${useOverview.waterOverview.waterIntakeToday?.water_intake} oz.`}
                     <span className="ml-2 text-sm font-medium text-gray-500">from total {useOverview.waterOverview?.total_water}</span>
                 </div>
