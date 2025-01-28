@@ -16,5 +16,20 @@ export async function fetchUser() {
         console.log(error)
         return error
     }
-}
+};
+
+export async function deleteUser() {
+
+    try {
+        await connectDB();
+        const session = await getServerSession();
+
+        await User.deleteOne({ email: session?.user.email });
+
+
+    } catch (e) {
+        console.log(e)
+        return e
+    }
+};
 
