@@ -201,7 +201,8 @@ export default async function RootLayout({
                     <div className="flex justify-center gap-x-6 md:order-2">
                         <span className="mt-8 text-center text-sm/6 text-gray-400 md:order-1 md:mt-0">Version {packagejson.version}</span>
                     </div>
-                    <p className="mt-8 text-center text-sm/6 text-gray-400 md:order-1 md:mt-0">
+                    <p className="mt-8 text-sm/6 text-gray-400 md:order-1 md:mt-0 flex flex-col">
+                    <a href="/dashboard/privacy-policy">Privacy Policy</a>
                         &copy; {current_year()} White Raven, Inc. All rights reserved.
                     </p>
                 </div>
