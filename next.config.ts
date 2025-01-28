@@ -1,7 +1,23 @@
 import type { NextConfig } from "next";
+import withSerwistInit from "@serwist/next";
 
-const nextConfig: NextConfig = {
-  /* config options here */
+const cspHeader = `
+default-src 'self';
+script-src 'self' 'unsafe-eval';
+style-src 'self' 'unsafe-inline';
+`;
+
+const withSerwist = withSerwistInit({
+  // Note: This is only an example. If you use Pages Router,
+  // use something else that works, such as "service-worker/index.ts".
+  swSrc: "app/sw.ts",
+  swDest: "public/sw.js",
+  reloadOnOnline: true,
+  disable: false,
+});
+
+export default withSerwist({
+  // Your Next.js config
   async headers() {
     return [
       {
@@ -34,12 +50,10 @@ const nextConfig: NextConfig = {
           },
           {
             key: 'Content-Security-Policy',
-            value: "default-src 'self'; script-src 'self'",
+            value: cspHeader.replace(/\n/g, ''),
           },
         ],
       },
     ]
   },
-};
-
-export default nextConfig;
+});
