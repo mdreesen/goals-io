@@ -14,6 +14,8 @@ const withSerwist = withSerwistInit({
   swDest: "public/sw.js",
   reloadOnOnline: true,
   disable: false,
+  register: true,
+  cacheOnNavigation: true,
 });
 
 export default withSerwist({
