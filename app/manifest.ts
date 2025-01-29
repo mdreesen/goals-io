@@ -26,6 +26,12 @@ export default function manifest(): MetadataRoute.Manifest {
       "health",
       "lifestyle",
       "productivity"
-    ]
+    ],
+    dir: "auto",
+    display_override: [
+      "standalone",
+      "window-controls-overlay"
+    ],
+    prefer_related_applications: true
   }
 }
