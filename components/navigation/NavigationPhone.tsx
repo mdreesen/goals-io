@@ -41,7 +41,7 @@ export default async function NavigationPhone() {
                     </li>
                 </Link>
 
-                <Link href={'/dashboard/soul'}>
+                <Link href={'/dashboard/spirit'}>
                     <li>
                         <Image
                             alt="Soul icon"
