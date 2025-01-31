@@ -1,46 +1,62 @@
-'use client';
-import { useEffect, useState } from "react";
+'use client'
+import { useState, useEffect } from 'react';
+import { DateTime } from 'luxon';
+import FastingForm from '../forms/create/FastingForm';
 
-export default function FastingTimer() {
-    const [ hours, setHours ] = useState(0)
-    const [ minutes, setMinutes ] = useState(0)
-    const [ seconds, setSeconds ] = useState(0);
-    const [fastingTime, setFastingTime] = useState(false)
+export default function Timer({ fastData }: any) {
+
+    const [timeRemaining, setTimeRemaining] = useState(calculateTimeRemaining());
+
+    const done = timeRemaining?.hours === 0 && timeRemaining?.minutes === 0 && Math.trunc(timeRemaining.seconds) === 0;
+
+    const now = DateTime.now();
 
     useEffect(() => {
-        const getTarget = new Date("12/31/2026 23:59:59");
+        function set() {
+            const intervalId = setInterval(() => {
+                setTimeRemaining(calculateTimeRemaining());
+            }, 1000);
+    
+            return () => clearInterval(intervalId)
+        }
 
-        setInterval(() => {
-            const now = new Date();
-            const difference = getTarget.getTime() - now.getTime();
+        if (fastData?.user?.start) return set();
+    }, [calculateTimeRemaining(), fastData?.user?.start]);
 
-            // const timeNow = now.toLocaleTimeString();
+    function calculateTimeRemaining() {
+        const now = DateTime.now();
+        const futureDateTime = DateTime.fromISO(fastData?.user?.target_date);
 
-            const newDate = new Date();
-            const setNewDate = newDate.setHours(newDate.getHours() + 16);
+        if (fastData?.user?.ended) return { days: 0, hours: 0, minutes: 0, seconds: 0 };
 
-            const timeHours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const timeMinutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-            const timeSeconds = Math.floor((difference % (1000 * 60)) / 1000);
+        if (futureDateTime < now) {
+            return { days: 0, hours: 0, minutes: 0, seconds: 0 };
+        }
 
-            setHours(timeHours);
-            setMinutes(timeMinutes);
-            setSeconds(timeSeconds);
+        const diff = futureDateTime.diff(now, ['days', 'hours', 'minutes', 'seconds']);
+        return {
+            days: diff.days,
+            hours: diff.hours,
+            minutes: diff.minutes,
+            seconds: diff.seconds,
+        };
+    };
 
-            if (timeHours <= 0 && timeMinutes <= 0 && timeSeconds <= 0) {
-                setFastingTime(true)
-            };
-        }, 1000)
-    }, []);
-
-    return (
-        <div className="flex flex-col">
-            <div>Hours {hours}</div>
-            <div>Minutes {minutes}</div>
-            <div>Seconds {seconds}</div>
-
-            {fastingTime && <h2>Your fasting time is done</h2>}
-        </div>
+    const timeIsDone = done && (
+        <h2 className='text-green-500'>Fasting is done!</h2>
     )
 
-}
+    return (
+        <div>
+            {fastData?.user?.start ? (
+                <>
+                    {timeRemaining.hours} hours, {timeRemaining.minutes} minutes, {Math.trunc(timeRemaining.seconds)} seconds
+                </>
+            ) : (
+                <div>Fast has not started</div>
+            )}
+            {timeIsDone}
+            <FastingForm start_date={now} data={fastData} />
+        </div>
+    );
+};

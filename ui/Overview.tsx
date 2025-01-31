@@ -9,7 +9,7 @@ export default async function Overview() {
 
     const useOverview = await fetchOverview();
 
-    const weight = (
+    const weight = useOverview?.showWeight && (
         <div className="px-4 py-5 sm:p-6">
             <dt className="text-base font-normal text-gray-900">Weight</dt>
             <dd className="mt-1 flex items-baseline justify-between md:block lg:flex">
@@ -37,7 +37,7 @@ export default async function Overview() {
         </div>
     );
 
-    const books = (
+    const books = useOverview?.showBooks &&  (
         <div className="px-4 py-5 sm:p-6">
             <dt className="text-base font-normal text-gray-900">Books</dt>
             <dd className="mt-1 flex items-baseline justify-between md:block lg:flex">
@@ -54,7 +54,7 @@ export default async function Overview() {
         </div>
     );
 
-    const water = (
+    const water = useOverview?.showWater && (
         <div className="px-4 py-5 sm:p-6">
             <dt className="text-base font-normal text-gray-900">Water</dt>
             <dd className="mt-1 flex items-baseline justify-between md:block lg:flex">

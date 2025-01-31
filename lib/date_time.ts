@@ -25,6 +25,21 @@ export async function date_time_today() {
     return dateTime.toLocaleString(DateTime.DATETIME_FULL);
 };
 
+export async function date_time_fasting() {
+    const useUser = await fetchUser()
+    Settings.defaultZone = "system";
+
+    const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    const useTimeZone = useUser.time_zone ?? timezone;
+    const dateTime = DateTime.local().setZone(useTimeZone);
+
+    const futureTime = dateTime.plus({ hours: 16 });
+    console.log(futureTime.toISO());
+    console.log(futureTime.toLocaleString(DateTime.DATETIME_SHORT)); // Localized format
+
+    return futureTime.toISO();
+};
+
 export function current_year() {
     const currentYear = new Date().getFullYear().toString();
 

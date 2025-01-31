@@ -28,6 +28,15 @@ const bookSchema = new Schema(
         book_end_date: String || undefined
     }, { timestamps: false });
 
+const fastingSchema = new Schema(
+    {
+        completed: Boolean || undefined,
+        start_date: String || undefined,
+        target_date: String || undefined,
+        ended: Boolean || undefined,
+        start: Boolean || undefined,
+    }, { timestamps: false });
+
 const habitsSchema = new Schema(
     {
         title: String || undefined,
@@ -75,6 +84,7 @@ const userSchema = new Schema(
         affirmations: [affirmationsSchema],
         bibles: [bibleSchema],
         books: [bookSchema],
+        fasting: [fastingSchema],
         weight: [weightSchema],
         water: [waterIntakeSchema],
         habits: [habitsSchema],
