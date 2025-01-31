@@ -6,11 +6,22 @@ import Link from 'next/link';
 export default async function Bible() {
 
     const bibles = await fetchBible() ?? [];
-    const useSermons = bibles.sermon;
-    const useDevotionals = bibles.devotional;
+    const useSermons = bibles.sermon.slice(-10);
+    const useDevotionals = bibles.devotional.slice(-10);
 
     const sermonNotes = (
         <div>
+            <div className="flex justify-end mt-4 mb-4 sm:mt-0 sm:flex-none">
+                <Link href={'/dashboard/spirit/bible/sermons'}>
+                    <button
+                        type="button"
+                        className="block rounded-md bg-gray-800 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-900"
+                    >
+                        See sermon notes
+                    </button>
+                </Link>
+            </div>
+
             <ul role="list" className="divide-y divide-gray-100">
                 {useSermons?.length > 0 ? useSermons?.map((item: any) => (
                     <li key={item.id} className="flex items-center justify-between gap-x-6 py-5">
@@ -68,6 +79,16 @@ export default async function Bible() {
 
     const devotionalNotes = (
         <div>
+            <div className="flex justify-end mt-4 mb-4 sm:mt-0 sm:flex-none">
+                <Link href={'/dashboard/spirit/bible/devotionals'}>
+                    <button
+                        type="button"
+                        className="block rounded-md bg-gray-800 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-900"
+                    >
+                        See devotional notes
+                    </button>
+                </Link>
+            </div>
 
             <ul role="list" className="divide-y divide-gray-100">
                 {useDevotionals?.length > 0 ? useDevotionals.map((item: any) => (

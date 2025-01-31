@@ -1,5 +1,5 @@
 import { fetchBibleById } from "@/actions/bible";
-import Link from "next/link";
+import ButtonBack from "@/components/buttons/ButtonBack";
 
 export default async function Page({ params }: any) {
 
@@ -64,13 +64,7 @@ export default async function Page({ params }: any) {
             </div>
 
             <div className="mt-6 flex items-center gap-x-6 justify-between">
-                <div className="flex gap-x-6 items-center">
-                    <Link href={'/dashboard/spirit'}>
-                        <button type="button" className="text-sm/6 font-semibold text-gray-900 justify-end">
-                            ← Back
-                        </button>
-                    </Link>
-                </div>
+                <ButtonBack path='/dashboard/spirit' />
             </div>
         </div>
     )

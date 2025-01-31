@@ -1,13 +1,10 @@
-[
-  {
-    "relation": ["delegate_permission/common.handle_all_urls"],
-    "target": {
-      "namespace": "android_app",
-      "package_name": "xyz.appmaker.kmilzh",
-      "sha256_cert_fingerprints": [
-        "97:6B:B3:65:18:A1:07:F8:58:51:DF:7B:C7:04:72:87:83:33:00:B9:5B:52:29:C1:C9:43:C2:B0:5C:AA:D7:30",
-        "F9:5C:23:2F:13:EA:6D:93:CF:83:C2:CE:A2:83:A4:64:CE:DA:3B:96:EE:54:19:EA:D2:FB:95:EF:F1:5B:A8:BE"
-      ]
-    }
-  }
-]
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "app.vercel.goals_io.twa",
+        "sha256_cert_fingerprints": [
+          "10:61:51:FD:74:E2:41:3A:77:4A:DB:0F:C3:59:9E:83:16:CE:7F:8E:CE:2E:EE:63:7F:4D:D6:01:8C:6C:C3:8D"
+        ]
+      }
+    }]

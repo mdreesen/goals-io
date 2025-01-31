@@ -1,11 +1,11 @@
 import { Suspense } from "react";
-import Bible from '@/ui/bible/Bible';
+import Devotionals from '@/ui/bible/Devotionals'
 import LoadingScale from "@/components/loaders/LoadingScale";
 import { fetchSettings } from "@/actions/settings";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Spirit | Ascend",
+  title: "Spirit | Devotionals | Ascend",
 };
 
 export default async function Page() {
@@ -15,7 +15,7 @@ export default async function Page() {
     const useBible = useShowBible?.value && (
         <>
             <Suspense fallback={<LoadingScale />}>
-                <Bible />
+                <Devotionals />
             </Suspense>
         </>
     );
