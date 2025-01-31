@@ -1,6 +1,7 @@
 import { fetchBible } from '@/actions/bible';
-import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
-import { EllipsisVerticalIcon } from '@heroicons/react/20/solid'
+import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react';
+import { EllipsisVerticalIcon } from '@heroicons/react/20/solid';
+import ButtonGoTo from '@/components/buttons/ButtonGoTo';
 import Link from 'next/link';
 
 export default async function Bible() {
@@ -12,14 +13,7 @@ export default async function Bible() {
     const sermonNotes = (
         <div>
             <div className="flex justify-end mt-4 mb-4 sm:mt-0 sm:flex-none">
-                <Link href={'/dashboard/spirit/bible/sermons'}>
-                    <button
-                        type="button"
-                        className="block rounded-md bg-gray-800 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-900"
-                    >
-                        See sermon notes
-                    </button>
-                </Link>
+                <ButtonGoTo title="See sermon notes" path="/dashboard/spirit/bible/all/sermons" />
             </div>
 
             <ul role="list" className="divide-y divide-gray-100">
@@ -80,14 +74,8 @@ export default async function Bible() {
     const devotionalNotes = (
         <div>
             <div className="flex justify-end mt-4 mb-4 sm:mt-0 sm:flex-none">
-                <Link href={'/dashboard/spirit/bible/devotionals'}>
-                    <button
-                        type="button"
-                        className="block rounded-md bg-gray-800 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-900"
-                    >
-                        See devotional notes
-                    </button>
-                </Link>
+                <ButtonGoTo title="See devotional notes" path="/dashboard/spirit/bible/all/devotionals" />
+
             </div>
 
             <ul role="list" className="divide-y divide-gray-100">
@@ -150,14 +138,8 @@ export default async function Bible() {
             <h2 className="text-3xl font-semibold text-gray-900">Bible</h2>
 
             <div className="flex justify-end mt-4 mb-4 sm:mt-0 sm:flex-none">
-                <Link href={'/dashboard/spirit/bible/create'}>
-                    <button
-                        type="button"
-                        className="block rounded-md bg-gray-800 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-900"
-                    >
-                        Add notes
-                    </button>
-                </Link>
+                <ButtonGoTo title="Add notes" path="/dashboard/spirit/bible/create" />
+
             </div>
             <div className='p-4 mb-6 rounded border border-green-600'>
                 <h2 className="text-xl font-semibold text-gray-900">Sermon Notes</h2>

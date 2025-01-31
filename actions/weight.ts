@@ -21,6 +21,7 @@ export async function fetchWeight() {
         const positiveInteger = Math.abs(Number(lostOrGained))
 
         return {
+            data: data[0].weight.reverse(),
             limited: limited[0].weight ?? [],
             dataToDate:limited[0].weight[0],
             highestWeight: findHighestNumber(useNumber),
