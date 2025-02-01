@@ -9,6 +9,8 @@ export default function Timer({ fastData }: any) {
 
     const done = timeRemaining?.hours === 0 && timeRemaining?.minutes === 0 && Math.trunc(timeRemaining.seconds) === 0;
 
+    const total_time = `${timeRemaining.hours}.${timeRemaining.minutes}`;
+
     const now = DateTime.now();
 
     useEffect(() => {
@@ -16,7 +18,7 @@ export default function Timer({ fastData }: any) {
             const intervalId = setInterval(() => {
                 setTimeRemaining(calculateTimeRemaining());
             }, 1000);
-    
+
             return () => clearInterval(intervalId)
         }
 
@@ -44,14 +46,31 @@ export default function Timer({ fastData }: any) {
 
     const timeIsDone = done && (
         <h2 className='text-green-500'>Fasting is done!</h2>
-    )
+    );
+
+    const progressBar = fastData?.user?.start && (
+        <div aria-hidden="true" className="mt-6">
+            <div className={`overflow-hidden ${done ? 'bg-green-500 animate-pulse' : 'bg-[#c18d21]'} rotate-180 rounded-full`}>
+                <div style={{ width: `${(Number(total_time) / 16) * 100}%` }} className={`h-2 bg-gray-200`} />
+            </div>
+            <div className="mt-6 hidden grid-cols-4 text-sm font-medium text-gray-600 sm:grid">
+                <div>Getting started</div>
+                <div className="text-center">Keep going</div>
+                <div className="text-center">Almost there</div>
+                <div className="text-right flex justify-end">
+                    <span className='flex flex-col w-[62px] justify-center text-center'>Nice job!</span>
+                </div>
+            </div>
+        </div>
+    );
 
     return (
         <div>
+            {progressBar}
             {fastData?.user?.start ? (
-                <>
-                    {timeRemaining.hours} hours, {timeRemaining.minutes} minutes, {Math.trunc(timeRemaining.seconds)} seconds
-                </>
+                <span className='text-sm font-medium text-gray-600'>
+                    {timeRemaining.hours} hours {timeRemaining.minutes} minutes
+                </span>
             ) : (
                 <div>Fast has not started</div>
             )}

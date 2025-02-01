@@ -44,7 +44,6 @@ export async function addBible(values: any) {
 
 export async function editBible(values: any) {
     const { _id } = values;
-    console.log(values)
 
     try {
         await connectDB();

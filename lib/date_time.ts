@@ -34,8 +34,6 @@ export async function date_time_fasting() {
     const dateTime = DateTime.local().setZone(useTimeZone);
 
     const futureTime = dateTime.plus({ hours: 16 });
-    console.log(futureTime.toISO());
-    console.log(futureTime.toLocaleString(DateTime.DATETIME_SHORT)); // Localized format
 
     return futureTime.toISO();
 };

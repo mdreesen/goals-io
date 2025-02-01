@@ -81,6 +81,7 @@ const userSchema = new Schema(
         region: String,
         postal_code: String,
         time_zone: String,
+        fasting_time: Number,
         affirmations: [affirmationsSchema],
         bibles: [bibleSchema],
         books: [bookSchema],

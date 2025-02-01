@@ -43,7 +43,6 @@ export async function addFasting(values: any) {
 
 export async function editFasting(values: any) {
     const { _id } = values;
-    console.log(_id, values)
 
     try {
         await connectDB();

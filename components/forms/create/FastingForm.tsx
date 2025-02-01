@@ -10,7 +10,7 @@ export default function FastingForm({ data }: any) {
 
     const [error, setError] = useState<string>();
 
-    const handleSubmit = async (formData: FormData) => {
+    const handleSubmit = async () => {
         try {
             if (!data?.user?.start || data?.user?.start === false) {
                 await addFasting({
