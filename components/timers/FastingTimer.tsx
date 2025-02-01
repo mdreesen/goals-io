@@ -44,7 +44,7 @@ export default function Timer({ fastData }: any) {
         };
     };
 
-    const timeIsDone = done && (
+    const timeIsDone = done && fastData?.user?.ended && (
         <h2 className='text-green-500'>Fasting is done!</h2>
     );
 
