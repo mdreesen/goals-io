@@ -6,6 +6,8 @@ export default async function Weight() {
 
   const useWeight = await fetchWeight() ?? [];
 
+  console.log(useWeight)
+
   return (
     <div className="px-4 sm:px-2 lg:px-4">
       <div className="sm:flex sm:items-center">

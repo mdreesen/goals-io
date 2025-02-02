@@ -3,6 +3,7 @@ import Navigation from "@/components/navigation/Navigation";
 import NavigationPhone from '@/components/navigation/NavigationPhone';
 import { current_year } from "@/lib/date_time";
 import packagejson from '@/package.json';
+import Banner_Utc_Time from '@/components/banners/Banner_Utc_Time';
 
 export default async function RootLayout({
     children,

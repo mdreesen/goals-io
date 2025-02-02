@@ -7,8 +7,11 @@ export async function date_today() {
     const useUser = parse(user);
     Settings.defaultZone = "system";
 
+    // Time zones
+    const useZone = DateTime.local().zoneName;
     const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    const useTimeZone = useUser.time_zone ?? timezone;
+
+    const useTimeZone = useUser.time_zone ?? useZone;
     const dateTime = DateTime.local().setZone(useTimeZone);
 
     return dateTime.toLocaleString();
@@ -18,8 +21,13 @@ export async function date_time_today() {
     const useUser = await fetchUser()
     Settings.defaultZone = "system";
 
+    // Time zones
+    const useZone = DateTime.local().zoneName;
     const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    const useTimeZone = useUser.time_zone ?? timezone;
+
+    const useTimeZone = useUser.time_zone ?? useZone;
+
+
     const dateTime = DateTime.local().setZone(useTimeZone);
 
     return dateTime.toLocaleString(DateTime.DATETIME_FULL);
