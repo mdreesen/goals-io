@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { register } from "@/actions/register";
+import { signIn } from "next-auth/react";
 import LoaderPacman from "@/components/loaders/LoaderPacman";
 
 export default function Page() {
@@ -15,21 +16,33 @@ export default function Page() {
 
   const handleSubmit = async (formData: FormData) => {
     setLoading(true);
+
+    // Set to register the user
     const r = await register({
       email: formData.get("email"),
       password: formData.get("password"),
       confirm_password: formData.get("confirm_password"),
     });
-    ref.current?.reset();
+
+    // If error shows, then show what happened
     if (r?.error) {
-      setError(r.error);
+      setError(r.error as string);
       setLoading(false)
-      return;
     }
+
+    // If everything passes, lets log them in
     else {
-      return router.push("/");
+      await signIn("credentials", {
+        email: formData.get("email"),
+        password: formData.get("password"),
+        redirect: false,
+      });
+
+      return router.push("/dashboard");
     }
   };
+
+  console.log(loading)
 
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8">
