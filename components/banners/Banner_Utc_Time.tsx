@@ -3,7 +3,7 @@ import { XMarkIcon } from '@heroicons/react/20/solid'
 export default function Banner_Utc_Time() {
 
   return (
-    <div className="relative w-full z-5 isolate flex items-center gap-x-6 overflow-hidden bg-gray-50 px-6 py-2.5 sm:px-3.5 sm:before:flex-1">
+    <div className="fixed w-full z-5 isolate flex items-center gap-x-6 overflow-hidden bg-gray-50 px-6 py-5 sm:px-3.5 sm:before:flex-1">
       <div
         aria-hidden="true"
         className="absolute left-[max(-7rem,calc(50%-52rem))] top-1/2 -z-10 -translate-y-1/2 transform-gpu blur-2xl"
@@ -30,11 +30,11 @@ export default function Banner_Utc_Time() {
       </div>
       <p className="text-sm/6 text-gray-900">
         <a href="#">
-          <strong className="font-semibold">Ascend</strong>
+          <strong className="font-semibold">Your device is using UTC time!</strong>
           <svg viewBox="0 0 2 2" aria-hidden="true" className="mx-2 inline size-0.5 fill-current">
             <circle r={1} cx={1} cy={1} />
           </svg>
-          Beta version is out
+          Go to your profile → update → select your time zone
         </a>
       </p>
       <div className="flex flex-1 justify-end">

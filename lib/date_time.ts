@@ -8,10 +8,9 @@ export async function date_today() {
     Settings.defaultZone = "system";
 
     // Time zones
-    const useZone = DateTime.local().zoneName;
     const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
-    const useTimeZone = useUser.time_zone ?? useZone;
+    const useTimeZone = useUser.time_zone ?? timezone;
     const dateTime = DateTime.local().setZone(useTimeZone);
 
     return dateTime.toLocaleString();
@@ -22,10 +21,9 @@ export async function date_time_today() {
     Settings.defaultZone = "system";
 
     // Time zones
-    const useZone = DateTime.local().zoneName;
     const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
-    const useTimeZone = useUser.time_zone ?? useZone;
+    const useTimeZone = useUser.time_zone ?? timezone;
 
 
     const dateTime = DateTime.local().setZone(useTimeZone);
@@ -50,4 +48,16 @@ export function current_year() {
     const currentYear = new Date().getFullYear().toString();
 
     return currentYear
+};
+
+export async function timezone() {
+    const user = await fetchUser();
+    const useUser = parse(user);
+    Settings.defaultZone = "system";
+
+    // Time zones
+    const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    const useTimeZone = useUser.time_zone ?? timezone;
+
+    return useTimeZone
 };

@@ -1,7 +1,7 @@
 import { fetchUser } from '@/actions/user';
 import Navigation from "@/components/navigation/Navigation";
 import NavigationPhone from '@/components/navigation/NavigationPhone';
-import { current_year } from "@/lib/date_time";
+import { current_year, timezone } from "@/lib/date_time";
 import packagejson from '@/package.json';
 import Banner_Utc_Time from '@/components/banners/Banner_Utc_Time';
 
@@ -12,6 +12,7 @@ export default async function RootLayout({
 }>) {
 
     const useUser = await fetchUser();
+    const useTimezone = await timezone();
 
     const user = {
         name: useUser?.username ? useUser?.username : useUser?.email,
@@ -20,11 +21,20 @@ export default async function RootLayout({
     // Conditionals
     const hasUserFirstLast = useUser?.first_name && useUser?.last_name ? `${useUser?.first_name} ${useUser?.last_name}` : 'Dashboard';
 
+    const hasUtcTime = useTimezone.includes('UTC') && (
+        <div className='h-[4rem]'>
+            <Banner_Utc_Time />
+        </div>
+    );
+
     return (
         <div className="flex flex-col min-h-screen">
+
+            {hasUtcTime}
+
             <div className="bg-gray-900 pb-32">
                 <Navigation />
-                <NavigationPhone/>
+                <NavigationPhone />
                 <header className="py-10">
                     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                         <h1 className="text-3xl font-bold tracking-tight text-white">{hasUserFirstLast}</h1>
