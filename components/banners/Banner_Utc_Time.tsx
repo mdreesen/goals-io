@@ -37,12 +37,12 @@ export default function Banner_Utc_Time() {
           Go to your profile → update → select your time zone
         </a>
       </p>
-      <div className="flex flex-1 justify-end">
+      {/* <div className="flex flex-1 justify-end">
         <button type="button" className="-m-3 p-3 focus-visible:outline-offset-[-4px]">
           <span className="sr-only">Dismiss</span>
           <XMarkIcon aria-hidden="true" className="size-5 text-gray-900" />
         </button>
-      </div>
+      </div> */}
     </div>
   )
 }
