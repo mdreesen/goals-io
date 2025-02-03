@@ -58,7 +58,7 @@ export default function NavigationPhone() {
                                 className={`${item.style}`}
                             />
 
-                            <div className={`${pathName.includes(item.href) && 'border-b-2 border-indigo-900'}`} />
+                            <div className={`${pathName === item.href && 'border-b-2 border-indigo-900'}`} />
                         </li>
                     </Link>
                 ))}
