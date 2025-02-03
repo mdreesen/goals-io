@@ -6,12 +6,10 @@ import ButtonDeleteUser from '@/components/buttons/ButtonDeleteUser';
 import { parse } from '@/lib/formatters';
 import type { Metadata } from "next";
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react';
-import { ChevronDownIcon } from '@heroicons/react/24/outline';
 
 export const metadata: Metadata = {
   title: "Profile | Ascend",
 };
-
 
 export default async function Page() {
   const useUser = await fetchUser();

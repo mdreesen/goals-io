@@ -1,5 +1,3 @@
-import Link from "next/link";
-import { date_time_fasting } from '@/lib/date_time';
 import Timer from '@/components/timers/FastingTimer';
 import { fetchFasting } from '@/actions/nutrition_fasting';
 import { parse } from '@/lib/formatters';

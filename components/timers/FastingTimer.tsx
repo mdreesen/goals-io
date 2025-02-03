@@ -1,7 +1,7 @@
 'use client'
 import { useState, useEffect } from 'react';
 import { DateTime } from 'luxon';
-import FastingForm from '../forms/create/FastingForm';
+import FastingForm from '@/components/forms/create/FastingForm';
 
 export default function Timer({ fastData }: any) {
 
@@ -10,6 +10,9 @@ export default function Timer({ fastData }: any) {
     const done = timeRemaining?.hours === 0 && timeRemaining?.minutes === 0 && Math.trunc(timeRemaining.seconds) === 0;
 
     const total_time = `${timeRemaining.hours}.${timeRemaining.minutes}`;
+
+    // const total_fast_time = 16 - Math.trunc(Number(total_time));
+    // console.log(total_fast_time, Number(total_time));
 
     const now = DateTime.now();
 
@@ -26,16 +29,16 @@ export default function Timer({ fastData }: any) {
     }, [calculateTimeRemaining(), fastData?.user?.start]);
 
     function calculateTimeRemaining() {
+
         const now = DateTime.now();
         const futureDateTime = DateTime.fromISO(fastData?.user?.target_date);
-
-        if (fastData?.user?.ended) return { days: 0, hours: 0, minutes: 0, seconds: 0 };
 
         if (futureDateTime < now) {
             return { days: 0, hours: 0, minutes: 0, seconds: 0 };
         }
 
         const diff = futureDateTime.diff(now, ['days', 'hours', 'minutes', 'seconds']);
+
         return {
             days: diff.days,
             hours: diff.hours,
@@ -43,10 +46,6 @@ export default function Timer({ fastData }: any) {
             seconds: diff.seconds,
         };
     };
-
-    const timeIsDone = done && fastData?.user?.ended && (
-        <h2 className='text-green-500'>Fasting is done!</h2>
-    );
 
     const progressBar = fastData?.user?.start && (
         <div aria-hidden="true" className="mt-6">
@@ -69,12 +68,11 @@ export default function Timer({ fastData }: any) {
             {progressBar}
             {fastData?.user?.start ? (
                 <span className='text-sm font-medium text-gray-600'>
-                    {timeRemaining.hours} hours {timeRemaining.minutes} minutes
+                    {timeRemaining.hours} hours {timeRemaining.minutes} minutes {Math.trunc(timeRemaining.seconds)} seconds
                 </span>
             ) : (
                 <div>Fast has not started</div>
             )}
-            {timeIsDone}
             <FastingForm start_date={now} data={fastData} />
         </div>
     );

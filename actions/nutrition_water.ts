@@ -65,7 +65,7 @@ export async function fetchWaterIntakeToOz() {
         const useWeight = findWeightToday?.weight ?? latestWeight?.weight;
 
         // Convert weight found to oz
-        const hasWeight = bodyWeightToWaterInOz(useWeight);
+        const hasWeight = bodyWeightToWaterInOz(useWeight ?? 210);
 
         return hasWeight;
 

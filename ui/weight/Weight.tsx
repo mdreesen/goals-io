@@ -71,7 +71,7 @@ export default async function Weight() {
                       </a>
                     </td>
                   </tr>
-                )) : <h3 className="py-2">No weight recorded</h3>}
+                )) : <span className="py-2">No weight recorded</span>}
               </tbody>
             </table>
           </div>
