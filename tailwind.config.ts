@@ -8,5 +8,18 @@ export default {
     "./ui/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+
+  theme: {
+    extends: {
+      keyframes: {
+        shimmer: {
+          '100%': {
+            transform: 'translateX(100%)',
+          },
+        },
+      },
+    }
+  },
+  
   plugins: [require("tailwindcss-animate")],
 } satisfies Config;

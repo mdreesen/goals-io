@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-export default function NavigationPhone() {
+export default function NavigationPhone({ settings }: any) {
     const pathName = usePathname();
 
     const links = [
@@ -12,42 +12,47 @@ export default function NavigationPhone() {
             href: "/dashboard/body",
             alt: "Body icon",
             assetSrc: '/assets/icons/body.png',
-            style: 'h-[3rem] w-[auto] object-cover scale-75'
+            style: 'h-[3rem] w-[auto] object-cover scale-75',
+            useNav: settings?.useShowBody
         },
         {
             id: 2,
             href: "/dashboard/mind",
             alt: "Mind icon",
             assetSrc: '/assets/icons/mind.png',
-            style: 'h-[3rem] w-[auto] object-cover scale-75'
+            style: 'h-[3rem] w-[auto] object-cover scale-75',
+            useNav: settings?.useShowMind
         },
         {
             id: 3,
             href: "/dashboard",
             alt: "Ascend logo back to dashboard",
             assetSrc: '/assets/logo_transparent_512x512.png',
-            style: 'h-[4rem] w-[auto] object-cover scale-75 bg-gray-900 rounded-full'
+            style: 'h-[4rem] w-[auto] object-cover scale-75 bg-gray-900 rounded-full',
+            useNav: true
         },
         {
             id: 4,
             href: "/dashboard/spirit",
             alt: "Soul icon",
             assetSrc: '/assets/icons/soul.png',
-            style: 'h-[3rem] w-[auto] object-cover scale-75'
+            style: 'h-[3rem] w-[auto] object-cover scale-75',
+            useNav: settings?.useShowSpirit
         },
         {
             id: 5,
             href: "/dashboard/profile",
             alt: "Profile icon",
             assetSrc: '/assets/icons/profile.png',
-            style: 'h-[3rem] w-[auto] object-cover scale-75'
+            style: 'h-[3rem] w-[auto] object-cover scale-75',
+            useNav: true
         },
     ]
 
     return (
         <nav className="bg-white sm:block md:hidden lg:hidden h-[6rem] fixed bottom-0 w-full z-50">
             <ul className='flex justify-around h-[100%] content-center items-center'>
-                {links.map((item) => (
+                {links.map((item) => item?.useNav && (
                     <Link href={item.href} key={item.id}>
                         <li>
                             <Image

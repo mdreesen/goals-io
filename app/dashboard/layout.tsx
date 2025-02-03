@@ -1,9 +1,11 @@
 import { fetchUser } from '@/actions/user';
+import { parse } from '@/lib/formatters';
+import { current_year, timezone } from "@/lib/date_time";
+import { fetchSettings } from '@/actions/settings';
 import Navigation from "@/components/navigation/Navigation";
 import NavigationPhone from '@/components/navigation/NavigationPhone';
-import { current_year, timezone } from "@/lib/date_time";
-import packagejson from '@/package.json';
 import Banner_Utc_Time from '@/components/banners/Banner_Utc_Time';
+import packagejson from '@/package.json';
 
 export default async function RootLayout({
     children,
@@ -13,6 +15,7 @@ export default async function RootLayout({
 
     const useUser = await fetchUser();
     const useTimezone = await timezone();
+    const useSettings = await fetchSettings();
 
     const user = {
         name: useUser?.username ? useUser?.username : useUser?.email,
@@ -34,7 +37,7 @@ export default async function RootLayout({
 
             <div className="bg-gray-900 pb-32">
                 <Navigation />
-                <NavigationPhone />
+                <NavigationPhone settings={parse(useSettings)} />
                 <header className="py-10">
                     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                         <h1 className="text-3xl font-bold tracking-tight text-white">{hasUserFirstLast}</h1>
@@ -45,7 +48,7 @@ export default async function RootLayout({
 
             <main className="-mt-32 grow">
                 <div className="mx-auto max-w-7xl px-4 pb-12 sm:px-6 lg:px-8">
-                    <div className="rounded-lg bg-white px-5 py-6 shadow sm:px-6">
+                    <div className="rounded-lg bg-white px-5 py-6 shadow sm:px-6 ">
                         {children}
                     </div>
                 </div>
@@ -57,7 +60,7 @@ export default async function RootLayout({
                     </div>
                     <p className="mt-8 text-sm/6 text-gray-400 md:order-1 md:mt-0 flex flex-col">
                         <a href="/dashboard/privacy-policy">Privacy Policy</a>
-                        &copy; {current_year()} White Raven, Inc. All rights reserved.
+                        &copy; {current_year()} White Raven Development. All rights reserved.
                     </p>
                 </div>
             </footer>
