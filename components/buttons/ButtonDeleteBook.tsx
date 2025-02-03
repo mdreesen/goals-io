@@ -10,7 +10,7 @@ export default function ButtonDeleteBook({ data }: any) {
         try {
             await deleteBook({ id: data._id });
             router.refresh
-            router.push(`/dashboard/books`);
+            router.push(`/dashboard/mind`);
         } catch (error) {
             console.log(error)
         }

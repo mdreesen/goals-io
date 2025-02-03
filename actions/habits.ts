@@ -45,7 +45,7 @@ export async function editHabit(values: any) {
             { $set: { 'habits.$': { ...values } } },
             { new: true });
 
-        revalidatePath('/dashboard/habits');
+        revalidatePath('/dashboard/mind');
 
 
     } catch (e) {
@@ -65,7 +65,7 @@ export async function deleteHabit(values: any) {
             { $pull: { 'habits': { _id: id } } },
             { new: true });
 
-        revalidatePath('/dashboard/habits');
+        revalidatePath('/dashboard/mind');
 
 
     } catch (e) {

@@ -11,9 +11,14 @@ export async function fetchBooks() {
         await connectDB();
         const session = await getServerSession();
 
-        const data = await User.find({ email: session?.user.email }, { books:{ $slice: -10 } }).limit(10);
+        const limited = await User.find({ email: session?.user.email }, { books:{ $slice: -10 } }).limit(10);
+        const data = await User.find({ email: session?.user.email }, 'books');
 
-        return data[0].books ?? [];
+        return {
+            limited: limited[0].books ?? [],
+            allData: data[0].books ?? [],
+            totalBooks: data[0].books.length.toString()
+        }
 
     } catch (e) {
         console.log(e);
@@ -47,7 +52,7 @@ export async function editBook(values: any) {
             { $set: { 'books.$': { ...values } } },
             { new: true });
 
-        revalidatePath('/dashboard/books');
+        revalidatePath('/dashboard/mind');
 
 
     } catch (e) {
@@ -67,7 +72,7 @@ export async function deleteBook(values: any) {
             { $pull: { 'books': { _id: id } } },
             { new: true });
 
-        revalidatePath('/dashboard/books');
+        revalidatePath('/dashboard/mind');
 
 
     } catch (e) {

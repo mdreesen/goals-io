@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { fetchBooks } from '@/actions/book';
 import { formatDateAndTime } from '@/lib/formatters'
+import ButtonGoTo from "@/components/buttons/ButtonGoTo";
+import Results from "@/components/showing/Results";
 
 export default async function Books() {
 
@@ -11,18 +13,16 @@ export default async function Books() {
             <h2 className="text-3xl font-semibold text-gray-900">Books</h2>
 
             <div className="flex justify-end mt-4 mb-4 sm:mt-0 sm:flex-none">
-                <Link href={'/dashboard/mind/books/create'}>
-                    <button
-                        type="button"
-                        className="block rounded-md bg-gray-800 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-black focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-900"
-                    >
-                        Add book
-                    </button>
-                </Link>
+                <div className="flex gap-4 w-full justify-between">
+                    <ButtonGoTo title='See all books' path={'/dashboard/mind/books/all'} />
+                    <ButtonGoTo title='Add book' path={'/dashboard/mind/books/create'} />
+                </div>
             </div>
 
+            <Results data={books.totalBooks}/>
+
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                {books.length > 0 ? books?.reverse().map((item: any, index: number) => {
+                {books.limited?.length > 0 ? books?.limited?.reverse().map((item: any, index: number) => {
 
                     const useBookStartDate = item.book_start_date ? `Start Date ${formatDateAndTime(item.book_start_date)}` : '';
                     const useBookEndDate = item.book_end_date ? `End Date ${formatDateAndTime(item.book_end_date)}` : 'Currently Reading';

@@ -28,7 +28,8 @@ export async function fetchWeight() {
             startingWeight: startingWeight,
             averageWeight: findAverageNumber(useNumber),
             lossOrGain: lostOrGained.includes('-') ? `Gained ${positiveInteger.toString()} lbs` : `Lost ${lostOrGained === 'NaN' ? '0' : lostOrGained} lbs`,
-            weightLGType: lostOrGained.includes('-') ? 'increase' : 'decrease'
+            weightLGType: lostOrGained.includes('-') ? 'increase' : 'decrease',
+            totalWeight: data[0].weight.length.toString()
         }
 
     } catch (e) {
@@ -63,7 +64,7 @@ export async function editWeight(values: any) {
             { $set: { 'weight.$': { ...values } } },
             { new: true });
 
-        revalidatePath('/dashboard/weight');
+        revalidatePath('/dashboard/body');
 
 
     } catch (e) {
@@ -83,7 +84,7 @@ export async function deleteWeight(values: any) {
             { $pull: { 'weight': { _id: id } } },
             { new: true });
 
-        revalidatePath('/dashboard/weight');
+        revalidatePath('/dashboard/body');
 
 
     } catch (e) {

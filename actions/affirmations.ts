@@ -44,7 +44,7 @@ export async function editAffirmation(values: any) {
             { $set: { 'affirmations.$': { ...values } } },
             { new: true });
 
-        revalidatePath('/dashboard/affirmations');
+        revalidatePath('/dashboard/mind');
 
 
     } catch (e) {
@@ -64,7 +64,7 @@ export async function deleteAffirmations(values: any) {
             { $pull: { 'affirmations': { _id: id } } },
             { new: true });
 
-        revalidatePath('/dashboard/affirmations');
+        revalidatePath('/dashboard/mind');
 
 
     } catch (e) {

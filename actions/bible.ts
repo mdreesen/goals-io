@@ -13,7 +13,7 @@ export async function fetchBible() {
         const data = await User.find({ email: session?.user.email }, 'bibles');
 
         const devotional = data[0].bibles.reverse().filter((item: any) => item?.type?.includes('Devotional')) ?? [];
-        const sermon = data[0].bibles.reverse().filter((item: any) => item?.type?.includes('Sermon')) ?? [];
+        const sermon = data[0].bibles.filter((item: any) => item?.type?.includes('Sermon')) ?? [];
 
         return {
             devotional: devotional,
@@ -53,7 +53,7 @@ export async function editBible(values: any) {
             { $set: { 'bibles.$': { ...values } } },
             { new: true });
 
-        revalidatePath('/dashboard/bible');
+        revalidatePath('/dashboard/spirit');
 
 
     } catch (e) {
@@ -73,7 +73,7 @@ export async function deleteBible(values: any) {
             { $pull: { 'bibles': { _id: id } } },
             { new: true });
 
-        revalidatePath('/dashboard/bible');
+        revalidatePath('/dashboard/spirit');
 
 
     } catch (e) {

@@ -39,14 +39,17 @@ export function parse(data: any) {
 }
 
 export function findHighestNumber(data: any) {
-  const highestNumber = Math.max(...data);
 
-  return highestNumber.toString()
+  const useData = data.length === 0 ? [0] : data;
+  const highestNumber = Math.max(...useData);
+
+  return highestNumber.toString();
 };
 
 export function findAverageNumber(data: any) {
   const sum = data.reduce((acc: any, current: any) => acc + current, 0);
-  const average = sum / data.length;
+  const average = sum / data.length || 0;
+
   const round = Math.round(average * 10) / 10
   return round.toString();
 };

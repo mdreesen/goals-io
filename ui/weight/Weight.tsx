@@ -1,12 +1,11 @@
 import { fetchWeight } from "@/actions/weight"
 import { formatDateAndTime } from "@/lib/formatters";
 import ButtonGoTo from "@/components/buttons/ButtonGoTo";
+import Results from "@/components/showing/Results";
 
 export default async function Weight() {
 
   const useWeight = await fetchWeight() ?? [];
-
-  console.log(useWeight)
 
   return (
     <div className="px-4 sm:px-2 lg:px-4">
@@ -21,21 +20,21 @@ export default async function Weight() {
               {useWeight.startingWeight && `Starting weight ${useWeight.startingWeight.weight} lbs`}
             </p>
             <p className="py-1 text-left text-sm font-semibold text-gray-900 sm:pl-0">
-              {useWeight.highestWeight && `Highest weight ${useWeight.highestWeight} lbs`}
+              {useWeight.highestWeight !== '0' && `Highest weight ${useWeight.highestWeight} lbs`}
             </p>
             <p className="py-1 text-left text-sm font-semibold text-gray-900 sm:pl-0">
-              {useWeight.averageWeight && `Average weight ${useWeight.averageWeight} lbs`}
+              {useWeight.averageWeight !== '0' && `Average weight ${useWeight.averageWeight} lbs`}
             </p>
             <p className="py-1 text-left text-sm font-semibold text-gray-900 sm:pl-0">
-              {useWeight.lossOrGain && `${useWeight.lossOrGain}`}
+              {useWeight.lossOrGain !== 'Lost 0 lbs' && `${useWeight.lossOrGain}`}
             </p>
 
           </div>
         </div>
         <div className="flex justify-end mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-          <div className="flex flex-col gap-4">
-            <ButtonGoTo title='Add weight' path={'/dashboard/body/weight/create'} />
+          <div className="flex gap-4 w-full justify-between">
             <ButtonGoTo title='See all weight' path={'/dashboard/body/weight/all'} />
+            <ButtonGoTo title='Add weight' path={'/dashboard/body/weight/create'} />
           </div>
         </div>
       </div>
@@ -43,6 +42,8 @@ export default async function Weight() {
       <div className="mt-8 flow-root">
         <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+          <Results data={useWeight.totalWeight}/>
+
             <table className="min-w-full divide-y divide-gray-300">
               <thead>
                 <tr>

@@ -15,6 +15,8 @@ export async function createWaterIntake(values: any) {
 
         await User.findOneAndUpdate({ email: session?.user.email }, { $addToSet: { water: { ...values } } }, { new: true });
 
+        revalidatePath('/dashboard/body');
+
     } catch (e) {
         console.log(e)
         return e
@@ -32,7 +34,7 @@ export async function editWaterIntake(values: any) {
             { $set: { 'water.$': { ...values } } },
             { new: true });
 
-        revalidatePath('/dashboard/nutrition');
+        revalidatePath('/dashboard/body');
 
 
     } catch (e) {

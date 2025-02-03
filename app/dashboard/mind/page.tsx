@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import Affirmations from "@/ui/Affirmations";
-import Books from "@/ui/Books";
+import Books from "@/ui/books/Books";
 import Habits from '@/ui/Habits';
 import LoadingScale from "@/components/loaders/LoadingScale";
 import { fetchSettings } from '@/actions/settings';
