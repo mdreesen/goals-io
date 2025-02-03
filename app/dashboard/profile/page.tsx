@@ -1,11 +1,11 @@
 import Link from 'next/link';
+import { parse } from '@/lib/formatters';
+import type { Metadata } from "next";
+import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react';
 import { fetchUser } from '@/actions/user';
 import { fetchSettings } from '@/actions/settings';
 import ToggleWithIcon from '@/components/toggles/ToggleWithIcon';
 import ButtonDeleteUser from '@/components/buttons/ButtonDeleteUser';
-import { parse } from '@/lib/formatters';
-import type { Metadata } from "next";
-import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react';
 
 export const metadata: Metadata = {
   title: "Profile | Ascend",

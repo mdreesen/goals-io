@@ -3,6 +3,7 @@ import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react';
 import { EllipsisVerticalIcon } from '@heroicons/react/20/solid';
 import ButtonGoTo from '@/components/buttons/ButtonGoTo';
 import Link from 'next/link';
+import Results from '@/components/showing/Results';
 
 export default async function Bible() {
 
@@ -15,6 +16,8 @@ export default async function Bible() {
             <div className="flex justify-end mt-4 mb-4 sm:mt-0 sm:flex-none">
                 <ButtonGoTo title="See sermon notes" path="/dashboard/spirit/bible/all/sermons" />
             </div>
+
+            <Results data={bibles.sermon.length.toString()}/>
 
             <ul role="list" className="divide-y divide-gray-100">
                 {useSermons?.length > 0 ? useSermons?.map((item: any) => (
@@ -75,8 +78,9 @@ export default async function Bible() {
         <div>
             <div className="flex justify-end mt-4 mb-4 sm:mt-0 sm:flex-none">
                 <ButtonGoTo title="See devotional notes" path="/dashboard/spirit/bible/all/devotionals" />
-
             </div>
+
+            <Results data={bibles.devotional.length.toString()}/>
 
             <ul role="list" className="divide-y divide-gray-100">
                 {useDevotionals?.length > 0 ? useDevotionals.map((item: any) => (
