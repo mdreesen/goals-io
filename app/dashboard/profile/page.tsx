@@ -30,35 +30,39 @@ export default async function Page() {
             <dd className="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0"><Link className='underline' href={`/dashboard/profile/edit/${useUser._id}`}>Update</Link></dd>
           </div>
 
-          <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-            <dt className="text-sm/6 font-medium text-gray-900">Affirmations</dt>
-            <dd className="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0"><ToggleWithIcon data={parse(useShowAffirmations) ?? {}} /></dd>
+          <div className='px-4'>
+            <p className="text-sm/6 font-medium text-gray-900">Customize what you want to use or not use in the app by using the toggles below.</p>
+            <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+              <dt className="text-sm/6 font-medium text-gray-900">Affirmations</dt>
+              <dd className="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0"><ToggleWithIcon data={parse(useShowAffirmations) ?? {}} /></dd>
+            </div>
+
+            <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+              <dt className="text-sm/6 font-medium text-gray-900">Bible</dt>
+              <dd className="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0"><ToggleWithIcon data={parse(useShowBible) ?? {}} /></dd>
+            </div>
+
+            <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+              <dt className="text-sm/6 font-medium text-gray-900">Books</dt>
+              <dd className="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0"><ToggleWithIcon data={parse(useShowBooks) ?? {}} /></dd>
+            </div>
+
+            <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+              <dt className="text-sm/6 font-medium text-gray-900">Habits</dt>
+              <dd className="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0"><ToggleWithIcon data={parse(useShowHabits) ?? {}} /></dd>
+            </div>
+
+            <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+              <dt className="text-sm/6 font-medium text-gray-900">Nutrition</dt>
+              <dd className="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0"><ToggleWithIcon data={parse(useShowNutrition) ?? {}} /></dd>
+            </div>
+
+            <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+              <dt className="text-sm/6 font-medium text-gray-900">Weight</dt>
+              <dd className="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0"><ToggleWithIcon data={parse(useShowWeight) ?? {}} /></dd>
+            </div>
           </div>
 
-          <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-            <dt className="text-sm/6 font-medium text-gray-900">Bible</dt>
-            <dd className="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0"><ToggleWithIcon data={parse(useShowBible) ?? {}} /></dd>
-          </div>
-
-          <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-            <dt className="text-sm/6 font-medium text-gray-900">Books</dt>
-            <dd className="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0"><ToggleWithIcon data={parse(useShowBooks) ?? {}} /></dd>
-          </div>
-
-          <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-            <dt className="text-sm/6 font-medium text-gray-900">Habits</dt>
-            <dd className="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0"><ToggleWithIcon data={parse(useShowHabits) ?? {}} /></dd>
-          </div>
-
-          <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-            <dt className="text-sm/6 font-medium text-gray-900">Nutrition</dt>
-            <dd className="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0"><ToggleWithIcon data={parse(useShowNutrition) ?? {}} /></dd>
-          </div>
-
-          <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-            <dt className="text-sm/6 font-medium text-gray-900">Weight</dt>
-            <dd className="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0"><ToggleWithIcon data={parse(useShowWeight) ?? {}} /></dd>
-          </div>
 
           <div className="px-4 py-6 sm:px-0 border-t border-gray-100 flex flex-col">
             <dt className="text-sm/6 font-medium text-gray-900">Delete Profile</dt>

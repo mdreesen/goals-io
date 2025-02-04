@@ -7,6 +7,7 @@ import { parse } from '@/lib/formatters';
 import { UseBooksPerMonthChart }  from "@/components/charts/UseBooksPerMonthChart";
 import { UseWeightPerDay }  from "@/components/charts/UseWeightPerDay";
 import { UseWaterPerDay }  from "@/components/charts/UseWaterPerDay";
+import { fetchSettings } from '@/actions/settings';
 
 // Components
 import Overview from "@/ui/Overview";
@@ -17,8 +18,14 @@ export default async function Page() {
     const booksPerMonth = await booksByMonth();
     const weightPerMonth = await weightByMonth();
     const waterPerDay = await waterByday();
+    const useSettings = await fetchSettings();
 
-    const bookSection = (
+    // Conditionals
+    const showBooks = useSettings.useShowBooks?.value;
+    const showWeight = useSettings.useShowWeight?.value && weightPerMonth.length > 0;
+    const showWater = useSettings.useShowNutrition?.value && waterPerDay.length > 0;
+
+    const bookSection = showBooks && (
         <div className="relative lg:col-span-3 border-solid rounded-md p-2 content-center">
             <h2 className="text-base/7 font-semibold text-indigo-900">Books Per Month</h2>
             <Suspense fallback={<ChartSkeleton/>}>
@@ -27,7 +34,7 @@ export default async function Page() {
         </div>
     );
 
-    const weightSection = weightPerMonth.length > 0 && (
+    const weightSection = showWeight && (
         <div className="relative lg:col-span-3 border-solid rounded-md p-2 content-center">
             <h2 className="text-base/7 font-semibold text-indigo-900">Weight Per Day</h2>
             <Suspense fallback={<ChartSkeleton/>}>
@@ -36,7 +43,7 @@ export default async function Page() {
         </div>
     );
 
-    const waterSection = waterPerDay.length > 0 && (
+    const waterSection = showWater && (
         <div className="relative lg:col-span-3 border-solid rounded-md p-2 content-center">
             <h2 className="text-base/7 font-semibold text-indigo-900">Water Per Day</h2>
             <Suspense fallback={<ChartSkeleton/>}>
