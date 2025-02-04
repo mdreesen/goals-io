@@ -19,7 +19,9 @@ export default async function Books() {
                 </div>
             </div>
 
-            <Results data={books.totalBooks}/>
+            <div className="py-2">
+                <Results data={books.totalBooks} />
+            </div>
 
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 {books.limited?.length > 0 ? books?.limited?.reverse().map((item: any, index: number) => {

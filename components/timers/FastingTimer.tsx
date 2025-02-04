@@ -68,7 +68,7 @@ export default function Timer({ fastData }: any) {
             {progressBar}
             {fastData?.user?.start ? (
                 <span className='text-sm font-medium text-gray-600'>
-                    {timeRemaining.hours} hours {timeRemaining.minutes} minutes {Math.trunc(timeRemaining.seconds)} seconds
+                    {timeRemaining.hours} hours {timeRemaining.minutes} minutes
                 </span>
             ) : (
                 <div>Fast has not started</div>

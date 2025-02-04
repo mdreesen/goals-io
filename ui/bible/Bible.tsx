@@ -17,7 +17,9 @@ export default async function Bible() {
                 <ButtonGoTo title="See sermon notes" path="/dashboard/spirit/bible/all/sermons" />
             </div>
 
-            <Results data={bibles.sermon.length.toString()}/>
+            <div>
+                <Results data={bibles.sermon.length.toString()} />
+            </div>
 
             <ul role="list" className="divide-y divide-gray-100">
                 {useSermons?.length > 0 ? useSermons?.map((item: any) => (
@@ -80,7 +82,7 @@ export default async function Bible() {
                 <ButtonGoTo title="See devotional notes" path="/dashboard/spirit/bible/all/devotionals" />
             </div>
 
-            <Results data={bibles.devotional.length.toString()}/>
+            <Results data={bibles.devotional.length.toString()} />
 
             <ul role="list" className="divide-y divide-gray-100">
                 {useDevotionals?.length > 0 ? useDevotionals.map((item: any) => (
