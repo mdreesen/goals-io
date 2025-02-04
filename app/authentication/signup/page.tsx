@@ -1,5 +1,5 @@
 "use client";
-import { useRef, useState } from "react";
+import { FormEvent, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
@@ -15,7 +15,6 @@ export default function Page() {
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (formData: FormData) => {
-    setLoading(true);
 
     // Set to register the user
     const r = await register({
@@ -23,6 +22,10 @@ export default function Page() {
       password: formData.get("password"),
       confirm_password: formData.get("confirm_password"),
     });
+
+    // For some reason, to have the loading function work
+    // This needs to be after the register method
+    setLoading(true);
 
     // If error shows, then show what happened
     if (r?.error) {
@@ -37,6 +40,8 @@ export default function Page() {
         password: formData.get("password"),
         redirect: false,
       });
+
+      setLoading(false);
 
       return router.push("/dashboard");
     }
