@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { editProfile } from "@/actions/profile";
 import Link from 'next/link';
-
+import { convertTimezone } from '@/lib/formatters';
 export default function ProfileForm({ data }: any) {
 
     const router = useRouter();
@@ -14,6 +14,9 @@ export default function ProfileForm({ data }: any) {
 
 
     const handleSubmit = async (formData: FormData) => {
+
+        const converted = convertTimezone(formData.get("time_zone"));
+        console.log(converted)
         try {
             await editProfile({
                 _id: data?._id,
@@ -22,7 +25,7 @@ export default function ProfileForm({ data }: any) {
                 last_name: formData.get("last_name"),
                 email: formData.get("email"),
                 country: formData.get("country"),
-                time_zone: `America/${formData.get("time_zone")}`,
+                time_zone: `America/${convertTimezone(formData.get("time_zone"))}`,
                 street_address: formData.get("street_address"),
                 city: formData.get("city"),
                 region: formData.get("region"),
@@ -45,7 +48,7 @@ export default function ProfileForm({ data }: any) {
                     <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                         <div className="sm:col-span-4">
                             <label htmlFor="username" className="block text-sm/6 font-medium text-gray-900">
-                                What are you called to be?
+                                Who are you called to be?
                             </label>
                             <div className="mt-2">
                                 <div className="flex items-center rounded-md bg-white pl-3 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
@@ -53,7 +56,7 @@ export default function ProfileForm({ data }: any) {
                                         id="username"
                                         name="username"
                                         type="text"
-                                        placeholder="username"
+                                        placeholder="Leader, Hard Worker, etc..."
                                         defaultValue={data?.username ?? ''}
                                         className="block min-w-0 grow py-1.5 pl-1 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6"
                                     />
@@ -150,12 +153,10 @@ export default function ProfileForm({ data }: any) {
                                     defaultValue={data?.time_zone ?? ''}
                                     className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pl-3 pr-8 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
                                 >
-                                    <option>Anchorage</option>
-                                    <option>Boise</option>
-                                    <option>Chicago</option>
-                                    <option>Denver</option>
-                                    <option>Los_Angeles</option>
-                                    <option>New_York</option>
+                                    <option>EST</option>
+                                    <option>CST</option>
+                                    <option>MST</option>
+                                    <option>PST</option>
                                 </select>
                                 <ChevronDownIcon
                                     aria-hidden="true"

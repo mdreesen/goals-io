@@ -59,3 +59,27 @@ export function lossOrGain({ starting, current }: any) {
   const round = Math.round(math * 10) / 10;
   return round.toString();
 };
+
+export function convertTimezone(data: any) {
+
+  switch(true) {
+    case data === 'EST':
+      return 'New_York';
+      break
+
+    case data === 'CST':
+      return 'Chicago';
+      break
+
+    case data === 'MST':
+      return 'Denver';
+      break
+    
+    case data === 'PST':
+      return 'Los_Angeles';
+      break
+
+    default:
+      return '';
+  }
+};
