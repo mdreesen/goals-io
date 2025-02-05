@@ -3,19 +3,24 @@
 import { useState } from 'react'
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react';
 import { readTutorial } from '@/actions/settings';
+import LoadingScale from '../loaders/LoadingScale';
 
 export default function Tutorial({ data }: any) {
     const [open, setOpen] = useState(true);
+    const [loading, setLoading] = useState(false);
 
     const handleToggle = async () => {
+        setLoading(true)
 
         try {
             await readTutorial({
                 _id: data?._id,
                 tutorial_read: true,
             });
+
         } catch (error) {
             console.error(error);
+            setLoading(false)
         }
     };
 
@@ -77,13 +82,20 @@ export default function Tutorial({ data }: any) {
                                     </div>
 
                                     <div className="mt-4">
-                                        <button
-                                            type="button"
-                                            onClick={handleToggle}
-                                            className="inline-flex w-full justify-center rounded-md bg-gray-900 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900 sm:col-start-2"
-                                        >
-                                            I have read
-                                        </button>
+                                        {
+                                            loading ? (
+                                                <LoadingScale />
+                                            ) : (
+                                                <button
+                                                    type="button"
+                                                    onClick={handleToggle}
+                                                    className="inline-flex w-full justify-center rounded-md bg-gray-900 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900 sm:col-start-2"
+                                                >
+                                                    I have read
+                                                </button>
+                                            )
+                                        }
+
                                     </div>
                                 </div>
 
