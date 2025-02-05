@@ -48,7 +48,7 @@ export default function Tutorial({ data }: any) {
                                     </p>
                                 </div>
 
-                                <div className='h-[10rem] overflow-scroll'>
+                                <div className='h-[40vh] overflow-scroll'>
                                     <div className="mt-4">
                                         <DialogTitle as="h3" className="text-base font-semibold text-gray-900">
                                             Water intake

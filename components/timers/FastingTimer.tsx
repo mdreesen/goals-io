@@ -67,7 +67,7 @@ export default function Timer({ fastData }: any) {
 
     const countDown = (
         <span className='text-sm font-medium text-gray-600'>
-        {timeRemaining.hours !== 0 && `${timeRemaining.hours} hours`} {timeRemaining.hours === 0 && `${timeRemaining.minutes} minutes`} {timeRemaining.hours === 0 && `${timeRemaining.seconds} seconds`}
+        {timeRemaining.hours !== 0 && `${timeRemaining.hours} hours`} {timeRemaining.hours === 0 && `${timeRemaining.minutes} minutes`} {timeRemaining.hours === 0 && `${Math.trunc(timeRemaining.seconds)} seconds`}
     </span>
     );
 
