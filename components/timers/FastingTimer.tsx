@@ -11,6 +11,8 @@ export default function Timer({ fastData }: any) {
 
     const total_time = `${timeRemaining.hours}.${timeRemaining.minutes}`;
 
+    const hasHour = timeRemaining.hours !== 0;
+
     // const total_fast_time = 16 - Math.trunc(Number(total_time));
     // console.log(total_fast_time, Number(total_time));
 
@@ -63,12 +65,18 @@ export default function Timer({ fastData }: any) {
         </div>
     );
 
+    const countDown = (
+        <span className='text-sm font-medium text-gray-600'>
+        {timeRemaining.hours !== 0 && `${timeRemaining.hours} hours`} {timeRemaining.hours === 0 && `${timeRemaining.minutes} minutes`} {timeRemaining.hours === 0 && `${timeRemaining.seconds} seconds`}
+    </span>
+    );
+
     return (
         <div>
             {progressBar}
             {fastData?.user?.start ? (
                 <span className='text-sm font-medium text-gray-600'>
-                    {timeRemaining.hours} hours {timeRemaining.minutes} minutes
+                    {countDown}
                 </span>
             ) : (
                 <div>Fast has not started</div>

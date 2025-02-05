@@ -5,6 +5,7 @@ import { fetchSettings } from '@/actions/settings';
 import Navigation from "@/components/navigation/Navigation";
 import NavigationPhone from '@/components/navigation/NavigationPhone';
 import Banner_Utc_Time from '@/components/banners/Banner_Utc_Time';
+import Tutorial from '@/components/modals/Tutorial';
 import packagejson from '@/package.json';
 
 export default async function RootLayout({
@@ -24,15 +25,22 @@ export default async function RootLayout({
     // Conditionals
     const hasUserFirstLast = useUser?.first_name && useUser?.last_name ? `${useUser?.first_name} ${useUser?.last_name}` : 'Dashboard';
 
+    // UTC device banner component
     const hasUtcTime = useTimezone.includes('UTC') && (
         <div className='h-[4rem]'>
             <Banner_Utc_Time />
         </div>
     );
 
+    // Tutorial component
+    const useTutorial = !useUser?.tutorial_read && (
+        <Tutorial data={parse(useUser)} />
+    );
+
     return (
         <div className="flex flex-col min-h-screen">
 
+            {/* Banner shown if device has UTC time */}
             {hasUtcTime}
 
             <div className="bg-gray-900 pb-32">
@@ -49,6 +57,8 @@ export default async function RootLayout({
             <main className="-mt-32 grow">
                 <div className="mx-auto max-w-7xl px-4 pb-12 sm:px-6 lg:px-8">
                     <div className="rounded-lg bg-white px-5 py-6 shadow sm:px-6 ">
+                        {/* Tutorial shown if user has not seen/read it */}
+                        {useTutorial}
                         {children}
                     </div>
                 </div>

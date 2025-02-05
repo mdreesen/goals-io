@@ -5,6 +5,7 @@ import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react';
 import { fetchUser } from '@/actions/user';
 import { fetchSettings } from '@/actions/settings';
 import ToggleWithIcon from '@/components/toggles/ToggleWithIcon';
+import ToggleWithThreeSelections from '@/components/toggles/ToggleWithThreeSelections';
 import ButtonDeleteUser from '@/components/buttons/ButtonDeleteUser';
 
 export const metadata: Metadata = {
@@ -62,7 +63,6 @@ export default async function Page() {
               <dd className="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0"><ToggleWithIcon data={parse(useShowWeight) ?? {}} /></dd>
             </div>
           </div>
-
 
           <div className="px-4 py-6 sm:px-0 border-t border-gray-100 flex flex-col">
             <dt className="text-sm/6 font-medium text-gray-900">Delete Profile</dt>

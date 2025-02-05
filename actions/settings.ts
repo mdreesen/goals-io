@@ -59,3 +59,22 @@ export async function editSettings(values: any) {
         return e
     }
 };
+
+export async function readTutorial(values: any) {
+    const { _id } = values;
+
+    try {
+        await connectDB();
+
+        await User.findOneAndUpdate(
+            { _id: _id },
+            { ...values },
+            { new: true });
+    
+        revalidatePath('/dashboard/profile');
+
+    } catch (e) {
+        console.log(e)
+        return e
+    }
+};
