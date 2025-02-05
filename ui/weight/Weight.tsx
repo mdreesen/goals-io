@@ -13,9 +13,9 @@ export default async function Weight() {
         <div className="sm:flex-auto">
           <h2 className="text-3xl font-semibold text-gray-900">Weight</h2>
           <div>
-            <th scope="col" className="py-2 text-left text-sm font-bold text-gray-900 sm:pl-0">
+            <span className="py-2 text-left text-sm font-bold text-gray-900 sm:pl-0">
               {useWeight.startingWeight && 'Notables'}
-            </th>
+            </span>
             <p className="py-1 text-left text-sm font-semibold text-gray-900 sm:pl-0">
               {useWeight.startingWeight && `Starting weight ${useWeight.startingWeight.weight} lbs`}
             </p>
@@ -56,9 +56,7 @@ export default async function Weight() {
                   <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                     Date
                   </th>
-                  <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-0">
-                    <span className="sr-only">Edit</span>
-                  </th>
+                  <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-0">Edit</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">
@@ -74,7 +72,7 @@ export default async function Weight() {
                       </a>
                     </td>
                   </tr>
-                )) : <span className="py-2">No weight recorded</span>}
+                )) : <tr className="py-2">No weight recorded</tr>}
               </tbody>
             </table>
           </div>

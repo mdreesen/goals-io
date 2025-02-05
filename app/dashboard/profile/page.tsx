@@ -69,7 +69,7 @@ export default async function Page() {
             <dd className="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
               <Menu as="div" className="relative inline-block text-left">
                 <div>
-                  <MenuButton className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-[#7A3A30] px-3 py-2 text-sm font-semibold text-white shadow-sm ring-1 ring-inset ring-gray-900 w-[275px]">
+                  <MenuButton className="inline-flex justify-center gap-x-1.5 rounded-md bg-[#7A3A30] px-3 py-2 text-sm font-semibold text-white shadow-sm ring-1 ring-inset ring-gray-900 w-[275px]">
                     <span>Delete</span>
                   </MenuButton>
                 </div>

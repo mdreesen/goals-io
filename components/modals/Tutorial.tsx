@@ -39,7 +39,7 @@ export default function Tutorial({ data }: any) {
                     >
                         <div>
                             <div className="mt-3 text-center sm:mt-5">
-                                <DialogTitle as="h3" className="text-base font-bold text-gray-900 text-xl">
+                                <DialogTitle as="h3" className="font-bold text-gray-900 text-xl">
                                     Welcome to Ascend!
                                 </DialogTitle>
                                 <div className="mt-2">
