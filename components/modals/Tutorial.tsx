@@ -8,16 +8,16 @@ export default function Tutorial({ data }: any) {
     const [open, setOpen] = useState(true);
 
     const handleToggle = async () => {
-    
+
         try {
-          await readTutorial({
-            _id: data?._id,
-            tutorial_read: true,
-          });
+            await readTutorial({
+                _id: data?._id,
+                tutorial_read: true,
+            });
         } catch (error) {
-          console.error(error);
+            console.error(error);
         }
-      };
+    };
 
     return (
         <Dialog open={open} onClose={setOpen} className="relative z-10 items-center">
@@ -49,9 +49,9 @@ export default function Tutorial({ data }: any) {
                                             Water intake
                                         </DialogTitle>
                                         <p className="text-sm text-gray-500">
-                                            This functionality is seen in the body section of the application. If you are using the water intake per day functionality, you will either input your weight to track how many ounces you need per day or you can use the default setting of 105 oz. per day.
-                                            A good rule of thumb for water intake per day is, your weight divided by 2, this number then is your water intake per day.
-                                            On your inital dashboard, a graph is there with the recorded water intake per day so that you can see where you track!
+                                            This feature is seen in the body section of the application. You will either input your weight to track how many ounces you need or you can use the default setting of 105 oz. per day.
+                                            A good rule of thumb for water intake is your weight divided by 2, this number is your water intake per day in ounces.
+                                            On your inital dashboard, a graph is shown with the recorded water intake per day so that you can see where you track!
                                         </p>
                                     </div>
 
@@ -60,9 +60,9 @@ export default function Tutorial({ data }: any) {
                                             Weight
                                         </DialogTitle>
                                         <p className="text-sm text-gray-500">
-                                            You can track your weight per day, this also affects your water intake in how many ounces of water you need per day.
-                                            A good rule of thumb for tracking your weight is to weigh yourself in the morning, as this brings consistancy to your routine and body weight measurement.
-                                            On your initial dashboard, a graph is there with the recorded weight per day so that you can see where you track!
+                                            As you are getting into the consistency of your routine, you should be tracking your weight every day. As you track your weight, your water goal will adjust for you.
+                                            A good rule of thumb is to weigh yourself in the morning, as this brings consistancy to your routine and body weight measurement.
+                                            On your initial dashboard, a graph is shown with the recorded weight per day so that you can see where you track!
                                         </p>
                                     </div>
 
@@ -71,15 +71,25 @@ export default function Tutorial({ data }: any) {
                                             Settings
                                         </DialogTitle>
                                         <p className="text-sm text-gray-500">
-                                            On your profile page, you are able to enable/disable functionality to customize what you need or want to see. If there is a season where you are not doing affermations, you can switch it off and carry on. You are always able to turn it back on when you are ready to use is.
-                                            When switching off functionality, your navigation bar will change dynamically to declutter things that you do not need.
+                                            On your profile page, you are able to enable/disable features to customize what you need or want to see. If there is a season where you are not doing affermations, you can switch it off and carry on. You are always able to turn it back on when you are ready to use it.
+                                            When switching off features, your navigation bar will change to declutter things.
                                         </p>
+                                    </div>
+
+                                    <div className="mt-4">
+                                        <button
+                                            type="button"
+                                            onClick={handleToggle}
+                                            className="inline-flex w-full justify-center rounded-md bg-gray-900 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 sm:col-start-2"
+                                        >
+                                            I have read
+                                        </button>
                                     </div>
                                 </div>
 
                             </div>
                         </div>
-                        <div className="mt-5 sm:mt-6 sm:grid sm:grid-flow-row-dense sm:grid-cols-2 sm:gap-3">
+                        {/* <div className="mt-5 sm:mt-6 sm:grid sm:grid-flow-row-dense sm:grid-cols-2 sm:gap-3">
                             <button
                                 type="button"
                                 onClick={handleToggle}
@@ -87,7 +97,7 @@ export default function Tutorial({ data }: any) {
                             >
                                 I have read
                             </button>
-                        </div>
+                        </div> */}
                     </DialogPanel>
                 </div>
             </div>

@@ -14,7 +14,7 @@ export default async function Bible() {
     const sermonNotes = (
         <div>
             <div className="flex justify-end mt-4 mb-4 sm:mt-0 sm:flex-none">
-                <ButtonGoTo title="See sermon notes" path="/dashboard/spirit/bible/all/sermons" />
+                <ButtonGoTo title="All sermon notes" path="/dashboard/spirit/bible/all/sermons" />
             </div>
 
             <div>
@@ -79,7 +79,7 @@ export default async function Bible() {
     const devotionalNotes = (
         <div>
             <div className="flex justify-end mt-4 mb-4 sm:mt-0 sm:flex-none">
-                <ButtonGoTo title="See devotional notes" path="/dashboard/spirit/bible/all/devotionals" />
+                <ButtonGoTo title="All devotional notes" path="/dashboard/spirit/bible/all/devotionals" />
             </div>
 
             <Results data={bibles.devotional.length.toString()} />
