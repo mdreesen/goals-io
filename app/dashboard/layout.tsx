@@ -7,6 +7,12 @@ import NavigationPhone from '@/components/navigation/NavigationPhone';
 import Banner_Utc_Time from '@/components/banners/Banner_Utc_Time';
 import Tutorial from '@/components/modals/Tutorial';
 import packagejson from '@/package.json';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: "Ascend",
+    description: "Set Habits. Achieve greatness.",
+  };
 
 export default async function RootLayout({
     children,

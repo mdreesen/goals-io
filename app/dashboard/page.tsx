@@ -20,6 +20,7 @@ export default async function Page() {
     const waterPerDay = await waterByday();
     const useSettings = await fetchSettings();
 
+
     // Conditionals
     const showBooks = useSettings.useShowBooks?.value;
     const showWeight = useSettings.useShowWeight?.value && weightPerMonth.length > 0;
