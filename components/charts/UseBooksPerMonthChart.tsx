@@ -29,8 +29,8 @@ export const UseBooksPerMonthChart = ({ data }: any) => {
 
   const dropdown = data.years.length > 0 && (
     <Listbox value={selectedYear} onChange={setSelectedYear}>
-      <div className='flex items-center gap-2'>
-        <Label className="block text-sm/6 font-medium text-gray-900">Showing Year</Label>
+      <div className='flex items-center gap-[5px]'>
+        <Label className="block text-sm/6 font-medium text-gray-900">Showing year</Label>
         <div className="relative">
           <ListboxButton className="grid w-[auto] cursor-default grid-cols-1 rounded-md bg-white text-left text-gray-900 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6">
             <span className="col-start-1 row-start-1 truncate pr-6 text-sm/6">{selectedYear}</span>
