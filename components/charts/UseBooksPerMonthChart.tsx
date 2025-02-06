@@ -30,7 +30,7 @@ export const UseBooksPerMonthChart = ({ data }: any) => {
   const dropdown = data.years.length > 0 && (
     <Listbox value={selectedYear} onChange={setSelectedYear}>
       <div className='flex items-center gap-[5px]'>
-        <Label className="block text-sm/6 font-medium text-gray-900">Showing year</Label>
+        <Label className="block text-sm/6 font-medium text-gray-900">Year</Label>
         <div className="relative">
           <ListboxButton className="grid w-[auto] cursor-default grid-cols-1 rounded-md bg-white text-left text-gray-900 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6">
             <span className="col-start-1 row-start-1 truncate pr-6 text-sm/6">{selectedYear}</span>
@@ -50,11 +50,11 @@ export const UseBooksPerMonthChart = ({ data }: any) => {
                 key={`${item}-${index}`}
                 value={item}
                 defaultValue={item}
-                className="group relative cursor-default select-none py-2 pl-3 pr-9 text-gray-900 data-[focus]:bg-gray-900 data-[focus]:text-white data-[focus]:outline-none"
+                className="group relative cursor-default select-none py-2 pl-3 data-[focus]:bg-gray-900 data-[focus]:text-white data-[focus]:outline-none"
               >
-                <span className="block truncate font-normal group-data-[selected]:font-semibold">{item}</span>
+                <span className="block truncate font-medium group-data-[selected]:font-semibold group-data-[selected]:text-white">{item}</span>
 
-                <span className="absolute inset-y-0 right-0 flex items-center pr-4 text-gray-900 group-[&:not([data-selected])]:hidden group-data-[focus]:text-white">
+                <span className="absolute inset-y-0 right-0 flex items-center pr-4 group-[&:not([data-selected])]:hidden group-data-[focus]:text-white">
                   <CheckIcon aria-hidden="true" className="size-5" />
                 </span>
               </ListboxOption>
