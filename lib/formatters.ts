@@ -61,6 +61,7 @@ export function lossOrGain({ starting, current }: any) {
 };
 
 export function convertTimezone(data: any) {
+  'use client'
 
   switch(true) {
     case data === 'EST':

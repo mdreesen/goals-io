@@ -6,12 +6,10 @@ import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import bible_books from '@/lib/bible_books.json';
 import ButtonDeleteBible from "@/components/buttons/ButtonDeleteBible";
 import ButtonCancel from "@/components/buttons/ButtonCancel";
-import LoadingScale from "@/components/loaders/LoadingScale";
 
 export default function BibleForm({ data }: any) {
 
     const [error, setError] = useState<string>();
-    const [loading, setLoading] = useState(false);
 
     const router = useRouter();
     const ref = useRef(null);
@@ -26,14 +24,12 @@ export default function BibleForm({ data }: any) {
                 notes: formData.get("notes"),
                 type: formData.get("type"),
             });
-            setLoading(true);
 
             router.refresh
             router.push(`/dashboard/spirit`);
         } catch (error) {
             setError(error as string)
             console.log(error);
-            setLoading(false);
         }
     };
 
@@ -150,14 +146,12 @@ export default function BibleForm({ data }: any) {
                 <div><ButtonDeleteBible data={data} /></div>
                 <div className="flex gap-x-6 items-center">
                     <ButtonCancel path={'/dashboard/spirit'} />
-                    {loading ? <LoadingScale height={25} width={2} /> : (
-                        <button
-                            type="submit"
-                            className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-                        >
-                            Save
-                        </button>
-                    )}
+                    <button
+                        type="submit"
+                        className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                    >
+                        Save
+                    </button>
                 </div>
             </div>
             {error && <span className='block text-sm/6 font-medium text-red-500'>{error}</span>}

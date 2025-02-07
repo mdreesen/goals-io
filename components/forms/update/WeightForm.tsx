@@ -3,7 +3,6 @@ import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { editWeight } from "@/actions/weight";
 import ButtonDeleteWeight from "@/components/buttons/ButtonDeleteWeight";
-import LoadingScale from "@/components/loaders/LoadingScale";
 import ButtonCancel from "@/components/buttons/ButtonCancel";
 
 export default function WeightForm({ data }: any) {
@@ -12,7 +11,6 @@ export default function WeightForm({ data }: any) {
     const ref = useRef(null);
 
     const [error, setError] = useState<string>();
-    const [loading, setLoading] = useState(false);
 
 
     const handleSubmit = async (formData: FormData) => {
@@ -22,14 +20,12 @@ export default function WeightForm({ data }: any) {
                 weight: formData.get("weight"),
                 weight_date: data?.date,
             });
-            setLoading(true);
 
             router.refresh
             router.push(`/dashboard/body`);
         } catch (error) {
             setError(error as string)
             console.log(error);
-            setLoading(false);
         }
     };
 
@@ -71,14 +67,12 @@ export default function WeightForm({ data }: any) {
                 <div><ButtonDeleteWeight data={data.weightData} /></div>
                 <div className="flex gap-x-6 items-center">
                     <ButtonCancel path={'/dashboard/body'} />
-                    {loading ? <LoadingScale height={25} width={2} /> : (
-                        <button
-                            type="submit"
-                            className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-                        >
-                            Save
-                        </button>
-                    )}
+                    <button
+                        type="submit"
+                        className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                    >
+                        Save
+                    </button>
                 </div>
             </div>
             {error && <span className='block text-sm/6 font-medium text-red-500'>{error}</span>}

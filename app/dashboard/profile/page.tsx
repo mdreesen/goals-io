@@ -5,7 +5,6 @@ import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react';
 import { fetchUser } from '@/actions/user';
 import { fetchSettings } from '@/actions/settings';
 import ToggleWithIcon from '@/components/toggles/ToggleWithIcon';
-import ToggleWithThreeSelections from '@/components/toggles/ToggleWithThreeSelections';
 import ButtonDeleteUser from '@/components/buttons/ButtonDeleteUser';
 
 export const metadata: Metadata = {

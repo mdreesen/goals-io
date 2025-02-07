@@ -6,7 +6,6 @@ import { parse } from '@/lib/formatters';
 export default async function Page() {
     const useUser = await fetchUser();
 
-
     return (
         <div>
             <ProfileForm data={parse(useUser)} />
