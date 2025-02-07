@@ -2,8 +2,9 @@
 import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { editWeight } from "@/actions/weight";
-import Link from 'next/link';
 import ButtonDeleteWeight from "@/components/buttons/ButtonDeleteWeight";
+import LoadingScale from "@/components/loaders/LoadingScale";
+import ButtonCancel from "@/components/buttons/ButtonCancel";
 
 export default function WeightForm({ data }: any) {
 
@@ -11,24 +12,27 @@ export default function WeightForm({ data }: any) {
     const ref = useRef(null);
 
     const [error, setError] = useState<string>();
+    const [loading, setLoading] = useState(false);
 
 
     const handleSubmit = async (formData: FormData) => {
         try {
-          await editWeight({
-            _id: data?.weightData?._id,
-            weight: formData.get("weight"),
-            weight_date: data?.date,
-          });
-          router.refresh
-          router.push(`/dashboard/body`);
-        } catch (error) {
-          setError(error as string)
-          console.log(error);
-        }
-      };
+            await editWeight({
+                _id: data?.weightData?._id,
+                weight: formData.get("weight"),
+                weight_date: data?.date,
+            });
+            setLoading(true);
 
-    // Expense name and expense value
+            router.refresh
+            router.push(`/dashboard/body`);
+        } catch (error) {
+            setError(error as string)
+            console.log(error);
+            setLoading(false);
+        }
+    };
+
     const personInfo = (
         <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
 
@@ -66,17 +70,15 @@ export default function WeightForm({ data }: any) {
             <div className="mt-6 flex items-center gap-x-6 justify-between">
                 <div><ButtonDeleteWeight data={data.weightData} /></div>
                 <div className="flex gap-x-6 items-center">
-                    <Link href={'/dashboard/body'}>
-                        <button type="button" className="text-sm/6 font-semibold text-gray-900 justify-end">
-                            Cancel
+                    <ButtonCancel path={'/dashboard/body'} />
+                    {loading ? <LoadingScale height={25} width={2} /> : (
+                        <button
+                            type="submit"
+                            className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                        >
+                            Save
                         </button>
-                    </Link>
-                    <button
-                        type="submit"
-                        className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-                    >
-                        Save
-                    </button>
+                    )}
                 </div>
             </div>
             {error && <span className='block text-sm/6 font-medium text-red-500'>{error}</span>}

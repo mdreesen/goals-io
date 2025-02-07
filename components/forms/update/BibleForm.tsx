@@ -3,34 +3,39 @@ import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { editBible } from "@/actions/bible";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
-import Link from "next/link";
 import bible_books from '@/lib/bible_books.json';
 import ButtonDeleteBible from "@/components/buttons/ButtonDeleteBible";
+import ButtonCancel from "@/components/buttons/ButtonCancel";
+import LoadingScale from "@/components/loaders/LoadingScale";
 
 export default function BibleForm({ data }: any) {
 
     const [error, setError] = useState<string>();
+    const [loading, setLoading] = useState(false);
 
     const router = useRouter();
     const ref = useRef(null);
 
     const handleSubmit = async (formData: FormData) => {
         try {
-          await editBible({
-            _id: data?._id,
-            book_title: formData.get("book_title"),
-            chapter: formData.get("chapter"),
-            verses: formData.get("verses"),
-            notes: formData.get("notes"),
-            type: formData.get("type"),
-          });
-          router.refresh
-          router.push(`/dashboard/spirit`);
+            await editBible({
+                _id: data?._id,
+                book_title: formData.get("book_title"),
+                chapter: formData.get("chapter"),
+                verses: formData.get("verses"),
+                notes: formData.get("notes"),
+                type: formData.get("type"),
+            });
+            setLoading(true);
+
+            router.refresh
+            router.push(`/dashboard/spirit`);
         } catch (error) {
-          setError(error as string)
-          console.log(error);
+            setError(error as string)
+            console.log(error);
+            setLoading(false);
         }
-      };
+    };
 
     return (
         <form ref={ref} action={handleSubmit}>
@@ -40,7 +45,7 @@ export default function BibleForm({ data }: any) {
 
                     <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
 
-                    <div className="sm:col-span-3">
+                        <div className="sm:col-span-3">
                             <label htmlFor="type" className="block text-sm/6 font-medium text-gray-900">
                                 Type of note
                             </label>
@@ -52,8 +57,8 @@ export default function BibleForm({ data }: any) {
                                     defaultValue={data?.type ?? ''}
                                     className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pl-3 pr-8 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
                                 >
-                                        <option>Sermon note</option>
-                                        <option>Devotional note</option>
+                                    <option>Sermon note</option>
+                                    <option>Devotional note</option>
 
                                 </select>
                                 <ChevronDownIcon
@@ -134,7 +139,7 @@ export default function BibleForm({ data }: any) {
                                     placeholder="Your bible notes"
                                     className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
                                     defaultValue={data?.notes ?? ''}
-                                    />
+                                />
                             </div>
                         </div>
                     </div>
@@ -142,22 +147,19 @@ export default function BibleForm({ data }: any) {
             </div>
 
             <div className="mt-6 flex items-center gap-x-6 justify-between">
-            <div><ButtonDeleteBible data={data} /></div>
+                <div><ButtonDeleteBible data={data} /></div>
                 <div className="flex gap-x-6 items-center">
-                    <Link href={'/dashboard/spirit'}>
-                        <button type="button" className="text-sm/6 font-semibold text-gray-900 justify-end">
-                            Cancel
+                    <ButtonCancel path={'/dashboard/spirit'} />
+                    {loading ? <LoadingScale height={25} width={2} /> : (
+                        <button
+                            type="submit"
+                            className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                        >
+                            Save
                         </button>
-                    </Link>
-                    <button
-                        type="submit"
-                        className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-                    >
-                        Save
-                    </button>
+                    )}
                 </div>
             </div>
-
             {error && <span className='block text-sm/6 font-medium text-red-500'>{error}</span>}
         </form>
     )

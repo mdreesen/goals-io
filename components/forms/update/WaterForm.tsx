@@ -2,7 +2,8 @@
 import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { editWaterIntake, createWaterIntake } from "@/actions/nutrition_water";
-import Link from 'next/link';
+import LoadingScale from "@/components/loaders/LoadingScale";
+import ButtonCancel from "@/components/buttons/ButtonCancel";
 
 export default function WaterForm({ data }: any) {
 
@@ -10,6 +11,7 @@ export default function WaterForm({ data }: any) {
     const ref = useRef(null);
 
     const [error, setError] = useState<string>();
+    const [loading, setLoading] = useState(false);
 
     const handleSubmit = async (formData: FormData) => {
 
@@ -21,24 +23,31 @@ export default function WaterForm({ data }: any) {
                     water_intake: formData.get("water"),
                     date: data?.useDateToday,
                 });
+                setLoading(true);
+
                 router.refresh
                 router.push(`/dashboard/body`);
             } catch (error) {
                 setError(error as string)
                 console.log(error);
+                setLoading(false);
             }
         } else {
+
             try {
                 await editWaterIntake({
                     _id: data?.waterIntakeToday?._id,
                     water_intake: formData.get("water"),
                     date: data?.useDateToday,
                 });
+                setLoading(true);
+
                 router.refresh
                 router.push(`/dashboard/body`);
             } catch (error) {
                 setError(error as string)
                 console.log(error);
+                setLoading(false);
             }
         }
     };
@@ -65,7 +74,6 @@ export default function WaterForm({ data }: any) {
         </div>
     );
 
-
     return (
         <form ref={ref} action={handleSubmit}>
             <div className="space-y-12">
@@ -79,17 +87,15 @@ export default function WaterForm({ data }: any) {
 
             <div className="mt-6 flex items-center gap-x-6 justify-end">
                 <div className="flex gap-x-6 items-center">
-                    <Link href={'/dashboard/body'}>
-                        <button type="button" className="text-sm/6 font-semibold text-gray-900 justify-end">
-                            Cancel
+                    <ButtonCancel path={'/dashboard/body'} />
+                    {loading ? <LoadingScale height={25} width={2} /> : (
+                        <button
+                            type="submit"
+                            className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                        >
+                            Save
                         </button>
-                    </Link>
-                    <button
-                        type="submit"
-                        className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-                    >
-                        Save
-                    </button>
+                    )}
                 </div>
             </div>
             {error && <span className='block text-sm/6 font-medium text-red-500'>{error}</span>}

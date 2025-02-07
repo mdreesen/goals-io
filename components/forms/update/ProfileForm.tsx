@@ -3,20 +3,20 @@ import { ChevronDownIcon } from '@heroicons/react/16/solid';
 import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { editProfile } from "@/actions/profile";
-import Link from 'next/link';
 import { convertTimezone } from '@/lib/formatters';
+import LoadingScale from "@/components/loaders/LoadingScale";
+import ButtonCancel from "@/components/buttons/ButtonCancel";
+
 export default function ProfileForm({ data }: any) {
 
     const router = useRouter();
     const ref = useRef(null);
 
     const [error, setError] = useState<string>();
-
+    const [loading, setLoading] = useState(false);
 
     const handleSubmit = async (formData: FormData) => {
 
-        const converted = convertTimezone(formData.get("time_zone"));
-        console.log(converted)
         try {
             await editProfile({
                 _id: data?._id,
@@ -31,11 +31,14 @@ export default function ProfileForm({ data }: any) {
                 region: formData.get("region"),
                 postal_code: formData.get("postal_code"),
             });
+            setLoading(true);
+
             router.refresh
             router.push(`/dashboard/profile`);
         } catch (error) {
             setError(error as string)
             console.log(error);
+            setLoading(false);
         }
     };
 
@@ -233,19 +236,16 @@ export default function ProfileForm({ data }: any) {
             </div>
 
             <div className="mt-6 flex items-center justify-end gap-x-6">
-                <Link href={`/dashboard/profile`}>
-                    <button type="button" className="text-sm/6 font-semibold text-gray-900">
-                        Cancel
+                <ButtonCancel path={`/dashboard/profile`} />
+                {loading ? <LoadingScale height={25} width={2} /> : (
+                    <button
+                        type="submit"
+                        className="rounded-md bg-gray-800 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900"
+                    >
+                        Save
                     </button>
-                </Link>
-                <button
-                    type="submit"
-                    className="rounded-md bg-gray-800 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900"
-                >
-                    Save
-                </button>
+                )}
             </div>
-
             {error && <span className='block text-sm/6 font-medium text-red-500'>{error}</span>}
         </form>
     )

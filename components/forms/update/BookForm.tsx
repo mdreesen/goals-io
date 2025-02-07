@@ -5,6 +5,8 @@ import { editBook } from "@/actions/book";
 import { ChevronDownIcon } from '@heroicons/react/16/solid';
 import Link from 'next/link';
 import ButtonDeleteBook from "@/components/buttons/ButtonDeleteBook";
+import ButtonCancel from "@/components/buttons/ButtonCancel";
+import LoadingScale from "@/components/loaders/LoadingScale";
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
@@ -16,6 +18,7 @@ export default function EditBook({ data }: any) {
     const [error, setError] = useState<string>();
     const [selectedStartDate, setSelectedStartDate] = useState(data?.book_start_date);
     const [selectedEndDate, setSelectedEndDate] = useState(data?.book_end_date);
+    const [loading, setLoading] = useState(false);
 
 
     const handleSubmit = async (formData: FormData) => {
@@ -28,11 +31,14 @@ export default function EditBook({ data }: any) {
                 book_start_date: selectedStartDate,
                 book_end_date: selectedEndDate
             });
+            setLoading(true);
+
             router.refresh
             router.push(`/dashboard/mind`);
         } catch (error) {
             setError(error as string)
             console.log(error);
+            setLoading(false);
         }
     };
 
@@ -120,7 +126,7 @@ export default function EditBook({ data }: any) {
             </div>
 
             <div>
-            <label className="block text-sm/6 font-medium text-gray-900">End Date</label>
+                <label className="block text-sm/6 font-medium text-gray-900">End Date</label>
                 <DatePicker
                     className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
                     selected={selectedEndDate}
@@ -147,20 +153,17 @@ export default function EditBook({ data }: any) {
             <div className="mt-6 flex items-center gap-x-6 justify-between">
                 <div><ButtonDeleteBook data={data} /></div>
                 <div className="flex gap-x-6 items-center">
-                    <Link href={'/dashboard/mind'}>
-                        <button type="button" className="text-sm/6 font-semibold text-gray-900 justify-end">
-                            Cancel
+                    <ButtonCancel path={'/dashboard/mind'} />
+                    {loading ? <LoadingScale height={25} width={2} /> : (
+                        <button
+                            type="submit"
+                            className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                        >
+                            Save
                         </button>
-                    </Link>
-                    <button
-                        type="submit"
-                        className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-                    >
-                        Save
-                    </button>
+                    )}
                 </div>
             </div>
-
             {error && <span className='block text-sm/6 font-medium text-red-500'>{error}</span>}
         </form>
     )

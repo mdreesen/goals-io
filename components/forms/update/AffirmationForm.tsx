@@ -4,7 +4,8 @@ import { useRouter } from "next/navigation";
 import { editAffirmation } from "@/actions/affirmations";
 import { ChevronDownIcon } from '@heroicons/react/16/solid';
 import { date_today } from "@/lib/date_time";
-import Link from 'next/link';
+import LoadingScale from "@/components/loaders/LoadingScale";
+import ButtonCancel from "@/components/buttons/ButtonCancel";
 
 export default function GoalForm({ data }: any) {
 
@@ -12,6 +13,7 @@ export default function GoalForm({ data }: any) {
     const ref = useRef(null);
 
     const [error, setError] = useState<string>();
+    const [loading, setLoading] = useState(false);
 
     const handleSubmit = async (formData: FormData) => {
         try {
@@ -21,11 +23,14 @@ export default function GoalForm({ data }: any) {
                 kind: formData.get("kind"),
                 date: date_today(),
             });
+            setLoading(true);
+
             router.refresh
             router.push(`/dashboard/mind`);
         } catch (error) {
             setError(error as string)
             console.log(error);
+            setLoading(false);
         }
     };
 
@@ -44,7 +49,7 @@ export default function GoalForm({ data }: any) {
                         className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
                         placeholder="Your affirmation"
                         defaultValue={data?.affirmation ?? ''}
-                        />
+                    />
                 </div>
             </div>
 
@@ -87,18 +92,17 @@ export default function GoalForm({ data }: any) {
             </div>
 
             <div className="mt-6 flex items-center justify-end gap-x-6">
-                <Link href={'/dashboard/mind'}>
-                    <button type="button" className="text-sm/6 font-semibold text-gray-900">
-                        Cancel
+                <ButtonCancel path={'/dashboard/mind'} />
+                {loading ? <LoadingScale height={25} width={2} /> : (
+                    <button
+                        type="submit"
+                        className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                    >
+                        Save
                     </button>
-                </Link>
-                <button
-                    type="submit"
-                    className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-                >
-                    Save
-                </button>
+                )}
             </div>
+            {error && <span className='block text-sm/6 font-medium text-red-500'>{error}</span>}
         </form>
     )
 }
