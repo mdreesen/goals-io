@@ -40,14 +40,14 @@ export default function WaterForm({ data }: any) {
                     water_intake: formData.get("water"),
                     date: data?.useDateToday,
                 });
-                setLoading(true);
+                // setLoading(true);
 
                 router.refresh
                 router.push(`/dashboard/body`);
             } catch (error) {
                 setError(error as string)
                 console.log(error);
-                setLoading(false);
+                // setLoading(false);
             }
         }
     };

@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import { ScaleLoader } from 'react-spinners';
 
 export default function LoadingScale({ height, width }: any) {
