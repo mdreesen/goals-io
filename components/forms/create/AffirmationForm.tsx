@@ -3,7 +3,6 @@ import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { addAffirmation } from "@/actions/affirmations";
 import { ChevronDownIcon } from '@heroicons/react/16/solid';
-import { date_today } from "@/lib/date_time";
 import Link from 'next/link';
 
 export default function GoalForm() {
@@ -14,11 +13,11 @@ export default function GoalForm() {
     const [error, setError] = useState<string>();
 
     const handleSubmit = async (formData: FormData) => {
+
         try {
             await addAffirmation({
                 affirmation: formData.get("affirmation"),
                 kind: formData.get("kind"),
-                date: date_today(),
             });
             router.refresh
             router.push(`/dashboard/mind`);

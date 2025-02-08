@@ -3,7 +3,6 @@ import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { editAffirmation } from "@/actions/affirmations";
 import { ChevronDownIcon } from '@heroicons/react/16/solid';
-import { date_today } from "@/lib/date_time";
 import ButtonCancel from "@/components/buttons/ButtonCancel";
 
 export default function GoalForm({ data }: any) {
@@ -19,7 +18,6 @@ export default function GoalForm({ data }: any) {
                 _id: data?._id,
                 affirmation: formData.get("affirmation"),
                 kind: formData.get("kind"),
-                date: date_today(),
             });
 
             router.refresh
