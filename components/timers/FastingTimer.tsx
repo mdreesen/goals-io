@@ -22,6 +22,13 @@ export default function FastingTimer({ fastData }: any) {
     const [loading, setLoading] = useState<boolean>();
     const [duration, setDuration] = useState<number | null | undefined>();
 
+    const time_hours = `${timeLeft?.hours}`;
+    const time_minutes = `${timeLeft?.minutes}`;
+    const time_seconds = `${timeLeft?.seconds}`;
+
+    const total_duration_milliseconds = fastData.user.duration * 60 * 60 * 1000;
+    const time_left_milliseconds = (Number(time_hours) * 3600 + Number(time_minutes) * 60 + Number(time_seconds)) * 1000;
+
     useEffect(() => {
         const storedStartTime = fastData.user.start_date;
         const storedEndTime = fastData.user.end_date;
@@ -63,8 +70,7 @@ export default function FastingTimer({ fastData }: any) {
         setLoading(true);
         setFastingEnded(true)
         clearInterval(intervalRef?.current as any);
-        // localStorage.removeItem('fastingStartTime');
-        // localStorage.removeItem('fastingEndTime');
+
         resetState();
         await editFasting({
             _id: fastData?.user?._id,
@@ -105,24 +111,14 @@ export default function FastingTimer({ fastData }: any) {
         setEndTime(targetEndTime);
 
         try {
-            if (!fastData?.user?.start || fastData?.user?.start === false) {
-                await addFasting({
-                    start: true,
-                    start_date: now.toISOString(),
-                    end_date: targetEndTime.toISOString(),
-                    ended: false,
-                });
-                setLoading(false)
-            } else {
-                await editFasting({
-                    _id: fastData?.user?._id,
-                    start: false,
-                    start_date: now.toISOString(),
-                    end_date: targetEndTime.toISOString(),
-                    ended: true,
-                });
-                setLoading(false)
-            }
+            await addFasting({
+                start: true,
+                start_date: now.toISOString(),
+                end_date: targetEndTime.toISOString(),
+                duration: duration,
+                ended: false,
+            });
+            setLoading(false);
         } catch (error) {
             setError(error as string)
             console.log(error);
@@ -159,27 +155,30 @@ export default function FastingTimer({ fastData }: any) {
         </button>
     );
 
-    const fasting = timeLeft && (
-        <p>
-            Time Left: {formatTime(timeLeft.hours)}:{formatTime(timeLeft.minutes)}:{formatTime(timeLeft.seconds)}
-        </p>
-    );
+    const ProgressBar = () => {
 
-    // const progressBar = fastData?.user?.start && (
-    //     <div aria-hidden="true" className="mt-6">
-    //         <div className={`overflow-hidden ${fastingEnded ? 'bg-green-500 animate-pulse' : 'bg-[#c18d21]'} rotate-180 rounded-full`}>
-    //             <div style={{ width: `${(duration / timeLeft.hours) * 100}%` }} className={`h-2 bg-gray-200`} />
-    //         </div>
-    //         <div className="mt-6 hidden grid-cols-4 text-sm font-medium text-gray-600 sm:grid">
-    //             <div>Getting started</div>
-    //             <div className="text-center">Keep going</div>
-    //             <div className="text-center">Almost there</div>
-    //             <div className="text-right flex justify-end">
-    //                 <span className='flex flex-col w-[62px] justify-center text-center'>Nice job!</span>
-    //             </div>
-    //         </div>
-    //     </div>
-    // );
+        return (
+            <div aria-hidden="true" className="mt-6">
+                {timeLeft && (
+                    <div className="flex justify-between">
+                        <p className="text-sm font-medium text-gray-900">{`Time left ${formatTime(timeLeft.hours)}:${formatTime(timeLeft.minutes)}:${formatTime(timeLeft.seconds)}`}</p>
+                        <p className="text-sm font-medium text-gray-900">{`${fastData.user.duration} hours`}</p>
+                    </div>
+                )}
+                <div className={`overflow-hidden ${time_left_milliseconds >= total_duration_milliseconds ? 'bg-green-500' : 'bg-[#c18d21]'} rotate-180 rounded-full`}>
+                    <div style={{ width: `${(time_left_milliseconds / total_duration_milliseconds) * 100}%` }} className={`h-2 bg-gray-200`} />
+                </div>
+                <div className="mt-6 hidden grid-cols-4 text-sm font-medium text-gray-600 sm:grid">
+                    <div>Getting started</div>
+                    <div className="text-center">Keep going</div>
+                    <div className="text-center">Almost there</div>
+                    <div className="text-right flex justify-end">
+                        <span className='flex flex-col w-[62px] justify-center text-center'>Nice job!</span>
+                    </div>
+                </div>
+            </div>
+        );
+    };
 
     return (
         <div>
@@ -190,8 +189,7 @@ export default function FastingTimer({ fastData }: any) {
                 </div>
             ) : (
                 <div>
-                    {loading ? <LoadingScale /> : fasting}
-
+                    {loading ? <LoadingScale /> : <ProgressBar />}
                     <div className="mt-6 flex items-center justify-end gap-x-6">
                         {loading ? <LoadingScale /> : buttonEndFast}
                     </div>

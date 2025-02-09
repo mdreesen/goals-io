@@ -35,6 +35,7 @@ const fastingSchema = new Schema(
         ended: Boolean || undefined,
         start: Boolean || undefined,
         end_date: Date || undefined,
+        duration: Number || undefined
     }, { timestamps: false });
 
 const habitsSchema = new Schema(
