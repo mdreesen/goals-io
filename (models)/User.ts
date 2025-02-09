@@ -31,10 +31,10 @@ const bookSchema = new Schema(
 const fastingSchema = new Schema(
     {
         completed: Boolean || undefined,
-        start_date: String || undefined,
-        target_date: String || undefined,
+        start_date: Date || undefined,
         ended: Boolean || undefined,
         start: Boolean || undefined,
+        end_date: Date || undefined,
     }, { timestamps: false });
 
 const habitsSchema = new Schema(
