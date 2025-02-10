@@ -10,7 +10,7 @@ export default function ButtonDeleteAffirmation({ data }: any) {
         try {
             await deleteAffirmations({ id: data });
             router.refresh
-            router.push(`/dashboard/affirmations`);
+            router.push(`/dashboard/mind`);
         } catch (error) {
             console.log(error)
         }

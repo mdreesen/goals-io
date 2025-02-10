@@ -31,7 +31,7 @@ export default async function Affirmations() {
                 </div>
             </summary>
             <div className="border-t border-t-gray-100 p-4 text-secondary-500">
-                <ul role="list" className="divide-y divide-gray-100 border border-amber-500 rounded-md">
+                <ul role="list" className="divide-y divide-gray-100 border border-amber-500 rounded-md my-10">
                     <AffirmationsList data={growth} />
                 </ul>
             </div>

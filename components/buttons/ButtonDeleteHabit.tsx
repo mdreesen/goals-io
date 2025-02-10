@@ -10,7 +10,7 @@ export default function ButtonDeleteHabit({ data }: any) {
         try {
             await deleteHabit({ id: data });
             router.refresh
-            router.push(`/dashboard/habits`);
+            router.push(`/dashboard/mind`);
         } catch (error) {
             console.log(error)
         }
