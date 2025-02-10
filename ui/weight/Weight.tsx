@@ -13,21 +13,31 @@ export default async function Weight() {
         <div className="sm:flex-auto">
           <h2 className="text-3xl font-semibold text-gray-900">Weight</h2>
           <div>
-            <span className="py-2 text-left text-sm font-bold text-gray-900 sm:pl-0">
-              {useWeight.startingWeight && 'Notables'}
-            </span>
-            <p className="py-1 text-left text-sm font-semibold text-gray-900 sm:pl-0">
-              {useWeight.startingWeight && `Starting weight ${useWeight.startingWeight.weight} lbs`}
-            </p>
-            <p className="py-1 text-left text-sm font-semibold text-gray-900 sm:pl-0">
-              {useWeight.highestWeight !== '0' && `Highest weight ${useWeight.highestWeight} lbs`}
-            </p>
-            <p className="py-1 text-left text-sm font-semibold text-gray-900 sm:pl-0">
-              {useWeight.averageWeight !== '0' && `Average weight ${useWeight.averageWeight} lbs`}
-            </p>
-            <p className="py-1 text-left text-sm font-semibold text-gray-900 sm:pl-0">
-              {useWeight.lossOrGain !== 'Lost 0 lbs' && `${useWeight.lossOrGain}`}
-            </p>
+            {useWeight.startingWeight && (
+              <span className="py-2 text-left text-sm font-bold text-gray-900 sm:pl-0">
+                Notables
+              </span>
+            )}
+            {useWeight.startingWeight && (
+              <p className="py-1 text-left text-sm font-semibold text-gray-900 sm:pl-0">
+                {`Starting weight ${useWeight.startingWeight.weight} lbs`}
+              </p>
+            )}
+            {useWeight.highestWeight !== '0' && (
+              <p className="py-1 text-left text-sm font-semibold text-gray-900 sm:pl-0">
+                {`Highest weight ${useWeight.highestWeight} lbs`}
+              </p>
+            )}
+            {useWeight.averageWeight !== '0' && (
+              <p className="py-1 text-left text-sm font-semibold text-gray-900 sm:pl-0">
+                {`Average weight ${useWeight.averageWeight} lbs`}
+              </p>
+            )}
+            {useWeight.lossOrGain !== 'Lost 0 lbs' && (
+              <p className="py-1 text-left text-sm font-semibold text-gray-900 sm:pl-0">
+                {`${useWeight.lossOrGain}`}
+              </p>
+            )}
 
           </div>
         </div>

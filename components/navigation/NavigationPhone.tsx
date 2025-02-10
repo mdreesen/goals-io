@@ -11,7 +11,7 @@ export default function NavigationPhone({ settings }: any) {
             id: 1,
             href: "/dashboard/body",
             alt: "Body icon",
-            assetSrc: '/assets/icons/body.png',
+            assetSrc: '/assets/icons/mobile_nav/body.png',
             style: 'h-[3rem] w-[auto] object-cover scale-75',
             useNav: settings?.useShowBody
         },
@@ -19,7 +19,7 @@ export default function NavigationPhone({ settings }: any) {
             id: 2,
             href: "/dashboard/mind",
             alt: "Mind icon",
-            assetSrc: '/assets/icons/mind.png',
+            assetSrc: '/assets/icons/mobile_nav/mind.png',
             style: 'h-[3rem] w-[auto] object-cover scale-75',
             useNav: settings?.useShowMind
         },
@@ -27,7 +27,7 @@ export default function NavigationPhone({ settings }: any) {
             id: 3,
             href: "/dashboard",
             alt: "Ascend logo back to dashboard",
-            assetSrc: '/assets/logo_transparent_512x512.png',
+            assetSrc: '/assets/icons/mobile_nav/logo_transparent_512x512.png',
             style: 'h-[4rem] w-[auto] object-cover scale-75 bg-gray-900 rounded-full',
             useNav: true
         },
@@ -35,7 +35,7 @@ export default function NavigationPhone({ settings }: any) {
             id: 4,
             href: "/dashboard/spirit",
             alt: "Soul icon",
-            assetSrc: '/assets/icons/soul.png',
+            assetSrc: '/assets/icons/mobile_nav/soul.png',
             style: 'h-[3rem] w-[auto] object-cover scale-75',
             useNav: settings?.useShowSpirit
         },
@@ -43,7 +43,7 @@ export default function NavigationPhone({ settings }: any) {
             id: 5,
             href: "/dashboard/profile",
             alt: "Profile icon",
-            assetSrc: '/assets/icons/profile.png',
+            assetSrc: '/assets/icons/mobile_nav/profile.png',
             style: 'h-[3rem] w-[auto] object-cover scale-75',
             useNav: true
         },
