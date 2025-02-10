@@ -8,8 +8,8 @@ import Results from '@/components/showing/Results';
 export default async function Bible() {
 
     const bibles = await fetchBible() ?? [];
-    const useSermons = bibles.sermon.slice(-10);
-    const useDevotionals = bibles.devotional.slice(-10);
+    const useSermons = bibles.sermon;
+    const useDevotionals = bibles.devotional;
 
     const sermonNotes = (
         <div>

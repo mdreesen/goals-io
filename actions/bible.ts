@@ -16,8 +16,8 @@ export async function fetchBible() {
         const sermon = data[0].bibles.filter((item: any) => item?.type?.includes('Sermon')) ?? [];
 
         return {
-            devotional: devotional,
-            sermon: sermon,
+            devotional: devotional.slice(0, 10),
+            sermon: sermon.slice(0, 10),
             all: data
         }
 
