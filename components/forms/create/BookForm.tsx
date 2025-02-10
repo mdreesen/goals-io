@@ -18,22 +18,23 @@ export default function EditBook() {
 
     const handleSubmit = async (formData: FormData) => {
         try {
-          await addBook({
-            book_title: formData.get("book_title"),
-            kind_of_book: formData.get("kind_of_book"),
-            book_author: formData.get("book_author"),
-            book_start_date: selectedStartDate,
-            book_end_date: selectedEndDate
-          });
-          router.refresh
-          router.push(`/dashboard/mind`);
+            await addBook({
+                book_title: formData.get("book_title"),
+                kind_of_book: formData.get("kind_of_book"),
+                book_author: formData.get("book_author"),
+                notes: formData.get("notes"),
+                book_start_date: selectedStartDate,
+                book_end_date: selectedEndDate
+            });
+            router.refresh
+            router.push(`/dashboard/mind`);
         } catch (error) {
-          setError(error as string)
-          console.log(error);
+            setError(error as string)
+            console.log(error);
         }
-      };
+    };
 
-      const handleStartDateChange = (date: any) => {
+    const handleStartDateChange = (date: any) => {
         setSelectedStartDate(date);
     };
 
@@ -114,7 +115,7 @@ export default function EditBook() {
             </div>
 
             <div>
-            <label className="block text-sm/6 font-medium text-gray-900">End Date</label>
+                <label className="block text-sm/6 font-medium text-gray-900">End Date</label>
                 <DatePicker
                     className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
                     selected={selectedEndDate}
@@ -123,7 +124,23 @@ export default function EditBook() {
                 />
             </div>
         </div>
-    )
+    );
+
+    const notes = (
+        <div className="sm:col-span-3">
+            <label htmlFor="first-name" className="block text-sm/6 font-medium text-gray-900">
+                Notes
+            </label>
+            <div className="mt-2">
+                <textarea
+                    id="notes"
+                    name="notes"
+                    placeholder="Notes about the book"
+                    className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
+                />
+            </div>
+        </div>
+    );
 
 
     return (
@@ -134,6 +151,7 @@ export default function EditBook() {
                     <p className="mt-1 text-sm/6 text-gray-600">Name and details of book.</p>
 
                     {form}
+                    {notes}
                     {datePickers}
                 </div>
             </div>
