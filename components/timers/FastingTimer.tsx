@@ -29,6 +29,8 @@ export default function FastingTimer({ fastData }: any) {
     const total_duration_milliseconds = fastData.user.duration * 60 * 60 * 1000;
     const time_left_milliseconds = (Number(time_hours) * 3600 + Number(time_minutes) * 60 + Number(time_seconds)) * 1000;
 
+    console.log(time_left_milliseconds, total_duration_milliseconds)
+
     useEffect(() => {
         const storedStartTime = fastData.user.start_date;
         const storedEndTime = fastData.user.end_date;
@@ -42,9 +44,10 @@ export default function FastingTimer({ fastData }: any) {
 
             if (parsedEndTime.getTime() > Date.now()) {
                 startTimer(parsedEndTime);
-            } else {
-                resetState();
-            }
+             } 
+            //  else {
+            //     resetState();
+            // }
         }
     }, []);
 
@@ -156,6 +159,7 @@ export default function FastingTimer({ fastData }: any) {
     );
 
     const ProgressBar = () => {
+        const doneFasting = Number.isNaN(time_left_milliseconds) || time_left_milliseconds >= total_duration_milliseconds;
 
         return (
             <div aria-hidden="true" className="mt-6">
@@ -165,9 +169,12 @@ export default function FastingTimer({ fastData }: any) {
                         <p className="text-sm font-medium text-gray-900">{`${fastData.user.duration} hours`}</p>
                     </div>
                 )}
-                <div className={`overflow-hidden ${time_left_milliseconds >= total_duration_milliseconds ? 'bg-green-500' : 'bg-[#c18d21]'} rotate-180 rounded-full`}>
-                    <div style={{ width: `${(time_left_milliseconds / total_duration_milliseconds) * 100}%` }} className={`h-2 bg-gray-200`} />
+                <div className={`overflow-hidden rotate-180 rounded-full ${doneFasting ? 'bg-gray-200' : 'bg-[#c18d21]'}`}>
+                    <div style={{ width: `${(time_left_milliseconds / total_duration_milliseconds) * 100}%` }} className={`${doneFasting && 'bg-green-500 animate-pulse'} h-2 bg-gray-200`} />
                 </div>
+                {
+                    doneFasting && <span>You are done! Great fast!</span>
+                }
                 <div className="mt-6 hidden grid-cols-4 text-sm font-medium text-gray-600 sm:grid">
                     <div>Getting started</div>
                     <div className="text-center">Keep going</div>
