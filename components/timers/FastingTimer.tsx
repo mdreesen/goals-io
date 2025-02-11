@@ -44,10 +44,10 @@ export default function FastingTimer({ fastData }: any) {
             if (parsedEndTime.getTime() > Date.now()) {
                 startTimer(parsedEndTime);
              }
-             else {
-                setLoading(false);
-             }
+        } else {
+            setLoading(false)
         }
+
     }, []);
 
     const startTimer = (targetEndTime: Date) => {

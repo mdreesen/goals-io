@@ -29,7 +29,6 @@ export default async function Books() {
 
                     const useBookStartDate = item.book_start_date ? `Start Date ${formatDateAndTime(item.book_start_date)}` : '';
                     const useBookEndDate = item.book_end_date ? `End Date ${formatDateAndTime(item.book_end_date)}` : 'Currently Reading';
-                    const useImage = await item?.book_image;
 
                     return (
                         <div
