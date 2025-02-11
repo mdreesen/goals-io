@@ -20,6 +20,9 @@ const withSerwist = withSerwistInit({
 
 export default withSerwist({
   // Your Next.js config
+  images: {
+    domains: ['https://www.googleapis.com', 'books.google.com'],
+  },
   async headers() {
     return [
       {

@@ -26,6 +26,7 @@ const bookSchema = new Schema(
         book_author: String || undefined,
         book_start_date: String || undefined,
         book_end_date: String || undefined,
+        book_image: String || undefined,
         notes: String || undefined
     }, { timestamps: false });
 

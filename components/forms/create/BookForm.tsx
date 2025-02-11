@@ -1,13 +1,15 @@
 'use client';
 import { useRef, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from 'next/navigation';
 import { addBook } from "@/actions/book";
+import { useSearchParams } from 'next/navigation';
+import { useDebouncedCallback } from 'use-debounce';
 import { ChevronDownIcon } from '@heroicons/react/16/solid';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import Link from 'next/link';
 
-export default function EditBook() {
+export default function BookForm() {
 
     const router = useRouter();
     const ref = useRef(null);
@@ -15,6 +17,19 @@ export default function EditBook() {
     const [error, setError] = useState<string>();
     const [selectedStartDate, setSelectedStartDate] = useState();
     const [selectedEndDate, setSelectedEndDate] = useState();
+
+    // URLSearchParams is a Web API that provides utility methods for manipulating the URL query parameters.
+    // const handleSearch = useDebouncedCallback((term) => {
+
+    //     const params = new URLSearchParams(searchParams);
+    //     params.set('page', '1');
+    //     if (term) {
+    //         params.set('query', term);
+    //     } else {
+    //         params.delete('query');
+    //     }
+    //     replace(`${pathname}?${params.toString()}`);
+    // }, 300);
 
     const handleSubmit = async (formData: FormData) => {
         try {
@@ -141,6 +156,11 @@ export default function EditBook() {
             </div>
         </div>
     );
+
+    // const images = useBookAPI?.items?.map((item: any, index: number) => {
+    //     const useFirstBook = item?.volumeInfo?.imageLinks?.thumbnail && index === 0;
+    //     return useFirstBook && <img key={item?.id} src={`${item?.volumeInfo?.imageLinks?.thumbnail}`} alt={`The cover for ${item.volumeInfo.title}`} />
+    // })
 
 
     return (
