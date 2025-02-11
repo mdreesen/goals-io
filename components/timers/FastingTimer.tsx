@@ -29,9 +29,8 @@ export default function FastingTimer({ fastData }: any) {
     const total_duration_milliseconds = fastData.user.duration * 60 * 60 * 1000;
     const time_left_milliseconds = (Number(time_hours) * 3600 + Number(time_minutes) * 60 + Number(time_seconds)) * 1000;
 
-    console.log(time_left_milliseconds, total_duration_milliseconds)
-
     useEffect(() => {
+        setLoading(true);
         const storedStartTime = fastData.user.start_date;
         const storedEndTime = fastData.user.end_date;
 
@@ -45,9 +44,6 @@ export default function FastingTimer({ fastData }: any) {
             if (parsedEndTime.getTime() > Date.now()) {
                 startTimer(parsedEndTime);
              } 
-            //  else {
-            //     resetState();
-            // }
         }
     }, []);
 
@@ -70,7 +66,6 @@ export default function FastingTimer({ fastData }: any) {
     };
 
     const handleEndFasting = async () => {
-        setLoading(true);
         setFastingEnded(true)
         clearInterval(intervalRef?.current as any);
 
@@ -94,12 +89,12 @@ export default function FastingTimer({ fastData }: any) {
         const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+        setLoading(false)
 
         return { days, hours, minutes, seconds };
     };
 
     const formatTime = (time: number): string => {
-
         return time < 10 ? "0" + time.toString() : time.toString();
     };
 
