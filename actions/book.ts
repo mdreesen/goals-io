@@ -4,6 +4,7 @@ import User from "@/(models)/User";
 import { getServerSession } from "next-auth/next";
 import { revalidatePath } from 'next/cache';
 import { current_year } from "@/lib/date_time";
+import { findBook } from '@/lib/book_formatters';
 
 export async function bookSearch({ book_title }: any) {
     console.log(book_title)
@@ -11,21 +12,7 @@ export async function bookSearch({ book_title }: any) {
     try {
         const res = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${book_title}`);
 
-        await res.json()
-    } 
-    catch (error) {
-        console.log(error);
-        return error;
-    }
-}
-
-export async function bookSearchImage({ book_title }: any) {
-    console.log(book_title)
-
-    try {
-        const res = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${book_title}`);
-
-        await res.json()
+        return await res.json()
     } 
     catch (error) {
         console.log(error);
@@ -57,17 +44,15 @@ export async function fetchBooks() {
 export async function addBook(values: any) {
 
     const session = await getServerSession();
-    console.log(values);
+
     try {
         await connectDB();
 
         const useBookSearch = await bookSearch({ book_title: values.book_title });
-        const filterBookByAuthor = await useBookSearch.items.filter((item: any) => item.volumeInfo.authors.includes(values.book_author))
 
-        const foundBook = filterBookByAuthor[0];
-        const useFoundBookImage = foundBook.volumeInfo.imageLinks.thumbnail ?? '';
+        const useFindBook = await findBook({ data: useBookSearch, book_title: values.book_title, book_author: values.book_author });
 
-        await User.findOneAndUpdate({ email: session?.user.email }, { $addToSet: { books: { ...values, book_image: useFoundBookImage } } }, { new: true });
+        await User.findOneAndUpdate({ email: session?.user.email }, { $addToSet: { books: { ...values, book_image: useFindBook } } }, { new: true });
 
     } catch (e) {
         console.log(e)
@@ -81,9 +66,13 @@ export async function editBook(values: any) {
     try {
         await connectDB();
 
+        const useBookSearch = await bookSearch({ book_title: values.book_title });
+
+        const useFindBook = await findBook({ data: useBookSearch, book_title: values.book_title, book_author: values.book_author });
+
         await User.findOneAndUpdate(
             { 'books._id': _id },
-            { $set: { 'books.$': { ...values } } },
+            { $set: { 'books.$': { ...values, book_image: useFindBook } } },
             { new: true });
 
         revalidatePath('/dashboard/mind');
