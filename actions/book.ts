@@ -13,13 +13,32 @@ export async function bookSearch({ book_title, book_author }: any) {
 
     try {
 
+        // Using API with authors and without Authors
         const openLibrary = await fetch(`https://openlibrary.org/search.json?q=${book_title}?author=${useAuthor}&limit=5`);
+        const openLibraryAllTitle = await fetch(`https://openlibrary.org/search.json?q=${book_title}&limit=5`);
+
         const useOpenLibrary = await openLibrary.json();
+        const useOpenLibraryAllTitles = await openLibraryAllTitle.json();
+
+        // Filtering all titles api and finding the author name within
+        const filterTitles = useOpenLibraryAllTitles.docs.filter((item: any) => item.author_name.includes(useAuthor));
 
         // Image URL used for the books
         // https://covers.openlibrary.org/a/id/8441376.jpg
 
-        return useOpenLibrary;
+        // If the api with authors found titles, lets use this api
+        // Otherwise, lets use the api with found authors within the items
+        // Default to an empty array
+        switch (true) {
+            case useOpenLibrary.docs.length > 0:
+                return useOpenLibrary.docs;
+                break
+            case filterTitles.length > 0:
+                return filterTitles;
+                break
+            default:
+                return [];
+        }
     } 
     catch (error) {
         console.log(error);
