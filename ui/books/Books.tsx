@@ -33,17 +33,17 @@ export default async function Books() {
                     return (
                         <div
                             key={`${item.book_title}-${index}`}
-                            className="relative flex items-center rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-gray-900 focus-within:ring-offset-2 hover:border-gray-400"
+                            className="relative flex items-center w-full rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-gray-900 focus-within:ring-offset-2 hover:border-gray-400"
                         >
-                            <Link href={`/dashboard/mind/books/edit/${item.id}`}>
+                            <Link className="w-full" href={`/dashboard/mind/books/edit/${item.id}`}>
                                 <div className="flex-1 flex w-full justify-between items-center">
-                                    <div className="w-[38vw]">
+                                    <div className="w-[auto]">
                                         <p className="text-sm font-medium text-gray-900">{item.book_title}</p>
-                                        <p className="truncate text-sm text-gray-500">{item.book_author}</p>
-                                        <p className="truncate text-sm text-gray-500">{item.kind_of_book}</p>
+                                        <p className="text-sm text-gray-500">{item.book_author}</p>
+                                        <p className="text-sm text-gray-500">{item.kind_of_book}</p>
                                         <div className='flex flex-col lg:flex-row lg:gap-4'>
-                                            <p className="truncate text-sm text-gray-500">{useBookStartDate}</p>
-                                            <p className="truncate text-sm text-gray-500">{useBookEndDate}</p>
+                                            <p className="text-sm text-gray-500">{useBookStartDate}</p>
+                                            <p className="text-sm text-gray-500">{useBookEndDate}</p>
                                         </div>
                                     </div>
                                     {item.book_image && (
