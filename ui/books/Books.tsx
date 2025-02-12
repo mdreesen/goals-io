@@ -49,7 +49,7 @@ export default async function Books() {
                                     {item.book_image && (
                                         <Image
                                             alt="White Raven Logo"
-                                            src={`${item.book_image}`}
+                                            src={`${item.book_image ?? ''}`}
                                             className="h-[8rem] w-[auto] object-cover flex-none bg-gray-50 scale-75"
                                             height={200}
                                             width={400}

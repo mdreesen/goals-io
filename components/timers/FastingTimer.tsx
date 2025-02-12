@@ -41,6 +41,9 @@ export default function FastingTimer({ fastData }: any) {
             setStartTime(parsedStartTime);
             setEndTime(parsedEndTime);
 
+            // Placing here to get rid of loading forever error
+            setLoading(false);
+    
             if (parsedEndTime.getTime() > Date.now()) {
                 startTimer(parsedEndTime);
              }
