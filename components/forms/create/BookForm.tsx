@@ -18,19 +18,6 @@ export default function BookForm() {
     const [selectedStartDate, setSelectedStartDate] = useState();
     const [selectedEndDate, setSelectedEndDate] = useState();
 
-    // URLSearchParams is a Web API that provides utility methods for manipulating the URL query parameters.
-    // const handleSearch = useDebouncedCallback((term) => {
-
-    //     const params = new URLSearchParams(searchParams);
-    //     params.set('page', '1');
-    //     if (term) {
-    //         params.set('query', term);
-    //     } else {
-    //         params.delete('query');
-    //     }
-    //     replace(`${pathname}?${params.toString()}`);
-    // }, 300);
-
     const handleSubmit = async (formData: FormData) => {
         try {
             await addBook({
@@ -126,6 +113,7 @@ export default function BookForm() {
                     selected={selectedStartDate}
                     onChange={handleStartDateChange}
                     dateFormat="yyyy-MM-dd"
+                    required
                 />
             </div>
 
