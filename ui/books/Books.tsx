@@ -46,7 +46,7 @@ export default async function Books() {
                                             <p className="text-sm text-gray-500">{useBookEndDate}</p>
                                         </div>
                                     </div>
-                                    {item.book_image && (
+                                    {item.book_image && item.book_image !== 'false' && (
                                         <Image
                                             alt="White Raven Logo"
                                             src={`${item.book_image ?? ''}`}

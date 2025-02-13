@@ -77,8 +77,17 @@ export async function addBook(values: any) {
         const useBookSearch = await bookSearch({ book_title: values.book_title, book_author: values.book_author });
         const useFindBook = await findBook({ data: useBookSearch });
 
-        const imageURL = `https://covers.openlibrary.org/a/id/${useFindBook}.jpg`;
-        await User.findOneAndUpdate({ email: session?.user.email }, { $addToSet: { books: { ...values, book_image: imageURL } } }, { new: true });
+        function useImage() {
+            const imageURL = `https://covers.openlibrary.org/a/id/${useFindBook}.jpg`;
+
+            if (useFindBook !== undefined) {
+                return imageURL;
+            } else {
+                return ''
+            }
+        };
+
+        await User.findOneAndUpdate({ email: session?.user.email }, { $addToSet: { books: { ...values, book_image: useImage() } } }, { new: true });
 
     } catch (e) {
         console.log(e)
@@ -94,12 +103,21 @@ export async function editBook(values: any) {
 
         const useBookSearch = await bookSearch({ book_title: values.book_title, book_author: values.book_author });
         const useFindBook = await findBook({ data: useBookSearch });
+        console.log(useFindBook);
 
-        const imageURL = `https://covers.openlibrary.org/a/id/${useFindBook}.jpg`;
+        function useImage() {
+            const imageURL = `https://covers.openlibrary.org/a/id/${useFindBook}.jpg`;
+
+            if (useFindBook !== undefined) {
+                return imageURL;
+            } else {
+                return ''
+            }
+        };
 
         await User.findOneAndUpdate(
             { 'books._id': _id },
-            { $set: { 'books.$': { ...values, book_image: imageURL } } },
+            { $set: { 'books.$': { ...values, book_image: useImage() } } },
             { new: true });
 
         revalidatePath('/dashboard/mind');
