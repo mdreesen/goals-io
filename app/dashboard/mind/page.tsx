@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import Affirmations from "@/ui/Affirmations";
 import Books from "@/ui/books/Books";
-import Habits from '@/ui/Habits';
+import Habits from '@/ui/habits/Habits';
 import LoadingScale from "@/components/loaders/LoadingScale";
 import { fetchSettings } from '@/actions/settings';
 import type { Metadata } from "next";

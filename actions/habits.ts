@@ -103,21 +103,31 @@ export async function filterHabits() {
 
         const data = await User.find({ email: session?.user.email }, 'habits');
 
-        const communityHabits = data[0].habits.filter((item: any) => item.kind.includes('Community')) ?? [];
-        const familyHabits = data[0].habits.filter((item: any) => item.kind.includes('Family')) ?? [];
-        const marriageHabits = data[0].habits.filter((item: any) => item.kind.includes('Marriage')) ?? [];
-        const personalHabits = data[0].habits.filter((item: any) => item.kind.includes('Personal')) ?? [];
+        // Filter habits by kind of habit, do not show done in this section
+        const communityHabits = data[0].habits.filter((item: any) => item.kind.includes('Community') && item.status !== 'Done') ?? [];
+        const familyHabits = data[0].habits.filter((item: any) => item.kind.includes('Family') && item.status !== 'Done') ?? [];
+        const marriageHabits = data[0].habits.filter((item: any) => item.kind.includes('Marriage') && item.status !== 'Done') ?? [];
+        const personalHabits = data[0].habits.filter((item: any) => item.kind.includes('Personal') && item.status !== 'Done') ?? [];
+
+        // If done, filter habit by done
+        const doneHabits =  data[0].habits.filter((item: any) => item.status === 'Done') ?? [];
+
+        // See if there are no habits
+        const none = data[0].habits.length === 0;
 
         return {
             community_habits: communityHabits,
             family_habits: familyHabits,
             marriage_habits: marriageHabits,
             personal_habits: personalHabits,
+            done_habits: doneHabits,
+            none_habits: none,
 
             use_community_habits: communityHabits.length > 0,
             use_family_habits: familyHabits.length > 0,
             use_marriage_habits: marriageHabits.length > 0,
             use_personal_habits: personalHabits.length > 0,
+            use_done_habits: doneHabits.length > 0,
         }
 
     } catch (e) {

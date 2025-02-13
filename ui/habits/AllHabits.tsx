@@ -10,14 +10,17 @@ export default async function Habits() {
     const family_habits_arr = filteredHabits?.family_habits;
     const marriage_habits_arr = filteredHabits?.marriage_habits;
     const community_habits_arr = filteredHabits?.community_habits;
+    const done_habits_arr = filteredHabits?.done_habits;
 
     // Render habits sections
     const renderPersonalHabits = filteredHabits.use_personal_habits;
     const renderFamilyHabits = filteredHabits.use_family_habits;
     const renderMarriageHabits = filteredHabits.use_marriage_habits;
     const renderCommunityHabits = filteredHabits.use_community_habits;
+    const renderDoneHabits = filteredHabits.use_done_habits;
 
-    const none = renderPersonalHabits === false && renderFamilyHabits === false && renderCommunityHabits === false;
+    const useNone = filteredHabits?.none_habits;
+    console.log(useNone)
 
     const useCommunityHabits = renderCommunityHabits && (
         <ul role="list" className="divide-y divide-gray-100 border border-green-600 my-6 rounded-md">
@@ -43,6 +46,12 @@ export default async function Habits() {
         </ul>
     );
 
+    const useDoneHabits = renderDoneHabits && (
+        <ul role="list" className="divide-y divide-gray-100 border border-blue-500 rounded-md">
+            <HabitList data={done_habits_arr} />
+        </ul>
+    );
+
     return (
         <div className="px-4 sm:px-2 lg:px-4">
             <h2 className="text-3xl font-semibold text-gray-900">Habits</h2>
@@ -57,11 +66,12 @@ export default async function Habits() {
                     </button>
                 </Link>
             </div>
-            {none && <h3>Add your Habits!</h3>}
+            {useNone && <h3>Add your Habits!</h3>}
             {usePersonalHabits}
             {useFamilyHabits}
             {useMarriageHabits}
             {useCommunityHabits}
+            {useDoneHabits}
         </div>
     )
 }
