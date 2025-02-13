@@ -19,7 +19,6 @@ export async function fetchGoals() {
 };
 
 export async function addAffirmation(values: any) {
-    console.log(values)
 
     const session = await getServerSession();
 

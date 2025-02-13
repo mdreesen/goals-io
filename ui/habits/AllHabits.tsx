@@ -20,7 +20,6 @@ export default async function Habits() {
     const renderDoneHabits = filteredHabits.use_done_habits;
 
     const useNone = filteredHabits?.none_habits;
-    console.log(useNone)
 
     const useCommunityHabits = renderCommunityHabits && (
         <ul role="list" className="divide-y divide-gray-100 border border-green-600 my-6 rounded-md">

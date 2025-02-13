@@ -27,7 +27,7 @@ export async function fetchFasting() {
 export async function addFasting(values: any) {
 
     const session = await getServerSession();
-console.log(values)
+
     try {
         await connectDB();
 

@@ -9,7 +9,7 @@ import { findBook } from '@/lib/book_formatters';
 export async function bookSearch({ book_title, book_author }: any) {
 
     const splitAuthor = book_author.split(",");
-    const useAuthor = splitAuthor[0] ?? book_author
+    const useAuthor = splitAuthor[0] ?? book_author;
 
     try {
 
@@ -103,7 +103,6 @@ export async function editBook(values: any) {
 
         const useBookSearch = await bookSearch({ book_title: values.book_title, book_author: values.book_author });
         const useFindBook = await findBook({ data: useBookSearch });
-        console.log(useFindBook);
 
         function useImage() {
             const imageURL = `https://covers.openlibrary.org/a/id/${useFindBook}.jpg`;
