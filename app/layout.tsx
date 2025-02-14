@@ -4,7 +4,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Ascend",
-  description: "Set Habits. Achieve greatness.",
+  description: "Set habits, Achieve greatness.",
 };
 
 export default function RootLayout({
