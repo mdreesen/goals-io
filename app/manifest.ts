@@ -12,11 +12,11 @@ export default function manifest(): MetadataRoute.Manifest {
     orientation: 'any',
     lang: 'en',
     display: 'standalone',
-    background_color: '#1b1b1b',
-    theme_color: '#ffffff',
+    background_color: '#272727',
+    theme_color: '#272727',
     icons: [
       {
-        src: '/assets/logo.png',
+        src: '/assets/play_store_icons/play_store_512.png',
         sizes: '512x512',
         type: 'image/png',
       }
