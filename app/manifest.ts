@@ -19,6 +19,19 @@ export default function manifest(): MetadataRoute.Manifest {
         src: '/assets/play_store_icons/play_store_512.png',
         sizes: '512x512',
         type: 'image/png',
+        purpose: "maskable"
+      },
+      {
+        src: '/assets/logo_512x512.png',
+        sizes: '512x512',
+        type: 'image/png',
+        purpose: "maskable"
+      },
+      {
+        src: '/assets/play_store_icons/play_store_512.png',
+        sizes: '512x512',
+        type: 'image/png',
+        purpose: "maskable"
       }
     ],
     categories: [
