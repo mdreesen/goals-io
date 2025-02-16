@@ -28,8 +28,8 @@ export default function manifest(): MetadataRoute.Manifest {
         purpose: "maskable"
       },
       {
-        src: '/assets/play_store_icons/play_store_512.png',
-        sizes: '512x512',
+        src: '/assets/logo.png',
+        sizes: '375x375',
         type: 'image/png',
         purpose: "maskable"
       }
