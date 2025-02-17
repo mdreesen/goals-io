@@ -10,7 +10,7 @@ export default function ButtonDeleteBook({ data }: any) {
         try {
             await deleteBible({ id: data._id });
             router.refresh
-            router.push(`/dashboard/bible`);
+            router.push(`/dashboard/spirit`);
         } catch (error) {
             console.log(error)
         }

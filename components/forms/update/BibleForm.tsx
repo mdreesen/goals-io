@@ -6,15 +6,18 @@ import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import bible_books from '@/lib/bible_books.json';
 import ButtonDeleteBible from "@/components/buttons/ButtonDeleteBible";
 import ButtonCancel from "@/components/buttons/ButtonCancel";
+import LoadingScale from "@/components/loaders/LoadingScale";
 
 export default function BibleForm({ data }: any) {
 
     const [error, setError] = useState<string>();
+    const [ loading, setLoading ] = useState(false);
 
     const router = useRouter();
     const ref = useRef(null);
 
     const handleSubmit = async (formData: FormData) => {
+        setLoading(true)
         try {
             await editBible({
                 _id: data?._id,
@@ -24,12 +27,14 @@ export default function BibleForm({ data }: any) {
                 notes: formData.get("notes"),
                 type: formData.get("type"),
             });
+            setLoading(false)
 
             router.refresh
             router.push(`/dashboard/spirit`);
         } catch (error) {
             setError(error as string)
             console.log(error);
+            setLoading(false)
         }
     };
 
