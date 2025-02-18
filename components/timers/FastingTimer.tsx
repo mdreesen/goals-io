@@ -158,14 +158,6 @@ export default function FastingTimer({ fastData }: any) {
             Start 20-Hour Fast
         </button>
     );
-    const buttonTest = (
-        <button
-            onClick={() => handleStartFasting(.01)}
-            className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-        >
-            Start test fast
-        </button>
-    );
 
     const buttonEndFast = (
         <button
@@ -213,7 +205,6 @@ export default function FastingTimer({ fastData }: any) {
                     {loading ? <LoadingScale /> : buttonSixteen}
                     {loading ? <LoadingScale /> : buttonEightteen}
                     {loading ? <LoadingScale /> : buttonTwenty}
-                    {buttonTest}
                 </div>
             ) : (
                 <div>
