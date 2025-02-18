@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-export default async function ButtonCancel({ path }: any) {
+export default function ButtonCancel({ path }: any) {
 
     return (
         <Link href={path}>

@@ -1,4 +1,3 @@
-// components/FastingTimer.tsx
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
@@ -18,7 +17,7 @@ export default function FastingTimer({ fastData }: any) {
     const [timeLeft, setTimeLeft] = useState<TimeLeft | null>(null);
     const intervalRef = useRef<NodeJS.Timeout | null>(null);
     const [error, setError] = useState<string>();
-    const [fastingEnded, setFastingEnded] = useState<boolean>(fastData?.user?.ended);
+    const [fastingEnded, setFastingEnded] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>();
     const [duration, setDuration] = useState<number | null | undefined>();
 
@@ -43,10 +42,10 @@ export default function FastingTimer({ fastData }: any) {
 
             // Placing here to get rid of loading forever error
             setLoading(false);
-    
+
             if (parsedEndTime.getTime() > Date.now()) {
                 startTimer(parsedEndTime);
-             }
+            }
         } else {
             setLoading(false)
         }
@@ -61,9 +60,9 @@ export default function FastingTimer({ fastData }: any) {
             const difference = targetEndTime.getTime() - now;
 
             if (difference <= 0) {
-                setFastingEnded(true)
+                setFastingEnded(true);
                 clearInterval(intervalRef.current as any);
-                resetState();
+                // resetState();
                 return;
             }
 
@@ -85,6 +84,7 @@ export default function FastingTimer({ fastData }: any) {
     };
 
     const resetState = () => {
+        setFastingEnded(false);
         setTimeLeft(null);
         setStartTime(null);
         setEndTime(null);
@@ -150,6 +150,23 @@ export default function FastingTimer({ fastData }: any) {
         </button>
     );
 
+    const buttonTwenty = (
+        <button
+            onClick={() => handleStartFasting(20)}
+            className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+        >
+            Start 20-Hour Fast
+        </button>
+    );
+    const buttonTest = (
+        <button
+            onClick={() => handleStartFasting(.01)}
+            className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+        >
+            Start test fast
+        </button>
+    );
+
     const buttonEndFast = (
         <button
             onClick={handleEndFasting}
@@ -160,7 +177,8 @@ export default function FastingTimer({ fastData }: any) {
     );
 
     const ProgressBar = () => {
-        const doneFasting = Number.isNaN(time_left_milliseconds) || time_left_milliseconds >= total_duration_milliseconds;
+
+        const useTimedFasting = (time_left_milliseconds / total_duration_milliseconds) * 100;
 
         return (
             <div aria-hidden="true" className="mt-6">
@@ -170,11 +188,11 @@ export default function FastingTimer({ fastData }: any) {
                         <p className="text-sm font-medium text-gray-900">{`${fastData.user.duration} hours`}</p>
                     </div>
                 )}
-                <div className={`overflow-hidden rotate-180 rounded-full ${doneFasting ? 'bg-gray-200' : 'bg-[#c18d21]'}`}>
-                    <div style={{ width: `${(time_left_milliseconds / total_duration_milliseconds) * 100}%` }} className={`${doneFasting && 'bg-green-500 animate-pulse'} h-2 bg-gray-200`} />
+                <div className={`overflow-hidden rotate-180 rounded-full ${fastingEnded ? 'bg-gray-200' : 'bg-[#c18d21]'}`}>
+                    <div style={{ width: `${fastingEnded ? '100' : useTimedFasting}%` }} className={`${fastingEnded ? 'bg-green-500 animate-pulse' : 'bg-gray-200'} h-2`} />
                 </div>
                 {
-                    doneFasting && <span>You are done! Great fast!</span>
+                    fastingEnded && <span>You are done! Great fast!</span>
                 }
                 <div className="mt-6 hidden grid-cols-4 text-sm font-medium text-gray-600 sm:grid">
                     <div>Getting started</div>
@@ -194,6 +212,8 @@ export default function FastingTimer({ fastData }: any) {
                 <div className="mt-6 flex items-center justify-end gap-x-6">
                     {loading ? <LoadingScale /> : buttonSixteen}
                     {loading ? <LoadingScale /> : buttonEightteen}
+                    {loading ? <LoadingScale /> : buttonTwenty}
+                    {buttonTest}
                 </div>
             ) : (
                 <div>
