@@ -101,7 +101,7 @@ export default async function Affirmations() {
                 <Link href={'/dashboard/mind/affirmations/create'}>
                     <button
                         type="button"
-                        className="block rounded-md bg-gray-800 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-black focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-900"
+                        className="block rounded-md bg-gray-800 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-gray-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-900"
                     >
                         Add affirmation
                     </button>

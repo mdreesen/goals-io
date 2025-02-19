@@ -11,7 +11,7 @@ export default function ButtonAuth() {
     if (status === "authenticated") {
       return (
         <button
-          className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
+          className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-400 hover:text-white"
           onClick={() => {
             signOut({ redirect: false }).then(() => {
               router.push("/");

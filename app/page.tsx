@@ -53,7 +53,7 @@ export default function Page() {
       </div>
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-[480px]">
-        <div className="bg-white px-6 py-12 shadow sm:rounded-lg sm:px-12">
+        <div className="bg-white px-6 py-12 sm:rounded-lg sm:px-12">
           <form onSubmit={handleSubmit} method="POST" className="space-y-6">
             <div>
               <label htmlFor="email" className="block text-sm/6 font-medium text-gray-900">
@@ -124,11 +124,11 @@ export default function Page() {
                 </label>
               </div>
 
-              {/* <div className="text-sm/6">
-                <a href="#" className="font-semibold text-gray-900 hover:text-gray-900">
+              <div className="text-sm/6">
+                <Link href="/authentication/reset-password" className="font-semibold text-gray-900 hover:text-gray-400">
                   Forgot password?
-                </a>
-              </div> */}
+                </Link>
+              </div>
             </div>
 
             <div className="flex justify-center">
@@ -136,7 +136,7 @@ export default function Page() {
                 loading ? <LoaderPacman /> : (
                   <button
                     type="submit"
-                    className="flex w-full justify-center rounded-md bg-gray-900 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-gray-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900"
+                    className="flex w-full justify-center rounded-md bg-gray-900 hover:bg-gray-400 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900"
                   >
                     Sign in
                   </button>
@@ -150,7 +150,7 @@ export default function Page() {
           <div>
 
             <p className="mt-10 text-center text-sm text-gray-900">
-              <Link href="/authentication/signup" className="leading-6 block text-sm/6 font-medium text-gray-900">
+              <Link href="/authentication/signup" className="leading-6 block text-sm/6 font-medium text-gray-900 hover:text-gray-400">
                 Do not have an account?
               </Link>
             </p>

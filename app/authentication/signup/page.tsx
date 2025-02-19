@@ -66,7 +66,7 @@ export default function Page() {
       </div>
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-[480px]">
-        <div className="bg-white px-6 py-12 shadow sm:rounded-lg sm:px-12">
+        <div className="bg-white px-6 py-12 sm:rounded-lg sm:px-12">
           <form method="POST" ref={ref} action={handleSubmit} className="space-y-6">
             <div>
               <label htmlFor="email" className="block text-sm/6 font-medium text-gray-900">
