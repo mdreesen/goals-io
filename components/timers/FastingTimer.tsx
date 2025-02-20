@@ -29,7 +29,6 @@ export default function FastingTimer({ fastData }: any) {
     const time_left_milliseconds = (Number(time_hours) * 3600 + Number(time_minutes) * 60 + Number(time_seconds)) * 1000;
 
     useEffect(() => {
-        // setLoading(true);
         const storedStartTime = fastData.user.start_date;
         const storedEndTime = fastData.user.end_date;
 
@@ -40,18 +39,10 @@ export default function FastingTimer({ fastData }: any) {
             setStartTime(parsedStartTime);
             setEndTime(parsedEndTime);
 
-            // Placing here to get rid of loading forever error
-            // setLoading(false);
-
             if (parsedEndTime.getTime() > Date.now()) {
                 startTimer(parsedEndTime);
-                // setLoading(false);
             }
         }
-        // else {
-        //     setLoading(false)
-        // }
-
     }, []);
 
     const startTimer = (targetEndTime: Date) => {
@@ -67,8 +58,6 @@ export default function FastingTimer({ fastData }: any) {
 
                 setFastingEnded(true);
                 clearInterval(intervalRef.current as any);
-                // resetState();
-                // setLoading(false)
                 return;
             }
 

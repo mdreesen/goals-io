@@ -95,7 +95,6 @@ export default function Tutorial({ data }: any) {
                                                 </button>
                                             )
                                         }
-
                                     </div>
                                 </div>
 
