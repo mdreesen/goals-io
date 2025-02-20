@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Provider } from "./provider";
+import NetworkStatusProvider from '@/components/wrappers/NetworkStatusProvider';
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -14,12 +15,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" dir="ltr">
-      <Provider>
-        <body>
-          {children}
-        </body>
-      </Provider>
-
+      <NetworkStatusProvider>
+        <Provider>
+          <body>
+            {children}
+          </body>
+        </Provider>
+      </NetworkStatusProvider>
     </html>
   );
 }
