@@ -29,7 +29,7 @@ export default function FastingTimer({ fastData }: any) {
     const time_left_milliseconds = (Number(time_hours) * 3600 + Number(time_minutes) * 60 + Number(time_seconds)) * 1000;
 
     useEffect(() => {
-        setLoading(true);
+        // setLoading(true);
         const storedStartTime = fastData.user.start_date;
         const storedEndTime = fastData.user.end_date;
 
@@ -41,18 +41,22 @@ export default function FastingTimer({ fastData }: any) {
             setEndTime(parsedEndTime);
 
             // Placing here to get rid of loading forever error
-            setLoading(false);
+            // setLoading(false);
 
             if (parsedEndTime.getTime() > Date.now()) {
                 startTimer(parsedEndTime);
+                // setLoading(false);
             }
-        } else {
-            setLoading(false)
         }
+        // else {
+        //     setLoading(false)
+        // }
 
     }, []);
 
     const startTimer = (targetEndTime: Date) => {
+        setLoading(true)
+
         clearInterval(intervalRef.current as any);
 
         intervalRef.current = setInterval(() => {
@@ -60,18 +64,21 @@ export default function FastingTimer({ fastData }: any) {
             const difference = targetEndTime.getTime() - now;
 
             if (difference <= 0) {
+
                 setFastingEnded(true);
                 clearInterval(intervalRef.current as any);
                 // resetState();
+                // setLoading(false)
                 return;
             }
 
             setTimeLeft(calculateTimeLeft(difference));
+            setLoading(false)
+
         }, 1000);
     };
 
     const handleEndFasting = async () => {
-        setFastingEnded(true)
         clearInterval(intervalRef?.current as any);
 
         resetState();
@@ -80,7 +87,6 @@ export default function FastingTimer({ fastData }: any) {
             start: false,
             ended: true,
         });
-        setLoading(false);
     };
 
     const resetState = () => {
@@ -95,7 +101,6 @@ export default function FastingTimer({ fastData }: any) {
         const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-        setLoading(false)
 
         return { days, hours, minutes, seconds };
     };
@@ -159,6 +164,15 @@ export default function FastingTimer({ fastData }: any) {
         </button>
     );
 
+    // const buttonTest = (
+    //     <button
+    //         onClick={() => handleStartFasting(.01)}
+    //         className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+    //     >
+    //         Test Button
+    //     </button>
+    // );
+
     const buttonEndFast = (
         <button
             onClick={handleEndFasting}
@@ -171,8 +185,9 @@ export default function FastingTimer({ fastData }: any) {
     const ProgressBar = () => {
 
         const useTimedFasting = (time_left_milliseconds / total_duration_milliseconds) * 100;
+        const useEndFasting = fastingEnded || !startTime || !timeLeft;
 
-        return (
+        return !loading && (
             <div aria-hidden="true" className="mt-6">
                 {timeLeft && (
                     <div className="flex justify-between">
@@ -180,11 +195,11 @@ export default function FastingTimer({ fastData }: any) {
                         <p className="text-sm font-medium text-gray-900">{`${fastData.user.duration} hours`}</p>
                     </div>
                 )}
-                <div className={`overflow-hidden rotate-180 rounded-full ${fastingEnded ? 'bg-gray-200' : 'bg-[#c18d21]'}`}>
-                    <div style={{ width: `${fastingEnded ? '100' : useTimedFasting}%` }} className={`${fastingEnded ? 'bg-green-500 animate-pulse' : 'bg-gray-200'} h-2`} />
+                <div className={`overflow-hidden rotate-180 rounded-full ${useEndFasting ? 'bg-gray-200' : 'bg-[#c18d21]'}`}>
+                    <div style={{ width: `${useEndFasting ? '100' : useTimedFasting}%` }} className={`${useEndFasting ? 'bg-green-500 animate-pulse' : 'bg-gray-200'} h-2`} />
                 </div>
                 {
-                    fastingEnded && <span>You are done! Great fast!</span>
+                    useEndFasting && <span>You are done! Great fast!</span>
                 }
                 <div className="mt-6 hidden grid-cols-4 text-sm font-medium text-gray-600 sm:grid">
                     <div>Getting started</div>
