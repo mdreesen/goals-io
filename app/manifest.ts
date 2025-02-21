@@ -1,6 +1,7 @@
 import type { MetadataRoute } from 'next';
 
-const currentUrl = 'https://goals-io.vercel.app/'; // Replace with your URL logic
+// const currentUrl = 'https://goals-io.vercel.app/'; // Replace with your URL logic
+const currentUrl = 'https://www.ascendpod.com/'
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
