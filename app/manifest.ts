@@ -1,7 +1,7 @@
 import type { MetadataRoute } from 'next';
 
 const currentUrl = 'https://goals-io.vercel.app/'; // Replace with your URL logic
- 
+
 export default function manifest(): MetadataRoute.Manifest {
   return {
     name: 'Ascend',
@@ -38,12 +38,25 @@ export default function manifest(): MetadataRoute.Manifest {
       "fitness",
       "health",
       "lifestyle",
-      "productivity"
+      "productivity",
+      "books",
+      "personalization"
     ],
     dir: "auto",
     display_override: [
       "standalone",
       "window-controls-overlay"
+    ],
+    related_applications: [
+      {
+        "platform": "play",
+        "url": "https://play.google.com/store/apps/details?id=app.vercel.goals_io.twa.pwa&hl=en-US&ah=LK08Pcp_p9aSBNro6Va1uM424v4",
+        "id": "app.vercel.goals_io.twa.pwa"
+      },
+      {
+        "platform": "windows",
+        "url": "https://www.ascendpod.com"
+      }
     ],
     prefer_related_applications: true
   }
