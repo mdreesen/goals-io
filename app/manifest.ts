@@ -16,19 +16,19 @@ export default function manifest(): MetadataRoute.Manifest {
     theme_color: '#272727',
     icons: [
       {
-        src: '/assets/play_store_icons/play_store_512.png',
+        src: '/assets/maskable_icon.png',
         sizes: '512x512',
         type: 'image/png',
         purpose: "any"
       },
       {
-        src: '/assets/play_store_icons/play_store_512.png',
+        src: '/assets/maskable_icon.png',
         sizes: '512x512',
         type: 'image/png',
         purpose: "monochrome"
       },
       {
-        src: '/assets/play_store_icons/play_store_512.png',
+        src: '/assets/maskable_icon.png',
         sizes: '512x512',
         type: 'image/png',
         purpose: "maskable"
@@ -39,7 +39,7 @@ export default function manifest(): MetadataRoute.Manifest {
         type: 'image/png',
       },
       {
-        src: '/assets/logo.png',
+        src: '/assets/maskable_icon.png',
         sizes: '375x375',
         type: 'image/png',
       }
