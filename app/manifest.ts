@@ -19,19 +19,29 @@ export default function manifest(): MetadataRoute.Manifest {
         src: '/assets/play_store_icons/play_store_512.png',
         sizes: '512x512',
         type: 'image/png',
+        purpose: "any"
+      },
+      {
+        src: '/assets/play_store_icons/play_store_512.png',
+        sizes: '512x512',
+        type: 'image/png',
+        purpose: "monochrome"
+      },
+      {
+        src: '/assets/play_store_icons/play_store_512.png',
+        sizes: '512x512',
+        type: 'image/png',
         purpose: "maskable"
       },
       {
         src: '/assets/logo_transparent_512x512.png',
         sizes: '512x512',
         type: 'image/png',
-        purpose: "any"
       },
       {
         src: '/assets/logo.png',
         sizes: '375x375',
         type: 'image/png',
-        purpose: "maskable"
       }
     ],
     categories: [
@@ -58,6 +68,6 @@ export default function manifest(): MetadataRoute.Manifest {
         "url": "https://www.ascendpod.com"
       }
     ],
-    prefer_related_applications: true
+    prefer_related_applications: true,
   }
 }
