@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next';
 
-// const currentUrl = 'https://goals-io.vercel.app/'; // Replace with your URL logic
+const currentUrlPWA = 'https://goals-io.vercel.app/'; // Replace with your URL logic
 const currentUrl = 'https://www.ascendpod.com/'
 
 export default function manifest(): MetadataRoute.Manifest {
@@ -9,7 +9,7 @@ export default function manifest(): MetadataRoute.Manifest {
     short_name: 'Ascend',
     id: "Ascend",
     description: 'Set goals. Achieve greatness.',
-    start_url: currentUrl,
+    start_url: currentUrlPWA,
     orientation: 'any',
     lang: 'en',
     display: 'standalone',
