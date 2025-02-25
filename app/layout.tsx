@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Provider } from "./provider";
-import { Analytics } from "@vercel/analytics/react"
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import NetworkStatusProvider from '@/components/wrappers/NetworkStatusProvider';
 import "./globals.css";
 
@@ -23,6 +24,9 @@ export default function RootLayout({
 
             {/* Vercel Analytics */}
             <Analytics />
+
+            {/* Vercel Speed insights */}
+            <SpeedInsights />
 
           </body>
         </Provider>
