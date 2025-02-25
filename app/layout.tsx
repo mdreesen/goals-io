@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Provider } from "./provider";
+import { Analytics } from "@vercel/analytics/react"
 import NetworkStatusProvider from '@/components/wrappers/NetworkStatusProvider';
 import "./globals.css";
 
@@ -19,6 +20,10 @@ export default function RootLayout({
         <Provider>
           <body>
             {children}
+
+            {/* Vercel Analytics */}
+            <Analytics />
+
           </body>
         </Provider>
       </NetworkStatusProvider>
