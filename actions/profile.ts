@@ -14,7 +14,7 @@ export async function editProfile(values: any) {
             { ...values },
             { new: true });
 
-        revalidatePath('/dashboard/weight');
+        revalidatePath('/dashboard/profile');
 
 
     } catch (e) {
