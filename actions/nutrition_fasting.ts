@@ -51,12 +51,8 @@ export async function editFasting(values: any) {
     const findFastingId = data[0].fasting.find((item: any) => parse(item._id).includes(_id)) ?? [];
 
     const makeFastingObj = {
-        _id: _id,
         duration: findFastingId.duration,
-        end_date: findFastingId.end_date,
-        start: false,
-        ended: true,
-        start_date: findFastingId.start_date
+        ...values
     }
 
     try {

@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { fetchAllWaterForToday } from "@/actions/nutrition_water";
 import ButtonGoTo from "@/components/buttons/ButtonGoTo";
 export default async function NutritionWater() {

@@ -28,6 +28,8 @@ export default function FastingTimer({ fastData }: any) {
     const total_duration_milliseconds = fastData.user.duration * 60 * 60 * 1000;
     const time_left_milliseconds = (Number(time_hours) * 3600 + Number(time_minutes) * 60 + Number(time_seconds)) * 1000;
 
+    const useTimedFasting = (time_left_milliseconds / total_duration_milliseconds) * 100;
+
     useEffect(() => {
         const storedStartTime = fastData.user.start_date;
         const storedEndTime = fastData.user.end_date;
@@ -173,7 +175,6 @@ export default function FastingTimer({ fastData }: any) {
 
     const ProgressBar = () => {
 
-        const useTimedFasting = (time_left_milliseconds / total_duration_milliseconds) * 100;
         const useEndFasting = fastingEnded || !startTime || !timeLeft;
 
         return !loading && (

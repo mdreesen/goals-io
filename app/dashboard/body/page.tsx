@@ -1,5 +1,4 @@
 import { Suspense } from "react";
-import Workout from "@/ui/workout/Workout";
 import Weight from '@/ui/weight/Weight';
 import NutritionWater from "@/ui/nutrition/NutritionWater";
 import Fasting from "@/ui/nutrition/Fasting";
@@ -41,14 +40,6 @@ export default async function Page() {
             <div className="border-t border-black/20"></div>
         </>
     );
-
-    // const useWorkout = useShowWeight?.value && (
-    //     <>
-    //         <Suspense fallback={<LoadingScale />}>
-    //             <Workout />
-    //         </Suspense>
-    //     </>
-    // );
 
     return (
         <div className="flex flex-col gap-[4rem]">
