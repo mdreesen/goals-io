@@ -37,7 +37,6 @@ export default async function Page() {
             <Suspense fallback={<LoadingScale />}>
                 <Weight />
             </Suspense>
-            <div className="border-t border-black/20"></div>
         </>
     );
 
