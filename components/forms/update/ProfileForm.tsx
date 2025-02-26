@@ -3,7 +3,7 @@ import { ChevronDownIcon } from '@heroicons/react/16/solid';
 import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { editProfile } from "@/actions/profile";
-import { convertTimezone } from '@/lib/formatters';
+import { convertTimezone, convertTimezoneReverse } from '@/lib/formatters';
 import ButtonCancel from "@/components/buttons/ButtonCancel";
 
 export default function ProfileForm({ data }: any) {
@@ -12,7 +12,8 @@ export default function ProfileForm({ data }: any) {
     const ref = useRef(null);
 
     const [error, setError] = useState<string>();
-console.log(data)
+    const useTimeZone = convertTimezoneReverse(data?.time_zone)
+
     const handleSubmit = async (formData: FormData) => {
 
         try {
@@ -149,7 +150,7 @@ console.log(data)
                                     id="time_zone"
                                     name="time_zone"
                                     autoComplete="time_zone-name"
-                                    defaultValue={data?.time_zone ?? ''}
+                                    defaultValue={useTimeZone ?? ''}
                                     className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pl-3 pr-8 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
                                 >
                                     <option>EST</option>
