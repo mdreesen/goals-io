@@ -21,7 +21,7 @@ export async function fetchOverview() {
             waterOverview: useWater,
 
             showBooks: settings.useShowBooks.value,
-            showWater: settings.useShowNutrition.value,
+            showWater: settings.useShowWaterIntake.value,
             showWeight: settings.useShowWeight.value,
         }
     } catch (e) {

@@ -14,30 +14,33 @@ export default async function Overview() {
             <dt className="text-base font-normal text-gray-900">Weight</dt>
             <dd className="mt-1 flex items-baseline justify-between md:block lg:flex">
                 <div className="flex items-baseline text-2xl font-semibold text-indigo-900">
-                    {useOverview?.weightOverview.dataToDate?.weight}
-                    <span className="ml-2 text-sm font-medium text-gray-500">from {useOverview?.weightOverview.startingWeight?.weight}</span>
+                    {useOverview?.weightOverview.data.length === 0 && <span className="text-sm font-medium text-gray-500">No weight taken</span>}
+                    {useOverview?.weightOverview.data.length > 0 && useOverview?.weightOverview.dataToDate?.weight}
+                    {useOverview?.weightOverview.data.length > 0 && <span className="ml-2 text-sm font-medium text-gray-500">from {useOverview?.weightOverview.startingWeight?.weight}</span>}
                 </div>
 
-                <div
-                    className={classNames(
-                        useOverview?.weightOverview.weightLGType === 'decrease' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800',
-                        'inline-flex items-baseline rounded-full px-2.5 py-0.5 text-sm font-medium md:mt-2 lg:mt-0',
-                    )}
-                >
-                    {useOverview?.weightOverview.weightLGType === 'decrease' ? (
-                        <ArrowDownIcon aria-hidden="true" className="-ml-1 mr-0.5 size-5 shrink-0 self-center text-green-500" />
-                    ) : (
-                        <ArrowUpIcon aria-hidden="true" className="-ml-1 mr-0.5 size-5 shrink-0 self-center text-red-500" />
-                    )}
+                {useOverview?.weightOverview.data.length > 0 && (
+                    <div
+                        className={classNames(
+                            useOverview?.weightOverview.weightLGType === 'decrease' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800',
+                            'inline-flex items-baseline rounded-full px-2.5 py-0.5 text-sm font-medium md:mt-2 lg:mt-0',
+                        )}
+                    >
+                        {useOverview?.weightOverview.weightLGType === 'decrease' ? (
+                            <ArrowDownIcon aria-hidden="true" className="-ml-1 mr-0.5 size-5 shrink-0 self-center text-green-500" />
+                        ) : (
+                            <ArrowUpIcon aria-hidden="true" className="-ml-1 mr-0.5 size-5 shrink-0 self-center text-red-500" />
+                        )}
 
-                    <span className="sr-only"> {useOverview?.weightOverview.weightLGType === 'decrease' ? 'Decreased' : 'Increased'} by </span>
-                    {useOverview?.weightOverview.lossOrGain}
-                </div>
+                        <span className="sr-only"> {useOverview?.weightOverview.weightLGType === 'decrease' ? 'Decreased' : 'Increased'} by </span>
+                        {useOverview?.weightOverview.lossOrGain}
+                    </div>
+                )}
             </dd>
         </div>
     );
 
-    const books = useOverview?.showBooks &&  (
+    const books = useOverview?.showBooks && (
         <div className="px-4 py-5 sm:p-6">
             <dt className="text-base font-normal text-gray-900">Books</dt>
             <dd className="mt-1 flex items-baseline justify-between md:block lg:flex">
@@ -58,7 +61,7 @@ export default async function Overview() {
         <div className="px-4 py-5 sm:p-6">
             <dt className="text-base font-normal text-gray-900">Water</dt>
             <dd className="mt-1 flex items-baseline justify-between md:block lg:flex">
-                <div className={`flex items-baseline text-2xl font-semibold ${useOverview.waterOverview?.congrats ? 'text-green-500' : 'text-indigo-900' }`}>
+                <div className={`flex items-baseline text-2xl font-semibold ${useOverview.waterOverview?.congrats ? 'text-green-500' : 'text-indigo-900'}`}>
                     {useOverview.waterOverview.waterIntakeToday?.water_intake && `${useOverview.waterOverview.waterIntakeToday?.water_intake} oz.`}
                     <span className="ml-2 text-sm font-medium text-gray-500">from total {useOverview.waterOverview?.total_water}</span>
                 </div>

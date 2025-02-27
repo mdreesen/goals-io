@@ -14,20 +14,23 @@ export async function fetchSettings() {
         const useShowAffirmations = user?.settings.find((item: any) => item.setting.includes('showAffirmations') ?? {}) ?? [];
         const useShowBible = user?.settings.find((item: any) => item.setting.includes('showBible') ?? {}) ?? [];
         const useShowBooks = user?.settings.find((item: any) => item.setting.includes('showBooks') ?? {}) ?? [];
+        const useShowFasting = user?.settings.find((item: any) => item.setting.includes('showFasting') ?? {}) ?? [];
         const useShowHabits = user?.settings.find((item: any) => item.setting.includes('showHabits') ?? {}) ?? [];
-        const useShowNutrition = user?.settings.find((item: any) => item.setting.includes('showNutrition') ?? {}) ?? [];
+        const useShowWaterIntake = user?.settings.find((item: any) => item.setting.includes('showWaterIntake') ?? {}) ?? [];
         const useShowWeight = user?.settings.find((item: any) => item.setting.includes('showWeight') ?? {}) ?? [];
 
-        const useShowBody = useShowWeight.value || useShowNutrition.value;
+        const useShowBody = useShowWeight.value || useShowWaterIntake.value || useShowFasting.value;
         const useShowMind = useShowAffirmations.value || useShowBooks.value || useShowHabits.value;
         const useShowSpirit = useShowBible.value;
 
         return {
+            useUserSettings: user?.settings,
             useShowAffirmations: useShowAffirmations,
             useShowBible: useShowBible,
             useShowBooks: useShowBooks,
+            useShowFasting: useShowFasting,
             useShowHabits: useShowHabits,
-            useShowNutrition: useShowNutrition,
+            useShowWaterIntake: useShowWaterIntake,
             useShowWeight: useShowWeight,
 
             useShowBody: useShowBody,

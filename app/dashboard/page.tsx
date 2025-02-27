@@ -24,7 +24,7 @@ export default async function Page() {
     // Conditionals
     const showBooks = useSettings.useShowBooks?.value;
     const showWeight = useSettings.useShowWeight?.value && weightPerMonth.length > 0;
-    const showWater = useSettings.useShowNutrition?.value && waterPerDay.length > 0;
+    const showWater = useSettings.useShowWaterIntake?.value && waterPerDay.length > 0;
 
     const bookSection = showBooks && (
         <div className="relative lg:col-span-3 border-solid rounded-md p-2 content-center">
