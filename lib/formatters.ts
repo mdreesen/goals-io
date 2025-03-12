@@ -89,19 +89,19 @@ export function convertTimezoneReverse(data: any) {
   'use client'
 console.log('data', data)
   switch(true) {
-    case data.includes('New_York'):
+    case data?.includes('New_York'):
       return 'EST';
       break
 
-    case data.includes('Chicago'):
+    case data?.includes('Chicago'):
       return 'CST';
       break
 
-    case data.includes('Denver'):
+    case data?.includes('Denver'):
       return 'MST';
       break
     
-    case data.includes('Los_Angeles'):
+    case data?.includes('Los_Angeles'):
       return 'PST';
       break
 
