@@ -53,7 +53,7 @@ export default async function Page({ params }: any) {
                             <textarea
                                 id="notes"
                                 name="notes"
-                                rows={20}
+                                rows={3}
                                 readOnly={true}
                                 className="block h-full field-sizing-content resize-none w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 sm:text-sm/6"
                                 value={formatDetails}
