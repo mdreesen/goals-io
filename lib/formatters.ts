@@ -87,7 +87,7 @@ export function convertTimezone(data: any) {
 
 export function convertTimezoneReverse(data: any) {
   'use client'
-console.log('data', data)
+
   switch(true) {
     case data?.includes('New_York'):
       return 'EST';
