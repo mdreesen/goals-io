@@ -13,12 +13,12 @@ export const resetPassword = async (values: any) => {
     const token = nanoid(32);
 
     const transporter = nodemailer.createTransport({
-        host: process.env.MAILTRAP_HOST,
+        host: `${process.env.MAILTRAP_HOST}`,
         port: Number(process.env.MAILTRAP_PORT),
         secure: false, // upgrade later with STARTTLS
         auth: {
-            user: process.env.MAILTRAP_USERNAME,
-            pass: process.env.MAILTRAP_PASSWORD,
+            user: `${process.env.MAILTRAP_USERNAME}`,
+            pass: `${process.env.MAILTRAP_PASSWORD}`,
         },
     });
 
