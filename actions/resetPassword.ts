@@ -7,7 +7,7 @@ import User from "@/(models)/User";
 // https://www.youtube.com/watch?v=vAfUyKpWj_M
 
 export const resetPassword = async (values: any) => {
-    const { email } = values;
+    const { email, verify_human } = values;
 
     // Nanoid creates a unique string
     const token = nanoid(32);
@@ -31,25 +31,33 @@ export const resetPassword = async (values: any) => {
 
     try {
         await connectDB();
-        const userFound = await User.findOne({ email });
 
-        if (!userFound) {
+        if (verify_human !== '7') {
             return {
-                error: 'Email not found'
+                error: 'Are you a bot? Try again!'
             }
         }
+        else {
+            const userFound = await User.findOne({ email });
 
-        const info = await transporter.sendMail({
-            from: 'NoReply@ascendpod.com', // sender address
-            to: email, // list of receivers
-            subject: "Reset your password", // Subject line
-            text: "Reset your password", // plain text body
-            html: htmlBody, // html body
-        });
-
-        console.log("Message sent: %s", info.messageId);
-        console.log(`Updating ${email} with ${token}`)
-        await User.findOneAndUpdate({ email: email }, { resetPasswordToken: token })
+            if (!userFound) {
+                return {
+                    error: 'Email not found'
+                }
+            }
+    
+            const info = await transporter.sendMail({
+                from: 'NoReply@ascendpod.com', // sender address
+                to: email, // list of receivers
+                subject: "Reset your password", // Subject line
+                text: "Reset your password", // plain text body
+                html: htmlBody, // html body
+            });
+    
+            console.log("Message sent: %s", info.messageId);
+            console.log(`Updating ${email} with ${token}`)
+            await User.findOneAndUpdate({ email: email }, { resetPasswordToken: token })
+        }
 
     } catch (e) {
         console.log(e);

@@ -24,7 +24,7 @@ export async function settings() {
 }
 
 export async function register(values: any) {
-    const { email, password, confirm_password } = values;
+    const { email, password, confirm_password, verify_human } = values;
     try {
         await connectDB();
         const userSettings = await settings();
@@ -38,6 +38,11 @@ export async function register(values: any) {
         if (userFound) {
             return {
                 error: 'Email already exists!'
+            }
+        }
+        if (verify_human !== '5') {
+            return {
+                error: 'Are you a bot? Try again!'
             }
         }
         const hashedPassword = await bcrypt.hash(password, 10);
