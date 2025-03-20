@@ -25,11 +25,11 @@ export default async function RootLayout({
     const useSettings = await fetchSettings();
 
     const user = {
-        name: useUser?.username ? useUser?.username : useUser?.email,
+        name: useUser?.username ? useUser?.username : '',
     };
 
     // Conditionals
-    const hasUserFirstLast = useUser?.first_name && useUser?.last_name ? `${useUser?.first_name} ${useUser?.last_name}` : 'Dashboard';
+    const hasUserFirstLast = useUser?.first_name && useUser?.last_name ? `${useUser?.first_name} ${useUser?.last_name}` : '';
 
     // UTC device banner component
     const hasUtcTime = useTimezone.includes('UTC') && (
