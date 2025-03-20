@@ -10,8 +10,9 @@ export default function Page() {
                         Resetting password
                     </h2>
                     <p className="mt-10 text-center leading-9 tracking-tight text-black">
-                        Thank you for resetting your password.<br />
-                        Go ahead and check your email for the link.<br />
+                        Thank you for resetting your password.
+                        Go ahead and check your email for the link.<br/>
+                        Check your spam folder if email is not found.<br/>
                         <Link href="/authentication/reset-password" className="underline">If link was not sent, click here to try again.</Link>
                     </p>
                 </div>
