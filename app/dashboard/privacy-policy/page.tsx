@@ -62,7 +62,10 @@ export default function Page() {
             <h2>10. Changes to this Privacy Policy</h2>
             We may update this Privacy Policy from time to time. We will notify you of any material changes by posting the updated policy on the App or by other appropriate means.
 
-            <h2>11. Contact Us</h2>
+            <h2>11. Limitation of Liability</h2>
+            This Privacy Policy outlines our general practices for collecting, using, and disclosing information. However, we cannot guarantee absolute security. You assume the risk of unauthorized access to, disclosure of, or alteration of your information. We are not liable for any damages that may result from such unauthorized access, disclosure, or alteration.
+
+            <h2>12. Contact Us</h2>
 
             If you have any questions about this Privacy Policy, please contact us.
         </div>

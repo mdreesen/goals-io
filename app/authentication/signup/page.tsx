@@ -16,33 +16,31 @@ export default function Page() {
 
   const handleSubmit = async (formData: FormData) => {
 
-      // Set to register the user
-      const r = await register({
+    setLoading(true);
+
+    // Set to register the user
+    const r = await register({
+      email: formData.get("email"),
+      password: formData.get("password"),
+      confirm_password: formData.get("confirm_password"),
+      verify_human: formData.get("verify_human")
+    });
+
+    // If error shows, then show what happened
+    if (r?.error) {
+      setError(r.error as string);
+      setLoading(false)
+    }
+    // If everything passes, lets log them in
+    else {
+      await signIn("credentials", {
         email: formData.get("email"),
         password: formData.get("password"),
-        confirm_password: formData.get("confirm_password"),
-        verify_human: formData.get("verify_human")
+        redirect: false,
       });
 
-      // For some reason, to have the loading function work
-      // This needs to be after the register method
-      setLoading(true);
-
-      // If error shows, then show what happened
-      if (r?.error) {
-        setError(r.error as string);
-        setLoading(false)
-      }
-      // If everything passes, lets log them in
-      else {
-        await signIn("credentials", {
-          email: formData.get("email"),
-          password: formData.get("password"),
-          redirect: false,
-        });
-
-        return router.push("/dashboard");
-      }
+      return router.push("/dashboard");
+    }
   };
 
   return (
@@ -116,7 +114,6 @@ export default function Page() {
 
             <div>
               <label htmlFor="verify_human" className="block text-sm/6 font-medium text-gray-900">
-                Are you a bot? <br />
                 What is 3+2?
               </label>
               <div className="mt-2">

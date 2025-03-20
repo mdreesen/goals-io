@@ -66,7 +66,6 @@ export default function Page() {
 
                         <div>
                             <label htmlFor="verify_human" className="block text-sm/6 font-medium text-gray-900">
-                                Are you a bot? <br />
                                 What is 4+3?
                             </label>
                             <div className="mt-2">
