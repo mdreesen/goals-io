@@ -13,12 +13,14 @@ export default async function Page() {
     const useSettings = await fetchSettings() ?? [];
     const { useShowBible, useShowJournal } = useSettings;
 
+    const dividerOne = useShowJournal?.value;
+
     const useBible = useShowBible?.value && (
         <>
             <Suspense fallback={<LoadingScale />}>
                 <Bible />
             </Suspense>
-            <div className="border-t border-black/20"></div>
+            {dividerOne && <div className="border-t border-black/20"></div>}
         </>
     );
 

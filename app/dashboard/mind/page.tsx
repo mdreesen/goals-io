@@ -14,12 +14,15 @@ export default async function Page() {
     const useSettings = await fetchSettings() ?? [];
     const { useShowAffirmations, useShowBooks, useShowHabits } = useSettings;
 
+    const dividerOne = useShowBooks?.value || useShowHabits?.value;
+    const dividerTwo = useShowHabits?.value;
+
     const useAffirmations = useShowAffirmations?.value && (
         <>
             <Suspense fallback={<LoadingScale />}>
                 <Affirmations />
             </Suspense>
-            <div className="border-t border-black/20"></div>
+            {dividerOne && <div className="border-t border-black/20"></div>}
         </>
     );
 
@@ -28,7 +31,7 @@ export default async function Page() {
             <Suspense fallback={<LoadingScale />}>
                 <Books />
             </Suspense>
-            <div className="border-t border-black/20"></div>
+            {dividerTwo && <div className="border-t border-black/20"></div>}
         </>
     );
 
