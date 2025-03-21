@@ -1,15 +1,13 @@
-import WorkoutForm from '@/components/forms/create/WorkoutForm';
-import { fetchUser } from '@/actions/user';
+import JournalForm from '@/components/forms/create/JournalForm';
 import { parse } from '@/lib/formatters';
 import { date_today } from '@/lib/date_time';
 
 export default async function Page() {
-    const useUser = await fetchUser();
     const date = await date_today();
 
     return (
         <div>
-            <WorkoutForm  />
+            <JournalForm data={parse({ date })} />
         </div>
     )
 }

@@ -53,7 +53,7 @@ export default async function Bible() {
                                             href={`/dashboard/spirit/bible/edit/${item._id}`}
                                             className="block px-3 py-1 text-sm/6 text-gray-900 data-[focus]:bg-gray-50 data-[focus]:outline-none"
                                         >
-                                            Edit<span className="sr-only">, {item.name}</span>
+                                            edit<span className="sr-only">, {item.name}</span>
                                         </Link>
                                     </MenuItem>
                                 </MenuItems>

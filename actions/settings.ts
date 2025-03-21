@@ -16,12 +16,13 @@ export async function fetchSettings() {
         const useShowBooks = user?.settings.find((item: any) => item.setting.includes('showBooks') ?? {}) ?? [];
         const useShowFasting = user?.settings.find((item: any) => item.setting.includes('showFasting') ?? {}) ?? [];
         const useShowHabits = user?.settings.find((item: any) => item.setting.includes('showHabits') ?? {}) ?? [];
+        const useShowJournal = user?.settings.find((item: any) => item.setting.includes('showJournal') ?? {}) ?? [];
         const useShowWaterIntake = user?.settings.find((item: any) => item.setting.includes('showWaterIntake') ?? {}) ?? [];
         const useShowWeight = user?.settings.find((item: any) => item.setting.includes('showWeight') ?? {}) ?? [];
 
         const useShowBody = useShowWeight.value || useShowWaterIntake.value || useShowFasting.value;
         const useShowMind = useShowAffirmations.value || useShowBooks.value || useShowHabits.value;
-        const useShowSpirit = useShowBible.value;
+        const useShowSpirit = useShowBible.value || useShowJournal.value;
 
         return {
             useUserSettings: user?.settings,
@@ -30,6 +31,7 @@ export async function fetchSettings() {
             useShowBooks: useShowBooks,
             useShowFasting: useShowFasting,
             useShowHabits: useShowHabits,
+            useShowJournal: useShowJournal,
             useShowWaterIntake: useShowWaterIntake,
             useShowWeight: useShowWeight,
 

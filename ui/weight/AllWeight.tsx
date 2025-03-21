@@ -63,7 +63,7 @@ export default async function Weight() {
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{formatDateAndTime(item.weight_date)}{item.starting_weight ? ' - Starting Date' : ''}</td>
                     <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
                       <a href={`/dashboard/body/weight/edit/${item.id}`} className="text-gray-900 hover:text-gray-900">
-                        Edit<span className="sr-only">, {item.id}</span>
+                        edit<span className="sr-only">, {item.id}</span>
                       </a>
                     </td>
                   </tr>

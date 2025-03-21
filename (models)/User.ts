@@ -50,6 +50,13 @@ const habitsSchema = new Schema(
         date_end: String || undefined
     }, { timestamps: false });
 
+const journalSchema = new Schema(
+    {
+        title: String || undefined,
+        entry: String || undefined,
+        date: String || undefined,
+    }, { timestamps: false });
+
 const settingsSchema = new Schema(
     {
         setting: String || undefined,
@@ -90,6 +97,7 @@ const userSchema = new Schema(
         bibles: [bibleSchema],
         books: [bookSchema],
         fasting: [fastingSchema],
+        journal: [journalSchema],
         weight: [weightSchema],
         water: [waterIntakeSchema],
         habits: [habitsSchema],

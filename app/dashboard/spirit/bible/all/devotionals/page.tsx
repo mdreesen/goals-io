@@ -1,7 +1,6 @@
 import { Suspense } from "react";
 import Devotionals from '@/ui/bible/Devotionals'
 import LoadingScale from "@/components/loaders/LoadingScale";
-import { fetchSettings } from "@/actions/settings";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -9,10 +8,8 @@ export const metadata: Metadata = {
 };
 
 export default async function Page() {
-    const useSettings = await fetchSettings() ?? [];
-    const { useShowBible } = useSettings;
 
-    const useBible = useShowBible?.value && (
+    const useBible = (
         <>
             <Suspense fallback={<LoadingScale />}>
                 <Devotionals />

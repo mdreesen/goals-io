@@ -12,6 +12,7 @@ export async function settings() {
             {setting: 'showBooks', title: 'Show Books', value: true},
             {setting: 'showFasting', title: 'Show Fasting', value: true},
             {setting: 'showHabits', title: 'Show Habits', value: true},
+            {setting: 'showJournal', title: 'Show Journal', value: true},
             {setting: 'showWaterIntake', title: 'Show Water Intake', value: true},
             {setting: 'showWeight', title: 'Show Weight', value: true},
         ]
