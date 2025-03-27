@@ -8,8 +8,8 @@ import Results from '@/components/showing/Results';
 export default async function Bible() {
 
     const bibles = await fetchBible() ?? [];
-    const useSermons = bibles.sermon;
-    const useDevotionals = bibles.devotional;
+    const useSermons = bibles.sermonLimited;
+    const useDevotionals = bibles.devotionalLimited;
 
     const sermonNotes = (
         <div>
@@ -18,7 +18,7 @@ export default async function Bible() {
             </div>
 
             <div>
-                <Results data={bibles.sermon.length.toString()} />
+                <Results data={bibles.sermonAll.length.toString()} />
             </div>
 
             <ul role="list" className="divide-y divide-gray-100">
@@ -82,7 +82,7 @@ export default async function Bible() {
                 <ButtonGoTo title="All devotional notes" path="/dashboard/spirit/bible/all/devotionals" />
             </div>
 
-            <Results data={bibles.devotional.length.toString()} />
+            <Results data={bibles.devotionalAll.length.toString()} />
 
             <ul role="list" className="divide-y divide-gray-100">
                 {useDevotionals?.length > 0 ? useDevotionals.map((item: any) => (

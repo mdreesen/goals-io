@@ -1,5 +1,6 @@
 import { fetchBible } from '@/actions/bible';
 import ButtonBack from '@/components/buttons/ButtonBack';
+import Results from '@/components/showing/Results';
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { EllipsisVerticalIcon } from '@heroicons/react/20/solid'
 import Link from 'next/link';
@@ -7,7 +8,7 @@ import Link from 'next/link';
 export default async function Bible() {
 
     const bibles = await fetchBible() ?? [];
-    const useSermons = bibles.sermon;
+    const useSermons = bibles?.sermonAll;
 
     const sermonNotes = (
         <div>
@@ -84,6 +85,7 @@ export default async function Bible() {
             </div>
             <div className='p-4 mb-6 rounded border border-green-600'>
                 <h2 className="text-xl font-semibold text-gray-900">Sermon Notes</h2>
+                <Results data={useSermons?.length.toString()} />
 
                 {sermonNotes}
             </div>
