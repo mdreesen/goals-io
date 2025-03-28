@@ -103,6 +103,7 @@ const userSchema = new Schema(
         habits: [habitsSchema],
         settings: [settingsSchema],
         resetPasswordToken: String,
+        privacy_policy: Boolean,
         createdAt: String,
         updatedAt: String
     }, { timestamps: true });

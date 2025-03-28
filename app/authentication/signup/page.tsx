@@ -23,7 +23,8 @@ export default function Page() {
       email: formData.get("email"),
       password: formData.get("password"),
       confirm_password: formData.get("confirm_password"),
-      verify_human: formData.get("verify_human")
+      verify_human: formData.get("verify_human"),
+      privacy_policy: formData.get('privacy_policy'),
     });
 
     // If error shows, then show what happened
@@ -126,6 +127,23 @@ export default function Page() {
               </div>
             </div>
 
+            <div className="flex h-6 items-center">
+              <input
+                id="privacy_policy"
+                name="privacy_policy"
+                required
+                type="checkbox"
+                aria-describedby="privacy-policy"
+                className="h-4 w-4 rounded border-gray-300 text-gray-900 focus:ring-gray-900"
+              />
+              <label htmlFor="privacy_policy" className="text-sm font-medium leading-6 text-black px-2 flex gap-1">
+                Agree to 
+                <Link href="/privacy-policy" className="leading-6 block text-sm/6 font-medium text-gray-900 hover:text-gray-400 underline">
+                  Privacy Policy
+                </Link>
+              </label>
+            </div>
+
             <div className="flex justify-center">
               {
                 loading ? <LoaderPacman /> : (
@@ -143,13 +161,11 @@ export default function Page() {
           <div className="text-red-500">{error}</div>
 
           <div>
-
             <p className="mt-10 text-center text-sm text-gray-900">
               <Link href="/" className="leading-6 block text-sm/6 font-medium text-gray-900">
                 Already have an account?
               </Link>
             </p>
-
           </div>
         </div>
       </div>

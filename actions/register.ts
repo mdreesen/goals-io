@@ -25,7 +25,7 @@ export async function settings() {
 }
 
 export async function register(values: any) {
-    const { email, password, confirm_password, verify_human } = values;
+    const { email, password, confirm_password, verify_human, privacy_policy } = values;
     try {
         await connectDB();
         const userSettings = await settings();
@@ -47,10 +47,12 @@ export async function register(values: any) {
             }
         }
         const hashedPassword = await bcrypt.hash(password, 10);
+
         const user = new User({
             email: email.trim().toLowerCase(),
             password: hashedPassword,
-            settings: userSettings
+            settings: userSettings,
+            privacy_policy: privacy_policy === 'on' ? true : false
         });
 
         await user.save();

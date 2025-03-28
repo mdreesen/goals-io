@@ -48,8 +48,6 @@ export default function Page() {
         <h2 className="mt-6 text-center text-2xl/9 font-bold tracking-tight text-gray-900">
           Sign in to your account
         </h2>
-
-        <InstallPrompt />
       </div>
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-[480px]">
@@ -147,14 +145,18 @@ export default function Page() {
 
           <div className="text-red-500">{error}</div>
 
-          <div>
+          <div className="flex justify-between">
+            <p className="mt-10 text-center text-sm text-gray-900">
+              <Link href="/privacy-policy" className="leading-6 block text-sm/6 font-medium text-gray-900 hover:text-gray-400">
+                Privacy Policy
+              </Link>
+            </p>
 
             <p className="mt-10 text-center text-sm text-gray-900">
               <Link href="/authentication/signup" className="leading-6 block text-sm/6 font-medium text-gray-900 hover:text-gray-400">
                 Do not have an account?
               </Link>
             </p>
-
           </div>
         </div>
       </div>
