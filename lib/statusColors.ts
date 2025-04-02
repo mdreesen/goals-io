@@ -5,7 +5,7 @@ export function statusColors(data: any) {
       return 'text-yellow-600 bg-yellow-50 ring-yellow-500/10';
       break
     case data.status === 'Done':
-      return 'text-red-600 bg-green-50 ring-red-500/10'
+      return 'text-green-600 bg-green-50 ring-green-500/10'
       break
     case data.status === 'Did Not Finish':
       return 'text-red-600 bg-red-50 ring-red-500/10'
