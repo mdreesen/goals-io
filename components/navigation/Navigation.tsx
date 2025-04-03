@@ -163,7 +163,6 @@ export default async function Navigation() {
                                     {item.name}
                                 </DisclosureButton>
                                 {item.component}
-
                             </div>
                         ))}
                     </div>
