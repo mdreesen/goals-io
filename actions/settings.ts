@@ -5,9 +5,10 @@ import { getServerSession } from "next-auth/next";
 import { revalidatePath } from 'next/cache';
 
 export async function fetchSettings() {
+    const session = await getServerSession();
+
     try {
         await connectDB();
-        const session = await getServerSession();
 
         const user = await User.findOne({ email: session?.user.email });
 

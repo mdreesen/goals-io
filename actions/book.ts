@@ -47,10 +47,10 @@ export async function bookSearch({ book_title, book_author }: any) {
 }
 
 export async function fetchBooks() {
+    const session = await getServerSession();
 
     try {
         await connectDB();
-        const session = await getServerSession();
 
         const limited = await User.find({ email: session?.user.email }, { books: { $slice: -10 } }).limit(10);
         const data = await User.find({ email: session?.user.email }, 'books');
@@ -150,9 +150,10 @@ export async function deleteBook(values: any) {
 
 export async function fetchBookById(values: any) {
     const { id } = values;
+    const session = await getServerSession();
+
     try {
         await connectDB();
-        const session = await getServerSession();
 
         const user = await User.findOne({ email: session?.user.email });
 
@@ -170,10 +171,10 @@ export async function fetchBookById(values: any) {
 };
 
 export async function booksByYear() {
+    const session = await getServerSession();
 
     try {
         await connectDB();
-        const session = await getServerSession();
 
         const user = await User.findOne({ email: session?.user.email });
 

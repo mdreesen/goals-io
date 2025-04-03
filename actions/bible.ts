@@ -6,9 +6,10 @@ import { revalidatePath } from 'next/cache';
 
 export async function fetchBible() {
 
+    const session = await getServerSession();
+
     try {
         await connectDB();
-        const session = await getServerSession();
 
         const data = await User.find({ email: session?.user.email }, 'bibles');
 
@@ -86,10 +87,10 @@ export async function deleteBible(values: any) {
 
 export async function fetchBibleById(values: any) {
     const { id } = values;
+    const session = await getServerSession();
 
     try {
         await connectDB();
-        const session = await getServerSession();
 
         const user = await User.findOne({ email: session?.user.email });
 

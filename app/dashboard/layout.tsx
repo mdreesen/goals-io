@@ -10,8 +10,12 @@ import packagejson from '@/package.json';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: "Ascend",
-    description: "Set Habits. Achieve greatness.",
+    title: {
+        template: '%s | Dashboard',
+        default: 'Dashboard',
+      },
+      description: "Set Habits. Achieve greatness.",
+      metadataBase: new URL('https://www.ascendpod.com'),
   };
 
 export default async function RootLayout({

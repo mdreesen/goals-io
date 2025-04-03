@@ -7,8 +7,13 @@ import { fetchSettings } from '@/actions/settings';
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Mind | Ascend",
-};
+    title: {
+        template: '%s | Mind',
+        default: 'Mind',
+      },
+      description: "Set Habits. Achieve greatness.",
+      metadataBase: new URL('https://www.ascendpod.com'),
+  };
 
 export default async function Page() {
     const useSettings = await fetchSettings() ?? [];

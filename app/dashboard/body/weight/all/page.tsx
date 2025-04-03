@@ -4,7 +4,12 @@ import LoadingScale from "@/components/loaders/LoadingScale";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Body | Weight | Ascend",
+    title: {
+        template: '%s | Body | Weight',
+        default: 'Body | Weight',
+    },
+    description: "Set Habits. Achieve greatness.",
+    metadataBase: new URL('https://www.ascendpod.com'),
 };
 
 export default async function Page() {

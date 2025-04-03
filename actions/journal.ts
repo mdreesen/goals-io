@@ -5,10 +5,10 @@ import { getServerSession } from "next-auth/next";
 import { revalidatePath } from 'next/cache';
 
 export async function fetchEntry() {
+    const session = await getServerSession();
 
     try {
         await connectDB();
-        const session = await getServerSession();
 
         const data = await User.find({ email: session?.user.email }, 'journal');
 
@@ -27,7 +27,6 @@ export async function fetchEntry() {
 };
 
 export async function addEntry(values: any) {
-
     const session = await getServerSession();
 
     try {
@@ -83,10 +82,10 @@ export async function deleteEntry(values: any) {
 
 export async function fetchEntryById(values: any) {
     const { id } = values;
+    const session = await getServerSession();
 
     try {
         await connectDB();
-        const session = await getServerSession();
 
         const user = await User.findOne({ email: session?.user.email });
 

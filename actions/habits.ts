@@ -5,9 +5,10 @@ import { getServerSession } from "next-auth/next";
 import { revalidatePath } from 'next/cache';
 
 export async function fetchHabits() {
+    const session = await getServerSession();
+
     try {
         await connectDB();
-        const session = await getServerSession();
 
         const data = await User.find({ email: session?.user.email }, 'habits');
 
@@ -20,7 +21,6 @@ export async function fetchHabits() {
 };
 
 export async function addHabit(values: any) {
-
     const session = await getServerSession();
 
     try {
@@ -76,9 +76,10 @@ export async function deleteHabit(values: any) {
 
 export async function fetchHabitsById(values: any) {
     const { id } = values;
+    const session = await getServerSession();
+
     try {
         await connectDB();
-        const session = await getServerSession();
 
         const user = await User.findOne({ email: session?.user.email });
 
@@ -96,10 +97,10 @@ export async function fetchHabitsById(values: any) {
 };
 
 export async function filterHabits() {
+    const session = await getServerSession();
 
     try {
         await connectDB();
-        const session = await getServerSession();
 
         const data = await User.find({ email: session?.user.email }, 'habits');
 

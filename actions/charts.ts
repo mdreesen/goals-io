@@ -5,10 +5,10 @@ import { getServerSession } from "next-auth/next";
 import { current_year } from '@/lib/date_time';
 
 export async function bookYears() {
+    const session = await getServerSession();
 
     try {
         await connectDB();
-        const session = await getServerSession();
 
         const user = await User.findOne({ email: session?.user.email });
         const books = user?.books ?? [];
@@ -41,10 +41,10 @@ export async function bookYears() {
 };
 
 export async function booksPerYear(year: any) {
+    const session = await getServerSession();
 
     try {
         await connectDB();
-        const session = await getServerSession();
 
         const user = await User.findOne({ email: session?.user.email });
 
@@ -147,12 +147,12 @@ export async function booksPerYear(year: any) {
 
 export async function booksByMonth() {
 
+    const year = current_year();
+    const useMonths = await booksPerYear(year);
+    const useBookYears = await bookYears();
+
     try {
         await connectDB();
-
-        const year = current_year();
-        const useMonths = await booksPerYear(year);
-        const useBookYears = await bookYears();
 
         return {
             years: useBookYears,
@@ -166,10 +166,10 @@ export async function booksByMonth() {
 };
 
 export async function weightByMonth() {
+    const session = await getServerSession();
 
     try {
         await connectDB();
-        const session = await getServerSession();
 
         const data = await User.find({ email: session?.user.email }, 'weight');
 
@@ -182,10 +182,10 @@ export async function weightByMonth() {
 };
 
 export async function waterByday() {
+    const session = await getServerSession();
 
     try {
         await connectDB();
-        const session = await getServerSession();
 
         const data = await User.find({ email: session?.user.email }, 'water');
 

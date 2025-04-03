@@ -5,9 +5,10 @@ import { getServerSession } from "next-auth/next";
 import { revalidatePath } from 'next/cache';
 
 export async function fetchGoals() {
+    const session = await getServerSession();
+
     try {
         await connectDB();
-        const session = await getServerSession();
 
         const data = await User.find({ email: session?.user.email }, 'affirmations');
 
@@ -75,9 +76,11 @@ export async function deleteAffirmations(values: any) {
 
 export async function fetchAffirmationsById(values: any) {
     const { id } = values;
+
+    const session = await getServerSession();
+
     try {
         await connectDB();
-        const session = await getServerSession();
 
         const user = await User.findOne({ email: session?.user.email });
 
@@ -96,9 +99,10 @@ export async function fetchAffirmationsById(values: any) {
 
 export async function filterAffirmations() {
 
+    const session = await getServerSession();
+
     try {
         await connectDB();
-        const session = await getServerSession();
 
         const data = await User.find({ email: session?.user.email }, 'affirmations');
 
