@@ -1,7 +1,15 @@
-import { useRef, useState } from "react";
-import { useRouter } from "next/navigation";
 import ButtonBack from "@/components/buttons/ButtonBack";
 import { fetchEntryById } from "@/actions/journal";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: {
+        template: '%s | Spirit | Journal | Details',
+        default: 'Spirit | Journal | Details',
+    },
+    description: "Set Habits. Achieve greatness.",
+    metadataBase: new URL('https://www.ascendpod.com'),
+};
 
 export default async function JournalForm({ params }: any) {
 

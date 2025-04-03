@@ -13,10 +13,10 @@ export const metadata: Metadata = {
     title: {
         template: '%s | Dashboard',
         default: 'Dashboard',
-      },
-      description: "Set Habits. Achieve greatness.",
-      metadataBase: new URL('https://www.ascendpod.com'),
-  };
+    },
+    description: "Set Habits. Achieve greatness.",
+    metadataBase: new URL('https://www.ascendpod.com'),
+};
 
 export default async function RootLayout({
     children,
@@ -65,7 +65,7 @@ export default async function RootLayout({
             </div>
 
             <main className="-mt-32 grow">
-                <div className="mx-auto max-w-7xl px-4 pb-12 sm:px-6 lg:px-8">
+                <div className="mx-auto max-w-7xl px-4 pb-[8rem] sm:px-6 lg:px-8">
                     <div className="rounded-lg bg-white px-5 py-6 shadow sm:px-6 ">
                         {/* Tutorial shown if user has not seen/read it */}
                         {useTutorial}
@@ -73,17 +73,6 @@ export default async function RootLayout({
                     </div>
                 </div>
             </main>
-            <footer className="bg-white">
-                <div className="mx-auto max-w-7xl px-6 py-12 mb-14 md:mb-0 lg:mb-0 md:flex md:items-center md:justify-between lg:px-8">
-                    <div className="flex justify-center gap-x-6 md:order-2">
-                        <span className="mt-8 text-center text-sm/6 text-gray-400 md:order-1 md:mt-0">Version {packagejson.version}</span>
-                    </div>
-                    <p className="mt-8 text-sm/6 text-gray-400 md:order-1 md:mt-0 flex flex-col">
-                        <a href="/dashboard/privacy-policy">Privacy Policy</a>
-                        &copy; {current_year()} White Raven Development. All rights reserved.
-                    </p>
-                </div>
-            </footer>
         </div>
     )
 }

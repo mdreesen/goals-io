@@ -4,16 +4,18 @@ import type { Metadata } from "next";
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react';
 import { fetchUser } from '@/actions/user';
 import { fetchSettings } from '@/actions/settings';
+import packagejson from '@/package.json';
 import ToggleWithIcon from '@/components/toggles/ToggleWithIcon';
 import ButtonDeleteUser from '@/components/buttons/ButtonDeleteUser';
+import { current_year } from '@/lib/date_time';
 
 export const metadata: Metadata = {
   title: {
-      template: '%s | Profile',
-      default: 'Profile',
-    },
-    description: "Set Habits. Achieve greatness.",
-    metadataBase: new URL('https://www.ascendpod.com'),
+    template: '%s | Profile',
+    default: 'Profile',
+  },
+  description: "Set Habits. Achieve greatness.",
+  metadataBase: new URL('https://www.ascendpod.com'),
 };
 
 export default async function Page() {
@@ -39,11 +41,11 @@ export default async function Page() {
             <p className="text-sm/6 font-medium text-gray-900">Customize what you want to use or not use in the app by using the toggles below.</p>
 
             {useUserSettings?.map((item: any) => (
-                <div key={`${item?._id}`} className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                  <dt className="text-sm/6 font-medium text-gray-900">{item?.title}</dt>
-                  <dd className="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0"><ToggleWithIcon data={parse(item) ?? {}} /></dd>
-                </div>
-              ))}
+              <div key={`${item?._id}`} className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+                <dt className="text-sm/6 font-medium text-gray-900">{item?.title}</dt>
+                <dd className="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0"><ToggleWithIcon data={parse(item) ?? {}} /></dd>
+              </div>
+            ))}
           </div>
 
           <div className="px-4 py-6 sm:px-0 border-t border-gray-100 flex flex-col">
@@ -68,6 +70,14 @@ export default async function Page() {
                 </MenuItems>
               </Menu>
             </dd>
+          </div>
+
+          <div className="px-4 py-6 sm:px-0 border-t border-gray-100">
+            <span className="mt-8 text-center text-sm/6 text-gray-400 md:order-1 md:mt-0">Version {packagejson.version}</span>
+            <p className="mt-8 text-sm/6 text-gray-400 md:order-1 md:mt-0 flex flex-col">
+              <a href="/dashboard/privacy-policy">Privacy Policy</a>
+              &copy; {current_year()} White Raven Development. All rights reserved.
+            </p>
           </div>
         </dl>
       </div>

@@ -2,13 +2,12 @@ import { fetchWeightById } from '@/actions/weight';
 import WeightForm from '@/components/forms/update/WeightForm';
 import { parse } from '@/lib/formatters';
 import { date_today } from '@/lib/date_time';
-
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
     title: {
-        template: '%s | Body | Edit | Weight',
-        default: 'Body | Edit | Weight',
+        template: '%s | Body | Weight | Edit',
+        default: 'Body | Weight | Edit',
     },
     description: "Set Habits. Achieve greatness.",
     metadataBase: new URL('https://www.ascendpod.com'),

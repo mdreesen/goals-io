@@ -1,10 +1,15 @@
 import { Suspense } from "react";
 import LoadingScale from "@/components/loaders/LoadingScale";
-import type { Metadata } from "next";
 import AllJournal from "@/ui/journal/AllJournal";
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Spirit | Journal | Ascend",
+    title: {
+        template: '%s | Spirit | Journal | All',
+        default: 'Spirit | Journal | All',
+    },
+    description: "Set Habits. Achieve greatness.",
+    metadataBase: new URL('https://www.ascendpod.com'),
 };
 
 export default async function Page() {

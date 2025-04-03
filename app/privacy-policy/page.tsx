@@ -1,4 +1,15 @@
-import ButtonBack from "@/components/buttons/ButtonBack"
+import ButtonBack from "@/components/buttons/ButtonBack";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: {
+        template: '%s | Privacy Policy',
+        default: 'Privacy Policy',
+    },
+    description: "Set Habits. Achieve greatness.",
+    metadataBase: new URL('https://www.ascendpod.com'),
+};
+
 export default function Page() {
     return (
         <div className="flex flex-col p-10 gap-4">

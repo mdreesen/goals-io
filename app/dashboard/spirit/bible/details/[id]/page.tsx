@@ -1,5 +1,15 @@
 import { fetchBibleById } from "@/actions/bible";
 import ButtonBack from "@/components/buttons/ButtonBack";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: {
+        template: '%s | Spirit | Bible | Details',
+        default: 'Spirit | Bible | Details',
+    },
+    description: "Set Habits. Achieve greatness.",
+    metadataBase: new URL('https://www.ascendpod.com'),
+};
 
 export default async function Page({ params }: any) {
 

@@ -5,8 +5,8 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
     title: {
-        template: '%s | Body | Weight',
-        default: 'Body | Weight',
+        template: '%s | Body | Weight | All',
+        default: 'Body | Weight | All',
     },
     description: "Set Habits. Achieve greatness.",
     metadataBase: new URL('https://www.ascendpod.com'),
