@@ -8,7 +8,6 @@ import { date_today, date_time_today } from '@/lib/date_time';
 
 
 export async function createWaterIntake(values: any) {
-
     const session = await getServerSession();
 
     try {
@@ -46,9 +45,10 @@ export async function editWaterIntake(values: any) {
 
 // Total weight and convert to oz for water intake
 export async function fetchWaterIntakeToOz() {
+    const session = await getServerSession();
+
     try {
         await connectDB();
-        const session = await getServerSession();
 
         // Get today's date
         const today = formatDateAndTime(date_today());
@@ -78,9 +78,10 @@ export async function fetchWaterIntakeToOz() {
 
 // Total weight and convert to oz for water intake
 export async function fetchAllWaterForToday() {
+    const session = await getServerSession();
+
     try {
         await connectDB();
-        const session = await getServerSession();
 
         const user = await User.findOne({ email: session?.user.email });
 

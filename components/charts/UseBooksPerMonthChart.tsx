@@ -16,17 +16,16 @@ export const UseBooksPerMonthChart = ({ data }: any) => {
   const [loading, setLoading] = useState(false);
 
 
-  const fetchData = async () => {
-    const data = await booksPerYear(selectedYear);
-    const useBookYear = await bookYears();
-    setLoading(true)
-    setChartData(data);
-    setBookYear(useBookYear);
-    setLoading(false)
-  };
-
-
   useEffect(() => {
+    const fetchData = async () => {
+      const data = await booksPerYear(selectedYear);
+      const useBookYear = await bookYears();
+      setLoading(true)
+      setChartData(data);
+      setBookYear(useBookYear);
+      setLoading(false)
+    };
+
     setLoading(true)
     fetchData();
 

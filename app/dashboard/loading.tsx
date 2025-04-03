@@ -1,4 +1,3 @@
-import LoaderPacman from "@/components/loaders/LoaderPacman";
 import LoadingScale from "@/components/loaders/LoadingScale";
 
 export default function Loading() {

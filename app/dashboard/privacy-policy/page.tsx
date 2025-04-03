@@ -1,3 +1,15 @@
+
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: {
+        template: '%s | Privacy Policy',
+        default: 'Privacy Policy',
+    },
+    description: "Set Habits. Achieve greatness.",
+    metadataBase: new URL('https://www.ascendpod.com'),
+};
+
 export default function Page() {
     return (
         <div className="flex flex-col p-2 gap-4">
@@ -37,21 +49,21 @@ export default function Page() {
             <h2>5. Permissions and APIs</h2>
             The App may request access to certain device permissions, such as location, camera, and storage, to provide specific functionalities. You can control these permissions through your device settings.
             The App may use third-party APIs, such as Google Maps, to provide certain features. These APIs may collect and use your information in accordance with their own privacy policies.
-            
+
             <h2>6. Device and Network Abuse</h2>
             The App prohibits any use that could harm or interfere with the functioning of the App or the devices or networks of others. This includes, but is not limited to:
 
             Malware and viruses: Introducing or spreading malware, viruses, or other harmful code.
             Spamming: Sending unsolicited messages or engaging in other forms of spam.
             Unauthorized access: Attempting to gain unauthorized access to the App or other systems.
-            
+
             <h2>7. Deceptive Behavior and Misrepresentation</h2>
             The App prohibits any deceptive or misleading behavior, including:
 
             Misrepresenting yourself: Using false or misleading information when using the App.
             Impersonating others: Impersonating another user or entity.
             Engaging in fraudulent activities: Using the App for any fraudulent or illegal activities.
-            
+
             <h2>8. Google Play&apos;s Target API Level Privacy</h2>
             We comply with Google Play&apos;s requirements regarding the target API level and user privacy.
 

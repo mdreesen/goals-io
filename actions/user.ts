@@ -5,9 +5,10 @@ import { getServerSession } from "next-auth/next";
 import bcrypt from "bcryptjs";
 
 export async function fetchUser() {
+    const session = await getServerSession();
+
     try {
         await connectDB();
-        const session = await getServerSession();
 
         // Find user and farmer with associated emails
         const user = await User.findOne({ email: session?.user.email });
@@ -20,10 +21,10 @@ export async function fetchUser() {
 };
 
 export async function deleteUser() {
+    const session = await getServerSession();
 
     try {
         await connectDB();
-        const session = await getServerSession();
 
         await User.deleteOne({ email: session?.user.email });
 

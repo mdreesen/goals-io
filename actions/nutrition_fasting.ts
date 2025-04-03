@@ -7,9 +7,10 @@ import { date_time_fasting } from "@/lib/date_time";
 import { parse } from "@/lib/formatters";
 
 export async function fetchFasting() {
+    const session = await getServerSession();
+
     try {
         await connectDB();
-        const session = await getServerSession();
         const now = await date_time_fasting();
 
         const data = await User.find({ email: session?.user.email }, 'fasting');
@@ -26,7 +27,6 @@ export async function fetchFasting() {
 };
 
 export async function addFasting(values: any) {
-
     const session = await getServerSession();
 
     try {

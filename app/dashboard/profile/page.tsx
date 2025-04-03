@@ -8,7 +8,12 @@ import ToggleWithIcon from '@/components/toggles/ToggleWithIcon';
 import ButtonDeleteUser from '@/components/buttons/ButtonDeleteUser';
 
 export const metadata: Metadata = {
-  title: "Profile | Ascend",
+  title: {
+      template: '%s | Profile',
+      default: 'Profile',
+    },
+    description: "Set Habits. Achieve greatness.",
+    metadataBase: new URL('https://www.ascendpod.com'),
 };
 
 export default async function Page() {

@@ -6,10 +6,10 @@ import { revalidatePath } from 'next/cache';
 import { findHighestNumber, findAverageNumber, lossOrGain } from '@/lib/formatters'
 
 export async function fetchWeight() {
+    const session = await getServerSession();
 
     try {
         await connectDB();
-        const session = await getServerSession();
 
         // Getting weight and limiting
         const data = await User.find({ email: session?.user.email }, 'weight');
@@ -39,7 +39,6 @@ export async function fetchWeight() {
 };
 
 export async function addWeight(values: any) {
-
     const session = await getServerSession();
 
     try {
@@ -95,9 +94,10 @@ export async function deleteWeight(values: any) {
 
 export async function fetchWeightById(values: any) {
     const { id } = values;
+    const session = await getServerSession();
+
     try {
         await connectDB();
-        const session = await getServerSession();
 
         const user = await User.findOne({ email: session?.user.email });
 
