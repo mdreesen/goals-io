@@ -26,6 +26,7 @@ export default function Page() {
       verify_human: formData.get("verify_human"),
       privacy_policy: formData.get('privacy_policy'),
     });
+    setLoading(true);
 
     // If error shows, then show what happened
     if (r?.error) {

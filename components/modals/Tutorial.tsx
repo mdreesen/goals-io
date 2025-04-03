@@ -76,7 +76,7 @@ export default function Tutorial({ data }: any) {
                                             Settings
                                         </DialogTitle>
                                         <p className="text-sm text-gray-500">
-                                            On your profile page, you are able to enable/disable features to customize what you need or want to see. If there is a season where you are not doing affermations, you can switch it off and carry on. You are always able to turn it back on when you are ready to use it.
+                                            On your profile page, you are able to enable/disable features to customize what you need or want to see. If there is a season where you are not doing affirmations, you can switch it off and carry on. You are always able to turn it back on when you are ready to use it.
                                             When switching off features, your navigation bar will change to declutter things.
                                         </p>
                                     </div>

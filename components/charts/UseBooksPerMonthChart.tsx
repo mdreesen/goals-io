@@ -3,7 +3,6 @@ import { Label, Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@h
 import { ChevronUpDownIcon } from '@heroicons/react/16/solid'
 import { CheckIcon } from '@heroicons/react/20/solid'
 import { booksPerYear, bookYears } from "@/actions/charts";
-import { ChartSkeleton } from '../loaders/Skeletons';
 import LoadingScale from '../loaders/LoadingScale';
 
 import React, { useEffect, useState } from "react"

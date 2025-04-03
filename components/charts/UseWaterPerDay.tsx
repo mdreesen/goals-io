@@ -1,6 +1,6 @@
 "use client"
 
-import React from "react"
+import React from "react";
 import { CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 // https://stackoverflow.com/questions/50078787/recharts-set-y-axis-range
 
