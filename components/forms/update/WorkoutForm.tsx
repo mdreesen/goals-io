@@ -10,12 +10,13 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
 export default function EditWorkoutForm({ data }: any) {
+    console.log(data?.workoutData?.date)
 
     const router = useRouter();
     const ref = useRef(null);
 
     const [error, setError] = useState<string>();
-    const [selectedDate, setSelectedDate] = useState(data?.date);
+    const [selectedDate, setSelectedDate] = useState(data?.workoutData?.date);
 
 
     const handleSubmit = async (formData: FormData) => {

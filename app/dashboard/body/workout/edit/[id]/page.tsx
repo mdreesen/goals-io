@@ -16,11 +16,10 @@ export const metadata: Metadata = {
 export default async function Page({ params }: any) {
     const { id } = await params;
     const workoutData = await fetchWorkoutById({ id });
-    const date = await date_today();
 
     return (
         <div>
-            <WorkoutForm data={parse({ workoutData, date })} />
+            <WorkoutForm data={parse({ workoutData })} />
         </div>
     )
 }
