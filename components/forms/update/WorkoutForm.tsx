@@ -25,6 +25,7 @@ export default function EditWorkoutForm({ data }: any) {
                 _id: data?.workoutData?._id,
                 type: formData.get("type"),
                 description: formData.get("description"),
+                sets: formData.get("sets"),
                 date: selectedDate,
             });
 
