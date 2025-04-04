@@ -14,7 +14,7 @@ export async function fetchWorkout() {
         const limited = await User.find({ email: session?.user.email }, { workout:{ $slice: -10 } }).limit(10);
 
         return {
-            data: data[0].workout.reverse(),
+            data: data[0].workout.reverse() ?? [],
             limited: limited[0].workout.reverse() ?? [],
             totalWorkouts: data[0].workout.length.toString()
         }
