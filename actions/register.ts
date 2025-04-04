@@ -15,6 +15,7 @@ export async function settings() {
             {setting: 'showJournal', title: 'Show Journal', value: true},
             {setting: 'showWaterIntake', title: 'Show Water Intake', value: true},
             {setting: 'showWeight', title: 'Show Weight', value: true},
+            {setting: 'showWorkout', title: 'Show Workout', value: true},
         ]
         
         return useSettings;

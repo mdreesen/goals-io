@@ -1,6 +1,7 @@
 import { fetchWorkout } from "@/actions/workout";
 import ButtonGoTo from "@/components/buttons/ButtonGoTo";
 import Results from "@/components/showing/Results";
+import { formatDateAndTime } from '@/lib/formatters'
 
 export default async function Workout() {
 
@@ -34,6 +35,9 @@ export default async function Workout() {
                                     <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
                                         Workout
                                     </th>
+                                    <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                        Date
+                                    </th>
                                     <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-0">Edit</th>
 
                                 </tr>
@@ -45,6 +49,8 @@ export default async function Workout() {
                                             {item.type}
                                         </td>
                                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{item.description}</td>
+                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{formatDateAndTime(item.date)}</td>
+
                                         <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
                                             <a href={`/dashboard/body/workout/edit/${item._id}`} className="text-gray-900 hover:text-gray-900">
                                                 edit<span className="sr-only">, {item.type}</span>

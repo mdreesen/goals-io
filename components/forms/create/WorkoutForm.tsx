@@ -5,12 +5,15 @@ import { addWorkout } from "@/actions/workout";
 import Link from 'next/link';
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import workout_type from '@/lib/dropdown/workout_type.json';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 export default function WorkoutForm({ data }: any) {
 
     const router = useRouter();
     const ref = useRef(null);
 
+    const [selectedDate, setSelectedDate] = useState();
     const [error, setError] = useState<string>();
 
 
@@ -20,7 +23,7 @@ export default function WorkoutForm({ data }: any) {
             await addWorkout({
                 type: formData.get("type"),
                 description: formData.get("description"),
-                date: data?.date,
+                date: selectedDate,
             });
 
             router.refresh
@@ -29,6 +32,10 @@ export default function WorkoutForm({ data }: any) {
             setError(error as string)
             console.log(error);
         }
+    };
+
+    const handleDateChange = (date: any) => {
+        setSelectedDate(date);
     };
 
     const workoutInfo = (
@@ -75,6 +82,19 @@ export default function WorkoutForm({ data }: any) {
         </div>
     );
 
+    const datePicker = (
+        <div>
+            <label className="block text-sm/6 font-medium text-gray-900">Workout Date</label>
+            <DatePicker
+                className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
+                selected={selectedDate}
+                onChange={handleDateChange}
+                dateFormat="yyyy-MM-dd"
+                required
+            />
+        </div>
+    );
+
 
     return (
         <form ref={ref} action={handleSubmit}>
@@ -85,6 +105,7 @@ export default function WorkoutForm({ data }: any) {
                     <div className="mt-6">
                         {workoutInfo}
                         {workoutDescription}
+                        {datePicker}
                     </div>
                 </div>
             </div>

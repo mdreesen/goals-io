@@ -145,12 +145,6 @@ export default function BookForm() {
         </div>
     );
 
-    // const images = useBookAPI?.items?.map((item: any, index: number) => {
-    //     const useFirstBook = item?.volumeInfo?.imageLinks?.thumbnail && index === 0;
-    //     return useFirstBook && <img key={item?.id} src={`${item?.volumeInfo?.imageLinks?.thumbnail}`} alt={`The cover for ${item.volumeInfo.title}`} />
-    // })
-
-
     return (
         <form ref={ref} action={handleSubmit}>
             <div className="space-y-12">

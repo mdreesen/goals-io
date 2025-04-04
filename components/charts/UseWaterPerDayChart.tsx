@@ -4,7 +4,7 @@ import React from "react";
 import { CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 // https://stackoverflow.com/questions/50078787/recharts-set-y-axis-range
 
-export const UseWaterPerDay = ({ data }: any) => {
+export const UseWaterPerDayChart = ({ data }: any) => {
 
   return (
     <ResponsiveContainer width='100%' height={300}>

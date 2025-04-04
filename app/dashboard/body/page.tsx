@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 
 export default async function Page() {
     const useSettings = await fetchSettings() ?? [];
-    const { useShowWaterIntake, useShowWeight, useShowFasting } = useSettings;
+    const { useShowWaterIntake, useShowWeight, useShowFasting, useShowWorkout } = useSettings;
 
     const dividerOne = useShowWaterIntake?.value || useShowWeight?.value;
     const dividerTwo = useShowWeight?.value;
@@ -50,7 +50,7 @@ export default async function Page() {
         </>
     );
 
-    const useWorkout = useShowWeight?.value && (
+    const useWorkout = useShowWorkout?.value && (
         <>
             <Suspense fallback={<LoadingScale />}>
                 <Workout />

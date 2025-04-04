@@ -3,7 +3,7 @@
 import React from "react";
 import { CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 
-export const UseWeightPerDay = ({ data }: any) => {
+export const UseWeightPerDayChart = ({ data }: any) => {
 
   return (
     <ResponsiveContainer width='100%' height={300}>
