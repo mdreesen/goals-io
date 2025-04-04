@@ -1,7 +1,7 @@
 'use client'
 import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { addWorkout } from "@/actions/workout";
+import { editWorkout } from "@/actions/workout";
 import Link from 'next/link';
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import workout_type from '@/lib/dropdown/workout_type.json';
@@ -17,7 +17,8 @@ export default function WorkoutForm({ data }: any) {
     const handleSubmit = async (formData: FormData) => {
         try {
 
-            await addWorkout({
+            await editWorkout({
+                _id: data?.workoutData?._id,
                 type: formData.get("type"),
                 description: formData.get("description"),
                 date: data?.date,
@@ -41,7 +42,7 @@ export default function WorkoutForm({ data }: any) {
                     id="type"
                     name="type"
                     autoComplete="type"
-
+                    defaultValue={data?.workoutData?.type ?? ''}
                     className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pl-3 pr-8 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
                 >
                     {workout_type.map((item) => (
@@ -69,7 +70,7 @@ export default function WorkoutForm({ data }: any) {
                     rows={3}
                     className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
                     placeholder="Describe your workout"
-                    defaultValue={''}
+                    defaultValue={data?.workoutData?.description ?? ''}
                 />
             </div>
         </div>
@@ -81,7 +82,7 @@ export default function WorkoutForm({ data }: any) {
             <div className="space-y-12">
                 <div className="border-b border-gray-900/10 pb-12">
                     <h2 className="text-base/7 font-semibold text-gray-900">Workout Information</h2>
-                    <p className="mt-1 text-sm/6 text-gray-600">Insert your workout.</p>
+                    <p className="mt-1 text-sm/6 text-gray-600">Update your workout.</p>
                     <div className="mt-6">
                         {workoutInfo}
                         {workoutDescription}

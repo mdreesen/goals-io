@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import Weight from '@/ui/weight/Weight';
 import NutritionWater from "@/ui/nutrition/NutritionWater";
 import Fasting from "@/ui/nutrition/Fasting";
+import Workout from "@/ui/workout/Workout";
 import LoadingScale from "@/components/loaders/LoadingScale";
 import { fetchSettings } from "@/actions/settings";
 import type { Metadata } from "next";
@@ -45,6 +46,15 @@ export default async function Page() {
             <Suspense fallback={<LoadingScale />}>
                 <Weight />
             </Suspense>
+            {dividerTwo && <div className="border-t border-black/20"></div>}
+        </>
+    );
+
+    const useWorkout = useShowWeight?.value && (
+        <>
+            <Suspense fallback={<LoadingScale />}>
+                <Workout />
+            </Suspense>
         </>
     );
 
@@ -53,6 +63,7 @@ export default async function Page() {
             {useFasting}
             {useWater}
             {useWeight}
+            {useWorkout}
         </div>
     )
 }

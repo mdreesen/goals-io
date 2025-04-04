@@ -77,6 +77,13 @@ const weightSchema = new Schema(
         starting_weight: Boolean || undefined
     }, { timestamps: false });
 
+const workoutSchema = new Schema(
+    {
+        type: String || undefined,
+        description: String || undefined,
+        date: String || undefined,
+    }, { timestamps: false });
+
 const userSchema = new Schema(
     {
         username: String,
@@ -97,11 +104,12 @@ const userSchema = new Schema(
         bibles: [bibleSchema],
         books: [bookSchema],
         fasting: [fastingSchema],
-        journal: [journalSchema],
-        weight: [weightSchema],
-        water: [waterIntakeSchema],
         habits: [habitsSchema],
+        journal: [journalSchema],
         settings: [settingsSchema],
+        water: [waterIntakeSchema],
+        weight: [weightSchema],
+        workout: [workoutSchema],
         resetPasswordToken: String,
         privacy_policy: Boolean,
         createdAt: String,
