@@ -15,7 +15,7 @@ export async function fetchWorkout() {
 
         return {
             data: data[0].workout.reverse(),
-            limited: limited[0].workout ?? [],
+            limited: limited[0].workout.reverse() ?? [],
             totalWorkouts: data[0].workout.length.toString()
         }
 
@@ -66,8 +66,8 @@ export async function deleteWorkout(values: any) {
         await connectDB();
 
         await User.findOneAndUpdate(
-            { 'weight._id': id },
-            { $pull: { 'weight': { _id: id } } },
+            { 'workout._id': id },
+            { $pull: { 'workout': { _id: id } } },
             { new: true });
 
         revalidatePath('/dashboard/body');

@@ -20,8 +20,9 @@ export default async function Page() {
     const useSettings = await fetchSettings() ?? [];
     const { useShowWaterIntake, useShowWeight, useShowFasting, useShowWorkout } = useSettings;
 
-    const dividerOne = useShowWaterIntake?.value || useShowWeight?.value;
-    const dividerTwo = useShowWeight?.value;
+    const dividerOne = useShowWaterIntake?.value || useShowWeight?.value || useShowWorkout?.value;
+    const dividerTwo = useShowWeight?.value || useShowWorkout?.value;
+    const dividerThree = useShowWorkout?.value;
 
     const useFasting = useShowFasting?.value && (
         <>
@@ -46,7 +47,7 @@ export default async function Page() {
             <Suspense fallback={<LoadingScale />}>
                 <Weight />
             </Suspense>
-            {dividerTwo && <div className="border-t border-black/20"></div>}
+            {dividerThree && <div className="border-t border-black/20"></div>}
         </>
     );
 

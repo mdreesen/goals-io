@@ -15,7 +15,6 @@ export const UseWorkoutPerMonthChart = ({ data }: any) => {
   const [selectedYear, setSelectedYear] = useState(data?.years[0]);
   const [loading, setLoading] = useState(false);
 
-console.log(chartData)
   useEffect(() => {
     const fetchData = async () => {
       const data = await workoutsPerYear(selectedYear);
