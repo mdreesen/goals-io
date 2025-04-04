@@ -84,6 +84,24 @@ export default function EditWorkoutForm({ data }: any) {
         </div>
     );
 
+    const workoutSets = (
+        <div className="col-span-full mt-4">
+            <label htmlFor="sets" className="block text-sm/6 font-medium text-gray-900">
+                sets
+            </label>
+            <div className="mt-2">
+                <textarea
+                    id="sets"
+                    name="sets"
+                    rows={3}
+                    className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
+                    placeholder="Workout sets"
+                    defaultValue={data?.workoutData?.sets ?? ''}
+                />
+            </div>
+        </div>
+    );
+
     const datePicker = (
         <div className="mt-4">
             <label className="block text-sm/6 font-medium text-gray-900">Workout Date</label>
@@ -107,6 +125,7 @@ export default function EditWorkoutForm({ data }: any) {
                     <div className="mt-6">
                         {workoutInfo}
                         {workoutDescription}
+                        {workoutSets}
                         {datePicker}
                     </div>
                 </div>

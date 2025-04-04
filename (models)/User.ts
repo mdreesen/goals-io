@@ -81,6 +81,7 @@ const workoutSchema = new Schema(
     {
         type: String || undefined,
         description: String || undefined,
+        sets: String || undefined,
         date: String || undefined,
     }, { timestamps: false });
 
