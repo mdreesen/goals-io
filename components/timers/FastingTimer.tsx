@@ -77,6 +77,7 @@ export default function FastingTimer({ fastData }: any) {
             _id: fastData?.user?._id,
             start: false,
             ended: true,
+            completed: fastingEnded
         });
     };
 
