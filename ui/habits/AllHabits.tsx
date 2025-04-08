@@ -1,6 +1,8 @@
 import { filterHabits } from '@/actions/habits';
 import Link from 'next/link';
 import HabitList from '@/components/lists/HabitList';
+import ButtonGoTo from '@/components/buttons/ButtonGoTo';
+import ButtonBack from '@/components/buttons/ButtonBack';
 
 export default async function Habits() {
     const filteredHabits = await filterHabits() as any;
@@ -46,25 +48,24 @@ export default async function Habits() {
     );
 
     const useDoneHabits = renderDoneHabits && (
-        <ul role="list" className="divide-y divide-gray-100 border border-blue-500 rounded-md">
+        <ul role="list" className="divide-y divide-gray-100 border border-black rounded-md mt-4">
+            <h3 className="text-lg font-semibold text-gray-900 p-4">Your done habits</h3>
             <HabitList data={done_habits_arr} />
         </ul>
     );
+
 
     return (
         <div className="px-4 sm:px-2 lg:px-4">
             <h2 className="text-3xl font-semibold text-gray-900">Habits</h2>
 
             <div className="flex justify-end mt-4 mb-4 sm:mt-0 sm:flex-none">
-                <Link href={'/dashboard/mind/habits/create'}>
-                    <button
-                        type="button"
-                        className="block rounded-md bg-gray-800 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-gray-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-900"
-                    >
-                        Add habit
-                    </button>
-                </Link>
+                <div className="flex flex-col gap-4">
+                    <ButtonGoTo title='Add habit' path={'/dashboard/mind/habits/create'} />
+                    <ButtonBack path={'/dashboard/mind'} />
+                </div>
             </div>
+            
             {useNone && <h3>Add your Habits!</h3>}
             {usePersonalHabits}
             {useFamilyHabits}

@@ -1,6 +1,6 @@
 import { filterHabits } from '@/actions/habits';
-import Link from 'next/link';
 import HabitList from '@/components/lists/HabitList';
+import ButtonGoTo from '@/components/buttons/ButtonGoTo';
 
 export default async function Habits() {
     const filteredHabits = await filterHabits() as any;
@@ -10,14 +10,12 @@ export default async function Habits() {
     const family_habits_arr = filteredHabits?.family_habits;
     const marriage_habits_arr = filteredHabits?.marriage_habits;
     const community_habits_arr = filteredHabits?.community_habits;
-    const done_habits_arr = filteredHabits?.done_habits;
 
     // Render habits sections
     const renderPersonalHabits = filteredHabits.use_personal_habits;
     const renderFamilyHabits = filteredHabits.use_family_habits;
     const renderMarriageHabits = filteredHabits.use_marriage_habits;
     const renderCommunityHabits = filteredHabits.use_community_habits;
-    const renderDoneHabits = filteredHabits.use_done_habits;
 
     // No habits
     const useNone = filteredHabits?.none_habits;
@@ -46,34 +44,20 @@ export default async function Habits() {
         </ul>
     );
 
-    const useDoneHabits = renderDoneHabits && (
-        <ul role="list" className="divide-y divide-gray-100 border border-black rounded-md mt-4">
-            <h3 className="text-lg font-semibold text-gray-900 p-4">Your done habits</h3>
-            <HabitList data={done_habits_arr} />
-        </ul>
-    );
-
     return (
         <div className="px-4 sm:px-2 lg:px-4">
             <h2 className="text-3xl font-semibold text-gray-900">Habits</h2>
 
-            <div className="flex justify-end mt-4 mb-4 sm:mt-0 sm:flex-none">
-                <Link href={'/dashboard/mind/habits/create'}>
-                    <button
-                        type="button"
-                        className="block rounded-md bg-gray-800 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-gray-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-900"
-                    >
-                        Add habit
-                    </button>
-                </Link>
+            <div className="flex gap-4 w-full justify-between my-4">
+                <ButtonGoTo title='See all habits' path={'/dashboard/mind/habits/all'} />
+                <ButtonGoTo title='Add habit' path={'/dashboard/mind/habits/create'} />
             </div>
+
             {useNone && <h3>Add your Habits!</h3>}
             {usePersonalHabits}
             {useFamilyHabits}
             {useMarriageHabits}
             {useCommunityHabits}
-
-            {useDoneHabits}
         </div>
     )
 }

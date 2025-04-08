@@ -2,7 +2,7 @@
 import { Label, Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/react'
 import { ChevronUpDownIcon } from '@heroicons/react/16/solid'
 import { CheckIcon } from '@heroicons/react/20/solid'
-import { workoutsPerYear, workoutYears } from "@/actions/charts";
+import { workoutsPerYear, workoutYears } from "@/actions/charts/workoutChart";
 import LoadingScale from '../loaders/LoadingScale';
 
 import React, { useEffect, useState } from "react"
