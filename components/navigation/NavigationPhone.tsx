@@ -50,7 +50,7 @@ export default function NavigationPhone({ settings }: any) {
     ]
 
     return (
-        <nav className="bg-transparent backdrop-blur-md sm:block md:hidden lg:hidden h-[6rem] fixed bottom-0 w-full z-50">
+        <nav className="bg-transparent backdrop-blur-[8px] sm:block md:hidden lg:hidden h-[6rem] fixed bottom-0 w-full z-50">
             <ul className='flex justify-around h-[100%] content-center items-center'>
                 {links.map((item) => item?.useNav && (
                     <Link href={item.href} key={item.id}>
