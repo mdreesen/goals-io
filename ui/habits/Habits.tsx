@@ -46,7 +46,7 @@ export default async function Habits() {
 
     return (
         <div className="px-4 sm:px-2 lg:px-4">
-            <h2 className="text-3xl font-semibold text-gray-900">Habits</h2>
+            <h2 className="mt-2 max-w-lg text-pretty text-4xl font-semibold tracking-tight text-gray-950 sm:text-5xl">Habits</h2>
 
             <div className="flex gap-4 w-full justify-between my-4">
                 <ButtonGoTo title='See all habits' path={'/dashboard/mind/habits/all'} />

@@ -70,8 +70,7 @@ export default async function Overview() {
     );
 
     return (
-        <div>
-            {/* <h3 className="text-base font-semibold text-gray-900">Overview</h3> */}
+        <div className='p-2'>
             <dl className="mt-5 grid grid-cols-1 divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow md:grid-cols-3 md:divide-x md:divide-y-0">
                 {weight}
                 {books}

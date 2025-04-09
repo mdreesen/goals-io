@@ -11,7 +11,7 @@ export default async function Weight() {
     <div className="px-4 sm:px-2 lg:px-4">
       <div className="sm:flex sm:items-center">
         <div className="sm:flex-auto">
-          <h2 className="text-3xl font-semibold text-gray-900">Weight</h2>
+          <h2 className="mt-2 max-w-lg text-pretty text-4xl font-semibold tracking-tight text-gray-950 sm:text-5xl">Weight</h2>
           <div>
             <span className="py-2 text-left text-sm font-bold text-gray-900 sm:pl-0">
               {useWeight.startingWeight && 'Notables'}

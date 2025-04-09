@@ -18,9 +18,8 @@ export default async function NutritionWater() {
 
       <h4 className="sr-only">Water Intake</h4>
       <p className="text-sm font-medium text-gray-900">Water Intake</p>
-      {/* <p className="text-sm font-medium text-gray-900">Date ({useAllWaterForToday.date_day_time})</p> */}
       <div className="flex justify-between">
-        <p className="text-sm font-medium text-gray-900">{formatWaterIntakeToday}</p>
+        <p className="text-sm text-indigo-900 font-semibold">{formatWaterIntakeToday}</p>
         <p className="text-sm font-medium text-gray-900">{formatTotalWaterIntake}</p>
       </div>
       <div aria-hidden="true" className="mt-6">
@@ -41,7 +40,7 @@ export default async function NutritionWater() {
 
   return (
     <div className="px-4 sm:px-2 lg:px-4">
-      <h2 className="text-3xl font-semibold text-gray-900">Nutrition</h2>
+      <h2 className="mt-2 max-w-lg text-pretty text-4xl font-semibold tracking-tight text-gray-950 sm:text-5xl">Nutrition</h2>
       {water}
     </div>
   )

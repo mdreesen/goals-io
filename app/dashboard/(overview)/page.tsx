@@ -32,53 +32,82 @@ export default async function Page() {
     const showWeight = useSettings.useShowWeight?.value && weightPerMonth.length > 0;
     const showWorkout = useSettings.useShowWorkout?.value;
 
-    const bookSection = showBooks && (
-        <div className="relative lg:col-span-3 border-solid rounded-md p-2 content-center">
-            <h2 className="text-base/7 font-semibold text-indigo-900">Books Per Month</h2>
-            <Suspense fallback={<ChartSkeleton />}>
-                <UseBooksPerMonthChart data={parse(booksPerMonth)} />
-            </Suspense>
+    // Books per month chart
+    const chartOne = showBooks && (
+        <div className="relative lg:col-span-3">
+            <div className="absolute inset-px rounded-lg bg-white max-lg:rounded-t-[2rem] lg:rounded-tl-[2rem]" />
+            <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] max-lg:rounded-t-[calc(2rem+1px)] lg:rounded-tl-[calc(2rem+1px)] p-4">
+                <h2 className="text-base/7 font-semibold text-indigo-900">Books</h2>
+                <Suspense fallback={<ChartSkeleton />}>
+                    <UseBooksPerMonthChart data={parse(booksPerMonth)} />
+                </Suspense>
+            </div>
+            <div className="pointer-events-none absolute inset-px rounded-lg shadow ring-1 ring-black/5 max-lg:rounded-t-[2rem] lg:rounded-tl-[2rem]" />
         </div>
     );
 
-    const waterSection = showWater && (
-        <div className="relative lg:col-span-3 border-solid rounded-md p-2 content-center">
-            <h2 className="text-base/7 font-semibold text-indigo-900">Water Per Day</h2>
-            <Suspense fallback={<ChartSkeleton />}>
-                <UseWaterPerDayChart data={parse(waterPerDay)} />
-            </Suspense>
+    // Water per day chart
+    const chartTwo = showWater && (
+        <div className="relative lg:col-span-3">
+            <div className="absolute inset-px rounded-lg bg-white lg:rounded-tr-[2rem]" />
+            <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] lg:rounded-tr-[calc(2rem+1px)] p-4">
+                <h2 className="text-base/7 font-semibold text-indigo-900">Water</h2>
+                <Suspense fallback={<ChartSkeleton />}>
+                    <UseWaterPerDayChart data={parse(waterPerDay)} />
+                </Suspense>
+            </div>
+            <div className="pointer-events-none absolute inset-px rounded-lg shadow ring-1 ring-black/5 lg:rounded-tr-[2rem]" />
         </div>
     );
 
-    const weightSection = showWeight && (
-        <div className="relative lg:col-span-3 border-solid rounded-md p-2 content-center">
-            <h2 className="text-base/7 font-semibold text-indigo-900">Weight Per Day</h2>
-            <Suspense fallback={<ChartSkeleton />}>
-                <UseWeightPerDayChart data={parse(weightPerMonth)} />
-            </Suspense>
+    // Weight per day chart
+    const chartThree = showWeight && (
+        <div className="relative lg:col-span-3">
+            <div className="absolute inset-px rounded-lg bg-white lg:rounded-bl-[2rem]" />
+            <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] lg:rounded-bl-[calc(2rem+1px)] p-4">
+                <h2 className="text-base/7 font-semibold text-indigo-900">Weight</h2>
+                <Suspense fallback={<ChartSkeleton />}>
+                    <UseWeightPerDayChart data={parse(weightPerMonth)} />
+                </Suspense>
+            </div>
+            <div className="pointer-events-none absolute inset-px rounded-lg shadow ring-1 ring-black/5 lg:rounded-bl-[2rem]" />
         </div>
     );
 
-    const workoutSection = showWorkout && (
-        <div className="relative lg:col-span-3 border-solid rounded-md p-2 content-center">
-            <h2 className="text-base/7 font-semibold text-indigo-900">Workouts Per Month</h2>
-            <Suspense fallback={<ChartSkeleton />}>
-                <UseWorkoutPerMonthChart data={parse(workoutPerMonth)} />
-            </Suspense>
+    // Workout per day chart
+    const chartFour = showWorkout && (
+        <div className="relative lg:col-span-3">
+            <div className="absolute inset-px rounded-lg bg-white" />
+            <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] p-4">
+                <h2 className="text-base/7 font-semibold text-indigo-900">Workouts</h2>
+                <Suspense fallback={<ChartSkeleton />}>
+                    <UseWorkoutPerMonthChart data={parse(workoutPerMonth)} />
+                </Suspense>
+            </div>
+            <div className="pointer-events-none absolute inset-px rounded-lg shadow ring-1 ring-black/5" />
         </div>
     );
 
     return (
-        <div className="bg-white py-12 sm:py-12">
-            <div className="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8">
-                <h2 className="text-3xl font-semibold text-gray-900">Overview</h2>
+        <div className="py-12 sm:py-12">
+            <div>
+                <h2 className="mt-2 max-w-lg text-pretty text-4xl font-semibold tracking-tight text-gray-950 sm:text-5xl">Overview</h2>
                 <Overview />
-                <div className="mt-10 grid grid-cols-1 gap-4 sm:mt-16 lg:grid-cols-6 lg:grid-rows-2">
-                    {bookSection}
-                    {waterSection}
-                    {weightSection}
-                    {workoutSection}
+
+                <div className="bg-white py-24 sm:py-32">
+                    <div className="mx-auto">
+                        <p className="mt-2 max-w-lg text-pretty text-4xl font-semibold tracking-tight text-gray-950 sm:text-5xl">
+                            Progress
+                        </p>
+                        <div className="mt-10 grid grid-cols-1 gap-4 sm:mt-16 lg:grid-cols-6 lg:grid-rows-2">
+                            {chartOne}
+                            {chartTwo}
+                            {chartThree}
+                            {chartFour}
+                        </div>
+                    </div>
                 </div>
+
             </div>
         </div>
     )

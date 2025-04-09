@@ -156,15 +156,6 @@ export default function FastingTimer({ fastData }: any) {
         </button>
     );
 
-    // const buttonTest = (
-    //     <button
-    //         onClick={() => handleStartFasting(.01)}
-    //         className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-    //     >
-    //         Test Button
-    //     </button>
-    // );
-
     const buttonEndFast = (
         <button
             onClick={handleEndFasting}
@@ -182,7 +173,9 @@ export default function FastingTimer({ fastData }: any) {
             <div aria-hidden="true" className="mt-6">
                 {timeLeft && (
                     <div className="flex justify-between">
-                        <p className="text-sm font-medium text-gray-900">{`Time left ${formatTime(timeLeft.hours)}:${formatTime(timeLeft.minutes)}:${formatTime(timeLeft.seconds)}`}</p>
+                        <p className="text-sm font-medium flex gap-1">
+                            <span>Time left:</span>
+                            <span className='text-indigo-900 font-semibold'>{`${formatTime(timeLeft.hours)}:${formatTime(timeLeft.minutes)}:${formatTime(timeLeft.seconds)}`}</span></p>
                         <p className="text-sm font-medium text-gray-900">{`${fastData.user.duration} hours`}</p>
                     </div>
                 )}

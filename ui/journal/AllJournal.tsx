@@ -70,7 +70,7 @@ export default async function Journal() {
 
     return (
         <div className="px-4 sm:px-2 lg:px-4">
-            <h2 className="text-3xl font-semibold text-gray-900">Journal</h2>
+            <h2 className="mt-2 max-w-lg text-pretty text-4xl font-semibold tracking-tight text-gray-950 sm:text-5xl">Journal</h2>
             <div className="flex justify-end mt-4 mb-4 sm:mt-0 sm:flex-none">
                 <div className="flex flex-col gap-4">
                     <ButtonGoTo title='Add entry' path={'/dashboard/spirit/journal/create'} />
