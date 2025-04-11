@@ -35,6 +35,8 @@ export default function Page() {
     }
     // If everything passes, lets log them in
     else {
+      setLoading(true);
+
       await signIn("credentials", {
         email: formData.get("email"),
         password: formData.get("password"),

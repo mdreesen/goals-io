@@ -86,45 +86,16 @@ export default function Page() {
             </div>
 
             <div className="flex items-center justify-between">
-              <div className="flex gap-3">
-                <div className="flex h-6 shrink-0 items-center">
-                  <div className="group grid size-4 grid-cols-1">
-                    <input
-                      id="remember-me"
-                      name="remember-me"
-                      type="checkbox"
-                      className="col-start-1 row-start-1 appearance-none rounded border border-gray-300 bg-white checked:border-gray-900 checked:bg-gray-900 indeterminate:border-gray-900 indeterminate:bg-gray-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900 disabled:border-gray-300 disabled:bg-gray-100 disabled:checked:bg-gray-100 forced-colors:appearance-auto"
-                    />
-                    <svg
-                      fill="none"
-                      viewBox="0 0 14 14"
-                      className="pointer-events-none col-start-1 row-start-1 size-3.5 self-center justify-self-center stroke-white group-has-[:disabled]:stroke-gray-950/25"
-                    >
-                      <path
-                        d="M3 8L6 11L11 3.5"
-                        strokeWidth={2}
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="opacity-0 group-has-[:checked]:opacity-100"
-                      />
-                      <path
-                        d="M3 7H11"
-                        strokeWidth={2}
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="opacity-0 group-has-[:indeterminate]:opacity-100"
-                      />
-                    </svg>
-                  </div>
-                </div>
-                <label htmlFor="remember-me" className="block text-sm/6 text-gray-900">
-                  Remember me
-                </label>
-              </div>
 
               <div className="text-sm/6">
                 <Link href="/authentication/reset-password" className="font-semibold text-gray-900 hover:text-gray-400">
                   Forgot password?
+                </Link>
+              </div>
+
+              <div className="text-sm/6">
+                <Link href="/privacy-policy" className="leading-6 block text-sm/6 font-medium text-gray-900 hover:text-gray-400">
+                  Privacy Policy
                 </Link>
               </div>
             </div>
@@ -145,13 +116,7 @@ export default function Page() {
 
           <div className="text-red-500">{error}</div>
 
-          <div className="flex justify-between">
-            <p className="mt-10 text-center text-sm text-gray-900">
-              <Link href="/privacy-policy" className="leading-6 block text-sm/6 font-medium text-gray-900 hover:text-gray-400">
-                Privacy Policy
-              </Link>
-            </p>
-
+          <div className="flex justify-center">
             <p className="mt-10 text-center text-sm text-gray-900">
               <Link href="/authentication/signup" className="leading-6 block text-sm/6 font-medium text-gray-900 hover:text-gray-400">
                 Do not have an account?
