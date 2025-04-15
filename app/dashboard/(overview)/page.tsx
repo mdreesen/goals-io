@@ -91,7 +91,7 @@ export default async function Page() {
     return (
         <div className="py-12 sm:py-12">
             <div>
-                <h2 className="mt-2 max-w-lg text-pretty text-4xl font-semibold tracking-tight text-gray-950 sm:text-5xl mb-6">Recapitulation</h2>
+                <h2 className="mt-2 max-w-lg text-pretty text-4xl font-semibold tracking-tight text-gray-950 sm:text-5xl mb-6">RECAPITULATION</h2>
                 <Overview />
 
                 <div className="bg-white py-24 sm:py-32">
