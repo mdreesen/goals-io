@@ -1,5 +1,6 @@
 import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/20/solid';
 import { fetchOverview } from '@/actions/overview';
+import AnimatedCounter from '@/components/animations/AnimatedCounter';
 
 function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(' ')
@@ -15,7 +16,7 @@ export default async function Overview() {
             <dd className="mt-1 flex items-baseline justify-between md:block lg:flex">
                 <div className="flex items-baseline text-2xl font-semibold text-white">
                     {useOverview?.weightOverview.data.length === 0 && <span className="text-sm font-medium text-white">No weight taken</span>}
-                    {useOverview?.weightOverview.data.length > 0 && useOverview?.weightOverview.dataToDate?.weight}
+                    {useOverview?.weightOverview.data.length > 0 && <AnimatedCounter number={useOverview?.weightOverview.dataToDate?.weight} decimals={1} />}
                     {useOverview?.weightOverview.data.length > 0 && <span className="ml-2 text-sm font-medium text-white">from {useOverview?.weightOverview.startingWeight?.weight}</span>}
                 </div>
 
@@ -45,12 +46,12 @@ export default async function Overview() {
             <dt className="text-base font-normal text-white">Books</dt>
             <dd className="mt-1 flex items-baseline justify-between md:block lg:flex">
                 <div className="flex items-baseline text-2xl font-semibold text-white">
-                    {useOverview.bookOverview.booksStartedToYear}
+                    <AnimatedCounter number={useOverview.bookOverview.booksStartedToYear} />
                     <span className="ml-2 text-sm font-medium text-white">Started</span>
                 </div>
 
                 <div className="flex items-baseline text-2xl font-semibold text-white">
-                    {useOverview.bookOverview.booksEndedToYear}
+                    <AnimatedCounter number={useOverview.bookOverview.booksEndedToYear} />
                     <span className="ml-2 text-sm font-medium text-white">Finished</span>
                 </div>
             </dd>
@@ -62,7 +63,7 @@ export default async function Overview() {
             <dt className="text-base font-normal text-white">Water</dt>
             <dd className="mt-1 flex items-baseline justify-between md:block lg:flex">
                 <div className={`flex items-baseline text-2xl font-semibold ${useOverview.waterOverview?.congrats ? 'text-green-500' : 'text-white'}`}>
-                    {useOverview.waterOverview.waterIntakeToday?.water_intake && `${useOverview.waterOverview.waterIntakeToday?.water_intake} oz.`}
+                    {useOverview.waterOverview.waterIntakeToday?.water_intake && <AnimatedCounter number={useOverview.waterOverview.waterIntakeToday?.water_intake} decimals={0} suffix={'oz.'} />}
                     <span className="ml-2 text-sm font-medium text-white">from total {useOverview.waterOverview?.total_water}</span>
                 </div>
             </dd>

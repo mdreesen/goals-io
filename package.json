@@ -1,6 +1,6 @@
 {
   "name": "goals-io",
-  "version": "0.5.1.1",
+  "version": "0.5.1.2",
   "private": true,
   "description": "Set goals. Achieve greatness.",
   "main": "index.js",
@@ -24,6 +24,7 @@
     "bcryptjs": "^2.4.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "count-up": "^1.0.4",
     "date-fns": "^3.6.0",
     "framer-motion": "^12.6.3",
     "full-icu": "^1.5.0",
@@ -36,6 +37,7 @@
     "next-pwa": "^5.6.0",
     "nodemailer": "^6.10.0",
     "react": "19.0.0",
+    "react-countup": "^6.5.3",
     "react-datepicker": "^7.5.0",
     "react-day-picker": "^8.10.1",
     "react-dom": "^19.0.0",
