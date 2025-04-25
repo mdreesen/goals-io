@@ -10,8 +10,12 @@ import { date_today, date_time_today } from '@/lib/date_time';
 export async function createWaterIntake(values: any) {
     const session = await getServerSession();
 
+    const waterIsNumber = !isNaN(+values.water_intake);
+
     try {
         await connectDB();
+
+        if (!waterIsNumber) throw new Error('Please insert a number');
 
         await User.findOneAndUpdate({ email: session?.user.email }, { $addToSet: { water: { ...values } } }, { new: true });
 
@@ -26,8 +30,12 @@ export async function createWaterIntake(values: any) {
 export async function editWaterIntake(values: any) {
     const { _id } = values;
 
+    const waterIsNumber = !isNaN(+values.water_intake);
+
     try {
         await connectDB();
+
+        if (!waterIsNumber) throw new Error('Please insert a number');
 
         await User.findOneAndUpdate(
             { 'water._id': _id },
