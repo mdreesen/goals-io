@@ -34,6 +34,7 @@ export default async function Books() {
 
                     const useBookStartDate = item.book_start_date ? `Start Date ${formatDateAndTime(item.book_start_date)}` : '';
                     const useBookEndDate = item.book_end_date ? `End Date ${formatDateAndTime(item.book_end_date)}` : 'Currently Reading';
+                    const hasBookList = item?.booklist === 'No' || !item?.booklist;
 
                     return (
                         <div
@@ -47,8 +48,9 @@ export default async function Books() {
                                         <p className="text-sm text-gray-500">{item.book_author}</p>
                                         <p className="text-sm text-gray-500">{item.kind_of_book}</p>
                                         <div className='flex flex-col lg:flex-row lg:gap-4'>
-                                            <p className="text-sm text-gray-500">{useBookStartDate}</p>
-                                            <p className="text-sm text-gray-500">{item.booklist === 'No' && useBookEndDate}</p>
+                                            {hasBookList && <p className="text-sm text-gray-500">{useBookStartDate}</p>}
+                                            {hasBookList && <p className="text-sm text-gray-500">{useBookEndDate}</p>}
+                                            {!hasBookList && <p className="text-sm text-gray-500">On your book list (future reads)</p>}
                                         </div>
                                     </div>
                                     {item.book_image && item.book_image !== 'false' && (
