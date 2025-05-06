@@ -19,9 +19,9 @@ export async function fetchWorkout() {
             totalWorkouts: data[0].workout.length.toString()
         }
 
-    } catch (e) {
-        console.log(e);
-        return e;
+    } catch (error) {
+        console.log(error);
+        return error;
     }
 };
 
@@ -33,9 +33,9 @@ export async function addWorkout(values: any) {
 
         await User.findOneAndUpdate({ email: session?.user.email }, { $addToSet: { workout: { ...values } } }, { new: true });
 
-    } catch (e) {
-        console.log(e)
-        return e
+    } catch (error) {
+        console.log(error)
+        return error
     }
 };
 
@@ -53,9 +53,9 @@ export async function editWorkout(values: any) {
         revalidatePath('/dashboard/body');
 
 
-    } catch (e) {
-        console.log(e)
-        return e
+    } catch (error) {
+        console.log(error)
+        return error
     }
 };
 
@@ -73,9 +73,9 @@ export async function deleteWorkout(values: any) {
         revalidatePath('/dashboard/body');
 
 
-    } catch (e) {
-        console.log(e)
-        return e
+    } catch (error) {
+        console.log(error)
+        return error
     }
 };
 
@@ -95,8 +95,8 @@ export async function fetchWorkoutById(values: any) {
 
         return workout[0]
 
-    } catch (e) {
-        console.log(e);
-        return e;
+    } catch (error) {
+        console.log(error);
+        return error;
     }
 };

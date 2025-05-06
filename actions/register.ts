@@ -20,8 +20,8 @@ export async function settings() {
         
         return useSettings;
 
-    } catch (e) {
-        console.log(e);
+    } catch (error) {
+        console.log(error);
     }
 }
 
@@ -58,7 +58,7 @@ export async function register(values: any) {
 
         await user.save();
 
-    } catch (e) {
-        console.log(e);
+    } catch (error) {
+        console.log(error);
     }
 }

@@ -29,9 +29,9 @@ export async function deleteUser() {
         await User.deleteOne({ email: session?.user.email });
 
 
-    } catch (e) {
-        console.log(e)
-        return e
+    } catch (error) {
+        console.log(error)
+        return error
     }
 };
 
@@ -53,9 +53,9 @@ export async function updateUserPassword(values: any) {
             password: hashedPassword
         });
 
-    } catch (e) {
-        console.log(e)
-        return e
+    } catch (error) {
+        console.log(error)
+        return error
     }
 };
 

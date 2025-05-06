@@ -2,7 +2,6 @@
 import { connectDB } from "@/lib/mongodb";
 import User from "@/(models)/User";
 import { getServerSession } from "next-auth/next";
-import { current_year } from '@/lib/date_time';
 
 export async function weightByMonth() {
     const session = await getServerSession();
@@ -14,8 +13,8 @@ export async function weightByMonth() {
 
         return data[0]?.weight ?? [];
 
-    } catch (e) {
-        console.log(e);
-        return e;
+    } catch (error) {
+        console.log(error);
+        return error;
     }
 };

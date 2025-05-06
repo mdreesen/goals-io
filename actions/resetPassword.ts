@@ -48,7 +48,7 @@ export const resetPassword = async (values: any) => {
             await User.findOneAndUpdate({ email: email }, { resetPasswordToken: token })
         }
 
-    } catch (e) {
-        console.log(e);
+    } catch (error) {
+        console.log(error);
     }
 }

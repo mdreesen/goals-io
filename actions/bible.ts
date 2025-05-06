@@ -24,9 +24,9 @@ export async function fetchBible() {
             all: data
         }
 
-    } catch (e) {
-        console.log(e);
-        return e;
+    } catch (error) {
+        console.log(error);
+        return error;
     }
 };
 
@@ -39,9 +39,9 @@ export async function addBible(values: any) {
 
         await User.findOneAndUpdate({ email: session?.user.email }, { $addToSet: { bibles: { ...values } } }, { new: true });
 
-    } catch (e) {
-        console.log(e)
-        return e
+    } catch (error) {
+        console.log(error)
+        return error
     }
 };
 
@@ -59,9 +59,9 @@ export async function editBible(values: any) {
         revalidatePath('/dashboard/spirit');
 
 
-    } catch (e) {
-        console.log(e)
-        return e
+    } catch (error) {
+        console.log(error)
+        return error
     }
 };
 
@@ -79,9 +79,9 @@ export async function deleteBible(values: any) {
         revalidatePath('/dashboard/spirit');
 
 
-    } catch (e) {
-        console.log(e)
-        return e
+    } catch (error) {
+        console.log(error)
+        return error
     }
 };
 
@@ -101,8 +101,8 @@ export async function fetchBibleById(values: any) {
 
         return bibles[0]
 
-    } catch (e) {
-        console.log(e);
-        return e;
+    } catch (error) {
+        console.log(error);
+        return error;
     }
 };

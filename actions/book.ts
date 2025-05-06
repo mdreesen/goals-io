@@ -56,14 +56,16 @@ export async function fetchBooks() {
         const data = await User.find({ email: session?.user.email }, 'books');
 
         return {
-            limited: limited[0].books ?? [],
-            allData: data[0].books ?? [],
-            totalBooks: data[0].books.length.toString()
+            limited: limited[0].books.filter((item: any) => item.booklist === 'No' || !item.booklist) ?? [],
+            allData: data[0].books.filter((item: any) => item.booklist === 'No' || !item.booklist) ?? [],
+            totalBooks: data[0].books.filter((item: any) => item.booklist === 'No' || !item.booklist).length.toString(),
+            bookList: data[0].books.filter((item: any) => item.booklist === 'Yes'),
+            totalBookList: data[0].books.filter((item: any) => item.booklist === 'Yes').length.toString(),
         }
 
-    } catch (e) {
-        console.log(e);
-        return e;
+    } catch (error) {
+        console.log(error);
+        return error;
     }
 };
 
@@ -89,18 +91,38 @@ export async function addBook(values: any) {
 
         await User.findOneAndUpdate({ email: session?.user.email }, { $addToSet: { books: { ...values, book_image: useImage() } } }, { new: true });
 
-    } catch (e) {
-        console.log(e)
-        return e
+    } catch (error) {
+        console.log(error)
+        return error;
     }
 };
 
 export async function editBook(values: any) {
     const { _id } = values;
 
+    const useBookData = () => {
+
+        const isBookListed = {
+            book_title: values.book_title,
+            kind_of_book: values.kind_of_book,
+            book_author: values.book_author,
+            book_image: values.book_image,
+            notes: values.notes,
+            booklist: values.booklist
+        };
+
+        switch (true) {
+            case values.booklist === 'Yes':
+                return isBookListed
+                break;
+
+            default:
+                return values
+        }
+    };
+
     try {
         await connectDB();
-
         const useBookSearch = await bookSearch({ book_title: values.book_title, book_author: values.book_author });
         const useFindBook = await findBook({ data: useBookSearch });
 
@@ -116,15 +138,15 @@ export async function editBook(values: any) {
 
         await User.findOneAndUpdate(
             { 'books._id': _id },
-            { $set: { 'books.$': { ...values, book_image: useImage() } } },
+            { $set: { 'books.$': { ...useBookData(), book_image: useImage() } } },
             { new: true });
 
         revalidatePath('/dashboard/mind');
 
 
-    } catch (e) {
-        console.log(e)
-        return e
+    } catch (error) {
+        console.log(error);
+        return error;
     }
 };
 
@@ -142,9 +164,9 @@ export async function deleteBook(values: any) {
         revalidatePath('/dashboard/mind');
 
 
-    } catch (e) {
-        console.log(e)
-        return e
+    } catch (error) {
+        console.log(error);
+        return error;
     }
 };
 
@@ -164,9 +186,9 @@ export async function fetchBookById(values: any) {
 
         return books[0]
 
-    } catch (e) {
-        console.log(e);
-        return e;
+    } catch (error) {
+        console.log(error);
+        return error;
     }
 };
 
@@ -191,9 +213,9 @@ export async function booksByYear() {
             booksEndedToYear: booksEndedToYear
         }
 
-    } catch (e) {
-        console.log(e);
-        return e;
+    } catch (error) {
+        console.log(error);
+        return error;
     }
 };
 

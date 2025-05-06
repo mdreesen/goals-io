@@ -3,7 +3,7 @@ import Image from "next/image";
 import { fetchBooks } from '@/actions/book';
 import { formatDateAndTime } from '@/lib/formatters'
 import ButtonGoTo from "@/components/buttons/ButtonGoTo";
-import Results from "@/components/showing/Results";
+import ButtonBack from "@/components/buttons/ButtonBack";
 
 export default async function Books() {
 
@@ -14,23 +14,14 @@ export default async function Books() {
             <h2 className="mt-2 max-w-lg text-pretty text-4xl font-semibold tracking-tight text-gray-950 sm:text-5xl">Books</h2>
 
             <div className="flex justify-end mt-4 mb-4 sm:mt-0 sm:flex-none">
-                <div className="flex gap-4 w-full justify-between">
-                    <div className="flex flex-col gap-2">
-                        <ButtonGoTo title='See all books' path={'/dashboard/mind/books/all'} />
-                        <ButtonGoTo title='See book list' path={'/dashboard/mind/books/booklist'} />
-                    </div>
-                    <div>
-                        <ButtonGoTo title='Add book' path={'/dashboard/mind/books/create'} />
-                    </div>
+                <div className="flex flex-col gap-4">
+                    <ButtonGoTo title='Add book' path={'/dashboard/mind/books/create'} />
+                    <ButtonBack path={'/dashboard/mind'} />
                 </div>
             </div>
 
-            <div className="py-2">
-                <Results data={books.totalBooks} />
-            </div>
-
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                {books.limited?.length > 0 ? books?.limited?.reverse().map(async (item: any, index: number) => {
+                {books.bookList?.length > 0 ? books?.bookList?.reverse().map(async (item: any, index: number) => {
 
                     const useBookStartDate = item.book_start_date ? `Start Date ${formatDateAndTime(item.book_start_date)}` : '';
                     const useBookEndDate = item.book_end_date ? `End Date ${formatDateAndTime(item.book_end_date)}` : 'Currently Reading';
@@ -51,7 +42,7 @@ export default async function Books() {
                                             <p className="text-sm text-gray-500">{item.booklist === 'No' && useBookEndDate}</p>
                                         </div>
                                     </div>
-                                    {item.book_image && item.book_image !== 'false' && (
+                                    {item.book_image && (
                                         <Image
                                             alt="White Raven Logo"
                                             src={`${item.book_image ?? ''}`}
@@ -65,7 +56,7 @@ export default async function Books() {
                             </Link>
                         </div>
                     );
-                }) : <h3>Add your books!</h3>}
+                }) : <h3>Add books to your booklist!</h3>}
             </div>
         </div>
     )

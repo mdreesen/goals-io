@@ -24,8 +24,8 @@ export async function fetchOverview() {
             showWater: settings.useShowWaterIntake.value,
             showWeight: settings.useShowWeight.value,
         }
-    } catch (e) {
-        console.log(e)
-        return e
+    } catch (error) {
+        console.log(error)
+        return error
     }
 };

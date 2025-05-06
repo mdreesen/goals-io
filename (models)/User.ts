@@ -27,7 +27,8 @@ const bookSchema = new Schema(
         book_start_date: String || undefined,
         book_end_date: String || undefined,
         book_image: String || undefined,
-        notes: String || undefined
+        notes: String || undefined,
+        booklist: String || undefined
     }, { timestamps: false });
 
 const fastingSchema = new Schema(

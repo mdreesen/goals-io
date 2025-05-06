@@ -17,9 +17,9 @@ export async function editProfile(values: any) {
         revalidatePath('/dashboard/profile');
 
 
-    } catch (e) {
-        console.log(e)
-        return e
+    } catch (error) {
+        console.log(error)
+        return error
     }
 }
 

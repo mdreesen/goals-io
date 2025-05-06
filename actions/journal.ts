@@ -20,9 +20,9 @@ export async function fetchEntry() {
             results: data[0].journal.length.toString()
         }
 
-    } catch (e) {
-        console.log(e);
-        return e;
+    } catch (error) {
+        console.log(error);
+        return error;
     }
 };
 
@@ -34,9 +34,9 @@ export async function addEntry(values: any) {
 
         await User.findOneAndUpdate({ email: session?.user.email }, { $addToSet: { journal: { ...values } } }, { new: true });
 
-    } catch (e) {
-        console.log(e)
-        return e
+    } catch (error) {
+        console.log(error)
+        return error
     }
 };
 
@@ -54,9 +54,9 @@ export async function editEntry(values: any) {
         revalidatePath('/dashboard/spirit');
 
 
-    } catch (e) {
-        console.log(e)
-        return e
+    } catch (error) {
+        console.log(error)
+        return error
     }
 };
 
@@ -74,9 +74,9 @@ export async function deleteEntry(values: any) {
         revalidatePath('/dashboard/spirit');
 
 
-    } catch (e) {
-        console.log(e)
-        return e
+    } catch (error) {
+        console.log(error)
+        return error
     }
 };
 
@@ -96,8 +96,8 @@ export async function fetchEntryById(values: any) {
 
         return journal[0]
 
-    } catch (e) {
-        console.log(e);
-        return e;
+    } catch (error) {
+        console.log(error);
+        return error;
     }
 };

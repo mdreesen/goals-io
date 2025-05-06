@@ -32,9 +32,9 @@ export async function fetchWeight() {
             totalWeight: data[0].weight.length.toString()
         }
 
-    } catch (e) {
-        console.log(e);
-        return e;
+    } catch (error) {
+        console.log(error);
+        return error;
     }
 };
 
@@ -46,9 +46,9 @@ export async function addWeight(values: any) {
 
         await User.findOneAndUpdate({ email: session?.user.email }, { $addToSet: { weight: { ...values } } }, { new: true });
 
-    } catch (e) {
-        console.log(e)
-        return e
+    } catch (error) {
+        console.log(error)
+        return error
     }
 };
 
@@ -66,9 +66,9 @@ export async function editWeight(values: any) {
         revalidatePath('/dashboard/body');
 
 
-    } catch (e) {
-        console.log(e)
-        return e
+    } catch (error) {
+        console.log(error)
+        return error
     }
 };
 
@@ -86,9 +86,9 @@ export async function deleteWeight(values: any) {
         revalidatePath('/dashboard/body');
 
 
-    } catch (e) {
-        console.log(e)
-        return e
+    } catch (error) {
+        console.log(error)
+        return error
     }
 };
 
@@ -108,8 +108,8 @@ export async function fetchWeightById(values: any) {
 
         return weight[0]
 
-    } catch (e) {
-        console.log(e);
-        return e;
+    } catch (error) {
+        console.log(error);
+        return error;
     }
 };

@@ -34,9 +34,9 @@ export async function workoutYears() {
                 return convertYears
         };
 
-    } catch (e) {
-        console.log(e);
-        return e;
+    } catch (error) {
+        console.log(error);
+        return error;
     }
 };
 
@@ -134,8 +134,8 @@ export async function workoutsByMonth() {
             dataPerYear: useMonths
         }
 
-    } catch (e) {
-        console.log(e);
-        return e;
+    } catch (error) {
+        console.log(error);
+        return error;
     }
 };

@@ -28,9 +28,9 @@ export async function addAffirmation(values: any) {
 
         await User.findOneAndUpdate({ email: session?.user.email }, { $addToSet: { affirmations: { ...values } } }, { new: true });
 
-    } catch (e) {
-        console.log(e)
-        return e
+    } catch (error) {
+        console.log(error)
+        return error
     }
 };
 
@@ -48,9 +48,9 @@ export async function editAffirmation(values: any) {
         revalidatePath('/dashboard/mind');
 
 
-    } catch (e) {
-        console.log(e)
-        return e
+    } catch (error) {
+        console.log(error)
+        return error
     }
 };
 
@@ -68,9 +68,9 @@ export async function deleteAffirmations(values: any) {
         revalidatePath('/dashboard/mind');
 
 
-    } catch (e) {
-        console.log(e)
-        return e
+    } catch (error) {
+        console.log(error)
+        return error
     }
 };
 
@@ -91,9 +91,9 @@ export async function fetchAffirmationsById(values: any) {
 
         return affirmations[0]
 
-    } catch (e) {
-        console.log(e);
-        return e;
+    } catch (error) {
+        console.log(error);
+        return error;
     }
 };
 
@@ -123,9 +123,9 @@ export async function filterAffirmations() {
             use_selfWorth_affirmations: selfWorthAffirmations?.length > 0,
         }
 
-    } catch (e) {
-        console.log(e);
-        return e;
+    } catch (error) {
+        console.log(error);
+        return error;
     }
 };
 

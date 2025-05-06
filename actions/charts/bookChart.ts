@@ -22,7 +22,8 @@ export async function bookYears() {
             const year = date.getFullYear();
 
             return year;
-        });
+
+        }).filter((item: any) => item);
 
         const convertYears = [...new Set(years.sort())].reverse();
 
@@ -34,9 +35,9 @@ export async function bookYears() {
                 return convertYears
         };
 
-    } catch (e) {
-        console.log(e);
-        return e;
+    } catch (error) {
+        console.log(error);
+        return error;
     }
 };
 
@@ -48,7 +49,8 @@ export async function booksPerYear(year: any) {
 
         const user = await User.findOne({ email: session?.user.email });
 
-        const books = user?.books ?? [];
+        const userBooks = user?.books ?? [];
+        const books = userBooks.filter((item: any) => item.booklist === 'No' || !item.booklist);
 
         // book_start_date by month to current year
         const january_start = books?.filter((item: any) => item?.book_start_date?.includes('Jan') && item?.book_start_date?.includes(year)).length;
@@ -159,8 +161,8 @@ export async function booksByMonth() {
             dataPerYear: useMonths
         }
 
-    } catch (e) {
-        console.log(e);
-        return e;
+    } catch (error) {
+        console.log(error);
+        return error;
     }
 };

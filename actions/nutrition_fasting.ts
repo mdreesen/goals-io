@@ -36,9 +36,9 @@ export async function addFasting(values: any) {
 
         revalidatePath('/dashboard/body');
 
-    } catch (e) {
-        console.log(e)
-        return e
+    } catch (error) {
+        console.log(error)
+        return error
     }
 };
 
@@ -66,8 +66,8 @@ export async function editFasting(values: any) {
         revalidatePath('/dashboard/body');
 
 
-    } catch (e) {
-        console.log(e)
-        return e
+    } catch (error) {
+        console.log(error)
+        return error
     }
 };

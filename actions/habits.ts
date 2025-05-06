@@ -28,9 +28,9 @@ export async function addHabit(values: any) {
 
         await User.findOneAndUpdate({ email: session?.user.email }, { $addToSet: { habits: { ...values } } }, { new: true });
 
-    } catch (e) {
-        console.log(e)
-        return e
+    } catch (error) {
+        console.log(error)
+        return error
     }
 };
 
@@ -48,9 +48,9 @@ export async function editHabit(values: any) {
         revalidatePath('/dashboard/mind');
 
 
-    } catch (e) {
-        console.log(e)
-        return e
+    } catch (error) {
+        console.log(error)
+        return error
     }
 };
 
@@ -68,9 +68,9 @@ export async function deleteHabit(values: any) {
         revalidatePath('/dashboard/mind');
 
 
-    } catch (e) {
-        console.log(e)
-        return e
+    } catch (error) {
+        console.log(error)
+        return error
     }
 };
 
@@ -90,9 +90,9 @@ export async function fetchHabitsById(values: any) {
 
         return habits[0]
 
-    } catch (e) {
-        console.log(e);
-        return e;
+    } catch (error) {
+        console.log(error);
+        return error;
     }
 };
 
@@ -131,9 +131,9 @@ export async function filterHabits() {
             use_done_habits: doneHabits.length > 0,
         }
 
-    } catch (e) {
-        console.log(e);
-        return e;
+    } catch (error) {
+        console.log(error);
+        return error;
     }
 };
 

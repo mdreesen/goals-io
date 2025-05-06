@@ -1,13 +1,13 @@
 import { fetchUser } from '@/actions/user';
 import { parse } from '@/lib/formatters';
-import { current_year, timezone } from "@/lib/date_time";
+import { timezone } from "@/lib/date_time";
 import { fetchSettings } from '@/actions/settings';
 import Navigation from "@/components/navigation/Navigation";
 import NavigationPhone from '@/components/navigation/NavigationPhone';
 import Banner_Utc_Time from '@/components/banners/Banner_Utc_Time';
 import Tutorial from '@/components/modals/Tutorial';
-import packagejson from '@/package.json';
 import { Metadata } from 'next';
+import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
     title: {
@@ -27,6 +27,8 @@ export default async function RootLayout({
     const useUser = await fetchUser();
     const useTimezone = await timezone();
     const useSettings = await fetchSettings();
+
+    if(!useUser._id) redirect('/');
 
     const user = {
         name: useUser?.username ? useUser?.username : '',
