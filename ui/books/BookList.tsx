@@ -1,13 +1,13 @@
 import Link from "next/link";
 import Image from "next/image";
-import { fetchBooks } from '@/actions/book';
+import { fetchBookList } from '@/actions/book';
 import { formatDateAndTime } from '@/lib/formatters'
 import ButtonGoTo from "@/components/buttons/ButtonGoTo";
 import ButtonBack from "@/components/buttons/ButtonBack";
 
 export default async function Books() {
 
-    const books = await fetchBooks() ?? [];
+    const books = await fetchBookList() ?? [];
 
     return (
         <div className="px-4 sm:px-2 lg:px-4">

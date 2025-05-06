@@ -59,6 +59,23 @@ export async function fetchBooks() {
             limited: limited[0].books.filter((item: any) => item.booklist === 'No' || !item.booklist) ?? [],
             allData: data[0].books.filter((item: any) => item.booklist === 'No' || !item.booklist) ?? [],
             totalBooks: data[0].books.filter((item: any) => item.booklist === 'No' || !item.booklist).length.toString(),
+        }
+
+    } catch (error) {
+        console.log(error);
+        return error;
+    }
+};
+
+export async function fetchBookList() {
+    const session = await getServerSession();
+
+    try {
+        await connectDB();
+
+        const data = await User.find({ email: session?.user.email }, 'books');
+
+        return {
             bookList: data[0].books.filter((item: any) => item.booklist === 'Yes'),
             totalBookList: data[0].books.filter((item: any) => item.booklist === 'Yes').length.toString(),
         }
