@@ -47,7 +47,8 @@
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7",
     "use-debounce": "^10.0.4",
-    "workbox-webpack-plugin": "^7.3.0"
+    "workbox-webpack-plugin": "^7.3.0",
+    "zod": "^3.24.4"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

@@ -4,8 +4,7 @@ import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { InstallPrompt } from "@/components/prompts/InstallPrompt";
-import LoaderPacman from "@/components/loaders/LoaderPacman";
+import LoadingScale from "@/components/loaders/LoadingScale";
 
 export default function Page() {
 
@@ -101,16 +100,14 @@ export default function Page() {
             </div>
 
             <div className="flex justify-center">
-              {
-                loading ? <LoaderPacman /> : (
-                  <button
-                    type="submit"
-                    className="flex w-full justify-center rounded-md bg-gray-900 hover:bg-gray-400 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900"
-                  >
-                    Sign in
-                  </button>
-                )
-              }
+
+              <button
+                type="submit"
+                disabled={loading}
+                className="flex w-full justify-center rounded-md bg-gray-900 hover:bg-gray-400 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900"
+              >
+                {loading ? <LoadingScale color={"#ffffff"} /> : 'Sign In'}
+              </button>
             </div>
           </form>
 
