@@ -39,7 +39,7 @@ export async function bookSearch({ book_title, book_author }: any) {
             default:
                 return [];
         }
-    } 
+    }
     catch (error) {
         console.log(error);
         return error;
@@ -52,16 +52,25 @@ export async function fetchBooks() {
     try {
         await connectDB();
 
-        const limited = await User.find(
-            { email: session?.user.email }, 
-            { books: { $slice: -10 } }
-        ).limit(10);
+        // const limited = await User.find(
+        //     { email: session?.user.email },
+        //     // { books: { $match: { booklist: "No" } } },
+        //     // { books: { $elemMatch: { 'booklist': 'No' } } },
+        //     // { "books.booklist" : "No"},
+        //     // { "books.booklist": "No" },
+        //     // { tasks: { $size: 10 } },
+        //     { books: { $slice: -10 } }
+        // ).limit(10);
 
         const data = await User.find({ email: session?.user.email }, 'books');
+        const filterData = data[0].books.filter((item: any) => item.booklist.includes('No') || !item.booklist);
+
+        const startIndex = Math.max(filterData.length - 10, 0);
+        const latestTen = filterData.slice(startIndex);
 
         return {
-            limited: limited[0].books ?? [],
-            allData: data[0].books.filter((item: any) => item.booklist === 'No' || !item.booklist) ?? [],
+            limited: latestTen ?? [],
+            allData: data[0].books ?? [],
             totalBooks: data[0].books.filter((item: any) => item.booklist === 'No' || !item.booklist).length.toString(),
         }
 

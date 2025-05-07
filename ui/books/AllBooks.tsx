@@ -21,7 +21,7 @@ export default async function Books() {
             </div>
 
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                {books.limited?.length > 0 ? books?.limited?.reverse().map(async (item: any, index: number) => {
+                {books.allData?.length > 0 ? books?.allData?.reverse().map(async (item: any, index: number) => {
 
                     const useBookStartDate = item.book_start_date ? `Start Date ${formatDateAndTime(item.book_start_date)}` : '';
                     const useBookEndDate = item.book_end_date ? `End Date ${formatDateAndTime(item.book_end_date)}` : 'Currently Reading';
