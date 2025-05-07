@@ -14,8 +14,8 @@ export async function bookSearch({ book_title, book_author }: any) {
     try {
 
         // Using API with authors and without Authors
-        const openLibrary = await fetch(`https://openlibrary.org/search.json?q=${book_title}?author=${useAuthor}&limit=5`);
-        const openLibraryAllTitle = await fetch(`https://openlibrary.org/search.json?q=${book_title}&limit=5`);
+        const openLibrary = await fetch(`https://openlibrary.org/search.json?q=${book_title}?author=${useAuthor}&limit=5`, { next: { revalidate: 3600 } });
+        const openLibraryAllTitle = await fetch(`https://openlibrary.org/search.json?q=${book_title}&limit=5`, { next: { revalidate: 3600 } });
 
         const useOpenLibrary = await openLibrary.json();
         const useOpenLibraryAllTitles = await openLibraryAllTitle.json();
