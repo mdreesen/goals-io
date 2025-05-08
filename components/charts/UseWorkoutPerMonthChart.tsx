@@ -54,7 +54,7 @@ export const UseWorkoutPerMonthChart = ({ data }: any) => {
     <div>
       <Card>
         <CardHeader>
-          <CardTitle>Books Per Month</CardTitle>
+          <CardTitle>Workouts Per Month</CardTitle>
           <CardDescription className='flex gap-2 items-center'>January - December {dropdown}</CardDescription>
         </CardHeader>
         <CardContent>
