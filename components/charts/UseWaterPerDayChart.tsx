@@ -8,7 +8,7 @@ import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "
 const chartConfig = {
   water_intake: {
     label: "Water Intake",
-    color: "#60a5fa",
+    color: "#312E81",
   },
 } satisfies ChartConfig
 
@@ -27,7 +27,7 @@ export const UseWaterPerDayChart = ({ data }: any) => {
             margin={{
               left: 12,
               right: 12,
-              top: 60
+              top: 90
             }}
           >
             <CartesianGrid vertical={false} />

@@ -71,14 +71,9 @@ export default async function Overview() {
     );
 
     return (
-        <div className="bg-gray-900 py-24 sm:py-32 rounded-md">
+        <div className="bg-gray-900 rounded-md">
             <div className="mx-auto max-w-7xl px-4 lg:px-4">
                 <div className="mx-auto max-w-2xl lg:max-w-none">
-                    <div className="text-center">
-                        <h2 className="text-balance text-4xl font-semibold tracking-tight text-white sm:text-5xl">
-                            Overview
-                        </h2>
-                    </div>
                     <dl className="mt-5 grid grid-cols-1 divide-y divide-gray-200 overflow-hidden rounded-lg bg-gray-900 shadow md:grid-cols-3 md:divide-x md:divide-y-0">
                         {weight}
                         {books}

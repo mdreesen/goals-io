@@ -179,7 +179,7 @@ export default function FastingTimer({ fastData }: any) {
                         <p className="text-sm font-medium text-gray-900">{`${fastData.user.duration} hours`}</p>
                     </div>
                 )}
-                <div className={`overflow-hidden rotate-180 rounded-full ${useEndFasting ? 'bg-gray-200' : 'bg-[#c18d21]'}`}>
+                <div className={`overflow-hidden rotate-180 rounded-full ${useEndFasting ? 'bg-gray-200' : 'bg-[#312E81]'}`}>
                     <div style={{ width: `${useEndFasting ? '100' : useTimedFasting}%` }} className={`${useEndFasting ? 'bg-green-500 animate-pulse' : 'bg-gray-200'} h-2`} />
                 </div>
                 {

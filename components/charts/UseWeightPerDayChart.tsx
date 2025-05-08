@@ -8,7 +8,7 @@ import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "
 const chartConfig = {
   weight: {
     label: "Weight",
-    color: "#60a5fa",
+    color: "#312E81",
   },
 } satisfies ChartConfig
 
@@ -27,7 +27,7 @@ export const UseWeightPerDayChart = ({ data }: any) => {
             margin={{
               left: 12,
               right: 12,
-              top: 40
+              top: 50
             }}
           >
             <CartesianGrid vertical={false} />

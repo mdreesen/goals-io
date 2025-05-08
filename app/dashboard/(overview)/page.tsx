@@ -62,25 +62,20 @@ export default async function Page() {
     // Workout per day chart
     const chartFour = showWorkout && (
         <div className="relative lg:col-span-3">
-            <div className="absolute inset-px rounded-lg bg-white fill-black-500 drop-shadow-lg drop-shadow-black-500/50" />
-            <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] p-4">
-                <h2 className="text-base/7 font-semibold text-indigo-900">Workouts</h2>
-                <Suspense fallback={<ChartSkeleton />}>
-                    <UseWorkoutPerMonthChart data={parse(workoutPerMonth)} />
-                </Suspense>
-            </div>
-            <div className="pointer-events-none absolute inset-px rounded-lg shadow ring-1 ring-black/5" />
+            <Suspense fallback={<ChartSkeleton />}>
+                <UseWorkoutPerMonthChart data={parse(workoutPerMonth)} />
+            </Suspense>
         </div>
     );
 
     return (
-        <div className="py-12 sm:py-12">
+        <div>
             <div>
-                <h2 className="mt-2 max-w-lg text-pretty text-4xl font-semibold tracking-tight text-gray-950 sm:text-5xl mb-6">RECAPITULATION</h2>
+                <h2 className="mt-2 max-w-lg text-pretty text-4xl text-center font-semibold tracking-tight text-gray-950 sm:text-5xl mb-6">Overview</h2>
                 <Overview />
 
-                <div className="bg-white py-24 sm:py-32">
-                    <div className="mx-auto">
+                <div>
+                    <div className="mx-auto mt-[3rem]">
                         <p className="mt-2 max-w-lg text-pretty text-4xl font-semibold tracking-tight text-gray-950 sm:text-5xl text-center">
                             Progress
                         </p>

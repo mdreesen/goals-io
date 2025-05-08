@@ -7,11 +7,12 @@ import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "
 import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
+import LoadingScale from "@/components/loaders/LoadingScale";
 
 const chartConfig = {
   start_date: {
     label: "Books Started",
-    color: "#2563eb",
+    color: "#312E81",
   },
   end_date: {
     label: "Books Finished",
@@ -24,13 +25,16 @@ export const UseBooksPerMonthChart = ({ data }: any) => {
   const [chartData, setChartData] = useState([]) as any; // State for chart data
   const [year, setYear] = useState([]) as any; // State for chart data
   const [selectedYear, setSelectedYear] = useState(data?.years[0]);
+  const [ loading, setLoading ] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true)
       const data = await booksPerYear(selectedYear);
       const useBookYear = await bookYears();
       setChartData(data);
       setYear(useBookYear);
+      setLoading(false)
     };
     fetchData();
   }, [selectedYear]);
@@ -38,7 +42,7 @@ export const UseBooksPerMonthChart = ({ data }: any) => {
   const dropdown = data?.years?.length > 0 && (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline">{selectedYear}</Button>
+      <Button variant="outline">{loading ? <LoadingScale width={3} height={15} /> : selectedYear}</Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
         <DropdownMenuLabel>Select year</DropdownMenuLabel>

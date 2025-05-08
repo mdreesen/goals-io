@@ -1,23 +1,19 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { workoutsPerYear, workoutYears } from "@/actions/charts/workoutChart";
-
 import { ChartLegend, ChartLegendContent } from "@/components/ui/chart";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
 import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
+import LoadingScale from "@/components/loaders/LoadingScale";
 
 const chartConfig = {
   workouts: {
     label: "Workouts",
-    color: "#2563eb",
-  },
-  end_date: {
-    label: "Books Finished",
-    color: "#60a5fa",
-  },
+    color: "#312E81",
+  }
 } satisfies ChartConfig;
 
 export const UseWorkoutPerMonthChart = ({ data }: any) => {
@@ -25,13 +21,16 @@ export const UseWorkoutPerMonthChart = ({ data }: any) => {
   const [chartData, setChartData] = useState([]) as any; // State for chart data
   const [year, setYear] = useState([]) as any; // State for chart data
   const [selectedYear, setSelectedYear] = useState(data?.years[0]);
+  const [ loading, setLoading ] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true)
       const data = await workoutsPerYear(selectedYear);
       const useYear = await workoutYears();
       setChartData(data);
       setYear(useYear);
+      setLoading(false)
     };
     fetchData();
   }, [selectedYear]);
@@ -39,7 +38,7 @@ export const UseWorkoutPerMonthChart = ({ data }: any) => {
   const dropdown = data?.years?.length > 0 && (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline">{selectedYear}</Button>
+        <Button variant="outline">{loading ? <LoadingScale width={3} height={15} /> : selectedYear}</Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
         <DropdownMenuLabel>Select year</DropdownMenuLabel>
@@ -50,7 +49,7 @@ export const UseWorkoutPerMonthChart = ({ data }: any) => {
       </DropdownMenuContent>
     </DropdownMenu>
   );
-console.log(data)
+
   return (
     <div>
       <Card>
