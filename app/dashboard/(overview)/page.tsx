@@ -35,42 +35,27 @@ export default async function Page() {
     // Books per month chart
     const chartOne = showBooks && (
         <div className="relative lg:col-span-3">
-            <div className="absolute inset-px rounded-lg bg-white max-lg:rounded-t-[2rem] lg:rounded-tl-[2rem] fill-black-500 drop-shadow-lg drop-shadow-black-500/50" />
-            <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] max-lg:rounded-t-[calc(2rem+1px)] lg:rounded-tl-[calc(2rem+1px)] p-4">
-                <h2 className="text-base/7 font-semibold text-indigo-900">Books</h2>
-                <Suspense fallback={<ChartSkeleton />}>
-                    <UseBooksPerMonthChart data={parse(booksPerMonth)} />
-                </Suspense>
-            </div>
-            <div className="pointer-events-none absolute inset-px rounded-lg shadow ring-1 ring-black/5 max-lg:rounded-t-[2rem] lg:rounded-tl-[2rem]" />
+            <Suspense fallback={<ChartSkeleton />}>
+                <UseBooksPerMonthChart data={parse(booksPerMonth)} />
+            </Suspense>
         </div>
     );
 
     // Water per day chart
     const chartTwo = showWater && (
         <div className="relative lg:col-span-3">
-            <div className="absolute inset-px rounded-lg bg-white lg:rounded-tr-[2rem] fill-black-500 drop-shadow-lg drop-shadow-black-500/50" />
-            <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] lg:rounded-tr-[calc(2rem+1px)] p-4">
-                <h2 className="text-base/7 font-semibold text-indigo-900">Water</h2>
-                <Suspense fallback={<ChartSkeleton />}>
-                    <UseWaterPerDayChart data={parse(waterPerDay)} />
-                </Suspense>
-            </div>
-            <div className="pointer-events-none absolute inset-px rounded-lg shadow ring-1 ring-black/5 lg:rounded-tr-[2rem]" />
+            <Suspense fallback={<ChartSkeleton />}>
+                <UseWaterPerDayChart data={parse(waterPerDay)} />
+            </Suspense>
         </div>
     );
 
     // Weight per day chart
     const chartThree = showWeight && (
         <div className="relative lg:col-span-3">
-            <div className="absolute inset-px rounded-lg bg-white lg:rounded-bl-[2rem] fill-black-500 drop-shadow-lg drop-shadow-black-500/50" />
-            <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] lg:rounded-bl-[calc(2rem+1px)] p-4">
-                <h2 className="text-base/7 font-semibold text-indigo-900">Weight</h2>
-                <Suspense fallback={<ChartSkeleton />}>
-                    <UseWeightPerDayChart data={parse(weightPerMonth)} />
-                </Suspense>
-            </div>
-            <div className="pointer-events-none absolute inset-px rounded-lg shadow ring-1 ring-black/5 lg:rounded-bl-[2rem]" />
+            <Suspense fallback={<ChartSkeleton />}>
+                <UseWeightPerDayChart data={parse(weightPerMonth)} />
+            </Suspense>
         </div>
     );
 
