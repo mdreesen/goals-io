@@ -4,31 +4,38 @@ import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import NetworkStatusProvider from '@/components/wrappers/NetworkStatusProvider';
 import "./globals.css";
+import { UseThemeProvider } from "@/components/wrappers/UseThemeProvider";
+import { fetchSettings } from "@/actions/settings";
 
 export const metadata: Metadata = {
   title: "Ascend",
   description: "Set habits, Achieve greatness.",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+  const useSettings = await fetchSettings();
+
+
   return (
     <html lang="en" dir="ltr">
       <NetworkStatusProvider>
         <Provider>
-          <body>
-            {children}
 
-            {/* Vercel Analytics */}
-            <Analytics />
+            <body>
+              {children}
 
-            {/* Vercel Speed insights */}
-            <SpeedInsights />
+              {/* Vercel Analytics */}
+              <Analytics />
 
-          </body>
+              {/* Vercel Speed insights */}
+              <SpeedInsights />
+
+            </body>
         </Provider>
       </NetworkStatusProvider>
     </html>

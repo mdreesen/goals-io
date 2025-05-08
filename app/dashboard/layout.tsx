@@ -30,24 +30,19 @@ export default async function RootLayout({
 
     if(!useUser._id) redirect('/');
 
-    const user = {
-        name: useUser?.username ? useUser?.username : '',
-    };
-
     // Conditionals
-    const hasUserFirstLast = useUser?.first_name && useUser?.last_name ? `${useUser?.first_name} ${useUser?.last_name}` : '';
+    const hasUserFirstLast = useUser?.first_name || useUser?.last_name ? `${useUser?.first_name} ${useUser?.last_name}` : '';
 
     // UTC device banner component
-    const hasUtcTime = useTimezone.includes('UTC') && (
-        <div className='h-[4rem]'>
-            <Banner_Utc_Time />
-        </div>
-    );
+    const hasUtcTime = useTimezone.includes('UTC') && (<div className='h-[4rem]'><Banner_Utc_Time /></div>);
 
     // Tutorial component
-    const useTutorial = !useUser?.tutorial_read && (
-        <Tutorial data={parse(useUser)} />
-    );
+    const useTutorial = !useUser?.tutorial_read && <Tutorial data={parse(useUser)} />;
+
+    // Dark Mode
+    const useDarkMode = useSettings.useDarkMode;
+
+    console.log(useSettings.useDarkMode)
 
     return (
         <div className="flex flex-col min-h-screen">
@@ -55,20 +50,20 @@ export default async function RootLayout({
             {/* Banner shown if device has UTC time */}
             {hasUtcTime}
 
-            <div className="bg-gray-900 pb-32">
+            <div className={`${useDarkMode ? 'dark' : 'light bg-gray-900'} pb-32`}>
                 <Navigation />
                 <NavigationPhone settings={parse(useSettings)} />
                 <header className="py-10">
                     <div className="mx-auto max-w-7xl px-4">
                         <h1 className="text-3xl font-bold tracking-tight text-white">{hasUserFirstLast}</h1>
-                        <p className="text-xl font-bold tracking-tight text-white">{user.name}</p>
+                        <p className="text-xl font-bold tracking-tight text-white">{useUser?.username && useUser.username}</p>
                     </div>
                 </header>
             </div>
 
             <main className="-mt-32 grow">
                 <div className="mx-auto max-w-7xl pb-[120px]">
-                    <div className="rounded-lg bg-white px-5 sm:px-6 pt-[2rem]">
+                    <div className={`${useDarkMode ? 'dark' : 'light'} rounded-lg bg-white px-5 sm:px-6 pt-[2rem]`}>
                         {/* Tutorial shown if user has not seen/read it */}
                         {useTutorial}
                         {children}

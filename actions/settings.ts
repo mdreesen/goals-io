@@ -21,6 +21,7 @@ export async function fetchSettings() {
         const useShowWaterIntake = user?.settings.find((item: any) => item.setting.includes('showWaterIntake') ?? {}) ?? [];
         const useShowWeight = user?.settings.find((item: any) => item.setting.includes('showWeight') ?? {}) ?? [];
         const useShowWorkout = user?.settings.find((item: any) => item.setting.includes('showWorkout') ?? {}) ?? [];
+        const useDarkMode = user?.settings.find((item: any) => item.setting.includes('darkMode') ?? {}) ?? [];
 
         const useShowBody = useShowWeight.value || useShowWaterIntake.value || useShowFasting.value || useShowWorkout.value;
         const useShowMind = useShowAffirmations.value || useShowBooks.value || useShowHabits.value;
@@ -40,7 +41,9 @@ export async function fetchSettings() {
 
             useShowBody: useShowBody,
             useShowMind: useShowMind,
-            useShowSpirit: useShowSpirit       
+            useShowSpirit: useShowSpirit,
+            
+            useDarkMode: useDarkMode.value,
         }
 
     } catch (error) {

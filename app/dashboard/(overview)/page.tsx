@@ -15,6 +15,7 @@ import { fetchSettings } from '@/actions/settings';
 
 // Components
 import Overview from "@/ui/Overview";
+import Title from "@/components/text/Title";
 
 export default async function Page() {
 
@@ -71,12 +72,12 @@ export default async function Page() {
     return (
         <div>
             <div>
-                <h2 className="mt-2 max-w-lg text-pretty text-4xl text-center font-semibold tracking-tight text-gray-950 sm:text-5xl mb-6">Overview</h2>
+                <Title title="Overview"/>
                 <Overview />
 
                 <div>
                     <div className="mx-auto mt-[3rem]">
-                        <p className="mt-2 max-w-lg text-pretty text-4xl font-semibold tracking-tight text-gray-950 sm:text-5xl text-center">
+                        <p className="mt-2 max-w-lg text-pretty text-4xl font-semibold tracking-tight sm:text-5xl text-center">
                             Progress
                         </p>
                         <div className="mt-10 grid grid-cols-1 gap-4 sm:mt-16 lg:grid-cols-6 lg:grid-rows-2">

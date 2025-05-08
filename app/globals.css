@@ -15,6 +15,20 @@ body {
 
 textarea {
   field-sizing: content;
+
+  &.dark {
+    color: white;
+  }
+};
+
+.light {
+  background-color: white;
+  color: #111827;
+}
+
+.dark {
+  background-color: black;
+  color: white;
 }
 
 
