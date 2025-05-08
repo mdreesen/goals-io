@@ -67,51 +67,51 @@ export async function workoutsPerYear(year: any) {
         return [
             {
                 name: 'January',
-                date: january_date,
+                workouts: january_date,
             },
             {
                 name: 'February',
-                date: february_date,
+                workouts: february_date,
             },
             {
                 name: 'March',
-                date: march_date,
+                workouts: march_date,
             },
             {
                 name: 'April',
-                date: april_date,
+                workouts: april_date,
             },
             {
                 name: 'May',
-                date: may_date,
+                workouts: may_date,
             },
             {
                 name: 'June',
-                date: june_date,
+                workouts: june_date,
             },
             {
                 name: 'July',
-                date: july_date,
+                workouts: july_date,
             },
             {
                 name: 'August',
-                date: august_date,
+                workouts: august_date,
             },
             {
                 name: 'September',
-                date: september_date,
+                workouts: september_date,
             },
             {
                 name: 'October',
-                date: october_date,
+                workouts: october_date,
             },
             {
                 name: 'November',
-                date: november_date,
+                workouts: november_date,
             },
             {
                 name: 'December',
-                date: december_date,
+                workouts: december_date,
             },
         ];
 

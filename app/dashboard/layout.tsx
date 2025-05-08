@@ -59,7 +59,7 @@ export default async function RootLayout({
                 <Navigation />
                 <NavigationPhone settings={parse(useSettings)} />
                 <header className="py-10">
-                    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                    <div className="mx-auto max-w-7xl px-4">
                         <h1 className="text-3xl font-bold tracking-tight text-white">{hasUserFirstLast}</h1>
                         <p className="text-xl font-bold tracking-tight text-white">{user.name}</p>
                     </div>
@@ -67,8 +67,8 @@ export default async function RootLayout({
             </div>
 
             <main className="-mt-32 grow">
-                <div className="mx-auto max-w-7xl px-4 pb-[8rem] sm:px-6 lg:px-8">
-                    <div className="rounded-lg bg-white px-5 py-6 shadow sm:px-6 ">
+                <div className="mx-auto max-w-7xl pb-[120px]">
+                    <div className="rounded-lg bg-white px-5 sm:px-6 pt-[2rem]">
                         {/* Tutorial shown if user has not seen/read it */}
                         {useTutorial}
                         {children}

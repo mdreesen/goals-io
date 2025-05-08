@@ -141,18 +141,25 @@ export default async function Bible() {
 
     return (
         <div className="px-4 sm:px-2 lg:px-4">
-            <h2 className="mt-2 max-w-lg text-pretty text-4xl font-semibold tracking-tight text-gray-950 sm:text-5xl">Bible</h2>
-
-            <div className="flex justify-end mt-4 mb-4 sm:mt-0 sm:flex-none">
-                <ButtonGoTo title="Add notes" path="/dashboard/spirit/bible/create" />
+            <div className='flex items-center justify-between'>
+            <h2 className="max-w-lg text-pretty text-4xl font-semibold tracking-tight text-gray-950 sm:text-5xl">Bible</h2>
+            <ButtonGoTo title="Add notes" path="/dashboard/spirit/bible/create" />
 
             </div>
-            <div className='p-4 mb-6 rounded border border-green-600'>
+
+            {/* <div className="flex justify-end mt-4 mb-4 sm:mt-0 sm:flex-none">
+                <ButtonGoTo title="Add notes" path="/dashboard/spirit/bible/create" />
+
+            </div> */}
+            <div className='p-4 mb-6'>
                 <h2 className="text-xl font-semibold text-gray-900">Sermon Notes</h2>
 
                 {sermonNotes}
             </div>
-            <div className='p-4 border rounded border-blue-600'>
+
+            <div className="border-t border-black/20"></div>
+
+            <div className='p-4'>
                 <h2 className="text-xl font-semibold text-gray-900">Devotional Notes</h2>
                 {devotionalNotes}
             </div>
