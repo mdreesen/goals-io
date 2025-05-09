@@ -84,7 +84,7 @@ export default async function Bible() {
                 </Link>
             </div>
 
-            <div className='p-4 border rounded border-blue-600'>
+            <div className='p-4'>
                 <h2 className="text-xl font-semibold">Devotional Notes</h2>
                 <Results data={useDevotionals?.length.toString()} />
 

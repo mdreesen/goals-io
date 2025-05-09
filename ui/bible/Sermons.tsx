@@ -1,5 +1,6 @@
 import { fetchBible } from '@/actions/bible';
 import ButtonBack from '@/components/buttons/ButtonBack';
+import ButtonGoTo from '@/components/buttons/ButtonGoTo';
 import Results from '@/components/showing/Results';
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { EllipsisVerticalIcon } from '@heroicons/react/20/solid'
@@ -12,7 +13,7 @@ export default async function Bible() {
 
     const sermonNotes = (
         <div>
-            <ul role="list" className="divide-y divide-gray-100">
+           <ul role="list" className="divide-y divide-gray-100">
                 {useSermons?.length > 0 ? useSermons?.map((item: any) => (
                     <li key={item.id} className="flex items-center justify-between gap-x-6 py-5">
                         <div className="min-w-0">
@@ -73,17 +74,10 @@ export default async function Bible() {
 
             <div className="flex justify-between items-center mt-4 mb-4 sm:mt-0 sm:flex-none">
                 <ButtonBack path='/dashboard/spirit' />
+                <ButtonGoTo title="Add notes" path="/dashboard/spirit/bible/create" />
 
-                <Link href={'/dashboard/spirit/bible/create'}>
-                    <button
-                        type="button"
-                        className="block rounded-md bg-gray-800 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-gray-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-900"
-                    >
-                        Add notes
-                    </button>
-                </Link>
             </div>
-            <div className='p-4 mb-6 rounded border border-green-600'>
+            <div className='p-4 mb-6'>
                 <h2 className="text-xl font-semibold">Sermon Notes</h2>
                 <Results data={useSermons?.length.toString()} />
 
