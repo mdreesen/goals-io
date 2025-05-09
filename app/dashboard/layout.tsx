@@ -45,7 +45,7 @@ export default async function RootLayout({
     console.log(useSettings.useDarkMode);
 
     return (
-        <div className={`${useDarkMode ? 'dark' : 'light bg-gray-900'} flex flex-col min-h-screen`}>
+        <div className={`flex flex-col min-h-screen`}>
 
             {/* Banner shown if device has UTC time */}
             {hasUtcTime}
@@ -61,7 +61,7 @@ export default async function RootLayout({
                 </header>
             </div>
 
-            <main className="-mt-32 grow">
+            <main className={`-mt-32 grow`}>
                 <div className="mx-auto max-w-7xl pb-[95px]">
                     <div className={`${useDarkMode ? 'dark' : 'light'} rounded-t-lg bg-white px-5 sm:px-6 pt-[2rem] pb-[2rem]`}>
                         {/* Tutorial shown if user has not seen/read it */}

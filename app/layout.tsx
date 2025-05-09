@@ -19,6 +19,7 @@ export default async function RootLayout({
 }>) {
 
   const useSettings = await fetchSettings();
+  const useDarkMode = useSettings.useDarkMode;
 
 
   return (
@@ -26,7 +27,7 @@ export default async function RootLayout({
       <NetworkStatusProvider>
         <Provider>
 
-            <body>
+            <body className={`${useDarkMode ? 'dark' : 'light'}`}>
               {children}
 
               {/* Vercel Analytics */}
