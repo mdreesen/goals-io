@@ -27,7 +27,7 @@ export default function Banner_Utc_Time() {
           className="aspect-[577/310] w-[36.0625rem] bg-gradient-to-r from-[#ff80b5] to-[#9089fc] opacity-30"
         />
       </div>
-      <p className="text-sm/6 text-gray-900">
+      <p className="text-sm/6">
         <a href="#">
           <strong className="font-semibold">Your device is using UTC time!</strong>
           <svg viewBox="0 0 2 2" aria-hidden="true" className="mx-2 inline size-0.5 fill-current">
@@ -39,7 +39,7 @@ export default function Banner_Utc_Time() {
       {/* <div className="flex flex-1 justify-end">
         <button type="button" className="-m-3 p-3 focus-visible:outline-offset-[-4px]">
           <span className="sr-only">Dismiss</span>
-          <XMarkIcon aria-hidden="true" className="size-5 text-gray-900" />
+          <XMarkIcon aria-hidden="true" className="size-5" />
         </button>
       </div> */}
     </div>

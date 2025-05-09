@@ -4,6 +4,7 @@ import { fetchBooks } from '@/actions/book';
 import { formatDateAndTime } from '@/lib/formatters'
 import ButtonGoTo from "@/components/buttons/ButtonGoTo";
 import Results from "@/components/showing/Results";
+import Title from "@/components/text/Title";
 
 export default async function Books() {
 
@@ -11,7 +12,7 @@ export default async function Books() {
 
     return (
         <div className="px-4 sm:px-2 lg:px-4">
-            <h2 className="mt-2 max-w-lg text-pretty text-4xl font-semibold tracking-tight text-gray-950 sm:text-5xl">Books</h2>
+            <Title text="Books" />
 
             <div className="flex justify-end mt-4 mb-4 sm:mt-0 sm:flex-none">
                 <div className="flex gap-4 w-full justify-between">
@@ -39,18 +40,18 @@ export default async function Books() {
                     return (
                         <div
                             key={`${item.book_title}-${index}`}
-                            className="relative flex items-center w-full rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-gray-900 focus-within:ring-offset-2 hover:border-gray-400"
+                            className="relative flex items-center w-full rounded-lg border border-gray-300 px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-gray-900 focus-within:ring-offset-2 hover:border-gray-400"
                         >
                             <Link className="w-full" href={`/dashboard/mind/books/edit/${item.id}`}>
                                 <div className="flex-1 flex w-full justify-between items-center">
                                     <div className="w-[auto]">
-                                        <p className="text-sm font-medium text-gray-900">{item.book_title}</p>
-                                        <p className="text-sm text-gray-500">{item.book_author}</p>
-                                        <p className="text-sm text-gray-500">{item.kind_of_book}</p>
+                                        <p className="text-sm font-medium">{item.book_title}</p>
+                                        <p className="text-sm">{item.book_author}</p>
+                                        <p className="text-sm">{item.kind_of_book}</p>
                                         <div className='flex flex-col lg:flex-row lg:gap-4'>
-                                            {hasBookList && <p className="text-sm text-gray-500">{useBookStartDate}</p>}
-                                            {hasBookList && <p className="text-sm text-gray-500">{useBookEndDate}</p>}
-                                            {!hasBookList && <p className="text-sm text-gray-500">On your book list (future reads)</p>}
+                                            {hasBookList && <p className="text-sm">{useBookStartDate}</p>}
+                                            {hasBookList && <p className="text-sm">{useBookEndDate}</p>}
+                                            {!hasBookList && <p className="text-sm">On your book list (future reads)</p>}
                                         </div>
                                     </div>
                                     {item.book_image && item.book_image !== 'false' && (

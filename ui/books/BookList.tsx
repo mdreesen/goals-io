@@ -11,7 +11,7 @@ export default async function Books() {
 
     return (
         <div className="px-4 sm:px-2 lg:px-4">
-            <h2 className="mt-2 max-w-lg text-pretty text-4xl font-semibold tracking-tight text-gray-950 sm:text-5xl">Books</h2>
+            <h2 className="mt-2 max-w-lg text-pretty text-4xl font-semibold tracking-tight sm:text-5xl">Books</h2>
 
             <div className="flex justify-end mt-4 mb-4 sm:mt-0 sm:flex-none">
                 <div className="flex flex-col gap-4">
@@ -34,12 +34,12 @@ export default async function Books() {
                             <Link className="w-full" href={`/dashboard/mind/books/edit/${item.id}`}>
                                 <div className="flex-1 flex w-full justify-between items-center">
                                     <div className="w-[auto]">
-                                        <p className="text-sm font-medium text-gray-900">{item.book_title}</p>
-                                        <p className="text-sm text-gray-500">{item.book_author}</p>
-                                        <p className="text-sm text-gray-500">{item.kind_of_book}</p>
+                                        <p className="text-sm font-medium">{item.book_title}</p>
+                                        <p className="text-sm">{item.book_author}</p>
+                                        <p className="text-sm">{item.kind_of_book}</p>
                                         <div className='flex flex-col lg:flex-row lg:gap-4'>
-                                            <p className="text-sm text-gray-500">{useBookStartDate}</p>
-                                            <p className="text-sm text-gray-500">{item.booklist === 'No' && useBookEndDate}</p>
+                                            <p className="text-sm">{useBookStartDate}</p>
+                                            <p className="text-sm">{item.booklist === 'No' && useBookEndDate}</p>
                                         </div>
                                     </div>
                                     {item.book_image && (

@@ -176,7 +176,7 @@ export default function FastingTimer({ fastData }: any) {
                         <p className="text-sm font-medium flex gap-1">
                             <span>Time left:</span>
                             <span className='text-indigo-900 font-semibold'>{`${formatTime(timeLeft.hours)}:${formatTime(timeLeft.minutes)}:${formatTime(timeLeft.seconds)}`}</span></p>
-                        <p className="text-sm font-medium text-gray-900">{`${fastData.user.duration} hours`}</p>
+                        <p className="text-sm font-medium">{`${fastData.user.duration} hours`}</p>
                     </div>
                 )}
                 <div className={`overflow-hidden rotate-180 rounded-full ${useEndFasting ? 'bg-gray-200' : 'bg-[#312E81]'}`}>
@@ -185,7 +185,7 @@ export default function FastingTimer({ fastData }: any) {
                 {
                     useEndFasting && <span>You are done! Great fast!</span>
                 }
-                <div className="mt-6 hidden grid-cols-4 text-sm font-medium text-gray-600 sm:grid">
+                <div className="mt-6 hidden grid-cols-4 text-sm font-medium sm:grid">
                     <div>Getting started</div>
                     <div className="text-center">Keep going</div>
                     <div className="text-center">Almost there</div>

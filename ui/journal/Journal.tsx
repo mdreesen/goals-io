@@ -1,6 +1,7 @@
 import { fetchEntry } from '@/actions/journal';
 import ButtonGoTo from '@/components/buttons/ButtonGoTo';
 import Results from '@/components/showing/Results';
+import Title from '@/components/text/Title';
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { EllipsisVerticalIcon } from '@heroicons/react/20/solid'
 import Link from 'next/link';
@@ -19,22 +20,22 @@ export default async function Journal() {
                             {
                                 item.title !== '' ? (
                                     <div className="flex gap-x-3 items-center">
-                                        <p className="text-sm/6 font-semibold text-gray-900">{item.date}</p>
+                                        <p className="text-sm/6 font-semibold">{item.date}</p>
                                         <svg viewBox="0 0 2 2" className="size-0.5 fill-current">
                                             <circle r={1} cx={1} cy={1} />
                                         </svg>
-                                        <p className="text-sm/6 font-semibold text-gray-900">{item.title}</p>
+                                        <p className="text-sm/6 font-semibold">{item.title}</p>
                                     </div>
                                 ) : (
                                     <div className="flex gap-x-3 items-center">
-                                        <p className="text-sm/6 font-semibold text-gray-900">{item.date}</p>
+                                        <p className="text-sm/6 font-semibold">{item.date}</p>
                                     </div>
                                 )
                             }
                         </div>
                         <div className="flex flex-none items-center gap-x-4">
                             <Menu as="div" className="relative flex-none">
-                                <MenuButton className="-m-2.5 block p-2.5 text-gray-500 hover:text-gray-900">
+                                <MenuButton className="-m-2.5 block p-2.5">
                                     <span className="sr-only">Open options</span>
                                     <EllipsisVerticalIcon aria-hidden="true" className="size-5" />
                                 </MenuButton>
@@ -45,7 +46,7 @@ export default async function Journal() {
                                     <MenuItem>
                                         <Link
                                             href={`/dashboard/spirit/journal/details/${item._id}`}
-                                            className="block px-3 py-1 text-sm/6 text-gray-900 data-[focus]:bg-gray-50 data-[focus]:outline-none"
+                                            className="block px-3 py-1 text-sm/6 data-[focus]:bg-gray-50 data-[focus]:outline-none"
                                         >
                                             details<span className="sr-only">, {item.title}</span>
                                         </Link>
@@ -53,7 +54,7 @@ export default async function Journal() {
                                     <MenuItem>
                                         <Link
                                             href={`/dashboard/spirit/journal/edit/${item._id}`}
-                                            className="block px-3 py-1 text-sm/6 text-gray-900 data-[focus]:bg-gray-50 data-[focus]:outline-none"
+                                            className="block px-3 py-1 text-sm/6 data-[focus]:bg-gray-50 data-[focus]:outline-none"
                                         >
                                             edit<span className="sr-only">, {item.title}</span>
                                         </Link>
@@ -70,7 +71,8 @@ export default async function Journal() {
 
     return (
         <div className="px-4 sm:px-2 lg:px-4">
-            <h2 className="mt-2 max-w-lg text-pretty text-4xl font-semibold tracking-tight text-gray-950 sm:text-5xl">Journal</h2>
+            <Title text="Journal" />
+
             <div className="flex justify-end mt-4 mb-4 sm:mt-0 sm:flex-none">
                 <div className="flex gap-4 w-full justify-between">
                     <ButtonGoTo title='See all entries' path={'/dashboard/spirit/journal/all'} />
@@ -79,7 +81,7 @@ export default async function Journal() {
             </div>
 
             <div className="px-4 sm:px-2 lg:px-4">
-              <Results data={journalEntries?.results} />
+                <Results data={journalEntries?.results} />
             </div>
 
             <div className='p-4 rounded'>

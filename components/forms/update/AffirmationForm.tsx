@@ -32,7 +32,7 @@ export default function GoalForm({ data }: any) {
         <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
 
             <div className="col-span-full">
-                <label htmlFor="affirmation" className="block text-sm/6 font-medium text-gray-900">
+                <label htmlFor="affirmation" className="block text-sm/6 font-medium">
                     Affirmation
                 </label>
                 <div className="mt-2">
@@ -40,7 +40,7 @@ export default function GoalForm({ data }: any) {
                         id="affirmation"
                         name="affirmation"
                         rows={3}
-                        className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
+                        className="block w-full rounded-md bg-white px-3 py-1.5 text-base outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
                         placeholder="Your affirmation"
                         defaultValue={data?.affirmation ?? ''}
                     />
@@ -48,7 +48,7 @@ export default function GoalForm({ data }: any) {
             </div>
 
             <div className="sm:col-span-3">
-                <label htmlFor="kind" className="block text-sm/6 font-medium text-gray-900">
+                <label htmlFor="kind" className="block text-sm/6 font-medium">
                     Kind of affirmation
                 </label>
                 <div className="mt-2 grid grid-cols-1">
@@ -57,7 +57,7 @@ export default function GoalForm({ data }: any) {
                         name="kind"
                         autoComplete="kind-name"
                         defaultValue={data?.kind ?? ''}
-                        className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pl-3 pr-8 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
+                        className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pl-3 pr-8 text-base outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
                     >
                         <option>Growth</option>
                         <option>Mindfulness</option>
@@ -78,7 +78,7 @@ export default function GoalForm({ data }: any) {
         <form ref={ref} action={handleSubmit}>
             <div className="space-y-12">
                 <div className="border-b border-gray-900/10 pb-12">
-                    <h2 className="text-base/7 font-semibold text-gray-900">Affirmation information</h2>
+                    <h2 className="text-base/7 font-semibold">Affirmation information</h2>
                     <p className="mt-1 text-sm/6 text-gray-600">Name and details of affirmation.</p>
 
                     {information}

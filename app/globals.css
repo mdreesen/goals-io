@@ -15,6 +15,20 @@ body {
 
 textarea {
   field-sizing: content;
+
+  &.dark {
+    color: white;
+  }
+};
+
+.light {
+  background-color: white;
+  color: #111827;
+}
+
+.dark {
+  background: linear-gradient(90deg, rgba(3, 11, 6, .977) 2%, #0f0e0e 49%);
+  color: white;
 }
 
 
@@ -48,7 +62,7 @@ textarea {
     --radius: 0.5rem;
   }
   .dark {
-    --background: 0 0% 3.9%;
+    --background: linear-gradient(90deg, rgba(3, 11, 6, .977) 2%, #0f0e0e 49%);
     --foreground: 0 0% 98%;
     --card: 0 0% 3.9%;
     --card-foreground: 0 0% 98%;

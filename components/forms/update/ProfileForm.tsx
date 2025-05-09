@@ -43,11 +43,11 @@ export default function ProfileForm({ data }: any) {
         <form ref={ref} action={handleSubmit}>
             <div className="space-y-12">
                 <div className="border-b border-gray-900/10 pb-12">
-                    <h2 className="text-base/7 font-semibold text-gray-900">Profile</h2>
+                    <h2 className="text-base/7 font-semibold">Profile</h2>
 
                     <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                         <div className="sm:col-span-4">
-                            <label htmlFor="username" className="block text-sm/6 font-medium text-gray-900">
+                            <label htmlFor="username" className="block text-sm/6 font-medium">
                                 Who are you called to be?
                             </label>
                             <div className="mt-2">
@@ -58,7 +58,7 @@ export default function ProfileForm({ data }: any) {
                                         type="text"
                                         placeholder="Leader, Hard Worker, etc..."
                                         defaultValue={data?.username ?? ''}
-                                        className="block min-w-0 grow py-1.5 pl-1 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6"
+                                        className="block min-w-0 grow py-1.5 pl-1 pr-3 text-base focus:outline focus:outline-0 sm:text-sm/6"
                                     />
                                 </div>
                             </div>
@@ -67,12 +67,12 @@ export default function ProfileForm({ data }: any) {
                 </div>
 
                 <div className="border-b border-gray-900/10 pb-12">
-                    <h2 className="text-base/7 font-semibold text-gray-900">Personal Information</h2>
-                    <p className="mt-1 text-sm/6 text-gray-600">Use a permanent address where you can receive mail.</p>
+                    <h2 className="text-base/7 font-semibold">Personal Information</h2>
+                    <p className="mt-1 text-sm/6">Use a permanent address where you can receive mail.</p>
 
                     <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                         <div className="sm:col-span-3">
-                            <label htmlFor="first_name" className="block text-sm/6 font-medium text-gray-900">
+                            <label htmlFor="first_name" className="block text-sm/6 font-medium">
                                 First name
                             </label>
                             <div className="mt-2">
@@ -82,13 +82,13 @@ export default function ProfileForm({ data }: any) {
                                     type="text"
                                     autoComplete="given-name"
                                     defaultValue={data?.first_name ?? ''}
-                                    className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
+                                    className="block w-full rounded-md bg-white px-3 py-1.5 text-base outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
                                 />
                             </div>
                         </div>
 
                         <div className="sm:col-span-3">
-                            <label htmlFor="last_name" className="block text-sm/6 font-medium text-gray-900">
+                            <label htmlFor="last_name" className="block text-sm/6 font-medium">
                                 Last name
                             </label>
                             <div className="mt-2">
@@ -98,13 +98,13 @@ export default function ProfileForm({ data }: any) {
                                     type="text"
                                     autoComplete="family-name"
                                     defaultValue={data?.last_name ?? ''}
-                                    className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
+                                    className="block w-full rounded-md bg-white px-3 py-1.5 text-base outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
                                 />
                             </div>
                         </div>
 
                         <div className="sm:col-span-4">
-                            <label htmlFor="email" className="block text-sm/6 font-medium text-gray-900">
+                            <label htmlFor="email" className="block text-sm/6 font-medium">
                                 Email address
                             </label>
                             <div className="mt-2">
@@ -114,13 +114,13 @@ export default function ProfileForm({ data }: any) {
                                     type="email"
                                     autoComplete="email"
                                     defaultValue={data?.email ?? ''}
-                                    className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
+                                    className="block w-full rounded-md bg-white px-3 py-1.5 text-base outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
                                 />
                             </div>
                         </div>
 
                         <div className="sm:col-span-3">
-                            <label htmlFor="country" className="block text-sm/6 font-medium text-gray-900">
+                            <label htmlFor="country" className="block text-sm/6 font-medium">
                                 Country
                             </label>
                             <div className="mt-2 grid grid-cols-1">
@@ -129,20 +129,20 @@ export default function ProfileForm({ data }: any) {
                                     name="country"
                                     autoComplete="country-name"
                                     defaultValue={data?.country ?? ''}
-                                    className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pl-3 pr-8 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
+                                    className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pl-3 pr-8 text-base outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
                                 >
                                     <option>United States</option>
                                     <option>Canada</option>
                                 </select>
                                 <ChevronDownIcon
                                     aria-hidden="true"
-                                    className="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-500 sm:size-4"
+                                    className="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end sm:size-4"
                                 />
                             </div>
                         </div>
 
                         <div className="sm:col-span-3">
-                            <label htmlFor="time_zone" className="block text-sm/6 font-medium text-gray-900">
+                            <label htmlFor="time_zone" className="block text-sm/6 font-medium">
                                 Time Zone
                             </label>
                             <div className="mt-2 grid grid-cols-1">
@@ -151,7 +151,7 @@ export default function ProfileForm({ data }: any) {
                                     name="time_zone"
                                     autoComplete="time_zone-name"
                                     defaultValue={useTimeZone ?? ''}
-                                    className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pl-3 pr-8 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
+                                    className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pl-3 pr-8 text-base outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
                                 >
                                     <option>EST</option>
                                     <option>CST</option>
@@ -160,13 +160,13 @@ export default function ProfileForm({ data }: any) {
                                 </select>
                                 <ChevronDownIcon
                                     aria-hidden="true"
-                                    className="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-500 sm:size-4"
+                                    className="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end sm:size-4"
                                 />
                             </div>
                         </div>
 
                         <div className="col-span-full">
-                            <label htmlFor="street_address" className="block text-sm/6 font-medium text-gray-900">
+                            <label htmlFor="street_address" className="block text-sm/6 font-medium">
                                 Street address
                             </label>
                             <div className="mt-2">
@@ -176,13 +176,13 @@ export default function ProfileForm({ data }: any) {
                                     type="text"
                                     autoComplete="street-address"
                                     defaultValue={data?.street_address ?? ''}
-                                    className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
+                                    className="block w-full rounded-md bg-white px-3 py-1.5 text-base outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
                                 />
                             </div>
                         </div>
 
                         <div className="sm:col-span-2 sm:col-start-1">
-                            <label htmlFor="city" className="block text-sm/6 font-medium text-gray-900">
+                            <label htmlFor="city" className="block text-sm/6 font-medium">
                                 City
                             </label>
                             <div className="mt-2">
@@ -192,13 +192,13 @@ export default function ProfileForm({ data }: any) {
                                     type="text"
                                     autoComplete="address-level2"
                                     defaultValue={data?.city ?? ''}
-                                    className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
+                                    className="block w-full rounded-md bg-white px-3 py-1.5 text-base outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
                                 />
                             </div>
                         </div>
 
                         <div className="sm:col-span-2">
-                            <label htmlFor="region" className="block text-sm/6 font-medium text-gray-900">
+                            <label htmlFor="region" className="block text-sm/6 font-medium">
                                 State / Province
                             </label>
                             <div className="mt-2">
@@ -208,13 +208,13 @@ export default function ProfileForm({ data }: any) {
                                     type="text"
                                     autoComplete="address-level1"
                                     defaultValue={data?.region ?? ''}
-                                    className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
+                                    className="block w-full rounded-md bg-white px-3 py-1.5 text-base outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
                                 />
                             </div>
                         </div>
 
                         <div className="sm:col-span-2">
-                            <label htmlFor="postal_code" className="block text-sm/6 font-medium text-gray-900">
+                            <label htmlFor="postal_code" className="block text-sm/6 font-medium">
                                 ZIP / Postal code
                             </label>
                             <div className="mt-2">
@@ -224,7 +224,7 @@ export default function ProfileForm({ data }: any) {
                                     type="text"
                                     autoComplete="postal-code"
                                     defaultValue={data?.postal_code ?? ''}
-                                    className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
+                                    className="block w-full rounded-md bg-white px-3 py-1.5 text-base outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
                                 />
                             </div>
                         </div>

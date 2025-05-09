@@ -27,30 +27,30 @@ export default async function Page() {
   return (
     <div>
       <div className="px-4 sm:px-0">
-        <h3 className="text-base/7 font-semibold text-gray-900">Profile Information</h3>
-        <p className="mt-1 max-w-2xl text-sm/6 text-gray-500">Personal details and settings.</p>
+        <h3 className="text-base/7 font-semibold">Profile Information</h3>
+        <p className="mt-1 max-w-2xl text-sm/6">Personal details and settings.</p>
       </div>
       <div className="mt-6 border-t border-gray-100">
         <dl className="divide-y divide-gray-100">
           <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-            <dt className="text-sm/6 font-medium text-gray-900">Update Information</dt>
-            <dd className="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0"><Link className='underline' href={`/dashboard/profile/edit/${useUser._id}`}>Update</Link></dd>
+            <dt className="text-sm/6 font-medium">Update Information</dt>
+            <dd className="mt-1 text-sm/6 sm:col-span-2 sm:mt-0"><Link className='underline' href={`/dashboard/profile/edit/${useUser._id}`}>Update</Link></dd>
           </div>
 
           <div className='px-4'>
-            <p className="text-sm/6 font-medium text-gray-900">Customize what you want to use or not use in the app by using the toggles below.</p>
+            <p className="text-sm/6 font-medium">Customize what you want to use or not use in the app by using the toggles below.</p>
 
             {useUserSettings?.map((item: any) => (
               <div key={`${item?._id}`} className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                <dt className="text-sm/6 font-medium text-gray-900">{item?.title}</dt>
-                <dd className="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0"><ToggleWithIcon data={parse(item) ?? {}} /></dd>
+                <dt className="text-sm/6 font-medium">{item?.title}</dt>
+                <dd className="mt-1 text-sm/6 sm:col-span-2 sm:mt-0"><ToggleWithIcon data={parse(item) ?? {}} /></dd>
               </div>
             ))}
           </div>
 
           <div className="px-4 py-6 sm:px-0 border-t border-gray-100 flex flex-col">
-            <dt className="text-sm/6 font-medium text-gray-900">Delete Profile</dt>
-            <dd className="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+            <dt className="text-sm/6 font-medium">Delete Profile</dt>
+            <dd className="mt-1 text-sm/6 sm:col-span-2 sm:mt-0">
               <Menu as="div" className="relative inline-block text-left">
                 <div>
                   <MenuButton className="inline-flex justify-center gap-x-1.5 rounded-md bg-[#7A3A30] px-3 py-2 text-sm font-semibold text-white shadow-sm ring-1 ring-inset ring-gray-900 w-full">
@@ -73,8 +73,8 @@ export default async function Page() {
           </div>
 
           <div className="px-4 py-6 sm:px-0 border-t border-gray-100">
-            <span className="mt-8 text-center text-sm/6 text-gray-400 md:order-1 md:mt-0">Version {packagejson.version}</span>
-            <p className="mt-8 text-sm/6 text-gray-400 md:order-1 md:mt-0 flex flex-col">
+            <span className="mt-8 text-center text-sm/6 md:order-1 md:mt-0">Version {packagejson.version}</span>
+            <p className="mt-8 text-sm/6 md:order-1 md:mt-0 flex flex-col">
               <a href="/dashboard/privacy-policy">Privacy Policy</a>
               &copy; {current_year()} White Raven Development. All rights reserved.
             </p>

@@ -17,7 +17,7 @@ export default function ButtonDeleteHabit({ data }: any) {
     };
 
     return (
-        <button type="submit" onClick={handleSubmit} className="block px-3 py-1 text-sm/6 text-gray-900 data-[focus]:bg-gray-50 data-[focus]:outline-none">
+        <button type="submit" onClick={handleSubmit} className="block px-3 py-1 text-sm/6 data-[focus]:bg-gray-50 data-[focus]:outline-none">
             Delete
         </button>
     )

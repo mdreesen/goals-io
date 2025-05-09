@@ -1,9 +1,7 @@
 "use server";
-import { connectDB } from "@/lib/mongodb";
 import User from "@/(models)/User";
 import bcrypt from "bcryptjs";
 import { RegisterFormSchema } from "@/lib/rules";
-import { signIn } from "next-auth/react";
 import { redirect } from "next/navigation";
 
 export async function settings() {
@@ -19,6 +17,7 @@ export async function settings() {
             { setting: 'showWaterIntake', title: 'Show Water Intake', value: true },
             { setting: 'showWeight', title: 'Show Weight', value: true },
             { setting: 'showWorkout', title: 'Show Workout', value: true },
+            { setting: 'darkMode', title: 'Dark Mode', value: false },
         ]
 
         return useSettings;
