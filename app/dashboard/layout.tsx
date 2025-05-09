@@ -42,18 +42,16 @@ export default async function RootLayout({
     // Dark Mode
     const useDarkMode = useSettings.useDarkMode;
 
-    console.log(useSettings.useDarkMode);
-
     return (
         <div className={`flex flex-col min-h-screen`}>
 
             {/* Banner shown if device has UTC time */}
             {hasUtcTime}
 
-            <div className={`pb-32`}>
+            <div className={`${useDarkMode ? 'dark' : 'light bg-gray-900'} pb-32`}>
                 <Navigation />
                 <NavigationPhone settings={parse(useSettings)} />
-                <header className="py-10">
+                <header className={`py-10`}>
                     <div className="mx-auto max-w-7xl px-4">
                         <h1 className="text-3xl font-bold tracking-tight text-white">{hasUserFirstLast}</h1>
                         <p className="text-xl font-bold tracking-tight text-white">{useUser?.username && useUser.username}</p>
