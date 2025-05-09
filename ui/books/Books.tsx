@@ -40,7 +40,7 @@ export default async function Books() {
                     return (
                         <div
                             key={`${item.book_title}-${index}`}
-                            className="relative flex items-center w-full rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-gray-900 focus-within:ring-offset-2 hover:border-gray-400"
+                            className="relative flex items-center w-full rounded-lg border border-gray-300 px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-gray-900 focus-within:ring-offset-2 hover:border-gray-400"
                         >
                             <Link className="w-full" href={`/dashboard/mind/books/edit/${item.id}`}>
                                 <div className="flex-1 flex w-full justify-between items-center">
