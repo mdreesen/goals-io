@@ -27,9 +27,9 @@ export default async function Bible() {
                     <li key={item.id} className="flex items-center justify-between gap-x-6 py-5">
                         <div className="min-w-0">
                             <div className="flex items-start gap-x-3">
-                                <p className="text-sm/6 font-semibold text-gray-900">{item.book_title}</p>
+                                <p className="text-sm/6 font-semibold">{item.book_title}</p>
                             </div>
-                            <div className="mt-1 flex items-center gap-x-2 text-xs/5 text-gray-500">
+                            <div className="mt-1 flex items-center gap-x-2 text-xs/5">
                                 <p className="whitespace-nowrap">
                                     {item.chapter && `Chapter ${item.chapter}`}
                                 </p>
@@ -43,7 +43,7 @@ export default async function Bible() {
                         </div>
                         <div className="flex flex-none items-center gap-x-4">
                             <Menu as="div" className="relative flex-none">
-                                <MenuButton className="-m-2.5 block p-2.5 text-gray-500 hover:text-gray-900">
+                                <MenuButton className="-m-2.5 block p-2.5 hover">
                                     <span className="sr-only">Open options</span>
                                     <EllipsisVerticalIcon aria-hidden="true" className="size-5" />
                                 </MenuButton>
@@ -54,7 +54,7 @@ export default async function Bible() {
                                     <MenuItem>
                                         <Link
                                             href={`/dashboard/spirit/bible/details/${item._id}`}
-                                            className="block px-3 py-1 text-sm/6 text-gray-900 data-[focus]:bg-gray-50 data-[focus]:outline-none"
+                                            className="block px-3 py-1 text-sm/6 data-[focus]:bg-gray-50 data-[focus]:outline-none"
                                         >
                                             details<span className="sr-only">, {item.name}</span>
                                         </Link>
@@ -62,7 +62,7 @@ export default async function Bible() {
                                     <MenuItem>
                                         <Link
                                             href={`/dashboard/spirit/bible/edit/${item._id}`}
-                                            className="block px-3 py-1 text-sm/6 text-gray-900 data-[focus]:bg-gray-50 data-[focus]:outline-none"
+                                            className="block px-3 py-1 text-sm/6 data-[focus]:bg-gray-50 data-[focus]:outline-none"
                                         >
                                             edit<span className="sr-only">, {item.name}</span>
                                         </Link>
@@ -90,9 +90,9 @@ export default async function Bible() {
                     <li key={item.id} className="flex items-center justify-between gap-x-6 py-5">
                         <div className="min-w-0">
                             <div className="flex items-start gap-x-3">
-                                <p className="text-sm/6 font-semibold text-gray-900">{item.book_title}</p>
+                                <p className="text-sm/6 font-semibold">{item.book_title}</p>
                             </div>
-                            <div className="mt-1 flex items-center gap-x-2 text-xs/5 text-gray-500">
+                            <div className="mt-1 flex items-center gap-x-2 text-xs/5">
                                 <p className="whitespace-nowrap">
                                     {item.chapter && `Chapter ${item.chapter}`}
                                 </p>
@@ -106,7 +106,7 @@ export default async function Bible() {
                         </div>
                         <div className="flex flex-none items-center gap-x-4">
                             <Menu as="div" className="relative flex-none">
-                                <MenuButton className="-m-2.5 block p-2.5 text-gray-500 hover:text-gray-900">
+                                <MenuButton className="-m-2.5 block p-2.5 hover">
                                     <span className="sr-only">Open options</span>
                                     <EllipsisVerticalIcon aria-hidden="true" className="size-5" />
                                 </MenuButton>
@@ -117,7 +117,7 @@ export default async function Bible() {
                                     <MenuItem>
                                         <Link
                                             href={`/dashboard/spirit/bible/details/${item._id}`}
-                                            className="block px-3 py-1 text-sm/6 text-gray-900 data-[focus]:bg-gray-50 data-[focus]:outline-none"
+                                            className="block px-3 py-1 text-sm/6 data-[focus]:bg-gray-50 data-[focus]:outline-none"
                                         >
                                             details<span className="sr-only">, {item.name}</span>
                                         </Link>
@@ -125,7 +125,7 @@ export default async function Bible() {
                                     <MenuItem>
                                         <Link
                                             href={`/dashboard/spirit/bible/edit/${item._id}`}
-                                            className="block px-3 py-1 text-sm/6 text-gray-900 data-[focus]:bg-gray-50 data-[focus]:outline-none"
+                                            className="block px-3 py-1 text-sm/6 data-[focus]:bg-gray-50 data-[focus]:outline-none"
                                         >
                                             edit<span className="sr-only">, {item.name}</span>
                                         </Link>
@@ -143,7 +143,7 @@ export default async function Bible() {
     return (
         <div className="px-4 sm:px-2 lg:px-4">
             <div className='flex items-center justify-between'>
-                <Title title="Bible" />
+                <Title text="Bible" />
 
                 <ButtonGoTo title="Add notes" path="/dashboard/spirit/bible/create" />
 
@@ -154,7 +154,7 @@ export default async function Bible() {
 
             </div> */}
             <div className='p-4 mb-6'>
-                <h2 className="text-xl font-semibold text-gray-900">Sermon Notes</h2>
+                <h2 className="text-xl font-semibold">Sermon Notes</h2>
 
                 {sermonNotes}
             </div>
@@ -162,7 +162,7 @@ export default async function Bible() {
             <div className="border-t border-black/20"></div>
 
             <div className='p-4'>
-                <h2 className="text-xl font-semibold text-gray-900">Devotional Notes</h2>
+                <h2 className="text-xl font-semibold">Devotional Notes</h2>
                 {devotionalNotes}
             </div>
         </div>

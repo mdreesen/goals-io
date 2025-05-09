@@ -72,12 +72,12 @@ export default async function Page() {
     return (
         <div>
             <div>
-                <Title title="Overview" />
+                <Title text="Overview" />
                 <Overview />
 
                 <div>
                     <div className="mx-auto mt-[3rem]">
-                        <Title title="Progress" />
+                        <Title text="Progress" />
 
                         <div className="mt-10 grid grid-cols-1 gap-4 sm:mt-16 lg:grid-cols-6 lg:grid-rows-2">
                             {chartOne}

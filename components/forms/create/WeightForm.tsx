@@ -37,7 +37,7 @@ export default function WeightForm({ data }: any) {
         <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
 
             <div className="sm:col-span-3">
-                <label htmlFor="first-name" className="block text-sm/6 font-medium text-gray-900">
+                <label htmlFor="first-name" className="block text-sm/6 font-medium">
                     Weight {useStartingWeight && ' - Please enter your starting weight'}
                 </label>
                 <div className="flex items-center w-[100px] rounded-md bg-white pl-3 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-gray-900">
@@ -46,7 +46,7 @@ export default function WeightForm({ data }: any) {
                         name="weight"
                         type="text"
                         placeholder="155"
-                        className="block min-w-0 grow py-1.5 pl-1 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6"
+                        className="block min-w-0 grow py-1.5 pl-1 text-base focus:outline focus:outline-0 sm:text-sm/6"
                     />
                     <div className="shrink-0 px-2 select-none text-base text-gray-500 sm:text-sm/6">lbs</div>
                 </div>
@@ -59,7 +59,7 @@ export default function WeightForm({ data }: any) {
         <form ref={ref} action={handleSubmit}>
             <div className="space-y-12">
                 <div className="border-b border-gray-900/10 pb-12">
-                    <h2 className="text-base/7 font-semibold text-gray-900">Weight Information</h2>
+                    <h2 className="text-base/7 font-semibold">Weight Information</h2>
                     <p className="mt-1 text-sm/6 text-gray-600">Insert your weight.</p>
                     {personInfo}
                 </div>
@@ -67,7 +67,7 @@ export default function WeightForm({ data }: any) {
 
             <div className="mt-6 flex items-center justify-end gap-x-6">
                 <Link href={'/dashboard/body'}>
-                    <button type="button" className="text-sm/6 font-semibold text-gray-900">
+                    <button type="button" className="text-sm/6 font-semibold">
                         Cancel
                     </button>
                 </Link>

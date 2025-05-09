@@ -33,12 +33,12 @@ export default function JournalForm({ data }: any) {
         <form ref={ref} action={handleSubmit}>
             <div className="space-y-12">
                 <div className="border-b border-gray-900/10 pb-12">
-                    <h2 className="text-base/7 font-semibold text-gray-900">Journal entry</h2>
+                    <h2 className="text-base/7 font-semibold">Journal entry</h2>
 
                     <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
 
                         <div className="sm:col-span-4">
-                            <label htmlFor="title" className="block text-sm/6 font-medium text-gray-900">
+                            <label htmlFor="title" className="block text-sm/6 font-medium">
                                 Title
                             </label>
                             <div className="mt-2">
@@ -49,14 +49,14 @@ export default function JournalForm({ data }: any) {
                                         type="text"
                                         placeholder="Title"
                                         defaultValue={data?.title ?? ''}
-                                        className="block min-w-0 grow py-1.5 pl-1 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6"
+                                        className="block min-w-0 grow py-1.5 pl-1 pr-3 text-base focus:outline focus:outline-0 sm:text-sm/6"
                                     />
                                 </div>
                             </div>
                         </div>
 
                         <div className="col-span-full">
-                            <label htmlFor="entry" className="block text-sm/6 font-medium text-gray-900">
+                            <label htmlFor="entry" className="block text-sm/6 font-medium">
                                 Entry
                             </label>
                             <div className="mt-2">
@@ -66,7 +66,7 @@ export default function JournalForm({ data }: any) {
                                     rows={3}
                                     placeholder="Your journal entry"
                                     defaultValue={data?.entry ?? ''}
-                                    className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
+                                    className="block w-full rounded-md bg-white px-3 py-1.5 text-base outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
                                 />
                             </div>
                         </div>

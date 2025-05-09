@@ -43,7 +43,7 @@ export default function EditWorkoutForm({ data }: any) {
 
     const workoutInfo = (
         <div className="sm:col-span-3">
-            <label htmlFor="type" className="block text-sm/6 font-medium text-gray-900">
+            <label htmlFor="type" className="block text-sm/6 font-medium">
                 Workout Type
             </label>
             <div className="mt-2 grid grid-cols-1">
@@ -52,7 +52,7 @@ export default function EditWorkoutForm({ data }: any) {
                     name="type"
                     autoComplete="type"
                     defaultValue={data?.workoutData?.type ?? ''}
-                    className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pl-3 pr-8 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
+                    className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pl-3 pr-8 text-base outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
                 >
                     {workout_type.map((item) => (
                         <option key={`${item.type}`}>{item.type}</option>
@@ -61,7 +61,7 @@ export default function EditWorkoutForm({ data }: any) {
                 </select>
                 <ChevronDownIcon
                     aria-hidden="true"
-                    className="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-500 sm:size-4"
+                    className="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end sm:size-4"
                 />
             </div>
         </div>
@@ -69,7 +69,7 @@ export default function EditWorkoutForm({ data }: any) {
 
     const workoutDescription = (
         <div className="col-span-full mt-4">
-            <label htmlFor="notes" className="block text-sm/6 font-medium text-gray-900">
+            <label htmlFor="notes" className="block text-sm/6 font-medium">
                 Description
             </label>
             <div className="mt-2">
@@ -77,7 +77,7 @@ export default function EditWorkoutForm({ data }: any) {
                     id="description"
                     name="description"
                     rows={3}
-                    className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
+                    className="block w-full rounded-md bg-white px-3 py-1.5 text-base outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
                     placeholder="Describe your workout"
                     defaultValue={data?.workoutData?.description ?? ''}
                 />
@@ -87,7 +87,7 @@ export default function EditWorkoutForm({ data }: any) {
 
     const workoutSets = (
         <div className="col-span-full mt-4">
-            <label htmlFor="sets" className="block text-sm/6 font-medium text-gray-900">
+            <label htmlFor="sets" className="block text-sm/6 font-medium">
                 sets
             </label>
             <div className="mt-2">
@@ -95,7 +95,7 @@ export default function EditWorkoutForm({ data }: any) {
                     id="sets"
                     name="sets"
                     rows={3}
-                    className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
+                    className="block w-full rounded-md bg-white px-3 py-1.5 text-base outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
                     placeholder="Workout sets"
                     defaultValue={data?.workoutData?.sets ?? ''}
                 />
@@ -105,9 +105,9 @@ export default function EditWorkoutForm({ data }: any) {
 
     const datePicker = (
         <div className="mt-4">
-            <label className="block text-sm/6 font-medium text-gray-900">Workout Date</label>
+            <label className="block text-sm/6 font-medium">Workout Date</label>
             <DatePicker
-                className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
+                className="block w-full rounded-md bg-white px-3 py-1.5 text-base outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
                 selected={selectedDate}
                 onChange={handleDateChange}
                 dateFormat="yyyy-MM-dd"
@@ -121,8 +121,8 @@ export default function EditWorkoutForm({ data }: any) {
         <form ref={ref} action={handleSubmit}>
             <div className="space-y-12">
                 <div className="border-b border-gray-900/10 pb-12">
-                    <h2 className="text-base/7 font-semibold text-gray-900">Workout Information</h2>
-                    <p className="mt-1 text-sm/6 text-gray-600">Update your workout.</p>
+                    <h2 className="text-base/7 font-semibold">Workout Information</h2>
+                    <p className="mt-1 text-sm/6">Update your workout.</p>
                     <div className="mt-6">
                         {workoutInfo}
                         {workoutDescription}

@@ -11,7 +11,7 @@ export default async function Workout() {
         <div className="px-4 sm:px-6 lg:px-8">
             <div className="sm:flex sm:items-center">
                 <div className="sm:flex-auto">
-                    <h2 className="mt-2 max-w-lg text-pretty text-4xl font-semibold tracking-tight text-gray-950 sm:text-5xl">Workout</h2>
+                    <h2 className="mt-2 max-w-lg text-pretty text-4xl font-semibold tracking-tight sm:text-5xl">Workout</h2>
                 </div>
             </div>
 
@@ -33,10 +33,10 @@ export default async function Workout() {
                         <table className="min-w-full divide-y divide-gray-300">
                             <thead>
                                 <tr>
-                                    <th scope="col" className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">
+                                    <th scope="col" className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold sm:pl-0">
                                         Type
                                     </th>
-                                    <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                    <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold">
                                         Workout
                                     </th>
                                     <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-0">Edit</th>
@@ -46,12 +46,12 @@ export default async function Workout() {
                             <tbody className="divide-y divide-gray-200">
                                 {useWorkout?.data?.length > 0 ? useWorkout?.data.map((item: any, index: number) => (
                                     <tr key={`${item.type}-${index}`}>
-                                        <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
+                                        <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium sm:pl-0">
                                             {item.type}
                                         </td>
                                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{item.description}</td>
                                         <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
-                                            <a href={`/dashboard/body/workout/edit/${item._id}`} className="text-gray-900 hover:text-gray-900">
+                                            <a href={`/dashboard/body/workout/edit/${item._id}`}>
                                                 edit<span className="sr-only">, {item.type}</span>
                                             </a>
                                         </td>

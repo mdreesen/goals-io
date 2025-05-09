@@ -59,7 +59,7 @@ export default async function Affirmations() {
 
     return (
         <div>
-            <Title title="Affirmations" />
+            <Title text="Affirmations" />
             <div className="flex justify-end mt-4 mb-4 sm:mt-0 sm:flex-none">
                 <Link href={'/dashboard/mind/affirmations/create'}>
                     <button

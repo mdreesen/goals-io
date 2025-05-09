@@ -13,19 +13,19 @@ export default async function Weight() {
         <div className="sm:flex-auto">
           <h2 className="mt-2 max-w-lg text-pretty text-4xl font-semibold tracking-tight text-gray-950 sm:text-5xl">Weight</h2>
           <div>
-            <span className="py-2 text-left text-sm font-bold text-gray-900 sm:pl-0">
+            <span className="py-2 text-left text-sm font-bold sm:pl-0">
               {useWeight.startingWeight && 'Notables'}
             </span>
-            <p className="py-1 text-left text-sm font-semibold text-gray-900 sm:pl-0">
+            <p className="py-1 text-left text-sm font-semibold sm:pl-0">
               {useWeight.startingWeight && `Starting weight ${useWeight.startingWeight.weight} lbs`}
             </p>
-            <p className="py-1 text-left text-sm font-semibold text-gray-900 sm:pl-0">
+            <p className="py-1 text-left text-sm font-semibold sm:pl-0">
               {useWeight.highestWeight && `Highest weight ${useWeight.highestWeight} lbs`}
             </p>
-            <p className="py-1 text-left text-sm font-semibold text-gray-900 sm:pl-0">
+            <p className="py-1 text-left text-sm font-semibold sm:pl-0">
               {useWeight.averageWeight && `Average weight ${useWeight.averageWeight} lbs`}
             </p>
-            <p className="py-1 text-left text-sm font-semibold text-gray-900 sm:pl-0">
+            <p className="py-1 text-left text-sm font-semibold sm:pl-0">
               {useWeight.lossOrGain && `${useWeight.lossOrGain}`}
             </p>
 
@@ -45,10 +45,10 @@ export default async function Weight() {
             <table className="min-w-full divide-y divide-gray-300">
               <thead>
                 <tr>
-                  <th scope="col" className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">
+                  <th scope="col" className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold sm:pl-0">
                     weight
                   </th>
-                  <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                  <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold">
                     Date
                   </th>
                   <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-0">Edit</th>
@@ -57,12 +57,12 @@ export default async function Weight() {
               <tbody className="divide-y divide-gray-200">
                 {useWeight?.data?.length > 0 ? useWeight.data.map((item: any, index: number) => (
                   <tr key={`${item.weight}-${index}`}>
-                    <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
+                    <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium sm:pl-0">
                       {`${item.weight} lbs ${item.starting_weight ? ' - Starting Weight' : ''}`}
                     </td>
-                    <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{formatDateAndTime(item.weight_date)}{item.starting_weight ? ' - Starting Date' : ''}</td>
+                    <td className="whitespace-nowrap px-3 py-4 text-sm">{formatDateAndTime(item.weight_date)}{item.starting_weight ? ' - Starting Date' : ''}</td>
                     <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
-                      <a href={`/dashboard/body/weight/edit/${item.id}`} className="text-gray-900 hover:text-gray-900">
+                      <a href={`/dashboard/body/weight/edit/${item.id}`}>
                         edit<span className="sr-only">, {item.id}</span>
                       </a>
                     </td>

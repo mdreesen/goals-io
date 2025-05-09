@@ -20,27 +20,27 @@ export default async function Weight() {
   const notables = (
     <div>
       {useWeight.startingWeight && (
-        <span className="py-2 text-left text-sm font-bold text-gray-900 sm:pl-0">
+        <span className="py-2 text-left text-sm font-bold sm:pl-0">
           Notables
         </span>
       )}
       {useWeight.startingWeight && (
-        <p className="py-1 text-left text-sm font-semibold text-gray-900 sm:pl-0">
+        <p className="py-1 text-left text-sm font-semibold sm:pl-0">
           {`Starting weight ${useWeight.startingWeight.weight} lbs`}
         </p>
       )}
       {useWeight.highestWeight !== '0' && (
-        <p className="py-1 text-left text-sm font-semibold text-gray-900 sm:pl-0">
+        <p className="py-1 text-left text-sm font-semibold sm:pl-0">
           {`Highest weight ${useWeight.highestWeight} lbs`}
         </p>
       )}
       {useWeight.averageWeight !== '0' && (
-        <p className="py-1 text-left text-sm font-semibold text-gray-900 sm:pl-0">
+        <p className="py-1 text-left text-sm font-semibold sm:pl-0">
           {`Average weight ${useWeight.averageWeight} lbs`}
         </p>
       )}
       {useWeight.lossOrGain !== 'Lost 0 lbs' && (
-        <p className="py-1 text-left text-sm font-semibold text-gray-900 sm:pl-0">
+        <p className="py-1 text-left text-sm font-semibold sm:pl-0">
           {`${useWeight.lossOrGain}`}
         </p>
       )}
@@ -52,7 +52,7 @@ export default async function Weight() {
     <div className="px-4 sm:px-2 lg:px-4">
       <div className="sm:flex sm:items-center">
         <div className="sm:flex-auto">
-          <Title title="Weight" />
+          <Title text="Weight" />
         </div>
         <div className="flex justify-end mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
           <div className="flex gap-4 w-full justify-between">

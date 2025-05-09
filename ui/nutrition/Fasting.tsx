@@ -9,7 +9,7 @@ export default async function Fasting() {
 
   return (
     <div className="px-4 sm:px-2 lg:px-4">
-      <Title title="Fasting"/>
+      <Title text="Fasting"/>
       <Timer fastData={parse(userFasting)}/>
     </div>
   )

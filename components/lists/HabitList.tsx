@@ -16,7 +16,7 @@ export default async function HabitList({ data }: any) {
                         {item.status}
                     </p>
                 </div>
-                <div className="mt-1 flex items-center gap-x-2 text-xs/5 text-gray-500">
+                <div className="mt-1 flex items-center gap-x-2 text-xs/5">
                     <p className="whitespace-nowrap">
                         {item.kind && `${item.kind} habit`}
                     </p>
@@ -24,7 +24,7 @@ export default async function HabitList({ data }: any) {
             </div>
             <div className="flex flex-none items-center gap-x-4">
                 <Menu as="div" className="relative flex-none">
-                    <MenuButton className="-m-2.5 block p-2.5 text-gray-500 hover:text-gray-900">
+                    <MenuButton className="-m-2.5 block p-2.5 hover:text-gray-900">
                         <span className="sr-only">Open options</span>
                         <EllipsisVerticalIcon aria-hidden="true" className="size-5" />
                     </MenuButton>

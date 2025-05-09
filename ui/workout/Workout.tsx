@@ -13,7 +13,7 @@ export default async function Workout() {
         <div className="px-4 sm:px-6 lg:px-8">
             <div className="sm:flex sm:items-center">
                 <div className="sm:flex-auto">
-                    <Title title="Workout" />
+                    <Title text="Workout" />
                 </div>
             </div>
 

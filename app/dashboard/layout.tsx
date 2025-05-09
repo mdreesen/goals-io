@@ -45,12 +45,12 @@ export default async function RootLayout({
     console.log(useSettings.useDarkMode);
 
     return (
-        <div className="flex flex-col min-h-screen">
+        <div className={`${useDarkMode ? 'dark' : 'light bg-gray-900'} flex flex-col min-h-screen`}>
 
             {/* Banner shown if device has UTC time */}
             {hasUtcTime}
 
-            <div className={`${useDarkMode ? 'dark' : 'light bg-gray-900'} pb-32`}>
+            <div className={`pb-32`}>
                 <Navigation />
                 <NavigationPhone settings={parse(useSettings)} />
                 <header className="py-10">
@@ -62,8 +62,8 @@ export default async function RootLayout({
             </div>
 
             <main className="-mt-32 grow">
-                <div className="mx-auto max-w-7xl pb-[120px]">
-                    <div className={`${useDarkMode ? 'dark' : 'light'} rounded-lg bg-white px-5 sm:px-6 pt-[2rem]`}>
+                <div className="mx-auto max-w-7xl pb-[95px]">
+                    <div className={`${useDarkMode ? 'dark' : 'light'} rounded-t-lg bg-white px-5 sm:px-6 pt-[2rem] pb-[2rem]`}>
                         {/* Tutorial shown if user has not seen/read it */}
                         {useTutorial}
                         {children}

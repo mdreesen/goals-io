@@ -1,6 +1,6 @@
 import { fetchSettings } from "@/actions/settings";
 
-export default async function Title({ text }: any) {
+export default async function SubText({ text }: any) {
     const useSettings = await fetchSettings();
 
     const useDarkMode = useSettings.useDarkMode;
