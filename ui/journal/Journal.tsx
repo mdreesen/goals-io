@@ -1,6 +1,7 @@
 import { fetchEntry } from '@/actions/journal';
 import ButtonGoTo from '@/components/buttons/ButtonGoTo';
 import Results from '@/components/showing/Results';
+import Title from '@/components/text/Title';
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { EllipsisVerticalIcon } from '@heroicons/react/20/solid'
 import Link from 'next/link';
@@ -70,7 +71,8 @@ export default async function Journal() {
 
     return (
         <div className="px-4 sm:px-2 lg:px-4">
-            <h2 className="mt-2 max-w-lg text-pretty text-4xl font-semibold tracking-tight text-gray-950 sm:text-5xl">Journal</h2>
+            <Title title="Journal" />
+
             <div className="flex justify-end mt-4 mb-4 sm:mt-0 sm:flex-none">
                 <div className="flex gap-4 w-full justify-between">
                     <ButtonGoTo title='See all entries' path={'/dashboard/spirit/journal/all'} />
@@ -79,7 +81,7 @@ export default async function Journal() {
             </div>
 
             <div className="px-4 sm:px-2 lg:px-4">
-              <Results data={journalEntries?.results} />
+                <Results data={journalEntries?.results} />
             </div>
 
             <div className='p-4 rounded'>

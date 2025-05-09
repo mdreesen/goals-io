@@ -1,5 +1,6 @@
 import { fetchAllWaterForToday } from "@/actions/nutrition_water";
 import ButtonGoTo from "@/components/buttons/ButtonGoTo";
+import Title from "@/components/text/Title";
 export default async function NutritionWater() {
 
   const useAllWaterForToday = await fetchAllWaterForToday() as any;
@@ -40,7 +41,7 @@ export default async function NutritionWater() {
 
   return (
     <div className="px-4 sm:px-2 lg:px-4">
-      <h2 className="mt-2 max-w-lg text-pretty text-4xl font-semibold tracking-tight text-gray-950 sm:text-5xl">Nutrition</h2>
+      <Title title="Nutrition" />
       {water}
     </div>
   )

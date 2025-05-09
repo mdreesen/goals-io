@@ -11,6 +11,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import Title from "@/components/text/Title";
 
 export default async function Weight() {
 
@@ -51,7 +52,7 @@ export default async function Weight() {
     <div className="px-4 sm:px-2 lg:px-4">
       <div className="sm:flex sm:items-center">
         <div className="sm:flex-auto">
-          <h2 className="mt-2 max-w-lg text-pretty text-4xl font-semibold tracking-tight text-gray-950 sm:text-5xl">Weight</h2>
+          <Title title="Weight" />
         </div>
         <div className="flex justify-end mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
           <div className="flex gap-4 w-full justify-between">

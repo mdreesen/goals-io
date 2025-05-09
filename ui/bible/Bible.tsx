@@ -4,6 +4,7 @@ import { EllipsisVerticalIcon } from '@heroicons/react/20/solid';
 import ButtonGoTo from '@/components/buttons/ButtonGoTo';
 import Link from 'next/link';
 import Results from '@/components/showing/Results';
+import Title from '@/components/text/Title';
 
 export default async function Bible() {
 
@@ -142,8 +143,9 @@ export default async function Bible() {
     return (
         <div className="px-4 sm:px-2 lg:px-4">
             <div className='flex items-center justify-between'>
-            <h2 className="max-w-lg text-pretty text-4xl font-semibold tracking-tight text-gray-950 sm:text-5xl">Bible</h2>
-            <ButtonGoTo title="Add notes" path="/dashboard/spirit/bible/create" />
+                <Title title="Bible" />
+
+                <ButtonGoTo title="Add notes" path="/dashboard/spirit/bible/create" />
 
             </div>
 

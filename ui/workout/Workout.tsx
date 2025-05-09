@@ -3,6 +3,7 @@ import ButtonGoTo from "@/components/buttons/ButtonGoTo";
 import Results from "@/components/showing/Results";
 import { formatDateAndTime } from '@/lib/formatters';
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import Title from "@/components/text/Title";
 
 export default async function Workout() {
 
@@ -12,7 +13,7 @@ export default async function Workout() {
         <div className="px-4 sm:px-6 lg:px-8">
             <div className="sm:flex sm:items-center">
                 <div className="sm:flex-auto">
-                    <h2 className="mt-2 max-w-lg text-pretty text-4xl font-semibold tracking-tight text-gray-950 sm:text-5xl">Workout</h2>
+                    <Title title="Workout" />
                 </div>
             </div>
 

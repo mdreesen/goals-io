@@ -72,14 +72,13 @@ export default async function Page() {
     return (
         <div>
             <div>
-                <Title title="Overview"/>
+                <Title title="Overview" />
                 <Overview />
 
                 <div>
                     <div className="mx-auto mt-[3rem]">
-                        <p className="mt-2 max-w-lg text-pretty text-4xl font-semibold tracking-tight sm:text-5xl text-center">
-                            Progress
-                        </p>
+                        <Title title="Progress" />
+
                         <div className="mt-10 grid grid-cols-1 gap-4 sm:mt-16 lg:grid-cols-6 lg:grid-rows-2">
                             {chartOne}
                             {chartTwo}

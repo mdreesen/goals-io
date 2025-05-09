@@ -1,5 +1,6 @@
 import { filterAffirmations } from '@/actions/affirmations';
 import AffirmationsList from '@/components/lists/AffirmationsList';
+import Title from '@/components/text/Title';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import Link from 'next/link';
 
@@ -58,7 +59,7 @@ export default async function Affirmations() {
 
     return (
         <div>
-            <h2 className="text-3xl font-semibold text-gray-900">Affirmations</h2>
+            <Title title="Affirmations" />
             <div className="flex justify-end mt-4 mb-4 sm:mt-0 sm:flex-none">
                 <Link href={'/dashboard/mind/affirmations/create'}>
                     <button
