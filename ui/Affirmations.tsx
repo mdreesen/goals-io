@@ -1,7 +1,7 @@
 import { filterAffirmations } from '@/actions/affirmations';
-import Link from 'next/link';
 import AffirmationsList from '@/components/lists/AffirmationsList';
-import { fetchSettings } from '@/actions/settings';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import Link from 'next/link';
 
 export default async function Affirmations() {
     const filteredAffirmations = await filterAffirmations() as any;
@@ -18,84 +18,46 @@ export default async function Affirmations() {
     const renderPositivity = filteredAffirmations.use_positivity_affirmations;
     const renderSelfWorth = filteredAffirmations.use_selfWorth_affirmations;
 
-    const none = renderGrowth === false && renderMindfulness === false && renderPositivity === false && renderSelfWorth === false;
+    const useNone = renderGrowth === false && renderMindfulness === false && renderPositivity === false && renderSelfWorth === false;
 
     const useGrowth = renderGrowth && (
-        <details className="group">
-            <summary className="flex cursor-pointer list-none items-center justify-between p-4 text-lg font-medium text-secondary-900 group-open:bg-gray-50">
-                <span>Growth</span>
-                <div className="text-secondary-500">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="block h-5 w-5 transition-all duration-300 group-open:rotate-180">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-                    </svg>
-                </div>
-            </summary>
-            <div className="border-t border-t-gray-100 p-4 text-secondary-500">
-                <ul role="list" className="divide-y divide-gray-100 border border-amber-500 rounded-md my-10">
-                    <AffirmationsList data={growth} />
-                </ul>
-            </div>
-        </details>
+        <AccordionItem value="item-1">
+            <AccordionTrigger>Growth</AccordionTrigger>
+            <AccordionContent>
+                <AffirmationsList data={growth} />
+            </AccordionContent>
+        </AccordionItem>
     );
 
     const useMindfulness = renderMindfulness && (
-        <details className="group">
-            <summary className="flex cursor-pointer list-none items-center justify-between p-4 text-lg font-medium text-secondary-900 group-open:bg-gray-50">
-                <span>Mindfulness</span>
-                <div className="text-secondary-500">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="block h-5 w-5 transition-all duration-300 group-open:rotate-180">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-                    </svg>
-                </div>
-            </summary>
-            <div className="border-t border-t-gray-100 p-4 text-secondary-500">
-                <ul role="list" className="divide-y divide-gray-100 border border-sky-600 my-6 rounded-md">
-                    <AffirmationsList data={mindfulness} />
-                </ul>
-            </div>
-        </details>
+        <AccordionItem value="item-2">
+            <AccordionTrigger>Mindfulness</AccordionTrigger>
+            <AccordionContent>
+                <AffirmationsList data={mindfulness} />
+            </AccordionContent>
+        </AccordionItem>
     );
 
     const usePositivity = renderPositivity && (
-        <details className="group">
-            <summary className="flex cursor-pointer list-none items-center justify-between p-4 text-lg font-medium text-secondary-900 group-open:bg-gray-50">
-                <span>Positivity</span>
-
-                <div className="text-secondary-500">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="block h-5 w-5 transition-all duration-300 group-open:rotate-180">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-                    </svg>
-                </div>
-            </summary>
-            <div className="border-t border-t-gray-100 p-4 text-secondary-500">
-                <ul role="list" className="divide-y divide-gray-100 border border-green-600 my-6 rounded-md">
-                    <AffirmationsList data={positivity} />
-                </ul>
-            </div>
-        </details>
+        <AccordionItem value="item-3">
+            <AccordionTrigger>Positivity</AccordionTrigger>
+            <AccordionContent>
+                <AffirmationsList data={positivity} />
+            </AccordionContent>
+        </AccordionItem>
     );
 
     const useSelfWorth = renderSelfWorth && (
-        <details className="group">
-            <summary className="flex cursor-pointer list-none items-center justify-between p-4 text-lg font-medium text-secondary-900 group-open:bg-gray-50">
-                <span>Self Worth</span>
-
-                <div className="text-secondary-500">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="block h-5 w-5 transition-all duration-300 group-open:rotate-180">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-                    </svg>
-                </div>
-            </summary>
-            <div className="border-t border-t-gray-100 p-4 text-secondary-500">
-                <ul role="list" className="divide-y divide-gray-100 border border-purple-500 my-6 rounded-md">
-                    <AffirmationsList data={self_worth} />
-                </ul>
-            </div>
-        </details>
+        <AccordionItem value="item-4">
+            <AccordionTrigger>Self Worth</AccordionTrigger>
+            <AccordionContent>
+                <AffirmationsList data={self_worth} />
+            </AccordionContent>
+        </AccordionItem>
     );
 
     return (
-        <div className="px-4 sm:px-2 lg:px-4">
+        <div>
             <h2 className="text-3xl font-semibold text-gray-900">Affirmations</h2>
             <div className="flex justify-end mt-4 mb-4 sm:mt-0 sm:flex-none">
                 <Link href={'/dashboard/mind/affirmations/create'}>
@@ -107,17 +69,15 @@ export default async function Affirmations() {
                     </button>
                 </Link>
             </div>
+            {useNone ? <h3>Add your Affirmations!</h3> : (
+                <Accordion type="single" collapsible className="w-full">
+                    {useGrowth}
+                    {useMindfulness}
+                    {usePositivity}
+                    {useSelfWorth}
+                </Accordion>
+            )}
 
-            <div className="mx-auto">
-                {none ? <h3>Add your Affirmations!</h3> : (
-                    <div className="divide-y divide-gray-100 overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm">
-                        {useGrowth}
-                        {useMindfulness}
-                        {usePositivity}
-                        {useSelfWorth}
-                    </div>
-                )}
-            </div>
         </div>
     )
 }

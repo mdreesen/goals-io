@@ -42,7 +42,7 @@ export default async function RootLayout({
     // Dark Mode
     const useDarkMode = useSettings.useDarkMode;
 
-    console.log(useSettings.useDarkMode)
+    console.log(useSettings.useDarkMode);
 
     return (
         <div className="flex flex-col min-h-screen">

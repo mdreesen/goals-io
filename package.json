@@ -1,6 +1,6 @@
 {
   "name": "goals-io",
-  "version": "0.6.0.4",
+  "version": "0.7.0.1",
   "private": true,
   "description": "Set goals. Achieve greatness.",
   "main": "index.js",
@@ -16,6 +16,7 @@
   "dependencies": {
     "@headlessui/react": "^2.2.0",
     "@heroicons/react": "^2.2.0",
+    "@radix-ui/react-accordion": "^1.2.10",
     "@radix-ui/react-dropdown-menu": "^2.1.14",
     "@radix-ui/react-slot": "^1.2.2",
     "@serwist/next": "^9.0.11",
