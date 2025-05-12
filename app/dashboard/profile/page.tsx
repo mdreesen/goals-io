@@ -22,7 +22,7 @@ export default async function Page() {
   const useUser = await fetchUser();
   const useSettings = await fetchSettings() ?? [];
 
-  const { useBodySettings, useMindSettings, useSpiritSettings } = useSettings;
+  const { useBodySettings, useMindSettings, useSpiritSettings, useDarkMode, usePersonalSettings } = useSettings;
 
   const bodySettings = useBodySettings.map((item: any) => (
     <div key={`${item?._id}`} className="py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
@@ -39,6 +39,13 @@ export default async function Page() {
   ));
 
   const spiritSettings = useSpiritSettings.map((item: any) => (
+    <div key={`${item?._id}`} className="py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+      <dt className="text-sm/6 font-medium">{item?.title}</dt>
+      <dd className="mt-1 text-sm/6 sm:col-span-2 sm:mt-0"><ToggleWithIcon data={parse(item) ?? {}} /></dd>
+    </div>
+  ));
+
+  const personalSettings = usePersonalSettings.map((item: any) => (
     <div key={`${item?._id}`} className="py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
       <dt className="text-sm/6 font-medium">{item?.title}</dt>
       <dd className="mt-1 text-sm/6 sm:col-span-2 sm:mt-0"><ToggleWithIcon data={parse(item) ?? {}} /></dd>
@@ -74,6 +81,11 @@ export default async function Page() {
             <div className='px-4 py-6'>
               <h2>Spirit Settings</h2>
               {spiritSettings}
+            </div>
+
+            <div className='px-4 py-6'>
+              <h2>Personal Settings</h2>
+              {personalSettings}
             </div>
           </div>
 
