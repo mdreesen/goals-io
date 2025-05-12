@@ -103,19 +103,19 @@ export const authOptions: NextAuthOptions = {
       async authorize(credentials) {
         await connectDB();
 
-        const useSettings = await settings();
+        // const useSettings = await settings();
 
         const user = await User.findOne({
           email: credentials?.email,
         }).select("+password");
 
         // When user signs up, it places new settings for them
-        if (user?.settings.length !== settings.length) {
-          await User.findOneAndUpdate(
-            { email: credentials?.email },
-            { $set: { 'settings': useSettings } },
-          );
-        }
+        // if (user?.settings.length !== settings.length) {
+        //   await User.findOneAndUpdate(
+        //     { email: credentials?.email },
+        //     { $set: { 'settings': useSettings } },
+        //   );
+        // }
 
         if (!user) throw new Error("Wrong Credentials");
         const passwordMatch = await bcrypt.compare(
