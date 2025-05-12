@@ -52,7 +52,7 @@ export default function EditWorkoutForm({ data }: any) {
                     name="type"
                     autoComplete="type"
                     defaultValue={data?.workoutData?.type ?? ''}
-                    className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pl-3 pr-8 text-base outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
+                    className="col-start-1 row-start-1 w-full appearance-none rounded-md py-1.5 pl-3 pr-8 text-base outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
                 >
                     {workout_type.map((item) => (
                         <option key={`${item.type}`}>{item.type}</option>
@@ -77,7 +77,7 @@ export default function EditWorkoutForm({ data }: any) {
                     id="description"
                     name="description"
                     rows={3}
-                    className="block w-full rounded-md bg-white px-3 py-1.5 text-base outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
+                    className="block w-full rounded-md px-3 py-1.5 text-base outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
                     placeholder="Describe your workout"
                     defaultValue={data?.workoutData?.description ?? ''}
                 />
@@ -95,7 +95,7 @@ export default function EditWorkoutForm({ data }: any) {
                     id="sets"
                     name="sets"
                     rows={3}
-                    className="block w-full rounded-md bg-white px-3 py-1.5 text-base outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
+                    className="block w-full rounded-md px-3 py-1.5 text-base outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
                     placeholder="Workout sets"
                     defaultValue={data?.workoutData?.sets ?? ''}
                 />
@@ -107,7 +107,7 @@ export default function EditWorkoutForm({ data }: any) {
         <div className="mt-4">
             <label className="block text-sm/6 font-medium">Workout Date</label>
             <DatePicker
-                className="block w-full rounded-md bg-white px-3 py-1.5 text-base outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
+                className="block w-full rounded-md px-3 py-1.5 text-base outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
                 selected={selectedDate}
                 onChange={handleDateChange}
                 dateFormat="yyyy-MM-dd"

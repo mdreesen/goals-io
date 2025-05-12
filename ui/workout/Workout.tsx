@@ -36,7 +36,7 @@ export default async function Workout() {
                         <TableRow key={item._id}>
                             <TableCell className="font-medium"><div className="flex flex-col gap-2"><span>{item?.type}</span><span>{item?.description}</span></div></TableCell>
                             <TableCell className="text-center">{formatDateAndTime(item?.date)}</TableCell>
-                            <TableCell className="flex justify-end"><ButtonGoTo className="text-right" title={'Edit'} path={`/dashboard/body/weight/edit/${item._id}`} /></TableCell>
+                            <TableCell className="flex justify-end"><ButtonGoTo className="text-right" title={'Edit'} path={`/dashboard/body/workout/edit/${item._id}`} /></TableCell>
                         </TableRow>
                     ))}
                 </TableBody>

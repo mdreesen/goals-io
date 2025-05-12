@@ -36,13 +36,13 @@ export default function WeightForm({ data }: any) {
                 <label htmlFor="first-name" className="block text-sm/6 font-medium">
                     Weight
                 </label>
-                <div className="flex items-center w-[100px] rounded-md bg-white pl-3 outline-1 -outline-offset-1 outline-gray-300 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-gray-900">
+                <div className="flex items-center w-[100px] rounded-md pl-3 outline-1 -outline-offset-1 outline-gray-300 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-gray-900">
                     <input
                         id="weight"
                         name="weight"
                         type="text"
                         placeholder="155"
-                        defaultValue={data.weightData.weight}
+                        defaultValue={data.weightData?.weight}
                         className="block min-w-0 grow py-1.5 pl-1 text-base focus:outline-0 sm:text-sm/6"
                     />
                     <div className="shrink-0 px-2 select-none text-base sm:text-sm/6">lbs</div>

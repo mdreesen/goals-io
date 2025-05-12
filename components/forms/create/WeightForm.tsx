@@ -40,7 +40,7 @@ export default function WeightForm({ data }: any) {
                 <label htmlFor="first-name" className="block text-sm/6 font-medium">
                     Weight {useStartingWeight && ' - Please enter your starting weight'}
                 </label>
-                <div className="flex items-center w-[100px] rounded-md bg-white pl-3 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-gray-900">
+                <div className="flex items-center w-[100px] rounded-md pl-3 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-gray-900">
                     <input
                         id="weight"
                         name="weight"

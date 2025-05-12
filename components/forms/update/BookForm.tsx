@@ -73,7 +73,7 @@ export default function EditBook({ data }: any) {
                         placeholder="Book title"
                         defaultValue={data?.book_title}
                         required
-                        className="block w-full rounded-md bg-white px-3 py-1.5 text-base outline outline-1 -outline-offset-1 outline-gray-900 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
+                        className="block w-full rounded-md px-3 py-1.5 text-base outline outline-1 -outline-offset-1 outline-gray-900 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
                     />
                 </div>
             </div>
@@ -88,7 +88,7 @@ export default function EditBook({ data }: any) {
                         name="kind_of_book"
                         autoComplete="kind_of_book"
                         defaultValue={data?.kind_of_book}
-                        className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pl-3 pr-8 text-base outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
+                        className="col-start-1 row-start-1 w-full appearance-none rounded-md py-1.5 pl-3 pr-8 text-base outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
                     >
                         <option>Audiobook</option>
                         <option>Ebook</option>
@@ -113,7 +113,7 @@ export default function EditBook({ data }: any) {
                         autoComplete="book_author"
                         placeholder="Author of book"
                         defaultValue={data?.book_author}
-                        className="block w-full rounded-md bg-white px-3 py-1.5 text-base outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
+                        className="block w-full rounded-md px-3 py-1.5 text-base outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
                     />
                 </div>
             </div>
@@ -128,7 +128,7 @@ export default function EditBook({ data }: any) {
                         autoComplete="booklist"
                         defaultValue={data?.booklist}
                         onChange={(e) => handleFutureRads(e.target.value)}
-                        className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pl-3 pr-8 text-base outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
+                        className="col-start-1 row-start-1 w-full appearance-none rounded-md py-1.5 pl-3 pr-8 text-base outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
                     >
                         <option>No</option>
                         <option>Yes</option>
@@ -148,7 +148,7 @@ export default function EditBook({ data }: any) {
             <div>
                 <label className="block text-sm/6 font-medium">Start Date</label>
                 <DatePicker
-                    className="block w-full rounded-md bg-white px-3 py-1.5 text-base outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
+                    className="block w-full rounded-md px-3 py-1.5 text-base outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
                     selected={selectedStartDate}
                     onChange={handleStartDateChange}
                     dateFormat="yyyy-MM-dd"
@@ -158,7 +158,7 @@ export default function EditBook({ data }: any) {
             <div>
                 <label className="block text-sm/6 font-medium">End Date</label>
                 <DatePicker
-                    className="block w-full rounded-md bg-white px-3 py-1.5 text-base outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
+                    className="block w-full rounded-md px-3 py-1.5 text-base outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
                     selected={selectedEndDate}
                     onChange={handleEndDateChange}
                     dateFormat="yyyy-MM-dd"
@@ -179,7 +179,7 @@ export default function EditBook({ data }: any) {
                     name="notes"
                     placeholder="Notes about the book"
                     defaultValue={data?.notes ?? ''}
-                    className="block w-full rounded-md bg-white px-3 py-1.5 text-base outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
+                    className="block w-full rounded-md px-3 py-1.5 text-base outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
                 />
             </div>
         </div>

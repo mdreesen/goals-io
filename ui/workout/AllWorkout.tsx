@@ -2,6 +2,8 @@ import { fetchWorkout } from "@/actions/workout";
 import ButtonBack from "@/components/buttons/ButtonBack";
 import ButtonGoTo from "@/components/buttons/ButtonGoTo";
 import Results from "@/components/showing/Results";
+import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { formatDateAndTime } from "@/lib/formatters";
 
 export default async function Workout() {
 
@@ -22,46 +24,25 @@ export default async function Workout() {
                 </div>
             </div>
 
-            <div className="mt-8 flow-root">
-                <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                    <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-
-                        <div className="px-4 sm:px-2 lg:px-4">
-                            <Results data={useWorkout?.totalWorkouts} />
-                        </div>
-
-                        <table className="min-w-full divide-y divide-gray-300">
-                            <thead>
-                                <tr>
-                                    <th scope="col" className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold sm:pl-0">
-                                        Type
-                                    </th>
-                                    <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold">
-                                        Workout
-                                    </th>
-                                    <th scope="col" className="relative py-3.5 pl-3 pr-4 sm:pr-0">Edit</th>
-
-                                </tr>
-                            </thead>
-                            <tbody className="divide-y divide-gray-200">
-                                {useWorkout?.data?.length > 0 ? useWorkout?.data.map((item: any, index: number) => (
-                                    <tr key={`${item.type}-${index}`}>
-                                        <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium sm:pl-0">
-                                            {item.type}
-                                        </td>
-                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{item.description}</td>
-                                        <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
-                                            <a href={`/dashboard/body/workout/edit/${item._id}`}>
-                                                edit<span className="sr-only">, {item.type}</span>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                )) : <tr className="py-2">No workouts recorded</tr>}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
+            <Table>
+                <TableCaption>All results of your recent tracked workouts.</TableCaption>
+                <TableHeader>
+                    <TableRow>
+                        <TableHead className="w-[100px]">Type</TableHead>
+                        <TableHead className="text-center">Date</TableHead>
+                        <TableHead className="text-right">Edit</TableHead>
+                    </TableRow>
+                </TableHeader>
+                <TableBody>
+                    {useWorkout.data.map((item: any) => (
+                        <TableRow key={item._id}>
+                            <TableCell className="font-medium"><div className="flex flex-col gap-2"><span>{item?.type}</span><span>{item?.description}</span></div></TableCell>
+                            <TableCell className="text-center">{formatDateAndTime(item?.date)}</TableCell>
+                            <TableCell className="flex justify-end"><ButtonGoTo className="text-right" title={'Edit'} path={`/dashboard/body/workout/edit/${item._id}`} /></TableCell>
+                        </TableRow>
+                    ))}
+                </TableBody>
+            </Table>
         </div>
     )
 }

@@ -2,15 +2,7 @@ import { fetchWeight } from "@/actions/weight"
 import { formatDateAndTime } from "@/lib/formatters";
 import ButtonGoTo from "@/components/buttons/ButtonGoTo";
 import Results from "@/components/showing/Results";
-import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table"
+import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import Title from "@/components/text/Title";
 
 export default async function Weight() {

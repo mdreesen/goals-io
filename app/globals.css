@@ -15,10 +15,6 @@ body {
 
 textarea {
   field-sizing: content;
-
-  &.dark {
-    color: white;
-  }
 };
 
 .light {
@@ -97,5 +93,14 @@ textarea {
   }
   body {
     @apply bg-background text-foreground;
+  }
+  textarea {
+    @apply bg-background text-foreground
+  }
+  input {
+    @apply bg-background text-foreground
+  }
+  select {
+    @apply bg-background text-foreground
   }
 }

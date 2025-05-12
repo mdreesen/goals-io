@@ -41,10 +41,10 @@ export default function Page() {
           height={200}
           width={200}
         />
-        <h2 className="mt-6 text-center text-3xl/9 font-bold tracking-tight text-gray-900">
+        <h2 className="mt-6 text-center text-3xl/9 font-bold tracking-tight">
           Welcome to Ascend
         </h2>
-        <h2 className="mt-6 text-center text-2xl/9 font-bold tracking-tight text-gray-900">
+        <h2 className="mt-6 text-center text-2xl/9 font-bold tracking-tight">
           Sign in to your account
         </h2>
       </div>

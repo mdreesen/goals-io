@@ -51,7 +51,7 @@ export default function ProfileForm({ data }: any) {
                                 Who are you called to be?
                             </label>
                             <div className="mt-2">
-                                <div className="flex items-center rounded-md bg-white pl-3 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
+                                <div className="flex items-center rounded-md pl-3 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
                                     <input
                                         id="username"
                                         name="username"
@@ -82,7 +82,7 @@ export default function ProfileForm({ data }: any) {
                                     type="text"
                                     autoComplete="given-name"
                                     defaultValue={data?.first_name ?? ''}
-                                    className="block w-full rounded-md bg-white px-3 py-1.5 text-base outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
+                                    className="block w-full rounded-md px-3 py-1.5 text-base outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
                                 />
                             </div>
                         </div>
@@ -98,7 +98,7 @@ export default function ProfileForm({ data }: any) {
                                     type="text"
                                     autoComplete="family-name"
                                     defaultValue={data?.last_name ?? ''}
-                                    className="block w-full rounded-md bg-white px-3 py-1.5 text-base outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
+                                    className="block w-full rounded-md px-3 py-1.5 text-base outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
                                 />
                             </div>
                         </div>
@@ -114,7 +114,7 @@ export default function ProfileForm({ data }: any) {
                                     type="email"
                                     autoComplete="email"
                                     defaultValue={data?.email ?? ''}
-                                    className="block w-full rounded-md bg-white px-3 py-1.5 text-base outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
+                                    className="block w-full rounded-md px-3 py-1.5 text-base outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
                                 />
                             </div>
                         </div>
@@ -129,7 +129,7 @@ export default function ProfileForm({ data }: any) {
                                     name="country"
                                     autoComplete="country-name"
                                     defaultValue={data?.country ?? ''}
-                                    className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pl-3 pr-8 text-base outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
+                                    className="col-start-1 row-start-1 w-full appearance-none rounded-md py-1.5 pl-3 pr-8 text-base outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
                                 >
                                     <option>United States</option>
                                     <option>Canada</option>
@@ -151,7 +151,7 @@ export default function ProfileForm({ data }: any) {
                                     name="time_zone"
                                     autoComplete="time_zone-name"
                                     defaultValue={useTimeZone ?? ''}
-                                    className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pl-3 pr-8 text-base outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
+                                    className="col-start-1 row-start-1 w-full appearance-none rounded-md py-1.5 pl-3 pr-8 text-base outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
                                 >
                                     <option>EST</option>
                                     <option>CST</option>
@@ -176,7 +176,7 @@ export default function ProfileForm({ data }: any) {
                                     type="text"
                                     autoComplete="street-address"
                                     defaultValue={data?.street_address ?? ''}
-                                    className="block w-full rounded-md bg-white px-3 py-1.5 text-base outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
+                                    className="block w-full rounded-md px-3 py-1.5 text-base outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
                                 />
                             </div>
                         </div>
@@ -192,7 +192,7 @@ export default function ProfileForm({ data }: any) {
                                     type="text"
                                     autoComplete="address-level2"
                                     defaultValue={data?.city ?? ''}
-                                    className="block w-full rounded-md bg-white px-3 py-1.5 text-base outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
+                                    className="block w-full rounded-md px-3 py-1.5 text-base outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
                                 />
                             </div>
                         </div>
@@ -208,7 +208,7 @@ export default function ProfileForm({ data }: any) {
                                     type="text"
                                     autoComplete="address-level1"
                                     defaultValue={data?.region ?? ''}
-                                    className="block w-full rounded-md bg-white px-3 py-1.5 text-base outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
+                                    className="block w-full rounded-md px-3 py-1.5 text-base outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
                                 />
                             </div>
                         </div>
@@ -224,7 +224,7 @@ export default function ProfileForm({ data }: any) {
                                     type="text"
                                     autoComplete="postal-code"
                                     defaultValue={data?.postal_code ?? ''}
-                                    className="block w-full rounded-md bg-white px-3 py-1.5 text-base outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
+                                    className="block w-full rounded-md px-3 py-1.5 text-base outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
                                 />
                             </div>
                         </div>
