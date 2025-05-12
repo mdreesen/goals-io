@@ -22,7 +22,28 @@ export default async function Page() {
   const useUser = await fetchUser();
   const useSettings = await fetchSettings() ?? [];
 
-  const { useUserSettings } = useSettings;
+  const { useBodySettings, useMindSettings, useSpiritSettings } = useSettings;
+
+  const bodySettings = useBodySettings.map((item: any) => (
+    <div key={`${item?._id}`} className="py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+      <dt className="text-sm/6 font-medium">{item?.title}</dt>
+      <dd className="mt-1 text-sm/6 sm:col-span-2 sm:mt-0"><ToggleWithIcon data={parse(item) ?? {}} /></dd>
+    </div>
+  ));
+
+  const mindSettings = useMindSettings.map((item: any) => (
+    <div key={`${item?._id}`} className="py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+      <dt className="text-sm/6 font-medium">{item?.title}</dt>
+      <dd className="mt-1 text-sm/6 sm:col-span-2 sm:mt-0"><ToggleWithIcon data={parse(item) ?? {}} /></dd>
+    </div>
+  ));
+
+  const spiritSettings = useSpiritSettings.map((item: any) => (
+    <div key={`${item?._id}`} className="py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+      <dt className="text-sm/6 font-medium">{item?.title}</dt>
+      <dd className="mt-1 text-sm/6 sm:col-span-2 sm:mt-0"><ToggleWithIcon data={parse(item) ?? {}} /></dd>
+    </div>
+  ));
 
   return (
     <div>
@@ -40,12 +61,20 @@ export default async function Page() {
           <div className='px-4'>
             <p className="text-sm/6 font-medium">Customize what you want to use or not use in the app by using the toggles below.</p>
 
-            {useUserSettings?.map((item: any) => (
-              <div key={`${item?._id}`} className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                <dt className="text-sm/6 font-medium">{item?.title}</dt>
-                <dd className="mt-1 text-sm/6 sm:col-span-2 sm:mt-0"><ToggleWithIcon data={parse(item) ?? {}} /></dd>
-              </div>
-            ))}
+            <div className='px-4 py-6'>
+              <h2>Body Settings</h2>
+              {bodySettings}
+            </div>
+
+            <div className='px-4 py-6'>
+              <h2>Mind Settings</h2>
+              {mindSettings}
+            </div>
+
+            <div className='px-4 py-6'>
+              <h2>Spirit Settings</h2>
+              {spiritSettings}
+            </div>
           </div>
 
           <div className="px-4 py-6 sm:px-0 border-t border-gray-100 flex flex-col">

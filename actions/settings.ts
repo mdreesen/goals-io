@@ -27,6 +27,10 @@ export async function fetchSettings() {
         const useShowMind = useShowAffirmations.value || useShowBooks.value || useShowHabits.value;
         const useShowSpirit = useShowBible.value || useShowJournal.value;
 
+        const bodySettings = [useShowFasting, useShowWaterIntake, useShowWeight, useShowWorkout];
+        const mindSettings = [useShowAffirmations, useShowBooks, useShowHabits];
+        const spiritSettings = [useShowBible, useShowJournal];
+
         return {
             useUserSettings: user?.settings,
             useShowAffirmations: useShowAffirmations,
@@ -42,6 +46,10 @@ export async function fetchSettings() {
             useShowBody: useShowBody,
             useShowMind: useShowMind,
             useShowSpirit: useShowSpirit,
+
+            useBodySettings: bodySettings,
+            useMindSettings: mindSettings,
+            useSpiritSettings:spiritSettings,
             
             useDarkMode: useDarkMode.value,
         }
