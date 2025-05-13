@@ -63,7 +63,7 @@ export default async function Page({ params }: any) {
                                 name="notes"
                                 rows={3}
                                 readOnly={true}
-                                className="block h-full field-sizing-content resize-none w-full rounded-md bg-white px-3 py-1.5 text-base outline outline-1 -outline-offset-1 sm:text-sm/6"
+                                className="block h-full field-sizing-content resize-none w-full rounded-md px-3 py-1.5 text-base outline outline-1 -outline-offset-1 sm:text-sm/6"
                                 value={details?.notes}
                             />
                         </div>

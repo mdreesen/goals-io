@@ -54,7 +54,7 @@ export default async function JournalForm({ params }: any) {
                                     placeholder="Your journal entry"
                                     defaultValue={details?.entry ?? ''}
                                     readOnly={true}
-                                    className="block w-full rounded-md bg-white px-3 py-1.5 text-base outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
+                                    className="block w-full rounded-md px-3 py-1.5 text-base outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
                                 />
                             </div>
                         </div>
