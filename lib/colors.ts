@@ -23,12 +23,12 @@ export async function colorModes(data: any) {
 
   switch (true) {
     case useDarkMode:
-        return '#ffffff';
-        break
+      return '#ffffff';
+      break
     case data !== '#000000':
-        return  data;
-        break
+      return data;
+      break
     default:
-        return '#000000';
-}
+      return '#000000';
+  }
 }

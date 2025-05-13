@@ -1,9 +1,9 @@
 import { Suspense } from "react";
 import Bible from '@/ui/bible/Bible';
 import Journal from '@/ui/journal/Journal';
-import LoadingScale from "@/components/loaders/LoadingScale";
 import { fetchSettings } from "@/actions/settings";
 import type { Metadata } from "next";
+import UseLoadingScale from "@/components/loaders/UseLoadingScale";
 
 export const metadata: Metadata = {
     title: {
@@ -22,7 +22,7 @@ export default async function Page() {
 
     const useBible = useShowBible?.value && (
         <>
-            <Suspense fallback={<LoadingScale />}>
+            <Suspense fallback={<UseLoadingScale />}>
                 <Bible />
             </Suspense>
             {dividerOne && <div className="border-t border-black/20"></div>}
@@ -31,7 +31,7 @@ export default async function Page() {
 
     const useJournal = useShowJournal?.value && (
         <>
-            <Suspense fallback={<LoadingScale />}>
+            <Suspense fallback={<UseLoadingScale />}>
                 <Journal />
             </Suspense>
         </>

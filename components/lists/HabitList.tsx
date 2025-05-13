@@ -1,6 +1,6 @@
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { EllipsisVerticalIcon } from '@heroicons/react/20/solid'
-import { statusColors } from '@/lib/statusColors';
+import { statusColors } from '@/lib/colors';
 import { parse } from '@/lib/formatters';
 import ButtonDeleteHabit from "@/components/buttons/ButtonDeleteHabit";
 import Link from 'next/link';

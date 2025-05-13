@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import AllBooks from "@/ui/books/AllBooks";
 import LoadingScale from "@/components/loaders/LoadingScale";
 import type { Metadata } from "next";
+import UseLoadingScale from "@/components/loaders/UseLoadingScale";
 
 export const metadata: Metadata = {
     title: {
@@ -16,7 +17,7 @@ export default async function Page() {
 
     const useBooks = (
         <>
-            <Suspense fallback={<LoadingScale />}>
+            <Suspense fallback={<UseLoadingScale />}>
                 <AllBooks />
             </Suspense>
         </>

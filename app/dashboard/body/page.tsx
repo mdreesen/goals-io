@@ -3,9 +3,9 @@ import Weight from '@/ui/weight/Weight';
 import NutritionWater from "@/ui/nutrition/NutritionWater";
 import Fasting from "@/ui/nutrition/Fasting";
 import Workout from "@/ui/workout/Workout";
-import LoadingScale from "@/components/loaders/LoadingScale";
 import { fetchSettings } from "@/actions/settings";
 import type { Metadata } from "next";
+import UseLoadingScale from "@/components/loaders/UseLoadingScale";
 
 export const metadata: Metadata = {
     title: {
@@ -26,7 +26,7 @@ export default async function Page() {
 
     const useFasting = useShowFasting?.value && (
         <>
-            <Suspense fallback={<LoadingScale />}>
+            <Suspense fallback={<UseLoadingScale />}>
                 <Fasting />
             </Suspense>
             {dividerOne && <div className="border-t border-black/20"></div>}
@@ -35,7 +35,7 @@ export default async function Page() {
 
     const useWater = useShowWaterIntake?.value && (
         <>
-            <Suspense fallback={<LoadingScale />}>
+            <Suspense fallback={<UseLoadingScale />}>
                 <NutritionWater />
             </Suspense>
             {dividerTwo && <div className="border-t border-black/20"></div>}
@@ -44,7 +44,7 @@ export default async function Page() {
 
     const useWeight = useShowWeight?.value && (
         <>
-            <Suspense fallback={<LoadingScale />}>
+            <Suspense fallback={<UseLoadingScale />}>
                 <Weight />
             </Suspense>
             {dividerThree && <div className="border-t border-black/20"></div>}
@@ -53,7 +53,7 @@ export default async function Page() {
 
     const useWorkout = useShowWorkout?.value && (
         <>
-            <Suspense fallback={<LoadingScale />}>
+            <Suspense fallback={<UseLoadingScale />}>
                 <Workout />
             </Suspense>
         </>

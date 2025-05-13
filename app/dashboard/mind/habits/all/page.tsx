@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import AllHabits from '@/ui/habits/AllHabits';
-import LoadingScale from "@/components/loaders/LoadingScale";
 import type { Metadata } from "next";
+import UseLoadingScale from "@/components/loaders/UseLoadingScale";
 
 export const metadata: Metadata = {
     title: {
@@ -16,7 +16,7 @@ export default async function Page() {
 
     const useHabits = (
         <>
-            <Suspense fallback={<LoadingScale />}>
+            <Suspense fallback={<UseLoadingScale />}>
                 <AllHabits />
             </Suspense>
         </>
