@@ -1,5 +1,6 @@
 import { filterHabits } from '@/actions/habits';
 import Link from 'next/link';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import HabitList from '@/components/lists/HabitList';
 import ButtonGoTo from '@/components/buttons/ButtonGoTo';
 import ButtonBack from '@/components/buttons/ButtonBack';
@@ -24,34 +25,48 @@ export default async function Habits() {
     const useNone = filteredHabits?.none_habits;
 
     const useCommunityHabits = renderCommunityHabits && (
-        <ul role="list" className="divide-y divide-gray-100 border border-green-600 my-6 rounded-md">
-            <HabitList data={community_habits_arr} />
-        </ul>
+        <AccordionItem value="item-1">
+            <AccordionTrigger>Community</AccordionTrigger>
+            <AccordionContent>
+                <HabitList data={community_habits_arr} />
+            </AccordionContent>
+        </AccordionItem>
     );
 
     const useFamilyHabits = renderFamilyHabits && (
-        <ul role="list" className="divide-y divide-gray-100 border border-sky-600 my-6 rounded-md">
-            <HabitList data={family_habits_arr} />
-        </ul>
+        <AccordionItem value="item-2">
+            <AccordionTrigger>Family</AccordionTrigger>
+            <AccordionContent>
+                <HabitList data={family_habits_arr} />
+            </AccordionContent>
+        </AccordionItem>
     );
 
     const useMarriageHabits = renderMarriageHabits && (
-        <ul role="list" className="divide-y divide-gray-100 border border-purple-600 my-6 rounded-md">
-            <HabitList data={marriage_habits_arr} />
-        </ul>
+        <AccordionItem value="item-3">
+            <AccordionTrigger>Marriage</AccordionTrigger>
+            <AccordionContent>
+                <HabitList data={marriage_habits_arr} />
+            </AccordionContent>
+        </AccordionItem>
     );
 
     const usePersonalHabits = renderPersonalHabits && (
-        <ul role="list" className="divide-y divide-gray-100 border border-amber-500 rounded-md">
-            <HabitList data={personal_habits_arr} />
-        </ul>
+        <AccordionItem value="item-4">
+            <AccordionTrigger>Personal</AccordionTrigger>
+            <AccordionContent>
+                <HabitList data={personal_habits_arr} />
+            </AccordionContent>
+        </AccordionItem>
     );
 
     const useDoneHabits = renderDoneHabits && (
-        <ul role="list" className="divide-y divide-gray-100 border border-black rounded-md mt-4">
-            <h3 className="text-lg font-semibold text-gray-900 p-4">Your done habits</h3>
-            <HabitList data={done_habits_arr} />
-        </ul>
+        <AccordionItem value="item-5">
+            <AccordionTrigger>Done</AccordionTrigger>
+            <AccordionContent>
+                <HabitList data={done_habits_arr} />
+            </AccordionContent>
+        </AccordionItem>
     );
 
 
@@ -66,12 +81,15 @@ export default async function Habits() {
                 </div>
             </div>
             
-            {useNone && <h3>Add your Habits!</h3>}
-            {usePersonalHabits}
-            {useFamilyHabits}
-            {useMarriageHabits}
-            {useCommunityHabits}
-            {useDoneHabits}
+            {useNone ? <h3>Add your Habits!</h3> : (
+                <Accordion type="single" collapsible className="w-full">
+                    {useCommunityHabits}
+                    {useFamilyHabits}
+                    {useMarriageHabits}
+                    {usePersonalHabits}
+                    {useDoneHabits}
+                </Accordion>
+            )}
         </div>
     )
 }

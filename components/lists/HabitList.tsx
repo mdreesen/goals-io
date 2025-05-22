@@ -11,7 +11,7 @@ export default async function HabitList({ data }: any) {
         <li key={`${item._id}-${index}`} className="flex items-center justify-between gap-x-6 p-5">
             <div className="min-w-0">
                 <div className="flex items-start gap-x-3">
-                    <p className="text-sm/6 font-semibold text-gray-900">{item.title}</p>
+                    <p className="text-sm/6 font-semibold">{item.title}</p>
                     <p className={`mt-0.5 whitespace-nowrap rounded-md px-1.5 py-0.5 text-xs font-medium ring-1 ring-inset ${statusColors(item)}`}>
                         {item.status}
                     </p>
@@ -24,7 +24,7 @@ export default async function HabitList({ data }: any) {
             </div>
             <div className="flex flex-none items-center gap-x-4">
                 <Menu as="div" className="relative flex-none">
-                    <MenuButton className="-m-2.5 block p-2.5 hover:text-gray-900">
+                    <MenuButton className="-m-2.5 block p-2.5">
                         <span className="sr-only">Open options</span>
                         <EllipsisVerticalIcon aria-hidden="true" className="size-5" />
                     </MenuButton>
@@ -35,7 +35,7 @@ export default async function HabitList({ data }: any) {
                         <MenuItem>
                             <Link
                                 href={`/dashboard/mind/habits/edit/${parse(item._id)}`}
-                                className="block px-3 py-1 text-sm/6 text-gray-900 data-[focus]:bg-gray-50 data-[focus]:outline-none"
+                                className="block px-3 py-1 text-sm/6 data-[focus]:bg-gray-50 data-[focus]:outline-none"
                             >
                                 Edit<span className="sr-only">, {item.name}</span>
                             </Link>
