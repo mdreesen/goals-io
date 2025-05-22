@@ -27,7 +27,7 @@ export async function fetchFasting() {
                     return "Fasting Now";
                     break
                 // Started but not complete
-                case latestFastingData.ended && !latestFastingData.complete:
+                case latestFastingData.ended && !latestFastingData.completed:
                     return "Ended Early";
                     break
                 // Not completed fasting
@@ -36,7 +36,7 @@ export async function fetchFasting() {
                     break
                 default:
                     return "Complete"
-            }
+            };
         };
 
         return {
