@@ -14,10 +14,30 @@ export async function fetchFasting() {
         const now = await date_time_fasting();
 
         const data = await User.find({ email: session?.user.email }, 'fasting');
+        const latestFastingData = data[0].fasting.reverse()[0];
+
+        const fastingText = () => {
+            switch (true) {
+                case !latestFastingData._id:
+                    return 'Not Started';
+                    break
+                case !latestFastingData.completed:
+                    return "Not Complete";
+                    break
+                case latestFastingData.start && !latestFastingData.complete:
+                    return "Ended Early";
+                    break
+                default:
+                    return "Complete"
+            }
+        };
 
         return {
             user: data[0].fasting.reverse()[0] ?? [],
-            date_now: now
+            date_now: now,
+            today_complete: latestFastingData.completed,
+            duration: latestFastingData.duration,
+            status: fastingText()
         };
 
     } catch (error) {

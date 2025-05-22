@@ -25,18 +25,18 @@ export default function FastingTimer({ fastData }: any) {
     const time_minutes = `${timeLeft?.minutes}`;
     const time_seconds = `${timeLeft?.seconds}`;
 
-    const total_duration_milliseconds = fastData.user.duration * 60 * 60 * 1000;
+    const total_duration_milliseconds = fastData.user?.duration * 60 * 60 * 1000;
     const time_left_milliseconds = (Number(time_hours) * 3600 + Number(time_minutes) * 60 + Number(time_seconds)) * 1000;
 
     const useTimedFasting = (time_left_milliseconds / total_duration_milliseconds) * 100;
 
     useEffect(() => {
-        const storedStartTime = fastData.user.start_date;
-        const storedEndTime = fastData.user.end_date;
+        const storedStartTime = fastData.user?.start_date;
+        const storedEndTime = fastData.user?.end_date;
 
         if (storedStartTime && storedEndTime) {
-            const parsedStartTime = new Date(fastData.user.start_date);
-            const parsedEndTime = new Date(fastData.user.end_date);
+            const parsedStartTime = new Date(fastData.user?.start_date);
+            const parsedEndTime = new Date(fastData.user?.end_date);
 
             setStartTime(parsedStartTime);
             setEndTime(parsedEndTime);
@@ -71,6 +71,8 @@ export default function FastingTimer({ fastData }: any) {
 
     const handleEndFasting = async () => {
         clearInterval(intervalRef?.current as any);
+
+        console.log('fastingEnded', fastingEnded)
 
         resetState();
         await editFasting({
@@ -118,6 +120,7 @@ export default function FastingTimer({ fastData }: any) {
                 end_date: targetEndTime.toISOString(),
                 duration: duration,
                 ended: false,
+                completed: fastingEnded
             });
             setLoading(false);
         } catch (error) {
@@ -153,6 +156,16 @@ export default function FastingTimer({ fastData }: any) {
             className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
         >
             Start 20-Hour Fast
+        </button>
+    );
+
+
+    const buttonTest = (
+        <button
+            onClick={() => handleStartFasting(.01)}
+            className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+        >
+            Test Button
         </button>
     );
 
@@ -204,6 +217,7 @@ export default function FastingTimer({ fastData }: any) {
                     {loading ? <LoadingScale /> : buttonSixteen}
                     {loading ? <LoadingScale /> : buttonEightteen}
                     {loading ? <LoadingScale /> : buttonTwenty}
+                    {buttonTest}
                 </div>
             ) : (
                 <div>
