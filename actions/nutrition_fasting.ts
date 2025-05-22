@@ -19,7 +19,7 @@ export async function fetchFasting() {
         const fastingText = () => {
             switch (true) {
                 // No fasting data
-                case !latestFastingData._id:
+                case !latestFastingData?._id:
                     return 'Not Started';
                     break
                 // Fasting started
@@ -27,11 +27,11 @@ export async function fetchFasting() {
                     return "Fasting Now";
                     break
                 // Started but not complete
-                case latestFastingData.start && !latestFastingData.complete:
+                case latestFastingData.ended && !latestFastingData.complete:
                     return "Ended Early";
                     break
                 // Not completed fasting
-                case !latestFastingData.completed:
+                case !latestFastingData?.completed:
                     return "Not Complete";
                     break
                 default:
@@ -42,8 +42,8 @@ export async function fetchFasting() {
         return {
             user: data[0].fasting.reverse()[0] ?? [],
             date_now: now,
-            today_complete: latestFastingData.completed,
-            duration: latestFastingData.duration,
+            today_complete: latestFastingData?.completed,
+            duration: latestFastingData?.duration,
             status: fastingText()
         };
 

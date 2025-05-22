@@ -33,7 +33,7 @@ export default async function Overview() {
             <dd className="mt-1 flex items-baseline justify-between md:block lg:flex">
                 <div className={`flex items-baseline text-2xl font-semibold ${useOverview?.fastingOverview?.today_complete ? 'text-green-500' : 'text-white'}`}>
                     {useOverview?.fastingOverview?.status}
-                    {useOverview?.fastingOverview?.duration && <span className="ml-2 flex gap-1 text-sm font-medium text-white">from <AnimatedCounter number={useOverview?.fastingOverview?.duration} /> hours</span>}
+                    {useOverview?.fastingOverview?.duration && <span className="ml-2 flex gap-1 text-sm font-medium text-white">duration <AnimatedCounter number={useOverview?.fastingOverview?.duration} /> hours</span>}
                 </div>
             </dd>
         </div>
