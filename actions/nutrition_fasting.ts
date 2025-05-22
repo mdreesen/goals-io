@@ -18,14 +18,21 @@ export async function fetchFasting() {
 
         const fastingText = () => {
             switch (true) {
+                // No fasting data
                 case !latestFastingData._id:
                     return 'Not Started';
                     break
-                case !latestFastingData.completed:
-                    return "Not Complete";
+                // Fasting started
+                case latestFastingData.start:
+                    return "Fasting Now";
                     break
+                // Started but not complete
                 case latestFastingData.start && !latestFastingData.complete:
                     return "Ended Early";
+                    break
+                // Not completed fasting
+                case !latestFastingData.completed:
+                    return "Not Complete";
                     break
                 default:
                     return "Complete"
