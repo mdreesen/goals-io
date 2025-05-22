@@ -25,11 +25,12 @@ export default async function Books() {
 
                     const useBookStartDate = item.book_start_date ? `Start Date ${formatDateAndTime(item.book_start_date)}` : '';
                     const useBookEndDate = item.book_end_date ? `End Date ${formatDateAndTime(item.book_end_date)}` : 'Currently Reading';
+                    const hasBookList = item?.booklist === 'No' || !item?.booklist;
 
                     return (
                         <div
                             key={`${item.book_title}-${index}`}
-                            className="relative flex items-center w-full rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-gray-900 focus-within:ring-offset-2 hover:border-gray-400"
+                            className="relative flex items-center w-full rounded-lg border border-gray-300 px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-gray-900 focus-within:ring-offset-2 hover:border-gray-400"
                         >
                             <Link className="w-full" href={`/dashboard/mind/books/edit/${item.id}`}>
                                 <div className="flex-1 flex w-full justify-between items-center">
@@ -38,8 +39,9 @@ export default async function Books() {
                                         <p className="text-sm">{item.book_author}</p>
                                         <p className="text-sm">{item.kind_of_book}</p>
                                         <div className='flex flex-col lg:flex-row lg:gap-4'>
-                                            <p className="text-sm">{useBookStartDate}</p>
-                                            <p className="text-sm">{useBookEndDate}</p>
+                                            {hasBookList && <p className="text-sm">{useBookStartDate}</p>}
+                                            {hasBookList && <p className="text-sm">{useBookEndDate}</p>}
+                                            {!hasBookList && <p className="text-sm">On your future reads list</p>}
                                         </div>
                                     </div>
                                     {item.book_image && (

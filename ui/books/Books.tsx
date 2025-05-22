@@ -51,7 +51,7 @@ export default async function Books() {
                                         <div className='flex flex-col lg:flex-row lg:gap-4'>
                                             {hasBookList && <p className="text-sm">{useBookStartDate}</p>}
                                             {hasBookList && <p className="text-sm">{useBookEndDate}</p>}
-                                            {!hasBookList && <p className="text-sm">On your book list (future reads)</p>}
+                                            {!hasBookList && <p className="text-sm">On your future reads list</p>}
                                         </div>
                                     </div>
                                     {item.book_image && item.book_image !== 'false' && (
