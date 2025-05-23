@@ -1,4 +1,4 @@
-import { filterHabits } from '@/actions/habits';
+import { filterHabits } from '@/actions/sections/mind/habits';
 import HabitList from '@/components/lists/HabitList';
 import ButtonGoTo from '@/components/buttons/ButtonGoTo';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";

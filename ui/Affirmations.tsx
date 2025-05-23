@@ -1,4 +1,4 @@
-import { filterAffirmations } from '@/actions/affirmations';
+import { filterAffirmations } from '@/actions/sections/mind/affirmations';
 import AffirmationsList from '@/components/lists/AffirmationsList';
 import Title from '@/components/text/Title';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";

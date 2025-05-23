@@ -1,5 +1,5 @@
 import ButtonBack from "@/components/buttons/ButtonBack";
-import { fetchEntryById } from "@/actions/journal";
+import { fetchEntryById } from "@/actions/sections/soul/journal";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {

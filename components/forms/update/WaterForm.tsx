@@ -1,7 +1,7 @@
 'use client'
 import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { editWaterIntake, createWaterIntake } from "@/actions/nutrition_water";
+import { editWaterIntake, createWaterIntake } from "@/actions/sections/body/nutrition_water";
 import ButtonCancel from "@/components/buttons/ButtonCancel";
 
 export default function WaterForm({ data }: any) {

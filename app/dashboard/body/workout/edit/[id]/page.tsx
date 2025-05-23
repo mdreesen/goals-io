@@ -1,5 +1,5 @@
 import WorkoutForm from '@/components/forms/update/WorkoutForm';
-import { fetchWorkoutById } from '@/actions/workout';
+import { fetchWorkoutById } from '@/actions/sections/body/workout';
 import { parse } from '@/lib/formatters';
 import { date_today } from '@/lib/date_time';
 import type { Metadata } from "next";

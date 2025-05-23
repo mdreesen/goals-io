@@ -1,4 +1,4 @@
-import { fetchWeight } from "@/actions/weight"
+import { fetchWeight } from "@/actions/sections/body/weight"
 import { formatDateAndTime } from "@/lib/formatters";
 import ButtonGoTo from "@/components/buttons/ButtonGoTo";
 import Results from "@/components/showing/Results";

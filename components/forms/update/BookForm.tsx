@@ -1,7 +1,7 @@
 'use client';
 import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { editBook } from "@/actions/book";
+import { editBook } from "@/actions/sections/mind/book";
 import { ChevronDownIcon } from '@heroicons/react/16/solid';
 import ButtonDeleteBook from "@/components/buttons/ButtonDeleteBook";
 import ButtonCancel from "@/components/buttons/ButtonCancel";

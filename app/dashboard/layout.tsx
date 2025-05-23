@@ -52,6 +52,9 @@ export default async function RootLayout({
                 <Navigation />
                 <NavigationPhone settings={parse(useSettings)} />
                 <header className={`py-10`}>
+                <div>
+
+                </div>
                     <div className="mx-auto max-w-7xl px-4">
                         <h1 className="text-3xl font-bold tracking-tight text-white">{hasUserFirstLast}</h1>
                         <p className="text-xl font-bold tracking-tight text-white">{useUser?.username && useUser.username}</p>

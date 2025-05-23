@@ -1,4 +1,4 @@
-import { fetchAllWaterForToday } from "@/actions/nutrition_water";
+import { fetchAllWaterForToday } from "@/actions/sections/body/nutrition_water";
 import ButtonGoTo from "@/components/buttons/ButtonGoTo";
 import Title from "@/components/text/Title";
 export default async function NutritionWater() {

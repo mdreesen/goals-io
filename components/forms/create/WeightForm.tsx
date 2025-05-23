@@ -1,7 +1,7 @@
 'use client'
 import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { addWeight } from "@/actions/weight";
+import { addWeight } from "@/actions/sections/body/weight";
 import Link from 'next/link';
 
 export default function WeightForm({ data }: any) {

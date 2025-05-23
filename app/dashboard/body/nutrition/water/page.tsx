@@ -1,4 +1,4 @@
-import { fetchAllWaterForToday } from '@/actions/nutrition_water';
+import { fetchAllWaterForToday } from '@/actions/sections/body/nutrition_water';
 import WaterForm from '@/components/forms/update/WaterForm';
 import { parse } from '@/lib/formatters';
 import type { Metadata } from "next";

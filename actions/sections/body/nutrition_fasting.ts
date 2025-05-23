@@ -6,6 +6,24 @@ import { revalidatePath } from 'next/cache';
 import { date_time_fasting } from "@/lib/date_time";
 import { parse } from "@/lib/formatters";
 
+export async function fetchAllFasting() {
+    const session = await getServerSession();
+
+    try {
+        await connectDB();
+
+        const data = await User.find({ email: session?.user.email }, 'fasting');
+
+        return {
+            data: data[0].fasting.reverse() ?? [],
+        }
+
+    } catch (error) {
+        console.log(error);
+        return error;
+    }
+};
+
 export async function fetchFasting() {
     const session = await getServerSession();
 

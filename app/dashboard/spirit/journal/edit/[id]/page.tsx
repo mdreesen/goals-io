@@ -1,4 +1,4 @@
-import { fetchEntryById } from "@/actions/journal";
+import { fetchEntryById } from "@/actions/sections/soul/journal";
 import JournalForm from '@/components/forms/update/JournalForm';
 import { parse } from '@/lib/formatters';
 import type { Metadata } from "next";

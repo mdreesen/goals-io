@@ -1,4 +1,4 @@
-import { fetchBibleById } from "@/actions/bible";
+import { fetchBibleById } from "@/actions/sections/soul/bible";
 import BibleForm from '@/components/forms/update/BibleForm';
 import { parse } from '@/lib/formatters';
 import type { Metadata } from "next";

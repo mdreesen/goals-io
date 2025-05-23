@@ -1,4 +1,4 @@
-import { fetchWeightById } from '@/actions/weight';
+import { fetchWeightById } from '@/actions/sections/body/weight';
 import WeightForm from '@/components/forms/update/WeightForm';
 import { parse } from '@/lib/formatters';
 import { date_today } from '@/lib/date_time';

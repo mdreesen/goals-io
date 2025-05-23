@@ -6,6 +6,24 @@ import { formatDateAndTime, bodyWeightToWaterInOz } from "@/lib/formatters";
 import { revalidatePath } from 'next/cache';
 import { date_today, date_time_today } from '@/lib/date_time';
 
+export async function fetchWater() {
+    const session = await getServerSession();
+
+    try {
+        await connectDB();
+
+        const data = await User.find({ email: session?.user.email }, 'water');
+
+        return {
+            data: data[0].water.reverse() ?? [],
+        }
+
+    } catch (error) {
+        console.log(error);
+        return error;
+    }
+};
+
 
 export async function createWaterIntake(values: any) {
     const session = await getServerSession();

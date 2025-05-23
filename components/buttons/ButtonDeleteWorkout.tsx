@@ -1,6 +1,6 @@
 'use client';
 import { useRouter } from "next/navigation";
-import { deleteWorkout } from '@/actions/workout';
+import { deleteWorkout } from '@/actions/sections/body/workout';
 
 export default function ButtonDeleteWorkout({ data }: any) {
     const router = useRouter();

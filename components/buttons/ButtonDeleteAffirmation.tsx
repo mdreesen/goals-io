@@ -1,6 +1,6 @@
 'use client';
 import { useRouter } from "next/navigation";
-import { deleteAffirmations } from '@/actions/affirmations';
+import { deleteAffirmations } from '@/actions/sections/mind/affirmations';
 
 export default function ButtonDeleteAffirmation({ data }: any) {
     const router = useRouter();

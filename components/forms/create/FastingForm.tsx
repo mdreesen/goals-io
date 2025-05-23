@@ -1,7 +1,7 @@
 'use client';
 import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { addFasting, editFasting } from "@/actions/nutrition_fasting";
+import { addFasting, editFasting } from "@/actions/sections/body/nutrition_fasting";
 
 export default function FastingForm({ data }: any) {
 

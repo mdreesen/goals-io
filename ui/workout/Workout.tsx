@@ -1,4 +1,4 @@
-import { fetchWorkout } from "@/actions/workout";
+import { fetchWorkout } from "@/actions/sections/body/workout";
 import ButtonGoTo from "@/components/buttons/ButtonGoTo";
 import Results from "@/components/showing/Results";
 import { formatDateAndTime } from '@/lib/formatters';

@@ -1,7 +1,7 @@
 'use client';
 import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { addBible } from "@/actions/bible";
+import { addBible } from "@/actions/sections/soul/bible";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import bible_books from '@/lib/dropdown/bible_books.json';

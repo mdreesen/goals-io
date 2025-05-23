@@ -1,7 +1,7 @@
 'use client';
 import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { addEntry } from "@/actions/journal";
+import { addEntry } from "@/actions/sections/soul/journal";
 import Link from "next/link";
 
 export default function JournalForm({ data }: any) {

@@ -1,6 +1,6 @@
 'use client';
 import { useRouter } from "next/navigation";
-import { deleteHabit } from '@/actions/habits';
+import { deleteHabit } from '@/actions/sections/mind/habits';
 
 export default function ButtonDeleteHabit({ data }: any) {
     const router = useRouter();

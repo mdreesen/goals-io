@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { addFasting, editFasting } from "@/actions/nutrition_fasting";
+import { addFasting, editFasting } from "@/actions/sections/body/nutrition_fasting";
 import LoadingScale from '../loaders/LoadingScale';
 
 interface TimeLeft {

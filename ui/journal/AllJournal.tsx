@@ -1,4 +1,4 @@
-import { fetchEntry } from '@/actions/journal';
+import { fetchEntry } from '@/actions/sections/soul/journal';
 import ButtonBack from '@/components/buttons/ButtonBack';
 import ButtonGoTo from '@/components/buttons/ButtonGoTo';
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'

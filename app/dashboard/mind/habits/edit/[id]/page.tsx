@@ -1,4 +1,4 @@
-import { fetchHabitsById } from '@/actions/habits';
+import { fetchHabitsById } from '@/actions/sections/mind/habits';
 import { parse } from '@/lib/formatters';
 import HabitForm from '@/components/forms/update/HabitForm';
 import type { Metadata } from "next";

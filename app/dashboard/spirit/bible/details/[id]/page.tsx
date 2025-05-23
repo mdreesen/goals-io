@@ -1,4 +1,4 @@
-import { fetchBibleById } from "@/actions/bible";
+import { fetchBibleById } from "@/actions/sections/soul/bible";
 import ButtonBack from "@/components/buttons/ButtonBack";
 import type { Metadata } from "next";
 

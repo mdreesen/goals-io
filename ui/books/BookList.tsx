@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { fetchBookList } from '@/actions/book';
+import { fetchBookList } from '@/actions/sections/mind/book';
 import { formatDateAndTime } from '@/lib/formatters'
 import ButtonGoTo from "@/components/buttons/ButtonGoTo";
 import ButtonBack from "@/components/buttons/ButtonBack";

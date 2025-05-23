@@ -1,7 +1,7 @@
 'use client';
 import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { editEntry } from "@/actions/journal";
+import { editEntry } from "@/actions/sections/soul/journal";
 import Link from "next/link";
 import ButtonCancel from "@/components/buttons/ButtonCancel";
 import ButtonDeleteJournal from "@/components/buttons/ButtonDeleteJournal";

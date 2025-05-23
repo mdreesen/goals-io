@@ -1,7 +1,7 @@
 'use client'
 import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { addWorkout } from "@/actions/workout";
+import { addWorkout } from "@/actions/sections/body/workout";
 import Link from 'next/link';
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import workout_type from '@/lib/dropdown/workout_type.json';

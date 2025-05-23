@@ -1,4 +1,4 @@
-import { fetchBible } from '@/actions/bible';
+import { fetchBible } from '@/actions/sections/soul/bible';
 import ButtonBack from '@/components/buttons/ButtonBack';
 import ButtonGoTo from '@/components/buttons/ButtonGoTo';
 import Results from '@/components/showing/Results';

@@ -1,7 +1,7 @@
 'use client';
 import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { addAffirmation } from "@/actions/affirmations";
+import { addAffirmation } from "@/actions/sections/mind/affirmations";
 import { ChevronDownIcon } from '@heroicons/react/16/solid';
 import Link from 'next/link';
 

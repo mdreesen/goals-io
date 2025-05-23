@@ -1,4 +1,4 @@
-import { fetchBookById } from '@/actions/book';
+import { fetchBookById } from '@/actions/sections/mind/book';
 import BookForm from '@/components/forms/update/BookForm';
 import { parse } from '@/lib/formatters';
 import type { Metadata } from "next";

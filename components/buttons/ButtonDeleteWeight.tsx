@@ -1,6 +1,6 @@
 'use client';
 import { useRouter } from "next/navigation";
-import { deleteWeight } from '@/actions/weight';
+import { deleteWeight } from '@/actions/sections/body/weight';
 
 export default function ButtonDeleteWeight({ data }: any) {
     const router = useRouter();

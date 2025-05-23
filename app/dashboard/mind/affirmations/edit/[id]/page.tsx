@@ -1,4 +1,4 @@
-import { fetchAffirmationsById } from '@/actions/affirmations';
+import { fetchAffirmationsById } from '@/actions/sections/mind/affirmations';
 import { parse } from '@/lib/formatters';
 import AffirmationForm from '@/components/forms/update/AffirmationForm';
 import type { Metadata } from "next";

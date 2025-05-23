@@ -1,5 +1,5 @@
 import Timer from '@/components/timers/FastingTimer';
-import { fetchFasting } from '@/actions/nutrition_fasting';
+import { fetchFasting } from '@/actions/sections/body/nutrition_fasting';
 import { parse } from '@/lib/formatters';
 import Title from '@/components/text/Title';
 

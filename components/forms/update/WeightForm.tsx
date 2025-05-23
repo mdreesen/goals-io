@@ -1,7 +1,7 @@
 'use client'
 import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { editWeight } from "@/actions/weight";
+import { editWeight } from "@/actions/sections/body/weight";
 import ButtonDeleteWeight from "@/components/buttons/ButtonDeleteWeight";
 import ButtonCancel from "@/components/buttons/ButtonCancel";
 

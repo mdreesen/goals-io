@@ -1,7 +1,7 @@
 'use client';
 import { useRef, useState } from "react";
 import { useRouter } from 'next/navigation';
-import { addBook } from "@/actions/book";
+import { addBook } from "@/actions/sections/mind/book";
 import { ChevronDownIcon } from '@heroicons/react/16/solid';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';

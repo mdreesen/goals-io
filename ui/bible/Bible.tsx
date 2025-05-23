@@ -1,4 +1,4 @@
-import { fetchBible } from '@/actions/bible';
+import { fetchBible } from '@/actions/sections/soul/bible';
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react';
 import { EllipsisVerticalIcon } from '@heroicons/react/20/solid';
 import ButtonGoTo from '@/components/buttons/ButtonGoTo';

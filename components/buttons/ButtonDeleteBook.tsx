@@ -1,6 +1,6 @@
 'use client';
 import { useRouter } from "next/navigation";
-import { deleteBook } from '@/actions/book';
+import { deleteBook } from '@/actions/sections/mind/book';
 
 export default function ButtonDeleteBook({ data }: any) {
     const router = useRouter();

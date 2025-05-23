@@ -1,4 +1,4 @@
-import { fetchEntry } from '@/actions/journal';
+import { fetchEntry } from '@/actions/sections/soul/journal';
 import ButtonGoTo from '@/components/buttons/ButtonGoTo';
 import Results from '@/components/showing/Results';
 import Title from '@/components/text/Title';
