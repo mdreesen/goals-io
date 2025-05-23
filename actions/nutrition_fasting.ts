@@ -40,7 +40,7 @@ export async function fetchFasting() {
         };
 
         return {
-            user: data[0].fasting.reverse()[0] ?? [],
+            user: latestFastingData ?? [],
             date_now: now,
             today_complete: latestFastingData?.completed,
             duration: latestFastingData?.duration,

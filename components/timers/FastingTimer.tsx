@@ -72,8 +72,6 @@ export default function FastingTimer({ fastData }: any) {
     const handleEndFasting = async () => {
         clearInterval(intervalRef?.current as any);
 
-        console.log('fastingEnded', fastingEnded)
-
         resetState();
         await editFasting({
             _id: fastData?.user?._id,
@@ -103,7 +101,7 @@ export default function FastingTimer({ fastData }: any) {
         return time < 10 ? "0" + time.toString() : time.toString();
     };
 
-    const handleStartFasting = async (duration: number) => {
+    const handleFasting = async (duration: number) => {
         setLoading(true);
         setDuration(duration);
 
@@ -113,28 +111,32 @@ export default function FastingTimer({ fastData }: any) {
         setStartTime(now);
         setEndTime(targetEndTime);
 
-        try {
-            await addFasting({
-                start: true,
-                start_date: now.toISOString(),
-                end_date: targetEndTime.toISOString(),
-                duration: duration,
-                ended: false,
-                completed: fastingEnded
-            });
-            setLoading(false);
-        } catch (error) {
-            setError(error as string)
-            console.log(error);
-            setLoading(false);
-        }
+        console.log('startTime', startTime, now);
+        console.log('fastData', fastData);
 
-        startTimer(targetEndTime);
+        if (fastData?.ended || !fastData?.start) {
+            try {
+                await addFasting({
+                    start: true,
+                    start_date: now.toISOString(),
+                    end_date: targetEndTime.toISOString(),
+                    duration: duration,
+                    ended: false,
+                });
+                setLoading(false);
+            } catch (error) {
+                setError(error as string)
+                console.log(error);
+                setLoading(false);
+            }
+
+            startTimer(targetEndTime);
+        }
     };
 
     const buttonSixteen = (
         <button
-            onClick={() => handleStartFasting(16)}
+            onClick={() => handleFasting(16)}
             className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
         >
             Start 16-Hour Fast
@@ -143,7 +145,7 @@ export default function FastingTimer({ fastData }: any) {
 
     const buttonEightteen = (
         <button
-            onClick={() => handleStartFasting(18)}
+            onClick={() => handleFasting(18)}
             className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
         >
             Start 18-Hour Fast
@@ -152,7 +154,7 @@ export default function FastingTimer({ fastData }: any) {
 
     const buttonTwenty = (
         <button
-            onClick={() => handleStartFasting(20)}
+            onClick={() => handleFasting(20)}
             className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
         >
             Start 20-Hour Fast
@@ -162,8 +164,8 @@ export default function FastingTimer({ fastData }: any) {
     const buttonEndFast = (
         <button
             onClick={handleEndFasting}
-            className="block rounded-md bg-gray-800 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-gray-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-            >
+            className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+        >
             End Fast
         </button>
     );
