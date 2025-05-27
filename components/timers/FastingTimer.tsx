@@ -3,6 +3,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { addFasting, editFasting } from "@/actions/sections/body/nutrition_fasting";
 import LoadingScale from '../loaders/LoadingScale';
+import { motion } from 'framer-motion';
+import { Button } from '@/components/ui/button'
 
 interface TimeLeft {
     days: number;
@@ -29,6 +31,8 @@ export default function FastingTimer({ fastData }: any) {
     const time_left_milliseconds = (Number(time_hours) * 3600 + Number(time_minutes) * 60 + Number(time_seconds)) * 1000;
 
     const useTimedFasting = (time_left_milliseconds / total_duration_milliseconds) * 100;
+
+    const useEndFasting = fastingEnded || !startTime || !timeLeft;
 
     useEffect(() => {
         const storedStartTime = fastData.user?.start_date;
@@ -77,7 +81,7 @@ export default function FastingTimer({ fastData }: any) {
             _id: fastData?.user?._id,
             start: false,
             ended: true,
-            completed: fastingEnded
+            completed: useEndFasting
         });
     };
 
@@ -111,9 +115,6 @@ export default function FastingTimer({ fastData }: any) {
         setStartTime(now);
         setEndTime(targetEndTime);
 
-        console.log('startTime', startTime, now);
-        console.log('fastData', fastData);
-
         if (fastData?.ended || !fastData?.start) {
             try {
                 await addFasting({
@@ -135,90 +136,126 @@ export default function FastingTimer({ fastData }: any) {
     };
 
     const buttonSixteen = (
-        <button
+        <Button
             onClick={() => handleFasting(16)}
             className="block rounded-md bg-gray-800 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-gray-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
         >
-            Start 16-Hour Fast
-        </button>
+            16-Hour
+        </Button>
     );
 
     const buttonEightteen = (
-        <button
+        <Button
             onClick={() => handleFasting(18)}
             className="block rounded-md bg-gray-800 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-gray-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
         >
-            Start 18-Hour Fast
-        </button>
+            18-Hour
+        </Button>
     );
 
     const buttonTwenty = (
-        <button
+        <Button
             onClick={() => handleFasting(20)}
             className="block rounded-md bg-gray-800 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-gray-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
         >
-            Start 20-Hour Fast
-        </button>
+            20-Hour
+        </Button>
+    );
+
+    const buttonTest = (
+        <Button
+            onClick={() => handleFasting(.01)}
+            className="block rounded-md bg-gray-800 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-gray-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+        >
+            Test
+        </Button>
     );
 
     const buttonEndFast = (
-        <button
+        <Button
             onClick={handleEndFasting}
             className="block rounded-md bg-gray-800 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-gray-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
         >
             End Fast
-        </button>
+        </Button>
     );
 
-    const ProgressBar = () => {
+    const fastingStatus = useEndFasting && (
+        <motion.div
+            className='h-[24px]'
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+        >
+            Fasting Complete!
+        </motion.div>
+    );
 
-        const useEndFasting = fastingEnded || !startTime || !timeLeft;
+    const currentFastingTime = timeLeft && (
+        <motion.div
+            className="flex justify-between"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+        >
+            <p className="text-sm font-medium flex gap-1">
+                <span>Time left:</span>
+                <span className='text-indigo-900 font-semibold'>{`${formatTime(timeLeft.hours)}:${formatTime(timeLeft.minutes)}:${formatTime(timeLeft.seconds)}`}</span></p>
+            <p className="text-sm font-medium">{`${fastData.user.duration} hours`}</p>
+        </motion.div>
+    );
 
-        return !loading && (
-            <div aria-hidden="true" className="mt-6">
-                {timeLeft && (
-                    <div className="flex justify-between">
-                        <p className="text-sm font-medium flex gap-1">
-                            <span>Time left:</span>
-                            <span className='text-indigo-900 font-semibold'>{`${formatTime(timeLeft.hours)}:${formatTime(timeLeft.minutes)}:${formatTime(timeLeft.seconds)}`}</span></p>
-                        <p className="text-sm font-medium">{`${fastData.user.duration} hours`}</p>
-                    </div>
-                )}
-                <div className={`overflow-hidden rotate-180 rounded-full ${useEndFasting ? 'bg-gray-200' : 'bg-[#312E81]'}`}>
-                    <div style={{ width: `${useEndFasting ? '100' : useTimedFasting}%` }} className={`${useEndFasting ? 'bg-green-500 animate-pulse' : 'bg-gray-200'} h-2`} />
-                </div>
-                {
-                    useEndFasting && <span>You are done! Great fast!</span>
-                }
-                <div className="mt-6 hidden grid-cols-4 text-sm font-medium sm:grid">
-                    <div>Getting started</div>
-                    <div className="text-center">Keep going</div>
-                    <div className="text-center">Almost there</div>
-                    <div className="text-right flex justify-end">
-                        <span className='flex flex-col w-[62px] justify-center text-center'>Nice job!</span>
-                    </div>
-                </div>
+    const progressBar = !loading && (
+        <div aria-hidden="true" className="mt-6">
+            {currentFastingTime}
+            <div className={`overflow-hidden rotate-180 rounded-full ${useEndFasting ? 'bg-gray-200' : 'bg-[#312E81]'}`}>
+                <div style={{ width: `${useEndFasting ? '100' : useTimedFasting}%` }} className={`${useEndFasting ? 'bg-green-500 animate-pulse' : 'bg-gray-200'} h-2`} />
             </div>
-        );
-    };
+            <div className='h-[24px]'>{fastingStatus}</div>
+        </div>
+    );
+
+    const startTimerButtons = !startTime && (
+        <motion.div
+            className="mt-6 flex items-center justify-end gap-x-6 transition delay-150 duration-300 ease-in-out"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+        >
+            {loading ? <LoadingScale /> : buttonSixteen}
+            {loading ? <LoadingScale /> : buttonEightteen}
+            {loading ? <LoadingScale /> : buttonTwenty}
+            {buttonTest}
+        </motion.div>
+    );
+
+    const endTimerButtons = startTime && (
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+        >
+            {loading ? <LoadingScale /> : progressBar}
+            <div className="mt-6 flex items-center justify-end gap-x-6 transition delay-150 duration-300 ease-in-out">
+                {loading ? <LoadingScale /> : buttonEndFast}
+            </div>
+
+        </motion.div>
+    );
 
     return (
-        <div>
-            {!startTime ? (
-                <div className="mt-6 flex items-center justify-end gap-x-6">
-                    {loading ? <LoadingScale /> : buttonSixteen}
-                    {loading ? <LoadingScale /> : buttonEightteen}
-                    {loading ? <LoadingScale /> : buttonTwenty}
-                </div>
-            ) : (
-                <div>
-                    {loading ? <LoadingScale /> : <ProgressBar />}
-                    <div className="mt-6 flex items-center justify-end gap-x-6">
-                        {loading ? <LoadingScale /> : buttonEndFast}
-                    </div>
-
-                </div>
-            )}
-        </div>
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+        >
+            {startTimerButtons}
+            {endTimerButtons}
+        </motion.div>
     );
 };
