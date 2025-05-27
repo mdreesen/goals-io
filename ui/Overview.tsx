@@ -1,6 +1,7 @@
 import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/20/solid';
 import { fetchOverview } from '@/actions/overview';
 import AnimatedCounter from '@/components/animations/AnimatedCounter';
+import { ClockIcon } from '@heroicons/react/24/outline'
 
 function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(' ')
@@ -32,8 +33,11 @@ export default async function Overview() {
             <dt className="text-base font-normal text-white">Fasting</dt>
             <dd className="mt-1 flex items-baseline justify-between md:block lg:flex">
                 <div className={`flex items-baseline text-2xl font-semibold ${useOverview?.fastingOverview?.today_complete ? 'text-green-500' : 'text-white'}`}>
-                    {useOverview?.fastingOverview?.status}
-                    {useOverview?.fastingOverview?.duration && <span className="ml-2 flex gap-1 text-sm font-medium text-white">duration <AnimatedCounter number={useOverview?.fastingOverview?.duration} /> hours</span>}
+                    <div>
+                        {useOverview?.fastingOverview?.status}
+                        {useOverview?.fastingOverview?.duration && <span className="flex gap-1 text-sm font-medium text-white">duration <AnimatedCounter number={useOverview?.fastingOverview?.duration} /> hours</span>}
+                    </div>
+                    {useOverview?.fastingOverview?.currently_fasting && <span className="ml-[1rem] inline-flex animate-bounce rounded-full opacity-75"><ClockIcon aria-hidden="true" stroke='white' className="size-8" /></span>}
                 </div>
             </dd>
         </div>

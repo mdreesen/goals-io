@@ -62,7 +62,8 @@ export async function fetchFasting() {
             date_now: now,
             today_complete: latestFastingData?.completed,
             duration: latestFastingData?.duration,
-            status: fastingText()
+            status: fastingText(),
+            currently_fasting: latestFastingData.start
         };
 
     } catch (error) {
