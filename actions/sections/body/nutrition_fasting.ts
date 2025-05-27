@@ -42,7 +42,7 @@ export async function fetchFasting() {
                     break
                 // Fasting started
                 case latestFastingData.start:
-                    return "Fasting Now";
+                    return "Currently Fasting";
                     break
                 // Started but not complete
                 case latestFastingData.ended && !latestFastingData.completed:
