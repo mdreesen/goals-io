@@ -162,15 +162,6 @@ export default function FastingTimer({ fastData }: any) {
         </Button>
     );
 
-    const buttonTest = (
-        <Button
-            onClick={() => handleFasting(.01)}
-            className="block rounded-md bg-gray-800 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-gray-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-        >
-            Test
-        </Button>
-    );
-
     const buttonEndFast = (
         <Button
             onClick={handleEndFasting}
@@ -218,18 +209,21 @@ export default function FastingTimer({ fastData }: any) {
     );
 
     const startTimerButtons = !startTime && (
-        <motion.div
-            className="mt-6 flex items-center justify-end gap-x-6 transition delay-150 duration-300 ease-in-out"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.5 }}
-        >
-            {loading ? <LoadingScale /> : buttonSixteen}
-            {loading ? <LoadingScale /> : buttonEightteen}
-            {loading ? <LoadingScale /> : buttonTwenty}
-            {buttonTest}
-        </motion.div>
+        <div>
+            <div className='flex items-center justify-center gap-x-6'>Choose your fasting time</div>
+
+            <motion.div
+                className="mt-6 flex items-center justify-center gap-x-6"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.5 }}
+            >
+                {loading ? <LoadingScale /> : buttonSixteen}
+                {loading ? <LoadingScale /> : buttonEightteen}
+                {loading ? <LoadingScale /> : buttonTwenty}
+            </motion.div>
+        </div>
     );
 
     const endTimerButtons = startTime && (
