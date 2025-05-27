@@ -2,6 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { motion } from 'framer-motion';
 
 export default function NavigationPhone({ settings }: any) {
     const pathName = usePathname();
@@ -54,7 +55,12 @@ export default function NavigationPhone({ settings }: any) {
             <ul className='flex justify-around h-[100%] content-center items-center'>
                 {links.map((item) => item?.useNav && (
                     <Link href={item.href} key={item.id}>
-                        <li>
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.5 }}
+                        >
                             <Image
                                 alt={item.alt}
                                 width={100}
@@ -63,8 +69,8 @@ export default function NavigationPhone({ settings }: any) {
                                 className={`${item.style}`}
                             />
 
-                            <div className={`${pathName === item.href && 'border-b-2 border-indigo-900'}`} />
-                        </li>
+                            <div className={`h-[2px] ${pathName === item.href && 'border-b-2 border-indigo-900'}`}/>
+                        </motion.div>
                     </Link>
                 ))}
             </ul>
