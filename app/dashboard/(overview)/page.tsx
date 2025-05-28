@@ -28,10 +28,10 @@ export default async function Page() {
 
 
     // Conditionals
-    const showBooks = useSettings.useShowBooks?.value && booksPerMonth.length > 0;
+    const showBooks = useSettings.useShowBooks?.value && booksPerMonth?.years.length > 0;
     const showWater = useSettings.useShowWaterIntake?.value && waterPerDay.length > 0;
     const showWeight = useSettings.useShowWeight?.value && weightPerMonth.length > 0;
-    const showWorkout = useSettings.useShowWorkout?.value && workoutPerMonth.length > 0;
+    const showWorkout = useSettings.useShowWorkout?.value && workoutPerMonth?.years.length > 0;
 
     const showProgressSection = showBooks || showWater || showWeight || showWorkout;
 
