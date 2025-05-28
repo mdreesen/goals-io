@@ -41,7 +41,7 @@ export async function fetchFasting() {
                     return 'Not Started';
                     break
                 // Fasting started
-                case latestFastingData.start:
+                case latestFastingData?.start:
                     return "Currently Fasting";
                     break
                 // Started but not complete
@@ -63,7 +63,7 @@ export async function fetchFasting() {
             today_complete: latestFastingData?.completed,
             duration: latestFastingData?.duration,
             status: fastingText(),
-            currently_fasting: latestFastingData.start
+            currently_fasting: latestFastingData?.start
         };
 
     } catch (error) {

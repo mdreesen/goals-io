@@ -28,10 +28,12 @@ export default async function Page() {
 
 
     // Conditionals
-    const showBooks = useSettings.useShowBooks?.value;
+    const showBooks = useSettings.useShowBooks?.value && booksPerMonth.length > 0;
     const showWater = useSettings.useShowWaterIntake?.value && waterPerDay.length > 0;
     const showWeight = useSettings.useShowWeight?.value && weightPerMonth.length > 0;
-    const showWorkout = useSettings.useShowWorkout?.value;
+    const showWorkout = useSettings.useShowWorkout?.value && workoutPerMonth.length > 0;
+
+    const showProgressSection = showBooks || showWater || showWeight || showWorkout;
 
     // Books per month chart
     const chartOne = showBooks && (
@@ -77,7 +79,8 @@ export default async function Page() {
 
                 <div>
                     <div className="mx-auto mt-[3rem]">
-                        <Title text="Progress" />
+
+                        {showProgressSection ? <Title text="Progress" /> : <div className="mt-2 max-w-lg text-pretty text-2xl text-center font-semibold tracking-tight sm:text-5xl mb-6">Start tracking your progress to see charts</div>}
 
                         <div className="mt-10 grid grid-cols-1 gap-4 sm:mt-16 lg:grid-cols-6 lg:grid-rows-2">
                             {chartOne}

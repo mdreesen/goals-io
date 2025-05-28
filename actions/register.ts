@@ -3,32 +3,13 @@ import User from "@/(models)/User";
 import bcrypt from "bcryptjs";
 import { RegisterFormSchema } from "@/lib/rules";
 import { redirect } from "next/navigation";
-
-export async function settings() {
-    try {
-
-        const useSettings = [
-            { setting: 'showAffirmations', title: 'Show Affirmations', value: true },
-            { setting: 'showBible', title: 'Show Bible', value: true },
-            { setting: 'showBooks', title: 'Show Books', value: true },
-            { setting: 'showFasting', title: 'Show Fasting', value: true },
-            { setting: 'showHabits', title: 'Show Habits', value: true },
-            { setting: 'showJournal', title: 'Show Journal', value: true },
-            { setting: 'showWaterIntake', title: 'Show Water Intake', value: true },
-            { setting: 'showWeight', title: 'Show Weight', value: true },
-            { setting: 'showWorkout', title: 'Show Workout', value: true },
-            { setting: 'darkMode', title: 'Dark Mode', value: false },
-        ]
-
-        return useSettings;
-
-    } catch (error) {
-        console.log(error);
-    }
-}
+import { userSettings, userAffirmations, userHabits, userJournal } from "@/lib/defaults/newUserData";
 
 export async function register(state: any, formData: any) {
-    const userSettings = await settings();
+    const defaultUserSettings = userSettings();
+    const defaultUserAffirmations = userAffirmations();
+    const defaultUserHabits = userHabits();
+    const defaultUserJournal = userJournal();
 
     // Must validate the formData fields from Sign Up
     const validateFields = RegisterFormSchema.safeParse({
@@ -63,7 +44,10 @@ export async function register(state: any, formData: any) {
     const user = new User({
         email: email,
         password: hashedPassword,
-        settings: userSettings,
+        affirmations: defaultUserAffirmations,
+        habits: defaultUserHabits,
+        journal: defaultUserJournal,
+        settings: defaultUserSettings,
         privacy_policy: privacy_policy === 'on' ? true : false
     });
 

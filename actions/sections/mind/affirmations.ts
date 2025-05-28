@@ -4,7 +4,7 @@ import User from "@/(models)/User";
 import { getServerSession } from "next-auth/next";
 import { revalidatePath } from 'next/cache';
 
-export async function fetchGoals() {
+export async function fetchAffirmations() {
     const session = await getServerSession();
 
     try {

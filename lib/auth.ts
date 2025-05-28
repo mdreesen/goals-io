@@ -1,6 +1,6 @@
 import { connectDB } from "@/lib/mongodb";
 import User from "@/(models)/User";
-import { settings } from '@/actions/register';
+import { userSettings } from '@/lib/defaults/newUserData';
 import type { NextAuthOptions, DefaultSession, DefaultUser } from "next-auth";
 import credentials from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
@@ -103,14 +103,14 @@ export const authOptions: NextAuthOptions = {
       async authorize(credentials) {
         await connectDB();
 
-        // const useSettings = await settings();
+        // const useSettings = await userSettings();
 
         const user = await User.findOne({
           email: credentials?.email,
         }).select("+password");
 
         // When user signs up, it places new settings for them
-        // if (user?.settings.length !== settings.length) {
+        // if (user?.settings.length !== userSettings.length) {
         //   await User.findOneAndUpdate(
         //     { email: credentials?.email },
         //     { $set: { 'settings': useSettings } },
