@@ -42,10 +42,10 @@ export default async function Weight() {
 
   return (
     <div className="px-4 sm:px-2 lg:px-4">
-      <div className="sm:flex sm:items-center">
-        <div className="sm:flex-auto">
-          <Title text="Weight" />
-        </div>
+      <div className="sm:flex-auto">
+        <Title text="Weight" />
+      </div>
+      <div className="flex items-center justify-end">
         <div className="flex justify-end mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
           <div className="flex gap-4 w-full justify-between">
             <ButtonGoTo title='See all weight' path={'/dashboard/body/weight/all'} />

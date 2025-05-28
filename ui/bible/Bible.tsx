@@ -142,9 +142,9 @@ export default async function Bible() {
 
     return (
         <div className="px-4 sm:px-2 lg:px-4">
-            <div className='flex items-center justify-between'>
-                <Title text="Bible" />
+            <Title text="Bible" />
 
+            <div className='flex items-center justify-end'>
                 <ButtonGoTo title="Add notes" path="/dashboard/spirit/bible/create" />
 
             </div>
