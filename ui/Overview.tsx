@@ -32,12 +32,14 @@ export default async function Overview() {
         <div className="px-4 py-5 sm:p-6">
             <dt className="text-base font-normal text-white">Fasting</dt>
             <dd className="mt-1 flex items-baseline justify-between md:block lg:flex">
-                <div className={`flex items-baseline text-2xl font-semibold ${useOverview?.fastingOverview?.today_complete ? 'text-green-500' : 'text-white'}`}>
-                    <div>
+                <div className={`flex flex-col items-baseline text-2xl font-semibold ${useOverview?.fastingOverview?.today_complete ? 'text-green-500' : 'text-white'}`}>
+                    <div className="flex">
                         {useOverview?.fastingOverview?.status}
+                        {useOverview?.fastingOverview?.currently_fasting && <span className="ml-[1rem] inline-flex animate-bounce rounded-full opacity-75"><ClockIcon aria-hidden="true" stroke='white' className="size-8" /></span>}
+                    </div>
+                    <div>
                         {useOverview?.fastingOverview?.duration && <span className="flex gap-1 text-sm font-medium text-white">duration <AnimatedCounter number={useOverview?.fastingOverview?.duration} /> hours</span>}
                     </div>
-                    {useOverview?.fastingOverview?.currently_fasting && <span className="ml-[1rem] inline-flex animate-bounce rounded-full opacity-75"><ClockIcon aria-hidden="true" stroke='white' className="size-8" /></span>}
                 </div>
             </dd>
         </div>
