@@ -80,7 +80,7 @@ export default async function Page() {
                 <div>
                     <div className="mx-auto mt-[3rem]">
 
-                        {showProgressSection ? <Title text="Progress" /> : <div className="mt-2 max-w-lg text-pretty text-2xl text-center font-semibold tracking-tight sm:text-5xl mb-6">Start tracking your progress to see charts</div>}
+                        {showProgressSection ? <Title text="Progress" /> : <div className="mt-2 text-pretty text-2xl text-center font-semibold tracking-tight mb-6">Start tracking your progress to see charts</div>}
 
                         <div className="mt-10 grid grid-cols-1 gap-4 sm:mt-16 lg:grid-cols-6 lg:grid-rows-2">
                             {chartOne}

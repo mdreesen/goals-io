@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { fetchUser } from '@/actions/user';
 import { parse } from '@/lib/formatters';
 import { timezone } from "@/lib/date_time";
@@ -28,7 +29,7 @@ export default async function RootLayout({
     const useTimezone = await timezone();
     const useSettings = await fetchSettings();
 
-    if(!useUser._id) redirect('/');
+    if (!useUser._id) redirect('/');
 
     // Conditionals
     const hasUserFirstLast = useUser?.first_name || useUser?.last_name ? `${useUser?.first_name} ${useUser?.last_name}` : '';
@@ -51,12 +52,20 @@ export default async function RootLayout({
             <div className={`${useDarkMode ? 'dark' : 'light bg-gray-900'} pb-32`}>
                 <Navigation />
                 <NavigationPhone settings={parse(useSettings)} />
-                <header className={`py-10`}>
-                <div>
 
-                </div>
+                <header className={`py-10`}>
                     <div className="mx-auto max-w-7xl px-4">
-                        <h1 className="text-3xl font-bold tracking-tight text-white">{hasUserFirstLast}</h1>
+                        <h1 className="text-3xl font-bold tracking-tight text-white flex items-center h-[3rem]">
+                            {hasUserFirstLast}
+                            <Image
+                                alt="White Raven Logo"
+                                width={100}
+                                height={100}
+                                priority
+                                src={'/assets/logo_transparent_512x512.png'}
+                                className="h-[8rem] w-16 rounded-full object-cover scale-75 lg:hidden md:hidden"
+                            />
+                        </h1>
                         <p className="text-xl font-bold tracking-tight text-white">{useUser?.username && useUser.username}</p>
                     </div>
                 </header>
