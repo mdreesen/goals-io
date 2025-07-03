@@ -53,7 +53,7 @@ export default async function RootLayout({
                 <Navigation />
                 <NavigationPhone settings={parse(useSettings)} />
 
-                <header className={`py-5`}>
+                <header className={`pb-8`}>
                     <div className="mx-auto max-w-7xl px-4">
                         <h1 className="text-3xl font-bold tracking-tight text-white flex items-center h-[3rem]">
                             {hasUserFirstLast}
