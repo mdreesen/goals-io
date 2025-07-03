@@ -16,7 +16,7 @@ export default async function Navigation() {
     const { useShowBody, useShowMind, useShowSpirit } = useSettings;
 
     const navigation = [
-        { name: 'Dashboard', href: '/dashboard', current: false, useNav: true },
+        { name: 'Main', href: '/dashboard', current: false, useNav: true },
         { name: 'Body', href: '/dashboard/body', current: false, useNav: useShowBody },
         { name: 'Mind', href: '/dashboard/mind', current: false, useNav: useShowMind },
         { name: 'Spirit', href: '/dashboard/spirit', current: false, useNav: useShowSpirit },
@@ -34,13 +34,17 @@ export default async function Navigation() {
                         <div className="flex items-center">
                             <div className="shrink-0">
                                 <Link href={'/dashboard'}>
-                                    <Image
-                                        alt="White Raven Logo"
-                                        width={100}
-                                        height={100}
-                                        src={'/assets/logo_transparent_512x512.png'}
-                                        className="h-[8rem] w-16 rounded-full object-cover scale-75"
-                                    />
+                                    <div className="flex items-center h-[40px] text-2xl font-bold text-white">
+                                        ASCΞND
+                                        <Image
+                                            alt="White Raven Logo"
+                                            width={100}
+                                            height={100}
+                                            priority
+                                            src={'/assets/logo_transparent_512x512.png'}
+                                            className="h-[226px] w-[200px] opacity-60 left-[-113px] relative rounded-full object-cover scale-75"
+                                        />
+                                    </div>
                                 </Link>
                             </div>
                             {navigation.map((item) => item?.useNav && (

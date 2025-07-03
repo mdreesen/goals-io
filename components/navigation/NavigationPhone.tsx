@@ -4,6 +4,7 @@ import Image from "next/image";
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react'; // Using Lucide React for icons
 import { current_year } from '@/lib/date_time';
+import Link from 'next/link';
 
 export default function NavigationPhone({ settings }: any) {
     const [isOpen, setIsOpen] = useState(false);
@@ -44,17 +45,19 @@ export default function NavigationPhone({ settings }: any) {
         <nav className="relative bg-gray-900 text-white p-4 md:hidden">
             <div className="flex justify-between items-center">
                 {/* Logo/Brand Name */}
-                <div className="flex items-center h-[40px] text-2xl font-bold text-white">
-                    ASCΞND
-                    <Image
-                        alt="White Raven Logo"
-                        width={100}
-                        height={100}
-                        priority
-                        src={'/assets/logo_transparent_512x512.png'}
-                        className="h-[226px] w-[200px] opacity-60 left-[-113px] relative rounded-full object-cover scale-75 lg:hidden md:hidden"
-                    />
-                </div>
+                <Link href={'/dashboard'}>
+                    <div className="flex items-center h-[40px] text-2xl font-bold text-white">
+                        ASCΞND
+                        <Image
+                            alt="White Raven Logo"
+                            width={100}
+                            height={100}
+                            priority
+                            src={'/assets/logo_transparent_512x512.png'}
+                            className="h-[226px] w-[200px] opacity-60 left-[-113px] relative rounded-full object-cover scale-75 lg:hidden md:hidden"
+                        />
+                    </div>
+                </Link>
 
                 {/* Hamburger Icon */}
                 <button
