@@ -57,14 +57,6 @@ export default async function RootLayout({
                     <div className="mx-auto max-w-7xl px-4">
                         <h1 className="text-3xl font-bold tracking-tight text-white flex items-center h-[3rem]">
                             {hasUserFirstLast}
-                            <Image
-                                alt="White Raven Logo"
-                                width={100}
-                                height={100}
-                                priority
-                                src={'/assets/logo_transparent_512x512.png'}
-                                className="h-[8rem] w-16 rounded-full object-cover scale-75 lg:hidden md:hidden"
-                            />
                         </h1>
                         <p className="text-xl font-bold tracking-tight text-white">{useUser?.username && useUser.username}</p>
                     </div>
@@ -72,7 +64,7 @@ export default async function RootLayout({
             </div>
 
             <main className={`-mt-32 grow`}>
-                <div className="mx-auto max-w-7xl pb-[95px]">
+                <div className="mx-auto max-w-7xl pb-[20px]">
                     <div className={`${useDarkMode ? 'dark' : 'light'} rounded-t-lg bg-white px-5 sm:px-6 pt-[2rem] pb-[2rem]`}>
                         {/* Tutorial shown if user has not seen/read it */}
                         {useTutorial}
