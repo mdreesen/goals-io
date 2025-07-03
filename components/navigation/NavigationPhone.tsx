@@ -34,11 +34,11 @@ export default function NavigationPhone({ settings }: any) {
     };
 
     const navItems = [
-        { name: 'Main', href: '/dashboard' },
-        { name: 'Body', href: '/dashboard/body' },
-        { name: 'Mind', href: '/dashboard/mind' },
-        { name: 'Spirit', href: '/dashboard/spirit' },
-        { name: 'Profile', href: '/dashboard/profile' },
+        { name: 'Main', href: '/dashboard', showNav: true },
+        { name: 'Body', href: '/dashboard/body', showNav: settings?.useShowBody },
+        { name: 'Mind', href: '/dashboard/mind', showNav: settings?.useShowMind },
+        { name: 'Spirit', href: '/dashboard/spirit', showNav: settings?.useShowSpirit },
+        { name: 'Profile', href: '/dashboard/profile', showNav: true },
     ];
 
     return (
@@ -107,7 +107,7 @@ export default function NavigationPhone({ settings }: any) {
                             animate="visible"
                             className="flex flex-col items-center space-y-6"
                         >
-                            {navItems.map((item) => (
+                            {navItems.map((item) => item?.showNav && (
                                 <motion.li key={item.name} variants={itemVariants}>
                                     <a
                                         href={item.href}
