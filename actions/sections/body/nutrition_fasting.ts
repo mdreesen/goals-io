@@ -5,6 +5,7 @@ import { getServerSession } from "next-auth/next";
 import { revalidatePath } from 'next/cache';
 import { date_time_fasting } from "@/lib/date_time";
 import { parse } from "@/lib/formatters";
+import { formatDateAndTime } from '@/lib/formatters';
 
 export async function fetchAllFasting() {
     const session = await getServerSession();
@@ -33,6 +34,8 @@ export async function fetchFasting() {
 
         const data = await User.find({ email: session?.user.email }, 'fasting');
         const latestFastingData = data[0].fasting.reverse()[0];
+        const formattedLatestEndedFastingDate = formatDateAndTime(latestFastingData.end_date);
+        const formattedTodayDate = formatDateAndTime(now);
 
         const fastingText = () => {
             switch (true) {
@@ -52,6 +55,11 @@ export async function fetchFasting() {
                 case !latestFastingData?.completed:
                     return "Not Complete";
                     break
+
+                case latestFastingData?.ended && formattedLatestEndedFastingDate !== formattedTodayDate:
+                    return 'Start Your Fast';
+                    break
+
                 default:
                     return "Complete"
             };
