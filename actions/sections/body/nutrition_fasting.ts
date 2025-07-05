@@ -43,7 +43,7 @@ export async function fetchFasting() {
                 case !latestFastingData?._id:
                     return 'Not Started';
                     break
-                                    // Ended has ended and latest fasting date does not match today's date
+                // Ended has ended and latest fasting date does not match today's date
                 case latestFastingData?.ended && formattedLatestEndedFastingDate !== formattedTodayDate:
                     return 'Start Your Fast';
                     break
