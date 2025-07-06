@@ -1,6 +1,6 @@
 {
   "name": "goals-io",
-  "version": "0.7.4.2",
+  "version": "0.7.4.3",
   "private": true,
   "description": "Set goals. Achieve greatness.",
   "main": "index.js",

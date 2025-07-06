@@ -42,7 +42,7 @@ export async function register(state: any, formData: any) {
     }}
 
     const user = new User({
-        email: email,
+        email: email.toLowerCase(),
         password: hashedPassword,
         affirmations: defaultUserAffirmations,
         habits: defaultUserHabits,
