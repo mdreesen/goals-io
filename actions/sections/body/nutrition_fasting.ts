@@ -34,18 +34,16 @@ export async function fetchFasting() {
 
         const data = await User.find({ email: session?.user.email }, 'fasting');
         const latestFastingData = data[0].fasting.reverse()[0];
-        const formattedLatestEndedFastingDate = formatDateAndTime(latestFastingData.end_date);
+        const formattedLatestEndedFastingDate = latestFastingData.end_date;
         const formattedTodayDate = formatDateAndTime(now);
+
+        console.log(latestFastingData?.ended, latestFastingData)
 
         const fastingText = () => {
             switch (true) {
                 // No fasting data
                 case !latestFastingData?._id:
                     return 'Not Started';
-                    break
-                // Ended has ended and latest fasting date does not match today's date
-                case latestFastingData?.ended && formattedLatestEndedFastingDate !== formattedTodayDate:
-                    return 'Start Your Fast';
                     break
                 // Fasting started
                 case latestFastingData?.start:
@@ -54,6 +52,10 @@ export async function fetchFasting() {
                 // Started but not complete
                 case latestFastingData.ended && !latestFastingData.completed:
                     return "Ended Early";
+                    break
+                // Ended has ended and latest fasting date does not match today's date
+                case latestFastingData?.ended && !latestFastingData?.start_date:
+                    return 'Start Your Fast';
                     break
                 // Not completed fasting
                 case !latestFastingData?.completed:
