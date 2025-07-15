@@ -44,10 +44,18 @@ export default async function Books() {
                                             {!hasBookList && <p className="text-sm">On your future reads list</p>}
                                         </div>
                                     </div>
-                                    {item.book_image && (
+                                    {item.book_image ? (
                                         <Image
                                             alt="White Raven Logo"
                                             src={`${item.book_image ?? ''}`}
+                                            className="h-[8rem] w-[auto] object-cover flex-none bg-gray-50 scale-75"
+                                            height={200}
+                                            width={400}
+                                        />
+                                    ) : (
+                                        <Image
+                                            alt={`Book image not available`}
+                                            src={`/assets/thumbnail_none.png`}
                                             className="h-[8rem] w-[auto] object-cover flex-none bg-gray-50 scale-75"
                                             height={200}
                                             width={400}

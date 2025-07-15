@@ -10,6 +10,47 @@ export default async function Books() {
 
     const books = await fetchBooks() ?? [];
 
+    const useCurrentBook = (
+        <div className="pb-10 pt-10">
+            <div className="pb-20 sm:pb-24 xl:pb-0">
+                <div className="mx-auto flex max-w-7xl flex-col items-center gap-x-8 gap-y-10 px-6 sm:gap-y-8 lg:px-8 xl:flex-row xl:items-stretch">
+                    <div className="-mt-8 w-[15rem] flex gap-6 max-w-2xl xl:-mb-8 xl:w-96 xl:flex-none">
+                        {books.useCurrentlyReading.map((item: any, index: number) => (
+                            <Link className="w-full" href={`/dashboard/mind/books/edit/${item.id}`}>
+                                {item.book_image ? (
+                                    <Image
+                                        alt={`${item.book_title} of ${index}`}
+                                        src={`${item.book_image ?? ''}`}
+                                        className="size-full rounded-2xl object-contain"
+                                        height={200}
+                                        width={400}
+                                    />
+                                ) : (
+                                    <Image
+                                        alt={`Book image not available`}
+                                        src={`/assets/thumbnail_none.png`}
+                                        className="size-full rounded-2xl object-contain"
+                                        height={200}
+                                        width={400}
+                                    />
+                                )}
+
+                                <div className="flex flex-col text-pretty tracking-tight gap-2">
+                                    <div className="text-md font-semibold">
+                                        {item.book_title}
+                                    </div>
+                                    <div className="text-sm">
+                                        {item.book_author}
+                                    </div>
+                                </div>
+                            </Link>
+                        ))}
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+
     return (
         <div className="px-4 sm:px-2 lg:px-4">
             <Title text="Books" />
@@ -24,6 +65,11 @@ export default async function Books() {
                         <ButtonGoTo title='Add book' path={'/dashboard/mind/books/create'} />
                     </div>
                 </div>
+            </div>
+
+            <div>
+                <Title text="Currently Reading" />
+                {useCurrentBook}
             </div>
 
             <div className="py-2">
@@ -54,10 +100,18 @@ export default async function Books() {
                                             {!hasBookList && <p className="text-sm">On your future reads list</p>}
                                         </div>
                                     </div>
-                                    {item.book_image && item.book_image !== 'false' && (
+                                    {item.book_image && item.book_image !== 'false' ? (
                                         <Image
-                                            alt="White Raven Logo"
+                                            alt={`${item.book_title} of ${index}`}
                                             src={`${item.book_image ?? ''}`}
+                                            className="h-[8rem] w-[auto] object-cover flex-none bg-gray-50 scale-75"
+                                            height={200}
+                                            width={400}
+                                        />
+                                    ) : (
+                                        <Image
+                                            alt={`Book image not available`}
+                                            src={`/assets/thumbnail_none.png`}
                                             className="h-[8rem] w-[auto] object-cover flex-none bg-gray-50 scale-75"
                                             height={200}
                                             width={400}

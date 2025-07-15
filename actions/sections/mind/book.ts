@@ -64,6 +64,7 @@ export async function fetchBooks() {
 
         const data = await User.find({ email: session?.user.email }, 'books');
         const filterData = data[0].books.filter((item: any) => item.booklist.includes('No') || !item.booklist);
+        const currentlyReading = data[0].books.filter((item: any) => item.book_start_date && !item.book_end_date);
 
         const startIndex = Math.max(filterData.length - 10, 0);
         const latestTen = filterData.slice(startIndex);
@@ -71,6 +72,7 @@ export async function fetchBooks() {
         return {
             limited: latestTen ?? [],
             allData: data[0].books ?? [],
+            useCurrentlyReading: currentlyReading,
             totalBooks: data[0].books.filter((item: any) => item.booklist === 'No' || !item.booklist).length.toString(),
         }
 

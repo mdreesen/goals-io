@@ -42,7 +42,7 @@ export default async function Books() {
                                             <p className="text-sm">{item.booklist === 'No' && useBookEndDate}</p>
                                         </div>
                                     </div>
-                                    {item.book_image && (
+                                    {item.book_image ? (
                                         <Image
                                             alt="White Raven Logo"
                                             src={`${item.book_image ?? ''}`}
@@ -50,6 +50,14 @@ export default async function Books() {
                                             height={200}
                                             width={400}
                                         />
+                                    ) : (
+                                        <Image
+                                        alt={`Book image not available`}
+                                        src={`/assets/thumbnail_none.png`}
+                                        className="h-[8rem] w-[auto] object-cover flex-none bg-gray-50 scale-75"
+                                        height={200}
+                                        width={400}
+                                    />
                                     )}
 
                                 </div>
