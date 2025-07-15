@@ -11,10 +11,10 @@ export default async function Books() {
     const books = await fetchBooks() ?? [];
 
     const useCurrentBook = (
-        <div className="pb-10 pt-10">
+        <div className="pb-10 pt-2">
             <div className="pb-20 sm:pb-24 xl:pb-0">
                 <div className="mx-auto flex max-w-7xl flex-col items-center gap-x-8 gap-y-10 px-6 sm:gap-y-8 lg:px-8 xl:flex-row xl:items-stretch">
-                    <div className="-mt-8 w-[15rem] flex gap-6 max-w-2xl xl:-mb-8 xl:w-96 xl:flex-none">
+                    <div className="-mt-8 w-[10rem] flex gap-6 max-w-2xl xl:-mb-8 xl:w-96 xl:flex-none">
                         {books.useCurrentlyReading.map((item: any, index: number) => (
                             <Link className="w-full" href={`/dashboard/mind/books/edit/${item.id}`}>
                                 {item.book_image ? (
@@ -67,8 +67,8 @@ export default async function Books() {
                 </div>
             </div>
 
-            <div>
-                <Title text="Currently Reading" />
+            <div className="pt-4">
+                <Title fontSize="2xl" text="Currently Reading" />
                 {useCurrentBook}
             </div>
 
