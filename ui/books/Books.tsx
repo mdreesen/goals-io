@@ -11,7 +11,7 @@ export default async function Books() {
     const books = await fetchBooks() ?? [];
 
     const useCurrentBook = (
-        <div className="py-[2rem] justify-center flex gap-6 items-baseline">
+        <div className="pb-[2rem] justify-center flex gap-6 items-baseline">
             {books.useCurrentlyReading.map((item: any, index: number) => (
                 <Link className="w-[10rem] h-full flex flex-col gap-2" href={`/dashboard/mind/books/edit/${item.id}`}>
                     {item.book_image ? (
