@@ -117,7 +117,7 @@ export default function WorkoutForm() {
 
     return (
         <form ref={ref} action={handleSubmit}>
-            <div className="space-y-12">
+            <div className="space-y-12 px-[2rem]">
                 <div className="border-b border-gray-900/10 pb-12">
                     <h2 className="text-base/7 font-semibold">Workout Information</h2>
                     <p className="mt-1 text-sm/6 text-gray-600">Insert your workout.</p>

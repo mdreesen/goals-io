@@ -193,7 +193,7 @@ export default function FastingTimer({ fastData }: any) {
         >
             <p className="text-sm font-medium flex gap-1">
                 <span>Time left:</span>
-                <span className='text-indigo-900 font-semibold'>{`${formatTime(timeLeft.hours)}:${formatTime(timeLeft.minutes)}:${formatTime(timeLeft.seconds)}`}</span></p>
+                <span className='text-yellow-600 font-semibold'>{`${formatTime(timeLeft.hours)}:${formatTime(timeLeft.minutes)}:${formatTime(timeLeft.seconds)}`}</span></p>
             <p className="text-sm font-medium">{`${fastData.user.duration} hours`}</p>
         </motion.div>
     );
@@ -201,7 +201,7 @@ export default function FastingTimer({ fastData }: any) {
     const progressBar = !loading && (
         <div aria-hidden="true" className="mt-6">
             {currentFastingTime}
-            <div className={`overflow-hidden rotate-180 rounded-full ${useEndFasting ? 'bg-gray-200' : 'bg-[#312E81]'}`}>
+            <div className={`overflow-hidden rotate-180 rounded-full ${useEndFasting ? 'bg-gray-200' : 'bg-yellow-500'}`}>
                 <div style={{ width: `${useEndFasting ? '100' : useTimedFasting}%` }} className={`${useEndFasting ? 'bg-green-500 animate-pulse' : 'bg-gray-200'} h-2`} />
             </div>
             <div className='h-[24px]'>{fastingStatus}</div>

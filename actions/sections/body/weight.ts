@@ -38,6 +38,37 @@ export async function fetchWeight() {
     }
 };
 
+export async function fetchWeightOverview() {
+    const session = await getServerSession();
+
+    try {
+        await connectDB();
+
+        // Getting weight and limiting
+        const data = await User.find({ email: session?.user.email }, 'weight');
+        const limited = await User.find({ email: session?.user.email }, { weight:{ $slice: -10 } }).limit(10);
+        const useNumber = data[0].weight.map((item: any) => Number(item.weight));
+        const startingWeight =  data[0].weight.find((item: any) => item.starting_weight === true);
+        const current = limited[0].weight.reverse()[0]?.weight ?? '0';
+        const lostOrGained = lossOrGain({ starting: startingWeight?.weight, current: current });
+        const positiveInteger = Math.abs(Number(lostOrGained))
+
+        return {
+            dataToDate:limited[0].weight[0],
+            highestWeight: findHighestNumber(useNumber),
+            startingWeight: startingWeight,
+            averageWeight: findAverageNumber(useNumber),
+            lossOrGain: lostOrGained.includes('-') ? `Gained ${positiveInteger.toString()} lbs` : `Lost ${lostOrGained === 'NaN' ? '0' : lostOrGained} lbs`,
+            weightLGType: lostOrGained.includes('-') ? 'increase' : 'decrease',
+            totalWeight: data[0].weight.length.toString()
+        }
+
+    } catch (error) {
+        console.log(error);
+        return error;
+    }
+};
+
 export async function addWeight(values: any) {
     const session = await getServerSession();
 

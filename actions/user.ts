@@ -20,6 +20,28 @@ export async function fetchUser() {
     }
 };
 
+export async function fetchUserOverview() {
+    const session = await getServerSession();
+
+    try {
+        await connectDB();
+
+        // Find user and farmer with associated emails
+        const user = await User.findOne({ email: session?.user.email });
+
+        const useOverview = {
+            first_name: user.first_name,
+            last_name: user.last_name,
+            description: user.username
+        }
+
+        return useOverview ?? {}
+    } catch (error) {
+        console.log(error)
+        return error
+    }
+};
+
 export async function deleteUser() {
     const session = await getServerSession();
 

@@ -72,7 +72,7 @@ export default function WaterForm({ data }: any) {
 
     return (
         <form ref={ref} action={handleSubmit}>
-            <div className="space-y-12">
+            <div className="space-y-12 px-[2rem]">
                 <div className="border-b border-gray-900/10 pb-12">
                     <h2 className="text-base/7 font-semibold">Water Information</h2>
                     <p className="mt-1 text-sm/6">Insert your water intake.</p>

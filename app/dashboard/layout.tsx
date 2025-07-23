@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { fetchUser } from '@/actions/user';
 import { parse } from '@/lib/formatters';
 import { timezone } from "@/lib/date_time";
@@ -31,9 +30,6 @@ export default async function RootLayout({
 
     if (!useUser._id) redirect('/');
 
-    // Conditionals
-    const hasUserFirstLast = useUser?.first_name || useUser?.last_name ? `${useUser?.first_name} ${useUser?.last_name}` : '';
-
     // UTC device banner component
     const hasUtcTime = useTimezone.includes('UTC') && (<div className='h-[4rem]'><Banner_Utc_Time /></div>);
 
@@ -44,34 +40,17 @@ export default async function RootLayout({
     const useDarkMode = useSettings.useDarkMode;
 
     return (
-        <div className={`flex flex-col min-h-screen`}>
+        <div className={`flex flex-col min-h-screen py-4 ${useDarkMode ? 'bg-gradient-to-br from-gray-950 to-gray-800 text-white' : 'bg-gradient-to-br from-gray-200 to-gray-100 text-gray-900'}`}>
 
             {/* Banner shown if device has UTC time */}
             {hasUtcTime}
 
-            <div className={`${useDarkMode ? 'dark' : 'light bg-gray-900'} pb-32`}>
+            <div>
                 <Navigation />
                 <NavigationPhone settings={parse(useSettings)} />
-
-                <header className={`pb-8`}>
-                    <div className="mx-auto max-w-7xl px-4">
-                        <h1 className="text-3xl font-bold tracking-tight text-white flex items-center h-[3rem]">
-                            {hasUserFirstLast}
-                        </h1>
-                        <p className="text-xl font-bold tracking-tight text-white">{useUser?.username && useUser.username}</p>
-                    </div>
-                </header>
+                {useTutorial}
+                {children}
             </div>
-
-            <main className={`-mt-32 grow`}>
-                <div className="mx-auto max-w-7xl pb-[20px]">
-                    <div className={`${useDarkMode ? 'dark' : 'light'} rounded-t-lg bg-white px-5 sm:px-6 pt-[2rem] pb-[2rem]`}>
-                        {/* Tutorial shown if user has not seen/read it */}
-                        {useTutorial}
-                        {children}
-                    </div>
-                </div>
-            </main>
         </div>
     )
 }

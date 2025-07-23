@@ -1,6 +1,6 @@
 'use server';
 import { connectDB } from "@/lib/mongodb";
-import { fetchWeight } from '@/actions/sections/body/weight';
+import { fetchWeightOverview } from '@/actions/sections/body/weight';
 import { booksByYear } from '@/actions/sections/mind/book';
 import { fetchAllWaterForToday } from '@/actions/sections/body/nutrition_water';
 import { fetchSettings } from '@/actions/settings';
@@ -10,7 +10,7 @@ export async function fetchOverview() {
     const useBook = await booksByYear();
     const useFasting = await fetchFasting();
     const useWater = await fetchAllWaterForToday();
-    const useWeight = await fetchWeight();
+    const useWeight = await fetchWeightOverview();
 
     const settings = await fetchSettings();
 

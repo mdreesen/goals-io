@@ -188,7 +188,7 @@ export default function EditBook({ data }: any) {
 
     return (
         <form ref={ref} action={handleSubmit}>
-            <div className="space-y-12">
+            <div className="space-y-12 px-[2rem]">
                 <div className="border-b border-gray-900/10 pb-12">
                     <h2 className="text-base/7 font-semibold">Book information</h2>
                     <p className="mt-1 text-sm/6 text-gray-600">Name and details of book.</p>
@@ -199,7 +199,7 @@ export default function EditBook({ data }: any) {
                 </div>
             </div>
 
-            <div className="mt-6 flex items-center gap-x-6 justify-between">
+            <div className="mt-6 flex items-center gap-x-6 justify-between px-[2rem]">
                 <div><ButtonDeleteBook data={data} /></div>
                 <div className="flex gap-x-6 items-center">
                     <ButtonCancel path={'/dashboard/mind'} />

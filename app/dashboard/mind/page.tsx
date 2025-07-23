@@ -49,7 +49,7 @@ export default async function Page() {
     );
 
     return (
-        <div className="flex flex-col gap-[4rem]">
+        <div className="flex flex-col gap-[4rem] px-[1rem] px-[1rem]">
             {useAffirmations}
             {useBooks}
             {useHabits}

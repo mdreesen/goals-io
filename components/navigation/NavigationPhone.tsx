@@ -42,11 +42,11 @@ export default function NavigationPhone({ settings }: any) {
     ];
 
     return (
-        <nav className="relative bg-gray-900 text-white p-4 md:hidden">
+        <nav className="relative bg-transparent p-4 md:hidden">
             <div className="flex justify-between items-center">
                 {/* Logo/Brand Name */}
                 <Link href={'/dashboard'}>
-                    <div className="flex items-center h-[40px] text-2xl font-bold text-white">
+                    <div className="flex items-center h-[40px] text-2xl font-bold">
                         ASCΞND
                         <Image
                             alt="White Raven Logo"
@@ -74,7 +74,7 @@ export default function NavigationPhone({ settings }: any) {
                                 exit={{ rotate: 0, opacity: 0 }}
                                 transition={{ duration: 0.2 }}
                             >
-                                <X size={28} className="text-white" />
+                                <X size={28} className={`text-white`} />
                             </motion.div>
                         ) : (
                             <motion.div
@@ -84,7 +84,7 @@ export default function NavigationPhone({ settings }: any) {
                                 exit={{ rotate: -90, opacity: 0 }}
                                 transition={{ duration: 0.2 }}
                             >
-                                <Menu size={28} className="text-white" />
+                                <Menu size={28} className={`${settings.useDarkMode ? 'text-white' : 'text-black' }`}/>
                             </motion.div>
                         )}
                     </AnimatePresence>

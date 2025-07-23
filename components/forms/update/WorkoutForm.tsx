@@ -119,7 +119,7 @@ export default function EditWorkoutForm({ data }: any) {
 
     return (
         <form ref={ref} action={handleSubmit}>
-            <div className="space-y-12">
+            <div className="space-y-12 px-[2rem]">
                 <div className="border-b border-gray-900/10 pb-12">
                     <h2 className="text-base/7 font-semibold">Workout Information</h2>
                     <p className="mt-1 text-sm/6">Update your workout.</p>
@@ -132,7 +132,7 @@ export default function EditWorkoutForm({ data }: any) {
                 </div>
             </div>
 
-            <div className="mt-6 flex items-center gap-x-6 justify-between">
+            <div className="mt-6 flex items-center gap-x-6 justify-between px-[2rem]">
                 <div><ButtonDeleteWorkout data={data?.workoutData} /></div>
 
                 <div className="flex gap-x-6 items-center">

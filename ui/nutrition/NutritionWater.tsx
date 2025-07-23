@@ -20,12 +20,12 @@ export default async function NutritionWater() {
       <h4 className="sr-only">Water Intake</h4>
       <p className="text-sm font-medium">Water Intake</p>
       <div className="flex justify-between">
-        <p className="text-sm text-indigo-900 font-semibold">{formatWaterIntakeToday}</p>
+        <p className="text-sm text-[#60a5fa] font-semibold">{formatWaterIntakeToday}</p>
         <p className="text-sm font-medium">{formatTotalWaterIntake}</p>
       </div>
       <div aria-hidden="true" className="mt-6">
         <div className="overflow-hidden rounded-full bg-gray-200">
-          <div style={{ width: `${useAllWaterForToday.current_progress === "NaN" ? '0' : useAllWaterForToday.current_progress}%` }} className={`h-2 rounded-full ${congratulations ? 'bg-green-500 animate-pulse' : 'bg-[#312E81]'}`} />
+          <div style={{ width: `${useAllWaterForToday.current_progress === "NaN" ? '0' : useAllWaterForToday.current_progress}%` }} className={`h-2 rounded-full ${congratulations ? 'bg-green-500 animate-pulse' : 'bg-[#60a5fa]'}`} />
         </div>
         <div className="mt-6 hidden grid-cols-4 text-sm font-medium sm:grid">
           <div>Getting started</div>

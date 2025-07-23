@@ -27,14 +27,14 @@ export default async function Navigation() {
     ]
 
     return (
-        <Disclosure as="nav" className="bg-gray-900 hidden md:block lg:block">
+        <Disclosure as="nav" className="bg-transparent hidden md:block lg:block">
             <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
                 <div>
                     <div className="flex h-16 items-center justify-between px-4 sm:px-0">
                         <div className="flex items-center">
                             <div className="shrink-0">
                                 <Link href={'/dashboard'}>
-                                    <div className="flex items-center h-[40px] text-2xl font-bold text-white">
+                                    <div className="flex items-center h-[40px] text-2xl font-bold">
                                         ASCΞND
                                         <Image
                                             alt="White Raven Logo"
@@ -56,7 +56,7 @@ export default async function Navigation() {
                                             href={item.href}
                                             aria-current={item.name ? 'page' : undefined}
                                             className={classNames(
-                                                'text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium',
+                                                'hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium',
                                             )}
                                         >
                                             {item.name}

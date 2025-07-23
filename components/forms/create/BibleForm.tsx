@@ -32,7 +32,7 @@ export default function BibleForm() {
 
     return (
         <form ref={ref} action={handleSubmit}>
-            <div className="space-y-12">
+            <div className="space-y-12 px-[2rem]">
                 <div className="border-b border-gray-900/10 pb-12">
                     <h2 className="text-base/7 font-semibold">Bible notes</h2>
 
@@ -135,7 +135,7 @@ export default function BibleForm() {
                 </div>
             </div>
 
-            <div className="mt-6 flex items-center gap-x-6 justify-between">
+            <div className="mt-6 flex items-center gap-x-6 justify-between px-[2rem]">
                 <div className="flex gap-x-6 items-center">
                     <Link href={'/dashboard/spirit'}>
                         <button type="button" className="text-sm/6 font-semibold justify-end">
