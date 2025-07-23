@@ -48,14 +48,16 @@ export default function NavigationPhone({ settings }: any) {
                 <Link href={'/dashboard'}>
                     <div className="flex items-center h-[40px] text-2xl font-bold">
                         ASCΞND
-                        <Image
-                            alt="White Raven Logo"
-                            width={100}
-                            height={100}
-                            priority
-                            src={'/assets/logo_transparent_512x512.png'}
-                            className="h-[226px] w-[200px] opacity-60 left-[-113px] relative rounded-full object-cover scale-75 lg:hidden md:hidden"
-                        />
+                        {settings?.useDarkMode && (
+                            <Image
+                                alt="White Raven Logo"
+                                width={100}
+                                height={100}
+                                priority
+                                src={'/assets/logo_transparent_512x512.png'}
+                                className="h-[226px] w-[200px] opacity-60 left-[-113px] relative rounded-full object-cover scale-75 lg:hidden md:hidden"
+                            />
+                        )}
                     </div>
                 </Link>
 
@@ -84,7 +86,7 @@ export default function NavigationPhone({ settings }: any) {
                                 exit={{ rotate: -90, opacity: 0 }}
                                 transition={{ duration: 0.2 }}
                             >
-                                <Menu size={28} className={`${settings.useDarkMode ? 'text-white' : 'text-black' }`}/>
+                                <Menu size={28} className={`${settings.useDarkMode ? 'text-white' : 'text-black'}`} />
                             </motion.div>
                         )}
                     </AnimatePresence>

@@ -13,7 +13,7 @@ export default async function Navigation() {
 
     const useSettings = await fetchSettings();
 
-    const { useShowBody, useShowMind, useShowSpirit } = useSettings;
+    const { useShowBody, useShowMind, useShowSpirit, useDarkMode } = useSettings;
 
     const navigation = [
         { name: 'Main', href: '/dashboard', current: false, useNav: true },
@@ -36,14 +36,16 @@ export default async function Navigation() {
                                 <Link href={'/dashboard'}>
                                     <div className="flex items-center h-[40px] text-2xl font-bold">
                                         ASCΞND
-                                        <Image
-                                            alt="White Raven Logo"
-                                            width={100}
-                                            height={100}
-                                            priority
-                                            src={'/assets/logo_transparent_512x512.png'}
-                                            className="h-[226px] w-[200px] opacity-60 left-[-113px] relative rounded-full object-cover scale-75"
-                                        />
+                                        {useDarkMode && (
+                                            <Image
+                                                alt="White Raven Logo"
+                                                width={100}
+                                                height={100}
+                                                priority
+                                                src={'/assets/logo_transparent_512x512.png'}
+                                                className="h-[226px] w-[200px] opacity-60 left-[-113px] relative rounded-full object-cover scale-75"
+                                            />
+                                        )}
                                     </div>
                                 </Link>
                             </div>
