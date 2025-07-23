@@ -3,7 +3,13 @@ import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import { resetPassword } from "@/actions/resetPassword";
 import Link from "next/link";
-import LoaderPacman from "@/components/loaders/LoaderPacman";
+import Image from "next/image";
+import { motion, AnimatePresence } from 'framer-motion';
+import { Mail, FileQuestion } from 'lucide-react'; // Icons for email, password, and social logins
+
+const cn = (...inputs: string[]) => {
+    return inputs.filter(Boolean).join(' ');
+};
 
 export default function Page() {
     const router = useRouter();
@@ -37,70 +43,165 @@ export default function Page() {
     };
 
     return (
-        <div className="h-[100vh]">
-            <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
-                <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-                    <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight">
-                        Forgot Password
-                    </h2>
-                    <p className="mt-10 text-center font-bold leading-9 tracking-tight">If you do not see the link in your email, try again.</p>
-                </div>
+        <div className="min-h-screen relative overflow-hidden flex items-center justify-center p-4">
+            {/* Animated Background Gradient */}
+            <div className="absolute inset-0 z-0 bg-gradient-to-br from-gray-950 via-gray-800 to-gray-950 animate-gradient-shift"></div>
 
-                <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-                    <form method="POST" onSubmit={handleSubmit} className="space-y-6">
-                        <div>
-                            <label htmlFor="email" className="block text-sm font-medium leading-6">
-                                Email address
-                            </label>
-                            <div className="mt-2">
-                                <input
-                                    id="email"
-                                    name="email"
-                                    type="email"
-                                    required
-                                    autoComplete="email"
-                                    className="block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-white/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900 sm:text-sm sm:leading-6"
-                                />
-                            </div>
-                        </div>
-
-                        <div>
-                            <label htmlFor="verify_human" className="block text-sm/6 font-medium">
-                                What is 4+3?
-                            </label>
-                            <div className="mt-2">
-                                <input
-                                    id="verify_human"
-                                    name="verify_human"
-                                    required
-                                    className="block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-white/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900 sm:text-sm sm:leading-6"
-                                />
-                            </div>
-                        </div>
-
-                        <div className="flex justify-center">
-                            {
-                                loading ? <LoaderPacman /> : (
-                                    <button
-                                        type="submit"
-                                        className="flex w-full justify-center rounded-md bg-gray-900 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-gray-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900"
-                                    >
-                                        Send
-                                    </button>
-                                )
-                            }
-                        </div>
-                    </form>
-
-                    <div className="text-red-500">{error}</div>
-
-                    <p className="mt-10 text-center text-sm text-gray-400">
-                        <Link href="/authentication/signup" className="font-semibold leading-6 hover:text-gray-400">
-                            Don&apos;t have an account?
-                        </Link>
-                    </p>
-                </div>
+            {/* Subtle Background Particles/Blobs */}
+            <div className="absolute inset-0 z-10 opacity-20">
+                <motion.div
+                    initial={{ x: -100, y: -100, scale: 0.5 }}
+                    animate={{ x: 100, y: 100, scale: 1.2 }}
+                    transition={{ repeat: Infinity, duration: 20, ease: "linear", repeatType: "mirror" }}
+                    className="absolute top-1/4 left-1/4 w-48 h-48 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl opacity-30"
+                ></motion.div>
+                <motion.div
+                    initial={{ x: 100, y: 100, scale: 0.8 }}
+                    animate={{ x: -100, y: -100, scale: 1.5 }}
+                    transition={{ repeat: Infinity, duration: 25, ease: "linear", repeatType: "mirror", delay: 5 }}
+                    className="absolute bottom-1/3 right-1/4 w-64 h-64 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-30"
+                ></motion.div>
+                <motion.div
+                    initial={{ x: -50, y: 50, scale: 0.7 }}
+                    animate={{ x: 50, y: -50, scale: 1.1 }}
+                    transition={{ repeat: Infinity, duration: 18, ease: "linear", repeatType: "mirror", delay: 10 }}
+                    className="absolute top-1/2 left-1/2 w-56 h-56 bg-pink-500 rounded-full mix-blend-multiply filter blur-xl opacity-30"
+                ></motion.div>
             </div>
+
+            <motion.div
+                initial={{ opacity: 0, y: -50, scale: 0.9 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+                className="relative z-20 bg-gray-800/80 backdrop-blur-xl rounded-2xl shadow-2xl p-8 w-full max-w-md border border-gray-700 space-y-8"
+            >
+                <h1 className="text-4xl font-extrabold text-center text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500">
+                    Welcome to
+
+                    <div className="flex">
+                        <div className="flex items-center justify-center h-[70px] text-4xl font-bold text-white w-full">
+                            ASCΞND
+                            <div className="absolute">
+                                <Image
+                                    alt="White Raven Logo"
+                                    width={100}
+                                    height={100}
+                                    priority
+                                    src={'/assets/logo_transparent_512x512.png'}
+                                    className="h-[226px] w-[200px] left-[94px] opacity-60 relative rounded-full object-cover scale-75 lg:hidden md:hidden"
+                                />
+                            </div>
+                        </div>
+                    </div>
+
+                </h1>
+                <p className="text-gray-300 text-center text-lg">
+                    Reset your password.
+                </p>
+
+                <form method="POST" onSubmit={handleSubmit} className="space-y-6">
+                    {/* Email Input */}
+                    <motion.div
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.5, delay: 0.4 }}
+                        whileHover={{ scale: 1.01, borderColor: '#60A5FA' }}
+                        className="relative"
+                    >
+                        <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
+
+
+                        <input
+                            id="email"
+                            name="email"
+                            type="email"
+                            required
+                            autoComplete="email"
+                            placeholder="email"
+                            className="w-full pl-10 pr-4 py-3 rounded-lg bg-gray-700 border border-gray-600 text-white placeholder-gray-400
+                                     focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                        />
+                    </motion.div>
+
+                    {/* Verify Human Input */}
+                    <motion.div
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.5, delay: 0.4 }}
+                        whileHover={{ scale: 1.01, borderColor: '#60A5FA' }}
+                        className="relative"
+                    >
+                        <FileQuestion className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
+
+                        <input
+                            id="verify_human"
+                            name="verify_human"
+                            required
+                            placeholder="What is 4+3?"
+                            className="w-full pl-10 pr-4 py-3 rounded-lg bg-gray-700 border border-gray-600 text-white placeholder-gray-400
+                                     focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                        />
+                    </motion.div>
+
+                    {/* Error Message */}
+                    <AnimatePresence>
+                        {error && (
+                            <motion.p
+                                initial={{ opacity: 0, y: -10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -10 }}
+                                transition={{ duration: 0.3 }}
+                                className="text-red-400 text-sm text-center"
+                            >
+                                {error}
+                            </motion.p>
+                        )}
+                    </AnimatePresence>
+
+
+                    {/* Submit Button */}
+                    <motion.button
+                        type="submit"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: 0.7 }}
+                        whileHover={{ scale: 1.03 }}
+                        whileTap={{ scale: 0.98 }}
+                        className={cn(
+                            "w-full py-3 rounded-lg font-semibold text-lg transition-all duration-300",
+                            loading
+                                ? "bg-gray-600 text-gray-400 cursor-not-allowed"
+                                : "bg-gradient-to-r from-blue-600 to-purple-700 hover:from-blue-700 hover:to-purple-800 text-white shadow-lg hover:shadow-xl"
+                        )}
+                        disabled={loading}
+                    >
+                        {loading ? 'Sending Email...' : 'Reset Password'}
+                    </motion.button>
+                </form>
+
+                {/* OR Divider */}
+                <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.8 }}
+                    className="relative flex items-center justify-center py-4"
+                >
+                    <div className="absolute w-full border-t border-gray-700"></div>
+                    <span className="relative z-10 bg-gray-800/80 backdrop-blur-md px-4 text-gray-400 text-sm">OR</span>
+                </motion.div>
+
+                <motion.p
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 1.1 }}
+                    className="text-gray-400 text-center text-sm mt-6"
+                >
+                    Have an account?{' '}
+                    <Link href="/" className="text-blue-400 hover:underline font-medium">
+                        Log In
+                    </Link>
+                </motion.p>
+            </motion.div>
         </div>
     );
 };
