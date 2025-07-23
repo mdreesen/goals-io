@@ -52,7 +52,7 @@ export default async function Books() {
                 <div className="flex gap-4 w-full justify-between">
                     <div className="flex flex-col gap-2">
                         <ButtonGoTo title='See all books' path={'/dashboard/mind/books/all'} />
-                        <ButtonGoTo title='See book list' path={'/dashboard/mind/books/booklist'} />
+                        <ButtonGoTo title='See Saved books' path={'/dashboard/mind/books/booklist'} />
                     </div>
                     <div>
                         <ButtonGoTo title='Log New Book' path={'/dashboard/mind/books/create'} />
