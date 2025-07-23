@@ -62,7 +62,7 @@ export default function WaterForm({ data }: any) {
                         type="text"
                         placeholder={data?.waterIntakeToday?.water_intake ?? '0'}
                         defaultValue={data?.waterIntakeToday?.water_intake ?? '0'}
-                        className="block min-w-0 grow py-1.5 pl-1 text-base focus:outline focus:outline-0 sm:text-sm/6"
+                        className="block min-w-0 grow py-1.5 pl-1 text-base focus:outline focus:outline-0 sm:text-sm/6  bg-transparent"
                     />
                     <div className="shrink-0 px-2 select-none text-base sm:text-sm/6">oz.</div>
                 </div>
@@ -73,7 +73,7 @@ export default function WaterForm({ data }: any) {
     return (
         <form ref={ref} action={handleSubmit}>
             <div className="space-y-12 px-[2rem]">
-                <div className="border-b border-gray-900/10 pb-12">
+                <div className="border-b border-gray-900/10 pb-12 flex flex-col justify-center items-center">
                     <h2 className="text-base/7 font-semibold">Water Information</h2>
                     <p className="mt-1 text-sm/6">Insert your water intake.</p>
 
@@ -81,7 +81,7 @@ export default function WaterForm({ data }: any) {
                 </div>
             </div>
 
-            <div className="mt-6 flex items-center gap-x-6 justify-end">
+            <div className="mt-6 flex items-center gap-x-6 justify-end px-[2rem]">
                 <div className="flex gap-x-6 items-center">
                     <ButtonCancel path={'/dashboard/body'} />
                     <button

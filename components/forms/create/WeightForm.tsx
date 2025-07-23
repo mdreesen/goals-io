@@ -46,7 +46,7 @@ export default function WeightForm({ data }: any) {
                         name="weight"
                         type="text"
                         placeholder="155"
-                        className="block min-w-0 grow py-1.5 pl-1 text-base focus:outline focus:outline-0 sm:text-sm/6"
+                        className="block min-w-0 grow py-1.5 pl-1 text-base focus:outline focus:outline-0 sm:text-sm/6 bg-transparent"
                     />
                     <div className="shrink-0 px-2 select-none text-base text-gray-500 sm:text-sm/6">lbs</div>
                 </div>

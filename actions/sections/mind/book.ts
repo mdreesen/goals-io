@@ -52,16 +52,6 @@ export async function fetchBooks() {
     try {
         await connectDB();
 
-        // const limited = await User.find(
-        //     { email: session?.user.email },
-        //     // { books: { $match: { booklist: "No" } } },
-        //     // { books: { $elemMatch: { 'booklist': 'No' } } },
-        //     // { "books.booklist" : "No"},
-        //     // { "books.booklist": "No" },
-        //     // { tasks: { $size: 10 } },
-        //     { books: { $slice: -10 } }
-        // ).limit(10);
-
         const data = await User.find({ email: session?.user.email }, 'books');
         const filterData = data[0].books.filter((item: any) => item.booklist.includes('No') || !item.booklist);
         const currentlyReading = data[0].books.filter((item: any) => item.book_start_date && !item.book_end_date);
@@ -70,8 +60,8 @@ export async function fetchBooks() {
         const latestTen = filterData.slice(startIndex);
 
         return {
-            limited: latestTen ?? [],
-            allData: data[0].books ?? [],
+            limited: latestTen.reverse() ?? [],
+            allData: data[0].books.reverse() ?? [],
             useCurrentlyReading: currentlyReading,
             totalBooks: data[0].books.filter((item: any) => item.booklist === 'No' || !item.booklist).length.toString(),
         }
