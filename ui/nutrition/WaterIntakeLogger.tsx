@@ -6,36 +6,26 @@ import { Droplet, Plus, Minus, Target, CheckCircle } from 'lucide-react';
 
 // shadcn/ui components
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-// import { Label } from '@/components/ui/label';
-// import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-// import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "radix-ui";
 
 // Utility function for Tailwind CSS class concatenation
 const cn = (...inputs: string[]) => {
   return inputs.filter(Boolean).join(' ');
 };
 
-interface DailyWaterLog {
-  date: string; // YYYY-MM-DD
-  amount: number; // Total amount for the day
-  unit: string; // 'ml', 'oz', 'glasses'
-}
-
 export default function WaterIntakeLogger({ water }: any) {
-  console.log('water', water)
   const [logAmount, setLogAmount] = useState<string>('18'); // Default log amount
   const [logUnit, setLogUnit] = useState<string>('oz'); // Default unit for logging
   const [dailyGoal, setDailyGoal] = useState<number>(water?.total_water); // Default daily goal in oz
-  const [currentDayIntake, setCurrentDayIntake] = useState<number>(water.current_progress); // Today's total intake in oz
+  const [currentDayIntake, setCurrentDayIntake] = useState<number>(water?.waterIntakeToday?.water_intake); // Today's total intake in oz
   const [message, setMessage] = useState<{ text: string; type: 'success' | 'error' | '' }>({ text: '', type: '' });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string>();
 
   // Load state from localStorage on mount
   useEffect(() => {
-    setCurrentDayIntake(water.current_progress)
+    setCurrentDayIntake(water.waterIntakeToday?.water_intake)
 
     if (typeof window !== 'undefined') {
       try {
@@ -63,20 +53,18 @@ export default function WaterIntakeLogger({ water }: any) {
     setLoading(true);
     setMessage({ text: '', type: '' });
 
-    // const amountInMl = amountToAdd;
     const newTotalIntake = Number(currentDayIntake) + amountToAdd;
+    const rounding = Math.round(newTotalIntake * 10) / 10
 
     // Otherwise, update the entry that has been made today
     if (water.create) {
       try {
         await createWaterIntake({
-          water_intake: newTotalIntake,
+          water_intake: newTotalIntake.toString(),
           date: water?.useDateToday,
         });
-        setCurrentDayIntake(newTotalIntake);
+        setCurrentDayIntake(rounding);
         setMessage({ text: `Logged ${amountToAdd} ${logUnit}!`, type: 'success' });
-        // router.refresh
-        // router.push(`/dashboard/body`);
       } catch (error) {
         setError(error as string)
         console.log(error);
@@ -86,18 +74,13 @@ export default function WaterIntakeLogger({ water }: any) {
       try {
         await editWaterIntake({
           _id: water?.waterIntakeToday?._id,
-          water_intake: newTotalIntake,
+          water_intake: newTotalIntake.toString(),
           date: water?.useDateToday,
         });
-        // setLoading(true);
-
-        // router.refresh
-        // router.push(`/dashboard/body`);
       } catch (error) {
         setError(error as string)
         console.log(error);
         setMessage({ text: 'Failed to log water. Please try again.', type: 'error' });
-        // setLoading(false);
       }
       finally {
         setLoading(false);
@@ -113,11 +96,6 @@ export default function WaterIntakeLogger({ water }: any) {
       return;
     }
     await handleLogWater(amount);
-  };
-
-  const handleGoalChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = parseFloat(e.target.value);
-    setDailyGoal(isNaN(value) || value <= 0 ? 0 : value);
   };
 
   const progressionPercentage = (water.current_progress / dailyGoal) * 100;
