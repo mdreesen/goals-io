@@ -69,7 +69,7 @@ export default async function Books() {
                 <Results data={books.totalBooks} />
             </div>
 
-            {books.limited.length > 0 ?<BooksReadList books={parse(books.limited)}/> : <h3>Log your books!</h3>}
+            {books.limited.length > 0 ? <BooksReadList books={parse(books.limited)}/> : <h3>Log your books!</h3>}
         </div>
     )
 }
