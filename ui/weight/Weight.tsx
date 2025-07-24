@@ -1,13 +1,16 @@
-import { fetchWeight } from "@/actions/sections/body/weight"
-import { formatDateAndTime } from "@/lib/formatters";
+import { fetchWeight, fetchWeightOverview } from "@/actions/sections/body/weight"
+import { formatDateAndTime, parse } from "@/lib/formatters";
 import ButtonGoTo from "@/components/buttons/ButtonGoTo";
 import Results from "@/components/showing/Results";
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import Title from "@/components/text/Title";
+import WeightList from '@/ui/weight/WeightList';
+import WeightNotables from '@/ui/weight/WeightNotables';
 
 export default async function Weight() {
 
   const useWeight = await fetchWeight() ?? [];
+  const useWeightNotables = await fetchWeightOverview() ?? [];
 
   const notables = (
     <div>
@@ -40,6 +43,8 @@ export default async function Weight() {
     </div>
   );
 
+  console.log('useWeightNotables', useWeightNotables)
+
   return (
     <div className="px-4 sm:px-2 lg:px-4">
       <div className="sm:flex-auto">
@@ -49,30 +54,25 @@ export default async function Weight() {
         <div className="flex justify-end mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
           <div className="flex gap-4 w-full justify-between">
             <ButtonGoTo title='See all weight' path={'/dashboard/body/weight/all'} />
-            <ButtonGoTo title='Add weight' path={'/dashboard/body/weight/create'} />
+
+            <div className="flex flex-col gap-4">
+              <ButtonGoTo title='Add weight' path={'/dashboard/body/weight/create'} />
+              <ButtonGoTo title='Add goal weight' path={'/dashboard/body/weight/goal/create'} />
+            </div>
+
           </div>
         </div>
       </div>
 
-      <Table>
-        <TableCaption><Results data={useWeight.totalWeight} /> of your recent tracked weight.</TableCaption>
-        <TableHeader>
-          <TableRow>
-            <TableHead className="w-[100px]">Weight</TableHead>
-            <TableHead className="text-center">Date</TableHead>
-            <TableHead className="text-right">Edit</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {useWeight.limited.map((item: any) => (
-            <TableRow key={item._id}>
-              <TableCell className="font-medium">{`${item.weight} lbs`}</TableCell>
-              <TableCell className="text-center">{formatDateAndTime(item.weight_date)}{item.starting_weight ? ' - Starting Date' : ''}</TableCell>
-              <TableCell className="flex justify-end"><ButtonGoTo className="text-right" title={'Edit'} path={`/dashboard/body/weight/edit/${item._id}`} /></TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+      <div>
+        <WeightNotables notables={parse(useWeightNotables)} />
+      </div>
+
+      <div className="pt-[2rem] pb-2">
+        <Results data={useWeight.totalWeight} />
+      </div>
+
+      <WeightList weight={parse(useWeight)} />
     </div>
   )
 }

@@ -102,6 +102,7 @@ const userSchema = new Schema(
         time_zone: String,
         fasting_time: Number,
         tutorial_read: Boolean,
+        goal_weight: String,
         affirmations: [affirmationsSchema],
         bibles: [bibleSchema],
         books: [bookSchema],

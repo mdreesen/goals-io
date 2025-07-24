@@ -3,7 +3,7 @@ import { connectDB } from "@/lib/mongodb";
 import User from "@/(models)/User";
 import { getServerSession } from "next-auth/next";
 import { revalidatePath } from 'next/cache';
-import { findHighestNumber, findAverageNumber, lossOrGain } from '@/lib/formatters'
+import { findHighestNumber, findAverageNumber, lossOrGain, round } from '@/lib/formatters'
 
 export async function fetchWeight() {
     const session = await getServerSession();
@@ -29,7 +29,7 @@ export async function fetchWeight() {
             averageWeight: findAverageNumber(useNumber),
             lossOrGain: lostOrGained.includes('-') ? `Gained ${positiveInteger.toString()} lbs` : `Lost ${lostOrGained === 'NaN' ? '0' : lostOrGained} lbs`,
             weightLGType: lostOrGained.includes('-') ? 'increase' : 'decrease',
-            totalWeight: data[0].weight.length.toString()
+            totalWeight: data[0].weight.length.toString(),
         }
 
     } catch (error) {
@@ -45,22 +45,29 @@ export async function fetchWeightOverview() {
         await connectDB();
 
         // Getting weight and limiting
+        const user = await User.find({ email: session?.user.email });
         const data = await User.find({ email: session?.user.email }, 'weight');
         const limited = await User.find({ email: session?.user.email }, { weight:{ $slice: -10 } }).limit(10);
         const useNumber = data[0].weight.map((item: any) => Number(item.weight));
         const startingWeight =  data[0].weight.find((item: any) => item.starting_weight === true);
         const current = limited[0].weight.reverse()[0]?.weight ?? '0';
         const lostOrGained = lossOrGain({ starting: startingWeight?.weight, current: current });
-        const positiveInteger = Math.abs(Number(lostOrGained))
+        const positiveInteger = Math.abs(Number(lostOrGained));
+        const goalLostOrGained = lossOrGain({ starting: user[0]?.goal_weight, current: current });
+        const goalPositiveInteger = Math.abs(Number(goalLostOrGained));
+        const goalProgress = round(Number(user[0]?.goal_weight) - Number(limited[0].weight[0].weight)).toString();
 
         return {
-            dataToDate:limited[0].weight[0],
+            goalWeight: user[0]?.goal_weight,
+            dataToDate: limited[0].weight[0],
             highestWeight: findHighestNumber(useNumber),
             startingWeight: startingWeight,
             averageWeight: findAverageNumber(useNumber),
             lossOrGain: lostOrGained.includes('-') ? `Gained ${positiveInteger.toString()} lbs` : `Lost ${lostOrGained === 'NaN' ? '0' : lostOrGained} lbs`,
             weightLGType: lostOrGained.includes('-') ? 'increase' : 'decrease',
-            totalWeight: data[0].weight.length.toString()
+            totalWeight: data[0].weight.length.toString(),
+            goalLostOrGained: goalLostOrGained.includes('-') ? `${goalPositiveInteger.toString()} lbs to go` : '',
+            goalProgress: Number(limited[0].weight[0].weight) <= Number(user[0]?.goal_weight)
         }
 
     } catch (error) {
@@ -76,6 +83,27 @@ export async function addWeight(values: any) {
         await connectDB();
 
         await User.findOneAndUpdate({ email: session?.user.email }, { $addToSet: { weight: { ...values } } }, { new: true });
+
+    } catch (error) {
+        console.log(error)
+        return error
+    }
+};
+
+export async function addGoalWeight(values: any) {
+    const session = await getServerSession();
+
+    const { goal_weight } = values;
+
+    try {
+        await connectDB();
+
+        await User.findOneAndUpdate(
+            { email: session?.user.email },
+            { goal_weight: goal_weight },
+            { new: true });
+    
+        // revalidatePath('/dashboard/body');
 
     } catch (error) {
         console.log(error)
