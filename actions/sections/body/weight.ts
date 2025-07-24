@@ -55,7 +55,7 @@ export async function fetchWeightOverview() {
         const positiveInteger = Math.abs(Number(lostOrGained));
         const goalLostOrGained = lossOrGain({ starting: user[0]?.goal_weight, current: current });
         const goalPositiveInteger = Math.abs(Number(goalLostOrGained));
-        const goalProgress = round(Number(user[0]?.goal_weight) - Number(limited[0].weight[0].weight)).toString();
+        const goalProgress = round(Number(user[0]?.goal_weight) - Number(limited[0].weight[0]?.weight)).toString();
 
         return {
             goalWeight: user[0]?.goal_weight,
@@ -67,7 +67,7 @@ export async function fetchWeightOverview() {
             weightLGType: lostOrGained.includes('-') ? 'increase' : 'decrease',
             totalWeight: data[0].weight.length.toString(),
             goalLostOrGained: goalLostOrGained.includes('-') ? `${goalPositiveInteger.toString()} lbs to go` : '',
-            goalProgress: Number(limited[0].weight[0].weight) <= Number(user[0]?.goal_weight)
+            goalProgress: Number(limited[0].weight[0]?.weight) <= Number(user[0]?.goal_weight)
         }
 
     } catch (error) {

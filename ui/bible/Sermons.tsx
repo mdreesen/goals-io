@@ -2,6 +2,7 @@ import { fetchBible } from '@/actions/sections/soul/bible';
 import ButtonBack from '@/components/buttons/ButtonBack';
 import ButtonGoTo from '@/components/buttons/ButtonGoTo';
 import Results from '@/components/showing/Results';
+import NoDataText from '@/components/text/NoDataText';
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { EllipsisVerticalIcon } from '@heroicons/react/20/solid'
 import Link from 'next/link';
@@ -62,7 +63,7 @@ export default async function Bible() {
                             </Menu>
                         </div>
                     </li>
-                )) : <h3>Add your sermon notes!</h3>}
+                )) : <NoDataText text="Add your sermon notes!" />}
             </ul>
 
         </div>

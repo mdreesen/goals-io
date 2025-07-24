@@ -30,7 +30,7 @@ export default function WorkoutsList({ workout }: any) {
             className="space-y-6 pb-[2rem]"
         >
             <AnimatePresence>
-                {workout.limited.map((workout: any, index: number) => (
+                {workout.map((workout: any, index: number) => (
                     <motion.div
                         key={workout._id}
                         variants={itemVariants}

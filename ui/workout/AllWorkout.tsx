@@ -1,9 +1,9 @@
 import { fetchWorkout } from "@/actions/sections/body/workout";
+import { formatDateAndTime, parse } from '@/lib/formatters';
 import ButtonBack from "@/components/buttons/ButtonBack";
 import ButtonGoTo from "@/components/buttons/ButtonGoTo";
-import Results from "@/components/showing/Results";
-import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { formatDateAndTime } from "@/lib/formatters";
+import WorkoutList from "@/ui/workout/WorkoutList";
+import NoDataText from "@/components/text/NoDataText";
 
 export default async function Workout() {
 
@@ -24,25 +24,8 @@ export default async function Workout() {
                 </div>
             </div>
 
-            <Table>
-                <TableCaption>All results of your recent tracked workouts.</TableCaption>
-                <TableHeader>
-                    <TableRow>
-                        <TableHead className="w-[100px]">Type</TableHead>
-                        <TableHead className="text-center">Date</TableHead>
-                        <TableHead className="text-right">Edit</TableHead>
-                    </TableRow>
-                </TableHeader>
-                <TableBody>
-                    {useWorkout.data.map((item: any) => (
-                        <TableRow key={item._id}>
-                            <TableCell className="font-medium"><div className="flex flex-col gap-2"><span>{item?.type}</span><span>{item?.description}</span></div></TableCell>
-                            <TableCell className="text-center">{formatDateAndTime(item?.date)}</TableCell>
-                            <TableCell className="flex justify-end"><ButtonGoTo className="text-right" title={'Edit'} path={`/dashboard/body/workout/edit/${item._id}`} /></TableCell>
-                        </TableRow>
-                    ))}
-                </TableBody>
-            </Table>
+            {useWorkout.limited.length > 0 ? <WorkoutList workout={parse(useWorkout.data)} /> : <NoDataText text="Log your workouts!" />}
+
         </div>
     )
 }

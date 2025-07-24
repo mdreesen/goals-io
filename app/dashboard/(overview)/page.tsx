@@ -11,6 +11,7 @@ import { booksByMonth } from "@/actions/charts/bookChart";
 import { weightByMonth } from "@/actions/charts/weightChart";
 import { waterByday } from "@/actions/charts/waterIntakeChart";
 import { workoutsByMonth } from "@/actions/charts/workoutChart";
+import { fetchSettings } from "@/actions/settings";
 
 import { UseBooksPerMonthChart } from "@/components/charts/UseBooksPerMonthChart";
 import { UseWaterPerDayChart } from "@/components/charts/UseWaterPerDayChart";
@@ -25,26 +26,36 @@ export default async function Page() {
     const waterPerDay = await waterByday();
     const weightPerMonth = await weightByMonth();
     const workoutPerMonth = await workoutsByMonth();
+    const userSettings = await fetchSettings();
 
     const progressionSection = (
         <div className="mb-12">
             <h2 className="text-3xl font-bold mb-8">Your Progress Charts</h2>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <Suspense fallback={<ChartSkeleton />}>
-                    <UseBooksPerMonthChart data={parse(booksPerMonth)} />
-                </Suspense>
 
-                <Suspense fallback={<ChartSkeleton />}>
-                    <UseWaterPerDayChart data={parse(waterPerDay)} />
-                </Suspense>
+                {userSettings.useShowBooks.value && (
+                    <Suspense fallback={<ChartSkeleton />}>
+                        <UseBooksPerMonthChart data={parse(booksPerMonth)} />
+                    </Suspense>
+                )}
 
-                <Suspense fallback={<ChartSkeleton />}>
-                    <UseWeightPerDayChart data={parse(weightPerMonth)} />
-                </Suspense>
+                {userSettings.useShowWaterIntake.value && (
+                    <Suspense fallback={<ChartSkeleton />}>
+                        <UseWaterPerDayChart data={parse(waterPerDay)} />
+                    </Suspense>
+                )}
 
-                <Suspense fallback={<ChartSkeleton />}>
-                    <UseWorkoutPerMonthChart data={parse(workoutPerMonth)} />
-                </Suspense>
+                {userSettings.useShowWeight.value && (
+                    <Suspense fallback={<ChartSkeleton />}>
+                        <UseWeightPerDayChart data={parse(weightPerMonth)} />
+                    </Suspense>
+                )}
+
+                {userSettings.useShowWorkout.value && (
+                    <Suspense fallback={<ChartSkeleton />}>
+                        <UseWorkoutPerMonthChart data={parse(workoutPerMonth)} />
+                    </Suspense>
+                )}
             </div>
         </div>
     );

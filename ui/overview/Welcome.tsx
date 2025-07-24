@@ -14,7 +14,7 @@ export default function Welcome({ user }: any) {
             className="text-center md:text-left mb-12"
         >
             <h1 className="text-5xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 mb-4">
-                Welcome back, {userName}!
+                Welcome, {userName}!
             </h1>
             <p className="text-xl">
                 {userDescription}

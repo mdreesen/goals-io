@@ -31,6 +31,7 @@ export async function fetchSettings() {
         const mindSettings = [useShowAffirmations, useShowBooks, useShowHabits];
         const spiritSettings = [useShowBible, useShowJournal];
         const personalSettings = [useDarkMode];
+        const overviewStats = [useShowBooks, useShowFasting, useShowWaterIntake, useShowWeight];
 
 
         return {

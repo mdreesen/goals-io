@@ -5,6 +5,7 @@ import ButtonGoTo from '@/components/buttons/ButtonGoTo';
 import Link from 'next/link';
 import Results from '@/components/showing/Results';
 import Title from '@/components/text/Title';
+import NoDataText from '@/components/text/NoDataText';
 
 export default async function Bible() {
 
@@ -71,7 +72,7 @@ export default async function Bible() {
                             </Menu>
                         </div>
                     </li>
-                )) : <h3>Add your sermon notes!</h3>}
+                )) : <NoDataText text="Add your sermon notes!" />}
             </ul>
 
         </div>
@@ -134,7 +135,7 @@ export default async function Bible() {
                             </Menu>
                         </div>
                     </li>
-                )) : <h3>Add your devotional notes!</h3>}
+                )) : <NoDataText text="Add your devotional notes!" />}
             </ul>
 
         </div>

@@ -12,39 +12,6 @@ export default async function Weight() {
   const useWeight = await fetchWeight() ?? [];
   const useWeightNotables = await fetchWeightOverview() ?? [];
 
-  const notables = (
-    <div>
-      {useWeight.startingWeight && (
-        <span className="py-2 text-left text-sm font-bold sm:pl-0">
-          Notables
-        </span>
-      )}
-      {useWeight.startingWeight && (
-        <p className="py-1 text-left text-sm font-semibold sm:pl-0">
-          {`Starting weight ${useWeight.startingWeight.weight} lbs`}
-        </p>
-      )}
-      {useWeight.highestWeight !== '0' && (
-        <p className="py-1 text-left text-sm font-semibold sm:pl-0">
-          {`Highest weight ${useWeight.highestWeight} lbs`}
-        </p>
-      )}
-      {useWeight.averageWeight !== '0' && (
-        <p className="py-1 text-left text-sm font-semibold sm:pl-0">
-          {`Average weight ${useWeight.averageWeight} lbs`}
-        </p>
-      )}
-      {useWeight.lossOrGain !== 'Lost 0 lbs' && (
-        <p className="py-1 text-left text-sm font-semibold sm:pl-0">
-          {`${useWeight.lossOrGain}`}
-        </p>
-      )}
-
-    </div>
-  );
-
-  console.log('useWeightNotables', useWeightNotables)
-
   return (
     <div className="px-4 sm:px-2 lg:px-4">
       <div className="sm:flex-auto">

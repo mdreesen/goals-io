@@ -4,6 +4,7 @@ import Results from "@/components/showing/Results";
 import { formatDateAndTime, parse } from '@/lib/formatters';
 import Title from "@/components/text/Title";
 import WorkoutList from "@/ui/workout/WorkoutList";
+import NoDataText from "@/components/text/NoDataText";
 
 export default async function Workout() {
 
@@ -26,7 +27,7 @@ export default async function Workout() {
                 <Results data={useWorkout.totalWorkouts} />
             </div>
 
-            {useWorkout.limited.length > 0 ? <WorkoutList workout={parse(useWorkout)} /> : <h3>Log your workouts!</h3>}
+            {useWorkout.limited.length > 0 ? <WorkoutList workout={parse(useWorkout.limited)} /> : <NoDataText text="Log your workouts!" />}
         </div>
     )
 }

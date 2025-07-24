@@ -98,7 +98,7 @@ export default function Stats({ stats }: any) {
         >
             <Scale size={24} className={`text-purple-400`} />
             <p className="text-lg font-medium text-gray-200">Weight</p>
-            <p className="text-4xl font-extrabold text-white">{`${stats?.weightOverview.dataToDate?.weight} lbs.`}</p>
+            <p className="text-4xl font-extrabold text-white">{stats?.weightOverview.dataToDate?.weight ? `${stats?.weightOverview.dataToDate?.weight} lbs.` : 'No recorded weight'}</p>
         </motion.div>
     );
 

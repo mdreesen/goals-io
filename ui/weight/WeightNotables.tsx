@@ -66,7 +66,7 @@ export default function WeightNotables({ notables }: any) {
         visible: { opacity: 1, scale: 1, transition: { duration: 0.5, ease: "easeOut" } },
     };
 
-    const weightToDate = notables.dataToDate.weight && (
+    const weightToDate = notables.dataToDate?.weight && (
         <motion.div
             variants={cardVariants}
             initial="hidden"
@@ -97,7 +97,7 @@ export default function WeightNotables({ notables }: any) {
         </motion.div>
     );
 
-    const goalWeight = notables.goalWeight && (
+    const goalWeight = notables?.goalWeight && (
         <motion.div
             variants={cardVariants}
             initial="hidden"
@@ -128,7 +128,7 @@ export default function WeightNotables({ notables }: any) {
         </motion.div>
     );
 
-    const weightChange = notables.goalLostOrGained && (
+    const weightChange = notables?.goalLostOrGained && (
         <motion.div
             variants={cardVariants}
             initial="hidden"
@@ -159,7 +159,7 @@ export default function WeightNotables({ notables }: any) {
         </motion.div>
     );
 
-    const weightChangeFromStarting = notables.lossOrGain && (
+    const weightChangeFromStarting = notables?.lossOrGain && (
         <motion.div
             variants={cardVariants}
             initial="hidden"

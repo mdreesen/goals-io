@@ -6,6 +6,7 @@ import ButtonGoTo from "@/components/buttons/ButtonGoTo";
 import Results from "@/components/showing/Results";
 import Title from "@/components/text/Title";
 import BooksReadList from '@/ui/books/BooksReadList';
+import NoDataText from "@/components/text/NoDataText";
 
 export default async function Books() {
 
@@ -60,16 +61,20 @@ export default async function Books() {
                 </div>
             </div>
 
-            <div className="pt-4">
-                <Title fontSize="2xl" text="Currently Reading" />
-                {useCurrentBook}
-            </div>
+            {
+                books.useCurrentlyReading > 0 && (
+                    <div className="pt-4">
+                    <Title fontSize="2xl" text="Currently Reading" />
+                    {useCurrentBook}
+                </div>
+                )
+            }
 
             <div className="py-2">
                 <Results data={books.totalBooks} />
             </div>
 
-            {books.limited.length > 0 ? <BooksReadList books={parse(books.limited)}/> : <h3>Log your books!</h3>}
+            {books.limited.length > 0 ? <BooksReadList books={parse(books.limited)}/> : <NoDataText text="Log your books!" />}
         </div>
     )
 }
