@@ -61,20 +61,18 @@ export default async function Books() {
                 </div>
             </div>
 
-            {
-                books.useCurrentlyReading > 0 && (
-                    <div className="pt-4">
+            {books.useCurrentlyReading.length > 0 && (
+                <div className="pt-4">
                     <Title fontSize="2xl" text="Currently Reading" />
                     {useCurrentBook}
                 </div>
-                )
-            }
+            )}
 
             <div className="py-2">
                 <Results data={books.totalBooks} />
             </div>
 
-            {books.limited.length > 0 ? <BooksReadList books={parse(books.limited)}/> : <NoDataText text="Log your books!" />}
+            {books.limited.length > 0 ? <BooksReadList books={parse(books.limited)} /> : <NoDataText text="Log your books!" />}
         </div>
     )
 }

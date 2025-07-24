@@ -23,8 +23,6 @@ export default function BooksReadList({ books }: any) {
         exit: { opacity: 0, x: -100, transition: { duration: 0.3, ease: "easeIn" } },
     };
 
-    console.log('books', books)
-
     return (
         <motion.div
             initial="hidden"
