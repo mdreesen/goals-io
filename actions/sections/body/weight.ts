@@ -66,7 +66,7 @@ export async function fetchWeightOverview() {
             lossOrGain: lostOrGained.includes('-') ? `Gained ${positiveInteger.toString()} lbs` : `Lost ${lostOrGained === 'NaN' ? '0' : lostOrGained} lbs`,
             weightLGType: lostOrGained.includes('-') ? 'increase' : 'decrease',
             totalWeight: data[0].weight.length.toString(),
-            goalLostOrGained: goalLostOrGained.includes('-') ? `${goalPositiveInteger.toString()} lbs to go` : '',
+            goalLostOrGained: goalLostOrGained.includes('-') ? `${goalPositiveInteger.toString()} lbs to go` : 'Goal Achieved!',
             goalProgress: Number(limited[0].weight[0]?.weight) <= Number(user[0]?.goal_weight)
         }
 

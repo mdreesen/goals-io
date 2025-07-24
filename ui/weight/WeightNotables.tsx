@@ -11,54 +11,6 @@ const cn = (...inputs: string[]) => {
     return inputs.filter(Boolean).join(' ');
 };
 
-// Sample Data for Weight Notables (replace with real data from your app's state/backend)
-const weightNotablesData = [
-    {
-        id: 'wn1',
-        title: 'Current Weight',
-        value: '75.2 kg',
-        icon: <Scale size={24} className="text-blue-400" />,
-        color: 'from-blue-600 to-blue-700',
-        description: 'As of today',
-    },
-    {
-        id: 'wn2',
-        title: 'Goal Weight',
-        value: '70.0 kg',
-        icon: <Target size={24} className="text-purple-400" />,
-        color: 'from-purple-600 to-purple-700',
-        description: 'Your target weight',
-    },
-    {
-        id: 'wn3',
-        title: 'Weight Change (Last 7 Days)',
-        value: '-1.3 kg',
-        icon: <ArrowDown size={24} className="text-green-400" />,
-        color: 'from-green-600 to-green-700',
-        description: 'Great progress!',
-        valueColorClass: 'text-green-300', // Specific color for value
-    },
-    {
-        id: 'wn4',
-        title: 'Overall Progress',
-        value: '5.0 kg lost',
-        icon: <TrendingUp size={24} className="text-yellow-400" />,
-        color: 'from-yellow-600 to-yellow-700',
-        description: 'Since starting',
-        valueColorClass: 'text-yellow-300', // Specific color for value
-    },
-    // Example for weight gain:
-    // {
-    //   id: 'wn5',
-    //   title: 'Weight Change (Last 7 Days)',
-    //   value: '+0.5 kg',
-    //   icon: <ArrowUp size={24} className="text-red-400" />,
-    //   color: 'from-red-600 to-red-700',
-    //   description: 'Slight increase',
-    //   valueColorClass: 'text-red-300',
-    // },
-];
-
 export default function WeightNotables({ notables }: any) {
     // Animation variants for individual notable cards
     const cardVariants = {
@@ -75,7 +27,7 @@ export default function WeightNotables({ notables }: any) {
         >
             <Card
                 className={cn(
-                    "bg-gray-800/70 backdrop-blur-lg border border-gray-700 text-white overflow-hidden",
+                    "bg-gray-800/70 backdrop-blur-lg text-white overflow-hidden",
                     "transform hover:scale-105 transition-transform duration-300 ease-out",
                     `bg-gradient-to-br from-blue-600 to-blue-700` // Apply dynamic gradient
                 )}
@@ -106,7 +58,7 @@ export default function WeightNotables({ notables }: any) {
         >
             <Card
                 className={cn(
-                    "bg-gray-800/70 backdrop-blur-lg border border-gray-700 text-white overflow-hidden",
+                    "bg-gray-800/70 backdrop-blur-lg text-white overflow-hidden",
                     "transform hover:scale-105 transition-transform duration-300 ease-out",
                     `bg-gradient-to-br from-purple-600 to-purple-700` // Apply dynamic gradient
                 )}
@@ -128,6 +80,8 @@ export default function WeightNotables({ notables }: any) {
         </motion.div>
     );
 
+    console.log(notables?.goalLostOrGained)
+
     const weightChange = notables?.goalLostOrGained && (
         <motion.div
             variants={cardVariants}
@@ -137,7 +91,7 @@ export default function WeightNotables({ notables }: any) {
         >
             <Card
                 className={cn(
-                    "bg-gray-800/70 backdrop-blur-lg border border-gray-700 text-white overflow-hidden",
+                    "bg-gray-800/70 backdrop-blur-lg text-white overflow-hidden",
                     "transform hover:scale-105 transition-transform duration-300 ease-out",
                     `bg-gradient-to-br from-green-600 to-green-700` // Apply dynamic gradient
                 )}
@@ -168,7 +122,7 @@ export default function WeightNotables({ notables }: any) {
         >
             <Card
                 className={cn(
-                    "bg-gray-800/70 backdrop-blur-lg border border-gray-700 text-white overflow-hidden",
+                    "bg-gray-800/70 backdrop-blur-lg text-white overflow-hidden",
                     "transform hover:scale-105 transition-transform duration-300 ease-out",
                     `bg-gradient-to-br from-yellow-600 to-yellow-700` // Apply dynamic gradient
                 )}

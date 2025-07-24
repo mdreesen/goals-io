@@ -13,55 +13,6 @@ const cn = (...inputs: (string | boolean)[]) => {
     return inputs.filter(Boolean).join(' ');
 };
 
-// Sample Data for the list of weight entries (replace with real data from your app)
-const sampleWeightEntries = [
-    {
-        id: 'wt1',
-        weight: 75.2, // in kg
-        unit: 'kg',
-        status: 'logged', // 'logged', 'goal_reached', 'missed_log'
-        date: 'Today',
-        icon: <Scale size={20} className="text-blue-400" />,
-        color: 'from-blue-600 to-blue-700',
-    },
-    {
-        id: 'wt2',
-        weight: 76.5,
-        unit: 'kg',
-        status: 'logged',
-        date: 'Yesterday',
-        icon: <Scale size={20} className="text-blue-400" />,
-        color: 'from-blue-600 to-blue-700',
-    },
-    {
-        id: 'wt3',
-        weight: 74.0,
-        unit: 'kg',
-        status: 'goal_reached',
-        date: '2024-07-20',
-        icon: <CheckCircle size={20} className="text-green-400" />,
-        color: 'from-green-600 to-green-700',
-    },
-    {
-        id: 'wt4',
-        weight: 168.5,
-        unit: 'lbs',
-        status: 'missed_log',
-        date: '2024-07-19',
-        icon: <XCircle size={20} className="text-red-400" />,
-        color: 'from-red-600 to-red-700',
-    },
-    {
-        id: 'wt5',
-        weight: 73.8,
-        unit: 'kg',
-        status: 'logged',
-        date: '2024-07-18',
-        icon: <Scale size={20} className="text-blue-400" />,
-        color: 'from-blue-600 to-blue-700',
-    },
-];
-
 export default function WeightList({ weight }: any) {
     // Animation variants for individual list items
     const itemVariants = {
@@ -91,7 +42,7 @@ export default function WeightList({ weight }: any) {
                         <Link href={`/dashboard/body/weight/edit/${entry._id}`}>
                         <Card
                             className={cn(
-                                "bg-gray-800/70 backdrop-blur-lg border border-gray-700 text-white overflow-hidden",
+                                "bg-gray-800 backdrop-blur-lg border border-gray-700 text-white overflow-hidden",
                                 "transform hover:scale-[1.01] hover:shadow-xl transition-all duration-300 ease-out",
                                 "cursor-pointer" // Indicate clickable
                             )}
