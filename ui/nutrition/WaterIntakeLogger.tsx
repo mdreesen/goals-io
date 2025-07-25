@@ -25,13 +25,13 @@ export default function WaterIntakeLogger({ water }: any) {
 
   // Load state from localStorage on mount
   useEffect(() => {
-    setCurrentDayIntake(water.waterIntakeToday?.water_intake)
 
     if (typeof window !== 'undefined') {
       try {
         const savedGoal = water?.total_water;
         if (savedGoal) {
           setDailyGoal(parseFloat(savedGoal));
+          setCurrentDayIntake(water?.waterIntakeToday?.water_intake)
         }
       } catch (error) {
         console.error("Failed to load water intake state:", error);
@@ -54,7 +54,6 @@ export default function WaterIntakeLogger({ water }: any) {
     setMessage({ text: '', type: '' });
 
     const newTotalIntake = Number(currentDayIntake) + amountToAdd;
-    const rounding = Math.round(newTotalIntake * 10) / 10
 
     // Otherwise, update the entry that has been made today
     if (water.create) {
@@ -63,11 +62,14 @@ export default function WaterIntakeLogger({ water }: any) {
           water_intake: newTotalIntake.toString(),
           date: water?.useDateToday,
         });
-        setCurrentDayIntake(rounding);
         setMessage({ text: `Logged ${amountToAdd} ${logUnit}!`, type: 'success' });
       } catch (error) {
         setError(error as string)
         console.log(error);
+        setLoading(false);
+      }
+      finally {
+        setLoading(false);
       }
     } else {
 
@@ -77,10 +79,13 @@ export default function WaterIntakeLogger({ water }: any) {
           water_intake: newTotalIntake.toString(),
           date: water?.useDateToday,
         });
+        setMessage({ text: `Updated ${amountToAdd} ${logUnit}!`, type: 'success' });
+
       } catch (error) {
         setError(error as string)
         console.log(error);
         setMessage({ text: 'Failed to log water. Please try again.', type: 'error' });
+        setLoading(false);
       }
       finally {
         setLoading(false);
@@ -91,11 +96,53 @@ export default function WaterIntakeLogger({ water }: any) {
   const handleManualLog = async (e: React.FormEvent) => {
     e.preventDefault();
     const amount = parseFloat(logAmount);
+    setLoading(true);
+
     if (isNaN(amount) || amount <= 0) {
       setMessage({ text: 'Please enter a valid positive amount.', type: 'error' });
+      setLoading(false);
       return;
     }
+
     await handleLogWater(amount);
+
+    if (water.create) {
+      try {
+        await createWaterIntake({
+          water_intake: amount.toString(),
+          date: water?.useDateToday,
+        });
+
+        setMessage({ text: `Logged to ${amount.toString()} ${logUnit}!`, type: 'success' });
+      } catch (error) {
+        setError(error as string)
+        console.log(error);
+        setLoading(false);
+      }
+      finally {
+        setLoading(false);
+      }
+    } else {
+
+      try {
+        await editWaterIntake({
+          _id: water?.waterIntakeToday?._id,
+          water_intake: amount.toString(),
+          date: water?.useDateToday,
+        });
+
+        setMessage({ text: `Updated to ${amount.toString()} ${logUnit}!`, type: 'success' });
+
+      } catch (error) {
+        setError(error as string)
+        console.log(error);
+        setMessage({ text: 'Failed to log water. Please try again.', type: 'error' });
+        setLoading(false);
+      }
+      finally {
+        setLoading(false);
+      }
+    }
   };
 
   const progressionPercentage = (water.current_progress / dailyGoal) * 100;
@@ -207,29 +254,8 @@ export default function WaterIntakeLogger({ water }: any) {
           </motion.div>
         </form>
 
-        {/* Set Daily Goal */}
-        {/* <div className="pt-6 border-t border-gray-700/50">
-          <label htmlFor="daily-goal" className="text-gray-300 text-sm font-medium mb-2 block">Set Daily Goal (in oz)</label>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.6 }}
-            className="relative"
-          >
-            <Input
-              id="daily-goal"
-              type="number"
-              value={dailyGoal}
-              onChange={handleGoalChange}
-              className="w-full pl-3 pr-2 py-2 rounded-lg bg-gray-700 border border-gray-600 text-white placeholder-gray-400
-                           focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              step="100"
-              disabled={loading}
-            />
-          </motion.div>
-        </div> */}
-
         {/* Message Display */}
+        <div className='mt-4 h[20px] flex justify-center'>
         <AnimatePresence>
           {message.text && (
             <motion.p
@@ -238,7 +264,7 @@ export default function WaterIntakeLogger({ water }: any) {
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.3 }}
               className={cn(
-                "text-sm text-center mt-4",
+                "text-sm text-center absolute flex justify-center",
                 message.type === 'success' ? 'text-green-400' : 'text-red-400'
               )}
             >
@@ -246,6 +272,7 @@ export default function WaterIntakeLogger({ water }: any) {
             </motion.p>
           )}
         </AnimatePresence>
+        </div>
       </CardContent>
     </motion.div>
   );

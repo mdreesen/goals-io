@@ -80,8 +80,6 @@ export default function WeightNotables({ notables }: any) {
         </motion.div>
     );
 
-    console.log(notables?.goalLostOrGained)
-
     const weightChange = notables?.goalLostOrGained && (
         <motion.div
             variants={cardVariants}
