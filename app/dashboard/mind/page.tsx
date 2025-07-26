@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import Affirmations from "@/ui/Affirmations";
+import Affirmations from "@/ui/affirmations/Affirmations";
 import Books from "@/ui/books/Books";
 import Habits from '@/ui/habits/Habits';
 import { fetchSettings } from '@/actions/settings';

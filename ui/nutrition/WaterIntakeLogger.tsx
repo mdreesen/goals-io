@@ -15,6 +15,7 @@ const cn = (...inputs: string[]) => {
 };
 
 export default function WaterIntakeLogger({ water }: any) {
+  console.log(water)
   const [logAmount, setLogAmount] = useState<string>('18'); // Default log amount
   const [logUnit, setLogUnit] = useState<string>('oz'); // Default unit for logging
   const [dailyGoal, setDailyGoal] = useState<number>(water?.total_water); // Default daily goal in oz
@@ -185,11 +186,11 @@ export default function WaterIntakeLogger({ water }: any) {
         <div className="w-full bg-gray-700 rounded-full h-4 mt-4 overflow-hidden">
           <motion.div
             initial={{ width: 0 }}
-            animate={{ width: `${Math.min(100, progressionPercentage)}%` }} // Cap at 100%
+            animate={{ width: `${water?.current_progress}%` }} // Cap at 100%
             transition={{ duration: 1, ease: "linear" }}
             className={cn(
               "h-full rounded-full",
-              progressionPercentage >= 100 ? "bg-gradient-to-r from-green-500 to-green-700" : "bg-gradient-to-r from-blue-500 to-blue-700"
+              water?.current_progress >= 100 ? "bg-gradient-to-r from-green-500 to-green-700" : "bg-gradient-to-r from-blue-500 to-blue-700"
             )}
           ></motion.div>
         </div>

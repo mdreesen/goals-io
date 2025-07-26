@@ -1,8 +1,9 @@
 import { filterAffirmations } from '@/actions/sections/mind/affirmations';
-import AffirmationsList from '@/components/lists/AffirmationsList';
 import Title from '@/components/text/Title';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import Link from 'next/link';
+import AffirmationsList from '@/ui/affirmations/AffirmationsList';
+import { parse } from '@/lib/formatters';
 
 export default async function Affirmations() {
     const filteredAffirmations = await filterAffirmations() as any;
@@ -25,7 +26,7 @@ export default async function Affirmations() {
         <AccordionItem value="item-1">
             <AccordionTrigger>Growth</AccordionTrigger>
             <AccordionContent>
-                <AffirmationsList data={growth} />
+                <AffirmationsList affirmations={parse(growth)} />
             </AccordionContent>
         </AccordionItem>
     );
@@ -34,7 +35,7 @@ export default async function Affirmations() {
         <AccordionItem value="item-2">
             <AccordionTrigger>Mindfulness</AccordionTrigger>
             <AccordionContent>
-                <AffirmationsList data={mindfulness} />
+                <AffirmationsList affirmations={parse(mindfulness)} />
             </AccordionContent>
         </AccordionItem>
     );
@@ -43,7 +44,7 @@ export default async function Affirmations() {
         <AccordionItem value="item-3">
             <AccordionTrigger>Positivity</AccordionTrigger>
             <AccordionContent>
-                <AffirmationsList data={positivity} />
+                <AffirmationsList affirmations={parse(positivity)} />
             </AccordionContent>
         </AccordionItem>
     );
@@ -52,7 +53,7 @@ export default async function Affirmations() {
         <AccordionItem value="item-4">
             <AccordionTrigger>Self Worth</AccordionTrigger>
             <AccordionContent>
-                <AffirmationsList data={self_worth} />
+                <AffirmationsList affirmations={parse(self_worth)} />
             </AccordionContent>
         </AccordionItem>
     );
