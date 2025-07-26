@@ -14,7 +14,6 @@ const cn = (...inputs: (string | boolean)[]) => {
 };
 
 export default function AffirmationsList({ affirmations }: any) {
-    console.log('affirmations', affirmations)
 
     // Animation variants for individual list items
     const itemVariants = {

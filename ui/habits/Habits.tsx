@@ -1,8 +1,9 @@
 import { filterHabits } from '@/actions/sections/mind/habits';
-import HabitList from '@/components/lists/HabitList';
 import ButtonGoTo from '@/components/buttons/ButtonGoTo';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import Title from '@/components/text/Title';
+import HabitList from '@/ui/habits/HabitsList';
+import { parse } from '@/lib/formatters';
 
 export default async function Habits() {
     const filteredHabits = await filterHabits() as any;
@@ -26,7 +27,7 @@ export default async function Habits() {
         <AccordionItem value="item-1">
             <AccordionTrigger>Community</AccordionTrigger>
             <AccordionContent>
-                <HabitList data={community_habits_arr} />
+                <HabitList habits={parse(community_habits_arr)} />
             </AccordionContent>
         </AccordionItem>
     );
@@ -35,7 +36,7 @@ export default async function Habits() {
         <AccordionItem value="item-2">
             <AccordionTrigger>Family</AccordionTrigger>
             <AccordionContent>
-                <HabitList data={family_habits_arr} />
+                <HabitList habits={parse(family_habits_arr)} />
             </AccordionContent>
         </AccordionItem>
     );
@@ -44,7 +45,7 @@ export default async function Habits() {
         <AccordionItem value="item-3">
             <AccordionTrigger>Marriage</AccordionTrigger>
             <AccordionContent>
-                <HabitList data={marriage_habits_arr} />
+                <HabitList habits={parse(marriage_habits_arr)} />
             </AccordionContent>
         </AccordionItem>
     );
@@ -53,7 +54,7 @@ export default async function Habits() {
         <AccordionItem value="item-4">
             <AccordionTrigger>Personal</AccordionTrigger>
             <AccordionContent>
-                <HabitList data={personal_habits_arr} />
+                <HabitList habits={parse(personal_habits_arr)} />
             </AccordionContent>
         </AccordionItem>
     );
