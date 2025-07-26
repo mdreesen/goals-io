@@ -1,5 +1,6 @@
 'use client';
 import React from 'react';
+import Link from "next/link";
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronRight, PersonStanding, Grab, Soup, Cross } from 'lucide-react'; // Icons for habits, status, frequency
 
@@ -46,39 +47,42 @@ export default function HabitsList({ habits }: any) {
                                 "cursor-pointer" // Indicate clickable
                             )}
                         >
-                            <CardContent className="p-6 flex items-center justify-between">
-                                <div className="flex items-center space-x-4">
-                                    {/* Icon with background circle */}
-                                    <div className={cn(
-                                        "p-3 rounded-full",
-                                        habit.kind === 'Community' && 'bg-green-500/20',
-                                        habit.kind === 'Family' && 'bg-blue-500/20',
-                                        habit.kind === 'Marriage' && 'bg-red-500/20',
-                                        habit.kind === 'Personal' && 'bg-gray-500/20',
-                                    )}>
-                                        {habit?.kind === 'Community' && <Cross size={20} className="text-green-400" />}
-                                        {habit?.kind === 'Family' && <Grab size={20} className="text-green-400" />}
-                                        {habit?.kind === 'Marriage' && <Soup size={20} className="text-green-400" />}
-                                        {habit?.kind === 'Personal' && <PersonStanding size={20} className="text-green-400" />}
+                            <Link className="w-full" href={`/dashboard/mind/habits/edit/${habit._id}`}>
 
-                                    </div>
-                                    <div>
-                                        <CardTitle className="text-xl font-semibold text-gray-100">{habit.title}</CardTitle>
-                                        <CardDescription className="text-gray-400 text-sm mt-1">
-                                            {habit?.description}
-                                        </CardDescription>
-                                        <p className={cn(
-                                            "text-xs font-medium mt-2",
-                                            habit.kind && 'text-blue-300',
+                                <CardContent className="p-6 flex items-center justify-between">
+                                    <div className="flex items-center space-x-4">
+                                        {/* Icon with background circle */}
+                                        <div className={cn(
+                                            "p-3 rounded-full",
+                                            habit.kind === 'Community' && 'bg-green-500/20',
+                                            habit.kind === 'Family' && 'bg-blue-500/20',
+                                            habit.kind === 'Marriage' && 'bg-red-500/20',
+                                            habit.kind === 'Personal' && 'bg-gray-500/20',
                                         )}>
-                                            Category: {habit?.kind}
-                                        </p>
+                                            {habit?.kind === 'Community' && <Cross size={20} className="text-green-400" />}
+                                            {habit?.kind === 'Family' && <Grab size={20} className="text-green-400" />}
+                                            {habit?.kind === 'Marriage' && <Soup size={20} className="text-green-400" />}
+                                            {habit?.kind === 'Personal' && <PersonStanding size={20} className="text-green-400" />}
+
+                                        </div>
+                                        <div>
+                                            <CardTitle className="text-xl font-semibold text-gray-100">{habit.title}</CardTitle>
+                                            <CardDescription className="text-gray-400 text-sm mt-1">
+                                                {habit?.description}
+                                            </CardDescription>
+                                            <p className={cn(
+                                                "text-xs font-medium mt-2",
+                                                habit.kind && 'text-blue-300',
+                                            )}>
+                                                Category: {habit?.kind}
+                                            </p>
+                                        </div>
                                     </div>
-                                </div>
-                                <Button variant="ghost" className="text-gray-400 hover:text-blue-400">
-                                    <ChevronRight size={24} />
-                                </Button>
-                            </CardContent>
+                                    <Button variant="ghost" className="text-gray-400 hover:text-blue-400">
+                                        <ChevronRight size={24} />
+                                    </Button>
+                                </CardContent>
+                            </Link>
                         </Card>
                     </motion.div>
                 ))}
