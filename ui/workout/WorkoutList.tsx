@@ -43,7 +43,7 @@ export default function WorkoutsList({ workout }: any) {
                         <Link href={`/dashboard/body/workout/edit/${workout._id}`}>
                             <Card
                                 className={cn(
-                                    "bg-gray-800/70 backdrop-blur-lg border border-gray-700 text-white overflow-hidden",
+                                    "bg-gray-800 backdrop-blur-lg border border-gray-700 text-white overflow-hidden",
                                     "transform hover:scale-[1.01] hover:shadow-xl transition-all duration-300 ease-out",
                                     "cursor-pointer" // Indicate clickable
                                 )}

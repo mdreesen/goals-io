@@ -1,5 +1,6 @@
 'use client'
 import React, { useState, useEffect } from 'react';
+import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from 'framer-motion';
 import { editWaterIntake, createWaterIntake } from "@/actions/sections/body/nutrition_water";
 import { Droplet, Plus, Minus, Target, CheckCircle } from 'lucide-react';
@@ -15,7 +16,7 @@ const cn = (...inputs: string[]) => {
 };
 
 export default function WaterIntakeLogger({ water }: any) {
-  console.log(water)
+
   const [logAmount, setLogAmount] = useState<string>('18'); // Default log amount
   const [logUnit, setLogUnit] = useState<string>('oz'); // Default unit for logging
   const [dailyGoal, setDailyGoal] = useState<number>(water?.total_water); // Default daily goal in oz
@@ -23,6 +24,8 @@ export default function WaterIntakeLogger({ water }: any) {
   const [message, setMessage] = useState<{ text: string; type: 'success' | 'error' | '' }>({ text: '', type: '' });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string>();
+
+  const router = useRouter();
 
   // Load state from localStorage on mount
   useEffect(() => {
@@ -32,13 +35,14 @@ export default function WaterIntakeLogger({ water }: any) {
         const savedGoal = water?.total_water;
         if (savedGoal) {
           setDailyGoal(parseFloat(savedGoal));
-          setCurrentDayIntake(water?.waterIntakeToday?.water_intake)
+          setCurrentDayIntake(water?.waterIntakeToday?.water_intake);
+          router.refresh;
         }
       } catch (error) {
         console.error("Failed to load water intake state:", error);
       }
     }
-  }, []);
+  }, [logAmount]);
 
   // Handle message display timeout
   useEffect(() => {
@@ -64,6 +68,7 @@ export default function WaterIntakeLogger({ water }: any) {
           date: water?.useDateToday,
         });
         setMessage({ text: `Logged ${amountToAdd} ${logUnit}!`, type: 'success' });
+        router.refresh;
       } catch (error) {
         setError(error as string)
         console.log(error);
@@ -71,6 +76,7 @@ export default function WaterIntakeLogger({ water }: any) {
       }
       finally {
         setLoading(false);
+        router.refresh;
       }
     } else {
 
@@ -81,7 +87,7 @@ export default function WaterIntakeLogger({ water }: any) {
           date: water?.useDateToday,
         });
         setMessage({ text: `Updated ${amountToAdd} ${logUnit}!`, type: 'success' });
-
+        router.refresh;
       } catch (error) {
         setError(error as string)
         console.log(error);
@@ -90,6 +96,7 @@ export default function WaterIntakeLogger({ water }: any) {
       }
       finally {
         setLoading(false);
+        router.refresh;
       }
     }
   };
@@ -146,7 +153,6 @@ export default function WaterIntakeLogger({ water }: any) {
     }
   };
 
-  const progressionPercentage = (water.current_progress / dailyGoal) * 100;
   const displayGoal = `${dailyGoal} ${logUnit}`;
   const displayCurrent = `${water.waterIntakeToday?.water_intake} ${logUnit}`;
 
@@ -195,8 +201,8 @@ export default function WaterIntakeLogger({ water }: any) {
           ></motion.div>
         </div>
         <p className="text-gray-400 text-sm mt-2">
-          {Math.round(progressionPercentage)}% of goal
-          {progressionPercentage >= 100 && <span className="ml-2 text-green-400 font-semibold"> (Goal Reached!)</span>}
+          {Math.round(water?.current_progress)}% of goal
+          {water?.current_progress >= 100 && <span className="ml-2 text-green-400 font-semibold"> (Goal Reached!)</span>}
         </p>
 
         {/* Quick Log Buttons */}
