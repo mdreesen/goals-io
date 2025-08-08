@@ -6,7 +6,7 @@ import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import bible_books from '@/lib/dropdown/bible_books.json';
 
-export default function BibleForm() {
+export default function BibleForm({ data }: any) {
 
     const [error, setError] = useState<string>();
 
@@ -21,6 +21,7 @@ export default function BibleForm() {
                 verses: formData.get("verses"),
                 notes: formData.get("notes"),
                 type: formData.get("type"),
+                date: data.date
             });
             router.refresh
             router.push(`/dashboard/spirit`);

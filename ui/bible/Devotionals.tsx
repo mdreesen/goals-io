@@ -2,9 +2,11 @@ import { fetchBible } from '@/actions/sections/soul/bible';
 import ButtonBack from '@/components/buttons/ButtonBack';
 import Results from '@/components/showing/Results';
 import NoDataText from '@/components/text/NoDataText';
+import { parse } from '@/lib/formatters';
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { EllipsisVerticalIcon } from '@heroicons/react/20/solid'
 import Link from 'next/link';
+import BibleList from '@/ui/bible/BibleList';
 
 export default async function Bible() {
 
@@ -87,9 +89,11 @@ export default async function Bible() {
 
             <div className='p-4'>
                 <h2 className="text-xl font-semibold">Devotional Notes</h2>
-                <Results data={useDevotionals?.length.toString()} />
+                <div className='py-4'>
+                    <Results data={useDevotionals?.length.toString()} />
+                </div>
 
-                {devotionalNotes}
+                <BibleList list={parse(useDevotionals)} />
             </div>
         </div>
     )

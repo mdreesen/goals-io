@@ -8,9 +8,10 @@ import ButtonDeleteBible from "@/components/buttons/ButtonDeleteBible";
 import ButtonCancel from "@/components/buttons/ButtonCancel";
 
 export default function BibleForm({ data }: any) {
+    console.log(data)
 
     const [error, setError] = useState<string>();
-    const [ loading, setLoading ] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     const router = useRouter();
     const ref = useRef(null);
@@ -25,6 +26,7 @@ export default function BibleForm({ data }: any) {
                 verses: formData.get("verses"),
                 notes: formData.get("notes"),
                 type: formData.get("type"),
+                date: data.date
             });
             setLoading(false)
 
@@ -54,7 +56,7 @@ export default function BibleForm({ data }: any) {
                                     id="type"
                                     name="type"
                                     autoComplete="type"
-                                    defaultValue={data?.type ?? ''}
+                                    defaultValue={data?.bookData?.type ?? ''}
                                     className="col-start-1 row-start-1 w-full appearance-none rounded-md py-1.5 pl-3 pr-8 text-base outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
                                 >
                                     <option>Sermon note</option>
@@ -77,7 +79,7 @@ export default function BibleForm({ data }: any) {
                                     id="book_title"
                                     name="book_title"
                                     autoComplete="book_title"
-                                    defaultValue={data?.book_title ?? ''}
+                                    defaultValue={data?.bookData?.book_title ?? ''}
                                     className="col-start-1 row-start-1 w-full appearance-none rounded-md py-1.5 pl-3 pr-8 text-base outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
                                 >
                                     {bible_books.map((item: any) => (
@@ -102,7 +104,7 @@ export default function BibleForm({ data }: any) {
                                         name="chapter"
                                         type="text"
                                         placeholder="1"
-                                        defaultValue={data?.chapter ?? ''}
+                                        defaultValue={data?.bookData?.chapter ?? ''}
                                         className="block min-w-0 grow py-1.5 pl-1 pr-3 text-base focus:outline focus:outline-0 sm:text-sm/6"
                                     />
                                 </div>
@@ -120,7 +122,7 @@ export default function BibleForm({ data }: any) {
                                         name="verses"
                                         type="text"
                                         placeholder="1-2"
-                                        defaultValue={data?.verses ?? ''}
+                                        defaultValue={data?.bookData?.verses ?? ''}
                                         className="block min-w-0 grow py-1.5 pl-1 pr-3 text-base focus:outline focus:outline-0 sm:text-sm/6"
                                     />
                                 </div>
@@ -138,7 +140,7 @@ export default function BibleForm({ data }: any) {
                                     rows={3}
                                     placeholder="Your bible notes"
                                     className="block w-full rounded-md px-3 py-1.5 text-base outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
-                                    defaultValue={data?.notes ?? ''}
+                                    defaultValue={data?.bookData?.notes ?? ''}
                                 />
                             </div>
                         </div>
@@ -147,7 +149,7 @@ export default function BibleForm({ data }: any) {
             </div>
 
             <div className="mt-6 flex items-center gap-x-6 justify-between px-[2rem]">
-                <div><ButtonDeleteBible data={data} /></div>
+                <div><ButtonDeleteBible data={data?.bookData} /></div>
                 <div className="flex gap-x-6 items-center">
                     <ButtonCancel path={'/dashboard/spirit'} />
                     <button
