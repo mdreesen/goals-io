@@ -57,6 +57,7 @@ const journalSchema = new Schema(
     {
         title: String || undefined,
         entry: String || undefined,
+        mood: String || undefined,
         date: String || undefined,
     }, { timestamps: false });
 

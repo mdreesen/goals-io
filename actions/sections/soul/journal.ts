@@ -15,7 +15,7 @@ export async function fetchEntry() {
         const entries = data[0].journal.reverse() ?? [];
 
         return {
-            entries: entries.slice(0, 10),
+            limited: entries.slice(0, 10),
             all: entries,
             results: data[0].journal.length.toString()
         }

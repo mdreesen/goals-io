@@ -3,6 +3,8 @@ import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { addEntry } from "@/actions/sections/soul/journal";
 import Link from "next/link";
+import { ChevronDownIcon } from "lucide-react";
+import journal_mood from '@/lib/dropdown/journal_mood.json';
 
 export default function JournalForm({ data }: any) {
 
@@ -13,18 +15,45 @@ export default function JournalForm({ data }: any) {
 
     const handleSubmit = async (formData: FormData) => {
         try {
-          await addEntry({
-            title: formData.get("title"),
-            entry: formData.get("entry"),
-            date: data.date,
-          });
-          router.refresh
-          router.push(`/dashboard/spirit`);
+            await addEntry({
+                title: formData.get("title"),
+                entry: formData.get("entry"),
+                mood: formData.get("mood"),
+                date: data.date,
+            });
+            router.refresh
+            router.push(`/dashboard/spirit`);
         } catch (error) {
-          setError(error as string)
-          console.log(error);
+            setError(error as string)
+            console.log(error);
         }
-      };
+    };
+
+    const mood = (
+        <div>
+            <label htmlFor="mood" className="block text-sm/6 font-medium">
+                Mood
+            </label>
+            <div className="mt-2 grid grid-cols-1">
+                <select
+                    id="mood"
+                    name="mood"
+                    autoComplete="mood"
+
+                    className="col-start-1 row-start-1 w-full appearance-none rounded-md py-1.5 pl-3 pr-8 text-base outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
+                >
+                    {journal_mood.map((item, index) => (
+                        <option key={`${item.mood}-${index}`}>{item.mood}</option>
+
+                    ))}
+                </select>
+                <ChevronDownIcon
+                    aria-hidden="true"
+                    className="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end sm:size-4"
+                />
+            </div>
+        </div>
+    );
 
     return (
         <form ref={ref} action={handleSubmit}>
@@ -38,6 +67,7 @@ export default function JournalForm({ data }: any) {
                             <label htmlFor="title" className="block text-sm/6 font-medium">
                                 Title
                             </label>
+
                             <div className="mt-2">
                                 <div className="flex items-center rounded-md pl-3 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-gray-900">
                                     <input
@@ -49,6 +79,10 @@ export default function JournalForm({ data }: any) {
                                     />
                                 </div>
                             </div>
+                        </div>
+
+                        <div>
+                            {mood}
                         </div>
 
                         <div className="col-span-full">

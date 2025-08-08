@@ -2,9 +2,10 @@
 import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { editEntry } from "@/actions/sections/soul/journal";
-import Link from "next/link";
 import ButtonCancel from "@/components/buttons/ButtonCancel";
 import ButtonDeleteJournal from "@/components/buttons/ButtonDeleteJournal";
+import journal_mood from '@/lib/dropdown/journal_mood.json';
+import { ChevronDownIcon } from "lucide-react";
 
 export default function JournalForm({ data }: any) {
 
@@ -28,6 +29,32 @@ export default function JournalForm({ data }: any) {
             console.log(error);
         }
     };
+
+    const mood = (
+        <div>
+            <label htmlFor="mood" className="block text-sm/6 font-medium">
+                Mood
+            </label>
+            <div className="mt-2 grid grid-cols-1">
+                <select
+                    id="mood"
+                    name="mood"
+                    autoComplete="mood"
+                    defaultValue={data?.mood ?? ''}
+                    className="col-start-1 row-start-1 w-full appearance-none rounded-md py-1.5 pl-3 pr-8 text-base outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
+                >
+                    {journal_mood.map((item, index) => (
+                        <option key={`${item.mood}-${index}`}>{item.mood}</option>
+
+                    ))}
+                </select>
+                <ChevronDownIcon
+                    aria-hidden="true"
+                    className="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end sm:size-4"
+                />
+            </div>
+        </div>
+    );
 
     return (
         <form ref={ref} action={handleSubmit}>
@@ -53,6 +80,10 @@ export default function JournalForm({ data }: any) {
                                     />
                                 </div>
                             </div>
+                        </div>
+
+                        <div>
+                            {mood}
                         </div>
 
                         <div className="col-span-full">
