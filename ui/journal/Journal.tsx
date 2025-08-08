@@ -24,7 +24,7 @@ export default async function Journal() {
                 <Results data={journalEntries?.results} />
             </div>
 
-            <div className='p-4 rounded'>
+            <div className='py-4'>
                 <JournalList list={parse(journalEntries.limited)}/>
             </div>
         </div>
