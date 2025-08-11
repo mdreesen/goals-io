@@ -1,6 +1,6 @@
 import { connectDB } from "@/lib/mongodb";
 import User from "@/(models)/User";
-import { userSettings } from '@/lib/defaults/newUserData';
+// import { userSettings } from '@/lib/defaults/newUserData';
 import type { NextAuthOptions, DefaultSession, DefaultUser } from "next-auth";
 import credentials from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";

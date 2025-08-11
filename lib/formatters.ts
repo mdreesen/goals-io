@@ -11,6 +11,29 @@ export function formatDateAndTime(date: any) {
   return converted.toString();
 };
 
+export function formatDateSpecific(date: Date) {
+  return date.toLocaleString('en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+  });
+};
+
+export function formatSecondsToHHMMSS(totalSeconds: number) {
+  const hours = Math.floor(totalSeconds / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  const seconds = Math.round(totalSeconds % 60);
+
+  // Pad with leading zeros if necessary
+  const formattedHours = String(hours).padStart(2, '0');
+  const formattedMinutes = String(minutes).padStart(2, '0');
+  const formattedSeconds = String(seconds).padStart(2, '0');
+
+  return `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
+}
+
 export function bodyWeightToWaterInOz(data: any) {
 
   // If string, convert to number, then convert back to string

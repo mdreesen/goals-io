@@ -33,6 +33,12 @@ const bookSchema = new Schema(
         booklist: String || undefined
     }, { timestamps: false });
 
+const coldSoakSchema = new Schema(
+    {
+        date: Date || undefined,
+        duration: Number || undefined
+    }, { timestamps: false });
+
 const fastingSchema = new Schema(
     {
         completed: Boolean || undefined,
@@ -109,6 +115,7 @@ const userSchema = new Schema(
         affirmations: [affirmationsSchema],
         bibles: [bibleSchema],
         books: [bookSchema],
+        cold_soaks: [coldSoakSchema],
         fasting: [fastingSchema],
         habits: [habitsSchema],
         journal: [journalSchema],

@@ -1,10 +1,13 @@
 import { formatDateAndTime } from '@/lib/formatters';
+import { fetchUser } from '@/actions/user';
 
-export function userSettings() {
-    return [
+export async function userSettings() {
+
+    const settings = [
         { setting: 'showAffirmations', title: 'Show Affirmations', value: true },
         { setting: 'showBible', title: 'Show Bible', value: true },
         { setting: 'showBooks', title: 'Show Books', value: true },
+        { setting: 'showColdSoak', title: 'Show Cold Soak', value: true },
         { setting: 'showFasting', title: 'Show Fasting', value: true },
         { setting: 'showHabits', title: 'Show Habits', value: true },
         { setting: 'showJournal', title: 'Show Journal', value: true },
@@ -13,6 +16,27 @@ export function userSettings() {
         { setting: 'showWorkout', title: 'Show Workout', value: true },
         { setting: 'darkMode', title: 'Dark Mode', value: false },
     ];
+
+    // const user = await fetchUser();
+
+    // if (user.settings.length !== settings.length) {
+    //     console.log('settings.length', settings.length);
+    //     console.log('user.settings.length', user.settings)
+    //     console.log('Cond 1', user._id && user.settings.length !== settings.length)
+    //     return [...settings, ...user.settings].filter(item => item.setting);
+    // }
+
+    // if (user._id && user.settings.length === settings.length) {
+    //     console.log('Cond 2', user._id && user.settings.length === settings.length)
+    //     return [...user.settings]
+    // }
+
+    // else {
+    //     return settings;
+    // }
+
+    return settings;
+
 };
 
 export function userAffirmations() {
@@ -172,9 +196,9 @@ export function userJournal() {
 
     return [
         {
-          title: 'First journal entry',
-          entry: 'Here is your first journal entry! Here is a space for you to write your experience!',
-          date: formatedDate,
+            title: 'First journal entry',
+            entry: 'Here is your first journal entry! Here is a space for you to write your experience!',
+            date: formatedDate,
         }
-      ]
+    ]
 }

@@ -16,6 +16,7 @@ export async function fetchSettings() {
         const useShowBible = user?.settings.find((item: any) => item.setting.includes('showBible') ?? {}) ?? [];
         const useShowBooks = user?.settings.find((item: any) => item.setting.includes('showBooks') ?? {}) ?? [];
         const useShowFasting = user?.settings.find((item: any) => item.setting.includes('showFasting') ?? {}) ?? [];
+        const useShowColdSoak = user?.settings.find((item: any) => item.setting.includes('showColdSoak') ?? {}) ?? [];
         const useShowHabits = user?.settings.find((item: any) => item.setting.includes('showHabits') ?? {}) ?? [];
         const useShowJournal = user?.settings.find((item: any) => item.setting.includes('showJournal') ?? {}) ?? [];
         const useShowWaterIntake = user?.settings.find((item: any) => item.setting.includes('showWaterIntake') ?? {}) ?? [];
@@ -23,15 +24,14 @@ export async function fetchSettings() {
         const useShowWorkout = user?.settings.find((item: any) => item.setting.includes('showWorkout') ?? {}) ?? [];
         const useDarkMode = user?.settings.find((item: any) => item.setting.includes('darkMode') ?? {}) ?? [];
 
-        const useShowBody = useShowWeight.value || useShowWaterIntake.value || useShowFasting.value || useShowWorkout.value;
+        const useShowBody = useShowWeight.value || useShowWaterIntake.value || useShowFasting.value || useShowWorkout.value || useShowColdSoak.value;
         const useShowMind = useShowAffirmations.value || useShowBooks.value || useShowHabits.value;
         const useShowSpirit = useShowBible.value || useShowJournal.value;
 
-        const bodySettings = [useShowFasting, useShowWaterIntake, useShowWeight, useShowWorkout];
+        const bodySettings = [useShowColdSoak, useShowFasting, useShowWaterIntake, useShowWeight, useShowWorkout];
         const mindSettings = [useShowAffirmations, useShowBooks, useShowHabits];
         const spiritSettings = [useShowBible, useShowJournal];
         const personalSettings = [useDarkMode];
-        const overviewStats = [useShowBooks, useShowFasting, useShowWaterIntake, useShowWeight];
 
 
         return {
@@ -39,6 +39,7 @@ export async function fetchSettings() {
             useShowAffirmations: useShowAffirmations,
             useShowBible: useShowBible,
             useShowBooks: useShowBooks,
+            useShowColdSoak: useShowColdSoak,
             useShowFasting: useShowFasting,
             useShowHabits: useShowHabits,
             useShowJournal: useShowJournal,
