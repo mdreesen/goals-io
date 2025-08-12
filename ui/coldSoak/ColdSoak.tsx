@@ -1,5 +1,4 @@
 import { fetchAllColdSoak } from '@/actions/sections/body/coldSoak';
-import ButtonGoTo from '@/components/buttons/ButtonGoTo';
 import Results from '@/components/showing/Results';
 import Title from '@/components/text/Title';
 import { parse } from '@/lib/formatters';

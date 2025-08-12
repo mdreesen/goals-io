@@ -59,7 +59,7 @@ export default function ColdSoakList({ list }: any) {
                                         {item.type === 'Strength Training' && <Dumbbell size={20} className="text-green-400" />}
                                     </div>
                                     <div>
-                                        <CardTitle className="text-xl font-semibold text-gray-100">{item.dateFormatted}</CardTitle>
+                                        <CardTitle className="text-lg font-semibold text-gray-100">{item.dateFormatted}</CardTitle>
                                         <CardDescription className="text-gray-400 text-sm mt-1">{item.duration && `Duration ${formatSecondsToHHMMSS(item.duration)}`}</CardDescription>
                                         <p className={cn(
                                             "text-xs font-medium mt-2",
