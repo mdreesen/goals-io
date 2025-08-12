@@ -1,13 +1,10 @@
 'use client'
 import React from 'react';
-import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Dumbbell, Clock, CheckCircle, XCircle, ChevronRight } from 'lucide-react'; // Icons for workouts, status
+import { DropletIcon, DropletOff } from 'lucide-react'; // Icons for workouts, status
 import { formatSecondsToHHMMSS } from '@/lib/formatters';
 // shadcn/ui components
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { formatDateAndTime } from '@/lib/formatters';
+import { Card, CardContent, CardDescription, CardTitle } from '@/components/ui/card';
 
 // Utility function for Tailwind CSS class concatenation
 const cn = (...inputs: (string | boolean)[]) => {
@@ -52,28 +49,21 @@ export default function ColdSoakList({ list }: any) {
                                     {/* Icon with background circle */}
                                     <div className={cn(
                                         "p-3 rounded-full",
-                                        item.type === 'Strength Training' && 'bg-green-500/20',
-                                        // workout.status === 'scheduled' && 'bg-blue-500/20',
-                                        // workout.status === 'missed' && 'bg-red-500/20',
+                                        item.duration && 'bg-blue-500/20',
                                     )}>
-                                        {item.type === 'Strength Training' && <Dumbbell size={20} className="text-green-400" />}
+                                        {item.duration && <DropletIcon size={20} className="text-blue-400" />}
                                     </div>
                                     <div>
-                                        <CardTitle className="text-lg font-semibold text-gray-100">{item.dateFormatted}</CardTitle>
+                                        <CardTitle className="text-md font-semibold text-gray-100">{item.dateFormatted}</CardTitle>
                                         <CardDescription className="text-gray-400 text-sm mt-1">{item.duration && `Duration ${formatSecondsToHHMMSS(item.duration)}`}</CardDescription>
                                         <p className={cn(
                                             "text-xs font-medium mt-2",
-                                            item.type === 'Strength Training' && 'text-green-300',
-                                            // workout.status === 'scheduled' && 'text-blue-300',
-                                            // workout.status === 'missed' && 'text-red-300',
+                                            item.duration && 'text-blue-300',
                                         )}>
                                             Status: {item.duration !== '' && 'Logged'}
                                         </p>
                                     </div>
                                 </div>
-                                {/* <Button variant="ghost" className="text-gray-400 hover:text-blue-400">
-                                    <ChevronRight size={24} />
-                                </Button> */}
                             </CardContent>
                         </Card>
                     </motion.div>

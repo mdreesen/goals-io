@@ -1,19 +1,12 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import { addColdSoak, fetchAllColdSoak } from "@/actions/sections/body/coldSoak";
+import { addColdSoak } from "@/actions/sections/body/coldSoak";
 import { Play, Pause, RefreshCcw, Droplets } from 'lucide-react';
 import { formatDateSpecific } from '@/lib/formatters';
-
-// Define the type for a single soak log entry.
-interface SoakLogEntry {
-  date: Date;
-  duration: number;
-}
 
 // The main application component for the cold soak tracker.
 export default function ColdSoakTimer() {
   // State variables for the soak log, typed as an array of SoakLogEntry objects.
-  const [soakLog, setSoakLog] = useState<SoakLogEntry[]>([]);
   const [timerSeconds, setTimerSeconds] = useState<number>(0);
   const [isRunning, setIsRunning] = useState<boolean>(false);
   const [isSoaking, setIsSoaking] = useState<boolean>(false);
@@ -80,10 +73,6 @@ export default function ColdSoakTimer() {
       // If the main timer is running, stop it and log the session.
       setIsRunning(false);
       setIsSoaking(false);
-      //   setSoakLog(prevLog => [
-      //     ...prevLog,
-      //     { date: new Date(), duration: timerSeconds },
-      //   ]);
 
       try {
         await addColdSoak({
@@ -116,40 +105,8 @@ export default function ColdSoakTimer() {
     return `${String(minutes).padStart(2, '0')}:${String(remainingSeconds).padStart(2, '0')}`;
   };
 
-  // Helper function to format the log date.
-  const formatDate = (date: Date): string => {
-    return date.toLocaleString('en-US', {
-      month: 'short',
-      day: 'numeric',
-      year: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
-    });
-  };
-
-  // Helper function to format the duration for the log.
-  const formatDuration = (seconds: number): string => {
-    const minutes = Math.floor(seconds / 60);
-    const remainingSeconds = seconds % 60;
-    return `${minutes}m ${remainingSeconds}s`;
-  };
-
   return (
-    // Main container with dark background, centered content, and the Ascend branding gradient.
     <div className="flex flex-col items-center justify-start pb-6 md:pb-12 font-inter">
-
-      {/* Ascend Text Logo */}
-      {/* <h1 className="
-          bg-gradient-to-r from-purple-400 via-indigo-500 to-pink-600
-          text-transparent bg-clip-text
-          text-4xl md:text-5xl lg:text-6xl
-          font-extrabold tracking-tight
-          drop-shadow-lg mb-8
-          transition-all duration-300 ease-in-out
-          hover:scale-105 hover:drop-shadow-2xl
-        ">
-          Ascend
-      </h1> */}
 
       {/* Main tracker card */}
       <div className="flex flex-col items-center bg-gray-800 rounded-3xl p-8 md:p-12 shadow-2xl w-full max-w-sm md:max-w-md">
