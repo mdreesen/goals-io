@@ -1,6 +1,6 @@
 import { connectDB } from "@/lib/mongodb";
 import User from "@/(models)/User";
-// import { userSettings } from '@/lib/defaults/newUserData';
+import { userSettings } from '@/lib/defaults/newUserData';
 import type { NextAuthOptions, DefaultSession, DefaultUser } from "next-auth";
 import credentials from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
@@ -103,19 +103,21 @@ export const authOptions: NextAuthOptions = {
       async authorize(credentials) {
         await connectDB();
 
-        // const useSettings = await userSettings();
+        const useSettings = await userSettings();
 
         const user = await User.findOne({
           email: credentials?.email,
         }).select("+password");
 
-        // When user signs up, it places new settings for them
-        // if (user?.settings.length !== userSettings.length) {
-        //   await User.findOneAndUpdate(
-        //     { email: credentials?.email },
-        //     { $set: { 'settings': useSettings } },
-        //   );
-        // }
+        // When user logs in, it checks to see if all setting objects are there
+        // If not, it will place all settings in with all settings reset to default
+        // TODO: Need to update this so that they do not reset when new settings are added
+        if (user?.settings.length !== useSettings.length) {
+          await User.findOneAndUpdate(
+            { email: credentials?.email },
+            { $set: { 'settings': useSettings } },
+          );
+        }
 
         if (!user) throw new Error("Wrong Credentials");
         const passwordMatch = await bcrypt.compare(

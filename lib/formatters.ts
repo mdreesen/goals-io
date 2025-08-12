@@ -13,11 +13,13 @@ export function formatDateAndTime(date: any) {
 
 export function formatDateSpecific(date: Date) {
   return date.toLocaleString('en-US', {
-    month: 'short',
-    day: 'numeric',
     year: 'numeric',
+    month: 'long', // 'numeric', '2-digit', 'short'
+    day: 'numeric',
     hour: '2-digit',
     minute: '2-digit',
+    second: '2-digit',
+    hour12: true // true for AM/PM, false for 24-hour
   });
 };
 
@@ -88,7 +90,7 @@ export function lossOrGain({ starting, current }: any) {
 export function convertTimezone(data: any) {
   'use client'
 
-  switch(true) {
+  switch (true) {
     case data === 'EST':
       return 'New_York';
       break
@@ -100,7 +102,7 @@ export function convertTimezone(data: any) {
     case data === 'MST':
       return 'Denver';
       break
-    
+
     case data === 'PST':
       return 'Los_Angeles';
       break
@@ -113,7 +115,7 @@ export function convertTimezone(data: any) {
 export function convertTimezoneReverse(data: any) {
   'use client'
 
-  switch(true) {
+  switch (true) {
     case data?.includes('New_York'):
       return 'EST';
       break
@@ -125,7 +127,7 @@ export function convertTimezoneReverse(data: any) {
     case data?.includes('Denver'):
       return 'MST';
       break
-    
+
     case data?.includes('Los_Angeles'):
       return 'PST';
       break

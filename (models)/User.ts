@@ -35,6 +35,7 @@ const bookSchema = new Schema(
 
 const coldSoakSchema = new Schema(
     {
+        dateFormatted: String || undefined,
         date: Date || undefined,
         duration: Number || undefined
     }, { timestamps: false });

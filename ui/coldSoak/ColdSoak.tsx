@@ -14,15 +14,16 @@ export default async function Journal() {
         <div className="px-4 sm:px-2 lg:px-4">
             <Title text="Cold Soak" />
 
-            <div className="px-4 sm:px-2 lg:px-4">
-                {/* <Results data={journalEntries?.results} /> */}
-            </div>
-
-            <div className='py-4'>
+            <div>
                 <ColdSoakTimer />
 
-                <div className='flex justify-center items-center'>
-                    <ColdSoakList list={parse(fetchColdSoak.limited)} />
+                <div>
+                    <div className="px-4 sm:px-2 lg:px-4 pt-[2rem] pb-2">
+                        <Results data={fetchColdSoak?.results} />
+                    </div>
+                    <div className='flex flex-col justify-center items-center'>
+                        <ColdSoakList list={parse(fetchColdSoak.limited)} />
+                    </div>
                 </div>
             </div>
         </div>

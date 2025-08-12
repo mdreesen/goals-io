@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { motion } from 'framer-motion';
-import { workoutsPerYear, workoutYears } from "@/actions/charts/workoutChart";
+import { dataPerYear, dataYears } from "@/actions/charts/coldSoakChart";
 import { ChartLegend, ChartLegendContent } from "@/components/ui/chart";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
@@ -11,13 +11,13 @@ import { Button } from "@/components/ui/button";
 import LoadingScale from "@/components/loaders/LoadingScale";
 
 const chartConfig = {
-  workouts: {
-    label: "Workouts Per Month",
+  coldSoaks: {
+    label: "Cold Soaks",
     color: "#60a5fa",
   }
 } satisfies ChartConfig;
 
-export const UseWorkoutPerMonthChart = ({ data }: any) => {
+export const UseColdSoakPerMonthChart = ({ data }: any) => {
 
   const [chartData, setChartData] = useState([]) as any; // State for chart data
   const [year, setYear] = useState([]) as any; // State for chart data
@@ -43,8 +43,8 @@ export const UseWorkoutPerMonthChart = ({ data }: any) => {
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true)
-      const data = await workoutsPerYear(selectedYear);
-      const useYear = await workoutYears();
+      const data = await dataPerYear(selectedYear);
+      const useYear = await dataYears();
       setChartData(data);
       setYear(useYear);
       setLoading(false)
@@ -78,7 +78,7 @@ export const UseWorkoutPerMonthChart = ({ data }: any) => {
 
         <Card className="bg-gray-800 backdrop-blur-lg border border-gray-700 text-white">
           <CardHeader>
-            <CardTitle>Workouts Per Month</CardTitle>
+            <CardTitle>Cold Soaks Per Month</CardTitle>
             <CardDescription className='flex gap-2 items-center'>January - December {dropdown}</CardDescription>
           </CardHeader>
           <CardContent>
@@ -97,7 +97,7 @@ export const UseWorkoutPerMonthChart = ({ data }: any) => {
                   content={<ChartTooltipContent indicator="dashed" />}
                 />
                 <ChartLegend content={<ChartLegendContent />} />
-                <Bar dataKey="workouts" fill="var(--color-workouts)" radius={4}></Bar>
+                <Bar dataKey="coldSoaks" fill="var(--color-coldSoaks)" radius={4}></Bar>
               </BarChart>
             </ChartContainer>
           </CardContent>

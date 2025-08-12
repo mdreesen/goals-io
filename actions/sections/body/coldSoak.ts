@@ -19,6 +19,7 @@ export async function fetchAllColdSoak() {
         return {
             data: data[0].cold_soaks.reverse() ?? [],
             limited: limited[0].cold_soaks.reverse() ?? [],
+            results: data[0].cold_soaks.length.toString()
         }
 
     } catch (error) {

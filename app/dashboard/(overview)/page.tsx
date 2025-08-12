@@ -8,12 +8,14 @@ import { parse } from '@/lib/formatters';
 import { fetchUserOverview } from "@/actions/user";
 import { fetchOverview } from '@/actions/overview';
 import { booksByMonth } from "@/actions/charts/bookChart";
+import { dataPerMonth } from '@/actions/charts/coldSoakChart';
 import { weightByMonth } from "@/actions/charts/weightChart";
 import { waterByday } from "@/actions/charts/waterIntakeChart";
 import { workoutsByMonth } from "@/actions/charts/workoutChart";
 import { fetchSettings } from "@/actions/settings";
 
 import { UseBooksPerMonthChart } from "@/components/charts/UseBooksPerMonthChart";
+import { UseColdSoakPerMonthChart } from "@/components/charts/UseColdSoakPerMonthChart";
 import { UseWaterPerDayChart } from "@/components/charts/UseWaterPerDayChart";
 import { UseWeightPerDayChart } from "@/components/charts/UseWeightPerDayChart";
 import { UseWorkoutPerMonthChart } from "@/components/charts/UseWorkoutPerMonthChart";
@@ -23,6 +25,7 @@ export default async function Page() {
     const useUser = await fetchUserOverview();
     const stats = await fetchOverview();
     const booksPerMonth = await booksByMonth();
+    const coldSoaksPerMonth = await dataPerMonth();
     const waterPerDay = await waterByday();
     const weightPerMonth = await weightByMonth();
     const workoutPerMonth = await workoutsByMonth();
@@ -36,6 +39,12 @@ export default async function Page() {
                 {userSettings.useShowBooks.value && (
                     <Suspense fallback={<ChartSkeleton />}>
                         <UseBooksPerMonthChart data={parse(booksPerMonth)} />
+                    </Suspense>
+                )}
+
+                {userSettings.useShowColdSoak.value && (
+                    <Suspense fallback={<ChartSkeleton />}>
+                        <UseColdSoakPerMonthChart data={parse(coldSoaksPerMonth)} />
                     </Suspense>
                 )}
 

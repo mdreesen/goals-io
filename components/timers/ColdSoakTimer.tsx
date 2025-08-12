@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { addColdSoak, fetchAllColdSoak } from "@/actions/sections/body/coldSoak";
 import { Play, Pause, RefreshCcw, Droplets } from 'lucide-react';
+import { formatDateSpecific } from '@/lib/formatters';
 
 // Define the type for a single soak log entry.
 interface SoakLogEntry {
@@ -79,22 +80,23 @@ export default function ColdSoakTimer() {
       // If the main timer is running, stop it and log the session.
       setIsRunning(false);
       setIsSoaking(false);
-    //   setSoakLog(prevLog => [
-    //     ...prevLog,
-    //     { date: new Date(), duration: timerSeconds },
-    //   ]);
+      //   setSoakLog(prevLog => [
+      //     ...prevLog,
+      //     { date: new Date(), duration: timerSeconds },
+      //   ]);
 
       try {
         await addColdSoak({
-            date: new Date(),
-            duration: timerSeconds,
+          dateFormatted: formatDateSpecific(new Date()),
+          date: new Date(),
+          duration: timerSeconds,
         });
         // setLoading(false);
-    } catch (error) {
+      } catch (error) {
         setError(error as string)
         console.log(error);
         // setLoading(false);
-    }
+      }
     }
   };
 
@@ -134,7 +136,7 @@ export default function ColdSoakTimer() {
 
   return (
     // Main container with dark background, centered content, and the Ascend branding gradient.
-    <div className="flex flex-col items-center justify-start p-6 md:p-12 font-inter">
+    <div className="flex flex-col items-center justify-start pb-6 md:pb-12 font-inter">
 
       {/* Ascend Text Logo */}
       {/* <h1 className="
