@@ -81,8 +81,8 @@ export async function fetchBookList() {
         const data = await User.find({ email: session?.user.email }, 'books');
 
         return {
-            bookList: data[0].books.filter((item: any) => item.booklist === 'Yes'),
-            totalBookList: data[0].books.filter((item: any) => item.booklist === 'Yes').length.toString(),
+            bookList: data[0].books.reverse().filter((item: any) => item.booklist === 'Yes'),
+            totalBookList: data[0].books.reverse().filter((item: any) => item.booklist === 'Yes').length.toString(),
         }
 
     } catch (error) {

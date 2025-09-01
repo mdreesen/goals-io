@@ -32,7 +32,6 @@ export default function BooksReadList({ books }: any) {
         >
             <AnimatePresence>
                 {books.map((book: any, index: number) => (
-
                     <motion.div
                         key={book._id}
                         variants={itemVariants}
@@ -96,7 +95,7 @@ export default function BooksReadList({ books }: any) {
                                                 book.booklist === 'Yes' && 'text-yellow-300'
                                                 // book.status === 'abandoned' && 'text-red-300',
                                             )}>
-                                                Status: {formatDateAndTime(book.book_start_date)}{book.book_end_date && ` | ${formatDateAndTime(book.book_end_date)}`}
+                                                Status: {book.book_start_date && formatDateAndTime(book.book_start_date)}{book.book_end_date && ` | ${formatDateAndTime(book.book_end_date)}`}{!book.book_start_date && !book.book_end_date && 'Saved'}
                                             </p>
                                         </div>
                                     </div>
