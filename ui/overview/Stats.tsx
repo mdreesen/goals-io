@@ -1,7 +1,7 @@
 'use client'
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Snowflake, Book, Clock, GlassWater, Scale } from 'lucide-react';
+import { Snowflake, Book, Clock, GlassWater, Scale, Star } from 'lucide-react';
 import { formatSecondsToHHMMSS } from '@/lib/formatters';
 
 // Utility function for Tailwind CSS class concatenation
@@ -11,7 +11,7 @@ const cn = (...inputs: string[]) => {
 };
 
 export default function Stats({ stats }: any) {
-
+    console.log(stats)
     // Animation variants for sections
     const sectionVariants = {
         hidden: { opacity: 0, y: 30 },
@@ -65,6 +65,13 @@ export default function Stats({ stats }: any) {
                 <p className="text-sm font-extrabold text-white">{stats.coldSoakOverview.last_recorded && `${stats.coldSoakOverview.last_recorded}`}</p>
             </div>
             <p className="text-4xl font-extrabold text-white">{`${formatSecondsToHHMMSS(stats.coldSoakOverview?.latest_data?.duration)}`}</p>
+
+            {stats.coldSoakOverview.cold_soaked_today && (
+                <div className='flex flex-col justify-center items-center'>
+                    <span>Complete</span>
+                    <Star size={40} className="text-white" />
+                </div>
+            )}
         </motion.div>
     );
 
@@ -86,6 +93,13 @@ export default function Stats({ stats }: any) {
             </div>
             <p className="text-4xl font-extrabold text-white">{stats?.fastingOverview?.status}</p>
             <p className="text-lg font-extrabold text-white">{stats?.fastingOverview?.duration && `${stats?.fastingOverview?.duration} hours`}</p>
+
+            {stats?.fastingOverview?.status === 'Complete' && (
+                <div className='flex flex-col justify-center items-center'>
+                    <span>Complete</span>
+                    <Star size={40} className="text-white" />
+                </div>
+            )}
         </motion.div>
     );
 
@@ -107,6 +121,13 @@ export default function Stats({ stats }: any) {
                 <p className="text-sm font-extrabold text-white">{stats.waterOverview.waterIntakeToday?.water_intake && `${stats.waterOverview?.date}`}</p>
             </div>
             <p className="text-4xl font-extrabold text-white">{`${stats.waterOverview.waterIntakeToday?.water_intake} oz.`}</p>
+
+            {stats.waterOverview.congrats && (
+                <div className='flex flex-col justify-center items-center'>
+                    <span>Complete</span>
+                    <Star size={40} className="text-white" />
+                </div>
+            )}
         </motion.div>
     );
 

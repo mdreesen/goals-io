@@ -1,7 +1,7 @@
 'use client'
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Scale, Target, TrendingUp, ArrowDown, ArrowUp, Star } from 'lucide-react';
+import { Scale, Target, TrendingUp, ArrowDown, Star } from 'lucide-react';
 
 // shadcn/ui components
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
