@@ -3,9 +3,8 @@ import { connectDB } from "@/lib/mongodb";
 import User from "@/(models)/User";
 import { getServerSession } from "next-auth/next";
 import { revalidatePath } from 'next/cache';
-import { date_time_fasting } from "@/lib/date_time";
-import { parse } from "@/lib/formatters";
-// import { formatDateAndTime } from '@/lib/formatters';
+import { formatDateAndTime } from "@/lib/formatters";
+import { date_today } from '@/lib/date_time';
 
 export async function fetchAllColdSoak() {
     const session = await getServerSession();
@@ -28,54 +27,26 @@ export async function fetchAllColdSoak() {
     }
 };
 
-export async function fetchColdSoak() {
+export async function fetchAllColdSoakToday() {
     const session = await getServerSession();
+    const today = await date_today();
 
     try {
         await connectDB();
-        const now = await date_time_fasting();
 
-        const data = await User.find({ email: session?.user.email }, 'fasting');
-        const latestFastingData = data[0].fasting.reverse()[0];
-        // const formattedLatestEndedFastingDate = latestFastingData.end_date;
-        // const formattedTodayDate = formatDateAndTime(now);
-
-        const fastingText = () => {
-            switch (true) {
-                // No fasting data
-                case !latestFastingData?._id:
-                    return 'Not Started';
-                    break
-                // Fasting started
-                case latestFastingData?.start:
-                    return "Currently Fasting";
-                    break
-                // Started but not complete
-                case latestFastingData.ended && !latestFastingData.completed:
-                    return "Ended Early";
-                    break
-                // Not completed fasting
-                case !latestFastingData?.completed:
-                    return "Not Complete";
-                    break
-
-                default:
-                    return "Complete"
-            };
-        };
+        const data = await User.find({ email: session?.user.email }, 'cold_soaks');
+        const latestData = data[0].cold_soaks.reverse()[0];
 
         return {
-            user: latestFastingData ?? [],
-            date_now: now,
-            today_complete: latestFastingData?.completed,
-            duration: latestFastingData?.duration,
-            status: fastingText(),
-            currently_fasting: latestFastingData?.start
-        };
+            data: data[0].cold_soaks.reverse() ?? [],
+            last_recorded: formatDateAndTime(latestData?.date),
+            cold_soaked_today: today.includes(formatDateAndTime(latestData?.date)),
+            latest_data: latestData
+        }
 
     } catch (error) {
-        console.log(error)
-        return error
+        console.log(error);
+        return error;
     }
 };
 
@@ -94,25 +65,15 @@ export async function addColdSoak(values: any) {
     }
 };
 
-export async function editColdSoak(values: any) {
-    const { _id } = values;
-
-    const session = await getServerSession();
-
-    const data = await User.find({ email: session?.user.email }, 'fasting');
-    const findFastingId = data[0].fasting.find((item: any) => parse(item._id).includes(_id)) ?? [];
-
-    const makeFastingObj = {
-        duration: findFastingId.duration,
-        ...values
-    }
+export async function deleteColdSoak(values: any) {
+    const { id } = values;
 
     try {
         await connectDB();
 
         await User.findOneAndUpdate(
-            { 'fasting._id': _id },
-            { $set: { 'fasting.$': { ...makeFastingObj } } },
+            { 'cold_soaks._id': id },
+            { $pull: { 'cold_soaks': { _id: id } } },
             { new: true });
 
         revalidatePath('/dashboard/body');

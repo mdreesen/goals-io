@@ -1,9 +1,8 @@
 'use client'
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Award, CheckCircle, Target, CalendarDays, Book, Clock, GlassWater, Scale } from 'lucide-react';
-import AnimatedCounter from '@/components/animations/AnimatedCounter';
-
+import { Snowflake, Book, Clock, GlassWater, Scale } from 'lucide-react';
+import { formatSecondsToHHMMSS } from '@/lib/formatters';
 
 // Utility function for Tailwind CSS class concatenation
 // This is typically from your lib/utils.ts if using shadcn/ui
@@ -48,6 +47,27 @@ export default function Stats({ stats }: any) {
         </motion.div>
     );
 
+    const coldSoak = stats.showColdSoak && (
+        <motion.div
+            variants={cardVariants}
+            initial="hidden"
+            animate="visible"
+            transition={{ delay: 0.1 }}
+            className={cn(
+                "flex flex-col items-center text-center space-y-3",
+                "transform hover:scale-105 transition-transform duration-300 ease-out",
+                `bg-gradient-to-br from-blue-300 to-blue-500 p-6 rounded-xl shadow-xl` // Apply dynamic gradient and base styling
+            )}
+        >
+            <Snowflake size={24} className={`text-white`} />
+            <div className="text-lg font-medium text-gray-200">
+                Cold Soak
+                <p className="text-sm font-extrabold text-white">{stats.coldSoakOverview.last_recorded && `${stats.coldSoakOverview.last_recorded}`}</p>
+            </div>
+            <p className="text-4xl font-extrabold text-white">{`${formatSecondsToHHMMSS(stats.coldSoakOverview?.latest_data?.duration)}`}</p>
+        </motion.div>
+    );
+
     const fasting = stats.showFasting && (
         <motion.div
             variants={cardVariants}
@@ -61,8 +81,11 @@ export default function Stats({ stats }: any) {
             )}
         >
             <Clock size={24} className={`text-yellow-400 ${stats?.fastingOverview?.currently_fasting ? 'animate-bounce' : ''}`} />
-            <p className="text-lg font-medium text-gray-200">Fasting</p>
+            <div className="text-lg font-medium text-gray-200">
+                Fasting
+            </div>
             <p className="text-4xl font-extrabold text-white">{stats?.fastingOverview?.status}</p>
+            <p className="text-lg font-extrabold text-white">{stats?.fastingOverview?.duration && `${stats?.fastingOverview?.duration} hours`}</p>
         </motion.div>
     );
 
@@ -79,7 +102,10 @@ export default function Stats({ stats }: any) {
             )}
         >
             <GlassWater size={24} className={`text-blue-400`} />
-            <p className="text-lg font-medium text-gray-200">Daily Water</p>
+            <div className="text-lg font-medium text-gray-200">
+                Daily Water
+                <p className="text-sm font-extrabold text-white">{stats.waterOverview.waterIntakeToday?.water_intake && `${stats.waterOverview?.date}`}</p>
+            </div>
             <p className="text-4xl font-extrabold text-white">{`${stats.waterOverview.waterIntakeToday?.water_intake} oz.`}</p>
         </motion.div>
     );
@@ -97,7 +123,10 @@ export default function Stats({ stats }: any) {
             )}
         >
             <Scale size={24} className={`text-purple-400`} />
-            <p className="text-lg font-medium text-gray-200">Weight</p>
+            <div className="text-lg font-medium text-gray-200">
+                Weight
+                <p className="text-sm font-extrabold text-white">{stats?.weightOverview.dataToDate?.weight_date && `${stats?.weightOverview.dataToDate?.weight_date}`}</p>
+            </div>
             <p className="text-4xl font-extrabold text-white">{stats?.weightOverview.dataToDate?.weight ? `${stats?.weightOverview.dataToDate?.weight} lbs.` : 'No recorded weight'}</p>
         </motion.div>
     );
@@ -112,6 +141,7 @@ export default function Stats({ stats }: any) {
             <h2 className="text-3xl font-bold mb-8">Your Overview</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 {books}
+                {coldSoak}
                 {fasting}
                 {water}
                 {weight}

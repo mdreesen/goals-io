@@ -8,7 +8,6 @@ import ButtonDeleteBible from "@/components/buttons/ButtonDeleteBible";
 import ButtonCancel from "@/components/buttons/ButtonCancel";
 
 export default function BibleForm({ data }: any) {
-    console.log(data)
 
     const [error, setError] = useState<string>();
     const [loading, setLoading] = useState(false);

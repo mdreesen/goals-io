@@ -1,8 +1,9 @@
-'use client'
+'use client';
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { DropletIcon, DropletOff } from 'lucide-react'; // Icons for workouts, status
+import { DropletIcon, DropletOff, Trash } from 'lucide-react'; // Icons for workouts, status
 import { formatSecondsToHHMMSS } from '@/lib/formatters';
+import ButtonDeleteColdSoak from '@/components/buttons/ButtonDeleteColdSoak';
 // shadcn/ui components
 import { Card, CardContent, CardDescription, CardTitle } from '@/components/ui/card';
 
@@ -45,23 +46,29 @@ export default function ColdSoakList({ list }: any) {
                             )}
                         >
                             <CardContent className="p-6 flex items-center justify-between">
-                                <div className="flex items-center space-x-4">
+                                <div className="flex flex-col items-center space-x-4 space-y-4">
                                     {/* Icon with background circle */}
-                                    <div className={cn(
-                                        "p-3 rounded-full",
-                                        item.duration && 'bg-blue-500/20',
-                                    )}>
-                                        {item.duration && <DropletIcon size={20} className="text-blue-400" />}
-                                    </div>
-                                    <div>
-                                        <CardTitle className="text-md font-semibold text-gray-100">{item.dateFormatted}</CardTitle>
-                                        <CardDescription className="text-gray-400 text-sm mt-1">{item.duration && `Duration ${formatSecondsToHHMMSS(item.duration)}`}</CardDescription>
-                                        <p className={cn(
-                                            "text-xs font-medium mt-2",
-                                            item.duration && 'text-blue-300',
+                                    <div className='flex items-center space-x-4'>
+                                        <div className={cn(
+                                            "p-3 rounded-full",
+                                            item.duration && 'bg-blue-500/20',
                                         )}>
-                                            Status: {item.duration !== '' && 'Logged'}
-                                        </p>
+                                            {item.duration && <DropletIcon size={20} className="text-blue-400" />}
+                                        </div>
+                                        <div>
+                                            <CardTitle className="text-md font-semibold text-gray-100">{item.dateFormatted}</CardTitle>
+                                            <CardDescription className="text-gray-400 text-sm mt-1">{item.duration && `Duration ${formatSecondsToHHMMSS(item.duration)}`}</CardDescription>
+                                            <p className={cn(
+                                                "text-xs font-medium mt-2",
+                                                item.duration && 'text-blue-300',
+                                            )}>
+                                                Status: {item.duration !== '' && 'Logged'}
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div className='flex justify-center'>
+                                        <ButtonDeleteColdSoak data={item} />
                                     </div>
                                 </div>
                             </CardContent>

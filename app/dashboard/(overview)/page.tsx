@@ -2,7 +2,6 @@ import { Suspense } from "react";
 import { ChartSkeleton } from '@/components/loaders/Skeletons';
 import Welcome from '@/ui/overview/Welcome';
 import Stats from '@/ui/overview/Stats';
-// import RecentActivity from '@/ui/overview/RecentActivity';
 
 import { parse } from '@/lib/formatters';
 import { fetchUserOverview } from "@/actions/user";
