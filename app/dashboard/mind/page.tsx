@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import Affirmations from "@/ui/affirmations/Affirmations";
 import Books from "@/ui/books/Books";
 import Habits from '@/ui/habits/Habits';
+import Gratitudes from "@/ui/gratitude/Gratitudes";
 import { fetchSettings } from '@/actions/settings';
 import type { Metadata } from "next";
 import UseLoadingScale from "@/components/loaders/UseLoadingScale";
@@ -17,7 +18,7 @@ export const metadata: Metadata = {
 
 export default async function Page() {
     const useSettings = await fetchSettings() ?? [];
-    const { useShowAffirmations, useShowBooks, useShowHabits } = useSettings;
+    const { useShowAffirmations, useShowBooks, useShowHabits, useShowGratitudes } = useSettings;
 
     const dividerOne = useShowBooks?.value || useShowHabits?.value;
     const dividerTwo = useShowHabits?.value;
@@ -40,6 +41,14 @@ export default async function Page() {
         </>
     );
 
+    const useGratitudes = useShowGratitudes?.value && (
+        <>
+            <Suspense fallback={<UseLoadingScale />}>
+                <Gratitudes />
+            </Suspense>
+        </>
+    );
+
     const useHabits = useShowHabits?.value && (
         <>
             <Suspense fallback={<UseLoadingScale />}>
@@ -52,6 +61,7 @@ export default async function Page() {
         <div className="flex flex-col gap-[4rem] px-[1rem]">
             {useAffirmations}
             {useBooks}
+            {useGratitudes}
             {useHabits}
         </div>
     )

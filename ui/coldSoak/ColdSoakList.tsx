@@ -45,7 +45,7 @@ export default function ColdSoakList({ list }: any) {
                                 "cursor-pointer" // Indicate clickable
                             )}
                         >
-                            <CardContent className="p-6 flex items-center justify-between">
+                            <CardContent className="p-6 flex items-center justify-center">
                                 <div className="flex flex-col items-center space-x-4 space-y-4">
                                     {/* Icon with background circle */}
                                     <div className='flex items-center space-x-4'>

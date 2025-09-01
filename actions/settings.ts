@@ -15,8 +15,9 @@ export async function fetchSettings() {
         const useShowAffirmations = user?.settings.find((item: any) => item.setting.includes('showAffirmations') ?? {}) ?? [];
         const useShowBible = user?.settings.find((item: any) => item.setting.includes('showBible') ?? {}) ?? [];
         const useShowBooks = user?.settings.find((item: any) => item.setting.includes('showBooks') ?? {}) ?? [];
-        const useShowFasting = user?.settings.find((item: any) => item.setting.includes('showFasting') ?? {}) ?? [];
         const useShowColdSoak = user?.settings.find((item: any) => item.setting.includes('showColdSoak') ?? {}) ?? [];
+        const useShowFasting = user?.settings.find((item: any) => item.setting.includes('showFasting') ?? {}) ?? [];
+        const useShowGratitudes = user?.settings.find((item: any) => item.setting.includes('showGratitudes') ?? {}) ?? [];
         const useShowHabits = user?.settings.find((item: any) => item.setting.includes('showHabits') ?? {}) ?? [];
         const useShowJournal = user?.settings.find((item: any) => item.setting.includes('showJournal') ?? {}) ?? [];
         const useShowWaterIntake = user?.settings.find((item: any) => item.setting.includes('showWaterIntake') ?? {}) ?? [];
@@ -25,11 +26,11 @@ export async function fetchSettings() {
         const useDarkMode = user?.settings.find((item: any) => item.setting.includes('darkMode') ?? {}) ?? [];
 
         const useShowBody = useShowWeight.value || useShowWaterIntake.value || useShowFasting.value || useShowWorkout.value || useShowColdSoak.value;
-        const useShowMind = useShowAffirmations.value || useShowBooks.value || useShowHabits.value;
+        const useShowMind = useShowAffirmations.value || useShowBooks.value || useShowGratitudes.value || useShowHabits.value;
         const useShowSpirit = useShowBible.value || useShowJournal.value;
 
         const bodySettings = [useShowColdSoak, useShowFasting, useShowWaterIntake, useShowWeight, useShowWorkout];
-        const mindSettings = [useShowAffirmations, useShowBooks, useShowHabits];
+        const mindSettings = [useShowAffirmations, useShowBooks, useShowGratitudes, useShowHabits];
         const spiritSettings = [useShowBible, useShowJournal];
         const personalSettings = [useDarkMode];
 
@@ -41,6 +42,7 @@ export async function fetchSettings() {
             useShowBooks: useShowBooks,
             useShowColdSoak: useShowColdSoak,
             useShowFasting: useShowFasting,
+            useShowGratitudes: useShowGratitudes,
             useShowHabits: useShowHabits,
             useShowJournal: useShowJournal,
             useShowWaterIntake: useShowWaterIntake,

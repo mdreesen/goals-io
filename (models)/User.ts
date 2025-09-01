@@ -50,6 +50,12 @@ const fastingSchema = new Schema(
         duration: Number || undefined,
     }, { timestamps: false });
 
+const gratitudeSchema = new Schema(
+    {
+        gratitude: String || undefined,
+        date: String || undefined,
+    }, { timestamps: false });
+
 const habitsSchema = new Schema(
     {
         title: String || undefined,
@@ -117,6 +123,7 @@ const userSchema = new Schema(
         bibles: [bibleSchema],
         books: [bookSchema],
         cold_soaks: [coldSoakSchema],
+        gratitudes: [gratitudeSchema],
         fasting: [fastingSchema],
         habits: [habitsSchema],
         journal: [journalSchema],
