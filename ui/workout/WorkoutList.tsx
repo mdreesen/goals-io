@@ -2,7 +2,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Dumbbell, Clock, CheckCircle, XCircle, ChevronRight } from 'lucide-react'; // Icons for workouts, status
+import { Dumbbell, Footprints, Scale, Minus, BicepsFlexed, Cross, Bike, PersonStanding, Sailboat, WavesLadder, Clock, CheckCircle, XCircle, ChevronRight } from 'lucide-react'; // Icons for workouts, status
 
 // shadcn/ui components
 import { Button } from '@/components/ui/button';
@@ -53,18 +53,34 @@ export default function WorkoutsList({ workout }: any) {
                                         {/* Icon with background circle */}
                                         <div className={cn(
                                             "p-3 rounded-full",
-                                            workout.type === 'Strength Training' && 'bg-green-500/20',
+                                            workout.type && 'bg-green-500/20',
                                             // workout.status === 'scheduled' && 'bg-blue-500/20',
                                             // workout.status === 'missed' && 'bg-red-500/20',
                                         )}>
+                                            {workout.type === 'Balance' && <Scale size={20} className="text-green-400" />}
+                                            {workout.type === 'Barre' && <Minus size={20} className="text-green-400" />}
+                                            {workout.type === 'Cardio' && <Footprints size={20} className="text-green-400" />}
+                                            {workout.type === 'Calisthenics' && <BicepsFlexed size={20} className="text-green-400" />}
+                                            {workout.type === 'Cross-training' && <Cross size={20} className="text-green-400" />}
+                                            {workout.type === 'Cycling' && <Bike size={20} className="text-green-400" />}
+                                            {workout.type === 'Dance' && <PersonStanding size={20} className="text-green-400" />}
+                                            {workout.type === 'Dance' && <PersonStanding size={20} className="text-green-400" />}
+                                            {workout.type === 'Flexibility Training' && <PersonStanding size={20} className="text-green-400" />}
+                                            {workout.type === 'Pilates' && <PersonStanding size={20} className="text-green-400" />}
+                                            {workout.type === 'Pilates' && <PersonStanding size={20} className="text-green-400" />}
+                                            {workout.type === 'Rowing' && <Sailboat size={20} className="text-green-400" />}
                                             {workout.type === 'Strength Training' && <Dumbbell size={20} className="text-green-400" />}
+                                            {workout.type === 'Stretching' && <PersonStanding size={20} className="text-green-400" />}
+                                            {workout.type === 'Swimming' && <WavesLadder size={20} className="text-green-400" />}
+                                            {workout.type === 'Walking' && <Footprints size={20} className="text-green-400" />}
+                                            {workout.type === 'Yoga' && <PersonStanding size={20} className="text-green-400" />}
                                         </div>
                                         <div>
                                             <CardTitle className="text-xl font-semibold text-gray-100">{workout.type}</CardTitle>
                                             <CardDescription className="text-gray-400 text-sm mt-1">{workout.description}</CardDescription>
                                             <p className={cn(
                                                 "text-xs font-medium mt-2",
-                                                workout.type === 'Strength Training' && 'text-green-300',
+                                                workout.type && 'text-green-300',
                                                 // workout.status === 'scheduled' && 'text-blue-300',
                                                 // workout.status === 'missed' && 'text-red-300',
                                             )}>

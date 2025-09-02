@@ -3,7 +3,8 @@ import { connectDB } from "@/lib/mongodb";
 import User from "@/(models)/User";
 import { getServerSession } from "next-auth/next";
 import { revalidatePath } from 'next/cache';
-import { findHighestNumber, findAverageNumber, lossOrGain, round } from '@/lib/formatters'
+import { findHighestNumber, findAverageNumber, lossOrGain, round, formatDateAndTime } from '@/lib/formatters';
+import { date_today } from '@/lib/date_time';
 
 export async function fetchWeight() {
     const session = await getServerSession();
@@ -14,11 +15,12 @@ export async function fetchWeight() {
         // Getting weight and limiting
         const data = await User.find({ email: session?.user.email }, 'weight');
         const limited = await User.find({ email: session?.user.email }, { weight:{ $slice: -10 } }).limit(10);
+
         const useNumber = data[0].weight.map((item: any) => Number(item.weight));
         const startingWeight =  data[0].weight.find((item: any) => item.starting_weight === true);
         const current = limited[0].weight.reverse()[0]?.weight ?? '0';
         const lostOrGained = lossOrGain({ starting: startingWeight?.weight, current: current });
-        const positiveInteger = Math.abs(Number(lostOrGained))
+        const positiveInteger = Math.abs(Number(lostOrGained));
 
         return {
             data: data[0].weight.reverse(),
@@ -40,6 +42,7 @@ export async function fetchWeight() {
 
 export async function fetchWeightOverview() {
     const session = await getServerSession();
+    const today = await date_today();
 
     try {
         await connectDB();
@@ -48,6 +51,8 @@ export async function fetchWeightOverview() {
         const user = await User.find({ email: session?.user.email });
         const data = await User.find({ email: session?.user.email }, 'weight');
         const limited = await User.find({ email: session?.user.email }, { weight:{ $slice: -10 } }).limit(10);
+        const latestData = data[0].weight.reverse()[0];
+
         const useNumber = data[0].weight.map((item: any) => Number(item.weight));
         const startingWeight =  data[0].weight.find((item: any) => item.starting_weight === true);
         const current = limited[0].weight.reverse()[0]?.weight ?? '0';
@@ -67,7 +72,8 @@ export async function fetchWeightOverview() {
             weightLGType: lostOrGained.includes('-') ? 'increase' : 'decrease',
             totalWeight: data[0].weight.length.toString(),
             goalLostOrGained: goalLostOrGained.includes('-') ? `${goalPositiveInteger.toString()} lbs to go` : 'Goal Achieved!',
-            goalProgress: Number(limited[0].weight[0]?.weight) <= Number(user[0]?.goal_weight)
+            goalProgress: Number(limited[0].weight[0]?.weight) <= Number(user[0]?.goal_weight),
+            logged_today: today.includes(formatDateAndTime(latestData?.weight_date)),
         }
 
     } catch (error) {

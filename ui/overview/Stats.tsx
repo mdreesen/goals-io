@@ -11,6 +11,7 @@ const cn = (...inputs: string[]) => {
 };
 
 export default function Stats({ stats }: any) {
+    console.log(stats)
 
     // Animation variants for sections
     const sectionVariants = {
@@ -149,6 +150,13 @@ export default function Stats({ stats }: any) {
                 <p className="text-sm font-extrabold text-white">{stats?.weightOverview.dataToDate?.weight_date && `${stats?.weightOverview.dataToDate?.weight_date}`}</p>
             </div>
             <p className="text-4xl font-extrabold text-white">{stats?.weightOverview.dataToDate?.weight ? `${stats?.weightOverview.dataToDate?.weight} lbs.` : 'No recorded weight'}</p>
+
+            {stats.weightOverview.logged_today && (
+                <div className='flex flex-col justify-center items-center'>
+                    <span>Complete</span>
+                    <Star size={40} className="text-white" />
+                </div>
+            )}
         </motion.div>
     );
 
