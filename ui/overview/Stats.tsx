@@ -11,7 +11,6 @@ const cn = (...inputs: string[]) => {
 };
 
 export default function Stats({ stats }: any) {
-    console.log(stats)
 
     // Animation variants for sections
     const sectionVariants = {
