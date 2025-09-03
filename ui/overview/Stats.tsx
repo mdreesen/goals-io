@@ -1,7 +1,7 @@
 'use client'
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Snowflake, Book, Clock, GlassWater, Scale, Star, ShieldHalf } from 'lucide-react';
+import { Snowflake, Book, Clock, GlassWater, Scale, Star, Shield } from 'lucide-react';
 import { formatSecondsToHHMMSS } from '@/lib/formatters';
 
 // Utility function for Tailwind CSS class concatenation
@@ -30,8 +30,8 @@ export default function Stats({ stats }: any) {
 
     const goalsAchived = stats.achivedGoals && (
         <div className='text-2xl font-extrabold flex mb-8 items-center justify-center gap-2 pl-[8px] text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 underline-offset-1'>
-            Heights <ShieldHalf size={30} className={`text-green-400`} /> Reached
-        </div>
+            Heights <Shield size={30} className={`text-gray-500`} /> Reached
+            </div>
     );
 
     const books = stats.showBooks && (
