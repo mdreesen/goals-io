@@ -21,7 +21,7 @@ export default async function Books() {
                 </div>
             </div>
 
-            {books.bookList.length > 0 ?<BooksReadList books={parse(books.bookList)}/> : <h3>Log your books!</h3>}
+            {books.bookList.length > 0 ?<BooksReadList format={'list'} books={parse(books.bookList, )}/> : <h3>Log your books!</h3>}
         </div>
     )
 }

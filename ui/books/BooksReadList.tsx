@@ -2,8 +2,20 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import EmblaCarousel from '@/components/carousels/BookEmblaCarousel';
+import BookCard from './BookCard';
 
-export default function BooksReadList({ books }: any) {
+export default function BooksReadList({ books, format }: any) {
+
+    const useCarousel = format === 'carousel' && (
+        <EmblaCarousel slides={books} />
+    );
+
+    const useList = format === 'list' && books.map((book: any, index: number) => (
+        <BookCard
+            key={`book-${index}`}
+            data={{ bookData: book, index: index }}
+        />
+    ))
 
     return (
         <motion.div
@@ -13,7 +25,8 @@ export default function BooksReadList({ books }: any) {
             className="space-y-6"
         >
             <AnimatePresence>
-                <EmblaCarousel slides={books} />
+                {useCarousel}
+                {useList}
             </AnimatePresence>
         </motion.div>
     );

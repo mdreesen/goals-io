@@ -39,7 +39,7 @@ export default function BookCard(bookData: any) {
                     initial="hidden"
                     animate="visible"
                     exit="exit"
-                    className="w-full"
+                    className="w-full justify-items-center"
                     transition={{ delay: bookData?.index * 0.1 }} // Staggered entry
                 >
 

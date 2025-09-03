@@ -72,7 +72,7 @@ export default async function Books() {
                 <Results data={books.totalBooks} />
             </div>
 
-            {books.limited.length > 0 ? <BooksReadList books={parse(books.limited)} /> : <NoDataText text="Log your books!" />}
+            {books.limited.length > 0 ? <BooksReadList format={'carousel'} books={parse(books.limited)} /> : <NoDataText text="Log your books!" />}
         </div>
     )
 }
