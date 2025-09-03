@@ -15,7 +15,7 @@ export default async function Books() {
     const useCurrentBook = (
         <div className="pb-[2rem] justify-center flex gap-6 items-baseline">
             {books.useCurrentlyReading.map((item: any, index: number) => (
-                <Link className="w-[10rem] h-full flex flex-col gap-2" href={`/dashboard/mind/books/edit/${item.id}`}>
+                <Link key={`$book-${index}`} className="w-[10rem] h-full flex flex-col gap-2" href={`/dashboard/mind/books/edit/${item.id}`}>
                     {item.book_image ? (
                         <Image
                             alt={`${item.book_title} of ${index}`}

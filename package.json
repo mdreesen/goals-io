@@ -1,6 +1,6 @@
 {
   "name": "goals-io",
-  "version": "0.7.7.8",
+  "version": "0.7.7.9",
   "private": true,
   "description": "Set goals. Achieve greatness.",
   "main": "index.js",
@@ -30,6 +30,9 @@
     "clsx": "^2.1.1",
     "count-up": "^1.0.4",
     "date-fns": "^3.6.0",
+    "embla-carousel": "^8.6.0",
+    "embla-carousel-autoplay": "^8.6.0",
+    "embla-carousel-react": "^8.6.0",
     "framer-motion": "^12.6.3",
     "full-icu": "^1.5.0",
     "lucide-react": "^0.469.0",
