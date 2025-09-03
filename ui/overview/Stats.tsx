@@ -70,7 +70,11 @@ export default function Stats({ stats }: any) {
                 Cold Soak
                 <p className="text-sm font-extrabold text-white">{stats.coldSoakOverview.last_recorded && `${stats.coldSoakOverview.last_recorded}`}</p>
             </div>
-            <p className="text-4xl font-extrabold text-white">{`${formatSecondsToHHMMSS(stats.coldSoakOverview?.latest_data?.duration)}`}</p>
+            {stats.coldSoakOverview?.latest_data ? (
+                <p className="text-4xl font-extrabold text-white">{`${formatSecondsToHHMMSS(stats.coldSoakOverview?.latest_data?.duration)}`}</p>
+            ) : (
+                <p className="text-4xl font-extrabold text-white">{`00:00:00`}</p>
+            )}
 
             {stats.coldSoakOverview.cold_soaked_today && (
                 <div className='flex flex-col justify-center items-center'>

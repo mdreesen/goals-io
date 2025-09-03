@@ -60,7 +60,21 @@ export async function fetchWeightOverview() {
         const positiveInteger = Math.abs(Number(lostOrGained));
         const goalLostOrGained = lossOrGain({ starting: user[0]?.goal_weight, current: current });
         const goalPositiveInteger = Math.abs(Number(goalLostOrGained));
-        const goalProgress = round(Number(user[0]?.goal_weight) - Number(limited[0].weight[0]?.weight)).toString();
+        // const goalProgress = round(Number(user[0]?.goal_weight) - Number(limited[0].weight[0]?.weight)).toString();
+
+        const message = () => {
+            switch (true) {
+                case goalLostOrGained.includes('-'):
+                    return `${goalPositiveInteger.toString()} lbs to go`;
+                    break
+                case data[0].weight.length.toString() === '0':
+                    return 'No goal weight'
+                    break;
+
+                default:
+                    return 'Goal Achieved!'
+            }
+        }
 
         return {
             goalWeight: user[0]?.goal_weight,
@@ -71,7 +85,7 @@ export async function fetchWeightOverview() {
             lossOrGain: lostOrGained.includes('-') ? `Gained ${positiveInteger.toString()} lbs` : `Lost ${lostOrGained === 'NaN' ? '0' : lostOrGained} lbs`,
             weightLGType: lostOrGained.includes('-') ? 'increase' : 'decrease',
             totalWeight: data[0].weight.length.toString(),
-            goalLostOrGained: goalLostOrGained.includes('-') ? `${goalPositiveInteger.toString()} lbs to go` : 'Goal Achieved!',
+            goalLostOrGained: message(),
             goalProgress: Number(limited[0].weight[0]?.weight) <= Number(user[0]?.goal_weight),
             logged_today: today.includes(formatDateAndTime(latestData?.weight_date)),
         }
