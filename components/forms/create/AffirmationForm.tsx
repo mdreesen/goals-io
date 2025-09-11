@@ -9,7 +9,7 @@ import affirmation_type from '@/lib/dropdown/affirmation_type.json'
 import { TypeAffirmation } from '@/types/forms';
 import { formVariants, itemVariants } from '@/lib/variants';
 
-export default function WorkoutForm() {
+export default function AffirmationForm() {
     const router = useRouter();
 
     const [error, setError] = useState<string>();

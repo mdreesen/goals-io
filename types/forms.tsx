@@ -12,6 +12,16 @@ export interface TypeBible {
     icon: string;
 }
 
+export interface TypeBook {
+    book_title: string;
+    kind_of_book: string;
+    book_author: string;
+    book_start_date: string;
+    book_end_date: string;
+    notes: string;
+    booklist: string;
+}
+
 export interface TypeGratitude {
     gratitude: string;
     date: string;

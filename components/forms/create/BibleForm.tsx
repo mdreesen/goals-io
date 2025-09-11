@@ -10,7 +10,7 @@ import bible_books from '@/lib/dropdown/bible_books.json';
 import { TypeBible } from '@/types/forms';
 import { formVariants, itemVariants } from '@/lib/variants';
 
-export default function WorkoutForm() {
+export default function BibleForm() {
     const router = useRouter();
 
     const [error, setError] = useState<string>();
