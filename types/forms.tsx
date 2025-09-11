@@ -1,3 +1,17 @@
+export interface TypeAffirmation {
+    affirmation: string;
+    kind: string;
+}
+
+export interface TypeBible {
+    book_title: string;
+    chapter: string;
+    verses: string;
+    notes: string;
+    type: string;
+    icon: string;
+}
+
 export interface TypeGratitude {
     gratitude: string;
     date: string;
