@@ -1,23 +1,38 @@
 'use client';
-import { useRef, useState } from "react";
+
+import { useState } from "react";
+import { motion } from 'framer-motion';
+import Link from 'next/link';
 import { useRouter } from "next/navigation";
 import { addGratitudes } from "@/actions/sections/mind/gratitudes";
-import Link from 'next/link';
+import { TypeGratitude } from '@/types/forms';
+import { formVariants, itemVariants } from '@/lib/variants';
 
 export default function GratitudeForm() {
-
     const router = useRouter();
-    const ref = useRef(null);
 
     const [error, setError] = useState<string>();
+    const [habitData, setHabitData] = useState<TypeGratitude>({
+        gratitude: '',
+        date: ''
+    });
 
-    const handleSubmit = async (formData: FormData) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+        const { name, value } = e.target;
+
+        setHabitData((prev) => ({ ...prev, [name]: value }));
+    };
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        const formData = new FormData(e.currentTarget);
+        const data = Object.fromEntries(formData.entries());
 
         try {
-            await addGratitudes({
-                gratitude: formData.get("gratitude"),
-                date: new Date(),
-            });
+
+            await addGratitudes({ ...data });
+
             router.refresh
             router.push(`/dashboard/mind`);
         } catch (error) {
@@ -26,52 +41,75 @@ export default function GratitudeForm() {
         }
     };
 
-    const information = (
-        <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-
-            <div className="col-span-full">
-                <label htmlFor="gratitude" className="block text-sm/6 font-medium">
-                    Gratitude
-                </label>
-                <div className="mt-2">
-                    <textarea
-                        id="gratitude"
-                        name="gratitude"
-                        rows={3}
-                        className="block w-full rounded-md px-3 py-1.5 text-base outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
-                        placeholder="I am grateful for..."
-                        defaultValue={''}
-                    />
-                </div>
-            </div>
-        </div>
-    );
-
+    const handleReset = () => {
+        setHabitData({
+            gratitude: '',
+            date: ''
+        });
+    };
 
     return (
-        <form ref={ref} action={handleSubmit}>
-            <div className="space-y-12 px-[2rem]">
-                <div className="border-b border-gray-900/10 pb-12">
-                    <h2 className="text-base/7 font-semibold">Gratitude information</h2>
-                    <p className="mt-1 text-sm/6">Name and details of Gratitude.</p>
+        <motion.form
+            className="flex w-full bg-transparent flex-col items-center justify-center space-y-6 p-8"
+            onSubmit={handleSubmit}
+            initial="hidden"
+            animate="visible"
+            variants={formVariants}
+        >
 
-                    {information}
-                </div>
-            </div>
+            <motion.div className="w-full max-w-lg space-y-4" variants={itemVariants}>
+                <label htmlFor="gratitude" className="block text-sm font-medium">
+                    Gratitude
+                </label>
+                <input
+                    id="gratitude"
+                    name="gratitude"
+                    required
+                    className="w-full rounded-md border border-gray-600 px-4 py-2 placeholder-gray-500 transition-colors duration-200 ease-in-out focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                    placeholder="I am grateful for..."
+                    value={habitData.gratitude}
+                    onChange={handleChange}
+                />
+            </motion.div>
 
-            <div className="mt-6 flex items-center justify-end gap-x-6">
-                <Link href={'/dashboard/mind'}>
-                    <button type="button" className="text-sm/6 font-semibold">
-                        Cancel
-                    </button>
-                </Link>
-                <button
-                    type="submit"
-                    className="block rounded-md bg-gray-800 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-gray-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            <div className="flex w-full max-w-lg space-x-4">
+                <motion.button
+                    type="button"
+                    onClick={handleReset}
+                    className="w-full max-w-lg rounded-md bg-gradient-to-r from-blue-500 to-purple-600 py-3 text-lg font-semibold shadow-lg transition-all duration-300 ease-in-out hover:from-blue-600 hover:to-purple-700 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900"
+                    variants={itemVariants}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                 >
-                    Save
-                </button>
+                    Reset
+                </motion.button>
             </div>
-        </form>
-    )
+
+            <motion.button
+                type="submit"
+                className="w-full max-w-lg rounded-md bg-gradient-to-r from-blue-500 to-purple-600 py-3 text-lg font-semibold shadow-lg transition-all duration-300 ease-in-out hover:from-blue-600 hover:to-purple-700 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900"
+                variants={itemVariants}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+            >
+                Save
+            </motion.button>
+
+            <div className="flex w-full max-w-lg space-x-4">
+                <motion.button
+                    type="button"
+                    className="w-full max-w-lg rounded-md bg-gradient-to-r from-blue-500 to-purple-600 py-3 text-lg font-semibold shadow-lg transition-all duration-300 ease-in-out hover:from-blue-600 hover:to-purple-700 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900"
+                    variants={itemVariants}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                >
+                    <Link href={'/dashboard/body'} className="block w-full">
+                        Cancel
+                    </Link>
+                </motion.button>
+            </div>
+
+            {error && <span className='block text-sm/6 font-medium text-red-500'>{error}</span>}
+        </motion.form>
+    );
 }

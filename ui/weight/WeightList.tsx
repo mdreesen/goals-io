@@ -7,6 +7,7 @@ import { Scale, CalendarDays, CheckCircle, XCircle, ChevronRight } from 'lucide-
 // shadcn/ui components
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { formatDateAndTime } from '@/lib/formatters';
 
 // Utility function for Tailwind CSS class concatenation
 const cn = (...inputs: (string | boolean)[]) => {
@@ -61,7 +62,7 @@ export default function WeightList({ weight }: any) {
                                     </div>
                                     <div>
                                         <CardTitle className="text-xl font-semibold text-gray-100">{entry.weight} lbs</CardTitle>
-                                        <CardDescription className="text-gray-400 text-sm mt-1">Logged on {entry.weight_date}</CardDescription>
+                                        <CardDescription className="text-gray-400 text-sm mt-1">Logged on {formatDateAndTime(entry.weight_date)}</CardDescription>
                                         <p className={cn(
                                             "text-xs font-medium mt-2",
                                             entry.weight_date !== '' && 'text-blue-300',

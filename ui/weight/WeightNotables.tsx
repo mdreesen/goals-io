@@ -5,6 +5,7 @@ import { Scale, Target, TrendingUp, ArrowDown, Star } from 'lucide-react';
 
 // shadcn/ui components
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { formatDateAndTime } from '@/lib/formatters';
 
 // Utility function for Tailwind CSS class concatenation
 const cn = (...inputs: string[]) => {
@@ -43,7 +44,7 @@ export default function WeightNotables({ notables }: any) {
                     )}>
                         {notables.dataToDate.weight} lbs
                     </div>
-                    <p className="text-xs text-gray-300 mt-1">As of {notables.dataToDate.weight_date}</p>
+                    <p className="text-xs text-gray-300 mt-1">As of {formatDateAndTime(notables.dataToDate.weight_date)}</p>
                 </CardContent>
             </Card>
         </motion.div>
