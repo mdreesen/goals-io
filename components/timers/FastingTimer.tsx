@@ -13,6 +13,24 @@ interface TimeLeft {
     seconds: number;
 }
 
+const containerVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: {
+        opacity: 1,
+        y: 0,
+        transition: {
+            when: 'beforeChildren',
+            staggerChildren: 0.1,
+            duration: 0.5,
+        },
+    },
+};
+
+const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 },
+};
+
 export default function FastingTimer({ fastData }: any) {
     const [startTime, setStartTime] = useState<Date | null>(null);
     const [endTime, setEndTime] = useState<Date | null>(null);
@@ -135,121 +153,84 @@ export default function FastingTimer({ fastData }: any) {
         }
     };
 
-    const buttonSixteen = (
-        <Button
-            onClick={() => handleFasting(16)}
-            className="block rounded-md bg-gray-800 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-gray-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-        >
-            16-Hour
-        </Button>
-    );
-
-    const buttonEightteen = (
-        <Button
-            onClick={() => handleFasting(18)}
-            className="block rounded-md bg-gray-800 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-gray-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-        >
-            18-Hour
-        </Button>
-    );
-
-    const buttonTwenty = (
-        <Button
-            onClick={() => handleFasting(20)}
-            className="block rounded-md bg-gray-800 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-gray-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-        >
-            20-Hour
-        </Button>
-    );
-
-    const buttonEndFast = (
-        <Button
-            onClick={handleEndFasting}
-            className="block rounded-md bg-gray-800 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-gray-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-        >
-            End Fast
-        </Button>
-    );
-
-    const fastingStatus = useEndFasting && (
-        <motion.div
-            className='h-[24px]'
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.5 }}
-        >
-            Fasting Complete!
-        </motion.div>
-    );
-
-    const currentFastingTime = timeLeft && (
-        <motion.div
-            className="flex justify-between"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.5 }}
-        >
-            <p className="text-sm font-medium flex gap-1">
-                <span>Time left:</span>
-                <span className='text-yellow-600 font-semibold'>{`${formatTime(timeLeft.hours)}:${formatTime(timeLeft.minutes)}:${formatTime(timeLeft.seconds)}`}</span></p>
-            <p className="text-sm font-medium">{`${fastData.user.duration} hours`}</p>
-        </motion.div>
-    );
-
-    const progressBar = !loading && (
-        <div aria-hidden="true" className="mt-6">
-            {currentFastingTime}
-            <div className={`overflow-hidden rotate-180 rounded-full ${useEndFasting ? 'bg-gray-200' : 'bg-yellow-500'}`}>
-                <div style={{ width: `${useEndFasting ? '100' : useTimedFasting}%` }} className={`${useEndFasting ? 'bg-green-500 animate-pulse' : 'bg-gray-200'} h-2`} />
-            </div>
-            <div className='h-[24px]'>{fastingStatus}</div>
-        </div>
-    );
-
-    const startTimerButtons = !startTime && (
-        <div>
-            <div className='flex items-center justify-center gap-x-6'>Choose your fasting time</div>
-
+    return (
+        <div className="flex w-full items-center justify-center">
             <motion.div
-                className="mt-6 flex items-center justify-center gap-x-6"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.5 }}
+                className="flex w-full max-w-lg flex-col items-center space-y-8 rounded-2xl border border-gray-700 bg-gray-800 p-8 shadow-2xl"
+                initial="hidden"
+                animate="visible"
+                variants={containerVariants}
             >
-                {loading ? <LoadingScale /> : buttonSixteen}
-                {loading ? <LoadingScale /> : buttonEightteen}
-                {loading ? <LoadingScale /> : buttonTwenty}
+                <motion.div variants={itemVariants}>
+                    <p className="mt-2 text-center text-sm text-gray-400">Your Fasting Tracker</p>
+                </motion.div>
+
+                <motion.div
+                    className="relative h-64 w-64 rounded-full bg-gray-700 shadow-inner"
+                    variants={itemVariants}
+                >
+                    <div
+                        className="absolute inset-0 rounded-full"
+                        style={{
+                            background: `conic-gradient(transparent ${useTimedFasting}%, #3B82F6 ${useTimedFasting}%)`,
+                            transform: 'rotate(-90deg)',
+                        }}
+                    ></div>
+                    <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
+                        <h2 className="text-5xl font-bold">{`${formatTime(timeLeft?.hours ?? 0)}:${formatTime(timeLeft?.minutes ?? 0)}:${formatTime(timeLeft?.seconds ?? 0)}`}</h2>
+                        <p className="text-sm uppercase tracking-wide text-gray-400">
+                            Time Elapsed
+                            {duration && <p className="text-sm uppercase tracking-wide text-gray-400">of {duration} hours</p>}
+                        </p>
+                    </div>
+                </motion.div>
+
+                {!startTime && (
+                    <motion.select
+                        className="w-full rounded-md border border-gray-600 bg-gray-700 py-3 text-center text-lg text-white shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        onChange={(e) => setDuration(parseInt(e.target.value))}
+                        value={duration || ''}
+                        variants={itemVariants}
+                    >
+                        <option value="" disabled>Select a fast duration</option>
+                        <option value="12">12 Hours</option>
+                        <option value="16">16 Hours</option>
+                        <option value="18">18 Hours</option>
+                        <option value="20">20 Hours</option>
+                        <option value="24">24 Hours</option>
+                        <option value="36">36 Hours</option>
+                    </motion.select>
+                )}
+
+                <div className="flex w-full max-w-sm flex-col space-y-4">
+                    {!startTime ? (
+                        <motion.button
+                            type="button"
+                            className={`w-full rounded-md bg-gradient-to-r ${duration ? 'from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700' : 'from-gray-400 to-gray-600'} py-3 text-lg font-semibold text-white shadow-lg transition-all duration-300 ease-in-out hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900`}
+                            onClick={() => handleFasting(Number(duration))}
+                            variants={itemVariants}
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            disabled={!duration}
+                        >
+                            {duration ? 'Start Fast' : 'Select fasting duration'}
+                        </motion.button>
+                    ) : (
+                        <form onSubmit={handleEndFasting} className="w-full flex justify-center">
+                            <motion.button
+                                type="submit"
+                                className="w-full rounded-md bg-gradient-to-r from-blue-500 to-purple-600 py-3 text-lg font-semibold text-white shadow-lg transition-all duration-300 ease-in-out hover:from-blue-600 hover:to-purple-700 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900"
+                                variants={itemVariants}
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                                disabled={loading}
+                            >
+                                {loading ? 'Saving...' : 'End and Save Fast'}
+                            </motion.button>
+                        </form>
+                    )}
+                </div>
             </motion.div>
         </div>
-    );
-
-    const endTimerButtons = startTime && (
-        <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.5 }}
-        >
-            {loading ? <LoadingScale /> : progressBar}
-            <div className="mt-6 flex items-center justify-end gap-x-6 transition delay-150 duration-300 ease-in-out">
-                {loading ? <LoadingScale /> : buttonEndFast}
-            </div>
-
-        </motion.div>
-    );
-
-    return (
-        <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.5 }}
-        >
-            {startTimerButtons}
-            {endTimerButtons}
-        </motion.div>
     );
 };

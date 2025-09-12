@@ -27,10 +27,6 @@ export default function WeightForm() {
         setWeightData((prev) => ({ ...prev, [name]: value }));
     };
 
-    const handleDateChange = (date: any) => {
-        setSelectedDate(date);
-    };
-
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
