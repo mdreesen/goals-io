@@ -23,7 +23,7 @@ export default function BibleForm() {
         icon: '',
     });
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const handleChange = (e: any) => {
         const { name, value } = e.target;
 
         setBibleData((prev) => ({ ...prev, [name]: value }));
@@ -163,14 +163,16 @@ export default function BibleForm() {
             </motion.div>
 
             <motion.div className="w-full max-w-lg space-y-4" variants={itemVariants}>
-                <label htmlFor="sets" className="block text-sm font-medium">
+                <label htmlFor="notes" className="block text-sm font-medium">
                     Notes
                 </label>
                 <textarea
-                    id="sets"
-                    name="sets"
+                    id="notes"
+                    name="notes"
                     rows={3}
                     placeholder="Your notes..."
+                    onChange={handleChange}
+                    value={bibleData.notes}
                     className="w-full rounded-md border border-gray-600 px-4 py-2 placeholder-gray-500 transition-colors duration-200 ease-in-out focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                 />
             </motion.div>

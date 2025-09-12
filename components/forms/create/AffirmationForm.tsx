@@ -127,7 +127,7 @@ export default function AffirmationForm() {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                 >
-                    <Link href={'/dashboard/spirit'} className="block w-full">
+                    <Link href={'/dashboard/mind'} className="block w-full">
                         Cancel
                     </Link>
                 </motion.button>

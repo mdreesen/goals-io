@@ -43,7 +43,7 @@ export async function addEntry(values: any) {
 };
 
 export async function editEntry(values: any) {
-    const { _id, date } = values;
+    const { _id } = values;
 
     try {
         await connectDB();

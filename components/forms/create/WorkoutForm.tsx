@@ -8,11 +8,14 @@ import { addWorkout } from "@/actions/sections/body/workout";
 import workout_type from '@/lib/dropdown/workout_type.json';
 import { TypeWorkout } from '@/types/forms';
 import { formVariants, itemVariants } from '@/lib/variants';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 export default function WorkoutForm() {
     const router = useRouter();
 
     const [error, setError] = useState<string>();
+    const [selectedDate, setSelectedDate] = useState();
     const [workoutData, setWorkoutData] = useState<TypeWorkout>({
         type: '',
         description: '',
@@ -27,6 +30,10 @@ export default function WorkoutForm() {
         setWorkoutData((prev) => ({ ...prev, [name]: value }));
     };
 
+    const handleDateChange = (date: any) => {
+        setSelectedDate(date);
+    };
+
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
@@ -35,7 +42,7 @@ export default function WorkoutForm() {
 
         try {
 
-            await addWorkout({ ...data });
+            await addWorkout({ ...data, date: selectedDate });
 
             router.refresh
             router.push(`/dashboard/body`);
@@ -74,7 +81,7 @@ export default function WorkoutForm() {
                         name="type"
                         required
                         className="w-full rounded-md border border-gray-600 px-4 py-2 transition-colors duration-200 ease-in-out focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
-                        value={workoutData.type ?? 'Select a workout type'}
+                        value={workoutData.type}
                         onChange={handleChange}
                     >
                         <option value="" disabled>Select a workout type</option>
@@ -93,14 +100,14 @@ export default function WorkoutForm() {
                 <label htmlFor="date" className="block text-sm font-medium">
                     Date
                 </label>
-                <input
-                    id="date"
-                    name="date"
-                    type="date"
+
+                <DatePicker
+                    className="block w-full rounded-md px-3 py-1.5 text-base outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
+                    selected={selectedDate}
+                    onChange={handleDateChange}
+                    placeholderText="mm/dd/yyyy"
+                    dateFormat="MM/dd/yyyy" // Specify the desired display format
                     required
-                    className="w-full rounded-md border border-gray-600 px-4 py-2 placeholder-gray-500 transition-colors duration-200 ease-in-out focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
-                    value={workoutData.date}
-                    onChange={handleChange}
                 />
             </motion.div>
 

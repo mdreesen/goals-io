@@ -1,6 +1,8 @@
 'use client';
 import { useRouter } from "next/navigation";
 import { deleteAffirmations } from '@/actions/sections/mind/affirmations';
+import { motion } from 'framer-motion';
+import { itemVariants } from '@/lib/variants';
 
 export default function ButtonDeleteAffirmation({ data }: any) {
     const router = useRouter();
@@ -17,8 +19,15 @@ export default function ButtonDeleteAffirmation({ data }: any) {
     };
 
     return (
-        <button type="submit" onClick={handleSubmit} className="block px-3 py-1 text-sm/6 data-[focus]:bg-gray-50 data-[focus]:outline-none">
+        <motion.button
+            type="button"
+            className="w-full max-w-lg rounded-md bg-gradient-to-r from-red-500 to-red-600 py-3 text-lg font-semibold shadow-lg transition-all duration-300 ease-in-out hover:from-blue-600 hover:to-purple-700 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900"
+            variants={itemVariants}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={handleSubmit}
+        >
             Delete
-        </button>
-    )
-}
+        </motion.button>
+    );
+};

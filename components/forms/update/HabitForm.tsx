@@ -1,26 +1,35 @@
 'use client';
-import { useRef, useState } from "react";
+
+import { useState } from "react";
+import { motion } from 'framer-motion';
+import Link from 'next/link';
 import { useRouter } from "next/navigation";
 import { editHabit } from "@/actions/sections/mind/habits";
-import { ChevronDownIcon } from '@heroicons/react/16/solid';
-import ButtonCancel from "@/components/buttons/ButtonCancel";
+import habit_type from '@/lib/dropdown/habit_type.json';
+import status from '@/lib/dropdown/status.json'
+import { TypeHabit } from '@/types/forms';
+import { formVariants, itemVariants } from '@/lib/variants';
+import ButtonDeleteHabit from "@/components/buttons/ButtonDeleteHabit";
 
 export default function HabitForm({ data }: any) {
-
     const router = useRouter();
-    const ref = useRef(null);
 
     const [error, setError] = useState<string>();
+    const [habitData, setHabitData] = useState<TypeHabit>({ ...data });
 
-    const handleSubmit = async (formData: FormData) => {
+    const handleChange = (e: any) => {
+        const { name, value } = e.target;
+
+        setHabitData((prev) => ({ ...prev, [name]: value }));
+    };
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
         try {
-            await editHabit({
-                _id: data?._id,
-                title: formData.get("title"),
-                description: formData.get("description"),
-                kind: formData.get("kind"),
-                status: formData.get("status"),
-            });
+
+            await editHabit({ ...habitData });
+
             router.refresh
             router.push(`/dashboard/mind`);
         } catch (error) {
@@ -29,115 +38,124 @@ export default function HabitForm({ data }: any) {
         }
     };
 
-    const information = (
-        <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+    return (
+        <motion.form
+            className="flex w-full bg-transparent flex-col items-center justify-center space-y-6 p-8"
+            onSubmit={handleSubmit}
+            initial="hidden"
+            animate="visible"
+            variants={formVariants}
+        >
 
-            <div className="sm:col-span-4">
-                <label htmlFor="title" className="block text-sm/6 font-medium">
-                    Title
+            <motion.div className="w-full max-w-lg space-y-4" variants={itemVariants}>
+                <label htmlFor="kind" className="block text-sm font-medium">
+                    Habit Type
                 </label>
-                <div className="mt-2">
-                    <div className="flex items-center rounded-md pl-3 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-gray-900">
-                        <input
-                            id="title"
-                            name="title"
-                            type="text"
-                            placeholder="Habit title"
-                            defaultValue={data?.title ?? ''}
-                            className="block min-w-0 grow py-1.5 pl-1 pr-3 text-base focus:outline focus:outline-0 sm:text-sm/6"
-                        />
-                    </div>
-                </div>
-            </div>
-
-            <div className="col-span-full">
-                <label htmlFor="description" className="block text-sm/6 font-medium">
-                    description
-                </label>
-                <div className="mt-2">
-                    <textarea
-                        id="description"
-                        name="description"
-                        rows={3}
-                        className="block w-full rounded-md px-3 py-1.5 text-base outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
-                        placeholder="About your habit"
-                        defaultValue={data?.description ?? ''}
-                    />
-                </div>
-            </div>
-
-            <div className="sm:col-span-3">
-                <label htmlFor="kind" className="block text-sm/6 font-medium">
-                    Kind of habit
-                </label>
-                <div className="mt-2 grid grid-cols-1">
+                <div className="relative">
                     <select
                         id="kind"
                         name="kind"
-                        autoComplete="kind-name"
-                        defaultValue={data?.kind ?? ''}
-                        className="col-start-1 row-start-1 w-full appearance-none rounded-md py-1.5 pl-3 pr-8 text-base outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
+                        required
+                        className="w-full rounded-md border border-gray-600 px-4 py-2 transition-colors duration-200 ease-in-out focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                        value={habitData.kind}
+                        onChange={handleChange}
                     >
-                        <option>Community</option>
-                        <option>Family</option>
-                        <option>Marriage</option>
-                        <option>Personal</option>
-                    </select>
-                    <ChevronDownIcon
-                        aria-hidden="true"
-                        className="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end sm:size-4"
-                    />
-                </div>
-            </div>
+                        <option value="" disabled>Select a habit type</option>
+                        {habit_type.map((item: any, index: number) => <option key={`${item.type}-${index}`} value={item.type}>{item.type}</option>)}
 
-            <div className="sm:col-span-3">
-                <label htmlFor="status" className="block text-sm/6 font-medium">
+                    </select>
+                    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-400">
+                        <svg className="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 6.757 7.586 5.343 9l4.5 4.5z" />
+                        </svg>
+                    </div>
+                </div>
+            </motion.div>
+
+            <motion.div className="w-full max-w-lg space-y-4" variants={itemVariants}>
+                <label htmlFor="status" className="block text-sm font-medium">
                     Status
                 </label>
-                <div className="mt-2 grid grid-cols-1">
+                <div className="relative">
                     <select
                         id="status"
                         name="status"
-                        autoComplete="status-name"
-                        defaultValue={data?.status ?? ''}
-                        className="col-start-1 row-start-1 w-full appearance-none rounded-md py-1.5 pl-3 pr-8 text-base outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
+                        required
+                        className="w-full rounded-md border border-gray-600 px-4 py-2 transition-colors duration-200 ease-in-out focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                        value={habitData.status}
+                        onChange={handleChange}
                     >
-                        <option>Not Started</option>
-                        <option>Active</option>
-                        <option>Done</option>
-                        <option>Did Not Finish</option>
+                        <option value="" disabled>Select a status</option>
+                        {status.status_habits.map((item: any, index: number) => <option key={`${item.status}-${index}`} value={item.status}>{item.status}</option>)}
+
                     </select>
-                    <ChevronDownIcon
-                        aria-hidden="true"
-                        className="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end sm:size-4"
-                    />
+                    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-400">
+                        <svg className="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 6.757 7.586 5.343 9l4.5 4.5z" />
+                        </svg>
+                    </div>
                 </div>
-            </div>
-        </div>
-    );
+            </motion.div>
 
+            <motion.div className="w-full max-w-lg space-y-4" variants={itemVariants}>
+                <label htmlFor="title" className="block text-sm font-medium">
+                    Title
+                </label>
+                <input
+                    id="title"
+                    name="title"
+                    required
+                    className="w-full rounded-md border border-gray-600 px-4 py-2 placeholder-gray-500 transition-colors duration-200 ease-in-out focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                    placeholder="Your title..."
+                    value={habitData.title}
+                    onChange={handleChange}
+                />
+            </motion.div>
 
-    return (
-        <form ref={ref} action={handleSubmit}>
-            <div className="space-y-12 px-[2rem]">
-                <div className="border-b border-gray-900/10 pb-12">
-                    <h2 className="text-base/7 font-semibold">Habit information</h2>
-                    <p className="mt-1 text-sm/6">Name and details of habit.</p>
+            <motion.div className="w-full max-w-lg space-y-4" variants={itemVariants}>
+                <label htmlFor="description" className="block text-sm font-medium">
+                    Description
+                </label>
+                <textarea
+                    id="description"
+                    name="description"
+                    rows={3}
+                    value={habitData.description}
+                    onChange={handleChange}
+                    placeholder="Your description..."
+                    className="w-full rounded-md border border-gray-600 px-4 py-2 placeholder-gray-500 transition-colors duration-200 ease-in-out focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                />
+            </motion.div>
 
-                    {information}
-                </div>
-            </div>
+            <motion.button
+                type="submit"
+                className="w-full max-w-lg rounded-md bg-gradient-to-r from-blue-500 to-purple-600 py-3 text-lg font-semibold shadow-lg transition-all duration-300 ease-in-out hover:from-blue-600 hover:to-purple-700 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900"
+                variants={itemVariants}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+            >
+                Save
+            </motion.button>
 
-            <div className="mt-6 flex items-center justify-end gap-x-6">
-                <ButtonCancel path={'/dashboard/mind'} />
-                <button
-                    type="submit"
-                    className="block rounded-md bg-gray-800 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-gray-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            <div className="flex w-full max-w-lg space-x-4">
+                <motion.button
+                    type="button"
+                    className="w-full max-w-lg rounded-md bg-gradient-to-r from-blue-500 to-purple-600 py-3 text-lg font-semibold shadow-lg transition-all duration-300 ease-in-out hover:from-blue-600 hover:to-purple-700 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900"
+                    variants={itemVariants}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                 >
-                    Save
-                </button>
+                    <Link href={'/dashboard/mind'} className="block w-full">
+                        Cancel
+                    </Link>
+                </motion.button>
             </div>
+
+            <div className="flex w-full max-w-lg space-x-4">
+                <ButtonDeleteHabit data={habitData} />
+            </div>
+
             {error && <span className='block text-sm/6 font-medium text-red-500'>{error}</span>}
-        </form>
-    )
+        </motion.form>
+    );
 }
