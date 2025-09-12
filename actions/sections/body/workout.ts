@@ -3,6 +3,7 @@ import { connectDB } from "@/lib/mongodb";
 import User from "@/(models)/User";
 import { getServerSession } from "next-auth/next";
 import { revalidatePath } from 'next/cache';
+import { date_today, date_time_today } from '@/lib/date_time';
 
 export async function fetchWorkout() {
     const session = await getServerSession();
@@ -27,6 +28,7 @@ export async function fetchWorkout() {
 
 export async function addWorkout(values: any) {
     const session = await getServerSession();
+    const date_and_time = await date_time_today();
 
     try {
         await connectDB();

@@ -16,7 +16,6 @@ export default function WeightForm({ data }: any) {
 
     const [error, setError] = useState<string>();
     const [weightData, setWeightData] = useState<TypeWeight>({ ...data.weightData });
-    const [selectedDate, setSelectedDate] = useState(data?.weightData?.date);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
@@ -29,7 +28,7 @@ export default function WeightForm({ data }: any) {
 
         try {
 
-            await editWeight({ ...weightData, date: selectedDate.toString() });
+            await editWeight({ ...weightData, weight_date: weightData.weight_date });
 
             router.refresh
             router.push(`/dashboard/body`);
@@ -48,7 +47,7 @@ export default function WeightForm({ data }: any) {
             variants={formVariants}
         >
 
-            <motion.div className="w-full max-w-lg space-y-4" variants={itemVariants}>
+            {/* <motion.div className="w-full max-w-lg space-y-4" variants={itemVariants}>
                 <label htmlFor="date" className="block text-sm font-medium">
                     Date
                 </label>
@@ -56,10 +55,11 @@ export default function WeightForm({ data }: any) {
                     id="date"
                     className="w-[100%] rounded-md border border-gray-600 px-4 py-2 placeholder-gray-500 transition-colors duration-200 ease-in-out focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                     selected={selectedDate}
-                    onChange={(date) => setSelectedDate(date)}
+                    onChange={handleDateChange}
+                    placeholderText="mm/dd/yyyy"
                     dateFormat="MM/dd/yyyy" // Specify the desired display format
                 />
-            </motion.div>
+            </motion.div> */}
 
             <motion.div className="w-full max-w-lg space-y-4" variants={itemVariants}>
                 <label htmlFor="weight" className="block text-sm font-medium">

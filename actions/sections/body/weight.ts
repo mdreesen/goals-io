@@ -60,7 +60,6 @@ export async function fetchWeightOverview() {
         const positiveInteger = Math.abs(Number(lostOrGained));
         const goalLostOrGained = lossOrGain({ starting: user[0]?.goal_weight, current: current });
         const goalPositiveInteger = Math.abs(Number(goalLostOrGained));
-        // const goalProgress = round(Number(user[0]?.goal_weight) - Number(limited[0].weight[0]?.weight)).toString();
 
         const message = () => {
             switch (true) {
@@ -98,11 +97,12 @@ export async function fetchWeightOverview() {
 
 export async function addWeight(values: any) {
     const session = await getServerSession();
+    const today = await date_today();
 
     try {
         await connectDB();
 
-        await User.findOneAndUpdate({ email: session?.user.email }, { $addToSet: { weight: { ...values } } }, { new: true });
+        await User.findOneAndUpdate({ email: session?.user.email }, { $addToSet: { weight: { ...values, weight_date: today } } }, { new: true });
 
     } catch (error) {
         console.log(error)
@@ -133,6 +133,7 @@ export async function addGoalWeight(values: any) {
 
 export async function editWeight(values: any) {
     const { _id } = values;
+    console.log(values)
 
     try {
         await connectDB();

@@ -157,6 +157,7 @@ export default function WorkoutForm({ data }: any) {
                             className="w-[100%] rounded-md border border-gray-600 px-4 py-2 placeholder-gray-500 transition-colors duration-200 ease-in-out focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                             selected={selectedStartDate}
                             onChange={(date) => setSelectedStartDate(date)}
+                            placeholderText="mm/dd/yyyy"
                             dateFormat="MM/dd/yyyy" // Specify the desired display format
                         />
                     </motion.div>
@@ -170,6 +171,7 @@ export default function WorkoutForm({ data }: any) {
                             className="w-[100%] rounded-md border border-gray-600 px-4 py-2 placeholder-gray-500 transition-colors duration-200 ease-in-out focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                             selected={selectedEndDate}
                             onChange={(date) => setSelectedEndDate(date)}
+                            placeholderText="mm/dd/yyyy"
                             dateFormat="MM/dd/yyyy" // Specify the desired display format
                         />
                     </motion.div>

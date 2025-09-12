@@ -7,11 +7,14 @@ import { useRouter } from "next/navigation";
 import { addWeight } from "@/actions/sections/body/weight";
 import { TypeWeight } from '@/types/forms';
 import { formVariants, itemVariants } from '@/lib/variants';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 export default function WeightForm() {
     const router = useRouter();
 
     const [error, setError] = useState<string>();
+    const [selectedDate, setSelectedDate] = useState();
     const [weightData, setWeightData] = useState<TypeWeight>({
         weight: '',
         weight_date: '',
@@ -22,6 +25,10 @@ export default function WeightForm() {
         const { name, value } = e.target;
 
         setWeightData((prev) => ({ ...prev, [name]: value }));
+    };
+
+    const handleDateChange = (date: any) => {
+        setSelectedDate(date);
     };
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -59,20 +66,19 @@ export default function WeightForm() {
             variants={formVariants}
         >
 
-            <motion.div className="w-full max-w-lg space-y-4" variants={itemVariants}>
+            {/* <motion.div className="w-full max-w-lg space-y-4" variants={itemVariants}>
                 <label htmlFor="date" className="block text-sm font-medium">
                     Date
                 </label>
-                <input
-                    id="weight_date"
-                    name="weight_date"
-                    type="date"
+                <DatePicker
+                    className="block w-full rounded-md px-3 py-1.5 text-base outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
+                    selected={selectedDate}
+                    onChange={handleDateChange}
+                    placeholderText="mm/dd/yyyy"
+                    dateFormat="MM/dd/yyyy" // Specify the desired display format
                     required
-                    className="w-full rounded-md border border-gray-600 px-4 py-2 placeholder-gray-500 transition-colors duration-200 ease-in-out focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
-                    value={weightData.weight_date}
-                    onChange={handleChange}
                 />
-            </motion.div>
+            </motion.div> */}
 
             <motion.div className="w-full max-w-lg space-y-4" variants={itemVariants}>
                 <label htmlFor="weight" className="block text-sm font-medium">

@@ -8,11 +8,14 @@ import { addEntry } from "@/actions/sections/soul/journal";
 import mood_type from '@/lib/dropdown/journal_mood.json';
 import { TypeJournal } from '@/types/forms';
 import { formVariants, itemVariants } from '@/lib/variants';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 export default function JournalForm() {
     const router = useRouter();
 
     const [error, setError] = useState<string>();
+    const [selectedDate, setSelectedDate] = useState();
     const [journalData, setJournalData] = useState<TypeJournal>({
         title: '',
         entry: '',
@@ -24,6 +27,10 @@ export default function JournalForm() {
         const { name, value } = e.target;
 
         setJournalData((prev) => ({ ...prev, [name]: value }));
+    };
+
+    const handleDateChange = (date: any) => {
+        setSelectedDate(date);
     };
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -64,7 +71,7 @@ export default function JournalForm() {
 
             <motion.div className="w-full max-w-lg space-y-4" variants={itemVariants}>
                 <label htmlFor="mood" className="block text-sm font-medium">
-                     Mood
+                    Mood
                 </label>
                 <div className="relative">
                     <select
@@ -91,14 +98,13 @@ export default function JournalForm() {
                 <label htmlFor="date" className="block text-sm font-medium">
                     Date
                 </label>
-                <input
-                    id="date"
-                    name="date"
-                    type="date"
+                <DatePicker
+                    className="block w-full rounded-md px-3 py-1.5 text-base outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
+                    selected={selectedDate}
+                    onChange={handleDateChange}
+                    placeholderText="mm/dd/yyyy"
+                    dateFormat="MM/dd/yyyy" // Specify the desired display format
                     required
-                    className="w-full rounded-md border border-gray-600 px-4 py-2 placeholder-gray-500 transition-colors duration-200 ease-in-out focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
-                    value={journalData.date}
-                    onChange={handleChange}
                 />
             </motion.div>
 

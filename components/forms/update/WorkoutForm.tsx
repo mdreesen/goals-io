@@ -85,6 +85,7 @@ export default function WorkoutForm({ data }: any) {
                     className="w-[100%] rounded-md border border-gray-600 px-4 py-2 placeholder-gray-500 transition-colors duration-200 ease-in-out focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                     selected={selectedDate}
                     onChange={(date) => setSelectedDate(date)}
+                    placeholderText="mm/dd/yyyy"
                     dateFormat="MM/dd/yyyy" // Specify the desired display format
                 />
 
@@ -102,6 +103,21 @@ export default function WorkoutForm({ data }: any) {
                     className="w-full rounded-md border border-gray-600 px-4 py-2 placeholder-gray-500 transition-colors duration-200 ease-in-out focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                     placeholder="e.g., 60"
                     defaultValue={workoutData.duration}
+                    onChange={handleChange}
+                />
+            </motion.div>
+
+            <motion.div className="w-full max-w-lg space-y-4" variants={itemVariants}>
+                <label htmlFor="description" className="block text-sm font-medium">
+                    Description
+                </label>
+                <input
+                    id="description"
+                    name="description"
+                    required
+                    className="w-full rounded-md border border-gray-600 px-4 py-2 placeholder-gray-500 transition-colors duration-200 ease-in-out focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                    placeholder="Legs, arms, core..."
+                    value={workoutData.description}
                     onChange={handleChange}
                 />
             </motion.div>

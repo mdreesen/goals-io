@@ -52,7 +52,7 @@ export interface TypeWeight {
 export interface TypeWorkout {
     type: string;
     description: string;
-    date: string;
+    date: '';
     sets: string;
     duration: string;
 }
