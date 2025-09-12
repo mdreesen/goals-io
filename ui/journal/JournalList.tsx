@@ -47,6 +47,10 @@ export default function JournalList({ list }: any) {
         exit: { opacity: 0, x: -100, transition: { duration: 0.3, ease: "easeIn" } },
     };
 
+    function formatDateTime(date: any): React.ReactNode {
+        throw new Error('Function not implemented.');
+    }
+
     return (
         <motion.div
             initial="hidden"
@@ -57,7 +61,7 @@ export default function JournalList({ list }: any) {
             <AnimatePresence>
                 {list.map((entry: any, index: number) => (
                     <motion.div
-                        key={entry.id}
+                        key={entry._id}
                         variants={itemVariants}
                         custom={index} // For staggered animation
                         initial="hidden"

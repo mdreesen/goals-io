@@ -1,6 +1,8 @@
 'use client';
 import { useRouter } from "next/navigation";
 import { deleteWeight } from '@/actions/sections/body/weight';
+import { motion } from 'framer-motion';
+import { itemVariants } from '@/lib/variants';
 
 export default function ButtonDeleteWeight({ data }: any) {
     const router = useRouter();
@@ -17,8 +19,16 @@ export default function ButtonDeleteWeight({ data }: any) {
     };
 
     return (
-        <button type="submit" onClick={handleSubmit} className="rounded-md bg-[#7A3A30] px-3 py-2 text-sm font-semibold text-white shadow-sm focus-visible:outline-2 focus-visible:outline-offset-2">
+        <motion.button
+            type="button"
+            className="w-full max-w-lg rounded-md bg-gradient-to-r from-red-500 to-red-600 py-3 text-lg font-semibold shadow-lg transition-all duration-300 ease-in-out hover:from-blue-600 hover:to-purple-700 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900"
+            variants={itemVariants}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={handleSubmit}
+        >
             Delete
-        </button>
+        </motion.button>
+
     )
 }

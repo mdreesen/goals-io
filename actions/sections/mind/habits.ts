@@ -36,7 +36,7 @@ export async function addHabit(values: any) {
 
 export async function editHabit(values: any) {
     const { _id } = values;
-
+console.log(values)
     try {
         await connectDB();
 

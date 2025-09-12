@@ -3,6 +3,7 @@ import { connectDB } from "@/lib/mongodb";
 import User from "@/(models)/User";
 import { getServerSession } from "next-auth/next";
 import { revalidatePath } from 'next/cache';
+import { formatDateAndTime } from "@/lib/formatters";
 
 export async function fetchEntry() {
     const session = await getServerSession();
@@ -27,12 +28,13 @@ export async function fetchEntry() {
 };
 
 export async function addEntry(values: any) {
+    const { date } = values;
     const session = await getServerSession();
 
     try {
         await connectDB();
 
-        await User.findOneAndUpdate({ email: session?.user.email }, { $addToSet: { journal: { ...values } } }, { new: true });
+        await User.findOneAndUpdate({ email: session?.user.email }, { $addToSet: { journal: { ...values, date: formatDateAndTime(date) } } }, { new: true });
 
     } catch (error) {
         console.log(error)

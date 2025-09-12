@@ -100,6 +100,7 @@ const workoutSchema = new Schema(
         description: String || undefined,
         sets: String || undefined,
         date: String || undefined,
+        duration: String || undefined
     }, { timestamps: false });
 
 const userSchema = new Schema(

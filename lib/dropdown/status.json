@@ -1,0 +1,13 @@
+{
+    "status_habits": [
+        {"status": "Not started"},
+        {"status": "Active"},
+        {"status": "Done"},
+        {"status": "Did not finish"}
+    ],
+
+    "yes_no": [
+        {"decision": "Yes"},
+        {"decision": "No"}
+    ]
+}

@@ -7,18 +7,20 @@ import { parse } from '@/lib/formatters';
 
 export default async function Habits() {
     const filteredHabits = await filterHabits() as any;
-
+    console.log(filteredHabits)
     // Filtered Goals
     const personal_habits_arr = filteredHabits?.personal_habits;
     const family_habits_arr = filteredHabits?.family_habits;
     const marriage_habits_arr = filteredHabits?.marriage_habits;
     const community_habits_arr = filteredHabits?.community_habits;
+    const done_habits_arr = filteredHabits?.done_habits;
 
     // Render habits sections
     const renderPersonalHabits = filteredHabits.use_personal_habits;
     const renderFamilyHabits = filteredHabits.use_family_habits;
     const renderMarriageHabits = filteredHabits.use_marriage_habits;
     const renderCommunityHabits = filteredHabits.use_community_habits;
+    const renderDoneHabits = filteredHabits.use_done_habits;
 
     // No habits
     const useNone = filteredHabits?.none_habits;
@@ -59,6 +61,15 @@ export default async function Habits() {
         </AccordionItem>
     );
 
+    const useDoneHabits = renderDoneHabits && (
+        <AccordionItem value="item-5">
+            <AccordionTrigger>Done</AccordionTrigger>
+            <AccordionContent>
+                <HabitList habits={parse(done_habits_arr)} />
+            </AccordionContent>
+        </AccordionItem>
+    );
+
     return (
         <div className="px-4 sm:px-2 lg:px-4">
             <Title text="Habits" />
@@ -74,6 +85,7 @@ export default async function Habits() {
                     {useFamilyHabits}
                     {useMarriageHabits}
                     {usePersonalHabits}
+                    {useDoneHabits}
                 </Accordion>
             )}
         </div>

@@ -31,7 +31,7 @@ export default function AffirmationsList({ affirmations }: any) {
             <AnimatePresence>
                 {affirmations.map((affirmation: any, index: number) => (
                     <motion.div
-                        key={affirmation?._id}
+                        key={`${affirmation?._id}-${index}`}
                         variants={itemVariants}
                         custom={index} // For staggered animation
                         initial="hidden"

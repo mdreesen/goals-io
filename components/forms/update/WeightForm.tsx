@@ -1,25 +1,35 @@
-'use client'
-import { useRef, useState } from "react";
+'use client';
+
+import { useState } from "react";
+import { motion } from 'framer-motion';
+import Link from 'next/link';
 import { useRouter } from "next/navigation";
 import { editWeight } from "@/actions/sections/body/weight";
+import { TypeWeight } from '@/types/forms';
+import { formVariants, itemVariants } from '@/lib/variants';
 import ButtonDeleteWeight from "@/components/buttons/ButtonDeleteWeight";
-import ButtonCancel from "@/components/buttons/ButtonCancel";
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 export default function WeightForm({ data }: any) {
-
     const router = useRouter();
-    const ref = useRef(null);
 
     const [error, setError] = useState<string>();
+    const [weightData, setWeightData] = useState<TypeWeight>({ ...data.weightData });
+    const [selectedDate, setSelectedDate] = useState(data?.weightData?.date);
 
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+        const { name, value } = e.target;
 
-    const handleSubmit = async (formData: FormData) => {
+        setWeightData((prev) => ({ ...prev, [name]: value }));
+    };
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
         try {
-            await editWeight({
-                _id: data?.weightData?._id,
-                weight: formData.get("weight"),
-                weight_date: data?.date,
-            });
+
+            await editWeight({ ...weightData, date: selectedDate.toString() });
 
             router.refresh
             router.push(`/dashboard/body`);
@@ -29,54 +39,73 @@ export default function WeightForm({ data }: any) {
         }
     };
 
-    const personInfo = (
-        <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-
-            <div className="sm:col-span-3">
-                <label htmlFor="first-name" className="block text-sm/6 font-medium">
-                    Weight
-                </label>
-                <div className="flex items-center w-[100px] rounded-md outline-1 -outline-offset-1 outline-gray-300 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-gray-900">
-                    <input
-                        id="weight"
-                        name="weight"
-                        type="text"
-                        placeholder="155"
-                        defaultValue={data.weightData?.weight}
-                        className="block min-w-0 grow py-1.5 pl-1 text-base focus:outline-0 sm:text-sm/6 bg-transparent"
-                    />
-                    <div className="shrink-0 px-2 select-none text-base sm:text-sm/6">lbs</div>
-                </div>
-            </div>
-        </div>
-    );
-
-
     return (
-        <form ref={ref} action={handleSubmit}>
-            <div className="space-y-12 px-[2rem]">
-                <div className="border-b border-gray-900/10 pb-12 flex flex-col justify-center items-center">
-                    <h2 className="text-base/7 font-semibold">Weight Information</h2>
-                    <p className="mt-1 text-sm/6">Insert your weight.</p>
+        <motion.form
+            className="flex w-full bg-transparent flex-col items-center justify-center space-y-6 p-8"
+            onSubmit={handleSubmit}
+            initial="hidden"
+            animate="visible"
+            variants={formVariants}
+        >
 
-                    {personInfo}
-                </div>
+            <motion.div className="w-full max-w-lg space-y-4" variants={itemVariants}>
+                <label htmlFor="date" className="block text-sm font-medium">
+                    Date
+                </label>
+                <DatePicker
+                    id="date"
+                    className="w-[100%] rounded-md border border-gray-600 px-4 py-2 placeholder-gray-500 transition-colors duration-200 ease-in-out focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                    selected={selectedDate}
+                    onChange={(date) => setSelectedDate(date)}
+                    dateFormat="MM/dd/yyyy" // Specify the desired display format
+                />
+            </motion.div>
+
+            <motion.div className="w-full max-w-lg space-y-4" variants={itemVariants}>
+                <label htmlFor="weight" className="block text-sm font-medium">
+                    Weight (lbs)
+                </label>
+                <input
+                    id="weight"
+                    name="weight"
+                    type="number"
+                    required
+                    className="w-full rounded-md border border-gray-600 px-4 py-2 placeholder-gray-500 transition-colors duration-200 ease-in-out focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                    placeholder="Your weight..."
+                    value={weightData.weight}
+                    onChange={handleChange}
+                />
+            </motion.div>
+
+            <motion.button
+                type="submit"
+                className="w-full max-w-lg rounded-md bg-gradient-to-r from-blue-500 to-purple-600 py-3 text-lg font-semibold shadow-lg transition-all duration-300 ease-in-out hover:from-blue-600 hover:to-purple-700 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900"
+                variants={itemVariants}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+            >
+                Save
+            </motion.button>
+
+            <div className="flex w-full max-w-lg space-x-4">
+                <motion.button
+                    type="button"
+                    className="w-full max-w-lg rounded-md bg-gradient-to-r from-blue-500 to-purple-600 py-3 text-lg font-semibold shadow-lg transition-all duration-300 ease-in-out hover:from-blue-600 hover:to-purple-700 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900"
+                    variants={itemVariants}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                >
+                    <Link href={'/dashboard/body'} className="block w-full">
+                        Cancel
+                    </Link>
+                </motion.button>
             </div>
 
-            <div className="mt-6 flex items-center gap-x-6 justify-between px-[2rem]">
-                <div><ButtonDeleteWeight data={data.weightData} /></div>
-                <div className="flex gap-x-6 items-center">
-                    <ButtonCancel path={'/dashboard/body'} />
-                    <button
-                        type="submit"
-                        className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-                    >
-                        Save
-                    </button>
-                </div>
+            <div className="flex w-full max-w-lg space-x-4">
+                <ButtonDeleteWeight data={weightData} />
             </div>
+
             {error && <span className='block text-sm/6 font-medium text-red-500'>{error}</span>}
-        </form>
-    )
+        </motion.form>
+    );
 }
-

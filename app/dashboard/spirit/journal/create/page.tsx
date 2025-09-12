@@ -1,6 +1,4 @@
 import JournalForm from '@/components/forms/create/JournalForm';
-import { parse } from '@/lib/formatters';
-import { date_today } from '@/lib/date_time';
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -13,11 +11,10 @@ export const metadata: Metadata = {
 };
 
 export default async function Page() {
-    const date = await date_today();
 
     return (
         <div>
-            <JournalForm data={parse({ date })} />
+            <JournalForm />
         </div>
     )
 }

@@ -26,6 +26,14 @@ textarea {
   color: white;
 }
 
+.react-datepicker__input-container {
+  width: inherit;
+}
+
+.react-datepicker-wrapper {
+  width: 100%;
+}
+
 
 
 @layer base {

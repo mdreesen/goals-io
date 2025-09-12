@@ -1,9 +1,9 @@
 [
-    {"mood": "neutral"},
-    {"mood": "happy"},
-    {"mood": "calm"},
-    {"mood": "sad"},
-    {"mood": "grateful"},
-    {"mood": "anxious"},
-    {"mood": "angry"}
+    {"mood": "Neutral"},
+    {"mood": "Happy"},
+    {"mood": "Calm"},
+    {"mood": "Sad"},
+    {"mood": "Grateful"},
+    {"mood": "Anxious"},
+    {"mood": "Angry"}
 ]

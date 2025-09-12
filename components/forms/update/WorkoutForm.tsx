@@ -1,33 +1,37 @@
-'use client'
-import { useRef, useState } from "react";
+'use client';
+
+import { useState } from "react";
+import { motion } from 'framer-motion';
+import Link from 'next/link';
 import { useRouter } from "next/navigation";
 import { editWorkout } from "@/actions/sections/body/workout";
-import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import workout_type from '@/lib/dropdown/workout_type.json';
+import { TypeWorkout } from '@/types/forms';
+import { formVariants, itemVariants } from '@/lib/variants';
 import ButtonDeleteWorkout from "@/components/buttons/ButtonDeleteWorkout";
-import ButtonCancel from "@/components/buttons/ButtonCancel";
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
-export default function EditWorkoutForm({ data }: any) {
-
+export default function WorkoutForm({ data }: any) {
     const router = useRouter();
-    const ref = useRef(null);
 
     const [error, setError] = useState<string>();
+    const [workoutData, setWorkoutData] = useState<TypeWorkout>({ ...data.workoutData });
     const [selectedDate, setSelectedDate] = useState(data?.workoutData?.date);
 
 
-    const handleSubmit = async (formData: FormData) => {
+    const handleChange = (e: any) => {
+        const { name, value } = e.target;
+
+        setWorkoutData((prev) => ({ ...prev, [name]: value }));
+    };
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
         try {
 
-            await editWorkout({
-                _id: data?.workoutData?._id,
-                type: formData.get("type"),
-                description: formData.get("description"),
-                sets: formData.get("sets"),
-                date: selectedDate,
-            });
+            await editWorkout({ ...workoutData, date: selectedDate.toString() });
 
             router.refresh
             router.push(`/dashboard/body`);
@@ -37,117 +41,115 @@ export default function EditWorkoutForm({ data }: any) {
         }
     };
 
-    const handleDateChange = (date: any) => {
-        setSelectedDate(date);
-    };
+    return (
+        <motion.form
+            className="flex w-full bg-transparent flex-col items-center justify-center space-y-6 p-8"
+            onSubmit={handleSubmit}
+            initial="hidden"
+            animate="visible"
+            variants={formVariants}
+        >
 
-    const workoutInfo = (
-        <div className="sm:col-span-3">
-            <label htmlFor="type" className="block text-sm/6 font-medium">
-                Workout Type
-            </label>
-            <div className="mt-2 grid grid-cols-1">
-                <select
-                    id="type"
-                    name="type"
-                    autoComplete="type"
-                    defaultValue={data?.workoutData?.type ?? ''}
-                    className="col-start-1 row-start-1 w-full appearance-none rounded-md py-1.5 pl-3 pr-8 text-base outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
-                >
-                    {workout_type.map((item) => (
-                        <option key={`${item.type}`}>{item.type}</option>
+            <motion.div className="w-full max-w-lg space-y-4" variants={itemVariants}>
+                <label htmlFor="type" className="block text-sm font-medium">
+                    Workout Type
+                </label>
+                <div className="relative">
+                    <select
+                        id="type"
+                        name="type"
+                        required
+                        className="w-full rounded-md border border-gray-600 px-4 py-2 transition-colors duration-200 ease-in-out focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                        defaultValue={workoutData.type}
+                        onChange={handleChange}
+                    >
+                        <option value="" disabled>Select a workout type</option>
+                        {workout_type.map((item: any, index: number) => <option key={`${item.type}-${index}`} value={item.type}>{item.type}</option>)}
 
-                    ))}
-                </select>
-                <ChevronDownIcon
-                    aria-hidden="true"
-                    className="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end sm:size-4"
+                    </select>
+                    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-400">
+                        <svg className="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 6.757 7.586 5.343 9l4.5 4.5z" />
+                        </svg>
+                    </div>
+                </div>
+            </motion.div>
+
+            <motion.div className="w-full max-w-lg space-y-4" variants={itemVariants}>
+                <label htmlFor="date" className="block text-sm font-medium">
+                    Date
+                </label>
+
+                <DatePicker
+                    id="date"
+                    className="w-[100%] rounded-md border border-gray-600 px-4 py-2 placeholder-gray-500 transition-colors duration-200 ease-in-out focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                    selected={selectedDate}
+                    onChange={(date) => setSelectedDate(date)}
+                    dateFormat="MM/dd/yyyy" // Specify the desired display format
                 />
-            </div>
-        </div>
-    );
 
-    const workoutDescription = (
-        <div className="col-span-full mt-4">
-            <label htmlFor="notes" className="block text-sm/6 font-medium">
-                Description
-            </label>
-            <div className="mt-2">
-                <textarea
-                    id="description"
-                    name="description"
-                    rows={3}
-                    className="block w-full rounded-md px-3 py-1.5 text-base outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
-                    placeholder="Describe your workout"
-                    defaultValue={data?.workoutData?.description ?? ''}
+            </motion.div>
+
+            <motion.div className="w-full max-w-lg space-y-4" variants={itemVariants}>
+                <label htmlFor="duration" className="block text-sm font-medium">
+                    Duration (in minutes)
+                </label>
+                <input
+                    id="duration"
+                    name="duration"
+                    type="number"
+                    required
+                    className="w-full rounded-md border border-gray-600 px-4 py-2 placeholder-gray-500 transition-colors duration-200 ease-in-out focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                    placeholder="e.g., 60"
+                    defaultValue={workoutData.duration}
+                    onChange={handleChange}
                 />
-            </div>
-        </div>
-    );
+            </motion.div>
 
-    const workoutSets = (
-        <div className="col-span-full mt-4">
-            <label htmlFor="sets" className="block text-sm/6 font-medium">
-                sets
-            </label>
-            <div className="mt-2">
+            <motion.div className="w-full max-w-lg space-y-4" variants={itemVariants}>
+                <label htmlFor="sets" className="block text-sm font-medium">
+                    Sets
+                </label>
                 <textarea
                     id="sets"
                     name="sets"
                     rows={3}
-                    className="block w-full rounded-md px-3 py-1.5 text-base outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
-                    placeholder="Workout sets"
-                    defaultValue={data?.workoutData?.sets ?? ''}
+                    placeholder="Your workout sets..."
+                    defaultValue={workoutData.sets}
+                    onChange={handleChange}
+                    className="w-full rounded-md border border-gray-600 px-4 py-2 placeholder-gray-500 transition-colors duration-200 ease-in-out focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                 />
+            </motion.div>
+
+            <motion.button
+                type="submit"
+                className="w-full max-w-lg rounded-md bg-gradient-to-r from-blue-500 to-purple-600 py-3 text-lg font-semibold shadow-lg transition-all duration-300 ease-in-out hover:from-blue-600 hover:to-purple-700 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900"
+                variants={itemVariants}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+            >
+                Save
+            </motion.button>
+
+            <div className="flex w-full max-w-lg space-x-4">
+                <motion.button
+                    type="button"
+                    className="w-full max-w-lg rounded-md bg-gradient-to-r from-blue-500 to-purple-600 py-3 text-lg font-semibold shadow-lg transition-all duration-300 ease-in-out hover:from-blue-600 hover:to-purple-700 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900"
+                    variants={itemVariants}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                >
+                    <Link href={'/dashboard/body'} className="block w-full">
+                        Cancel
+                    </Link>
+                </motion.button>
             </div>
-        </div>
+
+            <div className="flex w-full max-w-lg space-x-4">
+                <ButtonDeleteWorkout data={workoutData} />
+            </div>
+
+            {error && <span className='block text-sm/6 font-medium text-red-500'>{error}</span>}
+        </motion.form>
     );
-
-    const datePicker = (
-        <div className="mt-4">
-            <label className="block text-sm/6 font-medium">Workout Date</label>
-            <DatePicker
-                className="block w-full rounded-md px-3 py-1.5 text-base outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
-                selected={selectedDate}
-                onChange={handleDateChange}
-                dateFormat="yyyy-MM-dd"
-                required
-            />
-        </div>
-    );
-
-
-    return (
-        <form ref={ref} action={handleSubmit}>
-            <div className="space-y-12 px-[2rem]">
-                <div className="border-b border-gray-900/10 pb-12">
-                    <h2 className="text-base/7 font-semibold">Workout Information</h2>
-                    <p className="mt-1 text-sm/6">Update your workout.</p>
-                    <div className="mt-6">
-                        {workoutInfo}
-                        {workoutDescription}
-                        {workoutSets}
-                        {datePicker}
-                    </div>
-                </div>
-            </div>
-
-            <div className="mt-6 flex items-center gap-x-6 justify-between px-[2rem]">
-                <div><ButtonDeleteWorkout data={data?.workoutData} /></div>
-
-                <div className="flex gap-x-6 items-center">
-
-                    <ButtonCancel path={'/dashboard/body'} />
-
-                    <button
-                        type="submit"
-                        className="block rounded-md bg-gray-800 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-gray-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                    >
-                        Save
-                    </button>
-                </div>
-                {error && <span className='block text-sm/6 font-medium text-red-500'>{error}</span>}
-            </div>
-        </form>
-    )
 }

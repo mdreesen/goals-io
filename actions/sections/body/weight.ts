@@ -68,7 +68,7 @@ export async function fetchWeightOverview() {
                     return `${goalPositiveInteger.toString()} lbs to go`;
                     break
                 case data[0].weight.length.toString() === '0':
-                    return 'No goal weight'
+                    return 'No weight taken.'
                     break;
 
                 default:
