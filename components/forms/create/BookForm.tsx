@@ -9,11 +9,15 @@ import book_type from '@/lib/dropdown/book_type.json';
 import decision from '@/lib/dropdown/status.json'
 import { TypeBook } from '@/types/forms';
 import { formVariants, itemVariants } from '@/lib/variants';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 export default function WorkoutForm() {
     const router = useRouter();
 
     const [error, setError] = useState<string>();
+    const [selectedStartDate, setSelectedStartDate] = useState();
+    const [selectedEndDate, setSelectedEndDate] = useState();
     const [bookData, setBookData] = useState<TypeBook>({
         book_title: '',
         kind_of_book: '',
@@ -30,6 +34,14 @@ export default function WorkoutForm() {
         setBookData((prev) => ({ ...prev, [name]: value }));
     };
 
+    const handleStartDateChange = (date: any) => {
+        setSelectedStartDate(date.toString());
+    };
+
+    const handleEndDateChange = (date: any) => {
+        setSelectedEndDate(date.toString());
+    };
+
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
@@ -38,7 +50,7 @@ export default function WorkoutForm() {
 
         try {
 
-            await addBook({ ...data });
+            await addBook({ ...data, book_start_date: selectedStartDate, book_end_date: selectedEndDate });
 
             router.refresh
             router.push(`/dashboard/mind`);
@@ -168,14 +180,13 @@ export default function WorkoutForm() {
                         <label htmlFor="book_start_date" className="block text-sm font-medium">
                             Start date
                         </label>
-                        <input
-                            id="book_start_date"
-                            name="book_start_date"
-                            type="date"
+                        <DatePicker
+                            className="block w-full rounded-md px-3 py-1.5 text-base outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
+                            selected={selectedStartDate}
+                            onChange={handleStartDateChange}
+                            placeholderText="mm/dd/yyyy"
+                            dateFormat="MM/dd/yyyy" // Specify the desired display format
                             required
-                            className="w-full rounded-md border border-gray-600 px-4 py-2 placeholder-gray-500 transition-colors duration-200 ease-in-out focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
-                            value={bookData.book_start_date}
-                            onChange={handleChange}
                         />
                     </motion.div>
 
@@ -183,13 +194,13 @@ export default function WorkoutForm() {
                         <label htmlFor="book_end_date" className="block text-sm font-medium">
                             End date
                         </label>
-                        <input
-                            id="book_end_date"
-                            name="book_end_date"
-                            type="date"
-                            className="w-full rounded-md border border-gray-600 px-4 py-2 placeholder-gray-500 transition-colors duration-200 ease-in-out focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
-                            value={bookData.book_end_date}
-                            onChange={handleChange}
+                        <DatePicker
+                            className="block w-full rounded-md px-3 py-1.5 text-base outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-gray-900 sm:text-sm/6"
+                            selected={selectedEndDate}
+                            onChange={handleEndDateChange}
+                            placeholderText="mm/dd/yyyy"
+                            dateFormat="MM/dd/yyyy" // Specify the desired display format
+                            required
                         />
                     </motion.div>
                 </>
