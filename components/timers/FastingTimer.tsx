@@ -128,7 +128,8 @@ export default function FastingTimer({ fastData }: any) {
         setDuration(duration);
 
         const now = new Date();
-        const targetEndTime = new Date(now.getTime() + duration * 60 * 60 * 1000);
+        // const targetEndTime = new Date(now.getTime() + duration * 60 * 60 * 1000);
+        const targetEndTime = new Date(now.getTime() + .01 * 60 * 60 * 1000);
 
         setStartTime(now);
         setEndTime(targetEndTime);
@@ -172,7 +173,7 @@ export default function FastingTimer({ fastData }: any) {
                     <div
                         className="absolute inset-0 rounded-full"
                         style={{
-                            background: `conic-gradient(transparent ${useTimedFasting}%, #3B82F6 ${useTimedFasting}%)`,
+                            background: `${fastData.currently_fasting && fastingEnded ? `conic-gradient(transparent ${useTimedFasting}%, #10b981 ${useTimedFasting}%` : `conic-gradient(transparent ${useTimedFasting}%, #3B82F6 ${useTimedFasting}%`})`,
                             transform: 'rotate(-90deg)',
                         }}
                     ></div>
@@ -181,6 +182,7 @@ export default function FastingTimer({ fastData }: any) {
                         <p className="text-sm uppercase tracking-wide text-gray-400">
                             Time Elapsed
                             {duration && <p className="text-sm uppercase tracking-wide text-gray-400">of {duration} hours</p>}
+                            {fastData.currently_fasting && fastingEnded && <p className="text-sm uppercase tracking-wide text-white">Fasting complete!<br/>Save your fast.</p>}
                         </p>
                     </div>
                 </motion.div>
