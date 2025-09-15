@@ -128,8 +128,9 @@ export default function FastingTimer({ fastData }: any) {
         setDuration(duration);
 
         const now = new Date();
-        // const targetEndTime = new Date(now.getTime() + duration * 60 * 60 * 1000);
-        const targetEndTime = new Date(now.getTime() + .01 * 60 * 60 * 1000);
+
+        const targetEndTime = new Date(now.getTime() + duration * 60 * 60 * 1000);
+        // const targetEndTime = new Date(now.getTime() + .01 * 60 * 60 * 1000);
 
         setStartTime(now);
         setEndTime(targetEndTime);
