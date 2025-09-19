@@ -190,7 +190,7 @@ export default function WorkoutForm() {
                         />
                     </motion.div>
 
-                    <motion.div className="w-full max-w-lg space-y-4" variants={itemVariants}>
+                    {/* <motion.div className="w-full max-w-lg space-y-4" variants={itemVariants}>
                         <label htmlFor="book_end_date" className="block text-sm font-medium">
                             End date
                         </label>
@@ -200,9 +200,8 @@ export default function WorkoutForm() {
                             onChange={handleEndDateChange}
                             placeholderText="mm/dd/yyyy"
                             dateFormat="MM/dd/yyyy" // Specify the desired display format
-                            required
                         />
-                    </motion.div>
+                    </motion.div> */}
                 </>
             )}
 
