@@ -1,4 +1,4 @@
-import { d as defineEventHandler, r as readValidatedBody, s as setUserSession, c as createError } from '../../nitro/nitro.mjs';
+import { d as defineEventHandler, r as readValidatedBody, c as createError, s as setUserSession } from '../../nitro/nitro.mjs';
 import { z } from 'zod';
 import bcrypt from 'bcrypt';
 import mongoose, { Schema } from 'mongoose';
@@ -195,8 +195,8 @@ const login_post = defineEventHandler(async (event) => {
     await connectDB();
     const user = await User.findOne({ email });
     const passwordMatches = bcrypt.compare(password, (_a = user == null ? void 0 : user.password) != null ? _a : "");
-    if (!password) return { error: "Please insert password" };
-    if (!passwordMatches) return { error: "Wrong credentials" };
+    if (!password) return createError({ statusCode: 401, statusMessage: "Please insert password." });
+    if (!passwordMatches) return createError({ statusCode: 401, statusMessage: "Wrong credentials" });
     await setUserSession(event, {
       user: {
         _id: user == null ? void 0 : user._id,
