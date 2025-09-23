@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { useMotion } from '@vueuse/motion';
+import { formVarient, containerVarient, inputVarient } from '~/utils/varients';
 
 const formRef = ref();
 const isLoggingIn = ref(false);
@@ -14,7 +15,7 @@ const credentials = reactive({
 });
 
 async function login() {
-  $fetch('/api/login', {
+  $fetch('/api/authentication/login', {
     method: 'POST',
     body: credentials
   })
@@ -26,22 +27,7 @@ async function login() {
     .catch((error) => console.log(error));
 }
 
-useMotion(formRef, {
-  initial: { opacity: 0, y: 50 },
-  enter: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      type: 'spring',
-      stiffness: 250,
-      damping: 25,
-      mass: 0.5,
-      staggerChildren: 0.1,
-      delayChildren: 0.1,
-    },
-  },
-});
-
+useMotion(formRef, { ...formVarient() });
 
 </script>
 
@@ -52,10 +38,7 @@ useMotion(formRef, {
 
     <!-- Hero Text -->
     <section class="flex flex-col items-center gap-8">
-      <div class="text-center" v-motion="{
-        initial: { opacity: 0, y: -20 },
-        enter: { opacity: 1, y: 0, transition: { delay: 0.2, duration: 0.8 } }
-      }">
+      <div class="text-center" v-motion="{ ...containerVarient() }">
 
         <h1 class="flex flex-col text-4xl sm:text-6xl font-extrabold text-white leading-tight">
           <span>Welcome to</span>
@@ -73,25 +56,25 @@ useMotion(formRef, {
         <!-- Message Area -->
         <div v-if="message" class="text-center py-2 px-4 rounded-lg"
           :class="message.includes('successful') ? 'bg-green-600/30 text-green-400' : 'bg-red-600/30 text-red-400'"
-          v-motion="{ initial: { opacity: 0, scale: 0.8 }, enter: { opacity: 1, scale: 1 } }">
+          v-motion="{ ...inputVarient() }">
           {{ message }}
         </div>
 
         <!-- Login Form -->
         <form @submit.prevent="login" class="space-y-6">
-          <div v-motion="{ initial: { opacity: 0, y: 20 }, enter: { opacity: 1, y: 0 } }">
+          <div v-motion="{ ...inputVarient() }">
             <label for="email" class="block text-sm font-medium text-gray-300 mb-1">Email</label>
             <input id="email" type="email" v-model="credentials.email" placeholder="Email" required
               class="w-full rounded-xl border border-gray-600 bg-gray-700/50 py-3 px-4 text-lg text-white shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500" />
           </div>
 
-          <div v-motion="{ initial: { opacity: 0, y: 20 }, enter: { opacity: 1, y: 0, transition: { delay: 0.1 } } }">
+          <div v-motion="{ ...inputVarient() }">
             <label for="password" class="block text-sm font-medium text-gray-300 mb-1">Password</label>
             <input id="password" type="password" v-model="credentials.password" placeholder="Password" required
               class="w-full rounded-xl border border-gray-600 bg-gray-700/50 py-3 px-4 text-lg text-white shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500" />
           </div>
 
-          <div v-motion="{ initial: { opacity: 0, y: 20 }, enter: { opacity: 1, y: 0, transition: { delay: 0.2 } } }">
+          <div v-motion="{ ...inputVarient() }">
             <button type="submit" :disabled="isLoggingIn"
               class="w-full rounded-xl bg-gradient-to-r from-blue-500 to-purple-600 py-3 text-lg font-semibold text-white shadow-lg transition-all duration-300 ease-in-out hover:from-blue-600 hover:to-purple-700 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900">
               {{ isLoggingIn ? 'Logging In...' : 'Log In' }}
@@ -99,17 +82,16 @@ useMotion(formRef, {
           </div>
         </form>
 
-        <div class="relative flex items-center justify-center py-4">
-          <div className="absolute w-full border-t border-gray-700"></div>
-          <span className="relative z-10 bg-gray-800/80 backdrop-blur-md px-4 text-gray-400 text-sm">OR</span>
+        <div v-motion="{ ...inputVarient() }" class="relative flex items-center justify-center py-4">
+          <div class="absolute w-full border-t border-gray-700"></div>
+          <span class="relative z-10 bg-gray-800/80 backdrop-blur-md px-4 text-gray-400 text-sm">OR</span>
         </div>
 
         <!-- Signup Link -->
-        <div class="text-center"
-          v-motion="{ initial: { opacity: 0, y: 20 }, enter: { opacity: 1, y: 0, transition: { delay: 0.3 } } }">
+        <div class="text-center" v-motion="{ ...inputVarient() }">
           <p class="text-gray-400 text-sm">
             Don't have an account?
-            <a href="/signup" class="text-blue-400 hover:underline transition-colors">Sign up</a>
+            <NuxtLink to="/signup" class="text-blue-400 hover:underline transition-colors">Sign up</NuxtLink>
           </p>
         </div>
       </div>

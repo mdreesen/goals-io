@@ -15,8 +15,6 @@ async function logout() {
     await navigateTo('/login')
 };
 
-console.log('user', user.value)
-
 </script>
 
 <template>

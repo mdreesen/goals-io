@@ -1,0 +1,122 @@
+<script setup lang="ts">
+import { ref } from 'vue';
+import { useMotion } from '@vueuse/motion';
+import { formVarient, containerVarient, inputVarient } from '~/utils/varients';
+
+const formRef = ref();
+const isLoading = ref(false);
+let errorMessage = ref('');
+
+const { fetch: refreshSession } = useUserSession();
+
+
+const credentials = reactive({
+    email: '',
+    password: '',
+    confirm_password: '',
+    privacy_policy: true
+});
+
+async function handler() {
+    try {
+        isLoading.value = true;
+        await $fetch('/api/authentication/signup', { method: 'POST', body: credentials });
+        await $fetch('/api/authentication/login', { method: 'POST', body: { email: credentials.email, password: credentials.password } });
+        await refreshSession();
+        await navigateTo('/dashboard');
+
+    } catch (error) {
+        console.log(error)
+        errorMessage.value = error.statusMessage;
+        isLoading.value = false;
+    }
+};
+
+useMotion(formRef, { ...formVarient() });
+</script>
+
+<template>
+    <div class="relative flex min-h-screen items-center justify-center bg-gray-950 p-4 overflow-hidden">
+        <!-- Background Gradient -->
+        <div class="absolute inset-0 z-0 bg-gradient-to-br from-gray-950 via-gray-800 to-purple-950 opacity-70"></div>
+
+        <!-- Hero Text -->
+        <section class="flex flex-col items-center gap-8">
+            <div class="text-center" v-motion="{ ...containerVarient() }">
+
+                <h1 class="flex flex-col text-4xl sm:text-6xl font-extrabold text-white leading-tight">
+                    <span>Welcome to</span>
+                    <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
+                        ASCΞND
+                    </span>
+                </h1>
+                <p class="mt-2 text-lg sm:text-xl text-gray-400">Sign up to unlock your journey.</p>
+            </div>
+
+            <!-- Login Form Container -->
+            <div ref="formRef"
+                class="relative z-20 w-full max-w-sm rounded-3xl border border-gray-700 bg-gray-800/50 p-8 shadow-2xl backdrop-blur-md space-y-6 transform transition-all duration-300">
+
+                <!-- Message Area -->
+                <div v-if="errorMessage" class="text-center py-2 px-4 rounded-lg" :class="'bg-red-600/30 text-red-400'"
+                    v-motion="{ ...inputVarient() }">
+                    {{ errorMessage }}
+                </div>
+
+                <!-- Login Form -->
+                <form @submit.prevent="handler" class="space-y-6">
+                    <div v-motion="{ ...inputVarient() }">
+                        <label for="email" class="block text-sm font-medium text-gray-300 mb-1">Email</label>
+                        <input id="email" type="email" v-model="credentials.email" placeholder="Email" required
+                            class="w-full rounded-xl border border-gray-600 bg-gray-700/50 py-3 px-4 text-lg text-white shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                    </div>
+
+                    <div v-motion="{ ...inputVarient() }">
+                        <label for="password" class="block text-sm font-medium text-gray-300 mb-1">Password</label>
+                        <input id="password" type="password" v-model="credentials.password" placeholder="Password"
+                            required
+                            class="w-full rounded-xl border border-gray-600 bg-gray-700/50 py-3 px-4 text-lg text-white shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                    </div>
+
+                    <div v-motion="{ ...inputVarient() }">
+                        <label for="password" class="block text-sm font-medium text-gray-300 mb-1">Confirm
+                            Password</label>
+                        <input id="confirm_password" type="password" v-model="credentials.confirm_password"
+                            placeholder="Password" required
+                            class="w-full rounded-xl border border-gray-600 bg-gray-700/50 py-3 px-4 text-lg text-white shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                    </div>
+
+                    <div v-motion="{ ...inputVarient() }" class="flex items-center space-x-2">
+                        <input id="privacy" type="checkbox" v-model="credentials.privacy_policy" required
+                            class="rounded-md border-gray-600 text-purple-500 focus:ring-purple-500 transition-colors duration-200" />
+                        <label for="privacy" class="text-sm text-gray-400">
+                            I agree to the <NuxtLink to="/privacy_policy"
+                                class="text-blue-400 hover:underline transition-colors">Privacy Policy</NuxtLink>
+                        </label>
+                    </div>
+
+                    <div v-motion="{ ...inputVarient() }">
+                        <button type="submit" :disabled="isLoading"
+                            class="w-full rounded-xl bg-gradient-to-r from-blue-500 to-purple-600 py-3 text-lg font-semibold text-white shadow-lg transition-all duration-300 ease-in-out hover:from-blue-600 hover:to-purple-700 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900">
+                            {{ isLoading ? 'Signing Up...' : 'Sign up' }}
+                        </button>
+                    </div>
+
+                </form>
+
+                <div v-motion="{ ...inputVarient() }" class="relative flex items-center justify-center py-4">
+                    <div class="absolute w-full border-t border-gray-700"></div>
+                    <span class="relative z-10 bg-gray-800/80 backdrop-blur-md px-4 text-gray-400 text-sm">OR</span>
+                </div>
+
+                <!-- Signup Link -->
+                <div class="text-center" v-motion="{ ...inputVarient() }">
+                    <p class="text-gray-400 text-sm">
+                        Have an account already?
+                        <NuxtLink to="/login" class="text-blue-400 hover:underline transition-colors">Log in</NuxtLink>
+                    </p>
+                </div>
+            </div>
+        </section>
+    </div>
+</template>
