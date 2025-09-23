@@ -1,0 +1,27 @@
+<script setup lang="ts">
+import type { User } from '~/types/auth';
+
+
+definePageMeta({
+    middleware: ['authenticated'],
+});
+
+const { user, clear: clearSession } = useUserSession();
+const useUser = ref<User>(user?.value);
+
+
+async function logout() {
+    await clearSession()
+    await navigateTo('/login')
+};
+
+console.log('user', user.value)
+
+</script>
+
+<template>
+    <div>
+        <h1>Welcome {{ useUser?.first_name }}</h1>
+        <button @click="logout">Logout</button>
+    </div>
+</template>

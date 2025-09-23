@@ -1,0 +1,1 @@
+import{g as t,N as r,r as c,c as l,o as u,a,t as i,O as _,J as f}from"#entry";const v=t({__name:"index",setup(m){const{user:e,clear:s}=r(),o=c(e?.value);async function n(){await s(),await f("/login")}return console.log("user",e.value),(p,g)=>(u(),l("div",null,[a("h1",null,"Welcome "+i(_(o)?.first_name),1),a("button",{onClick:n},"Logout")]))}});export{v as default};
