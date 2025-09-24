@@ -27,6 +27,7 @@ export default defineEventHandler(async (event) => {
       return createError({ statusCode: 401, statusMessage: 'Wrong credentials' })
     };
 
+    const books = await JSON?.parse(JSON?.stringify(user?.books))
     // set the user session in the cookie
     // this server util is auto-imported by the auth-utils module
     await setUserSession(event, {

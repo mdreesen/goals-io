@@ -24,7 +24,10 @@ async function login() {
       await refreshSession()
       await navigateTo('/dashboard')
     })
-    .catch((error) => console.log(error));
+    .catch(async (error) => {
+      await navigateTo('/login')
+      console.log(error)
+    });
 }
 
 useMotion(formRef, { ...formVarient() });

@@ -1,1 +1,17 @@
 @import "tailwindcss";
+@import "@nuxt/ui";
+
+body {
+    min-height: 100vh;
+};
+
+.dark-mode {
+    background-image: linear-gradient(to bottom right, #0a0a0a, #1f2937);
+    color: white;
+};
+
+@theme {
+    --font-sans: 'Public Sans', system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+    --dark-mode: linear-gradient(to bottom right, #0a0a0a, #1f2937);
+  }

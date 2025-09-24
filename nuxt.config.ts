@@ -6,13 +6,22 @@ export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
   css: ["~/assets/css/main.css"],
-  modules: ['nuxt-auth-utils', '@vueuse/motion/nuxt'],
+  modules: [
+    'nuxt-auth-utils',
+    '@vueuse/motion/nuxt',
+    '@nuxt/image',
+    '@nuxtjs/color-mode',
+    'nuxt-charts',
+    '@nuxt/ui'
+  ],
   vite: {
     plugins: [tailwindcss()],
   },
   typescript: {
-    // typeCheck: true,
     strict: false
+  },
+  colorMode: {
+    dataValue: 'theme'
   },
 
   // @vueuse/motion/nuxt

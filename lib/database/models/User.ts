@@ -140,6 +140,7 @@ const userSchema = new Schema(
     }, { timestamps: true });
 
     export type UserType = {
+        _id: object,
         username?: string;
         first_name?: string;
         last_name?: string;

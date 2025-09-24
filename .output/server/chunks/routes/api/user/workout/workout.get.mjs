@@ -7,6 +7,9 @@ import 'node:buffer';
 import 'node:fs';
 import 'node:path';
 import 'node:url';
+import '@iconify/utils';
+import 'consola';
+import 'ipx';
 
 const workout_get = defineEventHandler(async (event) => {
   const { user } = await requireUserSession(event);
