@@ -18,7 +18,6 @@ const { data: workouts, pending: pending_workouts } = await useFetch('/api/chart
             <appCard />
             <appCard />
             <appCard />
-
         </section>
 
         <!-- Progress Chart Section -->
