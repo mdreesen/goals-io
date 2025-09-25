@@ -1,4 +1,4 @@
-import { defineComponent, withAsyncContext, withCtx, unref, createVNode, computed, toValue, reactive, mergeProps, renderSlot, resolveComponent, mergeModels, useSlots, useModel, watch, toRef, createBlock, createCommentVNode, openBlock, createTextVNode, toDisplayString, resolveDynamicComponent, withModifiers, Fragment, renderList, toHandlers, useSSRContext, useTemplateRef, ref, createElementBlock, normalizeStyle, createElementVNode } from 'vue';
+import { defineComponent, withAsyncContext, withCtx, unref, createBlock, createCommentVNode, openBlock, computed, toValue, reactive, mergeProps, renderSlot, createVNode, resolveComponent, mergeModels, useSlots, useModel, watch, toRef, createTextVNode, toDisplayString, resolveDynamicComponent, withModifiers, Fragment, renderList, toHandlers, useSSRContext, useTemplateRef, ref, createElementBlock, normalizeStyle, createElementVNode } from 'vue';
 import { ssrRenderAttrs, ssrRenderComponent, ssrRenderSlot, ssrRenderClass, ssrInterpolate, ssrRenderVNode, ssrRenderList } from 'vue/server-renderer';
 import { Primitive, useForwardPropsEmits, AccordionTrigger, AccordionItem, NavigationMenuItem, NavigationMenuTrigger, NavigationMenuLink, NavigationMenuContent, AccordionContent, AccordionRoot, NavigationMenuRoot, NavigationMenuList, NavigationMenuIndicator, NavigationMenuViewport, VisuallyHidden, DialogRoot, DialogTrigger, DialogPortal, DialogOverlay, DialogContent, DialogTitle, DialogDescription, DialogClose, TooltipRoot, TooltipTrigger, TooltipPortal, TooltipContent, TooltipArrow } from 'reka-ui';
 import { O as hash, x as defu } from '../nitro/nitro.mjs';
@@ -6725,11 +6725,11 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
   __ssrInlineRender: true,
   async setup(__props) {
     let __temp, __restore;
-    const { data: books } = ([__temp, __restore] = withAsyncContext(() => useFetch("/api/charts/books", { lazy: true }, "$LfO9GtariX")), __temp = await __temp, __restore(), __temp);
-    const { data: cold_soaks } = ([__temp, __restore] = withAsyncContext(() => useFetch("/api/charts/coldsoaks", { lazy: true }, "$KMKYIrndvK")), __temp = await __temp, __restore(), __temp);
-    const { data: water_intake } = ([__temp, __restore] = withAsyncContext(() => useFetch("/api/charts/water", { lazy: true }, "$SDIVj1M84F")), __temp = await __temp, __restore(), __temp);
-    const { data: weight } = ([__temp, __restore] = withAsyncContext(() => useFetch("/api/charts/weight", { lazy: true }, "$qASg8yHiFN")), __temp = await __temp, __restore(), __temp);
-    const { data: workouts } = ([__temp, __restore] = withAsyncContext(() => useFetch("/api/charts/workouts", { lazy: true }, "$WP_QjALZe2")), __temp = await __temp, __restore(), __temp);
+    const { data: books, pending: pending_books } = ([__temp, __restore] = withAsyncContext(() => useFetch("/api/charts/books", { lazy: true }, "$LfO9GtariX")), __temp = await __temp, __restore(), __temp);
+    const { data: cold_soaks, pending: pending_cold_soaks } = ([__temp, __restore] = withAsyncContext(() => useFetch("/api/charts/coldsoaks", { lazy: true }, "$KMKYIrndvK")), __temp = await __temp, __restore(), __temp);
+    const { data: water_intake, pending: pending_water } = ([__temp, __restore] = withAsyncContext(() => useFetch("/api/charts/water", { lazy: true }, "$SDIVj1M84F")), __temp = await __temp, __restore(), __temp);
+    const { data: weight, pending: pending_weight } = ([__temp, __restore] = withAsyncContext(() => useFetch("/api/charts/weight", { lazy: true }, "$qASg8yHiFN")), __temp = await __temp, __restore(), __temp);
+    const { data: workouts, pending: pending_workouts } = ([__temp, __restore] = withAsyncContext(() => useFetch("/api/charts/workouts", { lazy: true }, "$WP_QjALZe2")), __temp = await __temp, __restore(), __temp);
     return (_ctx, _push, _parent, _attrs) => {
       const _component_appNavBar = __nuxt_component_0;
       const _component_appCard = __nuxt_component_1;
@@ -6748,22 +6748,27 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       _push(ssrRenderComponent(_component_UContainer, null, {
         default: withCtx((_2, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(ssrRenderComponent(_component_appChartBarGroup, {
-              data: unref(books),
-              barOneName: "start_date",
-              barTwoName: "end_date",
-              barOneLabel: "Start Date",
-              barTwoLabel: "End Date"
-            }, null, _parent2, _scopeId));
-          } else {
-            return [
-              createVNode(_component_appChartBarGroup, {
+            if (!unref(pending_books)) {
+              _push2(ssrRenderComponent(_component_appChartBarGroup, {
                 data: unref(books),
                 barOneName: "start_date",
                 barTwoName: "end_date",
                 barOneLabel: "Start Date",
                 barTwoLabel: "End Date"
-              }, null, 8, ["data"])
+              }, null, _parent2, _scopeId));
+            } else {
+              _push2(`<!---->`);
+            }
+          } else {
+            return [
+              !unref(pending_books) ? (openBlock(), createBlock(_component_appChartBarGroup, {
+                key: 0,
+                data: unref(books),
+                barOneName: "start_date",
+                barTwoName: "end_date",
+                barOneLabel: "Start Date",
+                barTwoLabel: "End Date"
+              }, null, 8, ["data"])) : createCommentVNode("", true)
             ];
           }
         }),
@@ -6772,18 +6777,23 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       _push(ssrRenderComponent(_component_UContainer, null, {
         default: withCtx((_2, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(ssrRenderComponent(_component_appChartBar, {
-              data: unref(cold_soaks),
-              barName: "date",
-              barLabel: "Total"
-            }, null, _parent2, _scopeId));
-          } else {
-            return [
-              createVNode(_component_appChartBar, {
+            if (!unref(pending_cold_soaks)) {
+              _push2(ssrRenderComponent(_component_appChartBar, {
                 data: unref(cold_soaks),
                 barName: "date",
                 barLabel: "Total"
-              }, null, 8, ["data"])
+              }, null, _parent2, _scopeId));
+            } else {
+              _push2(`<!---->`);
+            }
+          } else {
+            return [
+              !unref(pending_cold_soaks) ? (openBlock(), createBlock(_component_appChartBar, {
+                key: 0,
+                data: unref(cold_soaks),
+                barName: "date",
+                barLabel: "Total"
+              }, null, 8, ["data"])) : createCommentVNode("", true)
             ];
           }
         }),
@@ -6792,18 +6802,23 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       _push(ssrRenderComponent(_component_UContainer, null, {
         default: withCtx((_2, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(ssrRenderComponent(_component_appChartLine, {
-              data: unref(water_intake),
-              lineName: "water_intake",
-              lineLabel: "Water total"
-            }, null, _parent2, _scopeId));
-          } else {
-            return [
-              createVNode(_component_appChartLine, {
+            if (!unref(pending_water)) {
+              _push2(ssrRenderComponent(_component_appChartLine, {
                 data: unref(water_intake),
                 lineName: "water_intake",
                 lineLabel: "Water total"
-              }, null, 8, ["data"])
+              }, null, _parent2, _scopeId));
+            } else {
+              _push2(`<!---->`);
+            }
+          } else {
+            return [
+              !unref(pending_water) ? (openBlock(), createBlock(_component_appChartLine, {
+                key: 0,
+                data: unref(water_intake),
+                lineName: "water_intake",
+                lineLabel: "Water total"
+              }, null, 8, ["data"])) : createCommentVNode("", true)
             ];
           }
         }),
@@ -6812,18 +6827,23 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       _push(ssrRenderComponent(_component_UContainer, null, {
         default: withCtx((_2, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(ssrRenderComponent(_component_appChartLine, {
-              data: unref(weight),
-              lineName: "weight",
-              lineLabel: "Weight"
-            }, null, _parent2, _scopeId));
-          } else {
-            return [
-              createVNode(_component_appChartLine, {
+            if (!unref(pending_weight)) {
+              _push2(ssrRenderComponent(_component_appChartLine, {
                 data: unref(weight),
                 lineName: "weight",
                 lineLabel: "Weight"
-              }, null, 8, ["data"])
+              }, null, _parent2, _scopeId));
+            } else {
+              _push2(`<!---->`);
+            }
+          } else {
+            return [
+              !unref(pending_weight) ? (openBlock(), createBlock(_component_appChartLine, {
+                key: 0,
+                data: unref(weight),
+                lineName: "weight",
+                lineLabel: "Weight"
+              }, null, 8, ["data"])) : createCommentVNode("", true)
             ];
           }
         }),
@@ -6832,18 +6852,23 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       _push(ssrRenderComponent(_component_UContainer, null, {
         default: withCtx((_2, _push2, _parent2, _scopeId) => {
           if (_push2) {
-            _push2(ssrRenderComponent(_component_appChartBar, {
-              data: unref(workouts),
-              barName: "date",
-              barLabel: "Total"
-            }, null, _parent2, _scopeId));
-          } else {
-            return [
-              createVNode(_component_appChartBar, {
+            if (!unref(pending_workouts)) {
+              _push2(ssrRenderComponent(_component_appChartBar, {
                 data: unref(workouts),
                 barName: "date",
                 barLabel: "Total"
-              }, null, 8, ["data"])
+              }, null, _parent2, _scopeId));
+            } else {
+              _push2(`<!---->`);
+            }
+          } else {
+            return [
+              !unref(pending_workouts) ? (openBlock(), createBlock(_component_appChartBar, {
+                key: 0,
+                data: unref(workouts),
+                barName: "date",
+                barLabel: "Total"
+              }, null, 8, ["data"])) : createCommentVNode("", true)
             ];
           }
         }),
@@ -6861,4 +6886,4 @@ _sfc_main.setup = (props, ctx) => {
 };
 
 export { _sfc_main as default };
-//# sourceMappingURL=index-DGOcWpQe.mjs.map
+//# sourceMappingURL=index-BaPD_buH.mjs.map

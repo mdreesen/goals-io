@@ -488,7 +488,7 @@ const _routes = [
   {
     name: "dashboard",
     path: "/dashboard",
-    component: () => import('./index-DGOcWpQe.mjs')
+    component: () => import('./index-BaPD_buH.mjs')
   },
   {
     name: "dashboard-body",
