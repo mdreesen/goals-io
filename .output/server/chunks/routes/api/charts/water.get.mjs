@@ -15,10 +15,19 @@ import '../../../_/User.mjs';
 import 'mongoose';
 import 'zod';
 
-const index_get = defineEventHandler(async (event) => {
+const water_get = defineEventHandler(async (event) => {
   try {
     const user = await loggedInUser(event);
-    return user == null ? void 0 : user.books;
+    const formatArray = user == null ? void 0 : user.water.map((item) => {
+      var _a;
+      const dailyWater = (_a = item.water_intake) != null ? _a : "";
+      return {
+        water_intake: Number(dailyWater),
+        date: item == null ? void 0 : item.date,
+        _id: item == null ? void 0 : item._id
+      };
+    });
+    return formatArray;
   } catch (error) {
     console.log(error);
     throw createError({
@@ -28,5 +37,5 @@ const index_get = defineEventHandler(async (event) => {
   }
 });
 
-export { index_get as default };
-//# sourceMappingURL=index.get.mjs.map
+export { water_get as default };
+//# sourceMappingURL=water.get.mjs.map

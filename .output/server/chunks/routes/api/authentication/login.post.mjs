@@ -1,8 +1,7 @@
 import { d as defineEventHandler, r as readValidatedBody, c as createError, s as setUserSession } from '../../../nitro/nitro.mjs';
 import { z } from 'zod';
 import bcrypt from 'bcrypt';
-import { c as connectDB } from '../../../_/mongodb.mjs';
-import { U as User$1 } from '../../../_/User.mjs';
+import { c as connectDB, U as User$1 } from '../../../_/User.mjs';
 import 'node:http';
 import 'node:https';
 import 'node:crypto';

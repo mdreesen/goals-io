@@ -1,5 +1,6 @@
 import { d as defineEventHandler, c as createError } from '../../../nitro/nitro.mjs';
 import { l as loggedInUser } from '../../../_/loggedInUser.mjs';
+import { m as monthStartEnd } from '../../../_/months.mjs';
 import 'node:http';
 import 'node:https';
 import 'node:crypto';
@@ -15,10 +16,10 @@ import '../../../_/User.mjs';
 import 'mongoose';
 import 'zod';
 
-const index_get = defineEventHandler(async (event) => {
+const books_get = defineEventHandler(async (event) => {
   try {
     const user = await loggedInUser(event);
-    return user == null ? void 0 : user.books;
+    return monthStartEnd({ data: user.books, startLabel: "book_start_date", endLabel: "book_end_date" });
   } catch (error) {
     console.log(error);
     throw createError({
@@ -28,5 +29,5 @@ const index_get = defineEventHandler(async (event) => {
   }
 });
 
-export { index_get as default };
-//# sourceMappingURL=index.get.mjs.map
+export { books_get as default };
+//# sourceMappingURL=books.get.mjs.map

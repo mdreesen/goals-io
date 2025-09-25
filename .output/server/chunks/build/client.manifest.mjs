@@ -44,7 +44,7 @@ const client_manifest = {
     "module": true,
     "prefetch": true,
     "preload": true,
-    "file": "B0aUaEOs.js",
+    "file": "-6ntaWi1.js",
     "name": "entry",
     "src": "../node_modules/nuxt/dist/app/entry.js",
     "isEntry": true,
@@ -55,12 +55,12 @@ const client_manifest = {
       "../node_modules/nuxt/dist/app/components/error-500.vue"
     ],
     "css": [
-      "entry.BADhe5wj.css"
+      "entry.cDoPb_P0.css"
     ],
     "assets": []
   },
-  "entry.BADhe5wj.css": {
-    "file": "entry.BADhe5wj.css",
+  "entry.cDoPb_P0.css": {
+    "file": "entry.cDoPb_P0.css",
     "resourceType": "style",
     "prefetch": true,
     "preload": true
@@ -91,7 +91,7 @@ const client_manifest = {
     "module": true,
     "prefetch": true,
     "preload": true,
-    "file": "rSKhsQcL.js",
+    "file": "DENgd8-f.js",
     "name": "authenticated",
     "src": "middleware/authenticated.ts",
     "isDynamicEntry": true,
@@ -104,7 +104,7 @@ const client_manifest = {
     "module": true,
     "prefetch": true,
     "preload": true,
-    "file": "Cqa1ybE8.js",
+    "file": "Gk2M8_fo.js",
     "name": "index",
     "src": "pages/(authentication)/index.vue",
     "isDynamicEntry": true,
@@ -117,7 +117,7 @@ const client_manifest = {
     "module": true,
     "prefetch": true,
     "preload": true,
-    "file": "BNHNmcZv.js",
+    "file": "CS4J4WRp.js",
     "name": "login",
     "src": "pages/(authentication)/login.vue",
     "isDynamicEntry": true,
@@ -131,7 +131,7 @@ const client_manifest = {
     "module": true,
     "prefetch": true,
     "preload": true,
-    "file": "l6AsvGU7.js",
+    "file": "C2MdKrTG.js",
     "name": "signup",
     "src": "pages/(authentication)/signup.vue",
     "isDynamicEntry": true,
@@ -158,7 +158,7 @@ const client_manifest = {
     "module": true,
     "prefetch": true,
     "preload": true,
-    "file": "BTUb1RNW.js",
+    "file": "DaRlqcKI.js",
     "name": "index",
     "src": "pages/dashboard/index.vue",
     "isDynamicEntry": true,
@@ -210,7 +210,7 @@ const client_manifest = {
     "module": true,
     "prefetch": true,
     "preload": true,
-    "file": "D8V8NdVw.js",
+    "file": "CwT6lqqx.js",
     "name": "index",
     "src": "pages/privacy_policy/index.vue",
     "isDynamicEntry": true,

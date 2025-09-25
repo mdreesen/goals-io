@@ -39,7 +39,7 @@ export default defineEventHandler(async (event) => {
     console.log(error);
     throw createError({
       statusCode: 401,
-      statusMessage: 'Please try again'
+      statusMessage: 'Please try again.'
     });
   };
 });
