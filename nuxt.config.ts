@@ -30,8 +30,6 @@ export default defineNuxtConfig({
 
   // @vueuse/motion/nuxt
   runtimeConfig: {
-    mongodbUri: process.env.MONGO_URI,
-
     public: {
       motion: {
         directives: {
