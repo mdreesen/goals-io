@@ -2,6 +2,7 @@ import { d as defineEventHandler, r as readValidatedBody, c as createError, s as
 import { z } from 'zod';
 import bcrypt from 'bcrypt';
 import { c as connectDB, U as User$1 } from '../../../_/User.mjs';
+import { defineStore } from 'pinia';
 import 'node:http';
 import 'node:https';
 import 'node:crypto';
@@ -15,6 +16,16 @@ import 'consola';
 import 'ipx';
 import 'mongoose';
 
+const useUser = defineStore("user", {
+  state: () => ({ user: {} }),
+  actions: {
+    setUser(user) {
+      this.user = user;
+    }
+  }
+  // other options...
+});
+
 const User = User$1;
 const bodySchema = z.object({
   email: z.email(),
@@ -23,6 +34,7 @@ const bodySchema = z.object({
 const login_post = defineEventHandler(async (event) => {
   var _a;
   const { email, password } = await readValidatedBody(event, bodySchema.parse);
+  useUser();
   try {
     await connectDB();
     const user = await User.findOne({ email });
@@ -35,21 +47,20 @@ const login_post = defineEventHandler(async (event) => {
       return createError({ statusCode: 401, statusMessage: "Wrong credentials" });
     }
     ;
-    const books = await (JSON == null ? void 0 : JSON.parse(JSON == null ? void 0 : JSON.stringify(user == null ? void 0 : user.books)));
     await setUserSession(event, {
       user: {
         _id: user == null ? void 0 : user._id,
-        username: user == null ? void 0 : user.username,
-        first_name: (user == null ? void 0 : user.first_name) || "",
+        username: (user == null ? void 0 : user.username) || "",
+        first_name: (user == null ? void 0 : user.first_name) || "Ascender",
         last_name: (user == null ? void 0 : user.last_name) || "",
-        name: `${user == null ? void 0 : user.first_name} ${user == null ? void 0 : user.last_name}` || "",
+        name: `${user == null ? void 0 : user.first_name} ${user == null ? void 0 : user.last_name}` || "Ascender",
         email: user == null ? void 0 : user.email,
-        phone: user == null ? void 0 : user.phone,
-        country: user == null ? void 0 : user.country,
-        street_address: user == null ? void 0 : user.street_address,
-        city: user == null ? void 0 : user.city,
-        region: user == null ? void 0 : user.region,
-        postal_code: user == null ? void 0 : user.postal_code
+        phone: (user == null ? void 0 : user.phone) || "",
+        country: (user == null ? void 0 : user.country) || "",
+        street_address: (user == null ? void 0 : user.street_address) || "",
+        city: (user == null ? void 0 : user.city) || "",
+        region: (user == null ? void 0 : user.region) || "",
+        postal_code: (user == null ? void 0 : user.postal_code) || ""
       }
     });
   } catch (error) {

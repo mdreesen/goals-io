@@ -1,0 +1,1 @@
+import{J as t,c as o,a as n,o as a}from"#entry";const p=t({__name:"index",setup(r){return(s,e)=>(a(),o("div",null,[...e[0]||(e[0]=[n("h1",null,"Welcome to the spirit page",-1)])]))}});export{p as default};

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 const props = defineProps({
-  title: {
+  text: {
     type: String,
     required: true
   },
@@ -22,7 +22,7 @@ const props = defineProps({
     <template #header>
       <div class="flex flex-col justify-center items-center">
         <baseIcon v-if="props.icon" :iconName="props.icon" />
-        <span>{{ props.title }}</span>
+        <span>{{ props.text }}</span>
       </div>
     </template>
 

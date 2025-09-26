@@ -11,8 +11,12 @@ export default defineNuxtConfig({
     '@nuxt/image',
     '@nuxtjs/color-mode',
     'nuxt-charts',
-    '@nuxt/ui'
+    '@nuxt/ui',
+    '@pinia/nuxt'
   ],
+  pinia: {
+    storesDirs: ['./store/**'],
+  },
   vite: {
     plugins: [tailwindcss()],
   },

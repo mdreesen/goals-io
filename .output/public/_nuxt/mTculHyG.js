@@ -1,1 +1,0 @@
-import{_ as o,c as t,a as n,o as r}from"#entry";const a={};function c(s,e){return r(),t("div",null,[...e[0]||(e[0]=[n("h1",null,"Welcome to the Body page",-1)])])}const d=o(a,[["render",c]]);export{d as default};

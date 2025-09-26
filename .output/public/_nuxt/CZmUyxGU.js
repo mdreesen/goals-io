@@ -1,1 +1,0 @@
-import{_ as n,c as o,a as t,o as r}from"#entry";const a={};function c(s,e){return r(),o("div",null,[...e[0]||(e[0]=[t("h1",null,"Welcome to the mind page",-1)])])}const d=n(a,[["render",c]]);export{d as default};

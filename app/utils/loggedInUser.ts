@@ -8,6 +8,7 @@ const User = UserModel as Model<UserType>;
 
 interface IUser extends UserType {
     email: string;
+    book_start_date: string;
 };
 
 export default defineEventHandler(async (event) => {

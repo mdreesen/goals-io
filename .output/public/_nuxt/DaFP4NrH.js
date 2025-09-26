@@ -1,0 +1,1 @@
+import{J as o,c as t,a as n,o as a}from"#entry";const p=o({__name:"index",setup(r){return(s,e)=>(a(),t("div",null,[...e[0]||(e[0]=[n("h1",null,"Welcome to the Body page",-1)])]))}});export{p as default};

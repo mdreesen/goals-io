@@ -1,1 +1,0 @@
-import{_ as t,c as o,a as n,o as r}from"#entry";const s={};function a(c,e){return r(),o("div",null,[...e[0]||(e[0]=[n("h1",null,"Welcome to the spirit page",-1)])])}const i=t(s,[["render",a]]);export{i as default};
