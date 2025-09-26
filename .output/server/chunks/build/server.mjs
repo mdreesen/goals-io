@@ -488,7 +488,7 @@ const _routes = [
   {
     name: "dashboard",
     path: "/dashboard",
-    component: () => import('./index-BaPD_buH.mjs')
+    component: () => import('./index-rcowERQR.mjs')
   },
   {
     name: "dashboard-body",
@@ -509,12 +509,12 @@ const _routes = [
     name: "index",
     path: "/",
     meta: { "middleware": ["authenticated"] },
-    component: () => import('./index-ugnvCsNl.mjs')
+    component: () => import('./index-s4q6E9g_.mjs')
   },
   {
     name: "login",
     path: "/login",
-    component: () => import('./login-Ca-xUnvY.mjs')
+    component: () => import('./login-D5ufPbZG.mjs')
   },
   {
     name: "dashboard-spirit",
@@ -524,7 +524,7 @@ const _routes = [
   {
     name: "signup",
     path: "/signup",
-    component: () => import('./signup-CleGsUoi.mjs')
+    component: () => import('./signup-DVjE-a_g.mjs')
   },
   {
     name: "dashboard-profile",
@@ -650,7 +650,7 @@ const globalMiddleware = [
   manifest_45route_45rule
 ];
 const namedMiddleware = {
-  authenticated: () => import('./authenticated-zQLmQZJa.mjs')
+  authenticated: () => import('./authenticated-JqEkwmHT.mjs')
 };
 const plugin = /* @__PURE__ */ defineNuxtPlugin({
   name: "nuxt:router",
@@ -992,7 +992,7 @@ const LazyIcon = defineAsyncComponent(() => Promise.resolve().then(() => index).
 const lazyGlobalComponents = [
   ["Icon", LazyIcon]
 ];
-const components_plugin_4kY4pyzJIYX99vmMAAIorFf3CnAaptHitJgf7JxiED8 = /* @__PURE__ */ defineNuxtPlugin({
+const components_plugin_z4hgvsiddfKkfXTP6M8M4zG5Cb7sGnDhcryKVM45Di4 = /* @__PURE__ */ defineNuxtPlugin({
   name: "nuxt:global-components",
   setup(nuxtApp) {
     for (const [name, component] of lazyGlobalComponents) {
@@ -3327,7 +3327,7 @@ const plugins = [
   plugin,
   session_server_fi7D7q_WjeXZl2Hh05GOWPuIxZQWSnpY3ifY_sSGHJo,
   revive_payload_server_MVtmlZaQpj6ApFmshWfUWl5PehCebzaBf2NuRMiIbms,
-  components_plugin_4kY4pyzJIYX99vmMAAIorFf3CnAaptHitJgf7JxiED8,
+  components_plugin_z4hgvsiddfKkfXTP6M8M4zG5Cb7sGnDhcryKVM45Di4,
   colors_E7kSti5pGZ28QhUUurq6gGRU3l65WuXO_KJC3GQgzFo,
   plugin_MeUvTuoKUi51yb_kBguab6hdcExVXeTtZtTg9TZZBB8,
   plugin_server_9Ca9_HhnjAGwBWpwAydRauMHxWoxTDY60BrArRnXN_A,
@@ -7985,5 +7985,5 @@ let entry;
 }
 const entry$1 = (ssrContext) => entry(ssrContext);
 
-export { useUserSession as A, useMotion as B, defineNuxtRouteMiddleware as C, navigateTo as D, _export_sfc as _, __nuxt_component_0$1 as a, useAppConfig as b, useLocale as c, usePortal as d, entry$1 as default, _sfc_main$8 as e, useRoute as f, createReusableTemplate as g, getSlotChildrenText as h, _sfc_main$9 as i, useFieldGroup as j, useComponentIcons as k, _sfc_main$e as l, _sfc_main$b as m, createSharedComposable as n, isArrayOfArray as o, get as p, pickLinkProps as q, reactivePick as r, _sfc_main$a as s, tv as t, useHead as u, __nuxt_component_2$1 as v, __nuxt_component_0$3 as w, fetchDefaults as x, useAsyncData as y, useRequestFetch as z };
+export { useRequestFetch as A, useUserSession as B, useMotion as C, defineNuxtRouteMiddleware as D, navigateTo as E, _export_sfc as _, __nuxt_component_0$1 as a, useAppConfig as b, useLocale as c, usePortal as d, entry$1 as default, _sfc_main$8 as e, useRoute as f, createReusableTemplate as g, getSlotChildrenText as h, _sfc_main$9 as i, useFieldGroup as j, useComponentIcons as k, _sfc_main$e as l, _sfc_main$b as m, createSharedComposable as n, isArrayOfArray as o, get as p, pickLinkProps as q, reactivePick as r, _sfc_main$a as s, tv as t, useHead as u, __nuxt_component_2$1 as v, __nuxt_component_0$2 as w, __nuxt_component_0$3 as x, fetchDefaults as y, useAsyncData as z };
 //# sourceMappingURL=server.mjs.map

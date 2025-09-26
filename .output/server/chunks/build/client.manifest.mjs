@@ -44,7 +44,7 @@ const client_manifest = {
     "module": true,
     "prefetch": true,
     "preload": true,
-    "file": "twVPgJ_2.js",
+    "file": "BhW7gLjV.js",
     "name": "entry",
     "src": "../node_modules/nuxt/dist/app/entry.js",
     "isEntry": true,
@@ -55,12 +55,12 @@ const client_manifest = {
       "../node_modules/nuxt/dist/app/components/error-500.vue"
     ],
     "css": [
-      "entry.cDoPb_P0.css"
+      "entry.BrO2GLZM.css"
     ],
     "assets": []
   },
-  "entry.cDoPb_P0.css": {
-    "file": "entry.cDoPb_P0.css",
+  "entry.BrO2GLZM.css": {
+    "file": "entry.BrO2GLZM.css",
     "resourceType": "style",
     "prefetch": true,
     "preload": true
@@ -91,7 +91,7 @@ const client_manifest = {
     "module": true,
     "prefetch": true,
     "preload": true,
-    "file": "DENgd8-f.js",
+    "file": "RU-mPEE6.js",
     "name": "authenticated",
     "src": "middleware/authenticated.ts",
     "isDynamicEntry": true,
@@ -158,7 +158,7 @@ const client_manifest = {
     "module": true,
     "prefetch": true,
     "preload": true,
-    "file": "BjVM_glS.js",
+    "file": "DfRQQsr-.js",
     "name": "index",
     "src": "pages/dashboard/index.vue",
     "isDynamicEntry": true,
