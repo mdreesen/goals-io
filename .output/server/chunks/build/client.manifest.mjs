@@ -44,7 +44,7 @@ const client_manifest = {
     "module": true,
     "prefetch": true,
     "preload": true,
-    "file": "C9fPU3jY.js",
+    "file": "C5zFtelZ.js",
     "name": "entry",
     "src": "../node_modules/nuxt/dist/app/entry.js",
     "isEntry": true,
@@ -52,6 +52,7 @@ const client_manifest = {
       "middleware/authenticated.ts",
       "layouts/authenticated.vue",
       "layouts/default.vue",
+      "../node_modules/workbox-window/build/workbox-window.prod.es5.mjs",
       "../node_modules/nuxt/dist/app/components/error-404.vue",
       "../node_modules/nuxt/dist/app/components/error-500.vue"
     ],
@@ -65,6 +66,27 @@ const client_manifest = {
     "resourceType": "style",
     "prefetch": true,
     "preload": true
+  },
+  "../node_modules/workbox-window/build/workbox-window.prod.es5.mjs": {
+    "resourceType": "script",
+    "module": true,
+    "prefetch": true,
+    "preload": true,
+    "file": "CwtvwXb3.js",
+    "name": "workbox-window.prod.es5",
+    "src": "../node_modules/workbox-window/build/workbox-window.prod.es5.mjs",
+    "isDynamicEntry": true
+  },
+  "_DfBJuHz8.js": {
+    "resourceType": "script",
+    "module": true,
+    "prefetch": true,
+    "preload": true,
+    "file": "DfBJuHz8.js",
+    "name": "useAuth",
+    "imports": [
+      "../node_modules/nuxt/dist/app/entry.js"
+    ]
   },
   "_THmtR4Dj.js": {
     "resourceType": "script",
@@ -90,7 +112,7 @@ const client_manifest = {
     "module": true,
     "prefetch": true,
     "preload": true,
-    "file": "DWvDL-jH.js",
+    "file": "CX7ieUek.js",
     "name": "authenticated",
     "src": "layouts/authenticated.vue",
     "isDynamicEntry": true,
@@ -117,7 +139,7 @@ const client_manifest = {
     "module": true,
     "prefetch": true,
     "preload": true,
-    "file": "FAhAfV1l.js",
+    "file": "CTM_rckc.js",
     "name": "authenticated",
     "src": "middleware/authenticated.ts",
     "isDynamicEntry": true,
@@ -143,13 +165,14 @@ const client_manifest = {
     "module": true,
     "prefetch": true,
     "preload": true,
-    "file": "DPLFktmZ.js",
+    "file": "Uo12L6yN.js",
     "name": "login",
     "src": "pages/(authentication)/login.vue",
     "isDynamicEntry": true,
     "imports": [
       "../node_modules/nuxt/dist/app/entry.js",
-      "_THmtR4Dj.js"
+      "_THmtR4Dj.js",
+      "_DfBJuHz8.js"
     ]
   },
   "pages/(authentication)/signup.vue": {
@@ -211,12 +234,13 @@ const client_manifest = {
     "module": true,
     "prefetch": true,
     "preload": true,
-    "file": "DnpJqyb2.js",
+    "file": "BUr5MEql.js",
     "name": "index",
     "src": "pages/dashboard/profile/index.vue",
     "isDynamicEntry": true,
     "imports": [
-      "../node_modules/nuxt/dist/app/entry.js"
+      "../node_modules/nuxt/dist/app/entry.js",
+      "_DfBJuHz8.js"
     ]
   },
   "pages/dashboard/spirit/index.vue": {

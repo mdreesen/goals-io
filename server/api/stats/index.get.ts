@@ -1,11 +1,12 @@
 import loggedInUser from '~/utils/loggedInUser';
+import type {BookType} from '~/types/books';
 
 export default defineEventHandler(async (event) => {
   try {
     const user = await loggedInUser(event);
 
     const now = new Date();
-    const year = now.getFullYear();
+    const year = now.getFullYear().toString();
 
     // User data per section
     const books = user?.books ?? [];
@@ -15,8 +16,8 @@ export default defineEventHandler(async (event) => {
     const weight = user?.weight ?? [];
 
     // Books started and books ended current year
-    const bookCurrentStartedYear = books.filter((item) => item.book_start_date?.includes(year)).length;
-    const bookCurrentEndedYear = books.filter((item) => item?.book_end_date?.includes(year)).length;
+    const bookCurrentStartedYear = books.filter((item: BookType) => item.book_start_date?.includes(year)).length;
+    const bookCurrentEndedYear = books.filter((item: BookType) => item?.book_end_date?.includes(year)).length;
 
     // Latest Cold Soak data
     const latestColdSoak = coldSoaks.reverse()[0];

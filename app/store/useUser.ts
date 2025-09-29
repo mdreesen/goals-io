@@ -10,8 +10,8 @@ export const useUser = defineStore('user', {
 
     actions: {
         setUser(user: User) {
-            this.user = user
+            console.log(user)
+            this.user = { ...this.user, ...user }
         }
-    }
-    // other options...
+    },
 });

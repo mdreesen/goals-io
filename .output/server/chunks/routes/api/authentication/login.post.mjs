@@ -2,7 +2,6 @@ import { d as defineEventHandler, r as readValidatedBody, c as createError, s as
 import { z } from 'zod';
 import bcrypt from 'bcrypt';
 import { c as connectDB, U as User$1 } from '../../../_/User.mjs';
-import { defineStore } from 'pinia';
 import 'node:http';
 import 'node:https';
 import 'node:crypto';
@@ -16,16 +15,6 @@ import 'consola';
 import 'ipx';
 import 'mongoose';
 
-const useUser = defineStore("user", {
-  state: () => ({ user: {} }),
-  actions: {
-    setUser(user) {
-      this.user = user;
-    }
-  }
-  // other options...
-});
-
 const User = User$1;
 const bodySchema = z.object({
   email: z.email(),
@@ -34,7 +23,6 @@ const bodySchema = z.object({
 const login_post = defineEventHandler(async (event) => {
   var _a;
   const { email, password } = await readValidatedBody(event, bodySchema.parse);
-  useUser();
   try {
     await connectDB();
     const user = await User.findOne({ email });

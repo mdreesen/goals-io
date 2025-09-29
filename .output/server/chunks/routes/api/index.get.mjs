@@ -20,7 +20,7 @@ const index_get = defineEventHandler(async (event) => {
   try {
     const user = await loggedInUser(event);
     const now = /* @__PURE__ */ new Date();
-    const year = now.getFullYear();
+    const year = now.getFullYear().toString();
     const books = (_a = user == null ? void 0 : user.books) != null ? _a : [];
     const coldSoaks = (_b = user == null ? void 0 : user.cold_soaks) != null ? _b : [];
     const fasting = (_c = user == null ? void 0 : user.fasting) != null ? _c : [];

@@ -1,5 +1,4 @@
 import { connectDB } from "../../lib/database/mongodb";
-
 import { Model } from 'mongoose';
 import UserModel from '../../lib/database/models/User';
 import type { UserType } from '../../lib/database/models/User';

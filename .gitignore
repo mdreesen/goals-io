@@ -7,3 +7,4 @@ node_modules
 # Serwist
 public/sw*
 public/swe-worker*
+sw.*

@@ -1,7 +1,6 @@
 import { z } from 'zod';
 import bcrypt from 'bcrypt';
 import { connectDB } from "../../../lib/database/mongodb";
-import { useUser } from '~/store/useUser';
 
 import { Model } from 'mongoose';
 import UserModel, { UserType } from '../../../lib/database/models/User';
@@ -14,7 +13,6 @@ const bodySchema = z.object({
 
 export default defineEventHandler(async (event) => {
   const { email, password } = await readValidatedBody(event, bodySchema.parse);
-  const userStore = useUser()
 
   try {
     await connectDB();

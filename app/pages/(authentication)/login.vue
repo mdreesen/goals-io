@@ -2,12 +2,14 @@
 import { ref } from 'vue';
 import { useMotion } from '@vueuse/motion';
 import { formVarient, containerVarient, inputVarient } from '~/utils/varients';
+import { useAuth } from '~/store';
+import type { User } from '~/types/user'
 
 const formRef = ref();
 const isLoggingIn = ref(false);
 const message = ref('');
 
-const { fetch: refreshSession } = useUserSession();
+const { loggedIn, user, fetch: refreshSession } = useUserSession()
 
 const credentials = reactive({
   email: '',
@@ -15,14 +17,22 @@ const credentials = reactive({
 });
 
 async function login() {
+  const authStore = useAuth()
   $fetch('/api/authentication/login', {
     method: 'POST',
     body: credentials
   })
     .then(async () => {
+      // useAuth.setToken(response.token); // Assuming 'response.token' contains the token
+      await refreshSession();
+      await navigateTo('/dashboard');
+
       // Refresh the session on client-side and redirect to the home page
-      await refreshSession()
-      await navigateTo('/dashboard')
+      authStore.setUser(user.value as User); // Assuming 'response.user' contains user data
+      authStore.setLoggedIn(loggedIn.value);
+
+      console.log('loggedIn', loggedIn.value);
+      console.log('user', user.value)
     })
     .catch(async (error) => {
       await navigateTo('/login')

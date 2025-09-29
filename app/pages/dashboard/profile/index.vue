@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
+import { useAuth } from '~/store';
+import type { User } from '~/types/user'
 
 definePageMeta({
   layout: 'authenticated',
@@ -12,10 +14,16 @@ const settings = ref({
   shareProgress: true,
 });
 
-const { clear: clearSession } = useUserSession();
+const { user, clear: clearSession } = useUserSession();
 async function logout() {
-  await clearSession()
-  await navigateTo('/login')
+  const authStore = useAuth()
+
+  await clearSession();
+  await navigateTo('/login');
+  console.log(user.value);
+
+  authStore.setUser(user.value as User); // Assuming 'response.user' contains user data
+  authStore.setLoggedIn(false);
 };
 
 const toggleSetting = (key: keyof typeof settings.value) => {

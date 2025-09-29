@@ -2,6 +2,7 @@
   <div>
     <UApp>
       <NuxtLayout>
+        <VitePwaManifest/>
         <NuxtPage />
       </NuxtLayout>
     </UApp>
