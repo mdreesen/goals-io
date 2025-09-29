@@ -562,7 +562,7 @@ const _routes = [
   {
     name: "login",
     path: "/login",
-    component: () => import('./login-DQ5z-SUB.mjs')
+    component: () => import('./login-D2YaTwv7.mjs')
   },
   {
     name: "dashboard-spirit",
@@ -579,7 +579,7 @@ const _routes = [
     name: "dashboard-profile",
     path: "/dashboard/profile",
     meta: __nuxt_page_meta || {},
-    component: () => import('./index-B9rJzI6r.mjs')
+    component: () => import('./index-CGV3LY3I.mjs')
   }
 ];
 const _wrapInTransition = (props, children) => {

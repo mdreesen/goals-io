@@ -5,7 +5,7 @@ export default defineEventHandler(async (event) => {
     const user = await loggedInUser(event);
 
     // Have to transform water_intake to Number...sad face
-    const formatArray = user?.water.map((item) => {
+    const formatArray = user?.water && user?.water.map((item) => {
       const dailyWater = (item as { water_intake: string }).water_intake ?? "";
 
       return {

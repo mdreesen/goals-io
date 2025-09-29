@@ -2,12 +2,12 @@
 import { ref } from 'vue';
 import { useMotion } from '@vueuse/motion';
 import { formVarient, containerVarient, inputVarient } from '~/utils/varients';
-import { useAuth } from '~/store';
-import type { User } from '~/types/user'
+import { useAuth } from '~/store/useAuth';
+import type { User } from '~/types/user';
 
 const formRef = ref();
-const isLoggingIn = ref(false);
 const message = ref('');
+const isLoading = ref(false);
 
 const { loggedIn, user, fetch: refreshSession } = useUserSession()
 
@@ -17,7 +17,8 @@ const credentials = reactive({
 });
 
 async function login() {
-  const authStore = useAuth()
+  const authStore = useAuth();
+  isLoading.value = true;
   $fetch('/api/authentication/login', {
     method: 'POST',
     body: credentials
@@ -30,13 +31,13 @@ async function login() {
       // Refresh the session on client-side and redirect to the home page
       authStore.setUser(user.value as User); // Assuming 'response.user' contains user data
       authStore.setLoggedIn(loggedIn.value);
-
-      console.log('loggedIn', loggedIn.value);
-      console.log('user', user.value)
+      
+      isLoading.value = false;
     })
     .catch(async (error) => {
-      await navigateTo('/login')
-      console.log(error)
+      await navigateTo('/login');
+      console.log(error);
+      isLoading.value = false;
     });
 }
 
@@ -88,9 +89,9 @@ useMotion(formRef, { ...formVarient() });
           </div>
 
           <div v-motion="{ ...inputVarient() }">
-            <button type="submit" :disabled="isLoggingIn"
-              class="w-full rounded-xl bg-gradient-to-r from-blue-500 to-purple-600 py-3 text-lg font-semibold text-white shadow-lg transition-all duration-300 ease-in-out hover:from-blue-600 hover:to-purple-700 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900">
-              {{ isLoggingIn ? 'Logging In...' : 'Log In' }}
+            <button type="submit" :disabled="isLoading"
+              :class="`${isLoading ? 'bg-gradient-to-r from-gray-500 to-gray-600' : 'bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900'} w-full rounded-xl py-3 text-lg font-semibold text-white shadow-lg transition-all duration-300 ease-in-out`">
+              {{ isLoading ? 'Logging In...' : 'Log In' }}
             </button>
           </div>
         </form>

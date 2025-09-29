@@ -17,7 +17,8 @@ const connectDB = async () => {
 const EnvSchema = z.object({
   MONGO_URI: z.string(),
   RESEND_KEY: z.string(),
-  PROJECT_DOMAIN: z.string()
+  PROJECT_DOMAIN: z.string(),
+  NUXT_SESSION_PASSWORD: z.string()
 });
 const env = EnvSchema.parse(process.env);
 

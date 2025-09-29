@@ -5,7 +5,7 @@ export default defineEventHandler(async (event) => {
     const user = await loggedInUser(event);
 
     // Have to transform weight to Number...sad face
-    const formatArray = user?.weight.map((item) => {
+    const formatArray = user?.weight && user?.weight.map((item) => {
       const dailyWeight = (item as { weight: string }).weight ?? "";
 
       return {

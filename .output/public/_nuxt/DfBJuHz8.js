@@ -1,1 +1,0 @@
-import{ar as e}from"#entry";const i=e("auth",{state:()=>({user:null,token:null,isAuthenticated:!1}),actions:{setUser(t){this.user=t,this.isAuthenticated=!0},setToken(t){this.token=t,localStorage.setItem("token",t)},setLoggedIn(t){this.isAuthenticated=t},clearAuth(){this.user=null,this.token=null,this.isAuthenticated=!1,localStorage.removeItem("token")}}});export{i as u};
