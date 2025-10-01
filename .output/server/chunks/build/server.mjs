@@ -540,13 +540,13 @@ const _routes = [
     name: "dashboard-body",
     path: "/dashboard/body",
     meta: __nuxt_page_meta$3 || {},
-    component: () => import('./index-D1tOq4qV.mjs')
+    component: () => import('./index-D3-zEQqN.mjs')
   },
   {
     name: "dashboard-mind",
     path: "/dashboard/mind",
     meta: __nuxt_page_meta$2 || {},
-    component: () => import('./index-BNlvwEvy.mjs')
+    component: () => import('./index-Cr1nY_xw.mjs')
   },
   {
     name: "privacy_policy",

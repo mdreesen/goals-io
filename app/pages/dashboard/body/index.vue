@@ -7,5 +7,11 @@
 <template>
     <div>
         <h1>Welcome to the Body page</h1>
+
+        <appTrackerHydration />
+        <appTrackerColdSoak />
+        <appTrackerFasting />
+        <appTrackerWeight />
+        <appTrackerWorkout />
     </div>
 </template>

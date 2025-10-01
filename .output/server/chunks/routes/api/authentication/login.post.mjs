@@ -29,22 +29,24 @@ const login_post = defineEventHandler(async (event) => {
     const passwordMatches = bcrypt.compare(password, (_a = user == null ? void 0 : user.password) != null ? _a : "");
     if (!password) throw createError({ statusCode: 401, statusMessage: "Please insert password." });
     if (!passwordMatches) throw createError({ statusCode: 401, statusMessage: "Wrong credentials" });
-    await setUserSession(event, {
-      user: {
-        _id: user == null ? void 0 : user._id,
-        username: (user == null ? void 0 : user.username) || "",
-        first_name: (user == null ? void 0 : user.first_name) || "Ascender",
-        last_name: (user == null ? void 0 : user.last_name) || "",
-        name: `${user == null ? void 0 : user.first_name} ${user == null ? void 0 : user.last_name}` || "Ascender",
-        email: user == null ? void 0 : user.email,
-        phone: (user == null ? void 0 : user.phone) || "",
-        country: (user == null ? void 0 : user.country) || "",
-        street_address: (user == null ? void 0 : user.street_address) || "",
-        city: (user == null ? void 0 : user.city) || "",
-        region: (user == null ? void 0 : user.region) || "",
-        postal_code: (user == null ? void 0 : user.postal_code) || ""
-      }
-    });
+    else {
+      await setUserSession(event, {
+        user: {
+          _id: user == null ? void 0 : user._id,
+          username: (user == null ? void 0 : user.username) || "",
+          first_name: (user == null ? void 0 : user.first_name) || "Ascender",
+          last_name: (user == null ? void 0 : user.last_name) || "",
+          name: `${user == null ? void 0 : user.first_name} ${user == null ? void 0 : user.last_name}` || "Ascender",
+          email: user == null ? void 0 : user.email,
+          phone: (user == null ? void 0 : user.phone) || "",
+          country: (user == null ? void 0 : user.country) || "",
+          street_address: (user == null ? void 0 : user.street_address) || "",
+          city: (user == null ? void 0 : user.city) || "",
+          region: (user == null ? void 0 : user.region) || "",
+          postal_code: (user == null ? void 0 : user.postal_code) || ""
+        }
+      });
+    }
   } catch (error) {
     console.log(error);
     throw createError({

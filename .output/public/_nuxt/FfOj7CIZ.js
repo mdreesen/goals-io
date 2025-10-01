@@ -1,1 +1,0 @@
-import{J as n,c as o,a as t,o as a}from"#entry";const m=n({__name:"index",setup(r){return(s,e)=>(a(),o("div",null,[...e[0]||(e[0]=[t("h1",null,"Welcome to the mind page",-1)])]))}});export{m as default};

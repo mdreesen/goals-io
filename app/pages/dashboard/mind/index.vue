@@ -10,5 +10,6 @@
         <!-- <AppAlert>
             This is an auto-imported component
         </AppAlert> -->
+        <appTrackerAffirmations />
     </div>
 </template>

@@ -23,26 +23,27 @@ export default defineEventHandler(async (event) => {
 
     if (!password) throw createError({ statusCode: 401, statusMessage: 'Please insert password.' });
     if (!passwordMatches) throw createError({ statusCode: 401, statusMessage: 'Wrong credentials' });
+    else {
+      // set the user session in the cookie
+      // this server util is auto-imported by the auth-utils module
+      await setUserSession(event, {
+        user: {
+          _id: user?._id!,
+          username: user?.username || '',
+          first_name: user?.first_name || 'Ascender',
+          last_name: user?.last_name || '',
+          name: `${user?.first_name} ${user?.last_name}` || 'Ascender',
+          email: user?.email,
+          phone: user?.phone || '',
+          country: user?.country || '',
+          street_address: user?.street_address || '',
+          city: user?.city || '',
+          region: user?.region || '',
+          postal_code: user?.postal_code || '',
+        }
+      });
+    }
 
-    // set the user session in the cookie
-    // this server util is auto-imported by the auth-utils module
-    await setUserSession(event, {
-      user: {
-        _id: user?._id!,
-        username: user?.username || '',
-        first_name: user?.first_name || 'Ascender',
-        last_name: user?.last_name || '',
-        name: `${user?.first_name} ${user?.last_name}` || 'Ascender',
-        email: user?.email,
-        phone: user?.phone || '',
-        country: user?.country || '',
-        street_address: user?.street_address || '',
-        city: user?.city || '',
-        region: user?.region || '',
-        postal_code: user?.postal_code || '',
-      }
-    });
-    
   } catch (error) {
     console.log(error);
     throw createError({
