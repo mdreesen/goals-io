@@ -8,6 +8,7 @@ import type { User } from '~/types/user';
 const formRef = ref();
 const message = ref('');
 const isLoading = ref(false);
+let errorMessage = ref('');
 
 const { loggedIn, user, fetch: refreshSession } = useUserSession()
 
@@ -31,12 +32,13 @@ async function login() {
       // Refresh the session on client-side and redirect to the home page
       authStore.setUser(user.value as User); // Assuming 'response.user' contains user data
       authStore.setLoggedIn(loggedIn.value);
-      
+
       isLoading.value = false;
     })
     .catch(async (error) => {
-      await navigateTo('/login');
+      // await navigateTo('/login');
       console.log(error);
+      errorMessage.value = error.statusMessage;
       isLoading.value = false;
     });
 }
@@ -68,10 +70,9 @@ useMotion(formRef, { ...formVarient() });
         class="relative z-20 w-full max-w-sm rounded-3xl border border-gray-700 bg-gray-800/50 p-8 shadow-2xl backdrop-blur-md space-y-6 transform transition-all duration-300">
 
         <!-- Message Area -->
-        <div v-if="message" class="text-center py-2 px-4 rounded-lg"
-          :class="message.includes('successful') ? 'bg-green-600/30 text-green-400' : 'bg-red-600/30 text-red-400'"
+        <div v-if="errorMessage" class="text-center py-2 px-4 rounded-lg" :class="'bg-red-600/30 text-red-400'"
           v-motion="{ ...inputVarient() }">
-          {{ message }}
+          {{ errorMessage }}
         </div>
 
         <!-- Login Form -->

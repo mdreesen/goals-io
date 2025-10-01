@@ -162,15 +162,19 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
   __name: "Welcome",
   __ssrInlineRender: true,
   setup(__props) {
-    const { user } = useUserSession();
+    const { user, loggedIn } = useUserSession();
     const useUser = ref(user?.value);
     return (_ctx, _push, _parent, _attrs) => {
       const _component_baseDescription = __nuxt_component_0$1;
-      _push(`<!--[--><h2 class="text-5xl text-center md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 mt-2"> Welcome, </h2><h2 class="text-5xl text-center md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500">${ssrInterpolate(unref(useUser).first_name)}! </h2>`);
-      _push(ssrRenderComponent(_component_baseDescription, {
-        text: unref(useUser).username
-      }, null, _parent));
-      _push(`<!--]-->`);
+      if (unref(loggedIn)) {
+        _push(`<div${ssrRenderAttrs(_attrs)}><h2 class="text-5xl text-center md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 mt-2"> Welcome, </h2><h2 class="text-5xl text-center md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500">${ssrInterpolate(unref(useUser).first_name)}! </h2>`);
+        _push(ssrRenderComponent(_component_baseDescription, {
+          text: unref(useUser).username
+        }, null, _parent));
+        _push(`</div>`);
+      } else {
+        _push(`<div${ssrRenderAttrs(_attrs)}><h2 class="text-5xl text-center md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 mt-2"> Log in or sign up to get started! </h2></div>`);
+      }
     };
   }
 });
@@ -1258,4 +1262,4 @@ _sfc_main.setup = (props, ctx) => {
 };
 
 export { _sfc_main as default };
-//# sourceMappingURL=index-CAU_7tES.mjs.map
+//# sourceMappingURL=index-DtAbMwTk.mjs.map

@@ -19,7 +19,7 @@ import 'zod';
 const coldsoaks_get = defineEventHandler(async (event) => {
   try {
     const user = await loggedInUser(event);
-    return monthStart({ data: user.cold_soaks, startLabel: "dateFormatted" });
+    return monthStart({ data: user == null ? void 0 : user.cold_soaks, startLabel: "dateFormatted" });
   } catch (error) {
     console.log(error);
     throw createError({

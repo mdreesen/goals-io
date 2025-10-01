@@ -3,8 +3,9 @@ import bcrypt from 'bcrypt';
 import { connectDB } from "../../../lib/database/mongodb";
 
 import { Model } from 'mongoose';
-import UserModel, { UserType } from '../../../lib/database/models/User';
-const User = UserModel as Model<UserType>;
+import UserModel from '../../../lib/database/models/User';
+import { User } from '~/types/user';
+const User = UserModel as Model<User>;
 
 const bodySchema = z.object({
   email: z.email(),
@@ -20,12 +21,8 @@ export default defineEventHandler(async (event) => {
     const user = await User.findOne({ email });
     const passwordMatches = bcrypt.compare(password, user?.password ?? '');
 
-    if (!password) {
-      return createError({ statusCode: 401, statusMessage: 'Please insert password.' })
-    };
-    if (!passwordMatches) {
-      return createError({ statusCode: 401, statusMessage: 'Wrong credentials' })
-    };
+    if (!password) throw createError({ statusCode: 401, statusMessage: 'Please insert password.' });
+    if (!passwordMatches) throw createError({ statusCode: 401, statusMessage: 'Wrong credentials' });
 
     // set the user session in the cookie
     // this server util is auto-imported by the auth-utils module

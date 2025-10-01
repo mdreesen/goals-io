@@ -36,8 +36,9 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
   __ssrInlineRender: true,
   setup(__props) {
     const formRef = ref();
-    const message = ref("");
+    ref("");
     const isLoading = ref(false);
+    let errorMessage = ref("");
     useUserSession();
     const credentials = reactive({
       email: "",
@@ -48,10 +49,10 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       const _component_NuxtLink = __nuxt_component_0$2;
       const _directive_motion = resolveDirective("motion");
       _push(`<div${ssrRenderAttrs(mergeProps({ class: "relative flex min-h-screen items-center justify-center bg-gray-950 p-4 overflow-hidden" }, _attrs))}><div class="absolute inset-0 z-0 bg-gradient-to-br from-gray-950 via-gray-800 to-purple-950 opacity-70"></div><section class="flex flex-col items-center gap-8"><div${ssrRenderAttrs(mergeProps({ class: "text-center" }, ssrGetDirectiveProps(_ctx, _directive_motion, { ...unref(containerVarient)() })))}><h1 class="flex flex-col text-4xl sm:text-6xl font-extrabold text-white leading-tight"><span>Welcome to</span><span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400"> ASCΞND </span></h1><p class="mt-2 text-lg sm:text-xl text-gray-400">Log in to unlock your journey.</p></div><div class="relative z-20 w-full max-w-sm rounded-3xl border border-gray-700 bg-gray-800/50 p-8 shadow-2xl backdrop-blur-md space-y-6 transform transition-all duration-300">`);
-      if (message.value) {
+      if (unref(errorMessage)) {
         _push(`<div${ssrRenderAttrs(mergeProps({
-          class: ["text-center py-2 px-4 rounded-lg", message.value.includes("successful") ? "bg-green-600/30 text-green-400" : "bg-red-600/30 text-red-400"]
-        }, ssrGetDirectiveProps(_ctx, _directive_motion, { ...unref(inputVarient)() })))}>${ssrInterpolate(message.value)}</div>`);
+          class: ["text-center py-2 px-4 rounded-lg", "bg-red-600/30 text-red-400"]
+        }, ssrGetDirectiveProps(_ctx, _directive_motion, { ...unref(inputVarient)() })))}>${ssrInterpolate(unref(errorMessage))}</div>`);
       } else {
         _push(`<!---->`);
       }
@@ -83,4 +84,4 @@ _sfc_main.setup = (props, ctx) => {
 };
 
 export { _sfc_main as default };
-//# sourceMappingURL=login-D2YaTwv7.mjs.map
+//# sourceMappingURL=login-oK7sgx4M.mjs.map

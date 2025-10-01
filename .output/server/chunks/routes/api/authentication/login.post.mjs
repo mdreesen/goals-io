@@ -27,14 +27,8 @@ const login_post = defineEventHandler(async (event) => {
     await connectDB();
     const user = await User.findOne({ email });
     const passwordMatches = bcrypt.compare(password, (_a = user == null ? void 0 : user.password) != null ? _a : "");
-    if (!password) {
-      return createError({ statusCode: 401, statusMessage: "Please insert password." });
-    }
-    ;
-    if (!passwordMatches) {
-      return createError({ statusCode: 401, statusMessage: "Wrong credentials" });
-    }
-    ;
+    if (!password) throw createError({ statusCode: 401, statusMessage: "Please insert password." });
+    if (!passwordMatches) throw createError({ statusCode: 401, statusMessage: "Wrong credentials" });
     await setUserSession(event, {
       user: {
         _id: user == null ? void 0 : user._id,

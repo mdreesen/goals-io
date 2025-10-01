@@ -6,9 +6,12 @@ const loggedInUser = defineEventHandler(async (event) => {
   try {
     await connectDB();
     const { user } = await requireUserSession(event);
-    const useUser = user.email;
-    const findUser = await User.find({ email: useUser });
-    return findUser[0];
+    const userEmail = user.email;
+    const findUser = await User.find({ email: userEmail });
+    if (findUser[0]) {
+      return findUser[0];
+    }
+    ;
   } catch (error) {
     console.log(error);
     throw createError({

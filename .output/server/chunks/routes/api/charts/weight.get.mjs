@@ -18,7 +18,7 @@ import 'zod';
 const weight_get = defineEventHandler(async (event) => {
   try {
     const user = await loggedInUser(event);
-    const formatArray = user == null ? void 0 : user.weight.map((item) => {
+    const formatArray = (user == null ? void 0 : user.weight) && (user == null ? void 0 : user.weight.map((item) => {
       var _a;
       const dailyWeight = (_a = item.weight) != null ? _a : "";
       return {
@@ -27,7 +27,7 @@ const weight_get = defineEventHandler(async (event) => {
         starting_weight: item == null ? void 0 : item.starting_weight,
         _id: item == null ? void 0 : item._id
       };
-    });
+    }));
     return formatArray;
   } catch (error) {
     console.log(error);

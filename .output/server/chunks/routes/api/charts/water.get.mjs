@@ -18,7 +18,7 @@ import 'zod';
 const water_get = defineEventHandler(async (event) => {
   try {
     const user = await loggedInUser(event);
-    const formatArray = user == null ? void 0 : user.water.map((item) => {
+    const formatArray = (user == null ? void 0 : user.water) && (user == null ? void 0 : user.water.map((item) => {
       var _a;
       const dailyWater = (_a = item.water_intake) != null ? _a : "";
       return {
@@ -26,7 +26,7 @@ const water_get = defineEventHandler(async (event) => {
         date: item == null ? void 0 : item.date,
         _id: item == null ? void 0 : item._id
       };
-    });
+    }));
     return formatArray;
   } catch (error) {
     console.log(error);

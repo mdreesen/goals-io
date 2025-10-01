@@ -3,8 +3,9 @@ import bcrypt from 'bcrypt';
 import { connectDB } from "../../../lib/database/mongodb";
 
 import { Model } from 'mongoose';
-import UserModel, { UserType } from '../../../lib/database/models/User';
-const User = UserModel as Model<UserType>;
+import UserModel from '../../../lib/database/models/User';
+import { User } from '~/types/user';
+const User = UserModel as Model<User>;
 
 const bodySchema = z.object({
   email: z.email(),

@@ -19,7 +19,7 @@ import 'zod';
 const workouts_get = defineEventHandler(async (event) => {
   try {
     const user = await loggedInUser(event);
-    return monthStart({ data: user.workout, startLabel: "date" });
+    return monthStart({ data: user == null ? void 0 : user.workout, startLabel: "date" });
   } catch (error) {
     console.log(error);
     throw createError({
