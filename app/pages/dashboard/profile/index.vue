@@ -45,9 +45,24 @@ const ToggleSwitch = (key: keyof typeof settings.value, label: string, descripti
 };
 
 const toggleItems = [
-  ToggleSwitch('darkMode', 'Dark Mode', 'Automatically switch the app appearance to dark mode.'),
-  ToggleSwitch('emailNotifications', 'Email Notifications', 'Receive updates, summaries, and tips directly to your inbox.'),
-  ToggleSwitch('shareProgress', 'Share Progress', 'Allow anonymous sharing of workout stats for community leaderboards.'),
+  {
+    title: 'Body Settings',
+    toggles: [
+      ToggleSwitch('darkMode', 'Dark Mode', 'Automatically switch the app appearance to dark mode.')
+    ]
+  },
+  {
+    title: 'Mind Settings',
+    toggles: [
+      ToggleSwitch('emailNotifications', 'Email Notifications', 'Receive updates, summaries, and tips directly to your inbox.'),
+    ]
+  },
+  {
+    title: 'Spirit Settings',
+    toggles: [
+      ToggleSwitch('shareProgress', 'Share Progress', 'Allow anonymous sharing of workout stats for community leaderboards.'),
+    ]
+  }
 ];
 </script>
 
@@ -71,14 +86,16 @@ const toggleItems = [
         </h2>
 
         <!-- Loop through Toggles -->
-        <div v-for="(item, index) in toggleItems" :key="item.key"
+        <div v-for="(item, index) in toggleItems" :key="index"
           class="flex justify-between items-center bg-gray-800 p-4 sm:p-6 rounded-xl shadow-lg border border-gray-700 hover:bg-gray-700 transition duration-300">
           <div class="flex flex-col">
-            <span class="text-xl font-medium">{{ item.label }}</span>
-            <span class="text-sm text-gray-400 mt-1 max-w-lg">{{ item.description }}</span>
-          </div>
+            <span class="text-xl font-medium">{{ item.title }}</span>
+            <div v-for="toggle in item.toggles">
+              <span class="text-sm text-gray-400 mt-1 max-w-lg">{{ toggle.description }}</span>
+              <USwitch @click="toggle.toggle" unchecked-icon="i-lucide-x" checked-icon="i-lucide-check" default-value />
 
-          <USwitch @click="item.toggle" unchecked-icon="i-lucide-x" checked-icon="i-lucide-check" default-value />
+            </div>
+          </div>
         </div>
       </section>
 

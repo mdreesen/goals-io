@@ -10,5 +10,7 @@
         <!-- <AppAlert>
             This is an auto-imported component
         </AppAlert> -->
+        <appTrackerBible />
+        <appTrackerJournal />
     </div>
 </template>

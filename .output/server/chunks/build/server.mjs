@@ -534,19 +534,19 @@ const _routes = [
     name: "dashboard",
     path: "/dashboard",
     meta: __nuxt_page_meta$4 || {},
-    component: () => import('./index-DtAbMwTk.mjs')
+    component: () => import('./index-DXrvMpGe.mjs')
   },
   {
     name: "dashboard-body",
     path: "/dashboard/body",
     meta: __nuxt_page_meta$3 || {},
-    component: () => import('./index-D3-zEQqN.mjs')
+    component: () => import('./index-CpWfMUBN.mjs')
   },
   {
     name: "dashboard-mind",
     path: "/dashboard/mind",
     meta: __nuxt_page_meta$2 || {},
-    component: () => import('./index-Cr1nY_xw.mjs')
+    component: () => import('./index-CmjbM_8T.mjs')
   },
   {
     name: "privacy_policy",
@@ -562,24 +562,24 @@ const _routes = [
   {
     name: "login",
     path: "/login",
-    component: () => import('./login-oK7sgx4M.mjs')
+    component: () => import('./login-DNBzto3o.mjs')
   },
   {
     name: "dashboard-spirit",
     path: "/dashboard/spirit",
     meta: __nuxt_page_meta$1 || {},
-    component: () => import('./index-Cs8AAF8T.mjs')
+    component: () => import('./index-BuQBT54J.mjs')
   },
   {
     name: "signup",
     path: "/signup",
-    component: () => import('./signup-CtctNc0v.mjs')
+    component: () => import('./signup-C1EiB26M.mjs')
   },
   {
     name: "dashboard-profile",
     path: "/dashboard/profile",
     meta: __nuxt_page_meta || {},
-    component: () => import('./index-CGV3LY3I.mjs')
+    component: () => import('./index-C7sYiw5Q.mjs')
   }
 ];
 const _wrapInTransition = (props, children) => {
@@ -7798,7 +7798,7 @@ _sfc_main$3.setup = (props, ctx) => {
 };
 const __nuxt_component_0 = Object.assign(_sfc_main$3, { __name: "UApp" });
 const layouts = {
-  authenticated: defineAsyncComponent(() => import('./authenticated-CJPqTZ2O.mjs').then((m) => m.default || m)),
+  authenticated: defineAsyncComponent(() => import('./authenticated-Cf5pJlRg.mjs').then((m) => m.default || m)),
   default: defineAsyncComponent(() => import('./default-D9k6IIt3.mjs').then((m) => m.default || m))
 };
 const LayoutLoader = defineComponent({
@@ -8188,5 +8188,5 @@ let entry;
 }
 const entry$1 = (ssrContext) => entry(ssrContext);
 
-export { createSharedComposable as A, isArrayOfArray as B, get as C, pickLinkProps as D, _sfc_main$a as E, __nuxt_component_2$1 as F, _export_sfc as _, __nuxt_component_0$2 as a, useAsyncData as b, useRequestFetch as c, useUserSession as d, entry$1 as default, useAppConfig as e, fetchDefaults as f, __nuxt_component_0$1 as g, __nuxt_component_0$3 as h, useMotion as i, useFormField as j, _sfc_main$e as k, defineNuxtRouteMiddleware as l, useLocale as m, navigateTo as n, usePortal as o, _sfc_main$8 as p, useRoute as q, reactivePick as r, createReusableTemplate as s, tv as t, useHead as u, getSlotChildrenText as v, _sfc_main$9 as w, useFieldGroup as x, useComponentIcons as y, _sfc_main$b as z };
+export { createSharedComposable as A, isArrayOfArray as B, get as C, pickLinkProps as D, _sfc_main$a as E, __nuxt_component_2$1 as F, _export_sfc as _, __nuxt_component_0$2 as a, useAsyncData as b, useRequestFetch as c, useUserSession as d, entry$1 as default, useAppConfig as e, fetchDefaults as f, __nuxt_component_0$3 as g, useMotion as h, __nuxt_component_0$1 as i, useFormField as j, _sfc_main$e as k, defineNuxtRouteMiddleware as l, useLocale as m, navigateTo as n, usePortal as o, _sfc_main$8 as p, useRoute as q, reactivePick as r, createReusableTemplate as s, tv as t, useHead as u, getSlotChildrenText as v, _sfc_main$9 as w, useFieldGroup as x, useComponentIcons as y, _sfc_main$b as z };
 //# sourceMappingURL=server.mjs.map

@@ -1,0 +1,1 @@
+import{J as t,K as r,A as c,c as i,a as e,t as l,E as u,o as _,ab as f}from"#entry";const k=t({__name:"index",setup(m){const{user:a,clear:s}=r(),n=c(a?.value);async function o(){await s(),await f("/login")}return(p,d)=>(_(),i("div",null,[e("h1",null,"Welcome "+l(u(n)?.first_name),1),e("button",{onClick:o},"Logout")]))}});export{k as default};

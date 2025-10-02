@@ -8,10 +8,14 @@ const props = defineProps({
     styles: {
         type: String,
         default: ''
+    },
+    size: {
+        type: String,
+        default: '24'
     }
 });
 </script>
 
 <template>
-    <Icon :class="props.styles" :name="props.iconName" size="24" />
+    <Icon :class="props.styles" :name="props.iconName" :size="props.size" />
 </template>

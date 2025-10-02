@@ -180,7 +180,7 @@ useMotion(trackerRef, {
         class="space-y-4 text-center"
         v-motion="{ initial: { opacity: 0, scale: 0.9 }, enter: { opacity: 1, scale: 1, transition: { delay: 0.2 } } }"
       >
-        <div class="text-8xl font-mono font-extrabold text-white" style="text-shadow: 0 0 15px rgba(124, 58, 237, 0.5);">
+        <div class="text-8xl font-extrabold text-white" style="text-shadow: 0 0 15px rgba(124, 58, 237, 0.5);">
           {{ currentSoakTimeFormatted }}
         </div>
 
@@ -212,16 +212,16 @@ useMotion(trackerRef, {
           :class="[
             isRunning 
               ? 'bg-yellow-500 hover:bg-yellow-600 text-gray-900 shadow-yellow-500/40 focus:ring-yellow-500' 
-              : 'bg-purple-600 hover:bg-purple-700 text-white shadow-purple-600/40 focus:ring-purple-500'
+              : 'bg-blue-500 hover:bg-blue-600 text-white shadow-blue-500/40 focus:ring-blue-500'
           ]"
         >
           <span v-if="isRunning">
             <!-- Pause Icon -->
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="4" height="16" x="6" y="4"/><rect width="4" height="16" x="14" y="4"/></svg>
+            <baseIcon iconName="material-symbols:pause" size="40" />
           </span>
           <span v-else>
             <!-- Start/Play Icon -->
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            <baseIcon iconName="material-symbols:play-arrow-outline-rounded" size="40" />
           </span>
         </button>
         
@@ -229,12 +229,12 @@ useMotion(trackerRef, {
         <button
           @click="logFastSession"
           :disabled="isSaving || elapsedTime === 0 || isRunning"
-          class="p-4 rounded-full bg-orange-600 font-semibold text-white transition duration-300 transform active:scale-[0.9] shadow-xl shadow-orange-700/50 
-                 hover:bg-orange-700 focus:outline-none focus:ring-4 focus:ring-orange-500 focus:ring-offset-2 focus:ring-offset-gray-900 disabled:opacity-50 disabled:cursor-not-allowed"
+          class="p-4 rounded-full bg-green-600 font-semibold text-white transition duration-300 transform active:scale-[0.9] shadow-xl shadow-green-700/50 
+                 hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-green-500 focus:ring-offset-2 focus:ring-offset-gray-900 disabled:opacity-50 disabled:cursor-not-allowed"
           :class="{ 'opacity-50': isSaving || elapsedTime === 0 || isRunning }"
         >
           <!-- Save Icon -->
-          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v13a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+           <baseIcon iconName="material-symbols:save-outline-rounded" size="40" />
         </button>
 
         <!-- Reset Button -->
@@ -246,10 +246,7 @@ useMotion(trackerRef, {
           :class="{ 'opacity-50': isSaving || isRunning }"
         >
           <!-- Reset Icon -->
-          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21.5 2v6h-6"/><path d="M21 17a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.75L3 14"/>
-            <path d="M3.5 22v-6h6"/>
-          </svg>
+          <baseIcon iconName="material-symbols:reset-shadow-outline-rounded" size="40" />
         </button>
       </div>
       

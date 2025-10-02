@@ -1,18 +1,14 @@
 <script setup lang="ts">
-import type { NavigationMenuItem } from '@nuxt/ui'
-
-const route = useRoute()
+import type { NavigationMenuItem } from '@nuxt/ui';
 
 const items = computed<NavigationMenuItem[]>(() => [{
   label: 'Main',
   to: '/dashboard',
   // icon: 'i-lucide-book-open',
-  active: route.path.startsWith('/docs/getting-started')
 }, {
   label: 'Body',
   to: '/dashboard/body',
   // icon: 'mdi-light:account',
-  active: route.path.startsWith('/docs/components')
 }, {
   label: 'Mind',
   // icon: 'i-simple-icons-figma',

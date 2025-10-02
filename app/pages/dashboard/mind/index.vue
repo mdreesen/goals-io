@@ -7,9 +7,10 @@
 <template>
     <div>
         <h1>Welcome to the mind page</h1>
-        <!-- <AppAlert>
-            This is an auto-imported component
-        </AppAlert> -->
-        <appTrackerAffirmations />
+
+        <appTrackerAffirmation />
+        <appTrackerBook />
+        <appTrackerGratitude />
+        <appTrackerHabit />
     </div>
 </template>

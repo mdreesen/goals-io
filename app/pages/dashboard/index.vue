@@ -10,7 +10,7 @@ const { data: weight, pending: pending_weight } = await useFetch('/api/charts/we
 const { data: workouts, pending: pending_workouts } = await useFetch('/api/charts/workouts', { lazy: true });
 
 const { data: stats, pending: pending_stats } = await useFetch('/api/stats', { lazy: true });
-console.log(stats.value)
+// console.log(stats.value)
 </script>
 
 <template>

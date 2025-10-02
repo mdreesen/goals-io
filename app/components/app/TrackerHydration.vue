@@ -117,13 +117,6 @@ useMotion(hydrationRef, {
       
       <!-- Header -->
       <header class="text-center" v-motion="{ initial: { opacity: 0, y: -20 }, enter: { opacity: 1, y: 0, transition: { delay: 0.1 } } }">
-        <h1 class="text-4xl font-extrabold flex items-center justify-center bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
-          <!-- Water Icon in Header -->
-          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-7 h-7 mr-3 text-blue-400">
-            <path d="M12 22a7 7 0 0 0 7-7c0-2.34-1.12-4.23-2.52-5.51A3 3 0 0 0 12 6a3 3 0 0 0-4.48 2.49C6.12 10.77 5 12.66 5 15a7 7 0 0 0 7 7Z"/>
-          </svg>
-          Hydration Tracker
-        </h1>
         <p class="mt-2 text-gray-400">Track your water intake towards your daily goal of {{ DAILY_GOAL_OZ }}oz.</p>
       </header>
       
