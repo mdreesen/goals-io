@@ -534,19 +534,19 @@ const _routes = [
     name: "dashboard",
     path: "/dashboard",
     meta: __nuxt_page_meta$4 || {},
-    component: () => import('./index-DXrvMpGe.mjs')
+    component: () => import('./index-Diq1cv-s.mjs')
   },
   {
     name: "dashboard-body",
     path: "/dashboard/body",
     meta: __nuxt_page_meta$3 || {},
-    component: () => import('./index-CpWfMUBN.mjs')
+    component: () => import('./index-D2oUlGXG.mjs')
   },
   {
     name: "dashboard-mind",
     path: "/dashboard/mind",
     meta: __nuxt_page_meta$2 || {},
-    component: () => import('./index-CmjbM_8T.mjs')
+    component: () => import('./index-C8VCG3Wh.mjs')
   },
   {
     name: "privacy_policy",
@@ -562,18 +562,18 @@ const _routes = [
   {
     name: "login",
     path: "/login",
-    component: () => import('./login-DNBzto3o.mjs')
+    component: () => import('./login-oK7sgx4M.mjs')
   },
   {
     name: "dashboard-spirit",
     path: "/dashboard/spirit",
     meta: __nuxt_page_meta$1 || {},
-    component: () => import('./index-BuQBT54J.mjs')
+    component: () => import('./index-DesqJv6q.mjs')
   },
   {
     name: "signup",
     path: "/signup",
-    component: () => import('./signup-C1EiB26M.mjs')
+    component: () => import('./signup-CtctNc0v.mjs')
   },
   {
     name: "dashboard-profile",
@@ -8188,5 +8188,5 @@ let entry;
 }
 const entry$1 = (ssrContext) => entry(ssrContext);
 
-export { createSharedComposable as A, isArrayOfArray as B, get as C, pickLinkProps as D, _sfc_main$a as E, __nuxt_component_2$1 as F, _export_sfc as _, __nuxt_component_0$2 as a, useAsyncData as b, useRequestFetch as c, useUserSession as d, entry$1 as default, useAppConfig as e, fetchDefaults as f, __nuxt_component_0$3 as g, useMotion as h, __nuxt_component_0$1 as i, useFormField as j, _sfc_main$e as k, defineNuxtRouteMiddleware as l, useLocale as m, navigateTo as n, usePortal as o, _sfc_main$8 as p, useRoute as q, reactivePick as r, createReusableTemplate as s, tv as t, useHead as u, getSlotChildrenText as v, _sfc_main$9 as w, useFieldGroup as x, useComponentIcons as y, _sfc_main$b as z };
+export { createSharedComposable as A, isArrayOfArray as B, get as C, pickLinkProps as D, _sfc_main$a as E, __nuxt_component_2$1 as F, _export_sfc as _, __nuxt_component_0$2 as a, useAsyncData as b, useRequestFetch as c, useUserSession as d, entry$1 as default, useAppConfig as e, fetchDefaults as f, __nuxt_component_0$1 as g, __nuxt_component_0$3 as h, useMotion as i, useFormField as j, _sfc_main$e as k, defineNuxtRouteMiddleware as l, useLocale as m, navigateTo as n, usePortal as o, _sfc_main$8 as p, useRoute as q, reactivePick as r, createReusableTemplate as s, tv as t, useHead as u, getSlotChildrenText as v, _sfc_main$9 as w, useFieldGroup as x, useComponentIcons as y, _sfc_main$b as z };
 //# sourceMappingURL=server.mjs.map

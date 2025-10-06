@@ -2,83 +2,87 @@
 import { ref, computed } from 'vue';
 import { useMotion } from '@vueuse/motion';
 
-// --- Global Constants (Ounce-Focused) ---
-const OZ_FACTOR_TO_ML = 29.57; // Conversion factor: 1 US fluid oz to ml
-const DAILY_GOAL_OZ = 100; // New Goal set explicitly in Ounces (approx 2957 ml)
+// --- Constants ---
+const GOAL_OZ = 100; // Daily hydration goal in ounces
+const ML_PER_OZ = 29.57; // Conversion factor: 1 US fluid ounce = 29.57 ml
+const GOAL_ML = GOAL_OZ * ML_PER_OZ; // Goal in milliliters (for internal math/DB logging)
 
-// Internal state tracks everything in Milliliters (ML) for data accuracy
-const dailyGoalML = DAILY_GOAL_OZ * OZ_FACTOR_TO_ML; 
-const currentIntakeML = ref(0); 
-
-// --- State for Input ---
-// Input is exclusively in Ounces (oz)
-const manualAmountOZ = ref(8); 
-
-// --- State for API & UI Feedback ---
+// --- State ---
+const currentIntakeML = ref(0); // Current water intake, stored internally in ML
+const manualAmountOz = ref(8); // Amount of water to add, defaulting to 8 oz
 const isSaving = ref(false);
 const saveMessage = ref<string | null>(null);
 
-// --- Computed Progress ---
-const progressPercent = computed<number>(() => {
-  const percent = (currentIntakeML.value / dailyGoalML) * 100;
-  return Math.min(100, percent); // Cap at 100%
+// --- Computed Values ---
+
+// Converts internal ML count back to ounces for display
+const currentIntakeOz = computed(() => {
+  return (currentIntakeML.value / ML_PER_OZ).toFixed(0);
 });
 
-// Computed class for progress bar color change
-const progressColor = computed<string>(() => {
-  if (progressPercent.value < 50) return 'bg-blue-500';
-  if (progressPercent.value < 100) return 'bg-yellow-500';
-  return 'bg-green-500'; // Goal reached
+// Calculates progress percentage for the bar
+const progressPercent = computed(() => {
+  const percentage = (currentIntakeML.value / GOAL_ML) * 100;
+  return Math.min(percentage, 100); // Cap at 100%
+});
+
+// Determines the color accent based on progress
+const progressAccentClass = computed(() => {
+  if (progressPercent.value < 50) return 'from-teal-600 to-teal-700';
+  if (progressPercent.value < 90) return 'from-blue-500 to-indigo-600';
+  return 'from-green-500 to-teal-500'; // Goal nearly reached or surpassed
 });
 
 // --- Actions ---
-const addWater = (): void => {
-  const amount = manualAmountOZ.value > 0 ? manualAmountOZ.value : 0;
-  if (amount === 0) return;
 
-  // Calculate total milliliters based on the Ounce input
-  const totalMl = amount * OZ_FACTOR_TO_ML;
-  currentIntakeML.value += totalMl;
-  
-  // Reset manual amount back to default 8oz
-  manualAmountOZ.value = 8; 
+// Adds the user-specified amount (in oz) to the total intake
+const addWater = () => {
+  if (manualAmountOz.value <= 0) return;
+
+  // Convert OZ input to ML
+  const mlToAdd = manualAmountOz.value * ML_PER_OZ;
+
+  // Update internal state
+  currentIntakeML.value += mlToAdd;
+
+  // Optional: Reset input amount after adding
+  // manualAmountOz.value = 8;
 };
 
-const resetIntake = (): void => { // Function to only reset the counter
-  currentIntakeML.value = 0;
-};
-
+// Logs the final daily intake and resets the tracker
 const logDailyIntake = async () => {
   if (currentIntakeML.value === 0) {
-    saveMessage.value = 'Intake is zero, nothing to save.';
-    setTimeout(() => saveMessage.value = null, 3000);
+    saveMessage.value = 'Intake is zero. Log some water before saving!';
+    setTimeout(() => saveMessage.value = null, 4000);
     return;
   }
 
   isSaving.value = true;
-  saveMessage.value = 'Saving intake...';
+  saveMessage.value = `Logging daily intake...`;
 
   const payload = {
-    date: new Date().toISOString(),
-    // Log in ML as the standard unit for the backend
-    intakeML: currentIntakeML.value, 
-    goalML: dailyGoalML,
+    intakeML: currentIntakeML.value,
+    goalML: GOAL_ML,
+    intakeOz: Number(currentIntakeOz.value),
+    goalOz: GOAL_OZ,
+    loggedAt: new Date().toISOString(),
   };
 
   try {
     // ----------------------------------------------------------------------
     // NOTE: This simulates the call to your MongoDB backend via a Nuxt Server API route.
-    // Replace with actual $fetch call to your /api/save-hydration endpoint.
+    // Replace with actual $fetch call to your /api/log-hydration endpoint.
     // ----------------------------------------------------------------------
-    
+
     // Simulate successful API call delay
-    await new Promise(resolve => setTimeout(resolve, 1500));
+    await new Promise(resolve => setTimeout(resolve, 2000));
     console.log('Simulating successful save to MongoDB with payload:', payload);
 
-    saveMessage.value = `Intake of ${(currentIntakeML.value / OZ_FACTOR_TO_ML).toFixed(1)}oz logged successfully!`;
-    resetIntake(); // Reset the count after successful log
+    saveMessage.value = `Daily intake of ${currentIntakeOz.value} oz logged successfully! Tracker reset.`;
+    currentIntakeML.value = 0; // Reset intake after successful log
+
   } catch (error) {
-    console.error('Failed to save hydration data:', error);
+    console.error('Failed to log intake:', error);
     saveMessage.value = 'Error saving data. Please try again.';
   } finally {
     isSaving.value = false;
@@ -86,10 +90,19 @@ const logDailyIntake = async () => {
   }
 };
 
+// Resets the tracker without logging
+const resetTracker = () => {
+  if (!isSaving.value) {
+    currentIntakeML.value = 0;
+    saveMessage.value = 'Tracker reset to 0 oz.';
+    setTimeout(() => saveMessage.value = null, 3000);
+  }
+};
+
 
 // --- Motion setup for fade-in effect ---
-const hydrationRef = ref();
-useMotion(hydrationRef, {
+const trackerRef = ref();
+useMotion(trackerRef, {
   initial: { opacity: 0, y: 50 },
   enter: {
     opacity: 1,
@@ -106,129 +119,111 @@ useMotion(hydrationRef, {
 </script>
 
 <template>
-  <!-- Custom Gradient Background -->
-  <div ref="hydrationRef" 
-    class="p-4 sm:p-8 text-white flex items-center justify-center"
-  >
-    <!-- Main Tracker Card -->
-    <div
-      class="w-full max-w-xl rounded-3xl bg-gray-900/80 p-6 sm:p-10 shadow-2xl backdrop-blur-md space-y-8 transition-all duration-500"
-    >
-      
+  <!-- MODERN SIMPLISTIC DESIGN: Deep Dark Background & Clean Contrast -->
+  <div ref="trackerRef" class="min-h-screen p-4 sm:p-8 text-white flex flex-col items-center justify-center font-sans">
+    <!-- Main Tracker Card (Minimalist & Elevated) -->
+    <div class="w-full max-w-lg rounded-2xl bg-gray-900 p-7 sm:p-10 shadow-xl shadow-gray-900/60 space-y-8 
+             transition-all duration-500 border border-gray-800">
+
       <!-- Header -->
-      <header class="text-center" v-motion="{ initial: { opacity: 0, y: -20 }, enter: { opacity: 1, y: 0, transition: { delay: 0.1 } } }">
-        <p class="mt-2 text-gray-400">Track your water intake towards your daily goal of {{ DAILY_GOAL_OZ }}oz.</p>
+      <header class="text-center"
+        v-motion="{ initial: { opacity: 0, y: -20 }, enter: { opacity: 1, y: 0, transition: { delay: 0.1 } } }">
+        <h1
+          class="text-4xl font-extrabold flex items-center justify-center bg-clip-text text-transparent bg-gradient-to-r from-teal-400 to-indigo-500">
+          <!-- Water Droplet Icon -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="w-8 h-8 mr-3 text-teal-400">
+            <path
+              d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 15a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
+          </svg>
+          Ascend Hydration Tracker
+        </h1>
+        <p class="mt-2 text-base text-gray-400">Achieve your daily $\text{100 oz}$ goal for optimal performance.</p>
       </header>
-      
+
       <!-- API Message Area -->
-      <div 
-          v-if="saveMessage" 
-          class="text-center p-3 rounded-xl font-medium transition-all duration-300"
-          :class="{
-            'bg-green-600/30 text-green-400 border border-green-600': saveMessage.includes('logged successfully'),
-            'bg-red-600/30 text-red-400 border border-red-600': saveMessage.includes('Error'),
-            'bg-blue-600/30 text-blue-400 border border-blue-600': saveMessage.includes('Saving') || saveMessage.includes('zero')
-          }"
-          v-motion="{ initial: { opacity: 0, scale: 0.9 }, enter: { opacity: 1, scale: 1 } }"
-      >
-          {{ saveMessage }}
+      <div v-if="saveMessage" class="text-center p-3 rounded-xl font-medium transition-all duration-300" :class="{
+        'bg-green-600/30 text-green-400 border border-green-600': saveMessage.includes('successfully') || saveMessage.includes('reset'),
+        'bg-red-600/30 text-red-400 border border-red-600': saveMessage.includes('Error') || saveMessage.includes('Intake is zero'),
+        'bg-indigo-600/30 text-indigo-400 border border-indigo-600': saveMessage.includes('Logging')
+      }" v-motion="{ initial: { opacity: 0, scale: 0.9 }, enter: { opacity: 1, scale: 1 } }">
+        {{ saveMessage }}
       </div>
 
-      <!-- Progress Display -->
-      <div 
-        class="space-y-4 text-center"
-        v-motion="{ initial: { opacity: 0, scale: 0.9 }, enter: { opacity: 1, scale: 1, transition: { delay: 0.2 } } }"
-      >
-        <div class="text-7xl font-extrabold text-white" style="text-shadow: 0 0 10px rgba(76, 29, 149, 0.5);">
-          <!-- Convert current intake from ML back to OZ for display -->
-          {{ (currentIntakeML / OZ_FACTOR_TO_ML).toFixed(1) }}
-          <span class="text-3xl text-gray-400">/ {{ DAILY_GOAL_OZ }} oz</span>
-        </div>
-
-        <!-- Progress Bar -->
-        <div class="w-full bg-gray-700 rounded-full h-4 overflow-hidden shadow-inner shadow-black/50">
-          <div
-            :style="{ width: progressPercent + '%' }"
-            :class="[progressColor]"
-            class="h-4 rounded-full transition-all duration-700 ease-out"
-          ></div>
-        </div>
-        
-        <p class="text-sm text-gray-400 font-medium pt-2">
-          {{ progressPercent.toFixed(0) }}% Complete
-          <span v-if="progressPercent >= 100" class="text-green-400 font-bold"> - Goal Reached!</span>
+      <!-- Current Intake Display -->
+      <div class="text-center"
+        v-motion="{ initial: { opacity: 0, scale: 0.9 }, enter: { opacity: 1, scale: 1, transition: { delay: 0.2 } } }">
+        <p class="text-xl font-medium text-gray-400">Current Intake</p>
+        <p class="text-7xl font-extrabold text-white mt-1 transition-colors duration-500"
+          :class="{ 'text-green-400': progressPercent >= 100 }">
+          {{ currentIntakeOz }}
+          <span class="text-3xl font-semibold text-gray-500">oz</span>
         </p>
+        <p class="text-sm font-medium text-gray-500 mt-1">Goal: {{ GOAL_OZ }} oz</p>
       </div>
 
-      <!-- Dynamic Add Water Input (Simplified to OZ only) -->
-      <div
-        class="flex flex-col sm:flex-row gap-4"
-        v-motion="{ initial: { opacity: 0, y: 20 }, enter: { opacity: 1, y: 0, transition: { delay: 0.3 } } }"
-      >
-        <!-- Amount Input -->
-        <input
-          type="number"
-          v-model.number="manualAmountOZ"
-          min="1"
-          placeholder="Amount in Ounces"
-          class="flex-1 p-3 rounded-xl bg-gray-700/50 border border-gray-600 text-white placeholder-gray-400
-                 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-300"
-        >
+      <!-- Progress Bar -->
+      <div class="w-full h-3 rounded-full bg-gray-700 overflow-hidden shadow-inner shadow-black/30"
+        v-motion="{ initial: { opacity: 0, x: -50 }, enter: { opacity: 1, x: 0, transition: { delay: 0.3 } } }">
+        <div class="h-full rounded-full transition-all duration-1000 ease-out"
+          :class="['bg-gradient-to-r', progressAccentClass]" :style="{ width: progressPercent + '%' }"></div>
+      </div>
 
-        <!-- Unit Display (Replacing Dropdown) -->
-        <div class="flex-1 p-3 rounded-xl bg-gray-700/50 border border-gray-600 flex items-center justify-center 
-                    font-semibold text-lg shadow-xl">
-            Ounces (oz)
+      <!-- Add Water Form -->
+      <form @submit.prevent="addWater" class="flex space-x-4 pt-4 border-t border-gray-800/50"
+        v-motion="{ initial: { opacity: 0, y: 20 }, enter: { opacity: 1, y: 0, transition: { delay: 0.4 } } }">
+        <!-- Amount Input (Ounces Only) -->
+        <div class="relative flex-grow">
+          <input type="number" v-model.number="manualAmountOz" min="1" placeholder="8" required
+            class="w-full rounded-xl border border-gray-700 bg-gray-800 py-3 pl-4 pr-12 text-base text-white placeholder-gray-500 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-teal-500 shadow-inner shadow-black/20"
+            :disabled="isSaving" />
+          <span class="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-gray-500 font-bold">oz</span>
         </div>
-        
+
         <!-- Add Button -->
-        <button
-          @click="addWater"
-          :disabled="manualAmountOZ <= 0 || isSaving"
-          class="sm:w-auto p-3 rounded-xl font-semibold transition duration-300 transform active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900"
-          :class="[
-            manualAmountOZ <= 0 || isSaving 
-              ? 'bg-gray-700 text-gray-400 cursor-not-allowed' 
-              : 'bg-blue-600 hover:bg-blue-700 text-white'
-          ]"
-        >
-          <!-- Plus Icon for Add Water -->
+        <button type="submit" :disabled="isSaving || manualAmountOz <= 0"
+          class="px-5 py-3 rounded-xl bg-gradient-to-r from-teal-600 to-indigo-700 font-bold text-white transition duration-300 transform active:scale-[0.98] shadow-lg shadow-teal-700/30 
+                 hover:from-teal-500 hover:to-indigo-600 focus:outline-none focus:ring-4 focus:ring-teal-500/50 disabled:opacity-50 disabled:cursor-not-allowed">
           <span class="flex items-center justify-center">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
-            <span class="ml-2 hidden sm:inline">Add Water</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5">
+              <path d="M5 12h14" />
+              <path d="M12 5v14" />
+            </svg>
           </span>
         </button>
-      </div>
-      
-      <!-- Action Buttons -->
-      <div 
-        class="flex justify-between pt-4 gap-4"
-        v-motion="{ initial: { opacity: 0, y: 20 }, enter: { opacity: 1, y: 0, transition: { delay: 0.7 } } }"
-      >
-        <button
-          @click="logDailyIntake"
-          :disabled="isSaving"
-          class="flex-1 px-6 py-3 bg-green-600 rounded-lg font-semibold text-white transition duration-300 transform active:scale-[0.98]
-                 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:ring-offset-gray-900 disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-          <!-- Log/Save Icon -->
+      </form>
+
+      <!-- Action Buttons (Log and Reset) -->
+      <div class="flex justify-between space-x-4 pt-4"
+        v-motion="{ initial: { opacity: 0, y: 20 }, enter: { opacity: 1, y: 0, transition: { delay: 0.5 } } }">
+        <!-- Log Button -->
+        <button @click="logDailyIntake" :disabled="isSaving || currentIntakeML === 0"
+          class="flex-1 px-5 py-3 rounded-full bg-gradient-to-r from-indigo-600 to-blue-700 font-bold text-white transition duration-300 transform active:scale-[0.98] shadow-xl shadow-indigo-700/30 
+                 hover:from-indigo-500 hover:to-blue-600 focus:outline-none focus:ring-4 focus:ring-indigo-500/50 disabled:opacity-50 disabled:cursor-not-allowed">
           <span class="flex items-center justify-center">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v13a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
-            {{ isSaving ? 'Logging...' : 'Log Daily Intake' }}
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+              class="w-5 h-5 mr-2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <polyline points="17 8 12 3 7 8" />
+              <line x1="12" y1="3" x2="12" y2="15" />
+            </svg>
+            Log Daily Intake
           </span>
         </button>
 
-        <button
-          @click="resetIntake"
-          :disabled="isSaving"
-          class="px-4 py-3 bg-red-600 rounded-lg font-semibold text-white hover:bg-red-700 transition duration-300 transform active:scale-[0.98]
-                 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-gray-900 disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-          <!-- Reset Icon -->
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.75L3 16"/>
-            <path d="M3 3v4h4"/>
-            <path d="M3 16V9h4"/>
+        <!-- Reset Button -->
+        <button @click="resetTracker" :disabled="isSaving || currentIntakeML === 0"
+          class="flex-shrink-0 px-5 py-3 rounded-full bg-gray-700 font-bold text-gray-300 transition duration-300 transform active:scale-[0.98] shadow-lg shadow-gray-700/20 
+                 hover:bg-gray-600 focus:outline-none focus:ring-4 focus:ring-gray-700/50 disabled:opacity-50 disabled:cursor-not-allowed">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5">
+            <path d="M3 2v6h6" />
+            <path d="M21 22v-6h-6" />
+            <path d="M21 8A10 10 0 0 0 4.5 4.5" />
+            <path d="M3 16a10 10 0 0 0 16.5 3.5" />
           </svg>
         </button>
       </div>

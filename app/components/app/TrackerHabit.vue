@@ -5,41 +5,42 @@ import { useMotion } from '@vueuse/motion';
 // --- Mock State (Simulating data fetched from MongoDB) ---
 interface HabitEntry {
   id: number;
-  name: string;
-  targetFrequency: string; // e.g., Daily, 3 times a week
-  streak: number; 
-  lastCompleted: string | null; // Date of last completion
-  loggedAt: string;
+  name: string; // Name of the habit
+  streak: number; // Simulated streak count
+  loggedDate: string;
+  isCompleted: boolean;
 }
 
-const habitList = ref<HabitEntry[]>([
-  { id: 1, name: 'Meditate for 10 minutes', targetFrequency: 'Daily', streak: 5, lastCompleted: '2025-10-02', loggedAt: '2025-10-01' },
-  { id: 2, name: 'Read 20 pages', targetFrequency: 'Daily', streak: 12, lastCompleted: '2025-10-02', loggedAt: '2025-10-01' },
-  { id: 3, name: 'Go for a walk', targetFrequency: '3 times/week', streak: 2, lastCompleted: '2025-10-01', loggedAt: '2025-10-02' },
+// Initial mock data - Simulating a list of established habits with check-ins
+const entryList = ref<HabitEntry[]>([
+  { id: 1, name: 'Meditate for 10 minutes', streak: 5, loggedDate: '2025-10-05', isCompleted: true },
+  { id: 2, name: 'Cold Soak session', streak: 2, loggedDate: '2025-10-04', isCompleted: false },
+  { id: 3, name: 'Read 20 pages', streak: 10, loggedDate: '2025-10-03', isCompleted: true },
 ]);
 let nextId = 4; // Counter for new mock entries
 
 // --- State ---
 const newHabitName = ref('');
-const newHabitFrequency = ref('Daily');
 const isSaving = ref(false);
 const saveMessage = ref<string | null>(null);
 
-// --- Logging Function (Simulates MongoDB interaction for habit creation) ---
+// --- Logging Function (Simulates MongoDB interaction for habit creation/check-in) ---
+
+// 1. Function to create a new habit
 const createNewHabit = async () => {
   if (!newHabitName.value.trim()) {
-    saveMessage.value = 'Please enter a habit name.';
-    setTimeout(() => saveMessage.value = null, 3000);
+    saveMessage.value = 'Please enter a name for your new habit.';
+    setTimeout(() => saveMessage.value = null, 4000);
     return;
   }
 
   isSaving.value = true;
-  saveMessage.value = 'Creating new habit...';
-  
+  saveMessage.value = `Creating new habit...`;
+
   const payload = {
-    name: newHabitName.value.trim(), 
-    targetFrequency: newHabitFrequency.value,
-    createdAt: new Date().toISOString(), 
+    name: newHabitName.value.trim(),
+    initialStreak: 0,
+    loggedAt: new Date().toISOString(),
   };
 
   try {
@@ -47,31 +48,63 @@ const createNewHabit = async () => {
     // NOTE: This simulates the call to your MongoDB backend via a Nuxt Server API route.
     // Replace with actual $fetch call to your /api/create-habit endpoint.
     // ----------------------------------------------------------------------
-    
+
     // Simulate successful API call delay
     await new Promise(resolve => setTimeout(resolve, 1500));
-    console.log('Simulating successful save to MongoDB with payload:', payload);
+    console.log('Simulating successful habit creation to MongoDB with payload:', payload);
 
-    // Update the local list and clear inputs on success (Mocking DB save)
-    habitList.value.unshift({
-        id: nextId++,
-        name: newHabitName.value.trim(),
-        targetFrequency: newHabitFrequency.value,
-        streak: 0,
-        lastCompleted: null,
-        loggedAt: new Date().toISOString().substring(0, 10),
+    // Add the new habit to the list (Mocking DB save)
+    entryList.value.unshift({
+      id: nextId++,
+      name: newHabitName.value.trim(),
+      streak: 0,
+      loggedDate: new Date().toISOString().substring(0, 10),
+      isCompleted: false,
     });
 
-    saveMessage.value = `${newHabitName.value.trim()} habit created!`;
+    saveMessage.value = `Habit "${newHabitName.value}" created successfully!`;
     newHabitName.value = '';
-    newHabitFrequency.value = 'Daily';
-    
+
   } catch (error) {
-    console.error('Failed to save habit:', error);
-    saveMessage.value = 'Error saving data. Please try again.';
+    console.error('Failed to create habit:', error);
+    saveMessage.value = 'Error creating habit. Please try again.';
   } finally {
     isSaving.value = false;
     setTimeout(() => saveMessage.value = null, 4000);
+  }
+};
+
+// 2. Function to toggle habit completion (simulates check-in/update to DB)
+const toggleHabitCompletion = async (habit: HabitEntry) => {
+  // Prevent actions while saving
+  if (isSaving.value) return;
+
+  // Simulate update to true or false
+  const newStatus = !habit.isCompleted;
+
+  // Update local state immediately for fast UI feedback
+  habit.isCompleted = newStatus;
+
+  // Set a temporary saving state message
+  saveMessage.value = newStatus ? `Checking in on "${habit.name}"...` : `Undoing check-in...`;
+
+  try {
+    // ----------------------------------------------------------------------
+    // NOTE: This simulates the API call to update the habit status/streak.
+    // Replace with actual $fetch call to your /api/update-habit endpoint.
+    // ----------------------------------------------------------------------
+    await new Promise(resolve => setTimeout(resolve, 800));
+
+    // Final success message
+    saveMessage.value = newStatus ? 'Habit checked off! Streak updated.' : 'Check-in undone.';
+
+  } catch (error) {
+    console.error('Failed to update habit:', error);
+    // Rollback local state on error
+    habit.isCompleted = !newStatus;
+    saveMessage.value = 'Error updating habit. Please try again.';
+  } finally {
+    setTimeout(() => saveMessage.value = null, 3000);
   }
 };
 
@@ -92,178 +125,122 @@ useMotion(trackerRef, {
     },
   },
 });
-
-// --- Habit Completion Logic (Simulated) ---
-const toggleCompletion = (habitId: number) => {
-    const habit = habitList.value.find(h => h.id === habitId);
-    if (!habit) return;
-
-    const today = new Date().toISOString().substring(0, 10);
-    
-    if (habit.lastCompleted === today) {
-        // --- Simulate undoing completion ---
-        habit.lastCompleted = null;
-        habit.streak = Math.max(0, habit.streak - 1);
-        saveMessage.value = `Completion undone for ${habit.name}.`;
-    } else {
-        // --- Simulate logging completion ---
-        habit.lastCompleted = today;
-        habit.streak += 1;
-        saveMessage.value = `Habit completed: ${habit.name}!`;
-    }
-    
-    setTimeout(() => saveMessage.value = null, 3000);
-    // In a real app, you would call a Server API here to update the completion status in MongoDB.
-    console.log(`Simulating status update for habit ID ${habitId}`);
-};
-
-const isCompletedToday = (lastCompletedDate: string | null) => {
-    if (!lastCompletedDate) return false;
-    const today = new Date().toISOString().substring(0, 10);
-    return lastCompletedDate === today;
-};
 </script>
 
 <template>
-  <!-- Custom Habit Gradient Background (Deep Blue/Purple for Structure and Growth) -->
-  <div ref="trackerRef" 
-    class="min-h-screen p-4 sm:p-8 text-white flex flex-col items-center justify-center"
-  >
-    <!-- Main Tracker Card (Glassmorphism Effect) -->
-    <div
-      class="w-full max-w-3xl rounded-3xl bg-white/5 p-6 sm:p-10 shadow-2xl backdrop-blur-lg space-y-8 
-             border border-indigo-400/20 ring-4 ring-indigo-600/20 transition-all duration-500 hover:ring-indigo-500/30"
-    >
-      
+  <!-- MODERN SIMPLISTIC DESIGN: Deep Dark Background & Clean Contrast -->
+  <div ref="trackerRef" class="min-h-screen p-4 sm:p-8 text-white flex flex-col items-center justify-center font-sans">
+    <!-- Main Tracker Card (Minimalist & Elevated) -->
+    <div class="w-full max-w-3xl rounded-2xl bg-gray-900 p-7 sm:p-10 shadow-xl shadow-gray-900/60 space-y-8 
+             transition-all duration-500 border border-gray-800">
+
       <!-- Header -->
-      <header class="text-center" v-motion="{ initial: { opacity: 0, y: -20 }, enter: { opacity: 1, y: 0, transition: { delay: 0.1 } } }">
-        <h1 class="text-4xl font-extrabold flex items-center justify-center bg-clip-text text-transparent bg-gradient-to-r from-teal-300 to-indigo-400">
-          <!-- Target Icon (Focus, Goal) -->
-          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 mr-3 text-teal-300">
-            <circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 0 0 0 20v-2a8 8 0 0 1 0-16V2Z"/>
+      <header class="text-center"
+        v-motion="{ initial: { opacity: 0, y: -20 }, enter: { opacity: 1, y: 0, transition: { delay: 0.1 } } }">
+        <h1
+          class="text-4xl font-extrabold flex items-center justify-center bg-clip-text text-transparent bg-gradient-to-r from-teal-400 to-indigo-500">
+          <!-- Target Icon for Habit Tracking -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="w-8 h-8 mr-3 text-teal-400">
+            <path d="M12 2a10 10 0 0 0 10 10 10 10 0 0 0-10 10 10 10 0 0 0-10-10A10 10 0 0 0 12 2Z" />
+            <path d="M12 7a5 5 0 0 0-5 5 5 5 0 0 0 5 5 5 5 0 0 0 5-5 5 5 0 0 0-5-5Z" />
+            <path d="M12 10a2 2 0 0 0-2 2 2 2 0 0 0 2 2 2 2 0 0 0 2-2 2 2 0 0 0-2-2Z" />
           </svg>
           Ascend Habit Tracker
         </h1>
-        <p class="mt-2 text-gray-300">Build unstoppable routines and track your progress daily.</p>
+        <p class="mt-2 text-base text-gray-400">Build momentum. Track your daily consistency and watch your habits
+          ascend.</p>
       </header>
-      
+
       <!-- API Message Area -->
-      <div 
-          v-if="saveMessage" 
-          class="text-center p-3 rounded-xl font-medium transition-all duration-300"
-          :class="{
-            'bg-green-600/30 text-green-400 border border-green-600': saveMessage.includes('completed') || saveMessage.includes('created'),
-            'bg-red-600/30 text-red-400 border border-red-600': saveMessage.includes('Error') || saveMessage.includes('Please enter'),
-            'bg-indigo-600/30 text-indigo-400 border border-indigo-600': saveMessage.includes('Creating') || saveMessage.includes('undone')
-          }"
-          v-motion="{ initial: { opacity: 0, scale: 0.9 }, enter: { opacity: 1, scale: 1 } }"
-      >
-          {{ saveMessage }}
+      <div v-if="saveMessage" class="text-center p-3 rounded-xl font-medium transition-all duration-300" :class="{
+        'bg-green-600/30 text-green-400 border border-green-600': saveMessage.includes('successfully') || saveMessage.includes('checked off'),
+        'bg-red-600/30 text-red-400 border border-red-600': saveMessage.includes('Error') || saveMessage.includes('Please enter'),
+        'bg-indigo-600/30 text-indigo-400 border border-indigo-600': saveMessage.includes('Creating') || saveMessage.includes('Checking in') || saveMessage.includes('Undoing')
+      }" v-motion="{ initial: { opacity: 0, scale: 0.9 }, enter: { opacity: 1, scale: 1 } }">
+        {{ saveMessage }}
       </div>
 
       <!-- Habit Creation Form -->
-      <form 
-        @submit.prevent="createNewHabit"
-        class="space-y-4"
-        v-motion="{ initial: { opacity: 0, y: 20 }, enter: { opacity: 1, y: 0, transition: { delay: 0.2 } } }"
-      >
-        <h2 class="text-xl font-bold text-gray-200 border-b border-gray-700 pb-2">Create New Habit</h2>
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
-            <!-- Habit Name Input -->
-            <div class="md:col-span-2">
-                <label for="habit-name" class="block text-sm font-bold text-gray-300 mb-1">Habit Name</label>
-                <input
-                    id="habit-name"
-                    type="text"
-                    v-model="newHabitName"
-                    placeholder="e.g., Drink 8 glasses of water"
-                    class="w-full rounded-xl border border-gray-600 bg-gray-700/50 py-3 px-4 text-white shadow-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                    :disabled="isSaving"
-                />
-            </div>
-            
-            <!-- Target Frequency Dropdown -->
-            <div class="md:col-span-1">
-                <label for="habit-frequency" class="block text-sm font-bold text-gray-300 mb-1">Frequency</label>
-                <select
-                    id="habit-frequency"
-                    v-model="newHabitFrequency"
-                    class="w-full rounded-xl border border-gray-600 bg-gray-700/50 py-3 px-4 text-white shadow-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                    :disabled="isSaving"
-                >
-                    <option value="Daily">Daily</option>
-                    <option value="5 times/week">5 times/week</option>
-                    <option value="3 times/week">3 times/week</option>
-                    <option value="Weekly">Weekly</option>
-                </select>
-            </div>
+      <form @submit.prevent="createNewHabit" class="space-y-4 border border-gray-700/50 p-6 rounded-xl bg-gray-800/30"
+        v-motion="{ initial: { opacity: 0, y: 20 }, enter: { opacity: 1, y: 0, transition: { delay: 0.2 } } }">
+        <h2 class="text-xl font-bold text-gray-200 border-b border-gray-700 pb-2 flex items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="w-5 h-5 mr-2 text-teal-400">
+            <path d="M5 12h14" />
+            <path d="M12 5v14" />
+          </svg>
+          Add New Habit
+        </h2>
 
-            <!-- Create Button -->
-            <div class="md:col-span-1">
-                <button
-                    type="submit"
-                    :disabled="isSaving || !newHabitName.trim()"
-                    class="w-full px-6 py-3 rounded-xl bg-indigo-600 font-semibold text-white transition duration-300 transform active:scale-[0.9] shadow-xl shadow-indigo-700/50 
-                           hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-900 disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                    <!-- Target Icon -->
-                    <span class="flex items-center justify-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
-                        <span class="ml-2 hidden sm:inline">Create Habit</span>
-                    </span>
-                </button>
-            </div>
+        <div class="flex space-x-4">
+          <!-- Habit Name Input -->
+          <input type="text" v-model="newHabitName" placeholder="e.g., Drink 100oz water" required
+            class="flex-grow rounded-xl border border-gray-700 bg-gray-800 py-3 px-4 text-base text-white placeholder-gray-500 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-teal-500 shadow-inner shadow-black/20"
+            :disabled="isSaving" />
+
+          <!-- Create Button -->
+          <button type="submit" :disabled="isSaving || !newHabitName.trim()"
+            class="px-5 py-3 rounded-xl bg-gradient-to-r from-teal-600 to-indigo-700 font-bold text-white transition duration-300 transform active:scale-[0.98] shadow-lg shadow-teal-700/30 
+                       hover:from-teal-500 hover:to-indigo-600 focus:outline-none focus:ring-4 focus:ring-teal-500/50 disabled:opacity-50 disabled:cursor-not-allowed">
+            <span class="flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5">
+                <line x1="12" y1="5" x2="12" y2="19" />
+                <line x1="5" y1="12" x2="19" y2="12" />
+              </svg>
+            </span>
+          </button>
         </div>
       </form>
-      
+
       <!-- Habit List -->
-      <div class="pt-6 space-y-3">
-        <h2 class="text-2xl font-bold text-gray-200 border-b border-gray-700 pb-2">Your Active Habits</h2>
+      <div class="pt-8 space-y-5">
+        <h2 class="text-2xl font-bold text-gray-200 border-b border-gray-700 pb-2">Today's Habits</h2>
 
-        <ul class="max-h-72 overflow-y-auto pr-2 space-y-2">
-            <li 
-                v-for="(item, index) in habitList" 
-                :key="item.id"
-                class="flex items-center justify-between p-4 border-b border-gray-700 last:border-b-0 bg-gray-800/30 rounded-lg group transition duration-200"
-                :class="{ 'border-l-4 border-l-green-500': isCompletedToday(item.lastCompleted) }"
-                v-motion="{ initial: { opacity: 0, x: -20 }, enter: { opacity: 1, x: 0, transition: { delay: 0.1 * index } } }"
-            >
-                <!-- Habit Info & Streak -->
-                <div class="flex-grow flex items-center">
-                    <!-- Completion Checkmark/Circle -->
-                    <button 
-                        @click="toggleCompletion(item.id)" 
-                        class="w-8 h-8 rounded-full flex items-center justify-center transition duration-300 flex-shrink-0"
-                        :class="[isCompletedToday(item.lastCompleted) ? 'bg-green-500 hover:bg-green-600 text-white' : 'bg-gray-700/50 border border-indigo-400/50 hover:bg-gray-700 text-indigo-400']"
-                        aria-label="Toggle completion"
-                    >
-                        <svg v-if="isCompletedToday(item.lastCompleted)" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-                        <svg v-else xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/></svg>
-                    </button>
+        <ul class="max-h-96 overflow-y-auto pr-3 space-y-4">
+          <li v-for="(item, index) in entryList" :key="item.id"
+            class="flex items-center justify-between p-4 border border-gray-800/80 bg-gray-800 rounded-lg transition duration-200 hover:bg-gray-800/50 hover:border-indigo-600/50"
+            v-motion="{ initial: { opacity: 0, x: -10 }, enter: { opacity: 1, x: 0, transition: { delay: 0.05 * index } } }">
+            <!-- Habit Name and Streak -->
+            <div class="flex items-center flex-1 min-w-0">
+              <!-- Completion Toggle -->
+              <button @click="toggleHabitCompletion(item)" :disabled="isSaving" :class="[
+                item.isCompleted
+                  ? 'bg-teal-600 hover:bg-teal-700'
+                  : 'bg-gray-700 hover:bg-gray-600 border border-gray-600',
+                'w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 mr-4 transition-colors duration-200'
+              ]">
+                <!-- Checkmark Icon -->
+                <svg v-if="item.isCompleted" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                  viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"
+                  stroke-linejoin="round" class="w-4 h-4">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+                <!-- Plus Icon (Placeholder when incomplete) -->
+                <svg v-else xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  class="w-4 h-4 text-gray-400">
+                  <line x1="12" y1="5" x2="12" y2="19" />
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                </svg>
+              </button>
 
-                    <div class="ml-4">
-                        <p class="text-lg font-medium text-gray-100">{{ item.name }}</p>
-                        <p class="text-xs text-gray-400 mt-0.5">Target: {{ item.targetFrequency }}</p>
-                    </div>
-                </div>
-
-                <!-- Streak Display -->
-                <div class="flex items-center text-right pl-4 flex-shrink-0">
-                    <p class="text-2xl font-extrabold mr-2" :class="item.streak > 0 ? 'text-teal-400' : 'text-gray-500'">
-                        {{ item.streak }}
-                    </p>
-                    <p class="text-sm text-gray-400">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-red-500 inline-block">
-                           <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/>
-                           <path d="M14 2v6h6"/>
-                        </svg>
-                        Day Streak
-                    </p>
-                </div>
-            </li>
-            <li v-if="habitList.length === 0" class="text-center text-gray-500 py-4">
-                No habits defined yet. Start building your foundation!
-            </li>
+              <div class="flex flex-col overflow-hidden">
+                <p class="text-lg font-medium truncate" :class="{ 'line-through text-gray-500': item.isCompleted }">
+                  {{ item.name }}
+                </p>
+                <span class="text-sm font-semibold mt-1" :class="item.streak > 0 ? 'text-teal-400' : 'text-gray-500'">
+                  🔥 {{ item.streak }} Day Streak
+                </span>
+              </div>
+            </div>
+          </li>
+          <li v-if="entryList.length === 0" class="text-center text-gray-500 py-4">
+            No habits defined. Add your first goal above!
+          </li>
         </ul>
       </div>
 

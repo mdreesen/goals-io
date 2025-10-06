@@ -5,62 +5,60 @@ import { useMotion } from '@vueuse/motion';
 // --- Mock State (Simulating data fetched from MongoDB) ---
 interface GratitudeEntry {
   id: number;
-  text: string;
+  entry: string; // The gratitude statement
   loggedAt: string;
 }
 
-const gratitudeList = ref<GratitudeEntry[]>([
-  { id: 1, text: 'I am grateful for the sunny weather and fresh air today.', loggedAt: '2025-10-01' },
-  { id: 2, text: 'Grateful for a successful, peaceful workday.', loggedAt: '2025-09-30' },
-  { id: 3, text: 'Thankful for my supportive friends and family.', loggedAt: '2025-09-29' },
+// Initial mock data
+const entryList = ref<GratitudeEntry[]>([
+  { id: 1, entry: 'I am grateful for the clean, cold water after my morning workout.', loggedAt: '2025-10-02' },
+  { id: 2, entry: 'I appreciate the quiet time I had to read 50 pages of my book today.', loggedAt: '2025-10-01' },
 ]);
-let nextId = 4; // Counter for new mock entries
+let nextId = 3; // Counter for new mock entries
 
 // --- State ---
 const newEntry = ref('');
 const isSaving = ref(false);
 const saveMessage = ref<string | null>(null);
 
-// --- Logging Function (Simulates MongoDB interaction) ---
-const logGratitude = async () => {
+// --- Logging Function (Simulates MongoDB interaction for entry creation) ---
+const logEntry = async () => {
   if (!newEntry.value.trim()) {
-    saveMessage.value = 'Please write something you are grateful for.';
-    setTimeout(() => saveMessage.value = null, 3000);
+    saveMessage.value = 'Your gratitude entry cannot be empty. What are you thankful for?';
+    setTimeout(() => saveMessage.value = null, 4000);
     return;
   }
 
   isSaving.value = true;
-  saveMessage.value = 'Logging gratitude entry...';
-  
-  const gratitudeText = newEntry.value.trim();
-  
+  saveMessage.value = `Logging gratitude...`;
+
   const payload = {
-    text: gratitudeText, 
-    logTime: new Date().toISOString(), 
+    entry: newEntry.value.trim(),
+    loggedAt: new Date().toISOString(),
   };
 
   try {
     // ----------------------------------------------------------------------
     // NOTE: This simulates the call to your MongoDB backend via a Nuxt Server API route.
-    // Replace with actual $fetch call to your /api/save-gratitude endpoint.
+    // Replace with actual $fetch call to your /api/log-gratitude endpoint.
     // ----------------------------------------------------------------------
-    
+
     // Simulate successful API call delay
     await new Promise(resolve => setTimeout(resolve, 1500));
     console.log('Simulating successful save to MongoDB with payload:', payload);
 
-    // Update the local list and clear input on success (Mocking DB save)
-    gratitudeList.value.unshift({
-        id: nextId++,
-        text: gratitudeText,
-        loggedAt: new Date().toISOString().substring(0, 10),
+    // Update the local list and clear inputs on success (Mocking DB save)
+    entryList.value.unshift({
+      id: nextId++,
+      entry: newEntry.value.trim().substring(0, 75) + (newEntry.value.length > 75 ? '...' : ''), // Keep list summary short
+      loggedAt: new Date().toISOString().substring(0, 10),
     });
 
     saveMessage.value = `Gratitude logged successfully!`;
-    newEntry.value = ''; // Clear the input field
-    
+    newEntry.value = '';
+
   } catch (error) {
-    console.error('Failed to save gratitude:', error);
+    console.error('Failed to save entry:', error);
     saveMessage.value = 'Error saving data. Please try again.';
   } finally {
     isSaving.value = false;
@@ -88,99 +86,102 @@ useMotion(trackerRef, {
 </script>
 
 <template>
-  <!-- Custom Warm Gradient Background (Sunset Colors for Gratitude) -->
-  <div ref="trackerRef" 
-    class="p-4 sm:p-8 text-white flex flex-col items-center justify-center"
-  >
-    <!-- Main Tracker Card (Glassmorphism Effect) -->
-    <div
-      class="w-full max-w-2xl rounded-3xl bg-white/5 p-6 sm:p-10 shadow-2xl backdrop-blur-lg space-y-8 
-             border border-pink-400/20 ring-4 ring-pink-600/20 transition-all duration-500 hover:ring-pink-500/30"
-    >
-      
+  <!-- MODERN SIMPLISTIC DESIGN: Deep Dark Background & Clean Contrast -->
+  <div ref="trackerRef" class="min-h-screen p-4 sm:p-8 text-white flex flex-col items-center justify-center font-sans">
+    <!-- Main Tracker Card (Minimalist & Elevated) -->
+    <div class="w-full max-w-3xl rounded-2xl bg-gray-900 p-7 sm:p-10 shadow-xl shadow-gray-900/60 space-y-8 
+             transition-all duration-500 border border-gray-800">
+
       <!-- Header -->
-      <header class="text-center" v-motion="{ initial: { opacity: 0, y: -20 }, enter: { opacity: 1, y: 0, transition: { delay: 0.1 } } }">
-        <h1 class="text-4xl font-extrabold flex items-center justify-center bg-clip-text text-transparent bg-gradient-to-r from-orange-300 to-pink-400">
-          <!-- Heart Icon (Gratitude, Love) -->
-          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 mr-3 text-orange-300">
-            <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+      <header class="text-center"
+        v-motion="{ initial: { opacity: 0, y: -20 }, enter: { opacity: 1, y: 0, transition: { delay: 0.1 } } }">
+        <h1
+          class="text-4xl font-extrabold flex items-center justify-center bg-clip-text text-transparent bg-gradient-to-r from-amber-400 to-yellow-500">
+          <!-- Heart/Star Icon for Gratitude -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="w-8 h-8 mr-3 text-amber-400">
+            <path
+              d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
           </svg>
-          Gratitude Journal
+          Ascend Gratitude Tracker
         </h1>
-        <p class="mt-2 text-gray-300">Log something positive every day to shift your perspective.</p>
+        <p class="mt-2 text-base text-gray-400">Focus on the positive and log what you are truly grateful for today.</p>
       </header>
-      
+
       <!-- API Message Area -->
-      <div 
-          v-if="saveMessage" 
-          class="text-center p-3 rounded-xl font-medium transition-all duration-300"
-          :class="{
-            'bg-green-600/30 text-green-400 border border-green-600': saveMessage.includes('logged successfully'),
-            'bg-red-600/30 text-red-400 border border-red-600': saveMessage.includes('Error') || saveMessage.includes('grateful for'),
-            'bg-purple-600/30 text-purple-400 border border-purple-600': saveMessage.includes('Logging')
-          }"
-          v-motion="{ initial: { opacity: 0, scale: 0.9 }, enter: { opacity: 1, scale: 1 } }"
-      >
-          {{ saveMessage }}
+      <div v-if="saveMessage" class="text-center p-3 rounded-xl font-medium transition-all duration-300" :class="{
+        'bg-green-600/30 text-green-400 border border-green-600': saveMessage.includes('logged successfully'),
+        'bg-red-600/30 text-red-400 border border-red-600': saveMessage.includes('Error') || saveMessage.includes('cannot be empty'),
+        'bg-indigo-600/30 text-indigo-400 border border-indigo-600': saveMessage.includes('Logging')
+      }" v-motion="{ initial: { opacity: 0, scale: 0.9 }, enter: { opacity: 1, scale: 1 } }">
+        {{ saveMessage }}
       </div>
 
-      <!-- Gratitude Input Form -->
-      <form 
-        @submit.prevent="logGratitude"
-        class="space-y-4"
-        v-motion="{ initial: { opacity: 0, y: 20 }, enter: { opacity: 1, y: 0, transition: { delay: 0.2 } } }"
-      >
-        <label for="gratitude-input" class="block text-xl font-bold text-gray-200">
-          What are you grateful for right now?
-        </label>
-        <div class="flex space-x-4">
-            <!-- Text Input -->
-            <input
-                id="gratitude-input"
-                type="text"
-                v-model="newEntry"
-                placeholder="e.g., The sound of rain outside my window."
-                class="flex-grow rounded-xl border border-gray-600 bg-gray-700/50 py-3 px-6 text-xl text-white shadow-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-orange-500"
-                :disabled="isSaving"
-            />
-            
-            <!-- Log Button -->
-            <button
-                type="submit"
-                :disabled="isSaving || !newEntry.trim()"
-                class="px-6 py-3 rounded-xl bg-orange-600 font-semibold text-white transition duration-300 transform active:scale-[0.9] shadow-xl shadow-orange-700/50 
-                       hover:bg-orange-700 focus:outline-none focus:ring-4 focus:ring-orange-500 focus:ring-offset-2 focus:ring-offset-gray-900 disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-                <!-- Plus Icon -->
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
-            </button>
+      <!-- Entry Creation Form -->
+      <form @submit.prevent="logEntry" class="space-y-6"
+        v-motion="{ initial: { opacity: 0, y: 20 }, enter: { opacity: 1, y: 0, transition: { delay: 0.2 } } }">
+        <h2 class="text-xl font-bold text-gray-200 border-b border-gray-700 pb-2">Log Today's Gratitude</h2>
+
+        <!-- Gratitude Textarea (Primary Focus) -->
+        <div>
+          <label for="gratitude-entry" class="block text-sm font-medium text-gray-400 mb-2">What made today
+            special?</label>
+          <textarea id="gratitude-entry" v-model="newEntry" rows="5" placeholder="I am grateful for..."
+            class="w-full rounded-xl border border-gray-700 bg-gray-800 py-4 px-5 text-base text-white placeholder-gray-500 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-amber-500 shadow-inner shadow-black/20"
+            :disabled="isSaving"></textarea>
+        </div>
+
+        <!-- Log Button (Sleek and Intentional) -->
+        <div class="flex justify-end pt-2">
+          <button type="submit" :disabled="isSaving || !newEntry.trim()"
+            class="px-8 py-3 rounded-full bg-gradient-to-r from-amber-600 to-yellow-700 font-bold text-gray-900 transition duration-300 transform active:scale-[0.98] shadow-xl shadow-amber-700/30 
+                       hover:from-amber-500 hover:to-yellow-600 focus:outline-none focus:ring-4 focus:ring-amber-500/50 disabled:opacity-50 disabled:cursor-not-allowed">
+            <!-- Star Icon for logging -->
+            <span class="flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="w-5 h-5 mr-2">
+                <path
+                  d="M12 1.5l3.24 6.54L22 9l-5 4.87 1.18 6.88-6.18-3.25L5.82 20.75 7 15.87 2 11.5l6.76-0.96L12 1.5z" />
+              </svg>
+              Log Gratitude
+            </span>
+          </button>
         </div>
       </form>
-      
-      <!-- Gratitude History List -->
-      <div class="pt-6 space-y-3">
-        <h2 class="text-2xl font-bold text-gray-200 border-b border-gray-700 pb-2">Recent Entries</h2>
 
-        <ul class="max-h-60 overflow-y-auto pr-2">
-            <li 
-                v-for="(item, index) in gratitudeList" 
-                :key="item.id"
-                class="flex items-start p-3 border-b border-gray-700 last:border-b-0"
-                v-motion="{ initial: { opacity: 0, x: -20 }, enter: { opacity: 1, x: 0, transition: { delay: 0.1 * index } } }"
-            >
-                <!-- Sun Icon (Warmth, Brightness) -->
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mt-1 mr-3 text-orange-400 flex-shrink-0">
-                    <circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/>
+      <!-- History List -->
+      <div class="pt-8 space-y-5">
+        <h2 class="text-2xl font-bold text-gray-200 border-b border-gray-700 pb-2">Gratitude History</h2>
+
+        <ul class="max-h-96 overflow-y-auto pr-3 space-y-4">
+          <li v-for="(item, index) in entryList" :key="item.id"
+            class="flex flex-col p-4 border border-gray-800/80 bg-gray-800 rounded-lg transition duration-200 hover:bg-gray-800/50 hover:border-amber-600/50"
+            v-motion="{ initial: { opacity: 0, x: -10 }, enter: { opacity: 1, x: 0, transition: { delay: 0.05 * index } } }">
+            <div class="flex items-start justify-between">
+              <!-- Icon & Entry Summary -->
+              <div class="flex items-start flex-1">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  class="w-4 h-4 mr-3 flex-shrink-0 mt-1 text-amber-400">
+                  <path d="M20 7v10h-6V7h6z" />
+                  <path d="M4 7v10h-6V7h6z" />
+                  <path d="M12 20s-8 4-8-10V5l-8-3-8 3v7c0 6 8 10 8 10" />
                 </svg>
-                
-                <div class="flex-grow">
-                    <p class="text-lg font-medium text-gray-100">{{ item.text }}</p>
-                    <p class="text-xs text-gray-400 mt-1">Logged: {{ item.loggedAt }}</p>
+                <div class="flex flex-col">
+                  <p class="text-lg text-gray-200 leading-tight italic">{{ item.entry }}</p>
                 </div>
-            </li>
-            <li v-if="gratitudeList.length === 0" class="text-center text-gray-500 py-4">
-                The best time to start is now! Log your first moment of gratitude.
-            </li>
+              </div>
+
+              <p class="text-xs text-gray-500 flex-shrink-0 ml-4 mt-1">
+                {{ item.loggedAt }}
+              </p>
+            </div>
+          </li>
+          <li v-if="entryList.length === 0" class="text-center text-gray-500 py-4">
+            Nothing yet? Find something small to be grateful for!
+          </li>
         </ul>
       </div>
 

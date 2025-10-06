@@ -1,4 +1,4 @@
-import { d as useUserSession, h as useMotion, a as __nuxt_component_0$2 } from './server.mjs';
+import { d as useUserSession, i as useMotion, a as __nuxt_component_0$2 } from './server.mjs';
 import { defineComponent, ref, reactive, resolveDirective, mergeProps, unref, withCtx, createTextVNode, useSSRContext } from 'vue';
 import { ssrRenderAttrs, ssrGetDirectiveProps, ssrInterpolate, ssrRenderAttr, ssrIncludeBooleanAttr, ssrLooseContain, ssrRenderComponent } from 'vue/server-renderer';
 import { f as formVarient, c as containerVarient, i as inputVarient } from './varients-BkFSZmK0.mjs';
@@ -101,4 +101,4 @@ _sfc_main.setup = (props, ctx) => {
 };
 
 export { _sfc_main as default };
-//# sourceMappingURL=signup-C1EiB26M.mjs.map
+//# sourceMappingURL=signup-CtctNc0v.mjs.map

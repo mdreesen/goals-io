@@ -2,94 +2,95 @@
 import { ref, computed } from 'vue';
 import { useMotion } from '@vueuse/motion';
 
-// --- Constants (LBS) ---
-const START_WEIGHT_LBS = 210; // Mock start weight for progress calculation
-const TARGET_WEIGHT_LBS = 180; // User's desired weight goal
+// --- Constants ---
+// NOTE: These values would typically be fetched from user settings in a real app.
+const GOAL_WEIGHT_LBS = 180;
 
 // --- State ---
-const currentWeight = ref<number | null>(null); // The weight the user enters now
-const lastLoggedWeight = ref<number>(205.5); // Mock of the last weight saved to the database
-
-// --- UI & API State ---
-const isSaving = ref(false);
+const currentWeightLbs = ref(205); // Mock current weight
+const targetWeightLbs = ref(GOAL_WEIGHT_LBS); // The user's goal
+const weightInput = ref(205); // Input field value
+const isLogging = ref(false);
 const saveMessage = ref<string | null>(null);
 
 // --- Computed Values ---
 
-// Calculates the percentage progress from the start weight toward the target weight
-const progressPercent = computed<number>(() => {
-  if (!currentWeight.value) return 0;
-  
-  // Assuming a weight loss goal (START > TARGET)
-  const totalRange = START_WEIGHT_LBS - TARGET_WEIGHT_LBS;
-  if (totalRange <= 0) return 0; // Avoid division by zero or errors for gain goals
-  
-  const progressMade = START_WEIGHT_LBS - currentWeight.value;
-  
-  // Clamp the result between 0% and 100%
-  const percent = (progressMade / totalRange) * 100;
-  return Math.max(0, Math.min(100, percent));
+// Calculates progress percentage towards the goal (assuming weight loss for simplicity)
+const progressPercent = computed(() => {
+  // Assuming start weight was 220 for a clean progress bar demonstration
+  const startingWeight = 220;
+
+  if (currentWeightLbs.value <= targetWeightLbs.value) return 100; // Goal reached
+
+  const totalDifference = startingWeight - targetWeightLbs.value;
+  const currentDifference = startingWeight - currentWeightLbs.value;
+
+  if (totalDifference <= 0) return 0; // Invalid goal set, or goal reached/passed start
+
+  const percentage = (currentDifference / totalDifference) * 100;
+  return Math.min(Math.max(percentage, 0), 100);
 });
 
-// Calculate the difference between the current weight and the target
-const weightToGoal = computed<number>(() => {
-  if (!currentWeight.value) return TARGET_WEIGHT_LBS - lastLoggedWeight.value;
-  return TARGET_WEIGHT_LBS - currentWeight.value;
+// Determines the color accent based on progress (Health & Precision Theme: Teal/Blue)
+const progressAccentClass = computed(() => {
+  if (progressPercent.value < 50) return 'from-red-500 to-orange-400';
+  if (progressPercent.value < 90) return 'from-teal-500 to-cyan-500';
+  return 'from-green-500 to-blue-500'; // Near or at goal
 });
 
-// Calculate the difference from the last recorded weight
-const weightDifference = computed<number>(() => {
-  if (!currentWeight.value) return 0;
-  return currentWeight.value - lastLoggedWeight.value;
+// Determines the status text
+const statusText = computed(() => {
+  if (currentWeightLbs.value <= targetWeightLbs.value) {
+    return 'Goal Achieved! Maintaining strength.';
+  }
+  const difference = currentWeightLbs.value - targetWeightLbs.value;
+  return `${difference.toFixed(1)} lbs to go. Keep Ascending!`;
 });
 
-const isGoalReached = computed(() => (currentWeight.value ?? 9999) <= TARGET_WEIGHT_LBS);
+// --- Actions ---
 
-
-// --- Logging Function ---
+// Logs the new weight and updates the current state
 const logWeight = async () => {
-  if (!currentWeight.value || currentWeight.value <= 0) {
+  if (weightInput.value <= 0) {
     saveMessage.value = 'Please enter a valid weight.';
-    setTimeout(() => saveMessage.value = null, 3000);
+    setTimeout(() => saveMessage.value = null, 4000);
     return;
   }
 
-  isSaving.value = true;
-  saveMessage.value = 'Logging weight...';
-  
+  isLogging.value = true;
+  saveMessage.value = `Logging weight of ${weightInput.value} lbs...`;
+
+  const loggedAt = new Date().toISOString();
+
   const payload = {
-    // Current date/time of logging
-    logTime: new Date().toISOString(), 
-    // The current weight entered by the user
-    weightLbs: currentWeight.value, 
-    // Target for context
-    targetLbs: TARGET_WEIGHT_LBS, 
+    currentWeightLbs: weightInput.value,
+    targetWeightLbs: targetWeightLbs.value,
+    loggedAt: loggedAt,
   };
 
   try {
     // ----------------------------------------------------------------------
     // NOTE: This simulates the call to your MongoDB backend via a Nuxt Server API route.
-    // Replace with actual $fetch call to your /api/save-weight endpoint.
+    // Replace with actual $fetch call to your /api/log-weight endpoint.
     // ----------------------------------------------------------------------
-    
+
     // Simulate successful API call delay
     await new Promise(resolve => setTimeout(resolve, 1500));
     console.log('Simulating successful save to MongoDB with payload:', payload);
 
-    // Update the last logged weight and clear input
-    lastLoggedWeight.value = currentWeight.value;
-    saveMessage.value = `Weight of ${currentWeight.value.toFixed(1)} lbs logged successfully!`;
-    currentWeight.value = null; // Clear the input field
-    
+    // Update client state after successful logging
+    currentWeightLbs.value = weightInput.value;
+
+    saveMessage.value = `Weight updated to ${currentWeightLbs.value} lbs! Progress saved.`;
+
   } catch (error) {
-    console.error('Failed to save weight:', error);
+    console.error('Failed to log weight:', error);
     saveMessage.value = 'Error saving data. Please try again.';
   } finally {
-    isSaving.value = false;
+    isLogging.value = false;
     setTimeout(() => saveMessage.value = null, 4000);
   }
 };
-
 
 // --- Motion setup for fade-in effect ---
 const trackerRef = ref();
@@ -110,128 +111,110 @@ useMotion(trackerRef, {
 </script>
 
 <template>
-  <!-- Custom Health Gradient Background (Blues and Greens for vitality) -->
-  <div ref="trackerRef" 
-    class="p-4 sm:p-8 text-white flex items-center justify-center"
-  >
-    <!-- Main Tracker Card (Glassmorphism Effect) -->
-    <div
-      class="w-full max-w-xl rounded-3xl bg-white/5 p-6 sm:p-10 shadow-2xl backdrop-blur-lg space-y-8 
-             border border-green-400/20 ring-4 ring-green-500/20 transition-all duration-500 hover:ring-green-400/30"
-    >
-      
+  <!-- MODERN SIMPLISTIC DESIGN: Deep Dark Background & Clean Contrast (Weight Theme: Teal/Blue) -->
+  <div ref="trackerRef" class="min-h-screen p-4 sm:p-8 text-white flex flex-col items-center justify-center font-sans">
+    <!-- Main Tracker Card (Minimalist & Elevated) -->
+    <div class="w-full max-w-lg rounded-2xl bg-gray-900 p-7 sm:p-10 shadow-xl shadow-gray-900/60 space-y-8 
+             transition-all duration-500 border border-gray-800">
+
       <!-- Header -->
-      <header class="text-center" v-motion="{ initial: { opacity: 0, y: -20 }, enter: { opacity: 1, y: 0, transition: { delay: 0.1 } } }">
-        <h1 class="text-4xl font-extrabold flex items-center justify-center bg-clip-text text-transparent bg-gradient-to-r from-teal-300 to-green-400">
-          <!-- Scale Icon (Weight) -->
-          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 mr-3 text-teal-300">
-            <path d="M12 2a9 9 0 0 1 9 9v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V11a9 9 0 0 1 9-9z"/><path d="M12 22V15"/><path d="M15 15H9"/>
+      <header class="text-center"
+        v-motion="{ initial: { opacity: 0, y: -20 }, enter: { opacity: 1, y: 0, transition: { delay: 0.1 } } }">
+        <h1
+          class="text-4xl font-extrabold flex items-center justify-center bg-clip-text text-transparent bg-gradient-to-r from-teal-400 to-blue-500">
+          <!-- Scale Icon -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="w-8 h-8 mr-3 text-teal-400">
+            <path d="M12 3a7 7 0 0 0-7 7v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V10a7 7 0 0 0-7-7z" />
+            <path d="M5 10l7 7 7-7" />
+            <line x1="12" y1="17" x2="12" y2="20" />
           </svg>
-          Weight Tracker
+          Ascend Weight Tracker
         </h1>
-        <p class="mt-2 text-gray-300">Log your progress. Target: {{ TARGET_WEIGHT_LBS }} lbs.</p>
-      </header>
-      
-      <!-- API Message Area -->
-      <div 
-          v-if="saveMessage" 
-          class="text-center p-3 rounded-xl font-medium transition-all duration-300"
-          :class="{
-            'bg-green-600/30 text-green-400 border border-green-600': saveMessage.includes('logged successfully'),
-            'bg-red-600/30 text-red-400 border border-red-600': saveMessage.includes('Error') || saveMessage.includes('valid weight'),
-            'bg-blue-600/30 text-blue-400 border border-blue-600': saveMessage.includes('Logging')
-          }"
-          v-motion="{ initial: { opacity: 0, scale: 0.9 }, enter: { opacity: 1, scale: 1 } }"
-      >
-          {{ saveMessage }}
-      </div>
-
-      <!-- Main Input Section -->
-      <div 
-        class="space-y-6"
-        v-motion="{ initial: { opacity: 0, scale: 0.9 }, enter: { opacity: 1, scale: 1, transition: { delay: 0.2 } } }"
-      >
-        <label for="weight-input" class="block text-xl font-bold text-gray-200">
-          Current Weight (lbs)
-        </label>
-        <div class="flex items-center space-x-4">
-            <input
-                id="weight-input"
-                type="number"
-                step="0.1"
-                min="1"
-                v-model.number="currentWeight"
-                placeholder="0.0"
-                class="flex-grow rounded-xl border border-gray-600 bg-gray-700/50 py-4 px-6 text-3xl text-white shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-green-500"
-                :disabled="isSaving"
-            />
-            <button
-                @click="logWeight"
-                :disabled="isSaving || !currentWeight"
-                class="px-8 py-4 rounded-xl bg-green-600 font-semibold text-white transition duration-300 transform active:scale-[0.9] shadow-xl shadow-green-700/50 
-                       hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-green-500 focus:ring-offset-2 focus:ring-offset-gray-900 disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-                <!-- Log Icon -->
-                <span class="flex items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 mr-2">
-                        <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v13a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/>
-                    </svg>
-                    Log Weight
-                </span>
-            </button>
-        </div>
-      </div>
-      
-      <!-- Progress Bar and Stats -->
-      <div class="pt-6 space-y-4">
-        <h2 class="text-2xl font-bold text-gray-200">Goal Progress</h2>
-
-        <!-- Progress Bar -->
-        <div class="w-full bg-gray-700 rounded-full h-4 overflow-hidden shadow-inner shadow-black/50">
-          <div
-            :style="{ width: progressPercent + '%' }"
-            :class="[isGoalReached ? 'bg-yellow-400' : 'bg-teal-500']"
-            class="h-4 rounded-full transition-all duration-700 ease-out"
-            v-motion="{ initial: { width: 0 }, enter: { width: `${progressPercent}%` } }"
-          ></div>
-        </div>
-
-        <p class="text-sm text-gray-400 font-medium pt-2">
-          {{ progressPercent.toFixed(1) }}% towards Goal ({{ TARGET_WEIGHT_LBS }} lbs)
+        <p class="mt-2 text-base text-gray-400">Log your progress towards your target weight in pounds ($\text{lbs}$).
         </p>
+      </header>
 
-        <!-- Stat Cards -->
-        <div class="grid grid-cols-3 gap-4 text-center border-t border-gray-700 pt-4">
-            <div 
-                v-motion="{ initial: { opacity: 0, y: 10 }, enter: { opacity: 1, y: 0, transition: { delay: 0.4 } } }"
-                class="p-3 bg-gray-700/50 rounded-xl border border-gray-600"
-            >
-                <p class="text-sm text-gray-400">Last Weight</p>
-                <p class="text-xl font-bold text-teal-300">{{ lastLoggedWeight.toFixed(1) }} lbs</p>
-            </div>
-            
-            <div 
-                v-motion="{ initial: { opacity: 0, y: 10 }, enter: { opacity: 1, y: 0, transition: { delay: 0.5 } } }"
-                class="p-3 bg-gray-700/50 rounded-xl border border-gray-600"
-                :class="weightToGoal > 0 ? 'border-red-500/50' : 'border-green-500/50'"
-            >
-                <p class="text-sm text-gray-400">To Target</p>
-                <p class="text-xl font-bold" :class="weightToGoal > 0 ? 'text-red-400' : 'text-green-400'">
-                    {{ Math.abs(weightToGoal).toFixed(1) }} lbs
-                </p>
-            </div>
-            
-            <div 
-                v-motion="{ initial: { opacity: 0, y: 10 }, enter: { opacity: 1, y: 0, transition: { delay: 0.6 } } }"
-                class="p-3 bg-gray-700/50 rounded-xl border border-gray-600"
-                :class="weightDifference > 0 ? 'border-red-500/50' : 'border-green-500/50'"
-            >
-                <p class="text-sm text-gray-400">From Last</p>
-                <p class="text-xl font-bold" :class="weightDifference > 0 ? 'text-red-400' : 'text-green-400'">
-                    {{ weightDifference.toFixed(1) }} lbs
-                </p>
-            </div>
+      <!-- API Message Area -->
+      <div v-if="saveMessage" class="text-center p-3 rounded-xl font-medium transition-all duration-300" :class="{
+        'bg-green-600/30 text-green-400 border border-green-600': saveMessage.includes('successfully') || saveMessage.includes('Weight updated'),
+        'bg-red-600/30 text-red-400 border border-red-600': saveMessage.includes('Error') || saveMessage.includes('valid weight'),
+        'bg-indigo-600/30 text-indigo-400 border border-indigo-600': saveMessage.includes('Logging')
+      }" v-motion="{ initial: { opacity: 0, scale: 0.9 }, enter: { opacity: 1, scale: 1 } }">
+        {{ saveMessage }}
+      </div>
+
+      <!-- Current Weight Display -->
+      <div class="text-center"
+        v-motion="{ initial: { opacity: 0, scale: 0.9 }, enter: { opacity: 1, scale: 1, transition: { delay: 0.2 } } }">
+        <p class="text-xl font-medium text-gray-400">Current Weight</p>
+        <p class="text-7xl font-extrabold text-white mt-1 transition-colors duration-500"
+          :class="{ 'text-teal-400': currentWeightLbs <= targetWeightLbs }">
+          {{ currentWeightLbs.toFixed(1) }}
+          <span class="text-3xl font-semibold text-gray-500">lbs</span>
+        </p>
+        <p class="text-sm font-medium text-gray-500 mt-1">Target: {{ targetWeightLbs }} lbs</p>
+        <p class="text-sm font-bold mt-2"
+          :class="{ 'text-green-400': currentWeightLbs <= targetWeightLbs, 'text-yellow-400': currentWeightLbs > targetWeightLbs }">
+          {{ statusText }}
+        </p>
+      </div>
+
+      <!-- Progress Bar -->
+      <div class="w-full h-3 rounded-full bg-gray-700 overflow-hidden shadow-inner shadow-black/30"
+        v-motion="{ initial: { opacity: 0, x: -50 }, enter: { opacity: 1, x: 0, transition: { delay: 0.3 } } }">
+        <div class="h-full rounded-full transition-all duration-1000 ease-out"
+          :class="['bg-gradient-to-r', progressAccentClass]" :style="{ width: progressPercent + '%' }"></div>
+      </div>
+
+      <!-- Log Weight Form -->
+      <form @submit.prevent="logWeight" class="flex space-x-4 pt-4 border-t border-gray-800/50"
+        v-motion="{ initial: { opacity: 0, y: 20 }, enter: { opacity: 1, y: 0, transition: { delay: 0.4 } } }">
+        <!-- Weight Input -->
+        <div class="relative flex-grow">
+          <input type="number" step="0.1" v-model.number="weightInput" min="1" placeholder="Enter today's weight"
+            required
+            class="w-full rounded-xl border border-gray-700 bg-gray-800/80 py-3 pl-4 pr-12 text-base text-white placeholder-gray-500 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-teal-500 shadow-inner shadow-black/20"
+            :disabled="isLogging" />
+          <span class="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-gray-500 font-bold">lbs</span>
         </div>
+
+        <!-- Log Button -->
+        <button type="submit" :disabled="isLogging || weightInput <= 0"
+          class="px-5 py-3 rounded-xl bg-gradient-to-r from-teal-600 to-blue-700 font-bold text-white transition duration-300 transform active:scale-[0.98] shadow-lg shadow-teal-700/30 
+                 hover:from-teal-500 hover:to-blue-600 focus:outline-none focus:ring-4 focus:ring-teal-500/50 disabled:opacity-50 disabled:cursor-not-allowed">
+          <span class="flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+              class="w-5 h-5 mr-2">
+              <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2z" />
+              <polyline points="17 8 12 3 7 8" />
+              <line x1="12" y1="3" x2="12" y2="15" />
+            </svg>
+            {{ isLogging ? 'Saving...' : 'Log Weight' }}
+          </span>
+        </button>
+      </form>
+
+      <!-- Reset Button (Could be used to reset weight locally or set goal) -->
+      <div class="flex justify-end pt-2"
+        v-motion="{ initial: { opacity: 0, y: 20 }, enter: { opacity: 1, y: 0, transition: { delay: 0.5 } } }">
+        <button @click="weightInput = currentWeightLbs" :disabled="isLogging"
+          class="flex-shrink-0 px-4 py-2 rounded-full bg-gray-700 font-bold text-gray-300 text-sm transition duration-300 transform active:scale-[0.98] shadow-lg shadow-gray-700/20 
+                 hover:bg-gray-600 focus:outline-none focus:ring-4 focus:ring-gray-700/50 disabled:opacity-50 disabled:cursor-not-allowed">
+          <span class="flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+              class="w-4 h-4 mr-1">
+              <path d="M3 2v6h6" />
+              <path d="M21 22v-6h-6" />
+              <path d="M21 8A10 10 0 0 0 4.5 4.5" />
+              <path d="M3 16a10 10 0 0 0 16.5 3.5" />
+            </svg>
+            Undo Input
+          </span>
+        </button>
       </div>
 
     </div>

@@ -1,9 +1,9 @@
 import { defineComponent, withAsyncContext, withCtx, unref, createVNode, createBlock, createCommentVNode, openBlock, computed, toValue, reactive, ref, mergeProps, toDisplayString, useSlots, renderSlot, useSSRContext, useTemplateRef, createElementBlock, normalizeStyle, createElementVNode, Fragment, renderList } from 'vue';
 import { ssrRenderAttrs, ssrRenderComponent, ssrInterpolate, ssrRenderClass, ssrRenderSlot } from 'vue/server-renderer';
-import { f as fetchDefaults, b as useAsyncData, c as useRequestFetch, d as useUserSession, g as __nuxt_component_0$3, e as useAppConfig, t as tv } from './server.mjs';
-import { _ as __nuxt_component_0$1$1, a as __nuxt_component_0$2 } from './Icon-A8r6hdbA.mjs';
+import { f as fetchDefaults, b as useAsyncData, c as useRequestFetch, d as useUserSession, h as __nuxt_component_0$3, e as useAppConfig, t as tv, g as __nuxt_component_0$1$1 } from './server.mjs';
+import { _ as __nuxt_component_0$2 } from './Header-BVSOQCaH.mjs';
 import { Primitive } from 'reka-ui';
-import { _ as _sfc_main$9 } from './Container-Cb3Pb78c.mjs';
+import { _ as _sfc_main$a } from './Container-Cb3Pb78c.mjs';
 import { Orientation, StackedBar, GroupedBar, Scatter, Position } from '@unovis/ts';
 import { VisXYContainer, VisTooltip, VisStackedBar, VisGroupedBar, VisAxis, VisBulletLegend, VisScatter } from '@unovis/vue';
 import { O as hash } from '../nitro/nitro.mjs';
@@ -136,7 +136,7 @@ function generateOptionSegments(opts) {
   }
   return segments;
 }
-const _sfc_main$8 = /* @__PURE__ */ defineComponent({
+const _sfc_main$9 = /* @__PURE__ */ defineComponent({
   __name: "Description",
   __ssrInlineRender: true,
   props: {
@@ -152,14 +152,14 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_setup$8 = _sfc_main$8.setup;
-_sfc_main$8.setup = (props, ctx) => {
+const _sfc_setup$9 = _sfc_main$9.setup;
+_sfc_main$9.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/base/Description.vue");
-  return _sfc_setup$8 ? _sfc_setup$8(props, ctx) : void 0;
+  return _sfc_setup$9 ? _sfc_setup$9(props, ctx) : void 0;
 };
-const __nuxt_component_0$1 = Object.assign(_sfc_main$8, { __name: "BaseDescription" });
-const _sfc_main$7 = /* @__PURE__ */ defineComponent({
+const __nuxt_component_0$1 = Object.assign(_sfc_main$9, { __name: "BaseDescription" });
+const _sfc_main$8 = /* @__PURE__ */ defineComponent({
   __name: "Welcome",
   __ssrInlineRender: true,
   setup(__props) {
@@ -179,13 +179,13 @@ const _sfc_main$7 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _sfc_setup$7 = _sfc_main$7.setup;
-_sfc_main$7.setup = (props, ctx) => {
+const _sfc_setup$8 = _sfc_main$8.setup;
+_sfc_main$8.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/app/Welcome.vue");
-  return _sfc_setup$7 ? _sfc_setup$7(props, ctx) : void 0;
+  return _sfc_setup$8 ? _sfc_setup$8(props, ctx) : void 0;
 };
-const __nuxt_component_0 = Object.assign(_sfc_main$7, { __name: "AppWelcome" });
+const __nuxt_component_0 = Object.assign(_sfc_main$8, { __name: "AppWelcome" });
 const theme = {
   "slots": {
     "root": "rounded-lg overflow-hidden",
@@ -213,7 +213,7 @@ const theme = {
     "variant": "outline"
   }
 };
-const _sfc_main$6 = {
+const _sfc_main$7 = {
   __name: "UCard",
   __ssrInlineRender: true,
   props: {
@@ -285,12 +285,49 @@ const _sfc_main$6 = {
     };
   }
 };
+const _sfc_setup$7 = _sfc_main$7.setup;
+_sfc_main$7.setup = (props, ctx) => {
+  const ssrContext = useSSRContext();
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../node_modules/@nuxt/ui/dist/runtime/components/Card.vue");
+  return _sfc_setup$7 ? _sfc_setup$7(props, ctx) : void 0;
+};
+const _sfc_main$6 = /* @__PURE__ */ defineComponent({
+  __name: "Icon",
+  __ssrInlineRender: true,
+  props: {
+    iconName: {
+      type: String,
+      default: "",
+      required: false
+    },
+    styles: {
+      type: String,
+      default: ""
+    },
+    size: {
+      type: String,
+      default: "24"
+    }
+  },
+  setup(__props) {
+    const props = __props;
+    return (_ctx, _push, _parent, _attrs) => {
+      const _component_Icon = __nuxt_component_0$1$1;
+      _push(ssrRenderComponent(_component_Icon, mergeProps({
+        class: props.styles,
+        name: props.iconName,
+        size: props.size
+      }, _attrs), null, _parent));
+    };
+  }
+});
 const _sfc_setup$6 = _sfc_main$6.setup;
 _sfc_main$6.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
-  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("../node_modules/@nuxt/ui/dist/runtime/components/Card.vue");
+  (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("components/base/Icon.vue");
   return _sfc_setup$6 ? _sfc_setup$6(props, ctx) : void 0;
 };
+const __nuxt_component_1 = Object.assign(_sfc_main$6, { __name: "BaseIcon" });
 const _sfc_main$5 = /* @__PURE__ */ defineComponent({
   __name: "Card",
   __ssrInlineRender: true,
@@ -311,8 +348,8 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent({
   setup(__props) {
     const props = __props;
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_UCard = _sfc_main$6;
-      const _component_baseIcon = __nuxt_component_0$2;
+      const _component_UCard = _sfc_main$7;
+      const _component_baseIcon = __nuxt_component_1;
       _push(ssrRenderComponent(_component_UCard, mergeProps({
         variant: "subtle",
         class: `w-[300px] divide-none ${props.color && props.color}`
@@ -1016,9 +1053,9 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
     const { data: stats, pending: pending_stats } = ([__temp, __restore] = withAsyncContext(() => useFetch("/api/stats", { lazy: true }, "$54DM7eVV6x")), __temp = await __temp, __restore(), __temp);
     return (_ctx, _push, _parent, _attrs) => {
       const _component_appWelcome = __nuxt_component_0;
-      const _component_baseHeader = __nuxt_component_0$1$1;
+      const _component_baseHeader = __nuxt_component_0$2;
       const _component_appCard = __nuxt_component_2;
-      const _component_UContainer = _sfc_main$9;
+      const _component_UContainer = _sfc_main$a;
       const _component_baseSectionHeader = __nuxt_component_4;
       const _component_appChartBarGroup = __nuxt_component_5;
       const _component_appChartBar = __nuxt_component_6;
@@ -1206,4 +1243,4 @@ _sfc_main.setup = (props, ctx) => {
 };
 
 export { _sfc_main as default };
-//# sourceMappingURL=index-DXrvMpGe.mjs.map
+//# sourceMappingURL=index-Diq1cv-s.mjs.map
