@@ -21,7 +21,7 @@ export async function bookSearch({ book_title, book_author }: any) {
         const useOpenLibraryAllTitles = await openLibraryAllTitle.json();
 
         // Filtering all titles api and finding the author name within
-        const filterTitles = useOpenLibraryAllTitles.docs.filter((item: any) => item.author_name.includes(useAuthor));
+        const filterTitles = useOpenLibraryAllTitles.docs.filter((item: any) => item?.author_name?.includes(useAuthor) ?? '');
 
         // Image URL used for the books
         // https://covers.openlibrary.org/a/id/8441376.jpg

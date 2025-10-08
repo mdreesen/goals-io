@@ -4,6 +4,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { DropletIcon, DropletOff, Trash } from 'lucide-react'; // Icons for workouts, status
 import { formatSecondsToHHMMSS } from '@/lib/formatters';
 import ButtonDeleteColdSoak from '@/components/buttons/ButtonDeleteColdSoak';
+import { itemVariants } from "@/lib/variants";
+
 // shadcn/ui components
 import { Card, CardContent, CardDescription, CardTitle } from '@/components/ui/card';
 
@@ -13,12 +15,6 @@ const cn = (...inputs: (string | boolean)[]) => {
 };
 
 export default function ColdSoakList({ list }: any) {
-    // Animation variants for individual list items
-    const itemVariants = {
-        hidden: { opacity: 0, y: 20, scale: 0.98 },
-        visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.5, ease: "easeOut" } },
-        exit: { opacity: 0, x: -100, transition: { duration: 0.3, ease: "easeIn" } },
-    };
 
     return (
         <motion.div

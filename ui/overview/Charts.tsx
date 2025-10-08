@@ -13,6 +13,8 @@ import {
     Bar,
     Legend,
 } from 'recharts';
+import { sectionVariants, cardVariants } from "@/lib/variants";
+
 
 // shadcn/ui components
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'; // Assuming you have shadcn's Card
@@ -37,22 +39,6 @@ const streakHistoryData = [
 ];
 
 export default function Charts() {
-
-      // Animation variants for sections
-  const sectionVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.7, ease: "easeOut" }
-    },
-  };
-
-  // Animation variants for individual cards/items
-  const cardVariants = {
-    hidden: { opacity: 0, scale: 0.9 },
-    visible: { opacity: 1, scale: 1, transition: { duration: 0.5, ease: "easeOut" } },
-  };
 
     return (
         <motion.section

@@ -2,6 +2,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Scale, Target, TrendingUp, ArrowDown, Star } from 'lucide-react';
+import { cardVariants } from "@/lib/variants";
 
 // shadcn/ui components
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -13,11 +14,6 @@ const cn = (...inputs: string[]) => {
 };
 
 export default function WeightNotables({ notables }: any) {
-    // Animation variants for individual notable cards
-    const cardVariants = {
-        hidden: { opacity: 0, scale: 0.9 },
-        visible: { opacity: 1, scale: 1, transition: { duration: 0.5, ease: "easeOut" } },
-    };
 
     const weightToDate = notables.dataToDate?.weight && (
         <motion.div

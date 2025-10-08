@@ -5,33 +5,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react'; // Using Lucide React for icons
 import { current_year } from '@/lib/date_time';
 import Link from 'next/link';
+import { staggerContainerVariants, menuVariants, navItemVariants } from "@/lib/variants";
+
 
 export default function NavigationPhone({ settings }: any) {
     const [isOpen, setIsOpen] = useState(false);
-
-    // Animation variants for the menu overlay
-    const menuVariants = {
-        hidden: { opacity: 0, x: "100%" },
-        visible: { opacity: 1, x: "0%", transition: { duration: 0.5, ease: "easeInOut" } },
-        exit: { opacity: 0, x: "100%", transition: { duration: 0.4, ease: "easeInOut" } },
-    };
-
-    // Animation variants for individual menu items (staggered)
-    const itemVariants = {
-        hidden: { opacity: 0, y: 20 },
-        visible: { opacity: 1, y: 0 },
-    };
-
-    const staggerContainerVariants = {
-        hidden: { opacity: 0 },
-        visible: {
-            opacity: 1,
-            transition: {
-                staggerChildren: 0.1, // Stagger delay for children
-                delayChildren: 0.3, // Delay before children start animating
-            },
-        },
-    };
 
     const navItems = [
         { name: 'Main', href: '/dashboard', showNav: true },
@@ -110,7 +88,7 @@ export default function NavigationPhone({ settings }: any) {
                             className="flex flex-col items-center space-y-6"
                         >
                             {navItems.map((item) => item?.showNav && (
-                                <motion.li key={item.name} variants={itemVariants}>
+                                <motion.li key={item.name} variants={navItemVariants}>
                                     <a
                                         href={item.href}
                                         onClick={() => setIsOpen(false)} // Close menu on item click

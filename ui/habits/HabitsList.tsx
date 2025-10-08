@@ -3,6 +3,7 @@ import React from 'react';
 import Link from "next/link";
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronRight, PersonStanding, Grab, Soup, Cross } from 'lucide-react'; // Icons for habits, status, frequency
+import { itemVariants } from "@/lib/variants";
 
 // shadcn/ui components
 import { Button } from '@/components/ui/button';
@@ -14,13 +15,6 @@ const cn = (...inputs: (string | boolean)[]) => {
 };
 
 export default function HabitsList({ habits }: any) {
-
-    // Animation variants for individual list items
-    const itemVariants = {
-        hidden: { opacity: 0, y: 20, scale: 0.98 },
-        visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.5, ease: "easeOut" } },
-        exit: { opacity: 0, x: -100, transition: { duration: 0.3, ease: "easeIn" } },
-    };
 
     return (
         <motion.div

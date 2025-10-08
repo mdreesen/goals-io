@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { CartesianGrid, Line, LineChart, XAxis } from "recharts"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart"
+import { cardVariants, sectionVariants } from "@/lib/variants";
 
 const chartConfig = {
   water_intake: {
@@ -15,22 +16,6 @@ const chartConfig = {
 
 export const UseWaterPerDayChart = ({ data }: any) => {
 
-  // Animation variants for sections
-  const sectionVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.7, ease: "easeOut" }
-    },
-  };
-
-  // Animation variants for individual cards/items
-  const cardVariants = {
-    hidden: { opacity: 0, scale: 0.9 },
-    visible: { opacity: 1, scale: 1, transition: { duration: 0.5, ease: "easeOut" } },
-  };
-
   return (
     <motion.section
       initial="hidden"
@@ -38,7 +23,7 @@ export const UseWaterPerDayChart = ({ data }: any) => {
       viewport={{ once: true, amount: 0.3 }}
       variants={sectionVariants}
     >
-      <motion.div variants={cardVariants}>
+      <motion.div transition={cardVariants}>
 
         <Card className="bg-gray-800 backdrop-blur-lg border border-gray-700 text-white">
           <CardHeader>

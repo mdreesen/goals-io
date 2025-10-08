@@ -9,6 +9,7 @@ import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import LoadingScale from "@/components/loaders/LoadingScale";
+import { sectionVariants, cardVariants } from "@/lib/variants";
 
 const chartConfig = {
   coldSoaks: {
@@ -23,22 +24,6 @@ export const UseColdSoakPerMonthChart = ({ data }: any) => {
   const [year, setYear] = useState([]) as any; // State for chart data
   const [selectedYear, setSelectedYear] = useState(data?.years[0]);
   const [loading, setLoading] = useState(false);
-
-  // Animation variants for sections
-  const sectionVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.7, ease: "easeOut" }
-    },
-  };
-
-  // Animation variants for individual cards/items
-  const cardVariants = {
-    hidden: { opacity: 0, scale: 0.9 },
-    visible: { opacity: 1, scale: 1, transition: { duration: 0.5, ease: "easeOut" } },
-  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -72,9 +57,9 @@ export const UseColdSoakPerMonthChart = ({ data }: any) => {
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.3 }}
-      variants={sectionVariants}
+      transition={sectionVariants}
     >
-      <motion.div variants={cardVariants}>
+      <motion.div transition={cardVariants}>
 
         <Card className="bg-gray-800 backdrop-blur-lg border border-gray-700 text-white">
           <CardHeader>

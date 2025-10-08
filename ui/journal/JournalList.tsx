@@ -2,6 +2,7 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Feather, Smile, CloudDrizzle, Sun, Heart, Frown, Angry, ChevronRight } from 'lucide-react'; // Icons for journal entries, moods
+import { itemVariants } from "@/lib/variants";
 
 // shadcn/ui components
 import { Button } from '@/components/ui/button';
@@ -40,16 +41,6 @@ const getMoodIcon = (mood: string) => {
 };
 
 export default function JournalList({ list }: any) {
-    // Animation variants for individual list items
-    const itemVariants = {
-        hidden: { opacity: 0, y: 20, scale: 0.98 },
-        visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.5, ease: "easeOut" } },
-        exit: { opacity: 0, x: -100, transition: { duration: 0.3, ease: "easeIn" } },
-    };
-
-    function formatDateTime(date: any): React.ReactNode {
-        throw new Error('Function not implemented.');
-    }
 
     return (
         <motion.div
