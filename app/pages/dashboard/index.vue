@@ -10,7 +10,8 @@ const { data: weight, pending: pending_weight } = await useFetch('/api/charts/we
 const { data: workouts, pending: pending_workouts } = await useFetch('/api/charts/workouts', { lazy: true });
 
 const { data: stats, pending: pending_stats } = await useFetch('/api/stats', { lazy: true });
-// console.log(stats.value)
+console.log(stats)
+
 </script>
 
 <template>
@@ -23,15 +24,15 @@ const { data: stats, pending: pending_stats } = await useFetch('/api/stats', { l
 
             <div class="container-cards">
                 <appCard text="Books" color="bg-gradient-to-br from-green-600 to-green-700"
-                    icon="material-symbols:book-ribbon-outline-rounded" />
+                    icon="material-symbols:book-ribbon-outline-rounded" collection="books" :data="stats" />
                 <appCard text="Cold Soak" color="bg-gradient-to-br from-blue-300 to-blue-500"
-                    icon="material-symbols:snowing-heavy" />
+                    icon="material-symbols:snowing-heavy" collection="coldSoak" :data="stats" />
                 <appCard text="Fasting" color="bg-gradient-to-br from-yellow-600 to-yellow-700"
-                    icon="material-symbols:nest-clock-farsight-analog-outline-rounded" />
+                    icon="material-symbols:nest-clock-farsight-analog-outline-rounded" collection="fasting" :data="stats" />
                 <appCard text="Daily Water" color="bg-gradient-to-br from-blue-600 to-blue-700"
-                    icon="material-symbols:water-medium-outline-rounded" />
+                    icon="material-symbols:water-medium-outline-rounded" :data="stats" />
                 <appCard text="Weight" color="bg-gradient-to-br from-purple-600 to-purple-700"
-                    icon="material-symbols:monitor-weight-outline" />
+                    icon="material-symbols:monitor-weight-outline" :data="stats" />
             </div>
         </section>
 

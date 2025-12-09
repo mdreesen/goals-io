@@ -16,8 +16,10 @@ export default defineEventHandler(async (event) => {
     const weight = user?.weight ?? [];
 
     // Books started and books ended current year
-    const bookCurrentStartedYear = books.filter((item: BookType) => item.book_start_date?.includes(year)).length;
-    const bookCurrentEndedYear = books.filter((item: BookType) => item?.book_end_date?.includes(year)).length;
+    const latestBooks = {
+      bookCurrentStartedYear: books.filter((item: BookType) => item.book_start_date?.includes(year)).length,
+      bookCurrentEndedYear: books.filter((item: BookType) => item?.book_end_date?.includes(year)).length
+    }
 
     // Latest Cold Soak data
     const latestColdSoak = coldSoaks.reverse()[0];
@@ -32,8 +34,7 @@ export default defineEventHandler(async (event) => {
     const latestWeight = weight.reverse()[0];
 
     return {
-        bookCurrentStartedYear: bookCurrentStartedYear,
-        bookCurrentEndedYear: bookCurrentEndedYear,
+        lastestBooks: latestBooks,
         latestColdSoak: latestColdSoak,
         latestFasting: latestFasting,
         latestWater: latestWater,

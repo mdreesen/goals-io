@@ -21,9 +21,7 @@ export default defineEventHandler(async (event) => {
     const user = await User.findOne({ email });
     const passwordMatches = bcrypt.compare(password, user?.password ?? '');
 
-    if (!password) throw createError({ statusCode: 401, statusMessage: 'Please insert password.' });
-    if (!passwordMatches) throw createError({ statusCode: 401, statusMessage: 'Wrong credentials' });
-    else {
+    if (await passwordMatches) {
       // set the user session in the cookie
       // this server util is auto-imported by the auth-utils module
       await setUserSession(event, {
@@ -42,6 +40,10 @@ export default defineEventHandler(async (event) => {
           postal_code: user?.postal_code || '',
         }
       });
+    }
+
+    else {
+      throw createError({ statusCode: 401, statusMessage: 'Wrong credentials' });
     }
 
   } catch (error) {

@@ -6,6 +6,7 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   css: ["~/assets/css/main.css"],
   modules: [
+    '@logto/nuxt',
     'nuxt-auth-utils',
     '@vueuse/motion/nuxt',
     '@nuxt/image',
@@ -105,8 +106,23 @@ export default defineNuxtConfig({
       type: 'module'
     }
   },
+
+  logto: {
+    pathnames: {
+      signIn: '/login',
+      signOut: '/logout',
+      callback: '/auth/callback',
+    },
+  },
+  
   // @vueuse/motion/nuxt
   runtimeConfig: {
+    logto: {
+      endpoint: process.env.PROJECT_DOMAIN,
+      appId: '<your-logto-app-id>',
+      appSecret: process.env.NEXTAUTH_SECRET,
+      cookieEncryptionKey: '<a-random-string>',
+    },
     public: {
       motion: {
         directives: {
