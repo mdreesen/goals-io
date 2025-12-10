@@ -1,71 +1,38 @@
 <script setup lang="ts">
-import { ref, computed, nextTick } from 'vue';
-import { ChevronUp, ChevronDown, ArrowRight, X, TrendingDown, TrendingUp, Minus } from 'lucide-vue-next';
+import { ref, computed } from 'vue';
 
 const { data: data, pending: pending_data } = await useFetch('/api/user/weight/weight', { lazy: true });
-console.log(data.value?.data?.weight)
 
-const props = defineProps({
-  initialWeight: {
-    type: Number,
-    default: 185
-  },
-  targetWeight: {
-    type: Number,
-    default: 0
-  }
+const isLoading = ref(false);
+let errorMessage = ref('');
+
+const currentWeight = computed(() => data.value?.data?.weight);
+
+const { fetch: refreshSession } = useUserSession()
+
+
+const input = reactive({
+  weight: '',
 });
 
-// --- State ---
-// We initialize "today's" weight with "yesterday's" for quick micro-adjustments
-const currentWeight = ref(props.initialWeight);
-const isCustomInput = ref(false);
-const inputRef = ref<HTMLInputElement | null>(null);
-const hasSaved = ref(false);
+async function log() {
+  isLoading.value = true;
+  $fetch('/api/user/weight/weight', {
+    method: 'POST',
+    body: input
+  })
+    .then(async () => {
+      await refreshSession();
 
-// --- Computed ---
-// Calculate the difference between now and previous
-const delta = computed(() => {
-  const diff = currentWeight.value - props.initialWeight;
-  return Number(diff.toFixed(1)); // Keep it to 1 decimal
-});
-
-const isGain = computed(() => delta.value > 0);
-const isLoss = computed(() => delta.value < 0);
-const isStable = computed(() => delta.value === 0);
-
-// Color coding based on movement towards target
-// Assuming weight loss is the goal for this logic (can be flipped)
-const trendColor = computed(() => {
-  if (isStable.value) return 'text-neutral-500 bg-neutral-800';
-
-  // If target is lower than current, loss is "good" (Emerald), gain is "bad" (Rose)
-  // Simplified for Ascend: Green = Loss, Red = Gain
-  return isLoss.value
-    ? 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20'
-    : 'text-rose-400 bg-rose-500/10 border-rose-500/20';
-});
-
-// --- Actions ---
-const adjust = (amount: number) => {
-  const newVal = currentWeight.value + amount;
-  currentWeight.value = Number(newVal.toFixed(1));
-  hasSaved.value = false;
+      isLoading.value = false;
+    })
+    .catch(async (error) => {
+      console.log(error);
+      errorMessage.value = error.statusMessage;
+      isLoading.value = false;
+    });
 };
 
-const toggleInput = async () => {
-  isCustomInput.value = !isCustomInput.value;
-  if (isCustomInput.value) {
-    await nextTick();
-    inputRef.value?.focus();
-  }
-};
-
-const saveEntry = () => {
-  hasSaved.value = true;
-  // In a real app, emit('save', currentWeight.value) here
-  setTimeout(() => { hasSaved.value = false }, 2000); // Reset feedback
-};
 </script>
 
 <template>
@@ -73,81 +40,38 @@ const saveEntry = () => {
 
     <div class="relative w-full flex flex-col items-center justify-center mb-10 group">
 
-      <div v-if="!isStable && !isCustomInput"
-        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-8xl font-bold text-neutral-800/50 select-none blur-[1px] transition-all duration-500"
-        :class="isGain ? 'translate-y-[-60%]' : 'translate-y-[-40%]'">
-        {{ props.initialWeight }}
-      </div>
+      <div class="relative z-10 flex items-baseline gap-1 cursor-pointer">
 
-      <div class="relative z-10 flex items-baseline gap-1 cursor-pointer" @click="toggleInput">
-        <template v-if="!isCustomInput">
-          <span
-            class="text-7xl font-bold text-white tracking-tighter tabular-nums transition-all duration-200 hover:scale-105 hover:text-indigo-200">
-            {{ currentWeight.toFixed(1) }}
-          </span>
-          <span class="text-lg text-neutral-500 font-medium">lbs</span>
-        </template>
 
-        <div v-else class="relative w-48">
-          <input ref="inputRef" v-model="currentWeight" type="number" step="0.1"
-            class="w-full bg-transparent border-b-2 border-indigo-500 text-center text-6xl font-bold text-white focus:outline-none pb-2"
-            @blur="isCustomInput = false" @keydown.enter="isCustomInput = false" />
+        <div v-if="!pending_data" class="relative w-48">
+          <div
+            class="w-full flex gap-2 justify-center items-baseline bg-transparent text-center text-6xl font-bold text-white focus:outline-none pb-2">
+            <span>{{ currentWeight }}</span>
+            <span class="text-sm">lbs.</span>
+          </div>
         </div>
-      </div>
-
-      <div
-        class="mt-6 flex items-center gap-2 px-4 py-1.5 rounded-full border border-transparent transition-all duration-300"
-        :class="trendColor">
-        <TrendingDown v-if="isLoss" class="w-4 h-4" />
-        <TrendingUp v-else-if="isGain" class="w-4 h-4" />
-        <Minus v-else class="w-4 h-4" />
-
-        <span class="text-sm font-bold tabular-nums">
-          {{ isGain ? '+' : '' }}{{ delta }} lbs
-        </span>
       </div>
 
     </div>
 
-    <div class="w-full relative h-24">
+    <div class="w-full relative">
 
       <transition name="slide-up" mode="out-in">
 
-        <div v-if="!hasSaved" class="flex items-center justify-between px-4">
+        <form @submit.prevent="log" class="space-y-6">
+          <div v-motion="{ ...inputVarient() }">
+            <label for="text" class="block text-sm font-medium text-gray-300 mb-1">Log Weight</label>
+            <input id="text" type="text" v-model="input.weight" placeholder="Example: 180.5" required
+              class="w-full rounded-xl border border-gray-600 bg-gray-700/50 py-3 px-4 text-lg text-white shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500" />
+          </div>
 
-          <div class="flex flex-col gap-2">
-            <button @click="adjust(-0.1)"
-              class="w-14 h-14 rounded-2xl bg-neutral-800 border border-neutral-700 text-neutral-400 hover:text-white hover:bg-neutral-700 active:scale-95 transition-all flex items-center justify-center">
-              <ChevronDown class="w-6 h-6" />
+          <div v-motion="{ ...inputVarient() }">
+            <button type="submit" :disabled="isLoading"
+              :class="`${isLoading ? 'bg-gradient-to-r from-gray-500 to-gray-600' : 'bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900'} w-full rounded-xl py-3 text-lg font-semibold text-white shadow-lg transition-all duration-300 ease-in-out`">
+              {{ isLoading ? 'Saving...' : 'Save' }}
             </button>
-            <span class="text-[10px] text-center text-neutral-600">-0.1</span>
           </div>
-
-          <button @click="saveEntry"
-            class="w-20 h-20 rounded-full bg-indigo-600 shadow-[0_0_30px_rgba(79,70,229,0.3)] hover:bg-indigo-500 hover:shadow-[0_0_40px_rgba(79,70,229,0.5)] active:scale-90 transition-all duration-300 flex items-center justify-center group">
-            <ArrowRight class="w-8 h-8 text-white group-hover:translate-x-1 transition-transform" />
-          </button>
-
-          <div class="flex flex-col gap-2">
-            <button @click="adjust(0.1)"
-              class="w-14 h-14 rounded-2xl bg-neutral-800 border border-neutral-700 text-neutral-400 hover:text-white hover:bg-neutral-700 active:scale-95 transition-all flex items-center justify-center">
-              <ChevronUp class="w-6 h-6" />
-            </button>
-            <span class="text-[10px] text-center text-neutral-600">+0.1</span>
-          </div>
-
-        </div>
-
-        <div v-else class="flex flex-col items-center justify-center w-full h-full">
-          <div class="text-indigo-400 font-medium text-sm tracking-wide animate-pulse">
-            LOGGED FOR TODAY
-          </div>
-          <button @click="hasSaved = false"
-            class="text-neutral-600 text-xs mt-2 hover:text-white underline decoration-neutral-700 underline-offset-4">
-            Undo
-          </button>
-        </div>
-
+        </form>
       </transition>
     </div>
 
