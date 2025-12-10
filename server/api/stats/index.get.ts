@@ -19,7 +19,7 @@ export default defineEventHandler(async (event) => {
     const latestBooks = {
       bookCurrentStartedYear: books.filter((item: BookType) => item.book_start_date?.includes(year)).length,
       bookCurrentEndedYear: books.filter((item: BookType) => item?.book_end_date?.includes(year)).length
-    }
+    };
 
     // Latest Cold Soak data
     const latestColdSoak = coldSoaks.reverse()[0];
@@ -35,10 +35,10 @@ export default defineEventHandler(async (event) => {
 
     return {
         lastestBooks: latestBooks,
-        latestColdSoak: latestColdSoak,
-        latestFasting: latestFasting,
-        latestWater: latestWater,
-        latestWeight: latestWeight
+        latestColdSoak: latestColdSoak as any,
+        latestFasting: latestFasting as any,
+        latestWater: latestWater as any,
+        latestWeight: latestWeight as any
     }
 
   } catch (error) {

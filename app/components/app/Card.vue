@@ -18,7 +18,7 @@ const props = defineProps({
     default: '',
   },
   data: {
-    default: () => { }
+    required: true,
   }
 })
 
@@ -33,6 +33,16 @@ const coldSoak = {
 
 const fasting = {
   duration: props.data?.latestFasting?.duration
+};
+
+const dailyWater = {
+  water: props.data?.latestWater?.water_intake,
+  date: props.data?.latestWater?.date,
+};
+
+const weight = {
+  weight: props.data?.latestWeight?.weight,
+  date: props.data?.latestWeight?.weight_date,
 }
 
 </script>
@@ -67,9 +77,19 @@ const fasting = {
       </div>
     </div>
 
-    <template #footer>
-      <!-- <Placeholder class="h-8" /> -->
-      <span>FOOTER</span>
-    </template>
+    <div v-if="collection === 'dailyWater'">
+      <div class="flex flex-col justify-center items-center">
+        <span>{{ dailyWater?.water }} oz.</span>
+      </div>
+    </div>
+
+    <div v-if="collection === 'weight'">
+      <div class="flex flex-col justify-center items-center">
+        <span>{{ weight?.weight }} lbs</span>
+        <span>{{ weight?.date }}</span>
+      </div>
+    </div>
+
+    <template #footer></template>
   </UCard>
 </template>

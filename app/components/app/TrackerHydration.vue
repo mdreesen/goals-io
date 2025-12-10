@@ -1,233 +1,226 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue';
-import { useMotion } from '@vueuse/motion';
-
-// --- Constants ---
-const GOAL_OZ = 100; // Daily hydration goal in ounces
-const ML_PER_OZ = 29.57; // Conversion factor: 1 US fluid ounce = 29.57 ml
-const GOAL_ML = GOAL_OZ * ML_PER_OZ; // Goal in milliliters (for internal math/DB logging)
-
-// --- State ---
-const currentIntakeML = ref(0); // Current water intake, stored internally in ML
-const manualAmountOz = ref(8); // Amount of water to add, defaulting to 8 oz
-const isSaving = ref(false);
-const saveMessage = ref<string | null>(null);
-
-// --- Computed Values ---
-
-// Converts internal ML count back to ounces for display
-const currentIntakeOz = computed(() => {
-  return (currentIntakeML.value / ML_PER_OZ).toFixed(0);
-});
-
-// Calculates progress percentage for the bar
-const progressPercent = computed(() => {
-  const percentage = (currentIntakeML.value / GOAL_ML) * 100;
-  return Math.min(percentage, 100); // Cap at 100%
-});
-
-// Determines the color accent based on progress
-const progressAccentClass = computed(() => {
-  if (progressPercent.value < 50) return 'from-teal-600 to-teal-700';
-  if (progressPercent.value < 90) return 'from-blue-500 to-indigo-600';
-  return 'from-green-500 to-teal-500'; // Goal nearly reached or surpassed
-});
-
-// --- Actions ---
-
-// Adds the user-specified amount (in oz) to the total intake
-const addWater = () => {
-  if (manualAmountOz.value <= 0) return;
-
-  // Convert OZ input to ML
-  const mlToAdd = manualAmountOz.value * ML_PER_OZ;
-
-  // Update internal state
-  currentIntakeML.value += mlToAdd;
-
-  // Optional: Reset input amount after adding
-  // manualAmountOz.value = 8;
-};
-
-// Logs the final daily intake and resets the tracker
-const logDailyIntake = async () => {
-  if (currentIntakeML.value === 0) {
-    saveMessage.value = 'Intake is zero. Log some water before saving!';
-    setTimeout(() => saveMessage.value = null, 4000);
-    return;
+  import { ref, computed, nextTick } from 'vue';
+  import { Plus, Minus, Check, Keyboard, X, ArrowRight } from 'lucide-vue-next';
+  
+  // --- Props ---
+  interface Props {
+    goal?: number; // Daily goal in oz
   }
-
-  isSaving.value = true;
-  saveMessage.value = `Logging daily intake...`;
-
-  const payload = {
-    intakeML: currentIntakeML.value,
-    goalML: GOAL_ML,
-    intakeOz: Number(currentIntakeOz.value),
-    goalOz: GOAL_OZ,
-    loggedAt: new Date().toISOString(),
+  const props = withDefaults(defineProps<Props>(), {
+    goal: 100,
+  });
+  
+  // --- State ---
+  const currentOz = ref(0);
+  const showCustomInput = ref(false);
+  const customAmount = ref<number | null>(null);
+  const inputRef = ref<HTMLInputElement | null>(null);
+  
+  // --- Computed ---
+  const percentage = computed(() => {
+    return Math.min((currentOz.value / props.goal) * 100, 100);
+  });
+  
+  // Calculate wave position (inverted for CSS 'top')
+  const wavePosition = computed(() => 100 - percentage.value);
+  const isComplete = computed(() => percentage.value >= 100);
+  
+  // --- Actions ---
+  const adjustWater = (amount: number) => {
+    const newVal = currentOz.value + amount;
+    currentOz.value = Math.max(0, Math.min(newVal, props.goal + 50)); 
   };
-
-  try {
-    // ----------------------------------------------------------------------
-    // NOTE: This simulates the call to your MongoDB backend via a Nuxt Server API route.
-    // Replace with actual $fetch call to your /api/log-hydration endpoint.
-    // ----------------------------------------------------------------------
-
-    // Simulate successful API call delay
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    console.log('Simulating successful save to MongoDB with payload:', payload);
-
-    saveMessage.value = `Daily intake of ${currentIntakeOz.value} oz logged successfully! Tracker reset.`;
-    currentIntakeML.value = 0; // Reset intake after successful log
-
-  } catch (error) {
-    console.error('Failed to log intake:', error);
-    saveMessage.value = 'Error saving data. Please try again.';
-  } finally {
-    isSaving.value = false;
-    setTimeout(() => saveMessage.value = null, 4000);
-  }
-};
-
-// Resets the tracker without logging
-const resetTracker = () => {
-  if (!isSaving.value) {
-    currentIntakeML.value = 0;
-    saveMessage.value = 'Tracker reset to 0 oz.';
-    setTimeout(() => saveMessage.value = null, 3000);
-  }
-};
-
-
-// --- Motion setup for fade-in effect ---
-const trackerRef = ref();
-useMotion(trackerRef, {
-  initial: { opacity: 0, y: 50 },
-  enter: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      type: 'spring',
-      stiffness: 200,
-      damping: 20,
-      staggerChildren: 0.1,
-      delayChildren: 0.1,
-    },
-  },
-});
-</script>
-
-<template>
-  <!-- MODERN SIMPLISTIC DESIGN: Deep Dark Background & Clean Contrast -->
-  <div ref="trackerRef" class="min-h-screen p-4 sm:p-8 text-white flex flex-col items-center justify-center font-sans">
-    <!-- Main Tracker Card (Minimalist & Elevated) -->
-    <div class="w-full max-w-lg rounded-2xl bg-gray-900 p-7 sm:p-10 shadow-xl shadow-gray-900/60 space-y-8 
-             transition-all duration-500 border border-gray-800">
-
-      <!-- Header -->
-      <header class="text-center"
-        v-motion="{ initial: { opacity: 0, y: -20 }, enter: { opacity: 1, y: 0, transition: { delay: 0.1 } } }">
-        <h1
-          class="text-4xl font-extrabold flex items-center justify-center bg-clip-text text-transparent bg-gradient-to-r from-teal-400 to-indigo-500">
-          <!-- Water Droplet Icon -->
-          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-            class="w-8 h-8 mr-3 text-teal-400">
-            <path
-              d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 15a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
-          </svg>
-          Ascend Hydration Tracker
-        </h1>
-        <p class="mt-2 text-base text-gray-400">Achieve your daily $\text{100 oz}$ goal for optimal performance.</p>
-      </header>
-
-      <!-- API Message Area -->
-      <div v-if="saveMessage" class="text-center p-3 rounded-xl font-medium transition-all duration-300" :class="{
-        'bg-green-600/30 text-green-400 border border-green-600': saveMessage.includes('successfully') || saveMessage.includes('reset'),
-        'bg-red-600/30 text-red-400 border border-red-600': saveMessage.includes('Error') || saveMessage.includes('Intake is zero'),
-        'bg-indigo-600/30 text-indigo-400 border border-indigo-600': saveMessage.includes('Logging')
-      }" v-motion="{ initial: { opacity: 0, scale: 0.9 }, enter: { opacity: 1, scale: 1 } }">
-        {{ saveMessage }}
-      </div>
-
-      <!-- Current Intake Display -->
-      <div class="text-center"
-        v-motion="{ initial: { opacity: 0, scale: 0.9 }, enter: { opacity: 1, scale: 1, transition: { delay: 0.2 } } }">
-        <p class="text-xl font-medium text-gray-400">Current Intake</p>
-        <p class="text-7xl font-extrabold text-white mt-1 transition-colors duration-500"
-          :class="{ 'text-green-400': progressPercent >= 100 }">
-          {{ currentIntakeOz }}
-          <span class="text-3xl font-semibold text-gray-500">oz</span>
-        </p>
-        <p class="text-sm font-medium text-gray-500 mt-1">Goal: {{ GOAL_OZ }} oz</p>
-      </div>
-
-      <!-- Progress Bar -->
-      <div class="w-full h-3 rounded-full bg-gray-700 overflow-hidden shadow-inner shadow-black/30"
-        v-motion="{ initial: { opacity: 0, x: -50 }, enter: { opacity: 1, x: 0, transition: { delay: 0.3 } } }">
-        <div class="h-full rounded-full transition-all duration-1000 ease-out"
-          :class="['bg-gradient-to-r', progressAccentClass]" :style="{ width: progressPercent + '%' }"></div>
-      </div>
-
-      <!-- Add Water Form -->
-      <form @submit.prevent="addWater" class="flex space-x-4 pt-4 border-t border-gray-800/50"
-        v-motion="{ initial: { opacity: 0, y: 20 }, enter: { opacity: 1, y: 0, transition: { delay: 0.4 } } }">
-        <!-- Amount Input (Ounces Only) -->
-        <div class="relative flex-grow">
-          <input type="number" v-model.number="manualAmountOz" min="1" placeholder="8" required
-            class="w-full rounded-xl border border-gray-700 bg-gray-800 py-3 pl-4 pr-12 text-base text-white placeholder-gray-500 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-teal-500 shadow-inner shadow-black/20"
-            :disabled="isSaving" />
-          <span class="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-gray-500 font-bold">oz</span>
+  
+  // Switch to Custom Input Mode
+  const toggleCustom = async () => {
+    showCustomInput.value = !showCustomInput.value;
+    if (showCustomInput.value) {
+      // Wait for DOM update then focus input
+      await nextTick();
+      inputRef.value?.focus();
+    } else {
+      customAmount.value = null;
+    }
+  };
+  
+  // Submit Custom Amount
+  const submitCustom = () => {
+    if (customAmount.value && customAmount.value > 0) {
+      adjustWater(customAmount.value);
+      showCustomInput.value = false;
+      customAmount.value = null;
+    }
+  };
+  </script>
+  
+  <template>
+    <div class="flex flex-col items-center justify-center w-full max-w-sm mx-auto p-8">
+  
+      <div 
+        class="relative w-64 h-64 group cursor-pointer select-none" 
+        @click="!showCustomInput && adjustWater(8)"
+      >
+        
+        <div 
+          class="absolute inset-0 rounded-full border border-neutral-800 transition-colors duration-500"
+          :class="{ 'border-emerald-500/30 shadow-[0_0_40px_rgba(16,185,129,0.2)]': isComplete }"
+        />
+  
+        <div class="absolute inset-2 rounded-full overflow-hidden bg-neutral-900 border-4 border-neutral-900 shadow-inner isolation-isolate transform transition-transform active:scale-95 duration-200">
+          
+          <div class="absolute inset-0 flex flex-col items-center justify-center z-10 mix-blend-difference pointer-events-none">
+             <span class="text-6xl font-bold text-white tabular-nums tracking-tighter">
+               {{ Math.round(currentOz) }}
+             </span>
+             <span class="text-sm font-medium text-neutral-400 mt-1">
+               / {{ props.goal }} oz
+             </span>
+          </div>
+  
+          <div 
+            class="absolute left-0 w-full h-full transition-all duration-1000 ease-[cubic-bezier(0.4,0,0.2,1)]"
+            :style="{ top: `${wavePosition}%` }"
+          >
+            <div class="wave absolute left-1/2 -top-[160%] w-[200%] h-[200%] -ml-[100%] rounded-[40%] bg-white opacity-10 animate-spin-slow" />
+            <div class="wave absolute left-1/2 -top-[165%] w-[200%] h-[200%] -ml-[100%] rounded-[45%] bg-blue-500 animate-spin-medium" />
+          </div>
+  
+          <transition name="fade">
+            <div v-if="isComplete" class="absolute inset-0 z-20 flex items-center justify-center bg-emerald-500/20 backdrop-blur-[2px]">
+              <div class="bg-emerald-500 text-black p-3 rounded-full shadow-lg animate-pop">
+                <Check class="w-8 h-8 stroke-[3]" />
+              </div>
+            </div>
+          </transition>
+  
         </div>
-
-        <!-- Add Button -->
-        <button type="submit" :disabled="isSaving || manualAmountOz <= 0"
-          class="px-5 py-3 rounded-xl bg-gradient-to-r from-teal-600 to-indigo-700 font-bold text-white transition duration-300 transform active:scale-[0.98] shadow-lg shadow-teal-700/30 
-                 hover:from-teal-500 hover:to-indigo-600 focus:outline-none focus:ring-4 focus:ring-teal-500/50 disabled:opacity-50 disabled:cursor-not-allowed">
-          <span class="flex items-center justify-center">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5">
-              <path d="M5 12h14" />
-              <path d="M12 5v14" />
-            </svg>
-          </span>
-        </button>
-      </form>
-
-      <!-- Action Buttons (Log and Reset) -->
-      <div class="flex justify-between space-x-4 pt-4"
-        v-motion="{ initial: { opacity: 0, y: 20 }, enter: { opacity: 1, y: 0, transition: { delay: 0.5 } } }">
-        <!-- Log Button -->
-        <button @click="logDailyIntake" :disabled="isSaving || currentIntakeML === 0"
-          class="flex-1 px-5 py-3 rounded-full bg-gradient-to-r from-indigo-600 to-blue-700 font-bold text-white transition duration-300 transform active:scale-[0.98] shadow-xl shadow-indigo-700/30 
-                 hover:from-indigo-500 hover:to-blue-600 focus:outline-none focus:ring-4 focus:ring-indigo-500/50 disabled:opacity-50 disabled:cursor-not-allowed">
-          <span class="flex items-center justify-center">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-              class="w-5 h-5 mr-2">
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-              <polyline points="17 8 12 3 7 8" />
-              <line x1="12" y1="3" x2="12" y2="15" />
-            </svg>
-            Log Daily Intake
-          </span>
-        </button>
-
-        <!-- Reset Button -->
-        <button @click="resetTracker" :disabled="isSaving || currentIntakeML === 0"
-          class="flex-shrink-0 px-5 py-3 rounded-full bg-gray-700 font-bold text-gray-300 transition duration-300 transform active:scale-[0.98] shadow-lg shadow-gray-700/20 
-                 hover:bg-gray-600 focus:outline-none focus:ring-4 focus:ring-gray-700/50 disabled:opacity-50 disabled:cursor-not-allowed">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5">
-            <path d="M3 2v6h6" />
-            <path d="M21 22v-6h-6" />
-            <path d="M21 8A10 10 0 0 0 4.5 4.5" />
-            <path d="M3 16a10 10 0 0 0 16.5 3.5" />
-          </svg>
-        </button>
       </div>
-
+  
+      <div class="mt-12 w-full h-20 relative">
+        
+        <Transition mode="out-in" name="slide-up">
+          
+          <div v-if="!showCustomInput" class="flex items-center justify-center gap-8 w-full absolute top-0 left-0">
+            
+            <button 
+              @click.stop="adjustWater(-8)"
+              class="w-12 h-12 rounded-full flex items-center justify-center border border-neutral-800 text-neutral-500 hover:text-white hover:border-neutral-600 transition-colors focus:outline-none"
+              aria-label="Remove water"
+            >
+              <Minus class="w-5 h-5" />
+            </button>
+  
+            <div class="flex flex-col items-center gap-2">
+              <button 
+                @click.stop="adjustWater(8)"
+                class="w-16 h-16 rounded-2xl bg-white text-black hover:bg-neutral-200 active:scale-90 transition-all duration-200 flex items-center justify-center shadow-[0_0_20px_rgba(255,255,255,0.1)]"
+              >
+                <Plus class="w-8 h-8" />
+              </button>
+              <span class="text-[10px] text-neutral-500 font-medium">+8oz</span>
+            </div>
+  
+            <button 
+              @click="toggleCustom"
+              class="w-12 h-12 rounded-full flex items-center justify-center border border-neutral-800 text-neutral-500 hover:text-blue-400 hover:border-blue-500/30 transition-colors focus:outline-none"
+              aria-label="Custom Amount"
+            >
+              <Keyboard class="w-5 h-5" />
+            </button>
+          </div>
+  
+          <div v-else class="flex items-center justify-center gap-4 w-full absolute top-0 left-0 px-4">
+            
+            <button 
+              @click="toggleCustom"
+              class="p-3 rounded-full text-neutral-500 hover:bg-neutral-800 hover:text-white transition-colors"
+            >
+              <X class="w-5 h-5" />
+            </button>
+  
+            <div class="flex-1 relative group">
+              <input 
+                ref="inputRef"
+                v-model="customAmount"
+                type="number" 
+                placeholder="0" 
+                @keydown.enter="submitCustom"
+                class="w-full bg-transparent border-b-2 border-neutral-700 text-center text-3xl font-bold text-white py-2 focus:outline-none focus:border-blue-500 transition-colors placeholder:text-neutral-700 appearance-none"
+              />
+              <span class="absolute right-2 bottom-3 text-neutral-500 text-sm font-medium">oz</span>
+            </div>
+  
+            <button 
+              @click="submitCustom"
+              :disabled="!customAmount"
+              class="p-3 rounded-full bg-blue-600 text-white disabled:opacity-50 disabled:cursor-not-allowed hover:bg-blue-500 transition-colors"
+            >
+              <ArrowRight class="w-5 h-5" />
+            </button>
+  
+          </div>
+        </Transition>
+  
+      </div>
     </div>
-  </div>
-</template>
+  </template>
+  
+  <style scoped>
+  /* Wave Animation Mechanics */
+  .animate-spin-slow { animation: spin 8s infinite linear; }
+  .animate-spin-medium { animation: spin 6s infinite linear; }
+  
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  
+  /* Slide Up Transition for Controls */
+  .slide-up-enter-active,
+  .slide-up-leave-active {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .slide-up-enter-from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  
+  .slide-up-leave-to {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  
+  .slide-up-enter-to,
+  .slide-up-leave-from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  /* Completion Pop Animation */
+  .animate-pop { animation: pop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+  
+  @keyframes pop {
+    0% { transform: scale(0); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  
+  /* Fade Transition */
+  .fade-enter-active, .fade-leave-active { transition: opacity 0.5s ease; }
+  .fade-enter-from, .fade-leave-to { opacity: 0; }
+  
+  .isolation-isolate { isolation: isolate; }
+  
+  /* Hide Input Number Arrows (Chrome, Safari, Edge, Opera) */
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  
+  /* Hide Input Number Arrows (Firefox) */
+  input[type=number] {
+    -moz-appearance: textfield;
+    appearance: auto;
+  }
+  </style>
