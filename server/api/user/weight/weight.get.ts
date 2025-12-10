@@ -1,9 +1,30 @@
+import loggedInUser from "~/utils/loggedInUser";
+
 export default defineEventHandler(async (event) => {
-    // make sure the user is logged in
-    // This will throw a 401 error if the request doesn't come from a valid user session
-    const { user } = await requireUserSession(event)
-  
-    // TODO: Fetch some stats based on the user
-  
-    return {}
-  });
+  try {
+    const user = await loggedInUser(event);
+
+    // Have to transform weight to Number...sad face
+    const formatArray = user?.weight && user?.weight.map((item) => {
+      const dailyWeight = (item as { weight: string }).weight ?? "";
+
+      return {
+        weight: Number(dailyWeight),
+        date: (item as { weight_date: string })?.weight_date,
+        starting_weight: (item as { starting_weight: string })?.starting_weight,
+        _id: (item as { _id: string })?._id
+      }
+    });
+
+    return {
+      data: formatArray?.reverse()[0],
+      goal_weight: Number(user?.goal_weight)
+    }
+  } catch (error) {
+    console.log(error);
+    throw createError({
+      statusCode: 500,
+      statusMessage: 'Something went wrong.'
+    });
+  };
+});

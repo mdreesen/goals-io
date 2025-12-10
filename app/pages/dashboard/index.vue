@@ -10,8 +10,6 @@ const { data: weight, pending: pending_weight } = await useFetch('/api/charts/we
 const { data: workouts, pending: pending_workouts } = await useFetch('/api/charts/workouts', { lazy: true });
 
 const { data: stats, pending: pending_stats } = await useFetch('/api/stats', { lazy: true });
-console.log(stats)
-
 </script>
 
 <template>
@@ -22,7 +20,7 @@ console.log(stats)
         <section>
             <baseHeader text="Your Overview" />
 
-            <div class="container-cards">
+            <div class="container-cards" v-if="!pending_stats">
                 <appCard text="Books" color="bg-gradient-to-br from-green-600 to-green-700"
                     icon="material-symbols:book-ribbon-outline-rounded" collection="books" :data="stats" />
                 <appCard text="Cold Soak" color="bg-gradient-to-br from-blue-300 to-blue-500"

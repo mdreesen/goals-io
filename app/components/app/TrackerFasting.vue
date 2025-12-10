@@ -1,280 +1,155 @@
 <script setup lang="ts">
-import { ref, computed, onUnmounted } from 'vue';
-import { useMotion } from '@vueuse/motion';
-
-// --- Constants ---
-const GOAL_HOURS = 16; // Target fasting duration in hours
-const GOAL_SECONDS = GOAL_HOURS * 60 * 60; // Goal in seconds (16 hours)
-
-// --- State ---
-const timerInterval = ref<ReturnType<typeof setInterval> | null>(null);
-const durationSeconds = ref(0); // Current duration in seconds
-const isRunning = ref(false);
-const startTime = ref<string | null>(null); // ISO string of when the timer started
-
-const isSaving = ref(false);
-const saveMessage = ref<string | null>(null);
-
-// --- Computed Values ---
-
-// Formats seconds into HH:MM:SS string
-const formattedTime = computed(() => {
-  const totalSeconds = durationSeconds.value;
-  const hours = Math.floor(totalSeconds / 3600);
-  const minutes = Math.floor((totalSeconds % 3600) / 60);
-  const seconds = totalSeconds % 60;
-
-  const pad = (num: number) => num.toString().padStart(2, '0');
-
-  return `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
-});
-
-// Calculates progress percentage for the bar
-const progressPercent = computed(() => {
-  const percentage = (durationSeconds.value / GOAL_SECONDS) * 100;
-  return Math.min(percentage, 100); // Cap at 100%
-});
-
-// Determines the color accent based on progress (Warm Purple/Orange Theme)
-const progressAccentClass = computed(() => {
-  if (progressPercent.value < 50) return 'from-purple-600 to-indigo-500';
-  if (progressPercent.value < 90) return 'from-pink-500 to-purple-600';
-  return 'from-orange-400 to-yellow-300'; // Goal nearly reached or surpassed
-});
-
-// --- Actions ---
-
-const startTimer = () => {
-  if (isRunning.value) return;
-
-  // Set the start time only if the timer is being started from 0
-  if (durationSeconds.value === 0) {
-    startTime.value = new Date().toISOString();
-    saveMessage.value = 'Fasting started. Focus on your energy!';
-    setTimeout(() => saveMessage.value = null, 3000);
-  } else {
-    // If resuming
-    saveMessage.value = 'Fasting resumed.';
-    setTimeout(() => saveMessage.value = null, 3000);
+  import { ref, computed, onMounted, onUnmounted } from 'vue'
+  import { format, differenceInSeconds, addHours } from 'date-fns'
+  import { Flame, Droplets, Zap, Sparkles, Play, Square } from 'lucide-vue-next'
+  
+  // --- State ---
+  const isFasting = ref(false)
+  const startTime = ref<Date | null>(null)
+  const currentTime = ref(new Date())
+  const goalHours = ref(16) // Default 16:8 Intermittent Fasting
+  const timerInterval = ref<NodeJS.Timeout | null>(null)
+  
+  // --- Fasting Stages Logic ---
+  const stages = [
+    { name: 'Stable', threshold: 0, icon: Droplets, color: 'text-blue-400', desc: 'Blood Sugar Stabilizing' },
+    { name: 'Burning', threshold: 12, icon: Flame, color: 'text-orange-400', desc: 'Fat Burning (Ketosis)' },
+    { name: 'Repair', threshold: 18, icon: Sparkles, color: 'text-purple-400', desc: 'Autophagy' },
+    { name: 'Ascended', threshold: 24, icon: Zap, color: 'text-yellow-400', desc: 'Peak Mental Clarity' },
+  ]
+  
+  // --- Computeds ---
+  const elapsedTime = computed(() => {
+    if (!startTime.value) return 0
+    return differenceInSeconds(currentTime.value, startTime.value)
+  })
+  
+  const progressPercentage = computed(() => {
+    const totalSeconds = goalHours.value * 3600
+    const pct = (elapsedTime.value / totalSeconds) * 100
+    return Math.min(pct, 100)
+  })
+  
+  const currentStage = computed(() => {
+    const hours = elapsedTime.value / 3600
+    // Find the highest threshold passed
+    return stages.slice().reverse().find(s => hours >= s.threshold) || stages[0]
+  })
+  
+  const formattedTime = computed(() => {
+    const h = Math.floor(elapsedTime.value / 3600).toString().padStart(2, '0')
+    const m = Math.floor((elapsedTime.value % 3600) / 60).toString().padStart(2, '0')
+    const s = (elapsedTime.value % 60).toString().padStart(2, '0')
+    return `${h}:${m}:${s}`
+  })
+  
+  // --- SVG Arc Math ---
+  const radius = 120
+  const circumference = 2 * Math.PI * radius
+  const dashOffset = computed(() => {
+    return circumference - (progressPercentage.value / 100) * circumference
+  })
+  
+  // --- Actions ---
+  const toggleFast = () => {
+    if (isFasting.value) {
+      // End Fast
+      isFasting.value = false
+      startTime.value = null
+      if (timerInterval.value) clearInterval(timerInterval.value)
+    } else {
+      // Start Fast
+      startTime.value = new Date()
+      isFasting.value = true
+      timerInterval.value = setInterval(() => {
+        currentTime.value = new Date()
+      }, 1000)
+    }
   }
+  
+  // Cleanup
+  onUnmounted(() => {
+    if (timerInterval.value) clearInterval(timerInterval.value)
+  })
+  </script>
+  
+  <template>
+    <div class="flex flex-col items-center justify-center min-h-[500px] p-6 rounded-3xl relative overflow-hidden">
+      
+      <div class="absolute top-0 left-1/2 -translate-x-1/2 w-64 h-64 rounded-full pointer-events-none"></div>
+  
+      <div class="relative w-[300px] h-[300px] flex items-center justify-center mb-8">
+        <svg class="w-full h-full transform -rotate-90 drop-shadow-[0_0_15px_rgba(99,102,241,0.3)]">
+          <circle 
+            cx="150" cy="150" :r="radius" 
+            stroke="currentColor" stroke-width="6" 
+            fill="transparent" 
+            class="text-zinc-800"
+          />
+          <circle 
+            cx="150" cy="150" :r="radius" 
+            stroke="url(#gradient)" stroke-width="8" 
+            fill="transparent"
+            stroke-linecap="round"
+            class="transition-all duration-1000 ease-out"
+            :style="{ strokeDasharray: circumference, strokeDashoffset: dashOffset }"
+          />
+          <defs>
+            <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#818cf8" /> <stop offset="100%" stop-color="#22d3ee" /> </linearGradient>
+          </defs>
+        </svg>
+  
+        <div class="absolute inset-0 flex flex-col items-center justify-center z-20">
+          <div v-if="!isFasting" class="text-center animate-in fade-in zoom-in duration-500">
 
-  isRunning.value = true;
-  timerInterval.value = setInterval(() => {
-    durationSeconds.value++;
-  }, 1000);
-};
-
-const pauseTimer = () => {
-  if (timerInterval.value) {
-    clearInterval(timerInterval.value);
-    timerInterval.value = null;
-  }
-  isRunning.value = false;
-  saveMessage.value = 'Fasting paused. Tap Start when ready.';
-  setTimeout(() => saveMessage.value = null, 3000);
-};
-
-// Logs the final duration and resets the tracker
-const logSoakSession = async () => {
-  if (durationSeconds.value === 0) {
-    saveMessage.value = 'Fasting duration is zero. Start the timer first!';
-    setTimeout(() => saveMessage.value = null, 4000);
-    return;
-  }
-
-  // Ensure timer is paused before logging
-  pauseTimer();
-
-  isSaving.value = true;
-  saveMessage.value = `Logging fasting session...`;
-
-  const endTime = new Date().toISOString();
-
-  const payload = {
-    startTime: startTime.value,
-    endTime: endTime,
-    durationSeconds: durationSeconds.value,
-    durationFormatted: formattedTime.value,
-    goalHours: GOAL_HOURS,
-    loggedAt: endTime,
-  };
-
-  try {
-    // ----------------------------------------------------------------------
-    // NOTE: This simulates the call to your MongoDB backend via a Nuxt Server API route.
-    // Replace with actual $fetch call to your /api/log-fasting endpoint.
-    // ----------------------------------------------------------------------
-
-    // Simulate successful API call delay
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    console.log('Simulating successful save to MongoDB with payload:', payload);
-
-    saveMessage.value = `Fasting session of ${formattedTime.value} logged successfully! Tracker reset.`;
-
-    // Reset state after successful log
-    durationSeconds.value = 0;
-    startTime.value = null;
-
-  } catch (error) {
-    console.error('Failed to log fast:', error);
-    saveMessage.value = 'Error saving data. Please try again.';
-  } finally {
-    isSaving.value = false;
-    setTimeout(() => saveMessage.value = null, 4000);
-  }
-};
-
-// Resets the tracker without logging
-const resetTracker = () => {
-  if (!isSaving.value) {
-    pauseTimer();
-    durationSeconds.value = 0;
-    startTime.value = null;
-    saveMessage.value = 'Tracker reset.';
-    setTimeout(() => saveMessage.value = null, 3000);
-  }
-};
-
-// Clear interval on component destruction
-onUnmounted(() => {
-  if (timerInterval.value) {
-    clearInterval(timerInterval.value);
-  }
-});
-
-
-// --- Motion setup for fade-in effect ---
-const trackerRef = ref();
-useMotion(trackerRef, {
-  initial: { opacity: 0, y: 50 },
-  enter: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      type: 'spring',
-      stiffness: 200,
-      damping: 20,
-      staggerChildren: 0.1,
-      delayChildren: 0.1,
-    },
-  },
-});
-</script>
-
-<template>
-  <!-- MODERN SIMPLISTIC DESIGN: Deep Dark Background & Clean Contrast (Fasting Theme) -->
-  <div ref="trackerRef" class="min-h-screen p-4 sm:p-8 text-white flex flex-col items-center justify-center font-sans">
-    <!-- Main Tracker Card (Minimalist & Elevated) -->
-    <div class="w-full max-w-lg rounded-2xl bg-gray-900 p-7 sm:p-10 shadow-xl shadow-gray-900/60 space-y-8 
-             transition-all duration-500 border border-gray-800">
-
-      <!-- Header -->
-      <header class="text-center"
-        v-motion="{ initial: { opacity: 0, y: -20 }, enter: { opacity: 1, y: 0, transition: { delay: 0.1 } } }">
-        <h1
-          class="text-4xl font-extrabold flex items-center justify-center bg-clip-text text-transparent bg-gradient-to-r from-pink-400 to-purple-500">
-          <!-- Hourglass/Time Icon -->
-          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-            class="w-8 h-8 mr-3 text-pink-400">
-            <path d="M12 2v2" />
-            <path d="m16 20-3-3H9L6 20" />
-            <path d="M12 22v-2" />
-            <path d="M5 22h14" />
-            <path d="M18 6a6 6 0 1 0-12 0 6 6 0 1 0 12 0Z" />
-          </svg>
-          Ascend Fasting Tracker
-        </h1>
-        <p class="mt-2 text-base text-gray-400">Track your intermittent fasting duration and metabolic cycles.</p>
-      </header>
-
-      <!-- API Message Area -->
-      <div v-if="saveMessage" class="text-center p-3 rounded-xl font-medium transition-all duration-300" :class="{
-        'bg-green-600/30 text-green-400 border border-green-600': saveMessage.includes('successfully') || saveMessage.includes('Focus on your energy'),
-        'bg-red-600/30 text-red-400 border border-red-600': saveMessage.includes('Error') || saveMessage.includes('duration is zero'),
-        'bg-indigo-600/30 text-indigo-400 border border-indigo-600': saveMessage.includes('Logging') || saveMessage.includes('paused') || saveMessage.includes('resumed')
-      }" v-motion="{ initial: { opacity: 0, scale: 0.9 }, enter: { opacity: 1, scale: 1 } }">
-        {{ saveMessage }}
+            <button 
+              @click="toggleFast"
+              class="group relative flex items-center justify-center w-16 h-16 bg-white rounded-full hover:scale-110 transition-transform duration-300 shadow-[0_0_40px_-10px_rgba(255,255,255,0.3)]"
+            >
+              <Play class="w-6 h-6 text-black fill-black ml-1 group-hover:text-indigo-600 transition-colors" />
+            </button>
+          </div>
+  
+          <div v-else class="text-center">
+            <div class="flex items-center justify-center space-x-2 mb-2">
+              <component :is="currentStage.icon" class="w-4 h-4 animate-pulse" :class="currentStage.color" />
+              <span class="text-xs font-bold uppercase tracking-widest text-zinc-400">{{ currentStage.name }}</span>
+            </div>
+            <h1 class="text-5xl font-medium text-white tracking-tighter tabular-nums drop-shadow-lg">
+              {{ formattedTime }}
+            </h1>
+            <p class="text-zinc-500 text-xs mt-2">{{ currentStage.desc }}</p>
+          </div>
+        </div>
       </div>
-
-      <!-- Current Duration Display -->
-      <div class="text-center"
-        v-motion="{ initial: { opacity: 0, scale: 0.9 }, enter: { opacity: 1, scale: 1, transition: { delay: 0.2 } } }">
-        <p class="text-xl font-medium text-gray-400">Elapsed Time (HH:MM:SS)</p>
-        <p class="text-7xl font-extrabold text-white mt-1 transition-colors duration-500"
-          :class="{ 'text-pink-400': durationSeconds > 0, 'text-orange-400': progressPercent >= 100 }">
-          {{ formattedTime }}
-        </p>
-        <p class="text-sm font-medium text-gray-500 mt-1">Target: {{ GOAL_HOURS }} hours</p>
-      </div>
-
-      <!-- Progress Bar -->
-      <div class="w-full h-3 rounded-full bg-gray-700 overflow-hidden shadow-inner shadow-black/30"
-        v-motion="{ initial: { opacity: 0, x: -50 }, enter: { opacity: 1, x: 0, transition: { delay: 0.3 } } }">
-        <div class="h-full rounded-full transition-all duration-1000 ease-out"
-          :class="['bg-gradient-to-r', progressAccentClass]" :style="{ width: progressPercent + '%' }"></div>
-      </div>
-
-      <!-- Main Timer Controls -->
-      <div class="flex justify-center space-x-4 pt-4"
-        v-motion="{ initial: { opacity: 0, y: 20 }, enter: { opacity: 1, y: 0, transition: { delay: 0.4 } } }">
-        <!-- Start / Pause Button -->
-        <button @click="isRunning ? pauseTimer() : startTimer()" :disabled="isSaving" class="flex-1 px-5 py-3 rounded-full bg-gradient-to-r font-bold text-white transition duration-300 transform active:scale-[0.98] shadow-xl 
-                 hover:scale-[1.01] focus:outline-none focus:ring-4 disabled:opacity-50 disabled:cursor-not-allowed"
-          :class="{
-            'from-red-600 to-pink-700 shadow-red-700/30 hover:from-red-500 hover:to-pink-600 focus:ring-red-500/50': isRunning, // Red when running (to pause)
-            'from-green-600 to-teal-700 shadow-green-700/30 hover:from-green-500 hover:to-teal-600 focus:ring-green-500/50': !isRunning, // Green when paused (to start)
-          }">
-          <span class="flex items-center justify-center">
-            <svg v-if="isRunning" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-              fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-              class="w-5 h-5 mr-2">
-              <rect x="6" y="4" width="4" height="16" rx="1" />
-              <rect x="14" y="4" width="4" height="16" rx="1" />
-            </svg>
-            <svg v-else xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-              class="w-5 h-5 mr-2">
-              <polygon points="5 3 19 12 5 21 5 3" />
-            </svg>
-            {{ isRunning ? 'Pause Fast' : (durationSeconds > 0 ? 'Resume Fast' : 'Start Fast') }}
-          </span>
+  
+      <div v-if="isFasting" class="w-full max-w-[280px] z-10">
+        <div class="flex justify-between items-center mb-4 px-4 py-3 bg-white/5 backdrop-blur-md rounded-xl border border-white/5">
+          <div class="text-left">
+            <p class="text-[10px] text-zinc-500 uppercase font-bold">Goal</p>
+            <p class="text-zinc-200 font-medium">{{ goalHours }} Hours</p>
+          </div>
+          <div class="text-right">
+            <p class="text-[10px] text-zinc-500 uppercase font-bold">End Time</p>
+            <p class="text-zinc-200 font-medium">
+              {{ startTime ? format(addHours(startTime, goalHours), 'h:mm a') : '--:--' }}
+            </p>
+          </div>
+        </div>
+  
+        <button 
+          @click="toggleFast"
+          class="w-full py-4 rounded-xl border border-red-500/20 bg-red-500/10 text-red-400 hover:bg-red-500/20 hover:text-red-300 transition-all text-sm font-semibold flex items-center justify-center gap-2"
+        >
+          <Square class="w-4 h-4 fill-current" />
+          End Fast
         </button>
       </div>
-
-      <!-- Log and Reset Buttons -->
-      <div class="flex justify-between space-x-4 pt-4 border-t border-gray-800/50"
-        v-motion="{ initial: { opacity: 0, y: 20 }, enter: { opacity: 1, y: 0, transition: { delay: 0.5 } } }">
-        <!-- Log Button -->
-        <button @click="logSoakSession" :disabled="isSaving || durationSeconds === 0"
-          class="flex-1 px-5 py-3 rounded-full bg-gradient-to-r from-purple-600 to-indigo-700 font-bold text-white transition duration-300 transform active:scale-[0.98] shadow-xl shadow-purple-700/30 
-                 hover:from-purple-500 hover:to-indigo-600 focus:outline-none focus:ring-4 focus:ring-purple-500/50 disabled:opacity-50 disabled:cursor-not-allowed">
-          <span class="flex items-center justify-center">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-              class="w-5 h-5 mr-2">
-              <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2z" />
-              <polyline points="17 8 12 3 7 8" />
-              <line x1="12" y1="3" x2="12" y2="15" />
-            </svg>
-            End and Log Fast ({{ formattedTime }})
-          </span>
-        </button>
-
-        <!-- Reset Button -->
-        <button @click="resetTracker" :disabled="isSaving || durationSeconds === 0"
-          class="flex-shrink-0 px-5 py-3 rounded-full bg-gray-700 font-bold text-gray-300 transition duration-300 transform active:scale-[0.98] shadow-lg shadow-gray-700/20 
-                 hover:bg-gray-600 focus:outline-none focus:ring-4 focus:ring-gray-700/50 disabled:opacity-50 disabled:cursor-not-allowed">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5">
-            <path d="M3 2v6h6" />
-            <path d="M21 22v-6h-6" />
-            <path d="M21 8A10 10 0 0 0 4.5 4.5" />
-            <path d="M3 16a10 10 0 0 0 16.5 3.5" />
-          </svg>
-        </button>
-      </div>
-
+  
     </div>
-  </div>
-</template>
+  </template>
+  
+  <style scoped>
+  /* Optional: Add custom fonts in your tailwind config/CSS */
+  </style>

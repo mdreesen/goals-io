@@ -17,6 +17,7 @@
     "@vite-pwa/nuxt": "^1.0.4",
     "@vueuse/motion": "^3.0.3",
     "bcrypt": "^6.0.0",
+    "date-fns": "^4.1.0",
     "lucide-vue-next": "^0.556.0",
     "mongodb": "^6.20.0",
     "mongoose": "^8.18.2",
