@@ -98,7 +98,7 @@ export default defineNuxtConfig({
       prefer_related_applications: true,
     },
     workbox: {
-      'navigateFallback': '/dashboard'
+      'navigateFallback': '/login'
     },
     devOptions: {
       enabled: true,

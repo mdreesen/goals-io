@@ -27,16 +27,13 @@ async function login() {
     .then(async () => {
       // useAuth.setToken(response.token); // Assuming 'response.token' contains the token
       await refreshSession();
-      await navigateTo('/dashboard');
 
-      // Refresh the session on client-side and redirect to the home page
-      authStore.setUser(user.value as User); // Assuming 'response.user' contains user data
-      authStore.setLoggedIn(loggedIn.value);
+      // if (loggedIn) await navigateTo('/dashboard');
+      await navigateTo('/dashboard');
 
       isLoading.value = false;
     })
     .catch(async (error) => {
-      // await navigateTo('/login');
       console.log(error);
       errorMessage.value = error.statusMessage;
       isLoading.value = false;

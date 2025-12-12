@@ -91,8 +91,7 @@ const waterIntakeSchema = new Schema(
 const weightSchema = new Schema(
     {
         weight: String || undefined,
-        weight_date: String || undefined,
-        starting_weight: Boolean || undefined
+        date: String || undefined,
     }, { timestamps: false });
 
 const workoutSchema = new Schema(

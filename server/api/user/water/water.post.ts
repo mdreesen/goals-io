@@ -17,7 +17,7 @@ export default defineEventHandler(async (event) => {
   try {
     const user = await loggedInUser(event);
 
-    await User.findOneAndUpdate({ email: user?.email }, { $addToSet: { weight: { weight: weight, date: formatDate() } } }, { new: true });
+    await User.findOneAndUpdate({ email: user?.email }, { $addToSet: { weight: { weight: weight, weight_date: formatDate() } } }, { new: true });
 
   } catch (error) {
     console.log(error);
