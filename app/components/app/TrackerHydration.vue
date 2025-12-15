@@ -5,23 +5,17 @@ import { Plus, Minus, Check } from 'lucide-vue-next';
 const { data: data, pending: pending_data } = await useFetch('/api/user/water/water', { lazy: true });
 const { fetch: refreshSession } = useUserSession()
 
-const userDailyGoal = computed(() => data.value?.latestWeight?.weight / 2);
+const userDailyGoal = computed(() => Number(data.value?.latestWeight?.weight) / 2);
+const userCurrentWater = computed(() => data.value?.latestWater?.water_intake);
 
 // --- State ---
-const currentOz = ref(0);
-const showCustomInput = ref(false);
-const customAmount = ref<number | null>(null);
-const inputRef = ref<HTMLInputElement | null>(null);
+const currentOz = ref(Number(userCurrentWater.value));
 const isLoading = ref(false);
 let errorMessage = ref('');
 
-const input = reactive({
-  water_intake: '',
-});
-
 // --- Computed ---
 const percentage = computed(() => {
-  return Math.min((currentOz.value / userDailyGoal.value) * 100, 100);
+  return Math.min((Number(userCurrentWater.value) / userDailyGoal.value) * 100, 100);
 });
 
 // Calculate wave position (inverted for CSS 'top')
@@ -38,7 +32,7 @@ async function log() {
   isLoading.value = true;
   $fetch('/api/user/water/water', {
     method: 'POST',
-    body: input
+    body: { water_intake: currentOz.value.toString() }
   })
     .then(async () => {
       await refreshSession();
@@ -53,13 +47,13 @@ async function log() {
 };
 
 // Submit Custom Amount
-const submitCustom = () => {
-  if (customAmount.value && customAmount.value > 0) {
-    adjustWater(customAmount.value);
-    showCustomInput.value = false;
-    customAmount.value = null;
-  }
-};
+// const submitCustom = () => {
+//   if (customAmount.value && customAmount.value > 0) {
+//     adjustWater(customAmount.value);
+//     showCustomInput.value = false;
+//     customAmount.value = null;
+//   }
+// };
 </script>
 
 <template>
@@ -76,7 +70,7 @@ const submitCustom = () => {
         <div
           class="absolute inset-0 flex flex-col items-center justify-center z-10 mix-blend-difference pointer-events-none">
           <span class="text-6xl font-bold text-white tabular-nums tracking-tighter">
-            {{ Math.round(currentOz) }}
+            {{ userCurrentWater }}
           </span>
           <span class="text-sm font-medium text-neutral-400 mt-1">
             Goal {{ userDailyGoal }} oz
@@ -106,7 +100,6 @@ const submitCustom = () => {
     <div class="mt-12 w-full relative">
 
       <Transition mode="out-in" name="slide-up">
-
         <div class="flex flex-col items-center justify-center gap-8 w-full top-0 left-0">
           <div class="flex items-center text-center gap-4">
             <button @click.stop="adjustWater(-8)"
@@ -143,15 +136,22 @@ const submitCustom = () => {
             </div>
           </div>
 
-          <div>
+          <!-- <div>
             <div class="relative">
-              <form>
+              <form @submit.prevent="log">
                 <input ref="inputRef" v-model="customAmount" type="number" placeholder="0" @keydown.enter="submitCustom"
                   class="w-full bg-transparent border-b-2 border-neutral-700 text-center text-3xl font-bold text-white py-2 focus:outline-none focus:border-blue-500 transition-colors placeholder:text-neutral-700 appearance-none" />
                 <span class="absolute right-2 bottom-3 text-neutral-500 text-sm font-medium">oz</span>
               </form>
             </div>
-          </div>
+          </div> -->
+          <form class="w-full" @submit.prevent="log">
+
+            <button type="submit" :disabled="isLoading"
+              :class="`${isLoading ? 'bg-gradient-to-r from-gray-500 to-gray-600' : 'bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900'} w-full rounded-xl py-3 text-lg font-semibold text-white shadow-lg transition-all duration-300 ease-in-out`">
+              {{ isLoading ? 'Logging...' : 'Log' }}
+            </button>
+          </form>
         </div>
       </Transition>
 
