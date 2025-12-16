@@ -49,6 +49,7 @@ const fastingSchema = new Schema(
         start: Boolean || undefined,
         end_date: Date || undefined,
         duration: Number || undefined,
+        time_fasted: String || undefined,
     }, { timestamps: false });
 
 const gratitudeSchema = new Schema(

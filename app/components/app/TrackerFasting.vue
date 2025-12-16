@@ -1,15 +1,26 @@
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted, onBeforeMount } from 'vue'
 import { format, differenceInSeconds, addHours } from 'date-fns'
 import { Flame, Droplets, Zap, Sparkles, Play, Square } from 'lucide-vue-next'
 
-const { fetch: refreshSession } = useUserSession()
+const props = defineProps({
+  data: {
+    type: Object,
+    default: () => { },
+    required: true
+  },
+});
+
+console.log('props data', props.data)
+const { fetch: refreshSession } = useUserSession();
 
 // --- State ---
-const isFasting = ref(false)
-const startTime = ref<Date | null>(null)
+const isFasting = ref(props.data?.start || false);
+const endedFasting = ref(props.data?.ended || true)
+const startTime = ref<Date | null>(props.data?.start_date || null);
+const endTime = ref<Date | null>(props.data?.end_date || null)
 const currentTime = ref(new Date())
-const goalHours = ref(16) // Default 16:8 Intermittent Fasting
+const goalHours = ref(props.data?.duration || 16) // Default 16:8 Intermittent Fasting
 const timerInterval = ref<NodeJS.Timeout | null>(null)
 const isLoading = ref(false);
 let errorMessage = ref('');
@@ -53,71 +64,100 @@ const circumference = 2 * Math.PI * radius
 const dashOffset = computed(() => {
   return circumference - (progressPercentage.value / 100) * circumference
 })
-
+console.log(isFasting.value)
 // --- Actions ---
 const toggleFast = () => {
   isLoading.value = true;
 
-  if (isFasting.value) {
-    // End Fast
-    isFasting.value = false
-    startTime.value = null
+  // End Fast
+  $fetch('/api/user/fasting/fasting', {
+    method: 'POST',
+    body: {
+      start_date: startTime.value,
+      end_date: endTime.value,
+      start: isFasting.value,
+      ended: endedFasting.value,
+      duration: 16,
+      time_fasted: formattedTime
+    }
+  })
+    .then(async () => {
+      await refreshSession();
 
-    $fetch('/api/user/fasting/fasting', {
-      method: 'POST',
-      body: {
-        start_date: new Date(),
-        start: true,
-        duration: 16
-      }
+      isLoading.value = false;
     })
-      .then(async () => {
-        await refreshSession();
+    .catch(async (error) => {
+      console.log(error);
+      errorMessage.value = error.statusMessage;
+      isLoading.value = false;
+    });
 
-        isLoading.value = false;
-      })
-      .catch(async (error) => {
-        console.log(error);
-        errorMessage.value = error.statusMessage;
-        isLoading.value = false;
-      });
 
-      
-    if (timerInterval.value) clearInterval(timerInterval.value);
-  } else {
+  if (timerInterval.value) clearInterval(timerInterval.value);
 
-    $fetch('/api/user/fasting/fasting', {
-      method: 'POST',
-      body: {
-        start_date: new Date(),
-        start: true,
-        duration: 16
-      }
-    })
-      .then(async () => {
-        await refreshSession();
+  // if (isFasting.value) {
+  //   // End Fast
+  //   $fetch('/api/user/fasting/fasting', {
+  //     method: 'POST',
+  //     body: {
+  //       start_date: null,
+  //       end_date: new Date(),
+  //       start: false,
+  //       ended: true,
+  //       duration: 16,
+  //       time_fasted: formattedTime
+  //     }
+  //   })
+  //     .then(async () => {
+  //       await refreshSession();
 
-        isLoading.value = false;
-      })
-      .catch(async (error) => {
-        console.log(error);
-        errorMessage.value = error.statusMessage;
-        isLoading.value = false;
-      });
+  //       isLoading.value = false;
+  //     })
+  //     .catch(async (error) => {
+  //       console.log(error);
+  //       errorMessage.value = error.statusMessage;
+  //       isLoading.value = false;
+  //     });
 
-    // Start Fast
-    startTime.value = new Date()
-    isFasting.value = true
-    timerInterval.value = setInterval(() => {
-      currentTime.value = new Date()
-    }, 1000)
-  }
-}
+
+  //   if (timerInterval.value) clearInterval(timerInterval.value);
+  // } else {
+  //   // Start Fast
+  //   $fetch('/api/user/fasting/fasting', {
+  //     method: 'POST',
+  //     body: {
+  //       start_date: new Date(),
+  //       start: true,
+  //       ended: false,
+  //       duration: 16,
+  //       time_fasted: null
+  //     }
+  //   })
+  //     .then(async () => {
+  //       await refreshSession();
+  //       isLoading.value = false;
+  //     })
+  //     .catch(async (error) => {
+  //       console.log(error);
+  //       errorMessage.value = error.statusMessage;
+  //       isLoading.value = false;
+  //     });
+  // }
+};
+
+onBeforeMount(() => {
+  // Start Fast
+  startTime.value = props.data?.start_date
+  isFasting.value = props.data?.start
+  timerInterval.value = setInterval(() => {
+    currentTime.value = new Date();
+  }, 1000)
+});
 
 // Cleanup
-onUnmounted(() => {
-  if (timerInterval.value) clearInterval(timerInterval.value)
-})
+// onUnmounted(() => {
+//   if (timerInterval.value) clearInterval(timerInterval.value)
+// })
 </script>
 
 <template>

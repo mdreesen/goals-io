@@ -5,12 +5,12 @@ import { WeightType } from '~/types/weight';
 export default defineEventHandler(async (event) => {
   try {
     const user = await loggedInUser(event);
-    const waterIntake = user?.water ?? [];
+    const data = user?.water ?? [];
     const weight = user?.weight ?? [];
 
 
     // Latest wieght and water intake
-    const latestWater = waterIntake.reverse()[0];
+    const latestWater = data.reverse()[0];
     const latestWeight = weight.reverse()[0];
 
     return {

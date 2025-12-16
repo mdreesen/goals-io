@@ -3,7 +3,7 @@ import type { User } from '~/types/auth';
 
 
 definePageMeta({
-    middleware: ['authenticated'],
+    middleware: ['auth'],
 });
 
 const { user, clear: clearSession } = useUserSession();

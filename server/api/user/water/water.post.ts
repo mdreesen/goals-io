@@ -16,10 +16,10 @@ export default defineEventHandler(async (event) => {
 
   try {
     const user = await loggedInUser(event);
-    const waterIntake = user?.water ?? [];
+    const data = user?.water ?? [];
 
     // Latest wieght and water intake
-    const latestWater = waterIntake.reverse()[0];
+    const latestData = data.reverse()[0];
 
     const waterObj = {
       water_intake: water_intake,
@@ -28,9 +28,9 @@ export default defineEventHandler(async (event) => {
 
     // If the date matches today, then we update
     // Otherwise; we create that does not match the day
-    if (latestWater?.date.includes(formatDate())) {
+    if (latestData?.date.includes(formatDate())) {
       await User.findOneAndUpdate(
-        { 'water._id': latestWater?._id },
+        { 'water._id': latestData?._id },
         { $set: { 'water.$': waterObj } },
         { new: true });
     } else {

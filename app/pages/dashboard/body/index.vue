@@ -1,7 +1,10 @@
 <script setup lang="ts">
+
 definePageMeta({
     layout: 'authenticated',
 });
+
+const { data: latestFastingData, pending: pending_data } = await useFetch('/api/user/fasting/fasting', { lazy: true });
 </script>
 
 <template>
@@ -15,9 +18,9 @@ definePageMeta({
         <appTrackerColdSoak />
     </div>
 
-    <div>
+    <div v-if="!pending_data">
         <baseHeader text="Fasting" />
-        <appTrackerFasting />
+        <appTrackerFasting :data="latestFastingData?.latestData" />
     </div>
 
     <div>
