@@ -1,12 +1,18 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
 
-const { data: data, pending: pending_data } = await useFetch('/api/user/weight/weight', { lazy: true });
+const props = defineProps({
+  data: {
+    type: Object,
+    default: () => { },
+    required: true
+  },
+});
 
 const isLoading = ref(false);
 let errorMessage = ref('');
 
-const currentWeight = computed(() => data.value?.data?.weight);
+const currentWeight = computed(() => props.data?.latestData?.weight);
 
 const { fetch: refreshSession } = useUserSession()
 
@@ -43,7 +49,7 @@ async function log() {
       <div class="relative z-10 flex items-baseline gap-1 cursor-pointer">
 
 
-        <div v-if="!pending_data" class="relative w-48">
+        <div class="relative w-48">
           <div
             class="w-full flex gap-2 justify-center items-baseline bg-transparent text-center text-6xl font-bold text-white focus:outline-none pb-2">
             <span>{{ currentWeight }}</span>

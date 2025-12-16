@@ -26,21 +26,22 @@ const index_get = defineEventHandler(async (event) => {
     const fasting = (_c = user == null ? void 0 : user.fasting) != null ? _c : [];
     const waterIntake = (_d = user == null ? void 0 : user.water) != null ? _d : [];
     const weight = (_e = user == null ? void 0 : user.weight) != null ? _e : [];
-    const bookCurrentStartedYear = books.filter((item) => {
-      var _a2;
-      return (_a2 = item.book_start_date) == null ? void 0 : _a2.includes(year);
-    }).length;
-    const bookCurrentEndedYear = books.filter((item) => {
-      var _a2;
-      return (_a2 = item == null ? void 0 : item.book_end_date) == null ? void 0 : _a2.includes(year);
-    }).length;
+    const latestBooks = {
+      bookCurrentStartedYear: books.filter((item) => {
+        var _a2;
+        return (_a2 = item.book_start_date) == null ? void 0 : _a2.includes(year);
+      }).length,
+      bookCurrentEndedYear: books.filter((item) => {
+        var _a2;
+        return (_a2 = item == null ? void 0 : item.book_end_date) == null ? void 0 : _a2.includes(year);
+      }).length
+    };
     const latestColdSoak = coldSoaks.reverse()[0];
     const latestFasting = fasting.reverse()[0];
     const latestWater = waterIntake.reverse()[0];
     const latestWeight = weight.reverse()[0];
     return {
-      bookCurrentStartedYear,
-      bookCurrentEndedYear,
+      lastestBooks: latestBooks,
       latestColdSoak,
       latestFasting,
       latestWater,

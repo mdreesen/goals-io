@@ -1,4 +1,4 @@
-import process from 'node:process';globalThis._importMeta_=globalThis._importMeta_||{url:"file:///_entry.js",env:process.env};import { defineComponent, effectScope, unref, mergeProps, withCtx, renderSlot, shallowRef, h, resolveComponent, computed, toValue, getCurrentInstance, onServerPrefetch, createElementBlock, inject, provide, createVNode, resolveDynamicComponent, toRef as toRef$1, useSlots, ref, createBlock, createCommentVNode, openBlock, toDisplayString, hasInjectionContext, watch, getCurrentScope, onScopeDispose, useAttrs, nextTick, isRef, reactive, toRefs, mergeModels, useModel, createTextVNode, cloneVNode, defineAsyncComponent, Fragment, useSSRContext, shallowReactive, Suspense, createApp, readonly, customRef, toRaw, renderList, useId, onErrorCaptured, isReadonly, isShallow, isReactive, withModifiers, markRaw } from 'vue';
+import process from 'node:process';globalThis._importMeta_=globalThis._importMeta_||{url:"file:///_entry.js",env:process.env};import { defineComponent, unref, mergeProps, withCtx, renderSlot, shallowRef, h, resolveComponent, computed, createElementBlock, toValue, getCurrentInstance, onServerPrefetch, inject, provide, createVNode, resolveDynamicComponent, toRef as toRef$1, useSlots, ref, createBlock, createCommentVNode, openBlock, toDisplayString, hasInjectionContext, watch, effectScope, useAttrs, isRef, nextTick, reactive, toRefs, mergeModels, useModel, createTextVNode, getCurrentScope, onScopeDispose, cloneVNode, defineAsyncComponent, Fragment, useSSRContext, shallowReactive, Suspense, createApp, readonly, customRef, toRaw, renderList, useId, onErrorCaptured, isReadonly, isShallow, isReactive, withModifiers, markRaw } from 'vue';
 import { o as serialize, q as parseQuery, t as klona, v as defuFn, k as hasProtocol, w as isScriptProtocol, m as joinURL, x as defu, y as appendResponseHeader, z as withQuery, A as sanitizeStatusCode, B as isEqual, C as withTrailingSlash, D as withoutTrailingSlash, c as createError$1, E as getContext, F as withLeadingSlash, G as parseURL, $ as $fetch$1, H as baseURL, I as createHooks, J as executeAsync, K as encodeParam, L as encodePath, M as toRouteMatcher, N as createRouter$1 } from '../nitro/nitro.mjs';
 import { createPinia, setActivePinia, shouldHydrate } from 'pinia';
 import { useRoute as useRoute$1, RouterView, createMemoryHistory, createRouter, START_LOCATION } from 'vue-router';
@@ -534,52 +534,52 @@ const _routes = [
     name: "dashboard",
     path: "/dashboard",
     meta: __nuxt_page_meta$4 || {},
-    component: () => import('./index-Diq1cv-s.mjs')
+    component: () => import('./index-D_rqD9CH.mjs')
   },
   {
     name: "dashboard-body",
     path: "/dashboard/body",
     meta: __nuxt_page_meta$3 || {},
-    component: () => import('./index-D2oUlGXG.mjs')
+    component: () => import('./index-CJi_s0w9.mjs')
   },
   {
     name: "dashboard-mind",
     path: "/dashboard/mind",
     meta: __nuxt_page_meta$2 || {},
-    component: () => import('./index-C8VCG3Wh.mjs')
+    component: () => import('./index-BsX3Vfas.mjs')
   },
   {
     name: "privacy_policy",
     path: "/privacy_policy",
-    component: () => import('./index-BXKTFnoy.mjs')
+    component: () => import('./index-DZYcuPub.mjs')
   },
   {
     name: "index",
     path: "/",
-    meta: { "middleware": ["authenticated"] },
-    component: () => import('./index-BMOFD_Qg.mjs')
+    meta: { "middleware": ["auth"] },
+    component: () => import('./index-DRAOk8nu.mjs')
   },
   {
     name: "login",
     path: "/login",
-    component: () => import('./login-oK7sgx4M.mjs')
+    component: () => import('./login-Cyea1axP.mjs')
   },
   {
     name: "dashboard-spirit",
     path: "/dashboard/spirit",
     meta: __nuxt_page_meta$1 || {},
-    component: () => import('./index-DesqJv6q.mjs')
+    component: () => import('./index-DmVf3dRS.mjs')
   },
   {
     name: "signup",
     path: "/signup",
-    component: () => import('./signup-CtctNc0v.mjs')
+    component: () => import('./signup-DsRRmH1t.mjs')
   },
   {
     name: "dashboard-profile",
     path: "/dashboard/profile",
     meta: __nuxt_page_meta || {},
-    component: () => import('./index-C7sYiw5Q.mjs')
+    component: () => import('./index-DfDRKitC.mjs')
   }
 ];
 const _wrapInTransition = (props, children) => {
@@ -700,7 +700,7 @@ const globalMiddleware = [
   manifest_45route_45rule
 ];
 const namedMiddleware = {
-  authenticated: () => import('./authenticated-FGqveLZp.mjs')
+  auth: () => import('./auth-CXjRY8Ka.mjs')
 };
 const plugin$1 = /* @__PURE__ */ defineNuxtPlugin({
   name: "nuxt:router",
@@ -7798,8 +7798,8 @@ _sfc_main$3.setup = (props, ctx) => {
 };
 const __nuxt_component_0 = Object.assign(_sfc_main$3, { __name: "UApp" });
 const layouts = {
-  authenticated: defineAsyncComponent(() => import('./authenticated-Cf5pJlRg.mjs').then((m) => m.default || m)),
-  default: defineAsyncComponent(() => import('./default-D9k6IIt3.mjs').then((m) => m.default || m))
+  authenticated: defineAsyncComponent(() => import('./authenticated-B2rxOXaV.mjs').then((m) => m.default || m)),
+  default: defineAsyncComponent(() => import('./default-X2IZVJnD.mjs').then((m) => m.default || m))
 };
 const LayoutLoader = defineComponent({
   name: "LayoutLoader",
@@ -8031,60 +8031,57 @@ function normalizeSlot(slot, data) {
   const slotContent = slot(data);
   return slotContent.length === 1 ? h(slotContent[0]) : h(Fragment, void 0, slotContent);
 }
-const _export_sfc = (sfc, props) => {
-  const target = sfc.__vccOpts || sfc;
-  for (const [key, val] of props) {
-    target[key] = val;
+const _sfc_main$2 = /* @__PURE__ */ defineComponent({
+  __name: "app",
+  __ssrInlineRender: true,
+  setup(__props) {
+    return (_ctx, _push, _parent, _attrs) => {
+      const _component_UApp = __nuxt_component_0;
+      const _component_NuxtLayout = __nuxt_component_1;
+      const _component_VitePwaManifest = __nuxt_component_2;
+      const _component_NuxtPage = __nuxt_component_3;
+      _push(`<div${ssrRenderAttrs(_attrs)}>`);
+      _push(ssrRenderComponent(_component_UApp, null, {
+        default: withCtx((_, _push2, _parent2, _scopeId) => {
+          if (_push2) {
+            _push2(ssrRenderComponent(_component_NuxtLayout, null, {
+              default: withCtx((_2, _push3, _parent3, _scopeId2) => {
+                if (_push3) {
+                  _push3(ssrRenderComponent(_component_VitePwaManifest, null, null, _parent3, _scopeId2));
+                  _push3(ssrRenderComponent(_component_NuxtPage, null, null, _parent3, _scopeId2));
+                } else {
+                  return [
+                    createVNode(_component_VitePwaManifest),
+                    createVNode(_component_NuxtPage)
+                  ];
+                }
+              }),
+              _: 1
+            }, _parent2, _scopeId));
+          } else {
+            return [
+              createVNode(_component_NuxtLayout, null, {
+                default: withCtx(() => [
+                  createVNode(_component_VitePwaManifest),
+                  createVNode(_component_NuxtPage)
+                ]),
+                _: 1
+              })
+            ];
+          }
+        }),
+        _: 1
+      }, _parent));
+      _push(`</div>`);
+    };
   }
-  return target;
-};
-const _sfc_main$2 = {};
-function _sfc_ssrRender(_ctx, _push, _parent, _attrs) {
-  const _component_UApp = __nuxt_component_0;
-  const _component_NuxtLayout = __nuxt_component_1;
-  const _component_VitePwaManifest = __nuxt_component_2;
-  const _component_NuxtPage = __nuxt_component_3;
-  _push(`<div${ssrRenderAttrs(_attrs)}>`);
-  _push(ssrRenderComponent(_component_UApp, null, {
-    default: withCtx((_, _push2, _parent2, _scopeId) => {
-      if (_push2) {
-        _push2(ssrRenderComponent(_component_NuxtLayout, null, {
-          default: withCtx((_2, _push3, _parent3, _scopeId2) => {
-            if (_push3) {
-              _push3(ssrRenderComponent(_component_VitePwaManifest, null, null, _parent3, _scopeId2));
-              _push3(ssrRenderComponent(_component_NuxtPage, null, null, _parent3, _scopeId2));
-            } else {
-              return [
-                createVNode(_component_VitePwaManifest),
-                createVNode(_component_NuxtPage)
-              ];
-            }
-          }),
-          _: 1
-        }, _parent2, _scopeId));
-      } else {
-        return [
-          createVNode(_component_NuxtLayout, null, {
-            default: withCtx(() => [
-              createVNode(_component_VitePwaManifest),
-              createVNode(_component_NuxtPage)
-            ]),
-            _: 1
-          })
-        ];
-      }
-    }),
-    _: 1
-  }, _parent));
-  _push(`</div>`);
-}
+});
 const _sfc_setup$2 = _sfc_main$2.setup;
 _sfc_main$2.setup = (props, ctx) => {
   const ssrContext = useSSRContext();
   (ssrContext.modules || (ssrContext.modules = /* @__PURE__ */ new Set())).add("app.vue");
   return _sfc_setup$2 ? _sfc_setup$2(props, ctx) : void 0;
 };
-const AppComponent = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["ssrRender", _sfc_ssrRender]]);
 const _sfc_main$1 = {
   __name: "nuxt-error-page",
   __ssrInlineRender: true,
@@ -8106,8 +8103,8 @@ const _sfc_main$1 = {
     const statusMessage = _error.statusMessage ?? (is404 ? "Page Not Found" : "Internal Server Error");
     const description = _error.message || _error.toString();
     const stack = void 0;
-    const _Error404 = defineAsyncComponent(() => import('./error-404-CzYXl9pZ.mjs'));
-    const _Error = defineAsyncComponent(() => import('./error-500-BjeOiE6J.mjs'));
+    const _Error404 = defineAsyncComponent(() => import('./error-404-BG14Co-6.mjs'));
+    const _Error = defineAsyncComponent(() => import('./error-500-BnyMJErs.mjs'));
     const ErrorTemplate = is404 ? _Error404 : _Error;
     return (_ctx, _push, _parent, _attrs) => {
       _push(ssrRenderComponent(unref(ErrorTemplate), mergeProps({ statusCode: unref(statusCode), statusMessage: unref(statusMessage), description: unref(description), stack: unref(stack) }, _attrs), null, _parent));
@@ -8154,7 +8151,7 @@ const _sfc_main = {
           } else if (unref(SingleRenderer)) {
             ssrRenderVNode(_push, createVNode(resolveDynamicComponent(unref(SingleRenderer)), null, null), _parent);
           } else {
-            _push(ssrRenderComponent(unref(AppComponent), null, null, _parent));
+            _push(ssrRenderComponent(unref(_sfc_main$2), null, null, _parent));
           }
         },
         _: 1
@@ -8188,5 +8185,5 @@ let entry;
 }
 const entry$1 = (ssrContext) => entry(ssrContext);
 
-export { createSharedComposable as A, isArrayOfArray as B, get as C, pickLinkProps as D, _sfc_main$a as E, __nuxt_component_2$1 as F, _export_sfc as _, __nuxt_component_0$2 as a, useAsyncData as b, useRequestFetch as c, useUserSession as d, entry$1 as default, useAppConfig as e, fetchDefaults as f, __nuxt_component_0$1 as g, __nuxt_component_0$3 as h, useMotion as i, useFormField as j, _sfc_main$e as k, defineNuxtRouteMiddleware as l, useLocale as m, navigateTo as n, usePortal as o, _sfc_main$8 as p, useRoute as q, reactivePick as r, createReusableTemplate as s, tv as t, useHead as u, getSlotChildrenText as v, _sfc_main$9 as w, useFieldGroup as x, useComponentIcons as y, _sfc_main$b as z };
+export { isArrayOfArray as A, get as B, pickLinkProps as C, _sfc_main$a as D, __nuxt_component_2$1 as E, __nuxt_component_0$2 as _, useUserSession as a, useAppConfig as b, __nuxt_component_0$1 as c, __nuxt_component_0$3 as d, entry$1 as default, useAsyncData as e, fetchDefaults as f, useRequestFetch as g, useMotion as h, useFormField as i, _sfc_main$e as j, defineNuxtRouteMiddleware as k, useLocale as l, usePortal as m, navigateTo as n, _sfc_main$8 as o, useRoute as p, createReusableTemplate as q, reactivePick as r, getSlotChildrenText as s, tv as t, useHead as u, _sfc_main$9 as v, useFieldGroup as w, useComponentIcons as x, _sfc_main$b as y, createSharedComposable as z };
 //# sourceMappingURL=server.mjs.map

@@ -2,20 +2,27 @@
 import { ref, computed } from 'vue';
 import { Plus, Minus, Check } from 'lucide-vue-next';
 
-const { data: data, pending: pending_data } = await useFetch('/api/user/water/water', { lazy: true });
-const { fetch: refreshSession } = useUserSession()
+const { fetch: refreshSession } = useUserSession();
 
-const userDailyGoal = computed(() => Number(data.value?.latestWeight?.weight) / 2);
-const userCurrentWater = computed(() => data.value?.latestWater?.water_intake);
+const props = defineProps({
+  data: {
+    type: Object,
+    default: () => { },
+    required: true
+  },
+});
+
+const userDailyGoal = computed(() => Number(props.data?.latestWeight?.weight) / 2);
+const userCurrentWater = computed(() => Number(props.data?.latestWater?.water_intake) ?? 0);
 
 // --- State ---
-const currentOz = ref(Number(userCurrentWater.value));
+const currentOz = ref(userCurrentWater.value);
 const isLoading = ref(false);
 let errorMessage = ref('');
 
 // --- Computed ---
 const percentage = computed(() => {
-  return Math.min((Number(userCurrentWater.value) / userDailyGoal.value) * 100, 100);
+  return Math.min((userCurrentWater.value / userDailyGoal.value) * 100, 100);
 });
 
 // Calculate wave position (inverted for CSS 'top')
@@ -59,7 +66,7 @@ async function log() {
 <template>
   <div class="flex flex-col items-center justify-center w-full max-w-sm mx-auto p-8">
 
-    <div v-if="!pending_data" class="relative w-64 h-64 group cursor-pointer select-none">
+    <div class="relative w-64 h-64 group cursor-pointer select-none">
 
       <div class="absolute inset-0 rounded-full border border-neutral-800 transition-colors duration-500"
         :class="{ 'border-emerald-500/30 shadow-[0_0_40px_rgba(16,185,129,0.2)]': isComplete }" />
@@ -70,7 +77,7 @@ async function log() {
         <div
           class="absolute inset-0 flex flex-col items-center justify-center z-10 mix-blend-difference pointer-events-none">
           <span class="text-6xl font-bold text-white tabular-nums tracking-tighter">
-            {{ userCurrentWater }}
+            {{ currentOz }}
           </span>
           <span class="text-sm font-medium text-neutral-400 mt-1">
             Goal {{ userDailyGoal }} oz

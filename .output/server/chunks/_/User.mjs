@@ -72,7 +72,8 @@ const fastingSchema = new Schema(
     ended: Boolean || void 0,
     start: Boolean || void 0,
     end_date: Date || void 0,
-    duration: Number || void 0
+    duration: Number || void 0,
+    time_fasted: String || void 0
   },
   { timestamps: false }
 );
@@ -121,8 +122,7 @@ const waterIntakeSchema = new Schema(
 const weightSchema = new Schema(
   {
     weight: String || void 0,
-    weight_date: String || void 0,
-    starting_weight: Boolean || void 0
+    date: String || void 0
   },
   { timestamps: false }
 );

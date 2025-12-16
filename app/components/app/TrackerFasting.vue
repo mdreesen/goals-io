@@ -11,7 +11,6 @@ const props = defineProps({
   },
 });
 
-console.log('props data', props.data)
 const { fetch: refreshSession } = useUserSession();
 
 // --- State ---
@@ -64,7 +63,7 @@ const circumference = 2 * Math.PI * radius
 const dashOffset = computed(() => {
   return circumference - (progressPercentage.value / 100) * circumference
 })
-console.log(isFasting.value)
+// console.log(isFasting.value)
 // --- Actions ---
 const toggleFast = () => {
   isLoading.value = true;

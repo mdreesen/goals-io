@@ -17,7 +17,7 @@ export default defineEventHandler(async (event) => {
     });
 
     return {
-      data: formatArray?.reverse()[0],
+      latestData: formatArray?.reverse()[0] ?? {},
       goal_weight: Number(user?.goal_weight)
     }
   } catch (error) {

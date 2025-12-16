@@ -8,7 +8,7 @@ export default defineEventHandler(async (event) => {
     const latestData = data.reverse()[0];
 
     return {
-      latestData: latestData
+      latestData: latestData ?? {}
     }
   } catch (error) {
     console.log(error);

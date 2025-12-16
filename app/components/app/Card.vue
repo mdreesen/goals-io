@@ -65,8 +65,6 @@ const weight = {
 
     <div v-if="collection === 'coldSoak'">
       <div class="flex flex-col justify-center items-center">
-        <span>Started {{ books.start }}</span>
-        <span>Finished {{ books.end }}</span>
         <span>{{ coldSoak?.date }}</span>
       </div>
     </div>
@@ -80,6 +78,7 @@ const weight = {
     <div v-if="collection === 'dailyWater'">
       <div class="flex flex-col justify-center items-center">
         <span>{{ dailyWater?.water }} oz.</span>
+        <span>{{ dailyWater?.date }}</span>
       </div>
     </div>
 

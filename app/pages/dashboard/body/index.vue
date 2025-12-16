@@ -4,13 +4,16 @@ definePageMeta({
     layout: 'authenticated',
 });
 
-const { data: latestFastingData, pending: pending_data } = await useFetch('/api/user/fasting/fasting', { lazy: true });
+const { data: latestHydrationData, pending: pending_hydration } = await useFetch('/api/user/water/water', { lazy: true });
+const { data: latestFastingData, pending: pending_fasting } = await useFetch('/api/user/fasting/fasting', { lazy: true });
+const { data: latestWeightData, pending: pending_weight } = await useFetch('/api/user/weight/weight', { lazy: true });
+
 </script>
 
 <template>
-    <div>
+    <div v-if="!pending_hydration">
         <baseHeader text="Hydration" />
-        <appTrackerHydration />
+        <appTrackerHydration :data="latestHydrationData" />
     </div>
 
     <div>
@@ -18,14 +21,14 @@ const { data: latestFastingData, pending: pending_data } = await useFetch('/api/
         <appTrackerColdSoak />
     </div>
 
-    <div v-if="!pending_data">
+    <div v-if="!pending_fasting">
         <baseHeader text="Fasting" />
         <appTrackerFasting :data="latestFastingData?.latestData" />
     </div>
 
-    <div>
+    <div v-if="!pending_weight">
         <baseHeader text="Weight" />
-        <appTrackerWeight />
+        <appTrackerWeight :data="latestWeightData" />
     </div>
 
     <div>

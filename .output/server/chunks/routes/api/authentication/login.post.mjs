@@ -1,4 +1,4 @@
-import { d as defineEventHandler, r as readValidatedBody, c as createError, s as setUserSession } from '../../../nitro/nitro.mjs';
+import { d as defineEventHandler, r as readValidatedBody, s as setUserSession, c as createError } from '../../../nitro/nitro.mjs';
 import { z } from 'zod';
 import bcrypt from 'bcrypt';
 import { c as connectDB, U as User$1 } from '../../../_/User.mjs';
@@ -27,9 +27,7 @@ const login_post = defineEventHandler(async (event) => {
     await connectDB();
     const user = await User.findOne({ email });
     const passwordMatches = bcrypt.compare(password, (_a = user == null ? void 0 : user.password) != null ? _a : "");
-    if (!password) throw createError({ statusCode: 401, statusMessage: "Please insert password." });
-    if (!passwordMatches) throw createError({ statusCode: 401, statusMessage: "Wrong credentials" });
-    else {
+    if (await passwordMatches) {
       await setUserSession(event, {
         user: {
           _id: user == null ? void 0 : user._id,
@@ -46,6 +44,8 @@ const login_post = defineEventHandler(async (event) => {
           postal_code: (user == null ? void 0 : user.postal_code) || ""
         }
       });
+    } else {
+      throw createError({ statusCode: 401, statusMessage: "Wrong credentials" });
     }
   } catch (error) {
     console.log(error);
