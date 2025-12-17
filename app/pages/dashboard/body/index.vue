@@ -11,28 +11,30 @@ const { data: latestWeightData, pending: pending_weight } = await useFetch('/api
 </script>
 
 <template>
-    <div v-if="!pending_hydration">
-        <baseHeader text="Hydration" />
-        <appTrackerHydration :data="latestHydrationData" />
-    </div>
+    <div class="container-categories">
+        <div>
+            <baseHeader text="Hydration" />
+            <appTrackerHydration v-if="!pending_hydration" :data="latestHydrationData" />
+        </div>
 
-    <div>
-        <baseHeader text="Cold Soak" />
-        <appTrackerColdSoak />
-    </div>
+        <div>
+            <baseHeader text="Cold Soak" />
+            <appTrackerColdSoak />
+        </div>
 
-    <div v-if="!pending_fasting">
-        <baseHeader text="Fasting" />
-        <appTrackerFasting :data="latestFastingData?.latestData" />
-    </div>
+        <div>
+            <baseHeader text="Fasting" />
+            <appTrackerFasting v-if="!pending_fasting" :data="latestFastingData?.latestData" />
+        </div>
 
-    <div v-if="!pending_weight">
-        <baseHeader text="Weight" />
-        <appTrackerWeight :data="latestWeightData" />
-    </div>
+        <div>
+            <baseHeader text="Weight" />
+            <appTrackerWeight v-if="!pending_weight" :data="latestWeightData" />
+        </div>
 
-    <div>
-        <baseHeader text="Workout" />
-        <appTrackerWorkout />
+        <div>
+            <baseHeader text="Workout" />
+            <appTrackerWorkout />
+        </div>
     </div>
 </template>

@@ -71,12 +71,7 @@ async function log() {
               class="w-full rounded-xl border border-gray-600 bg-gray-700/50 py-3 px-4 text-lg text-white shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500" />
           </div>
 
-          <div v-motion="{ ...inputVarient() }">
-            <button type="submit" :disabled="isLoading"
-              :class="`${isLoading ? 'bg-gradient-to-r from-gray-500 to-gray-600' : 'bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900'} w-full rounded-xl py-3 text-lg font-semibold text-white shadow-lg transition-all duration-300 ease-in-out`">
-              {{ isLoading ? 'Saving...' : 'Save' }}
-            </button>
-          </div>
+          <baseButtonSubmit text="Save" :isLoading="isLoading" />
         </form>
       </transition>
     </div>

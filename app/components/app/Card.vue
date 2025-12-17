@@ -48,7 +48,7 @@ const weight = {
 </script>
 
 <template>
-  <UCard variant="subtle" :class="`w-[300px] divide-none ${props.color && props.color}`">
+  <UCard variant="subtle" :class="`w-full max-w-lg divide-none ${props.color && props.color}`">
     <template #header>
       <div class="flex flex-col justify-center items-center">
         <baseIcon v-if="props.icon" :iconName="props.icon" />
@@ -57,35 +57,35 @@ const weight = {
     </template>
 
     <div v-if="collection === 'books'">
-      <div class="flex flex-col justify-center items-center">
+      <div class="flex flex-col justify-center items-center text-2xl font-extrabold text-white">
         <span>Started {{ books.start }} books</span>
         <span>Finished {{ books.end }} books</span>
       </div>
     </div>
 
     <div v-if="collection === 'coldSoak'">
-      <div class="flex flex-col justify-center items-center">
+      <div class="flex flex-col justify-center items-center text-2xl font-extrabold text-white">
         <span>{{ coldSoak?.date }}</span>
       </div>
     </div>
 
     <div v-if="collection === 'fasting'">
-      <div class="flex flex-col justify-center items-center">
+      <div class="flex flex-col justify-center items-center text-2xl font-extrabold text-white">
         <span>Duration {{ fasting?.duration }} hours</span>
       </div>
     </div>
 
     <div v-if="collection === 'dailyWater'">
-      <div class="flex flex-col justify-center items-center">
-        <span>{{ dailyWater?.water }} oz.</span>
-        <span>{{ dailyWater?.date }}</span>
+      <div class="flex flex-col justify-center items-center font-extrabold text-white">
+        <span class="text-2xl">{{ dailyWater?.water }} oz.</span>
+        <span class="text-lg">{{ dailyWater?.date }}</span>
       </div>
     </div>
 
     <div v-if="collection === 'weight'">
-      <div class="flex flex-col justify-center items-center">
-        <span>{{ weight?.weight }} lbs</span>
-        <span>{{ weight?.date }}</span>
+      <div class="flex flex-col justify-center items-center font-extrabold text-white">
+        <span class="text-2xl">{{ weight?.weight }} lbs</span>
+        <span class="text-lg">{{ weight?.date }}</span>
       </div>
     </div>
 

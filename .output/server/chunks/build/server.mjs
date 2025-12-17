@@ -534,19 +534,19 @@ const _routes = [
     name: "dashboard",
     path: "/dashboard",
     meta: __nuxt_page_meta$4 || {},
-    component: () => import('./index-D_rqD9CH.mjs')
+    component: () => import('./index-Caq7Qrfr.mjs')
   },
   {
     name: "dashboard-body",
     path: "/dashboard/body",
     meta: __nuxt_page_meta$3 || {},
-    component: () => import('./index-CJi_s0w9.mjs')
+    component: () => import('./index-darflHst.mjs')
   },
   {
     name: "dashboard-mind",
     path: "/dashboard/mind",
     meta: __nuxt_page_meta$2 || {},
-    component: () => import('./index-BsX3Vfas.mjs')
+    component: () => import('./index-cH-FvEri.mjs')
   },
   {
     name: "privacy_policy",

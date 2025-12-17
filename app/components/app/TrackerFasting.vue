@@ -87,6 +87,7 @@ const toggleFast = () => {
     })
       .then(async () => {
         await refreshSession();
+        await refreshNuxtData();
 
         isLoading.value = false;
       })
@@ -116,7 +117,7 @@ const toggleFast = () => {
     })
       .then(async () => {
         await refreshSession();
-
+        await refreshNuxtData();
         isLoading.value = false;
       })
       .catch(async (error) => {

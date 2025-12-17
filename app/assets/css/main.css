@@ -5,6 +5,10 @@ body {
     min-height: 100vh;
 };
 
+textarea {
+  field-sizing: content;
+};
+
 .dark-mode {
     background-color: linear-gradient(to bottom right, #0a0a0a, #1f2937);
     color: white;
@@ -15,13 +19,19 @@ body {
     color: white;
 };
 
+.container-categories {
+  display: flex;
+  flex-direction: column;
+  gap: 8rem;
+  padding-bottom: 2rem;
+}
+
 .sections {
   display: flex;
   flex-direction: column;
   gap: 4rem;
   padding: 2rem 0 2rem 0;
-}
-
+};
 
 .container-cards {
   display: flex;
@@ -30,7 +40,8 @@ body {
   flex-flow: wrap;
   justify-content: center;
   text-align: center;
-}
+  padding: 0 2rem;
+};
 
 @theme {
     --font-sans: 'Public Sans', system-ui, sans-serif;
