@@ -1,7 +1,9 @@
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted, onBeforeMount } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { format, differenceInSeconds, addHours } from 'date-fns'
 import { Flame, Droplets, Zap, Sparkles, Play, Square } from 'lucide-vue-next'
+
+const { fetch: refreshSession } = useUserSession();
 
 const props = defineProps({
   data: {
@@ -11,15 +13,11 @@ const props = defineProps({
   },
 });
 
-const { fetch: refreshSession } = useUserSession();
-
 // --- State ---
-const isFasting = ref(props.data?.start || false);
-const endedFasting = ref(props.data?.ended || true)
-const startTime = ref<Date | null>(props.data?.start_date || null);
-const endTime = ref<Date | null>(props.data?.end_date || null)
+const isFasting = ref(props.data?.start)
+const startTime = ref<Date | null>(props.data?.start_date)
 const currentTime = ref(new Date())
-const goalHours = ref(props.data?.duration || 16) // Default 16:8 Intermittent Fasting
+const goalHours = ref(16) // Default 16:8 Intermittent Fasting
 const timerInterval = ref<NodeJS.Timeout | null>(null)
 const isLoading = ref(false);
 let errorMessage = ref('');
@@ -37,6 +35,8 @@ const elapsedTime = computed(() => {
   if (!startTime.value) return 0
   return differenceInSeconds(currentTime.value, startTime.value)
 })
+
+const useIsFasting = computed(() => props.data?.start);
 
 const progressPercentage = computed(() => {
   const totalSeconds = goalHours.value * 3600
@@ -63,100 +63,84 @@ const circumference = 2 * Math.PI * radius
 const dashOffset = computed(() => {
   return circumference - (progressPercentage.value / 100) * circumference
 })
-// console.log(isFasting.value)
+
 // --- Actions ---
 const toggleFast = () => {
   isLoading.value = true;
 
-  // End Fast
-  $fetch('/api/user/fasting/fasting', {
-    method: 'POST',
-    body: {
-      start_date: startTime.value,
-      end_date: endTime.value,
-      start: isFasting.value,
-      ended: endedFasting.value,
-      duration: 16,
-      time_fasted: formattedTime
-    }
-  })
-    .then(async () => {
-      await refreshSession();
+  if (props.data.start) {
+    // End Fast
+    isFasting.value = false
+    // startTime.value = null
 
-      isLoading.value = false;
+    $fetch('/api/user/fasting/fasting', {
+      method: 'POST',
+      body: {
+        _id: props.data?._id,
+        start_date: null,
+        start: false,
+        ended: true,
+        duration: goalHours.value,
+        time_fasted: formattedTime.value,
+        completed: false
+      }
     })
-    .catch(async (error) => {
-      console.log(error);
-      errorMessage.value = error.statusMessage;
-      isLoading.value = false;
-    });
+      .then(async () => {
+        await refreshSession();
 
+        isLoading.value = false;
+      })
+      .catch(async (error) => {
+        console.log(error);
+        errorMessage.value = error.statusMessage;
+        isLoading.value = false;
+      });
 
-  if (timerInterval.value) clearInterval(timerInterval.value);
+    if (timerInterval.value) clearInterval(timerInterval.value)
+  } else {
+    // Start Fast
+    isFasting.value = true
 
-  // if (isFasting.value) {
-  //   // End Fast
-  //   $fetch('/api/user/fasting/fasting', {
-  //     method: 'POST',
-  //     body: {
-  //       start_date: null,
-  //       end_date: new Date(),
-  //       start: false,
-  //       ended: true,
-  //       duration: 16,
-  //       time_fasted: formattedTime
-  //     }
-  //   })
-  //     .then(async () => {
-  //       await refreshSession();
+    isLoading.value = true;
+    $fetch('/api/user/fasting/fasting', {
+      method: 'POST',
+      body: {
+        _id: null,
+        start_date: new Date(),
+        start: true,
+        ended: false,
+        duration: goalHours.value,
+        time_fasted: null,
+        completed: false
+      }
+    })
+      .then(async () => {
+        await refreshSession();
 
-  //       isLoading.value = false;
-  //     })
-  //     .catch(async (error) => {
-  //       console.log(error);
-  //       errorMessage.value = error.statusMessage;
-  //       isLoading.value = false;
-  //     });
+        isLoading.value = false;
+      })
+      .catch(async (error) => {
+        console.log(error);
+        errorMessage.value = error.statusMessage;
+        isLoading.value = false;
+      });
+  }
+}
 
-
-  //   if (timerInterval.value) clearInterval(timerInterval.value);
-  // } else {
-  //   // Start Fast
-  //   $fetch('/api/user/fasting/fasting', {
-  //     method: 'POST',
-  //     body: {
-  //       start_date: new Date(),
-  //       start: true,
-  //       ended: false,
-  //       duration: 16,
-  //       time_fasted: null
-  //     }
-  //   })
-  //     .then(async () => {
-  //       await refreshSession();
-  //       isLoading.value = false;
-  //     })
-  //     .catch(async (error) => {
-  //       console.log(error);
-  //       errorMessage.value = error.statusMessage;
-  //       isLoading.value = false;
-  //     });
-  // }
-};
-
-onBeforeMount(() => {
-  // Start Fast
-  startTime.value = props.data?.start_date
-  isFasting.value = props.data?.start
+onMounted(() => {
+  startTime.value = props.data.start_date
+  isFasting.value = true
   timerInterval.value = setInterval(() => {
-    currentTime.value = new Date();
-  }, 1000)
-});
+    currentTime.value = new Date()
+  }, 1000);
+})
 
 // Cleanup
-// onUnmounted(() => {
-//   if (timerInterval.value) clearInterval(timerInterval.value)
-// })
+onUnmounted(() => {
+  if (timerInterval.value) clearInterval(timerInterval.value)
+});
+
+console.log(useIsFasting.value)
 </script>
 
 <template>
@@ -180,12 +164,8 @@ onBeforeMount(() => {
       </svg>
 
       <div class="absolute inset-0 flex flex-col items-center justify-center z-20">
-        <div v-if="!isFasting" class="text-center animate-in fade-in zoom-in duration-500">
+        <div v-if="!useIsFasting" class="text-center animate-in fade-in zoom-in duration-500">
 
-          <button @click="toggleFast"
-            class="group relative flex items-center justify-center w-16 h-16 bg-white rounded-full hover:scale-110 transition-transform duration-300 shadow-[0_0_40px_-10px_rgba(255,255,255,0.3)]">
-            <Play class="w-6 h-6 text-black fill-black ml-1 group-hover:text-indigo-600 transition-colors" />
-          </button>
         </div>
 
         <div v-else class="text-center">
@@ -201,7 +181,7 @@ onBeforeMount(() => {
       </div>
     </div>
 
-    <div v-if="isFasting" class="w-full max-w-[280px] z-10">
+    <div v-if="useIsFasting" class="w-full max-w-[280px] z-10">
       <div
         class="flex justify-between items-center mb-4 px-4 py-3 bg-white/5 backdrop-blur-md rounded-xl border border-white/5">
         <div class="text-left">
@@ -216,12 +196,18 @@ onBeforeMount(() => {
         </div>
       </div>
 
-      <button @click="toggleFast"
+      <!-- <button v-if="!isLoading" @click="toggleFast"
         class="w-full py-4 rounded-xl border border-red-500/20 bg-red-500/10 text-red-400 hover:bg-red-500/20 hover:text-red-300 transition-all text-sm font-semibold flex items-center justify-center gap-2">
         <Square class="w-4 h-4 fill-current" />
         End Fast
-      </button>
+      </button> -->
     </div>
+
+    <button v-if="!isLoading" @click="toggleFast"
+      :class="`w-full max-w-[280px] py-4 rounded-xl border ${useIsFasting ? 'border-red-500/20 bg-red-500/10 text-red-400 hover:bg-red-500/20 hover:text-red-300' : 'border-green-500/20 bg-green-500/10 text-green-400 hover:bg-green-500/20 hover:text-green-300'} transition-all text-sm font-semibold flex items-center justify-center gap-2`">
+      <Square class="w-4 h-4 fill-current" />
+      {{ !useIsFasting ? 'Start Fast' : 'End Fast'}}
+    </button>
 
   </div>
 </template>
