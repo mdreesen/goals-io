@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
 import { Plus, Minus, Check } from 'lucide-vue-next';
+import { formatDate } from '~/utils/date';
 
 const { fetch: refreshSession } = useUserSession();
 
@@ -13,7 +14,10 @@ const props = defineProps({
 });
 
 const userDailyGoal = computed(() => Number(props.data?.latestWeight?.weight) / 2);
-const userCurrentWater = computed(() => Number(props.data?.latestWater?.water_intake) ?? 0);
+const userCurrentWater = computed(() => {
+  if (props.data?.latestWater?.date !== formatDate()) return 0
+  return Number(props.data?.latestWater?.water_intake) ?? 0
+});
 
 // --- State ---
 const currentOz = ref(userCurrentWater.value);

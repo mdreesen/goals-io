@@ -28,8 +28,6 @@ const props = defineProps({
   }
 });
 
-// console.log('Chart props', props.data)
-
 
 type ItemData = {
   month: string

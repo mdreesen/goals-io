@@ -26,7 +26,8 @@ const { data: stats, pending: pending_stats } = await useFetch('/api/stats', { l
                 <appCard text="Cold Soak" color="bg-gradient-to-br from-blue-300 to-blue-500"
                     icon="material-symbols:snowing-heavy" collection="coldSoak" :data="stats" />
                 <appCard text="Fasting" color="bg-gradient-to-br from-yellow-600 to-yellow-700"
-                    icon="material-symbols:nest-clock-farsight-analog-outline-rounded" collection="fasting" :data="stats" />
+                    icon="material-symbols:nest-clock-farsight-analog-outline-rounded" collection="fasting"
+                    :data="stats" />
                 <appCard text="Daily Water" color="bg-gradient-to-br from-blue-600 to-blue-700"
                     icon="material-symbols:water-medium-outline-rounded" collection="dailyWater" :data="stats" />
                 <appCard text="Weight" color="bg-gradient-to-br from-purple-600 to-purple-700"
@@ -41,8 +42,11 @@ const { data: stats, pending: pending_stats } = await useFetch('/api/stats', { l
             <!-- Book Tracking -->
             <UContainer>
                 <baseSectionHeader text="Books" />
-                <appChartBarGroup v-if="!pending_books" :data="books" barOneName="start_date" barTwoName="end_date"
-                    barOneLabel="Start Date" barTwoLabel="End Date" />
+                <div class="flex justify-end">
+                    <baseSelectorYear :data="books.years" />
+                </div>
+                <appChartBarGroup v-if="!pending_books" :data="books.chartData" barOneName="start_date"
+                    barTwoName="end_date" barOneLabel="Start Date" barTwoLabel="End Date" />
             </UContainer>
 
             <!-- Cold Soak Tracking -->

@@ -10,7 +10,7 @@ export default defineEventHandler(async (event) => {
 
       return {
         weight: Number(dailyWeight),
-        date: (item as { weight_date: string })?.weight_date,
+        date: (item as { date: string })?.date ?? (item as { weight_date: string })?.weight_date,
         starting_weight: (item as { starting_weight: string })?.starting_weight,
         _id: (item as { _id: string })?._id
       }
