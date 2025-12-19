@@ -42,9 +42,6 @@ const { data: stats, pending: pending_stats } = await useFetch('/api/stats', { l
             <!-- Book Tracking -->
             <UContainer>
                 <baseSectionHeader text="Books" />
-                <div class="flex justify-end">
-                    <baseSelectorYear :data="books.years" />
-                </div>
                 <appChartBarGroup v-if="!pending_books" :data="books.chartData" barOneName="start_date"
                     barTwoName="end_date" barOneLabel="Start Date" barTwoLabel="End Date" />
             </UContainer>

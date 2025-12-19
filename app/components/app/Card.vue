@@ -44,7 +44,6 @@ const weight = {
   weight: props.data?.latestWeight?.weight,
   date: props.data?.latestWeight?.date,
 }
-console.log(weight)
 </script>
 
 <template>

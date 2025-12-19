@@ -1,16 +1,32 @@
 <script setup lang="ts">
-    definePageMeta({
-        layout: 'authenticated',
-    });
+definePageMeta({
+    layout: 'authenticated',
+});
+
+const { data: bookData, pending: pending_books } = await useFetch('/api/user/books/books', { lazy: true });
+
 </script>
 
 <template>
-    <div>
-        <h1>Welcome to the mind page</h1>
+    <div class="container-categories">
+        <!-- <div>
+            <baseHeader text="Affirmations" />
+            <appTrackerAffirmation />
+        </div> -->
 
-        <appTrackerAffirmation />
-        <appTrackerBook />
-        <appTrackerGratitude />
-        <appTrackerHabit />
+        <div>
+            <baseHeader text="Books" />
+            <appTrackerBook v-if="!pending_books" :data="bookData"/>
+        </div>
+
+        <!-- <div>
+            <baseHeader text="Gratitudes" />
+            <appTrackerGratitude />
+        </div> -->
+
+        <!-- <div>
+            <baseHeader text="Habits" />
+            <appTrackerHabit />
+        </div> -->
     </div>
 </template>

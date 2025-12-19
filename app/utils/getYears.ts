@@ -19,8 +19,6 @@ export function years(data: Array<any>) {
 
     const convertYears = [...new Set(years.sort())].reverse();
 
-    console.log(convertYears)
-
     switch (true) {
         case convertYears.length === 1:
             return [now.getFullYear(), ...convertYears];

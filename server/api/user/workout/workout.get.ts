@@ -1,9 +1,21 @@
+import loggedInUser from "~/utils/loggedInUser";
+
 export default defineEventHandler(async (event) => {
-    // make sure the user is logged in
-    // This will throw a 401 error if the request doesn't come from a valid user session
-    const { user } = await requireUserSession(event)
-  
-    // TODO: Fetch some stats based on the user
-  
-    return {}
-  });
+  try {
+    const user = await loggedInUser(event);
+    const data = user?.workout ?? [];
+
+    // Latest wieght and water intake
+    const latestData = data.reverse();
+
+    return {
+      latestData: latestData
+    }
+  } catch (error) {
+    console.log(error);
+    throw createError({
+      statusCode: 500,
+      statusMessage: 'Something went wrong.'
+    });
+  };
+});

@@ -141,7 +141,6 @@ onUnmounted(() => {
   if (timerInterval.value) clearInterval(timerInterval.value)
 });
 
-console.log(useIsFasting.value)
 </script>
 
 <template>
