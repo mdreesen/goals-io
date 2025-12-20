@@ -10,3 +10,7 @@ export function formatDate() {
       hour12: true // true for AM/PM, false for 24-hour
     });
   };
+
+  export function timeZone() {
+    return  Intl.DateTimeFormat().resolvedOptions().timeZone;
+  }
