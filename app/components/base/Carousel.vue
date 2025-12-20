@@ -19,7 +19,8 @@ const props = defineProps({
             container: 'ms-0'
         }">
         <div class="w-40 h-60 px-4">
-            <img class="object-cover w-40 h-60" :src="item?.book_image" width="320" height="320">
+            <!-- <img class="object-cover w-40 h-60" :src="item?.book_image" width="320" height="320"> -->
+            <NuxtImg class="object-cover w-40 h-60" :src="item?.book_image" />
         </div>
     </UCarousel>
 </template>
