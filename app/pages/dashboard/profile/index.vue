@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
+import packageJson from '../../../../package.json'
 import { useAuth } from '~/store/useAuth';
-import type { User } from '~/types/user'
+import { formatDate } from '~/utils/date';
+import { timeZone } from '~/utils/date';
 
 definePageMeta({
   layout: 'authenticated',
@@ -98,6 +100,13 @@ const toggleItems = [
           </div>
         </div>
       </section>
+
+      <!-- Action Button Example -->
+      <div class="flex flex-col mt-10 pt-8 border-t border-gray-700 text-gray-400">
+        <span>Date: {{ formatDate() }}</span>
+        <span>Time zone: {{ timeZone() }}</span>
+        <span>Version: {{ packageJson.version }}</span>
+      </div>
 
       <!-- Action Button Example -->
       <div class="mt-10 pt-8 border-t border-gray-700">
