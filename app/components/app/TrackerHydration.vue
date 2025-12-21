@@ -43,7 +43,10 @@ async function log() {
   isLoading.value = true;
   $fetch('/api/user/water/water', {
     method: 'POST',
-    body: { water_intake: currentOz.value.toString() }
+    body: { 
+      water_intake: currentOz.value.toString(),
+      date: formatDate()
+     }
   })
     .then(async () => {
       await refreshSession();

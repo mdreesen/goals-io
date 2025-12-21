@@ -8,11 +8,12 @@ import { User } from '~/types/user';
 const User = UserModel as Model<User>;
 
 const bodySchema = z.object({
-  water_intake: z.string()
+  water_intake: z.string(),
+  date: z.string()
 })
 
 export default defineEventHandler(async (event) => {
-  const { water_intake } = await readValidatedBody(event, bodySchema.parse);
+  const { water_intake, date } = await readValidatedBody(event, bodySchema.parse);
 
   try {
     const user = await loggedInUser(event);
@@ -23,7 +24,7 @@ export default defineEventHandler(async (event) => {
 
     const waterObj = {
       water_intake: water_intake,
-      date: formatDate()
+      date: date
     }
 
     // If the date matches today, then we update
