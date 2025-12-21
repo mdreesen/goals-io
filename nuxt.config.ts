@@ -13,7 +13,8 @@ export default defineNuxtConfig({
     'nuxt-charts',
     '@nuxt/ui',
     '@pinia/nuxt',
-    '@vite-pwa/nuxt'
+    '@vite-pwa/nuxt',
+    'nuxt-time'
   ],
   imports: {
     dirs: ['store']

@@ -2,8 +2,13 @@ export function date() {
     return new Date().toISOString();
 };
 
+export function timeZone() {
+  return  Intl.DateTimeFormat().resolvedOptions().timeZone;
+};
+
 export function formatDate() {
     return new Date().toLocaleString('en-US', {
+      timeZone: timeZone(),
       year: 'numeric',
       month: 'long', // 'numeric', '2-digit', 'short'
       day: 'numeric',
@@ -11,6 +16,3 @@ export function formatDate() {
     });
   };
 
-  export function timeZone() {
-    return  Intl.DateTimeFormat().resolvedOptions().timeZone;
-  }
