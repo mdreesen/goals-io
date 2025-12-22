@@ -16,7 +16,6 @@ const items = ref(props.data);
 
 const selected = ref();
 
-console.log(selected.value)
 </script>
 
 <template>

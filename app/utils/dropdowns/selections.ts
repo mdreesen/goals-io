@@ -15,4 +15,15 @@ export const workout = [
     {"label": "Swimming", "value": "Swimming" , onSelect(e: Event) {e.preventDefault()} },
     {"label": "Walking", "value": "Walking" , onSelect(e: Event) {e.preventDefault()} },
     {"label": "Yoga", "value": "Yoga", onSelect(e: Event) {e.preventDefault()}  }
-]
+];
+
+export const selection_book_kinds = [
+    { label: 'Audiobook', value: 'Audiobook' },
+    { label: 'Ebook', value: 'Ebook' },
+    { label: 'Printed', value: 'Printed' }
+];
+
+export const selection_save = [
+    { label: 'Save', value: true },
+    { label: 'No', value: false },
+];

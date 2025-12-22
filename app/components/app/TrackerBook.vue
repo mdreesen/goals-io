@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed } from 'vue';
+import { selection_book_kinds, selection_save } from '~/utils/dropdowns/selections';
 
 const props = defineProps({
   data: {
@@ -24,17 +25,6 @@ const input = reactive({
   notes: '',
   booklist: false,
 });
-
-const kinds = [
-  { label: 'Audiobook', value: 'Audiobook' },
-  { label: 'Ebook', value: 'Ebook' },
-  { label: 'Printed', value: 'Printed' }
-];
-
-const statuses = [
-  { label: 'Save', value: true },
-  { label: 'No', value: false },
-];
 
 const useBookForm = () => {
   console.log('Click on')
@@ -82,7 +72,7 @@ async function log() {
               <select id="status-select" v-model="input.kind_of_book" required
                 class="w-full rounded-xl border border-gray-600 bg-gray-700/50 py-3 px-4 text-lg text-white shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500">
                 <option disabled value="">Kind of book</option>
-                <option v-for="kind in kinds" :value="kind.value" :key="kind.label">
+                <option v-for="kind in selection_book_kinds" :value="kind.value" :key="kind.label">
                   {{ kind.label }}
                 </option>
               </select>
@@ -93,7 +83,7 @@ async function log() {
               <select id="status-select" v-model="input.booklist" required
                 class="w-full rounded-xl border border-gray-600 bg-gray-700/50 py-3 px-4 text-lg text-white shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500">
                 <option disabled value="">No</option>
-                <option v-for="status in statuses" :value="status.value" :key="status.label">
+                <option v-for="status in selection_save" :value="status.value" :key="status.label">
                   {{ status.label }}
                 </option>
               </select>

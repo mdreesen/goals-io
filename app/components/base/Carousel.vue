@@ -20,7 +20,11 @@ const props = defineProps({
         }">
         <div class="w-40 h-60 px-4">
             <!-- <img class="object-cover w-40 h-60" :src="item?.book_image" width="320" height="320"> -->
-            <NuxtImg class="object-cover w-40 h-60" :src="item?.book_image" />
+            <NuxtLink :to="`/dashboard/mind/books/${[item?._id]}`"
+                class="flex items-center text-2xl font-extrabold h-[40px]">
+                <NuxtImg class="object-cover w-40 h-60" :src="item?.book_image" />
+            </NuxtLink>
+
         </div>
     </UCarousel>
 </template>
