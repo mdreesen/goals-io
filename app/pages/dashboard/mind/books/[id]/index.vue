@@ -5,26 +5,18 @@ import { selection_book_kinds, selection_save } from '~/utils/dropdowns/selectio
 const route = useRoute();
 
 const { data: data, pending: pending_data } = await useFetch(`/api/user/books/${route.params.id}`, { lazy: true });
-
+console.log(data)
 const isLoading = ref(false);
 let errorMessage = ref('');
 
 const { fetch: refreshSession } = useUserSession()
 
-const input = reactive({
-    book_title: data.value?.book_title,
-    kind_of_book: data.value?.kind_of_book,
-    book_author: data.value?.book_author,
-    book_start_date: data.value?.book_start_date,
-    book_end_date: data.value?.book_end_date,
-    notes: data.value?.notes,
-    booklist: data.value?.booklist,
-});
+const input = reactive(data.value);
 
 async function log() {
     isLoading.value = true;
     $fetch('/api/user/books/books', {
-        method: 'POST',
+        method: 'PUT',
         body: input
     })
         .then(async () => {
@@ -40,14 +32,14 @@ async function log() {
 };
 </script>
 <template>
-    <div class="relative flex flex-col w-full max-w-3xl p-3 mx-auto overflow-hidden">
+    <div v-if="!pending_data" class="relative flex flex-col w-full max-w-3xl p-3 mx-auto overflow-hidden">
+
+        <div class="flex justify-center py-4">
+            <NuxtImg class="object-cover h-60" :src="data?.book_image" />
+        </div>
 
         <transition name="slide-up" mode="out-in">
-
-            <!-- <div>
-            <NuxtImg class="object-cover w-40 h-60" :src="item?.book_image" />
-        </div> -->
-            <form v-if="!pending_data" @submit.prevent="log" class="space-y-6">
+            <form @submit.prevent="log" class="space-y-6">
                 <div v-motion="{ ...inputVarient() }">
                     <label for="text" class="block text-sm font-medium text-gray-300 mb-1">Kind of book</label>
 
