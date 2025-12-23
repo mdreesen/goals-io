@@ -7,7 +7,6 @@ const props = defineProps({
         required: true
     },
 });
-
 </script>
 
 <template>
@@ -19,12 +18,10 @@ const props = defineProps({
             container: 'ms-0'
         }">
         <div class="h-60 flex gap-4">
-            <!-- <img class="object-cover w-40 h-60" :src="item?.book_image" width="320" height="320"> -->
             <NuxtLink :to="`/dashboard/mind/books/${[item?._id]}`"
                 class="flex items-center w-full text-2xl font-extrabold">
                 <NuxtImg class="object-cover h-60" :src="item?.book_image" />
             </NuxtLink>
-
         </div>
     </UCarousel>
 </template>

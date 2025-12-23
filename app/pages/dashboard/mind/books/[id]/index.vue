@@ -4,25 +4,64 @@ import { selection_book_kinds, selection_save } from '~/utils/dropdowns/selectio
 
 const route = useRoute();
 
-const { data: data, pending: pending_data } = await useFetch(`/api/user/books/${route.params.id}`, { lazy: true });
-console.log(data)
+const { data: data, pending: pending_data } = await useFetch(`/api/user/books/${route.params.id}`);
+
+const input = reactive({
+    book_author: "",
+    book_end_date: "",
+    book_image: "",
+    book_start_date: "",
+    book_title: "",
+    booklist: "",
+    kind_of_book: "",
+    notes: ""
+});
+
+if (data.value) {
+    input.book_author = data.value.book_author;
+    input.book_end_date = data.value.book_end_date;
+    input.book_image = data.value.book_image;
+    input.book_start_date = data.value.book_start_date
+    input.book_title = data.value.book_title;
+    input.booklist = data.value.booklist
+    input.kind_of_book = data.value.kind_of_book
+    input.notes = data.value.notes
+};
+
 const isLoading = ref(false);
 let errorMessage = ref('');
-
-const { fetch: refreshSession } = useUserSession()
-
-const input = reactive(data.value);
+const selectedDateTime = ref()
 
 async function log() {
     isLoading.value = true;
-    $fetch('/api/user/books/books', {
-        method: 'PUT',
+    $fetch(`/api/user/books/${route.params.id}`, {
+        method: 'POST',
         body: input
     })
         .then(async () => {
             await refreshSession();
 
             isLoading.value = false;
+        })
+        .catch(async (error) => {
+            console.log(error);
+            errorMessage.value = error.statusMessage;
+            isLoading.value = false;
+        });
+};
+
+async function delete_log() {
+    isLoading.value = true;
+    $fetch(`/api/user/books/${route.params.id}`, {
+        method: 'DELETE',
+        body: input
+    })
+        .then(async () => {
+            await refreshSession();
+
+            isLoading.value = false;
+            await navigateTo('/dashboard/mind');
+
         })
         .catch(async (error) => {
             console.log(error);
@@ -83,10 +122,15 @@ async function log() {
 
                 <div v-motion="{ ...inputVarient() }">
                     <baseLabel text="Start" />
-                    <baseDatePicker v-model="input.book_start_date" />
+                    <UInput type="datetime-local" id="event-date" v-model="selectedDateTime" />
+                    <p>Selected Date: {{ selectedDateTime }}</p>
                 </div>
 
-                <baseButtonSubmit text="Save" :isLoading="isLoading" />
+                <div class="flex flex-col gap-8 pb-4">
+                    <baseButtonSubmit text="Save" :isLoading="isLoading" />
+                    <baseButtonCancel text="Cancel" path="/dashboard/mind" :isLoading="isLoading" />
+                    <baseButtonDelete @click="delete_log" text="Delete" :isLoading="isLoading" />
+                </div>
             </form>
         </transition>
     </div>
