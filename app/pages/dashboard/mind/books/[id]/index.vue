@@ -1,10 +1,13 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
 import { selection_book_kinds, selection_save } from '~/utils/dropdowns/selections';
+import { getLocalTimeZone, today, CalendarDate } from '@internationalized/date'
+import { useFormatDate } from '~/utils/date';
 
 const route = useRoute();
 
 const { data: data, pending: pending_data } = await useFetch(`/api/user/books/${route.params.id}`);
+const { fetch: refreshSession } = useUserSession();
 
 const input = reactive({
     book_author: "",
@@ -30,7 +33,8 @@ if (data.value) {
 
 const isLoading = ref(false);
 let errorMessage = ref('');
-const selectedDateTime = ref()
+const selectedDateTime = ref();
+const date = ref(new CalendarDate(today(getLocalTimeZone()).year, today(getLocalTimeZone()).month, today(getLocalTimeZone()).day)) as any;
 
 async function log() {
     isLoading.value = true;
@@ -121,10 +125,14 @@ async function delete_log() {
                 </div>
 
                 <div v-motion="{ ...inputVarient() }">
-                    <baseLabel text="Start" />
-                    <UInput type="datetime-local" id="event-date" v-model="selectedDateTime" />
-                    <p>Selected Date: {{ selectedDateTime }}</p>
-                </div>
+              <baseLabel text="Start" />
+              <UInputDate v-model="date" icon="i-lucide-calendar" />
+            </div>
+
+            <div v-motion="{ ...inputVarient() }">
+              <baseLabel text="End" />
+              <UInputDate v-model="date" icon="i-lucide-calendar" />
+            </div>
 
                 <div class="flex flex-col gap-8 pb-4">
                     <baseButtonSubmit text="Save" :isLoading="isLoading" />

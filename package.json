@@ -13,7 +13,7 @@
   "dependencies": {
     "@internationalized/date": "^3.10.1",
     "@nuxt/image": "^1.11.0",
-    "@nuxt/ui": "^4.0.0",
+    "@nuxt/ui": "^4.3.0",
     "@pinia/nuxt": "^0.11.2",
     "@tailwindcss/vite": "^4.1.13",
     "@vite-pwa/nuxt": "^1.0.4",
@@ -23,7 +23,7 @@
     "lucide-vue-next": "^0.556.0",
     "mongodb": "^6.20.0",
     "mongoose": "^8.18.2",
-    "nuxt": "^4.1.2",
+    "nuxt": "^4.2.2",
     "nuxt-auth-utils": "^0.5.25",
     "nuxt-charts": "^0.2.4",
     "nuxt-time": "^1.0.3",

@@ -1,6 +1,8 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { ref, computed, watch } from 'vue';
 import { selection_book_kinds, selection_save } from '~/utils/dropdowns/selections';
+import { getLocalTimeZone, today, CalendarDate } from '@internationalized/date'
+import { useFormatDate } from '~/utils/date';
 
 const props = defineProps({
   data: {
@@ -14,24 +16,23 @@ let addBook = ref(false)
 const isLoading = ref(false);
 let errorMessage = ref('');
 
-const { fetch: refreshSession } = useUserSession()
+const date = ref(new CalendarDate(today(getLocalTimeZone()).year, today(getLocalTimeZone()).month, today(getLocalTimeZone()).day)) as any;
+
+const { fetch: refreshSession } = useUserSession();
 
 const input = reactive({
   book_title: '',
   kind_of_book: '',
   book_author: '',
-  book_start_date: '',
-  book_end_date: '',
+  book_start_date: useFormatDate(date.value.toDate(getLocalTimeZone())),
   notes: '',
   booklist: false,
 });
 
 const useBookForm = () => {
-  console.log('Click on')
   return addBook.value = true
 };
 const closeBookForm = () => {
-  console.log('Click off')
   return addBook.value = false
 }
 
@@ -110,7 +111,7 @@ async function log() {
 
             <div v-motion="{ ...inputVarient() }">
               <baseLabel text="Start" />
-              <baseDatePicker v-model="input.book_start_date" />
+              <UInputDate v-model="date" icon="i-lucide-calendar" />
             </div>
 
             <baseButtonSubmit text="Save" :isLoading="isLoading" />
