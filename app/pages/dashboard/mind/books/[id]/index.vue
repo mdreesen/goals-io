@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
 import { selection_book_kinds, selection_save } from '~/utils/dropdowns/selections';
-import { getLocalTimeZone, today, CalendarDate } from '@internationalized/date'
+import { getLocalTimeZone, CalendarDate } from '@internationalized/date'
 import { useFormatDate, yearMonthDayFormat } from '~/utils/date';
 
 
@@ -23,7 +23,7 @@ const input = reactive({
     book_start_date: formattedStartDate.value,
     book_end_date: formattedEndDate.value,
     book_title: "",
-    booklist: "",
+    booklist: false,
     kind_of_book: "",
     notes: ""
 });
@@ -38,27 +38,26 @@ watch(dateStart, () => {
     input.book_start_date = formattedStartDate.value;
 }, { immediate: true });
 
-console.log(formattedEndDate.value)
-
 if (data.value) {
     input.book_author = data.value.book_author;
+    input.book_start_date = formattedStartDate.value;
     input.book_end_date = formattedEndDate.value;
     input.book_image = data.value.book_image;
-    input.book_end_date = data.value.book_end_date;
     input.book_title = data.value.book_title;
-    input.booklist = data.value.booklist;
+    input.booklist = data.value.booklist === 'true';
     input.kind_of_book = data.value.kind_of_book;
     input.notes = data.value.notes;
 };
 
 async function log() {
     isLoading.value = true;
-    $fetch(`/api/user/books/${route.params.id}`, {
-        method: 'POST',
+    $fetch(`/api/user/books/${route.params.id}/books`, {
+        method: 'PUT',
         body: input
     })
         .then(async () => {
             await refreshSession();
+            await navigateTo('/dashboard/mind');
 
             isLoading.value = false;
         })

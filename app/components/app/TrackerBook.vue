@@ -27,7 +27,7 @@ const input = reactive({
   book_author: '',
   book_start_date: formattedDate.value,
   notes: '',
-  booklist: false,
+  booklist: '',
 });
 
 watch(date, () => {
