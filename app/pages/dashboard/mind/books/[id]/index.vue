@@ -29,14 +29,8 @@ const input = reactive({
     notes: ""
 });
 
-console.log('dateEnd', data.value)
 
 watch(dateEnd, () => {
-    // if (data?.book_end_date) {
-    //     dateEnd.value = new CalendarDate(yearMonthDayFormat(data.value.book_end_date).year, yearMonthDayFormat(data.value.book_end_date).month, yearMonthDayFormat(data.value.book_end_date).day)
-    //     formattedEndDate.value = useFormatDate(dateStart.value.toDate(getLocalTimeZone())) ?? '';
-    //     input.book_end_date = formattedStartDate.value;
-    // }
     if (dateEnd.value?.year && dateEnd.value?.month && dateEnd.value?.day) {
         useEndDate.value = new CalendarDate(dateEnd.value?.year, dateEnd.value?.month, dateEnd.value?.day)
         formattedEndDate.value = useFormatDate(useEndDate.value.toDate(getLocalTimeZone())) ?? '';
