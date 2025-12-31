@@ -15,8 +15,9 @@ const props = defineProps({
 let addBook = ref(false)
 const isLoading = ref(false);
 let errorMessage = ref('');
+const formattedDate = ref();
 
-const date = ref(new CalendarDate(today(getLocalTimeZone()).year, today(getLocalTimeZone()).month, today(getLocalTimeZone()).day)) as any;
+let date = ref(new CalendarDate(today(getLocalTimeZone()).year, today(getLocalTimeZone()).month, today(getLocalTimeZone()).day)) as any;
 
 const { fetch: refreshSession } = useUserSession();
 
@@ -24,10 +25,15 @@ const input = reactive({
   book_title: '',
   kind_of_book: '',
   book_author: '',
-  book_start_date: useFormatDate(date.value.toDate(getLocalTimeZone())),
+  book_start_date: formattedDate.value,
   notes: '',
   booklist: false,
 });
+
+watch(date, () => {
+  formattedDate.value = useFormatDate(date.value.toDate(getLocalTimeZone()));
+  input.book_start_date = formattedDate.value
+}, { immediate: true });
 
 const useBookForm = () => {
   return addBook.value = true

@@ -21,16 +21,16 @@ const { data: stats, pending: pending_stats } = await useFetch('/api/stats', { l
             <baseHeader text="Your Overview" />
 
             <div class="container-cards" v-if="!pending_stats">
-                <appCard text="Books" color="bg-gradient-to-br from-green-600 to-green-700"
+                <baseOverviewCard text="Books" color="bg-gradient-to-br from-green-600 to-green-700"
                     icon="material-symbols:book-ribbon-outline-rounded" collection="books" :data="stats" />
-                <appCard text="Cold Soak" color="bg-gradient-to-br from-blue-300 to-blue-500"
+                <baseOverviewCard text="Cold Soak" color="bg-gradient-to-br from-blue-300 to-blue-500"
                     icon="material-symbols:snowing-heavy" collection="coldSoak" :data="stats" />
-                <appCard text="Fasting" color="bg-gradient-to-br from-yellow-600 to-yellow-700"
+                <baseOverviewCard text="Fasting" color="bg-gradient-to-br from-yellow-600 to-yellow-700"
                     icon="material-symbols:nest-clock-farsight-analog-outline-rounded" collection="fasting"
                     :data="stats" />
-                <appCard text="Daily Water" color="bg-gradient-to-br from-blue-600 to-blue-700"
+                <baseOverviewCard text="Daily Water" color="bg-gradient-to-br from-blue-600 to-blue-700"
                     icon="material-symbols:water-medium-outline-rounded" collection="dailyWater" :data="stats" />
-                <appCard text="Weight" color="bg-gradient-to-br from-purple-600 to-purple-700"
+                <baseOverviewCard text="Weight" color="bg-gradient-to-br from-purple-600 to-purple-700"
                     icon="material-symbols:monitor-weight-outline" collection="weight" :data="stats" />
             </div>
         </section>

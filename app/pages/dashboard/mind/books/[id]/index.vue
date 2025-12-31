@@ -125,14 +125,14 @@ async function delete_log() {
                 </div>
 
                 <div v-motion="{ ...inputVarient() }">
-              <baseLabel text="Start" />
-              <UInputDate v-model="date" icon="i-lucide-calendar" />
-            </div>
+                    <baseLabel text="Start" />
+                    <UInputDate v-model="date" icon="i-lucide-calendar" />
+                </div>
 
-            <div v-motion="{ ...inputVarient() }">
-              <baseLabel text="End" />
-              <UInputDate v-model="date" icon="i-lucide-calendar" />
-            </div>
+                <div v-motion="{ ...inputVarient() }">
+                    <baseLabel text="End" />
+                    <UInputDate v-model="date" icon="i-lucide-calendar" />
+                </div>
 
                 <div class="flex flex-col gap-8 pb-4">
                     <baseButtonSubmit text="Save" :isLoading="isLoading" />

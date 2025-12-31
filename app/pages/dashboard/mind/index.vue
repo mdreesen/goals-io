@@ -3,15 +3,15 @@ definePageMeta({
     layout: 'authenticated',
 });
 
+// const { data: affirmationData, pending: pending_affirmations } = await useFetch('/api/user/affirmations/affirmations', { lazy: true });
 const { data: bookData, pending: pending_books } = await useFetch('/api/user/books/books', { lazy: true });
-
 </script>
 
 <template>
     <div class="container-categories">
         <!-- <div>
             <baseHeader text="Affirmations" />
-            <appTrackerAffirmation />
+            <appTrackerAffirmation v-if="!pending_affirmations" :data="affirmationData" />
         </div> -->
 
         <div>
