@@ -21,7 +21,7 @@ export async function images_books({ book_title, book_author }: any) {
         const useCovers = filterTitles.length > 0 ? filterTitles : useOpenLibraryTitle?.docs;
         const findCover = useCovers.find((item: any) => item?.cover_i);
 
-        return findCover?.cover_i ? `https://covers.openlibrary.org/a/id/${findCover?.cover_i}.jpg` : `https://placehold.co/600x400?text=No+Image+Found`;
+        return findCover?.cover_i ? `https://covers.openlibrary.org/a/id/${findCover?.cover_i}.jpg` : `/images/thumbnail_none.png`;
     }
     catch (error) {
         console.log(error);

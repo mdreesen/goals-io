@@ -2,39 +2,54 @@
 import { ref, computed } from 'vue';
 import { selection_book_kinds, selection_save } from '~/utils/dropdowns/selections';
 import { getLocalTimeZone, today, CalendarDate } from '@internationalized/date'
-import { useFormatDate } from '~/utils/date';
+import { useFormatDate, yearMonthDayFormat } from '~/utils/date';
+
 
 const route = useRoute();
 
 const { data: data, pending: pending_data } = await useFetch(`/api/user/books/${route.params.id}`);
 const { fetch: refreshSession } = useUserSession();
 
+const isLoading = ref(false);
+let errorMessage = ref('');
+const dateStart = ref(new CalendarDate(yearMonthDayFormat(data.value.book_start_date).year, yearMonthDayFormat(data.value.book_start_date).month, yearMonthDayFormat(data.value.book_start_date).day)) as any;
+const dateEnd = ref(new CalendarDate(yearMonthDayFormat(data.value.book_end_date).year, yearMonthDayFormat(data.value.book_end_date).month, yearMonthDayFormat(data.value.book_end_date).day)) as any;
+const formattedStartDate = ref();
+const formattedEndDate = ref();
+
 const input = reactive({
     book_author: "",
-    book_end_date: "",
     book_image: "",
-    book_start_date: "",
+    book_start_date: formattedStartDate.value,
+    book_end_date: formattedEndDate.value,
     book_title: "",
     booklist: "",
     kind_of_book: "",
     notes: ""
 });
 
+watch(dateEnd, () => {
+    formattedEndDate.value = useFormatDate(dateEnd.value.toDate(getLocalTimeZone()));
+    input.book_end_date = formattedEndDate.value;
+}, { immediate: true });
+
+watch(dateStart, () => {
+    formattedStartDate.value = useFormatDate(dateStart.value.toDate(getLocalTimeZone()));
+    input.book_start_date = formattedStartDate.value;
+}, { immediate: true });
+
+console.log(formattedEndDate.value)
+
 if (data.value) {
     input.book_author = data.value.book_author;
-    input.book_end_date = data.value.book_end_date;
+    input.book_end_date = formattedEndDate.value;
     input.book_image = data.value.book_image;
-    input.book_start_date = data.value.book_start_date
+    input.book_end_date = data.value.book_end_date;
     input.book_title = data.value.book_title;
-    input.booklist = data.value.booklist
-    input.kind_of_book = data.value.kind_of_book
-    input.notes = data.value.notes
+    input.booklist = data.value.booklist;
+    input.kind_of_book = data.value.kind_of_book;
+    input.notes = data.value.notes;
 };
-
-const isLoading = ref(false);
-let errorMessage = ref('');
-const selectedDateTime = ref();
-const date = ref(new CalendarDate(today(getLocalTimeZone()).year, today(getLocalTimeZone()).month, today(getLocalTimeZone()).day)) as any;
 
 async function log() {
     isLoading.value = true;
@@ -126,12 +141,12 @@ async function delete_log() {
 
                 <div v-motion="{ ...inputVarient() }">
                     <baseLabel text="Start" />
-                    <UInputDate v-model="date" icon="i-lucide-calendar" />
+                    <UInputDate v-model="dateStart" icon="i-lucide-calendar" />
                 </div>
 
                 <div v-motion="{ ...inputVarient() }">
                     <baseLabel text="End" />
-                    <UInputDate v-model="date" icon="i-lucide-calendar" />
+                    <UInputDate v-model="dateEnd" icon="i-lucide-calendar" />
                 </div>
 
                 <div class="flex flex-col gap-8 pb-4">
