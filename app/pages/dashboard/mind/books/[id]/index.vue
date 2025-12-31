@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { ref, watch } from 'vue';
 import { selection_book_kinds, selection_save } from '~/utils/dropdowns/selections';
 import { getLocalTimeZone, CalendarDate } from '@internationalized/date'
 import { useFormatDate, yearMonthDayFormat } from '~/utils/date';
@@ -13,7 +13,8 @@ const { fetch: refreshSession } = useUserSession();
 const isLoading = ref(false);
 let errorMessage = ref('');
 const dateStart = ref(new CalendarDate(yearMonthDayFormat(data.value.book_start_date).year, yearMonthDayFormat(data.value.book_start_date).month, yearMonthDayFormat(data.value.book_start_date).day)) as any;
-const dateEnd = ref(new CalendarDate(yearMonthDayFormat(data.value.book_end_date).year, yearMonthDayFormat(data.value.book_end_date).month, yearMonthDayFormat(data.value.book_end_date).day)) as any;
+const dateEnd = ref(data.value.book_end_date || data.value.book_end_date === '' ? new CalendarDate(yearMonthDayFormat(data.value.book_end_date).year, yearMonthDayFormat(data.value.book_end_date).month, yearMonthDayFormat(data.value.book_end_date).day) : '') as any;
+const useEndDate = ref();
 const formattedStartDate = ref();
 const formattedEndDate = ref();
 
@@ -28,13 +29,23 @@ const input = reactive({
     notes: ""
 });
 
+console.log('dateEnd', data.value)
+
 watch(dateEnd, () => {
-    formattedEndDate.value = useFormatDate(dateEnd.value.toDate(getLocalTimeZone()));
-    input.book_end_date = formattedEndDate.value;
+    // if (data?.book_end_date) {
+    //     dateEnd.value = new CalendarDate(yearMonthDayFormat(data.value.book_end_date).year, yearMonthDayFormat(data.value.book_end_date).month, yearMonthDayFormat(data.value.book_end_date).day)
+    //     formattedEndDate.value = useFormatDate(dateStart.value.toDate(getLocalTimeZone())) ?? '';
+    //     input.book_end_date = formattedStartDate.value;
+    // }
+    if (dateEnd.value?.year && dateEnd.value?.month && dateEnd.value?.day) {
+        useEndDate.value = new CalendarDate(dateEnd.value?.year, dateEnd.value?.month, dateEnd.value?.day)
+        formattedEndDate.value = useFormatDate(useEndDate.value.toDate(getLocalTimeZone())) ?? '';
+        input.book_end_date = formattedEndDate.value;
+    }
 }, { immediate: true });
 
 watch(dateStart, () => {
-    formattedStartDate.value = useFormatDate(dateStart.value.toDate(getLocalTimeZone()));
+    formattedStartDate.value = useFormatDate(dateStart.value.toDate(getLocalTimeZone())) ?? '';
     input.book_start_date = formattedStartDate.value;
 }, { immediate: true });
 

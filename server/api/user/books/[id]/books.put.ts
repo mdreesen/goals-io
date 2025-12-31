@@ -34,7 +34,6 @@ export default defineEventHandler(async (event) => {
     const id = getRouterParam(event, 'id');
 
     const useImages = await images_books({ book_title: book_title, book_author: book_author });
-
     await User.findOneAndUpdate(
       { 'books._id': id },
       { $set: { 'books.$': { ...obj, book_image: useImages } } },

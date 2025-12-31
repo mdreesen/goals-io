@@ -6,10 +6,13 @@ export default defineEventHandler(async (event) => {
     const user = await loggedInUser(event);
     const latestBooks = user?.books?.reverse() ?? [];
     const bookOrder = user?.books ?? [];
+    const currentRead = user?.books.filter((item) => !item?.book_end_date || item?.book_end_date === '') ?? [];
 
     function filterBooks(data: Array<any>) {
-      return data?.filter((item: any) => item.booklist.includes('No') || !item.booklist);
+      return data?.filter((item: any) => item.booklist.includes('false') || !item.booklist);
     };
+
+    console.log('currentRead', currentRead)
 
     return {
       latestData: latestData(10, bookOrder),
