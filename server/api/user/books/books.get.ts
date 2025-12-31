@@ -12,8 +12,6 @@ export default defineEventHandler(async (event) => {
       return data?.filter((item: any) => item.booklist.includes('false') || !item.booklist);
     };
 
-    console.log('currentRead', currentRead)
-
     return {
       latestData: latestData(10, bookOrder),
       current: filterBooks(latestBooks)
