@@ -1,9 +1,39 @@
+import { z } from 'zod';
+import loggedInUser from "~/utils/loggedInUser";
+
+import { Model } from 'mongoose';
+import UserModel from '../../../../lib/database/models/User';
+import { User } from '~/types/user';
+const User = UserModel as Model<User>;
+
+const bodySchema = z.object({
+  type: z.string(),
+  duration: z.string(),
+  description: z.string(),
+  sets: z.string(),
+  date: z.string()
+})
+
 export default defineEventHandler(async (event) => {
-    // make sure the user is logged in
-    // This will throw a 401 error if the request doesn't come from a valid user session
-    const { user } = await requireUserSession(event)
-  
-    // TODO: Fetch some stats based on the user
-  
-    return {}
-  });
+  const { type, duration, description, sets, date} = await readValidatedBody(event, bodySchema.parse);
+
+  const obj = {
+    type: type,
+    duration: duration,
+    description: description,
+    sets: sets,
+    date: date
+  };
+
+  try {
+    const user = await loggedInUser(event);
+    await User.findOneAndUpdate({ email: user?.email }, { $addToSet: { workout: obj } }, { new: true });
+
+  } catch (error) {
+    console.log(error);
+    throw createError({
+      statusCode: 401,
+      message: 'Please try again'
+    });
+  };
+});

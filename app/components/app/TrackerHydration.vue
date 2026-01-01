@@ -43,13 +43,14 @@ async function log() {
   isLoading.value = true;
   $fetch('/api/user/water/water', {
     method: 'POST',
-    body: { 
+    body: {
       water_intake: currentOz.value.toString(),
       date: formatDate()
-     }
+    }
   })
     .then(async () => {
       await refreshSession();
+      await refreshNuxtData();
 
       isLoading.value = false;
     })
@@ -59,15 +60,6 @@ async function log() {
       isLoading.value = false;
     });
 };
-
-// Submit Custom Amount
-// const submitCustom = () => {
-//   if (customAmount.value && customAmount.value > 0) {
-//     adjustWater(customAmount.value);
-//     showCustomInput.value = false;
-//     customAmount.value = null;
-//   }
-// };
 </script>
 
 <template>
@@ -91,7 +83,7 @@ async function log() {
           </span>
         </div>
 
-        <div class="absolute left-0 w-full h-full transition-all duration-1000 ease-[cubic-bezier(0.4,0,0.2,1)]"
+        <div class="absolute left-0 w-full h-full transition-all duration-1000 ease-in-out"
           :style="{ top: `${wavePosition}%` }">
           <div
             class="wave absolute left-1/2 -top-[160%] w-[200%] h-[200%] -ml-[100%] rounded-[40%] bg-white opacity-10 animate-spin-slow" />
@@ -103,7 +95,7 @@ async function log() {
           <div v-if="isComplete"
             class="absolute inset-0 z-20 flex items-center justify-center bg-emerald-500/20 backdrop-blur-[2px]">
             <div class="bg-emerald-500 text-black p-3 rounded-full shadow-lg animate-pop">
-              <Check class="w-8 h-8 stroke-[3]" />
+              <Check class="w-8 h-8 stroke-3" />
             </div>
           </div>
         </transition>
@@ -116,7 +108,7 @@ async function log() {
       <Transition mode="out-in" name="slide-up">
         <div class="flex flex-col items-center justify-center gap-8 w-full top-0 left-0">
           <div class="flex items-center text-center gap-4">
-            <button @click.stop="adjustWater(-8)"
+            <button @click.stop="adjustWater(-1)"
               class="w-12 h-12 rounded-full flex items-center justify-center border border-neutral-800 text-neutral-500 hover:text-white hover:border-neutral-600 transition-colors focus:outline-none"
               aria-label="Remove water">
               <Minus class="w-5 h-5" />
@@ -148,17 +140,14 @@ async function log() {
               </button>
               <span class="text-[10px] text-neutral-500 font-medium">+18oz</span>
             </div>
+
+            <button @click.stop="adjustWater(1)"
+              class="w-12 h-12 rounded-full flex items-center justify-center border border-neutral-800 text-neutral-500 hover:text-white hover:border-neutral-600 transition-colors focus:outline-none"
+              aria-label="Remove water">
+              <Plus class="w-5 h-5" />
+            </button>
           </div>
 
-          <!-- <div>
-            <div class="relative">
-              <form @submit.prevent="log">
-                <input ref="inputRef" v-model="customAmount" type="number" placeholder="0" @keydown.enter="submitCustom"
-                  class="w-full bg-transparent border-b-2 border-neutral-700 text-center text-3xl font-bold text-white py-2 focus:outline-none focus:border-blue-500 transition-colors placeholder:text-neutral-700 appearance-none" />
-                <span class="absolute right-2 bottom-3 text-neutral-500 text-sm font-medium">oz</span>
-              </form>
-            </div>
-          </div> -->
           <form class="w-full" @submit.prevent="log">
             <baseButtonSubmit text="Save" :isLoading="isLoading" />
           </form>

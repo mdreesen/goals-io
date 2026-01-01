@@ -32,10 +32,10 @@ const { data: latestWorkoutData, pending: pending_workout } = await useFetch('/a
             <baseHeader text="Weight" />
             <appTrackerWeight v-if="!pending_weight" :data="latestWeightData" />
         </div>
-<!-- 
+
         <div>
             <baseHeader text="Workout" />
             <appTrackerWorkout v-if="!pending_workout" :data="latestWorkoutData" />
-        </div> -->
+        </div>
     </div>
 </template>

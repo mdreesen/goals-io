@@ -24,6 +24,6 @@ export const selection_book_kinds = [
 ];
 
 export const selection_save = [
-    { label: 'Save', value: true },
     { label: 'No', value: false },
+    { label: 'Save', value: true },
 ];

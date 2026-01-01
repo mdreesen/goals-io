@@ -79,7 +79,7 @@ async function log() {
 
               <select id="status-select" v-model="input.kind_of_book" required
                 class="w-full rounded-xl border border-gray-600 bg-gray-700/50 py-3 px-4 text-lg text-white shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500">
-                <option disabled value="">Kind of book</option>
+                <option value="" disabled selected hidden>Kind of book</option>
                 <option v-for="kind in selection_book_kinds" :value="kind.value" :key="kind.label">
                   {{ kind.label }}
                 </option>
@@ -90,7 +90,7 @@ async function log() {
               <baseLabel text="Save for future reads" />
               <select id="status-select" v-model="input.booklist" required
                 class="w-full rounded-xl border border-gray-600 bg-gray-700/50 py-3 px-4 text-lg text-white shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500">
-                <option disabled value="">No</option>
+                <option value="" disabled selected hidden>Select</option>
                 <option v-for="status in selection_save" :value="status.value" :key="status.label">
                   {{ status.label }}
                 </option>
