@@ -1,4 +1,5 @@
 import loggedInUser from "~/utils/loggedInUser";
+import { filterYear } from "~/utils/formatters/months";
 
 export default defineEventHandler(async (event) => {
   try {
@@ -15,7 +16,7 @@ export default defineEventHandler(async (event) => {
       }
     });
 
-    return formatArray;
+    return filterYear(formatArray);
   } catch (error) {
     console.log(error);
     throw createError({

@@ -93,6 +93,7 @@ const weightSchema = new Schema(
     {
         weight: String || undefined,
         date: String || undefined,
+        weight_date: String || undefined,
     }, { timestamps: false });
 
 const workoutSchema = new Schema(

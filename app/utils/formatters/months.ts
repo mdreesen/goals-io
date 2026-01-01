@@ -161,4 +161,11 @@ export function monthStart({ data, startLabel }) {
             date: december_start,
         },
     ];
+};
+
+export function filterYear(data: any) {
+    const now = new Date();
+    const year = now.getFullYear();
+
+    return data.filter((item: any) => item?.date.includes(year) ?? '');
 }

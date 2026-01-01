@@ -1,4 +1,5 @@
 import loggedInUser from "~/utils/loggedInUser";
+import { filterYear } from "~/utils/formatters/months";
 
 export default defineEventHandler(async (event) => {
   try {
@@ -7,16 +8,17 @@ export default defineEventHandler(async (event) => {
     // Have to transform weight to Number...sad face
     const formatArray = user?.weight && user?.weight.map((item) => {
       const dailyWeight = (item as { weight: string }).weight ?? "";
+      const dailyDate = (item as { date: string }).date || (item as { weight_date: string }).weight_date;
 
       return {
         weight: Number(dailyWeight),
-        date: (item as { weight_date: string })?.weight_date,
+        date: dailyDate,
         starting_weight: (item as { starting_weight: string })?.starting_weight,
         _id: (item as { _id: string })?._id
       }
     });
 
-    return formatArray;
+    return filterYear(formatArray);
   } catch (error) {
     console.log(error);
     throw createError({
