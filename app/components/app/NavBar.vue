@@ -28,12 +28,12 @@ const items = computed<NavigationMenuItem[]>(() => [{
   <UHeader mode="slideover" class="border-none">
     <template #title>
       <!-- Logo/Brand Name -->
-      <NuxtLink to="/" class="flex items-center text-2xl font-extrabold h-[40px]">
+      <NuxtLink to="/" class="flex items-center text-2xl font-extrabold h-10">
         <span class="text-2xl font-bold">
           ASCΞND
         </span>
         <NuxtImg
-          class="h-[100px] w-[100px] opacity-60 left-[-58px] relative rounded-full object-cover scale-75 lg:hidden md:hidden"
+          class="h-25 w-25 opacity-60 -left-14.5 relative rounded-full object-cover scale-75 lg:hidden md:hidden"
           alt="White Raven Logo" format="webp" width="56px" height="100px" src="/images/logo_transparent_512x512.png" />
       </NuxtLink>
     </template>
