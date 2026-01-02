@@ -35,6 +35,7 @@ async function log() {
   })
     .then(async () => {
       await refreshSession();
+      await refreshNuxtData();
 
       isLoading.value = false;
     })
