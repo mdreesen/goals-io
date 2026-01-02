@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue';
+import { ref, watch } from 'vue';
 import { selection_book_kinds, selection_save } from '~/utils/dropdowns/selections';
 import { getLocalTimeZone, today, CalendarDate } from '@internationalized/date'
 import { useFormatDate } from '~/utils/date';
@@ -12,7 +12,6 @@ const props = defineProps({
   },
 });
 
-let addBook = ref(false)
 const isLoading = ref(false);
 let errorMessage = ref('');
 const formattedDate = ref();
@@ -34,13 +33,6 @@ watch(date, () => {
   formattedDate.value = useFormatDate(date.value.toDate(getLocalTimeZone()));
   input.book_start_date = formattedDate.value
 }, { immediate: true });
-
-const useBookForm = () => {
-  return addBook.value = true
-};
-const closeBookForm = () => {
-  return addBook.value = false
-}
 
 async function log() {
   isLoading.value = true;

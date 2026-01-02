@@ -29,13 +29,13 @@ textarea {
 .sections {
   display: flex;
   flex-direction: column;
-  gap: 4rem;
+  gap: 2rem;
   padding: 2rem 0 2rem 0;
 };
 
 .container-cards {
   display: flex;
-  gap: 4rem;
+  gap: 2rem;
   padding: 0 0 2rem 0;
   flex-flow: wrap;
   justify-content: center;

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import { formatDate } from '~/utils/date';
 
 const route = useRoute();
 
@@ -19,9 +20,12 @@ if (data.value) {
 
 async function log() {
     isLoading.value = true;
-    $fetch(`/api/user/gratitudes/${route.params.id}/gratitudes`, {
+    $fetch(`/api/user/gratitudes/${route.params.id}`, {
         method: 'PUT',
-        body: input
+        body: {
+            ...input,
+            date: formatDate()
+        }
     })
         .then(async () => {
             await refreshSession();
