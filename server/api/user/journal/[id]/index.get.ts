@@ -6,7 +6,7 @@ export default defineEventHandler(async (event) => {
     const id = getRouterParam(event, 'id');
 
     const user = await loggedInUser(event);
-    const data = user?.gratitudes ?? [];
+    const data = user?.journal ?? [];
 
     const dataArr = data.filter((item: any) => item.id.includes(id));
 

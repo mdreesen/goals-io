@@ -10,8 +10,8 @@ export default defineEventHandler(async (event) => {
     const id = getRouterParam(event, 'id');
 
     await User.findOneAndUpdate(
-      { 'gratitudes._id': id },
-      { $pull: { 'gratitudes': { _id: id } } },
+      { 'journal._id': id },
+      { $pull: { 'journal': { _id: id } } },
       { new: true });
 
   } catch (error) {

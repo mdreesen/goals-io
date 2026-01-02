@@ -6,24 +6,26 @@ import { User } from '~/types/user';
 const User = UserModel as Model<User>;
 
 const bodySchema = z.object({
-  gratitude: z.string().nullable(),
-  date: z.string().nullable(),
+  mood: z.string().nullable(),
+  title: z.string().nullable(),
+  entry: z.string().nullable()
 })
 
 export default defineEventHandler(async (event) => {
-  const { gratitude, date } = await readValidatedBody(event, bodySchema.parse);
+  const { mood, title, entry } = await readValidatedBody(event, bodySchema.parse);
 
   const obj = {
-    gratitude: gratitude,
-    date: date,
+    mood: mood,
+    title: title,
+    entry: entry
   };
 
   try {
     const id = getRouterParam(event, 'id');
 
     await User.findOneAndUpdate(
-      { 'gratitudes._id': id },
-      { $set: { 'gratitudes.$': { ...obj } } },
+      { 'journal._id': id },
+      { $set: { 'journal.$': { ...obj } } },
       { new: true });
 
   } catch (error) {

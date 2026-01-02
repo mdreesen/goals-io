@@ -6,7 +6,7 @@ import { mood } from "~/utils/dropdowns/selections";
 
 const route = useRoute();
 
-const { data: data, pending: pending_data } = await useFetch(`/api/user/books/${route.params.id}`);
+const { data: data, pending: pending_data } = await useFetch(`/api/user/journal/${route.params.id}`);
 const { fetch: refreshSession } = useUserSession();
 
 const isLoading = ref(false);
@@ -35,7 +35,7 @@ async function log() {
     })
         .then(async () => {
             await refreshSession();
-            await navigateTo('/dashboard/mind');
+            await navigateTo('/dashboard/spirit');
 
             isLoading.value = false;
         })
@@ -56,7 +56,7 @@ async function delete_log() {
             await refreshSession();
 
             isLoading.value = false;
-            await navigateTo('/dashboard/mind');
+            await navigateTo('/dashboard/spirit');
 
         })
         .catch(async (error) => {
@@ -95,7 +95,7 @@ async function delete_log() {
 
                 <div class="flex flex-col gap-8 pb-4">
                     <baseButtonSubmit text="Save" :isLoading="isLoading" />
-                    <baseButtonCancel text="Cancel" path="/dashboard/mind" :isLoading="isLoading" />
+                    <baseButtonCancel text="Cancel" path="/dashboard/spirit" :isLoading="isLoading" />
                     <baseButtonDelete @click="delete_log" text="Delete" :isLoading="isLoading" />
                 </div>
             </form>
