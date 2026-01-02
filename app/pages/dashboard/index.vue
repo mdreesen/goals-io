@@ -23,8 +23,8 @@ const { data: stats, pending: pending_stats } = await useFetch('/api/stats', { l
             <div class="container-cards" v-if="!pending_stats">
                 <baseOverviewCard text="Books" color="bg-gradient-to-br from-green-600 to-green-700"
                     icon="material-symbols:book-ribbon-outline-rounded" collection="books" :data="stats" />
-                <baseOverviewCard text="Cold Soak" color="bg-gradient-to-br from-blue-300 to-blue-500"
-                    icon="material-symbols:snowing-heavy" collection="coldSoak" :data="stats" />
+                <!-- <baseOverviewCard text="Cold Soak" color="bg-gradient-to-br from-blue-300 to-blue-500"
+                    icon="material-symbols:snowing-heavy" collection="coldSoak" :data="stats" /> -->
                 <baseOverviewCard text="Fasting" color="bg-gradient-to-br from-yellow-600 to-yellow-700"
                     icon="material-symbols:nest-clock-farsight-analog-outline-rounded" collection="fasting"
                     :data="stats" />
@@ -47,10 +47,10 @@ const { data: stats, pending: pending_stats } = await useFetch('/api/stats', { l
             </UContainer>
 
             <!-- Cold Soak Tracking -->
-            <UContainer>
+            <!-- <UContainer>
                 <baseSectionHeader text="Cold Soaks" />
                 <appChartBar v-if="!pending_cold_soaks" :data="cold_soaks" barName="date" barLabel="Total" />
-            </UContainer>
+            </UContainer> -->
 
             <!-- Water Tracking -->
             <UContainer>

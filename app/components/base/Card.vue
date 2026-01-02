@@ -3,7 +3,7 @@
 const props = defineProps({
   text: {
     type: String,
-    required: true
+    required: false
   },
   color: {
     type: String,
@@ -13,31 +13,34 @@ const props = defineProps({
     type: String,
     default: '',
   },
-  collection: {
+
+  iconNav: {
     type: String,
     default: '',
-  },
-  data: {
-    required: true,
   }
 });
+
+
 </script>
 
 <template>
-  <UCard variant="subtle" :class="`w-full max-w-lg divide-none ${props.color && props.color}`">
+  <UCard variant="subtle" :class="`w-full flex justify-between max-w-lg px-5 divide-none ${props.color && props.color}`">
     <template #header>
-      <div class="flex flex-col justify-center items-center">
-        <baseIcon v-if="props.icon" :iconName="props.icon" />
-        <span>{{ props.text }}</span>
+      <div class="flex h-full flex-col justify-center items-center">
+        <baseIcon v-if="props.icon" :iconName="props.icon" styles="text-green-400" />
       </div>
     </template>
 
     <div>
       <div class="flex flex-col justify-center items-center font-extrabold text-white">
-
+        <p>{{ text }}</p>
       </div>
     </div>
 
-    <template #footer></template>
+    <template #footer>
+      <div class="flex h-full flex-col justify-center items-center opacity-40">
+        <baseIcon v-if="props.iconNav" :iconName="props.iconNav" />
+      </div>
+    </template>
   </UCard>
 </template>

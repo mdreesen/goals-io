@@ -69,74 +69,70 @@ async function log() {
 
     <div class="flex flex-col items-center justify-center w-full max-w-sm mx-auto p-8 font-sans">
 
-      <div v-if="addBook" class="w-full relative mb-4">
+      <div class="w-full relative mb-4 flex justify-center">
 
         <transition name="slide-up" mode="out-in">
 
-          <form @submit.prevent="log" class="space-y-6">
-            <div v-motion="{ ...inputVarient() }">
-              <label for="text" class="block text-sm font-medium text-gray-300 mb-1">Kind of book</label>
+          <UDrawer title="Drawer with description"
+            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit.">
+            <UButton label="Add Book" color="neutral" variant="subtle" trailing-icon="material-symbols:book-4-spark-rounded" />
 
-              <select id="status-select" v-model="input.kind_of_book" required
-                class="w-full rounded-xl border border-gray-600 bg-gray-700/50 py-3 px-4 text-lg text-white shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500">
-                <option value="" disabled selected hidden>Kind of book</option>
-                <option v-for="kind in selection_book_kinds" :value="kind.value" :key="kind.label">
-                  {{ kind.label }}
-                </option>
-              </select>
-            </div>
+            <template #body>
+              <form @submit.prevent="log" class="space-y-6">
+                <div v-motion="{ ...inputVarient() }">
+                  <label for="text" class="block text-sm font-medium text-gray-300 mb-1">Kind of book</label>
 
-            <div v-motion="{ ...inputVarient() }">
-              <baseLabel text="Save for future reads" />
-              <select id="status-select" v-model="input.booklist" required
-                class="w-full rounded-xl border border-gray-600 bg-gray-700/50 py-3 px-4 text-lg text-white shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500">
-                <option value="" disabled selected hidden>Select</option>
-                <option v-for="status in selection_save" :value="status.value" :key="status.label">
-                  {{ status.label }}
-                </option>
-              </select>
-            </div>
+                  <select id="status-select" v-model="input.kind_of_book" required
+                    class="w-full rounded-xl border border-gray-600 bg-gray-700/50 py-3 px-4 text-lg text-white shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option value="" disabled selected hidden>Kind of book</option>
+                    <option v-for="kind in selection_book_kinds" :value="kind.value" :key="kind.label">
+                      {{ kind.label }}
+                    </option>
+                  </select>
+                </div>
 
-            <div v-motion="{ ...inputVarient() }">
-              <baseLabel text="Title" />
-              <input id="text" type="text" v-model="input.book_title" placeholder="Title" required
-                class="w-full rounded-xl border border-gray-600 bg-gray-700/50 py-3 px-4 text-lg text-white shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500" />
-            </div>
+                <div v-motion="{ ...inputVarient() }">
+                  <baseLabel text="Save for future reads" />
+                  <select id="status-select" v-model="input.booklist" required
+                    class="w-full rounded-xl border border-gray-600 bg-gray-700/50 py-3 px-4 text-lg text-white shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option value="" disabled selected hidden>Select</option>
+                    <option v-for="status in selection_save" :value="status.value" :key="status.label">
+                      {{ status.label }}
+                    </option>
+                  </select>
+                </div>
 
-            <div v-motion="{ ...inputVarient() }">
-              <baseLabel text="Author" />
-              <input id="text" type="text" v-model="input.book_author" placeholder="Author" required
-                class="w-full rounded-xl border border-gray-600 bg-gray-700/50 py-3 px-4 text-lg text-white shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500" />
-            </div>
+                <div v-motion="{ ...inputVarient() }">
+                  <baseLabel text="Title" />
+                  <input id="text" type="text" v-model="input.book_title" placeholder="Title" required
+                    class="w-full rounded-xl border border-gray-600 bg-gray-700/50 py-3 px-4 text-lg text-white shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                </div>
 
-            <div v-motion="{ ...inputVarient() }">
-              <baseLabel text="Notes" />
-              <textarea id="text" type="text" v-model="input.notes" placeholder="Book notes"
-                class="w-full rounded-xl border border-gray-600 bg-gray-700/50 py-3 px-4 text-lg text-white shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500" />
-            </div>
+                <div v-motion="{ ...inputVarient() }">
+                  <baseLabel text="Author" />
+                  <input id="text" type="text" v-model="input.book_author" placeholder="Author" required
+                    class="w-full rounded-xl border border-gray-600 bg-gray-700/50 py-3 px-4 text-lg text-white shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                </div>
 
-            <div v-motion="{ ...inputVarient() }">
-              <baseLabel text="Start" />
-              <UInputDate v-model="date" icon="i-lucide-calendar" />
-            </div>
+                <div v-motion="{ ...inputVarient() }">
+                  <baseLabel text="Notes" />
+                  <textarea id="text" type="text" v-model="input.notes" placeholder="Book notes"
+                    class="w-full rounded-xl border border-gray-600 bg-gray-700/50 py-3 px-4 text-lg text-white shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                </div>
 
-            <baseButtonSubmit text="Save" :isLoading="isLoading" />
-          </form>
+                <div v-motion="{ ...inputVarient() }">
+                  <baseLabel text="Start" />
+                  <UInputDate v-model="date" icon="i-lucide-calendar" />
+                </div>
+
+                <baseButtonSubmit text="Save" :isLoading="isLoading" />
+              </form>
+            </template>
+          </UDrawer>
+
+
         </transition>
       </div>
-
-      <div>
-        <button v-if="!addBook" class="h-4 w-full" @click="useBookForm()">
-          <baseLabel text="Add Book" />
-          <baseIcon iconName="material-symbols:book-4-spark-rounded" size="40" />
-        </button>
-
-        <button v-if="addBook" class="h-4 w-full" @click="closeBookForm()">
-          <baseLabel text="Close" />
-          <baseIcon iconName="material-symbols:arrow-circle-up-outline-rounded" size="40" />
-        </button>
-      </div>
-
     </div>
   </div>
 </template>
