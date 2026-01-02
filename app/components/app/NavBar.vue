@@ -34,7 +34,7 @@ const items = computed<NavigationMenuItem[]>(() => [{
         </span>
         <NuxtImg
           class="h-25 w-25 opacity-60 -left-14.5 relative rounded-full object-cover lg:hidden md:hidden"
-          alt="White Raven Logo" format="webp" width="56px" height="100px" src="/images/logo_transparent_512x512.png" />
+          alt="White Raven Logo" format="webp" width="200px" height="200px" src="/images/logo_transparent_512x512.png" />
       </NuxtLink>
     </template>
 
