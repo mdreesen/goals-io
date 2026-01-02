@@ -28,6 +28,16 @@ export const selection_save = [
     { label: 'Save', value: true },
 ];
 
+export const mood = [
+    { label: "Neutral", value: "Neutral" },
+    { label: "Happy", value: "Happy" },
+    { label: "Calm", value: "Calm" },
+    { label: "Sad", value: "Sad" },
+    { label: "Grateful", value: "Grateful" },
+    { label: "Anxious", value: "Anxious" },
+    { label: "Angry", value: "Angry" }
+]
+
 export const book_of_bible = [
     { "book": "Genesis" },
     { "book": "Exodus" },
