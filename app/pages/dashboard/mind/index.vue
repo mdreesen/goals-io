@@ -6,7 +6,6 @@ definePageMeta({
 // const { data: affirmationData, pending: pending_affirmations } = await useFetch('/api/user/affirmations/affirmations', { lazy: true });
 const { data: bookData, pending: pending_books } = await useFetch('/api/user/books/books', { lazy: true });
 const { data: gratitudeData, pending: pending_gratitude } = await useFetch('/api/user/gratitudes/gratitudes', { lazy: true });
-console.log(gratitudeData)
 </script>
 
 <template>

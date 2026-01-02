@@ -6,8 +6,6 @@ export default defineEventHandler(async (event) => {
     const data = user?.gratitudes;
     const latestData = data?.reverse();
 
-    console.log(latestData)
-
     const formatArray = latestData?.map((item) => {
       return {
         description: item.gratitude,
