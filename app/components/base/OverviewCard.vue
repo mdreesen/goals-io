@@ -20,7 +20,7 @@ const props = defineProps({
   data: {
     required: true,
   }
-})
+});
 
 const books = {
   start: props.data?.lastestBooks?.bookCurrentStartedYear,
@@ -32,7 +32,8 @@ const coldSoak = {
 };
 
 const fasting = {
-  duration: props.data?.latestFasting?.duration
+  duration: props.data?.latestFasting?.duration,
+  isFasting: props.data?.latestFasting?.start
 };
 
 const dailyWater = {
@@ -43,7 +44,7 @@ const dailyWater = {
 const weight = {
   weight: props.data?.latestWeight?.weight,
   date: props.data?.latestWeight?.date,
-}
+};
 </script>
 
 <template>
