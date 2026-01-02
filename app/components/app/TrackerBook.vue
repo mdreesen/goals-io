@@ -73,8 +73,7 @@ async function log() {
 
         <transition name="slide-up" mode="out-in">
 
-          <UDrawer title="Drawer with description"
-            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit.">
+          <UDrawer title="Log a new book">
             <UButton label="Add Book" color="neutral" variant="subtle" trailing-icon="material-symbols:book-4-spark-rounded" />
 
             <template #body>
