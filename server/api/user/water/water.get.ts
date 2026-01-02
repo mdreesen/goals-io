@@ -10,8 +10,8 @@ export default defineEventHandler(async (event) => {
 
 
     // Latest wieght and water intake
-    const latestWater = data.reverse()[0];
-    const latestWeight = weight.reverse()[0];
+    const latestWater = data.reverse()[0] ?? {};
+    const latestWeight = weight.reverse()[0] ?? {};
 
     return {
       latestWeight: latestWeight as WeightType,

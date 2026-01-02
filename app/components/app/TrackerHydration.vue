@@ -23,6 +23,7 @@ const userCurrentWater = computed(() => {
 const currentOz = ref(userCurrentWater.value);
 const isLoading = ref(false);
 let errorMessage = ref('');
+const useLatestWater = ref(props?.data?.latestWater?.date ?? '00/00/00')
 
 // --- Computed ---
 const percentage = computed(() => {
@@ -45,7 +46,8 @@ async function log() {
     method: 'POST',
     body: {
       water_intake: currentOz.value.toString(),
-      date: formatDate()
+      date: formatDate(),
+      action: useLatestWater.value.includes(formatDate()) ?? false
     }
   })
     .then(async () => {
