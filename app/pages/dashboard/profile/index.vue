@@ -10,7 +10,6 @@ const { data: profileData, pending: pending_profile } = await useFetch('/api/use
 <template>
   <div class="container-categories">
     <div>
-      <baseHeader text="Devotionals" />
       <appProfile v-if="!pending_profile" :data="profileData" />
     </div>
   </div>

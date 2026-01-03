@@ -17,7 +17,9 @@ const props = defineProps({
     },
 });
 
-console.log(props.data)
+const { fetch: refreshSession } = useUserSession();
+
+let errorMessage = ref('');
 
 // --- Reactive State for User Preferences (Simulates database data) ---
 const settings = ref({
@@ -41,23 +43,38 @@ async function logout() {
     await navigateTo('/login');
 };
 
-const toggleSetting = (key: keyof typeof settings.value) => {
+const toggleSetting = ({ key, _id, title }) => {
     settings.value[key] = !settings.value[key];
-    console.log(`Setting '${key}' updated to: ${settings.value[key]}`);
-    // In a real app, you would call a Nuxt Server API route here to save the change to MongoDB.
+    console.log(`Setting '${key}' updated to: ${settings.value[key]}, _id is ${_id}`);
+
+    $fetch(`/api/user/profile`, {
+        method: 'PUT',
+        body: {
+            title: title,
+            setting: key,
+            value: settings.value[key],
+            _id: _id,
+        }
+    })
+        .then(async () => {
+            await refreshSession();
+
+        })
+        .catch(async (error) => {
+            console.log(error);
+            errorMessage.value = error.statusMessage;
+        });
 };
 
 // --- Sub-Component for the Toggle Switch ---
 // This uses computed properties and a simple structure for the toggle animation.
-const ToggleSwitch = (key: keyof typeof settings.value, label: string, description: string) => {
+const ToggleSwitch = (key: keyof typeof settings.value, _id: string, title: string) => {
     const isActive = computed(() => settings.value[key]);
 
     return {
         key,
-        label,
-        description,
         isActive,
-        toggle: () => toggleSetting(key),
+        toggle: () => toggleSetting({ key: key, _id: _id, title: title }),
     };
 };
 
@@ -65,7 +82,7 @@ const bodyToggles = props.data?.bodySettings.map((item) => {
     return {
         title: item?.title,
         toggles: [
-            ToggleSwitch(item?.value, '', ''),
+            ToggleSwitch(item?.setting, item?._id, item?.title),
         ]
     };
 });
@@ -74,7 +91,7 @@ const mindToggles = props.data?.mindSettings.map((item) => {
     return {
         title: item?.title,
         toggles: [
-            ToggleSwitch(item?.value, '', ''),
+            ToggleSwitch(item?.setting, item._id, item?.title),
         ]
     };
 });
@@ -83,7 +100,7 @@ const spiritToggles = props.data?.spiritSettings.map((item) => {
     return {
         title: item?.title,
         toggles: [
-            ToggleSwitch(item?.value, '', ''),
+            ToggleSwitch(item?.setting, item._id, item?.title),
         ]
     };
 });
@@ -97,8 +114,7 @@ const spiritToggles = props.data?.spiritSettings.map((item) => {
 
             <!-- Header -->
             <header class="pb-8 border-b border-gray-700">
-                <h1
-                    class="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-400">
+                <h1 class="text-4xl font-bold bg-clip-text text-transparent bg-linear-to-r from-purple-400 to-blue-400">
                     Settings
                 </h1>
                 <p class="mt-2 text-gray-400">Manage your profile, preferences, and privacy settings.</p>

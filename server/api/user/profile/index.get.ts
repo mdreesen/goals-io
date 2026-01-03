@@ -15,6 +15,7 @@ export default defineEventHandler(async (event) => {
     return {
         bodySettings,
         mindSettings,
-        spiritSettings
+        spiritSettings,
+        settings: data
     }
 });

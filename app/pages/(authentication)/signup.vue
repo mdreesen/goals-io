@@ -38,7 +38,7 @@ useMotion(formRef, { ...formVarient() });
 <template>
     <div class="relative flex min-h-screen items-center justify-center bg-gray-950 p-4 overflow-hidden">
         <!-- Background Gradient -->
-        <div class="absolute inset-0 z-0 bg-gradient-to-br from-gray-950 via-gray-800 to-purple-950 opacity-70"></div>
+        <div class="absolute inset-0 z-0 bg-linear-to-br from-gray-950 via-gray-800 to-purple-950 opacity-70"></div>
 
         <!-- Hero Text -->
         <section class="flex flex-col items-center gap-8">
@@ -46,7 +46,7 @@ useMotion(formRef, { ...formVarient() });
 
                 <h1 class="flex flex-col text-4xl sm:text-6xl font-extrabold text-white leading-tight">
                     <span>Welcome to</span>
-                    <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
+                    <span class="bg-clip-text text-transparent bg-linear-to-r from-blue-400 to-purple-400">
                         ASCΞND
                     </span>
                 </h1>
@@ -97,7 +97,7 @@ useMotion(formRef, { ...formVarient() });
 
                     <div v-motion="{ ...inputVarient() }">
                         <button type="submit" :disabled="isLoading"
-                            class="w-full rounded-xl bg-gradient-to-r from-blue-500 to-purple-600 py-3 text-lg font-semibold text-white shadow-lg transition-all duration-300 ease-in-out hover:from-blue-600 hover:to-purple-700 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900">
+                            class="w-full rounded-xl bg-linear-to-r from-blue-500 to-purple-600 py-3 text-lg font-semibold text-white shadow-lg transition-all duration-300 ease-in-out hover:from-blue-600 hover:to-purple-700 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900">
                             {{ isLoading ? 'Signing Up...' : 'Sign up' }}
                         </button>
                     </div>

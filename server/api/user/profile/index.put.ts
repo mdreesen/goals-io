@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import loggedInUser from "~/utils/loggedInUser";
 
 import { Model } from 'mongoose';
 import UserModel from '../../../../lib/database/models/User';
@@ -6,25 +7,30 @@ import { User } from '~/types/user';
 const User = UserModel as Model<User>;
 
 const bodySchema = z.object({
-  gratitude: z.string().nullable(),
-  date: z.string().nullable(),
+  _id: z.string().nullable(),
+  title: z.string().nullable(),
+  setting: z.string().nullable(),
+  value: z.boolean()
 })
 
 export default defineEventHandler(async (event) => {
-  const { gratitude, date } = await readValidatedBody(event, bodySchema.parse);
-
-  const obj = {
-    gratitude: gratitude,
-    date: date,
-  };
+  const { _id, title, setting, value } = await readValidatedBody(event, bodySchema.parse);
 
   try {
-    const id = getRouterParam(event, 'id');
+
+    const obj = {
+      _id: _id,
+      title: title,
+      setting: setting,
+      value: value
+    };
+
+    console.log(obj)
 
     await User.findOneAndUpdate(
-        { _id: _id },
-        { email: email.toLowerCase(), ...values },
-        { new: true });
+      { 'settings._id': _id },
+      { $set: { 'settings.$': obj } },
+      { new: true });
 
   } catch (error) {
     console.log(error);
