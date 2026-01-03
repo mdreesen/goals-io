@@ -21,7 +21,7 @@ const input = reactive({
 
 if (data.value) {
     input.type = data.value.type;
-    input.book = data.value.book;
+    input.book = data.value.book_title;
     input.chapter = data.value.chapter;
     input.verses = data.value.verses;
     input.notes = data.value.notes;
