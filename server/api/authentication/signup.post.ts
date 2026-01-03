@@ -5,6 +5,7 @@ import { connectDB } from "../../../lib/database/mongodb";
 import { Model } from 'mongoose';
 import UserModel from '../../../lib/database/models/User';
 import { User } from '~/types/user';
+import { settings } from '~/utils/user/profileSettings';
 const User = UserModel as Model<User>;
 
 const bodySchema = z.object({
@@ -31,7 +32,8 @@ export default defineEventHandler(async (event) => {
     const registerUser = new User({
       email: email.toLowerCase().trim(),
       password: hashedPassword,
-      privacy_policy: privacy_policy
+      privacy_policy: privacy_policy,
+      settings: settings()
     });
 
     await registerUser.save();
