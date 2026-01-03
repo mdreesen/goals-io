@@ -3,7 +3,11 @@ import { latestData } from '~/utils/formatters/latestData';
 
 export default defineEventHandler(async (event) => {
     const user = await loggedInUser(event);
-    const data = user?.journal?.reverse();
+    const data = user?.bibles?.reverse() ?? [];
 
-    return latestData(5, data) ?? [];
+    const filterData = data?.filter((item) => {
+      return item?.type.includes('Devotional');
+    }) ?? [];
+
+    return latestData(5, filterData);
   });

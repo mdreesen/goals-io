@@ -10,8 +10,6 @@ const props = defineProps({
   },
 });
 
-console.log('dsata', props.data)
-
 </script>
 
 <template>
