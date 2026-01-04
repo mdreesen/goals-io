@@ -7,20 +7,37 @@ const props = defineProps({
         required: true
     },
 });
+
+function icons(str: string) {
+    switch(true) {
+        case str === 'Audiobook':
+            return "material-symbols:headphones-rounded"
+            break
+        case str === 'Printed':
+            return "material-symbols:book-5-rounded";
+            break
+        case str === 'Ebook':
+            return "material-symbols:fullscreen-portrait-outline";
+            break
+        default:
+            return 'material-symbols:book-5-rounded';
+    }
+}
 </script>
 
 <template>
     <UCarousel v-slot="{ item }" loop arrows :autoplay="{ delay: 5000 }" wheel-gestures :prev="{ variant: 'solid' }"
         :next="{ variant: 'solid' }" :items="props.data" :ui="{
-            item: 'basis-1/3 ps-0 flex gap-4 justify-center lg:basis-1/4 md:basis-1/4 sm:basis-1/3',
+            item: 'basis-1/2 ps-0 flex p-2 justify-center h-full lg:basis-1/4 md:basis-1/4 sm:basis-1/3',
             prev: 'sm:start-8',
             next: 'sm:end-8',
             container: 'ms-0'
         }">
-        <div class="h-60 flex gap-4">
+        <div class="h-full w-full flex gap-4">
             <NuxtLink :to="`/dashboard/mind/books/${[item?._id]}`"
-                class="flex items-center w-full text-2xl font-extrabold">
-                <NuxtImg class="object-cover h-60" :src="item?.book_image" />
+                class="flex items-center w-full h-full text-2xl font-extrabold -x-2">
+                <baseCardBook :kind="item?.kind_of_book" :title="item?.book_title" :author="item?.book_author"
+                    :image="item?.book_image" :icon="icons(item?.kind_of_book)" />
             </NuxtLink>
         </div>
     </UCarousel>

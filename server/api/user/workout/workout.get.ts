@@ -1,4 +1,5 @@
 import loggedInUser from "~/utils/loggedInUser";
+import { latestData } from '~/utils/formatters/latestData';
 
 export default defineEventHandler(async (event) => {
   try {
@@ -6,10 +7,10 @@ export default defineEventHandler(async (event) => {
     const data = user?.workout ?? [];
 
     // Latest wieght and water intake
-    const latestData = data.reverse();
+    const latest = latestData(3, data);
 
     return {
-      latestData: latestData
+      latestData: latest
     }
   } catch (error) {
     console.log(error);

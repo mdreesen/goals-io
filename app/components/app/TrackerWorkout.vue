@@ -16,7 +16,6 @@ let errorMessage = ref('');
 
 const { fetch: refreshSession } = useUserSession()
 
-
 const input = reactive({
   type: '',
   duration: '',
@@ -50,6 +49,21 @@ async function log() {
 
 <template>
   <div class="flex flex-col items-center justify-center w-full max-w-sm mx-auto p-8 font-sans">
+
+    <!-- <div class="container-cards">
+      <template v-for="item in props.data">
+        <transition name="slide-up" mode="out-in">
+          <nuxt-link class="flex flex-col justify-center w-full items-center"
+            :to="`/dashboard/spirit/bible/devotional/${[item._id]}`">
+            <baseCard :label="item.book_title"
+              :text="`${item?.chapter ? `Chapter ${item?.chapter} •` : ''} Verse ${item?.verses ? item?.verses : ''}`"
+              :date="item?.date"
+              icon="material-symbols:shield-spark-rounded" iconColor="bg-gray-500/60"
+              iconNav="material-symbols:arrow-forward-ios-rounded" />
+          </nuxt-link>
+        </transition>
+      </template>
+</div> -->
 
     <div class="w-full relative">
 

@@ -88,8 +88,8 @@ const toggleSetting = (item) => {
                 <p class="mt-2 text-gray-400">Manage your profile, preferences, and privacy settings.</p>
             </header>
 
-                        <!-- Body Section -->
-                        <section class="space-y-6">
+            <!-- Body Section -->
+            <section class="space-y-6">
                 <h2 class="text-2xl font-semibold text-gray-200 mb-6">
                     Update your user profile
                 </h2>
@@ -114,7 +114,8 @@ const toggleSetting = (item) => {
                         <div v-for="item in props.data.bodySettings">
                             <span class="text-sm text-gray-400 mt-1 max-w-lg">{{ item.title }}</span>
                             <USwitch @click="toggleSetting(item)" unchecked-icon="i-lucide-x"
-                                checked-icon="i-lucide-check" color="primary" v-model="item.value" :loading="isLoading" />
+                                checked-icon="i-lucide-check" color="primary" v-model="item.value"
+                                :loading="isLoading" />
                         </div>
                     </div>
                 </div>
@@ -150,7 +151,8 @@ const toggleSetting = (item) => {
                         <div v-for="item in props.data.spiritSettings">
                             <span class="text-sm text-gray-400 mt-1 max-w-lg">{{ item.title }}</span>
                             <USwitch @click="toggleSetting(item)" unchecked-icon="i-lucide-x"
-                                checked-icon="i-lucide-check" color="neutral" v-model="item.value" :loading="isLoading" />
+                                checked-icon="i-lucide-check" color="neutral" v-model="item.value"
+                                :loading="isLoading" />
                         </div>
                     </div>
                 </div>
