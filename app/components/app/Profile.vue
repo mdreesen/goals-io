@@ -19,19 +19,21 @@ const props = defineProps({
 
 const { fetch: refreshSession } = useUserSession();
 
-let errorMessage = ref('');
+function findSetting(str: string) {
+    return props.data.settings.find((item: any) => item?.setting.includes(str))
+}
 
-// --- Reactive State for User Preferences (Simulates database data) ---
-const settings = ref({
-    showFasting: true,
-    showWater: true,
-    showWeight: true,
-    showWorkout: true,
-    showBooks: true,
-    showGratitudes: true,
-    showBible: true,
-    showJournal: true
-});
+let errorMessage = ref('');
+const isLoading = ref(false);
+
+const bodySettings = computed(() => props.data?.bodySettings.map((item) => {
+    return {
+        title: item?.title,
+        setting: item?.setting,
+        value: findSetting(item?.setting).value,
+        _id: item?._id,
+    }
+}));
 
 const { clear: clearSession } = useUserSession();
 async function logout() {
@@ -43,67 +45,33 @@ async function logout() {
     await navigateTo('/login');
 };
 
-const toggleSetting = ({ key, _id, title }) => {
-    settings.value[key] = !settings.value[key];
-    console.log(`Setting '${key}' updated to: ${settings.value[key]}, _id is ${_id}`);
+const toggleSetting = (item) => {
+    // This below line must be there to ensure inital changes
+    item.value = !item.value;
+
+    isLoading.value = true
 
     $fetch(`/api/user/profile`, {
         method: 'PUT',
         body: {
-            title: title,
-            setting: key,
-            value: settings.value[key],
-            _id: _id,
+            title: item?.title,
+            setting: item?.setting,
+            value: item.value,
+            _id: item?._id,
         }
     })
         .then(async () => {
             await refreshSession();
 
+            isLoading.value = false
+
         })
         .catch(async (error) => {
             console.log(error);
             errorMessage.value = error.statusMessage;
+            isLoading.value = false
         });
 };
-
-// --- Sub-Component for the Toggle Switch ---
-// This uses computed properties and a simple structure for the toggle animation.
-const ToggleSwitch = (key: keyof typeof settings.value, _id: string, title: string) => {
-    const isActive = computed(() => settings.value[key]);
-
-    return {
-        key,
-        isActive,
-        toggle: () => toggleSetting({ key: key, _id: _id, title: title }),
-    };
-};
-
-const bodyToggles = props.data?.bodySettings.map((item) => {
-    return {
-        title: item?.title,
-        toggles: [
-            ToggleSwitch(item?.setting, item?._id, item?.title),
-        ]
-    };
-});
-
-const mindToggles = props.data?.mindSettings.map((item) => {
-    return {
-        title: item?.title,
-        toggles: [
-            ToggleSwitch(item?.setting, item._id, item?.title),
-        ]
-    };
-});
-
-const spiritToggles = props.data?.spiritSettings.map((item) => {
-    return {
-        title: item?.title,
-        toggles: [
-            ToggleSwitch(item?.setting, item._id, item?.title),
-        ]
-    };
-});
 
 </script>
 
@@ -126,14 +94,13 @@ const spiritToggles = props.data?.spiritSettings.map((item) => {
                     Body preferences
                 </h2>
 
-                <div v-for="(item, index) in bodyToggles" :key="index"
+                <div
                     class="flex justify-between items-center bg-gray-800 p-4 sm:p-6 rounded-xl shadow-lg border border-gray-700 hover:bg-gray-700 transition duration-300">
-                    <div class="flex flex-col">
-                        <span class="text-xl font-medium">{{ item.title }}</span>
-                        <div v-for="toggle in item.toggles">
-                            <span class="text-sm text-gray-400 mt-1 max-w-lg">{{ toggle.description }}</span>
-                            <USwitch @click="toggle.toggle" unchecked-icon="i-lucide-x" checked-icon="i-lucide-check"
-                                default-value />
+                    <div class="flex flex-col gap-5">
+                        <div v-for="item in props.data.bodySettings">
+                            <span class="text-sm text-gray-400 mt-1 max-w-lg">{{ item.title }}</span>
+                            <USwitch @click="toggleSetting(item)" unchecked-icon="i-lucide-x"
+                                checked-icon="i-lucide-check" color="primary" v-model="item.value" :loading="isLoading" />
                         </div>
                     </div>
                 </div>
@@ -145,14 +112,13 @@ const spiritToggles = props.data?.spiritSettings.map((item) => {
                     Mind preferences
                 </h2>
 
-                <div v-for="(item, index) in mindToggles" :key="index"
+                <div
                     class="flex justify-between items-center bg-gray-800 p-4 sm:p-6 rounded-xl shadow-lg border border-gray-700 hover:bg-gray-700 transition duration-300">
-                    <div class="flex flex-col">
-                        <span class="text-xl font-medium">{{ item.title }}</span>
-                        <div v-for="toggle in item.toggles">
-                            <span class="text-sm text-gray-400 mt-1 max-w-lg">{{ toggle.description }}</span>
-                            <USwitch @click="toggle.toggle" unchecked-icon="i-lucide-x" checked-icon="i-lucide-check"
-                                default-value />
+                    <div class="flex flex-col gap-5">
+                        <div v-for="item in props.data.mindSettings">
+                            <span class="text-sm text-gray-400 mt-1 max-w-lg">{{ item.title }}</span>
+                            <USwitch @click="toggleSetting(item)" unchecked-icon="i-lucide-x"
+                                checked-icon="i-lucide-check" color="info" v-model="item.value" :loading="isLoading" />
                         </div>
                     </div>
                 </div>
@@ -164,15 +130,13 @@ const spiritToggles = props.data?.spiritSettings.map((item) => {
                     Spirit preferences
                 </h2>
 
-                <div v-for="(item, index) in spiritToggles" :key="index"
+                <div
                     class="flex justify-between items-center bg-gray-800 p-4 sm:p-6 rounded-xl shadow-lg border border-gray-700 hover:bg-gray-700 transition duration-300">
-                    <div class="flex flex-col">
-                        <span class="text-xl font-medium">{{ item.title }}</span>
-                        <div v-for="toggle in item.toggles">
-                            <span class="text-sm text-gray-400 mt-1 max-w-lg">{{ toggle.description }}</span>
-                            <USwitch @click="toggle.toggle" unchecked-icon="i-lucide-x" checked-icon="i-lucide-check"
-                                default-value />
-
+                    <div class="flex flex-col gap-5">
+                        <div v-for="item in props.data.spiritSettings">
+                            <span class="text-sm text-gray-400 mt-1 max-w-lg">{{ item.title }}</span>
+                            <USwitch @click="toggleSetting(item)" unchecked-icon="i-lucide-x"
+                                checked-icon="i-lucide-check" color="neutral" v-model="item.value" :loading="isLoading" />
                         </div>
                     </div>
                 </div>
