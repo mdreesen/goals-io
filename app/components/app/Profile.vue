@@ -88,6 +88,20 @@ const toggleSetting = (item) => {
                 <p class="mt-2 text-gray-400">Manage your profile, preferences, and privacy settings.</p>
             </header>
 
+                        <!-- Body Section -->
+                        <section class="space-y-6">
+                <h2 class="text-2xl font-semibold text-gray-200 mb-6">
+                    Update your user profile
+                </h2>
+
+                <div
+                    class="flex justify-between items-center bg-gray-800 p-4 sm:p-6 rounded-xl shadow-lg border border-gray-700 hover:bg-gray-700 transition duration-300">
+                    <div class="flex flex-col gap-5">
+                        <span>This will be a link to update your profile</span>
+                    </div>
+                </div>
+            </section>
+
             <!-- Body Section -->
             <section class="space-y-6">
                 <h2 class="text-2xl font-semibold text-gray-200 mb-6">
