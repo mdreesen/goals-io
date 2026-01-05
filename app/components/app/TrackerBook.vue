@@ -57,12 +57,12 @@ async function log() {
 <template>
   <div class="relative flex flex-col w-full max-w-3xl mx-auto overflow-hidden">
 
-    <section>
+    <section v-if="props.data?.current.length >= 1">
       <baseSectionHeader text="Currently Reading" />
       <baseCarousel :data="props.data?.current" />
     </section>
 
-    <section>
+    <section v-if="props.data?.latestData.length >= 1">
       <baseSectionHeader text="Latest Reads" />
       <baseCarousel :data="props.data?.latestData" />
     </section>
