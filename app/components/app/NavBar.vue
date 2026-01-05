@@ -38,10 +38,10 @@ const items = computed<NavigationMenuItem[]>(() => [{
       </NuxtLink>
     </template>
 
-    <UNavigationMenu :items="items" />
+    <UNavigationMenu color="neutral" :items="items" />
 
     <template #body>
-      <UNavigationMenu :items="items" orientation="vertical" class="-mx-2.5" />
+      <UNavigationMenu color="neutral" :items="items" orientation="vertical" class="-mx-2.5" />
     </template>
   </UHeader>
 </template>
