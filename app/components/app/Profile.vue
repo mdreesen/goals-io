@@ -19,23 +19,15 @@ const props = defineProps({
 
 const { fetch: refreshSession } = useUserSession();
 
-function findSetting(str: string) {
-    return props.data.settings.find((item: any) => item?.setting.includes(str))
-}
-
 let errorMessage = ref('');
 const isLoading = ref(false);
 
-const bodySettings = computed(() => props.data?.bodySettings.map((item) => {
-    return {
-        title: item?.title,
-        setting: item?.setting,
-        value: findSetting(item?.setting).value,
-        _id: item?._id,
-    }
-}));
-
 const { clear: clearSession } = useUserSession();
+
+const input = reactive({
+  gratitude: "",
+});
+
 async function logout() {
     const authStore = useAuth()
 
@@ -45,7 +37,7 @@ async function logout() {
     await navigateTo('/login');
 };
 
-const toggleSetting = (item) => {
+const toggleSetting = (item: any) => {
     // This below line must be there to ensure inital changes
     item.value = !item.value;
 
@@ -73,6 +65,28 @@ const toggleSetting = (item) => {
         });
 };
 
+async function log() {
+    isLoading.value = true;
+    $fetch(`/api/user/gratitudes/gratitudes`, {
+        method: 'POST',
+        body: {
+            ...input,
+            date: formatDate()
+        }
+    })
+        .then(async () => {
+            await refreshSession();
+            await refreshNuxtData();
+
+            isLoading.value = false;
+        })
+        .catch(async (error) => {
+            console.log(error);
+            errorMessage.value = error.statusMessage;
+            isLoading.value = false;
+        });
+};
+
 </script>
 
 <template>
@@ -95,9 +109,51 @@ const toggleSetting = (item) => {
                 </h2>
 
                 <div
-                    class="flex justify-between items-center bg-gray-800 p-4 sm:p-6 rounded-xl shadow-lg border border-gray-700 hover:bg-gray-700 transition duration-300">
+                    class="flex justify-center items-center bg-gray-800 p-4 sm:p-6 rounded-xl shadow-lg border border-gray-700 hover:bg-gray-700 transition duration-300">
                     <div class="flex flex-col gap-5">
-                        <span>This will be a link to update your profile</span>
+                        <span>Update your user profile info</span>
+
+                        <div class="w-full relative mb-4 flex justify-center">
+
+                            <transition name="slide-up" mode="out-in">
+
+                                <UDrawer title="Update user profile">
+                                    <UButton label="Update profile" color="neutral" variant="subtle"
+                                        trailing-icon="material-symbols:person-edit" />
+
+                                    <template #body>
+                                        <form @submit.prevent="log" class="space-y-6">
+
+                                            <div v-motion="{ ...inputVarient() }">
+                                                <baseLabel text="Who are you called to be?" />
+                                                <input id="text" type="text" v-model="input.gratitude"
+                                                    placeholder="Leader, hard worker, etc..." required
+                                                    class="w-full rounded-xl border border-gray-600 bg-gray-700/50 py-3 px-4 text-lg text-white shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                            </div>
+
+                                            <div v-motion="{ ...inputVarient() }">
+                                                <baseLabel text="First Name" />
+                                                <input id="text" type="text" v-model="input.gratitude"
+                                                    placeholder="First name" required
+                                                    class="w-full rounded-xl border border-gray-600 bg-gray-700/50 py-3 px-4 text-lg text-white shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                            </div>
+
+                                            <div v-motion="{ ...inputVarient() }">
+                                                <baseLabel text="Last name" />
+                                                <input id="text" type="text" v-model="input.gratitude"
+                                                    placeholder="Last name" required
+                                                    class="w-full rounded-xl border border-gray-600 bg-gray-700/50 py-3 px-4 text-lg text-white shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                            </div>
+
+                                            <div class="flex flex-col gap-8 pb-4">
+                                                <baseButtonSubmit text="Save" :isLoading="isLoading" />
+                                            </div>
+                                        </form>
+                                    </template>
+                                </UDrawer>
+                            </transition>
+                        </div>
+
                     </div>
                 </div>
             </section>

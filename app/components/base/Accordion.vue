@@ -9,7 +9,6 @@ const props = defineProps({
   },
 });
 
-console.log('Accordion data', props.data)
 
 const items = ref<AccordionItem[]>([
   {
