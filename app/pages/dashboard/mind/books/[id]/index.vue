@@ -16,7 +16,7 @@ const dateStart = ref(new CalendarDate(yearMonthDayFormat(data.value.book_start_
 const dateEnd = ref(data.value.book_end_date || data.value.book_end_date === '' ? new CalendarDate(yearMonthDayFormat(data.value.book_end_date).year, yearMonthDayFormat(data.value.book_end_date).month, yearMonthDayFormat(data.value.book_end_date).day) : '') as any;
 const useEndDate = ref();
 const formattedStartDate = ref();
-const formattedEndDate = ref();
+const formattedEndDate = ref('');
 
 const input = reactive({
     book_author: "",

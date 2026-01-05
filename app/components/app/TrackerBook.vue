@@ -57,7 +57,15 @@ async function log() {
 <template>
   <div class="relative flex flex-col w-full max-w-3xl mx-auto overflow-hidden">
 
-    <baseCarousel :data="props.data?.latestData" />
+    <section>
+      <baseSectionHeader text="Currently Reading" />
+      <baseCarousel :data="props.data?.current" />
+    </section>
+
+    <section>
+      <baseSectionHeader text="Latest Reads" />
+      <baseCarousel :data="props.data?.latestData" />
+    </section>
 
     <div class="flex flex-col items-center justify-center w-full max-w-sm mx-auto p-8 font-sans">
 

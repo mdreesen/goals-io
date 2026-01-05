@@ -14,7 +14,7 @@ export default defineEventHandler(async (event) => {
 
     return {
       latestData: latestData(10, bookOrder),
-      current: filterBooks(latestBooks)
+      current: filterBooks(currentRead)
     }
 
   } catch (error) {
