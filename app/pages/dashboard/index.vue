@@ -1,20 +1,8 @@
 <script setup lang="ts">
-    import { computed, watch } from 'vue';
-    import { storeToRefs } from 'pinia'
 
 definePageMeta({
     layout: 'authenticated',
 });
-import { useSettings } from '~/store/useSettings';
-
-const settingsStore = useSettings();
-
-watch(settingsStore, () => {
-    console.log(settingsStore)
-}, { immediate: true });
-
-// console.log('useBookSettings', settingsStore.useBookSettings)
-
 const { data: books, pending: pending_books } = await useFetch('/api/charts/books', { lazy: true });
 // const { data: cold_soaks, pending: pending_cold_soaks } = await useFetch('/api/charts/coldsoaks', { lazy: true });
 const { data: water_intake, pending: pending_water } = await useFetch('/api/charts/water', { lazy: true });
