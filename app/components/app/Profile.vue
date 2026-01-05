@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { ref } from 'vue';
 import packageJson from '../../../package.json'
-import { useAuth } from '~/store/useAuth';
 import { formatDate } from '~/utils/date';
 import { timeZone } from '~/utils/date';
 
@@ -29,9 +28,6 @@ const input = reactive({
 });
 
 async function logout() {
-    const authStore = useAuth()
-
-    authStore.clearAuth();
 
     await clearSession();
     await navigateTo('/login');
@@ -54,7 +50,6 @@ const toggleSetting = (item: any) => {
     })
         .then(async () => {
             await refreshSession();
-
             isLoading.value = false
 
         })
@@ -76,7 +71,6 @@ async function log() {
     })
         .then(async () => {
             await refreshSession();
-            await refreshNuxtData();
 
             isLoading.value = false;
         })
@@ -227,6 +221,8 @@ async function log() {
                     class="px-6 py-3 bg-red-600 rounded-lg font-semibold hover:bg-red-700 transition duration-300">
                     Sign Out
                 </button>
+
+                <appDeleteProfile />
             </div>
 
         </div>

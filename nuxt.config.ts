@@ -20,7 +20,7 @@ export default defineNuxtConfig({
     dirs: ['store']
   },
   pinia: {
-    storesDirs: ['./store/**'],
+    storesDirs: ['./store/**', './custom-folder/stores/**'],
   },
   vite: {
     plugins: [tailwindcss()],

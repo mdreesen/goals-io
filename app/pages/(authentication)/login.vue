@@ -2,7 +2,6 @@
 import { ref } from 'vue';
 import { useMotion } from '@vueuse/motion';
 import { formVarient, containerVarient, inputVarient } from '~/utils/varients';
-import { useAuth } from '~/store/useAuth';
 import type { User } from '~/types/user';
 
 const formRef = ref();
@@ -18,14 +17,12 @@ const credentials = reactive({
 });
 
 async function login() {
-  const authStore = useAuth();
   isLoading.value = true;
   $fetch('/api/authentication/login', {
     method: 'POST',
     body: credentials
   })
     .then(async () => {
-      // useAuth.setToken(response.token); // Assuming 'response.token' contains the token
       await refreshSession();
 
       // if (loggedIn) await navigateTo('/dashboard');
@@ -47,7 +44,7 @@ useMotion(formRef, { ...formVarient() });
 <template>
   <div class="relative flex min-h-screen items-center justify-center bg-gray-950 p-4 overflow-hidden">
     <!-- Background Gradient -->
-    <div class="absolute inset-0 z-0 bg-gradient-to-br from-gray-950 via-gray-800 to-purple-950 opacity-70"></div>
+    <div class="absolute inset-0 z-0 bg-linear-to-br from-gray-950 via-gray-800 to-purple-950 opacity-70"></div>
 
     <!-- Hero Text -->
     <section class="flex flex-col items-center gap-8">
@@ -55,7 +52,7 @@ useMotion(formRef, { ...formVarient() });
 
         <h1 class="flex flex-col text-4xl sm:text-6xl font-extrabold text-white leading-tight">
           <span>Welcome to</span>
-          <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
+          <span class="bg-clip-text text-transparent bg-linear-to-r from-blue-400 to-purple-400">
             ASCΞND
           </span>
         </h1>
@@ -88,7 +85,7 @@ useMotion(formRef, { ...formVarient() });
 
           <div v-motion="{ ...inputVarient() }">
             <button type="submit" :disabled="isLoading"
-              :class="`${isLoading ? 'bg-gradient-to-r from-gray-500 to-gray-600' : 'bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900'} w-full rounded-xl py-3 text-lg font-semibold text-white shadow-lg transition-all duration-300 ease-in-out`">
+              :class="`${isLoading ? 'bg-linear-to-r from-gray-500 to-gray-600' : 'bg-linear-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900'} w-full rounded-xl py-3 text-lg font-semibold text-white shadow-lg transition-all duration-300 ease-in-out`">
               {{ isLoading ? 'Logging In...' : 'Log In' }}
             </button>
           </div>
