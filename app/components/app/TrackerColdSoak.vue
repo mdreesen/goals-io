@@ -92,7 +92,7 @@
   </script>
   
   <template>
-    <div class="relative flex flex-col items-center justify-center min-h-[600px] w-full max-w-md mx-auto rounded-[3rem] p-8 overflow-hidden select-none">
+    <div class="relative flex flex-col items-center justify-center min-h-150 w-full max-w-md mx-auto rounded-[3rem] p-8 overflow-hidden select-none">
       
       <div class="absolute inset-0 transition-all duration-1000 pointer-events-none"
         :class="status === 'active' ? 'bg-cyan-950/20' : 'bg-transparent'"
@@ -115,7 +115,7 @@
       </div>
   
       <div class="relative z-10 mb-12">
-        <svg class="w-[300px] h-[300px] transform -rotate-90 filter drop-shadow-[0_0_10px_rgba(0,0,0,0.5)]">
+        <svg class="w-75 h-75 transform -rotate-90 filter drop-shadow-[0_0_10px_rgba(0,0,0,0.5)]">
           <circle cx="150" cy="150" :r="radius" stroke="currentColor" stroke-width="4" fill="transparent" class="text-zinc-800/50" />
           
           <circle 
@@ -173,7 +173,7 @@
         </div>
       </div>
   
-      <div class="w-full max-w-[280px] z-20">
+      <div class="w-full max-w-70 z-20">
         
         <button 
           v-if="status === 'idle' || status === 'completed'"

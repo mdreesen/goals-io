@@ -8,5 +8,5 @@
 </script>
 
 <template>
-    <h3 class="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-400 my-8 flex justify-center">{{ props.text }}</h3>
+    <h3 class="text-3xl font-bold bg-clip-text text-transparent bg-linear-to-r from-purple-400 to-blue-400 my-8 flex justify-center">{{ props.text }}</h3>
 </template>

@@ -216,7 +216,7 @@ async function log() {
             </div>
 
             <!-- Action Button Example -->
-            <div class="mt-10 pt-8 border-t border-gray-700">
+            <div class="flex flex-col gap-8 mt-10 pt-8 border-t border-gray-700">
                 <button @click="logout"
                     class="px-6 py-3 bg-red-600 rounded-lg font-semibold hover:bg-red-700 transition duration-300">
                     Sign Out

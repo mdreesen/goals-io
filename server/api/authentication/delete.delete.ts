@@ -10,7 +10,7 @@ export default defineEventHandler(async (event) => {
     try {
         const user = await loggedInUser(event);
 
-        // await User.deleteOne({ email: user?.email });
+        await User.deleteOne({ email: user?.email });
 
     } catch (error) {
         console.log(error);
