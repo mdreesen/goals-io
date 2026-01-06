@@ -9,6 +9,8 @@ const { data: water_intake, pending: pending_water } = await useFetch('/api/char
 const { data: weight, pending: pending_weight } = await useFetch('/api/charts/weight', { lazy: true });
 const { data: workouts, pending: pending_workouts } = await useFetch('/api/charts/workouts', { lazy: true });
 
+const { data: setting, pending: pending_settings } = await useFetch('/api/user/profile/setting', { lazy: true });
+
 const { data: stats, pending: pending_stats } = await useFetch('/api/stats', { lazy: true });
 </script>
 
@@ -21,16 +23,20 @@ const { data: stats, pending: pending_stats } = await useFetch('/api/stats', { l
             <baseHeader text="Your Overview" />
 
             <div class="container-cards" v-if="!pending_stats">
-                <baseCardOverview text="Books" color="bg-gradient-to-br from-green-600 to-green-700"
+                <baseCardOverview v-if="setting.bookSetting.value" text="Books"
+                    color="bg-gradient-to-br from-green-600 to-green-700"
                     icon="material-symbols:book-ribbon-outline-rounded" collection="books" :data="stats" />
                 <!-- <baseCardOverview text="Cold Soak" color="bg-gradient-to-br from-blue-300 to-blue-500"
                     icon="material-symbols:snowing-heavy" collection="coldSoak" :data="stats" /> -->
-                <baseCardOverview text="Fasting" color="bg-gradient-to-br from-yellow-600 to-yellow-700"
+                <baseCardOverview v-if="setting.fastingSetting.value" text="Fasting"
+                    color="bg-gradient-to-br from-yellow-600 to-yellow-700"
                     icon="material-symbols:nest-clock-farsight-analog-outline-rounded" collection="fasting"
                     :data="stats" />
-                <baseCardOverview text="Daily Water" color="bg-gradient-to-br from-blue-600 to-blue-700"
+                <baseCardOverview v-if="setting.waterSetting.value" text="Daily Water"
+                    color="bg-gradient-to-br from-blue-600 to-blue-700"
                     icon="material-symbols:water-medium-outline-rounded" collection="dailyWater" :data="stats" />
-                <baseCardOverview text="Weight" color="bg-gradient-to-br from-purple-600 to-purple-700"
+                <baseCardOverview v-if="setting.weightSetting.value" text="Weight"
+                    color="bg-gradient-to-br from-purple-600 to-purple-700"
                     icon="material-symbols:monitor-weight-outline" collection="weight" :data="stats" />
             </div>
         </section>
@@ -40,10 +46,12 @@ const { data: stats, pending: pending_stats } = await useFetch('/api/stats', { l
             <baseHeader text="Your Progress Charts" />
 
             <!-- Book Tracking -->
-            <UContainer>
-                <baseSectionHeader text="Books" />
-                <appChartBarGroup v-if="!pending_books" :data="books.chartData" barOneName="start_date"
-                    barTwoName="end_date" barOneLabel="Start Date" barTwoLabel="End Date" />
+            <UContainer v-if="!pending_books && !pending_settings">
+                <section v-if="setting.bookSetting.value">
+                    <baseSectionHeader text="Books" />
+                    <appChartBarGroup :data="books.chartData" barOneName="start_date" barTwoName="end_date"
+                        barOneLabel="Start Date" barTwoLabel="End Date" />
+                </section>
             </UContainer>
 
             <!-- Cold Soak Tracking -->
@@ -53,22 +61,28 @@ const { data: stats, pending: pending_stats } = await useFetch('/api/stats', { l
             </UContainer> -->
 
             <!-- Water Tracking -->
-            <UContainer>
-                <baseSectionHeader text="Water Intake" />
+            <UContainer v-if="!pending_water && !pending_settings">
+                <section v-if="setting.waterSetting.value">
+                    <baseSectionHeader text="Water Intake" />
                 <appChartLine v-if="!pending_water" :data="water_intake" lineName="water_intake"
                     lineLabel="Water total" />
+                </section>
             </UContainer>
 
             <!-- Weight Tracking -->
-            <UContainer>
-                <baseSectionHeader text="Weight" />
-                <appChartLine v-if="!pending_weight" :data="weight" lineName="weight" lineLabel="Weight" />
+            <UContainer v-if="!pending_weight && !pending_settings">
+                <section v-if="setting.weightSetting.value">
+                    <baseSectionHeader text="Weight" />
+                    <appChartLine v-if="!pending_weight" :data="weight" lineName="weight" lineLabel="Weight" />
+                </section>
             </UContainer>
 
             <!-- Workout Tracking -->
-            <UContainer>
-                <baseSectionHeader text="Workouts" />
-                <appChartBar v-if="!pending_workouts" :data="workouts" barName="date" barLabel="Total" />
+            <UContainer v-if="!pending_workouts && !pending_settings">
+                <section v-if="setting.workoutSetting.value">
+                    <baseSectionHeader text="Workouts" />
+                    <appChartBar v-if="!pending_workouts" :data="workouts" barName="date" barLabel="Total" />
+                </section>
             </UContainer>
         </section>
     </div>

@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 import { Model } from 'mongoose';
-import UserModel from '../../../../lib/database/models/User';
+import UserModel from '../../../../../lib/database/models/User';
 import { User } from '~/types/user';
 const User = UserModel as Model<User>;
 

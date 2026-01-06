@@ -39,7 +39,7 @@ const toggleSetting = (item: any) => {
 
     isLoading.value = true
 
-    $fetch(`/api/user/profile`, {
+    $fetch(`/api/user/profile/settings`, {
         method: 'PUT',
         body: {
             title: item?.title,
