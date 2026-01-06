@@ -16,6 +16,10 @@ const credentials = reactive({
   password: '',
 });
 
+const input = reactive({
+  email: "",
+});
+
 async function login() {
   isLoading.value = true;
   $fetch('/api/authentication/login', {
@@ -35,7 +39,28 @@ async function login() {
       errorMessage.value = error.statusMessage;
       isLoading.value = false;
     });
-}
+};
+
+async function forgotpassword() {
+  isLoading.value = true;
+  // $fetch(`/api/user/gratitudes/gratitudes`, {
+  //   method: 'POST',
+  //   body: {
+  //     ...input
+  //   }
+  // })
+  //   .then(async () => {
+  //     await refreshSession();
+  //     await refreshNuxtData();
+
+  //     isLoading.value = false;
+  //   })
+  //   .catch(async (error) => {
+  //     console.log(error);
+  //     errorMessage.value = error.statusMessage;
+  //     isLoading.value = false;
+  //   });
+};
 
 useMotion(formRef, { ...formVarient() });
 
@@ -81,6 +106,34 @@ useMotion(formRef, { ...formVarient() });
             <label for="password" class="block text-sm font-medium text-gray-300 mb-1">Password</label>
             <input id="password" type="password" v-model="credentials.password" placeholder="Password" required
               class="w-full rounded-xl border border-gray-600 bg-gray-700/50 py-3 px-4 text-lg text-white shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500" />
+          </div>
+
+          <div class="flex flex-col items-center justify-center w-full max-w-sm mx-auto font-sans">
+
+            <div class="w-full relative flex justify-end">
+
+              <transition name="slide-up" mode="out-in">
+
+                <UDrawer title="Reset your password">
+                  <UButton label="Forgot password" color="neutral" variant="subtle" />
+
+                  <template #body>
+                    <form @submit.prevent="forgotpassword" class="space-y-6">
+
+                      <div v-motion="{ ...inputVarient() }">
+                        <label for="email" class="block text-sm font-medium text-gray-300 mb-1">Email</label>
+                        <input id="email" type="email" v-model="input.email" placeholder="Email" required
+                          class="w-full rounded-xl border border-gray-600 bg-gray-700/50 py-3 px-4 text-lg text-white shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                      </div>
+
+                      <div class="flex flex-col gap-8 pb-4">
+                        <baseButtonSubmit text="Reset" :isLoading="isLoading" isLoadingText="Submitting..." />
+                      </div>
+                    </form>
+                  </template>
+                </UDrawer>
+              </transition>
+            </div>
           </div>
 
           <div v-motion="{ ...inputVarient() }">
