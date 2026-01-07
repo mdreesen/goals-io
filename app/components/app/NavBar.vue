@@ -4,8 +4,6 @@ import { useColorMode } from '#imports'; // This import works in Nuxt 3/4 setup 
 
 const colorMode = useColorMode();
 
-console.log('Current color mode value:', colorMode.value)
-
 const items = computed<NavigationMenuItem[]>(() => [{
   label: 'Main',
   to: '/dashboard',
