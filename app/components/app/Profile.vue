@@ -93,7 +93,7 @@ async function log() {
 
 <template>
     <!-- Removed ref="pageRef" -->
-    <div class="min-h-screen bg-gray-900 p-4 sm:p-8 text-white">
+    <div class="min-h-screen p-4 sm:p-8">
         <div class="max-w-4xl mx-auto py-10 flex flex-col gap-8">
 
             <!-- Header -->
@@ -106,12 +106,12 @@ async function log() {
 
             <!-- Body Section -->
             <section class="space-y-6">
-                <h2 class="text-2xl font-semibold text-gray-200 mb-6">
+                <h2 class="text-2xl font-semibold mb-6">
                     Update your user profile
                 </h2>
 
                 <div
-                    class="flex justify-center items-center bg-gray-800 p-4 sm:p-6 rounded-xl shadow-lg border border-gray-700 hover:bg-gray-700 transition duration-300">
+                    class="flex justify-center items-center p-4 sm:p-6 rounded-xl shadow-lg border border-gray-700 hover:bg-gray-700 transition duration-300">
                     <div class="flex flex-col gap-5">
                         <span>Update your user profile info</span>
 
@@ -162,12 +162,12 @@ async function log() {
 
             <!-- Body Section -->
             <section class="space-y-6">
-                <h2 class="text-2xl font-semibold text-gray-200 mb-6">
+                <h2 class="text-2xl font-semibold mb-6">
                     Body preferences
                 </h2>
 
                 <div
-                    class="flex justify-between items-center bg-gray-800 p-4 sm:p-6 rounded-xl shadow-lg border border-gray-700 hover:bg-gray-700 transition duration-300">
+                    class="flex justify-between items-center p-4 sm:p-6 rounded-xl shadow-lg border border-gray-700 hover:bg-gray-700 transition duration-300">
                     <div class="flex flex-col gap-5">
                         <div v-for="item in props.data.bodySettings">
                             <span class="text-sm text-gray-400 mt-1 max-w-lg">{{ item.title }}</span>
@@ -181,12 +181,12 @@ async function log() {
 
             <!-- Mind Section -->
             <section class="space-y-6">
-                <h2 class="text-2xl font-semibold text-gray-200 mb-6">
+                <h2 class="text-2xl font-semibold mb-6">
                     Mind preferences
                 </h2>
 
                 <div
-                    class="flex justify-between items-center bg-gray-800 p-4 sm:p-6 rounded-xl shadow-lg border border-gray-700 hover:bg-gray-700 transition duration-300">
+                    class="flex justify-between items-center p-4 sm:p-6 rounded-xl shadow-lg border border-gray-700 hover:bg-gray-700 transition duration-300">
                     <div class="flex flex-col gap-5">
                         <div v-for="item in props.data.mindSettings">
                             <span class="text-sm text-gray-400 mt-1 max-w-lg">{{ item.title }}</span>
@@ -199,12 +199,12 @@ async function log() {
 
             <!-- Spirit Section -->
             <section class="space-y-6">
-                <h2 class="text-2xl font-semibold text-gray-200 mb-6">
+                <h2 class="text-2xl font-semibold mb-6">
                     Spirit preferences
                 </h2>
 
                 <div
-                    class="flex justify-between items-center bg-gray-800 p-4 sm:p-6 rounded-xl shadow-lg border border-gray-700 hover:bg-gray-700 transition duration-300">
+                    class="flex justify-between items-center p-4 sm:p-6 rounded-xl shadow-lg border border-gray-700 hover:bg-gray-700 transition duration-300">
                     <div class="flex flex-col gap-5">
                         <div v-for="item in props.data.spiritSettings">
                             <span class="text-sm text-gray-400 mt-1 max-w-lg">{{ item.title }}</span>

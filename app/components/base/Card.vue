@@ -44,19 +44,19 @@ const props = defineProps({
     </template>
 
     <div v-if="label">
-      <div class="flex flex-col justify-center items-center font-extrabold text-white">
+      <div class="flex flex-col justify-center items-center font-extrabold">
         <p>{{ label }}</p>
       </div>
     </div>
 
     <div v-if="text">
-      <div class="flex flex-col justify-center items-center font-light text-white">
+      <div class="flex flex-col justify-center items-center font-light">
         <p>{{ text }}</p>
       </div>
     </div>
 
     <div v-if="date">
-      <div class="flex flex-col justify-center items-center font-light text-white">
+      <div class="flex flex-col justify-center items-center font-light">
         <p>{{ date }}</p>
       </div>
     </div>

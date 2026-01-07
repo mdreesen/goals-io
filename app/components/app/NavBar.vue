@@ -1,5 +1,10 @@
 <script setup lang="ts">
 import type { NavigationMenuItem } from '@nuxt/ui';
+import { useColorMode } from '#imports'; // This import works in Nuxt 3/4 setup scripts
+
+const colorMode = useColorMode();
+
+console.log('Current color mode value:', colorMode.value)
 
 const items = computed<NavigationMenuItem[]>(() => [{
   label: 'Main',
@@ -33,6 +38,7 @@ const items = computed<NavigationMenuItem[]>(() => [{
           ASCΞND
         </span>
         <NuxtImg
+        v-if="colorMode.value !== 'light'"
           class="h-25 w-25 opacity-60 -left-14.5 relative rounded-full object-cover lg:hidden md:hidden"
           alt="White Raven Logo" format="webp" width="200px" height="200px" src="/images/logo_transparent_512x512.png" />
       </NuxtLink>
