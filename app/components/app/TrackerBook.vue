@@ -79,7 +79,7 @@ async function log() {
             <template #body>
               <form @submit.prevent="log" class="space-y-6">
                 <div v-motion="{ ...inputVarient() }">
-                  <label for="text" class="block text-sm font-medium text-gray-300 mb-1">Kind of book</label>
+                  <baseLabel text="Kind of book" />
 
                   <select id="status-select" v-model="input.kind_of_book" required
                     class="w-full rounded-xl border border-gray-600 bg-gray-700/50 py-3 px-4 text-lg text-white shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500">

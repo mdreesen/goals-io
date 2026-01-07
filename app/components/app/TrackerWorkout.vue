@@ -55,7 +55,8 @@ async function log() {
         <transition name="slide-up" mode="out-in">
           <nuxt-link class="flex flex-col justify-center w-full items-center"
             :to="`/dashboard/body/${[item._id]}/workout`">
-            <baseCard :label="item.type" :text="item.description" :date="item.date" icon="material-symbols:run-circle-rounded" iconColor="bg-blue-500/60"
+            <baseCard :label="item.type" :text="item.description" :date="item.date"
+              icon="material-symbols:run-circle-rounded" iconColor="bg-blue-500/60"
               iconNav="material-symbols:arrow-forward-ios-rounded" />
           </nuxt-link>
         </transition>
@@ -87,19 +88,19 @@ async function log() {
                   </div>
 
                   <div v-motion="{ ...inputVarient() }">
-                    <label for="text" class="block text-sm font-medium text-gray-300 mb-1">Duration (in minutes)</label>
+                    <baseLabel text="Duration (in minutes)" />
                     <input id="text" type="text" v-model="input.duration" placeholder="Example: 60" required
                       class="w-full rounded-xl border border-gray-600 bg-gray-700/50 py-3 px-4 text-lg text-white shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500" />
                   </div>
 
                   <div v-motion="{ ...inputVarient() }">
-                    <label for="text" class="block text-sm font-medium text-gray-300 mb-1">Description</label>
+                    <baseLabel text="Description" />
                     <input id="text" type="text" v-model="input.description" placeholder="Legs, arms, core..." required
                       class="w-full rounded-xl border border-gray-600 bg-gray-700/50 py-3 px-4 text-lg text-white shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500" />
                   </div>
 
                   <div v-motion="{ ...inputVarient() }">
-                    <label for="text" class="block text-sm font-medium text-gray-300 mb-1">Sets</label>
+                    <baseLabel text="Sets" />
                     <textarea id="text" type="text" v-model="input.sets" placeholder="Your workout sets" required
                       class="w-full rounded-xl border border-gray-600 bg-gray-700/50 py-3 px-4 text-lg text-white shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500" />
                   </div>
