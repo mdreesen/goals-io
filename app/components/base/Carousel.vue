@@ -1,8 +1,9 @@
 <script setup lang="ts">
+import type { BookType } from '~/types/books';
 
 const props = defineProps({
     data: {
-        type: Array,
+        type: Array<BookType>,
         default: () => [],
         required: true
     },
