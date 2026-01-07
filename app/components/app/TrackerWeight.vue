@@ -8,7 +8,7 @@ const props = defineProps({
     required: true
   },
 });
-console.log(props.data)
+
 const isLoading = ref(false);
 let errorMessage = ref('');
 
