@@ -11,11 +11,11 @@ const isLoading = ref(false);
 let errorMessage = ref('');
 
 const input = reactive({
-    gratitude: "",
+  weight: '',
 });
 
 if (data.value) {
-    input.gratitude = data.value.gratitude;
+    input.weight = data.value.weight;
 };
 
 async function log() {
