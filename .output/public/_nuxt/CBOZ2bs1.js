@@ -1,1 +1,0 @@
-import{e as o,c as n,o as s,t as a}from"./B-MK43wj.js";const r={for:"text",class:"block text-sm font-medium text-gray-300 mb-1"},c=o({__name:"Label",props:{text:{type:String,required:!0}},setup(t){const e=t;return(_,m)=>(s(),n("label",r,a(e.text),1))}}),i=Object.assign(c,{__name:"BaseLabel"});export{i as _};

@@ -14,17 +14,19 @@ const { data: workouts, pending: pending_workouts } = await useFetch('/api/chart
 const { data: setting, pending: pending_settings } = await useFetch('/api/user/profile/setting', { lazy: true });
 
 const { data: stats, pending: pending_stats } = await useFetch('/api/stats', { lazy: true });
+
+console.log(setting.value)
 </script>
 
 <template>
-    <div>
-        <section v-if="!pending_profile">
+    <div v-if="!pending_profile && !pending_stats">
+        <section>
             <appWelcome :data="profile" />
         </section>
         <section>
             <baseHeader text="Your Overview" />
 
-            <div class="container-cards" v-if="!pending_stats">
+            <div class="container-cards" v-if="!pending_stats && !pending_profile">
                 <baseCardOverview v-if="setting.bookSetting.value" text="Books"
                     color="bg-gradient-to-br from-green-600 to-green-700"
                     icon="material-symbols:book-ribbon-outline-rounded" collection="books" :data="stats" />

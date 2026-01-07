@@ -8,10 +8,10 @@ export default defineEventHandler(async (event) => {
     const mindArr = ['showBooks', 'showGratitudes'];
     const spiritArr = ['showBible', 'showJournal'];
 
-    const bodySettings = data?.settings?.filter((item) => bodyArr.includes(item?.setting))
-    const mindSettings = data?.settings?.filter((item) => mindArr.includes(item?.setting))
-    const spiritSettings = data?.settings?.filter((item) => spiritArr.includes(item?.setting))
-
+    const bodySettings = data?.settings?.filter((item) => bodyArr.includes(item?.setting)) ?? []
+    const mindSettings = data?.settings?.filter((item) => mindArr.includes(item?.setting)) ?? []
+    const spiritSettings = data?.settings?.filter((item) => spiritArr.includes(item?.setting)) ?? []
+console.log(bodySettings)
     return {
         username: data?.username,
         first_name: data?.first_name ? data?.first_name : 'Ascender',

@@ -16,8 +16,6 @@ const props = defineProps({
     },
 });
 
-console.log(props.data)
-
 const { fetch: refreshSession } = useUserSession();
 
 let errorMessage = ref('');

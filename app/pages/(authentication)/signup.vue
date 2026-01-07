@@ -89,10 +89,11 @@ useMotion(formRef, { ...formVarient() });
                     <div v-motion="{ ...inputVarient() }" class="flex items-center space-x-2">
                         <input id="privacy" type="checkbox" v-model="credentials.privacy_policy" required
                             class="rounded-md border-gray-600 text-purple-500 focus:ring-purple-500 transition-colors duration-200" />
-                        <label for="privacy" class="text-sm text-gray-400">
-                            I agree to the <NuxtLink to="/privacy_policy"
+                            <div>
+                                <baseLabel text="I agree to the" />
+                                <NuxtLink to="/privacy_policy"
                                 class="text-blue-400 hover:underline transition-colors">Privacy Policy</NuxtLink>
-                        </label>
+                            </div>
                     </div>
 
                     <div v-motion="{ ...inputVarient() }">
