@@ -8,7 +8,7 @@ const props = defineProps({
     required: true
   },
 });
-
+console.log(props.data)
 const isLoading = ref(false);
 let errorMessage = ref('');
 
@@ -42,7 +42,7 @@ async function log() {
 </script>
 
 <template>
-  <div class="flex flex-col items-center justify-center w-full max-w-sm mx-auto p-8 font-sans">
+  <div class="flex flex-col items-center justify-center w-full max-w-sm mx-auto font-sans">
 
     <div class="relative w-full flex flex-col items-center justify-center mb-10 group">
 
@@ -60,20 +60,48 @@ async function log() {
 
     </div>
 
+
+    <div class="container-cards">
+      <template v-for="item in props.data.latestDataArr.reverse()">
+        <transition name="slide-up" mode="out-in">
+          <nuxt-link class="flex flex-col justify-center w-full items-center"
+            :to="`/dashboard/spirit/journal/${[item._id]}`">
+            <baseCard :label="`${item.weight} lbs`" :date="item.date" icon="material-symbols:monitor-weight" iconColor="bg-gray-500/60"
+              iconNav="material-symbols:arrow-forward-ios-rounded" />
+          </nuxt-link>
+        </transition>
+      </template>
+    </div>
+
+
+
     <div class="w-full relative">
 
-      <transition name="slide-up" mode="out-in">
+      <div class="flex flex-col items-center justify-center w-full max-w-sm mx-auto p-8 font-sans">
 
-        <form @submit.prevent="log" class="space-y-6">
-          <div v-motion="{ ...inputVarient() }">
-            <label for="text" class="block text-sm font-medium text-gray-300 mb-1">Log Weight</label>
-            <input id="text" type="text" v-model="input.weight" placeholder="Example: 180.5" required
-              class="w-full rounded-xl border border-gray-600 bg-gray-700/50 py-3 px-4 text-lg text-white shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500" />
-          </div>
+        <div class="w-full relative mb-4 flex justify-center">
 
-          <baseButtonSubmit text="Save" :isLoading="isLoading" />
-        </form>
-      </transition>
+          <transition name="slide-up" mode="out-in">
+
+            <UDrawer title="Log weight">
+              <UButton label="Log weight" color="neutral" variant="subtle"
+                trailing-icon="material-symbols:bolt-rounded" />
+
+              <template #body>
+                <form @submit.prevent="log" class="space-y-6">
+                  <div v-motion="{ ...inputVarient() }">
+                    <label for="text" class="block text-sm font-medium text-gray-300 mb-1">Weight</label>
+                    <input id="text" type="text" v-model="input.weight" placeholder="Example: 180.5" required
+                      class="w-full rounded-xl border border-gray-600 bg-gray-700/50 py-3 px-4 text-lg text-white shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                  </div>
+
+                  <baseButtonSubmit text="Save" :isLoading="isLoading" />
+                </form>
+              </template>
+            </UDrawer>
+          </transition>
+        </div>
+      </div>
     </div>
 
   </div>

@@ -4,7 +4,7 @@ import { latestData } from '~/utils/formatters/latestData';
 export default defineEventHandler(async (event) => {
   try {
     const user = await loggedInUser(event);
-    const data = user?.workout ?? [];
+    const data = user?.workout?.reverse() ?? [];
 
     // Latest wieght and water intake
     const latest = latestData(3, data);

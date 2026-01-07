@@ -1,4 +1,5 @@
 import loggedInUser from "~/utils/loggedInUser";
+import { latestData } from '~/utils/formatters/latestData';
 
 export default defineEventHandler(async (event) => {
   try {
@@ -17,6 +18,7 @@ export default defineEventHandler(async (event) => {
     });
 
     return {
+      latestDataArr: latestData(3, formatArray?.reverse()) ?? [],
       latestData: formatArray?.reverse()[0] ?? {},
       goal_weight: Number(user?.goal_weight)
     }
