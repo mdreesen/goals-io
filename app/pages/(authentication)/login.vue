@@ -1,0 +1,169 @@
+<script setup lang="ts">
+import { ref } from 'vue';
+import { useMotion } from '@vueuse/motion';
+import { formVarient, containerVarient, inputVarient } from '~/utils/varients';
+import type { User } from '~/types/user';
+
+const formRef = ref();
+const message = ref('');
+const isLoading = ref(false);
+let errorMessage = ref('');
+
+const { loggedIn, user, fetch: refreshSession } = useUserSession()
+
+const credentials = reactive({
+  email: '',
+  password: '',
+});
+
+const input = reactive({
+  email: "",
+  question: ""
+});
+
+async function login() {
+  isLoading.value = true;
+  $fetch('/api/authentication/login', {
+    method: 'POST',
+    body: credentials
+  })
+    .then(async () => {
+      await refreshSession();
+
+      // if (loggedIn) await navigateTo('/dashboard');
+      await navigateTo('/dashboard');
+
+      isLoading.value = false;
+    })
+    .catch(async (error) => {
+      console.log(error);
+      errorMessage.value = error.statusMessage;
+      isLoading.value = false;
+    });
+};
+
+async function forgotpassword() {
+  isLoading.value = true;
+  $fetch(`/api/authentication/forgot`, {
+    method: 'POST',
+    body: {
+      ...input
+    }
+  })
+    .then(async () => {
+      await refreshSession();
+      await refreshNuxtData();
+
+      isLoading.value = false;
+    })
+    .catch(async (error) => {
+      console.log(error);
+      errorMessage.value = error.statusMessage;
+      isLoading.value = false;
+    });
+};
+
+useMotion(formRef, { ...formVarient() });
+
+</script>
+
+<template>
+  <div class="relative flex min-h-screen items-center justify-center bg-gray-950 p-4 overflow-hidden">
+    <!-- Background Gradient -->
+    <div class="absolute inset-0 z-0 bg-linear-to-br from-gray-950 via-gray-800 to-purple-950 opacity-70"></div>
+
+    <!-- Hero Text -->
+    <section class="flex flex-col items-center gap-8">
+      <div class="text-center" v-motion="{ ...containerVarient() }">
+
+        <h1 class="flex flex-col text-4xl sm:text-6xl font-extrabold text-white leading-tight">
+          <span>Welcome to</span>
+          <span class="bg-clip-text text-transparent bg-linear-to-r from-blue-400 to-purple-400">
+            ASCΞND
+          </span>
+        </h1>
+        <p class="mt-2 text-lg sm:text-xl text-gray-400">Log in to unlock your journey.</p>
+      </div>
+
+      <!-- Login Form Container -->
+      <div ref="formRef"
+        class="relative z-20 w-full max-w-sm rounded-3xl border border-gray-700 bg-gray-800/50 p-8 shadow-2xl backdrop-blur-md space-y-6 transform transition-all duration-300">
+
+        <!-- Message Area -->
+        <div v-if="errorMessage" class="text-center py-2 px-4 rounded-lg" :class="'bg-red-600/30 text-red-400'"
+          v-motion="{ ...inputVarient() }">
+          {{ errorMessage }}
+        </div>
+
+        <!-- Login Form -->
+        <form @submit.prevent="login" class="space-y-6">
+          <div v-motion="{ ...inputVarient() }">
+            <label for="email" class="block text-sm font-medium text-gray-300 mb-1">Email</label>
+            <input id="email" type="email" v-model="credentials.email" placeholder="Email" required
+              class="w-full rounded-xl border border-gray-600 bg-gray-700/50 py-3 px-4 text-lg text-white shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500" />
+          </div>
+
+          <div v-motion="{ ...inputVarient() }">
+            <label for="password" class="block text-sm font-medium text-gray-300 mb-1">Password</label>
+            <input id="password" type="password" v-model="credentials.password" placeholder="Password" required
+              class="w-full rounded-xl border border-gray-600 bg-gray-700/50 py-3 px-4 text-lg text-white shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500" />
+          </div>
+
+          <div v-motion="{ ...inputVarient() }" class="flex flex-col items-center justify-center w-full max-w-sm mx-auto font-sans">
+
+            <div class="w-full relative flex justify-end">
+
+              <transition name="slide-up" mode="out-in">
+
+                <UDrawer title="Reset your password">
+                  <UButton label="Forgot password" color="neutral" variant="subtle" />
+
+                  <template #body>
+                    <form @submit.prevent="forgotpassword" class="space-y-6">
+
+                      <div v-motion="{ ...inputVarient() }">
+                        <label for="email" class="block text-sm font-medium text-gray-300 mb-1">Email</label>
+                        <input id="email" type="email" v-model="input.email" placeholder="Email" required
+                          class="w-full rounded-xl border border-gray-600 bg-gray-700/50 py-3 px-4 text-lg text-white shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                      </div>
+
+                      <div v-motion="{ ...inputVarient() }">
+                        <label for="text" class="block text-sm font-medium text-gray-300 mb-1">Question</label>
+                        <input id="question" type="text" v-model="input.question" placeholder="What is 4 + 3" required
+                          class="w-full rounded-xl border border-gray-600 bg-gray-700/50 py-3 px-4 text-lg text-white shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                      </div>
+
+                      <div class="flex flex-col gap-8 pb-4">
+                        <baseButtonSubmit text="Reset" :isLoading="isLoading" isLoadingText="Submitting..." />
+                      </div>
+                    </form>
+                  </template>
+                </UDrawer>
+              </transition>
+            </div>
+          </div>
+
+          <div v-motion="{ ...inputVarient() }">
+            <button type="submit" :disabled="isLoading"
+              :class="`${isLoading ? 'bg-linear-to-r from-gray-500 to-gray-600' : 'bg-linear-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900'} w-full rounded-xl py-3 text-lg font-semibold text-white shadow-lg transition-all duration-300 ease-in-out`">
+              {{ isLoading ? 'Logging In...' : 'Log In' }}
+            </button>
+          </div>
+        </form>
+
+        <div v-motion="{ ...inputVarient() }" class="relative flex items-center justify-center py-4">
+          <div class="absolute w-full border-t border-gray-700"></div>
+          <span class="relative z-10 bg-gray-800/80 backdrop-blur-md px-4 text-gray-400 text-sm">OR</span>
+        </div>
+
+        <!-- Signup Link -->
+        <div class="text-center" v-motion="{ ...inputVarient() }">
+          <p class="text-gray-400 text-sm">
+            Don't have an account?
+            <NuxtLink to="/signup" class="text-blue-400 hover:underline transition-colors">Sign up</NuxtLink>
+          </p>
+        </div>
+      </div>
+    </section>
+  </div>
+</template>

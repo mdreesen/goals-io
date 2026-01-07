@@ -1,0 +1,1 @@
+const t=()=>({initial:{opacity:0,y:50},enter:{opacity:1,y:0,transition:{type:"spring",stiffness:250,damping:25,mass:.5,staggerChildren:.1,delayChildren:.1}}}),i=()=>({initial:{opacity:0,y:-20},enter:{opacity:1,y:0,transition:{delay:.2,duration:.8}}}),n=()=>({initial:{opacity:0,y:20},enter:{opacity:1,y:0}});export{i as c,t as f,n as i};
