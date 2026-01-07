@@ -18,6 +18,7 @@ const credentials = reactive({
 
 const input = reactive({
   email: "",
+  question: ""
 });
 
 async function login() {
@@ -43,23 +44,23 @@ async function login() {
 
 async function forgotpassword() {
   isLoading.value = true;
-  // $fetch(`/api/user/gratitudes/gratitudes`, {
-  //   method: 'POST',
-  //   body: {
-  //     ...input
-  //   }
-  // })
-  //   .then(async () => {
-  //     await refreshSession();
-  //     await refreshNuxtData();
+  $fetch(`/api/authentication/forgot`, {
+    method: 'POST',
+    body: {
+      ...input
+    }
+  })
+    .then(async () => {
+      await refreshSession();
+      await refreshNuxtData();
 
-  //     isLoading.value = false;
-  //   })
-  //   .catch(async (error) => {
-  //     console.log(error);
-  //     errorMessage.value = error.statusMessage;
-  //     isLoading.value = false;
-  //   });
+      isLoading.value = false;
+    })
+    .catch(async (error) => {
+      console.log(error);
+      errorMessage.value = error.statusMessage;
+      isLoading.value = false;
+    });
 };
 
 useMotion(formRef, { ...formVarient() });
@@ -108,7 +109,7 @@ useMotion(formRef, { ...formVarient() });
               class="w-full rounded-xl border border-gray-600 bg-gray-700/50 py-3 px-4 text-lg text-white shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500" />
           </div>
 
-          <div class="flex flex-col items-center justify-center w-full max-w-sm mx-auto font-sans">
+          <div v-motion="{ ...inputVarient() }" class="flex flex-col items-center justify-center w-full max-w-sm mx-auto font-sans">
 
             <div class="w-full relative flex justify-end">
 
@@ -123,6 +124,12 @@ useMotion(formRef, { ...formVarient() });
                       <div v-motion="{ ...inputVarient() }">
                         <label for="email" class="block text-sm font-medium text-gray-300 mb-1">Email</label>
                         <input id="email" type="email" v-model="input.email" placeholder="Email" required
+                          class="w-full rounded-xl border border-gray-600 bg-gray-700/50 py-3 px-4 text-lg text-white shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                      </div>
+
+                      <div v-motion="{ ...inputVarient() }">
+                        <label for="text" class="block text-sm font-medium text-gray-300 mb-1">Question</label>
+                        <input id="question" type="text" v-model="input.question" placeholder="What is 4 + 3" required
                           class="w-full rounded-xl border border-gray-600 bg-gray-700/50 py-3 px-4 text-lg text-white shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500" />
                       </div>
 
