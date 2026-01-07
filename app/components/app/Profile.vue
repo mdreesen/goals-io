@@ -16,6 +16,8 @@ const props = defineProps({
     },
 });
 
+console.log(props.data)
+
 const { fetch: refreshSession } = useUserSession();
 
 let errorMessage = ref('');
@@ -24,8 +26,16 @@ const isLoading = ref(false);
 const { clear: clearSession } = useUserSession();
 
 const input = reactive({
-  gratitude: "",
+    username: "",
+    first_name: "",
+    last_name: ""
 });
+
+if (props.data) {
+    input.username = props.data.username;
+    input.first_name = props.data.first_name;
+    input.last_name = props.data.last_name;
+};
 
 async function logout() {
 
@@ -62,15 +72,13 @@ const toggleSetting = (item: any) => {
 
 async function log() {
     isLoading.value = true;
-    $fetch(`/api/user/gratitudes/gratitudes`, {
-        method: 'POST',
-        body: {
-            ...input,
-            date: formatDate()
-        }
+    $fetch(`/api/user/profile`, {
+        method: 'PUT',
+        body: input,
     })
         .then(async () => {
             await refreshSession();
+            await refreshNuxtData();
 
             isLoading.value = false;
         })
@@ -120,22 +128,22 @@ async function log() {
 
                                             <div v-motion="{ ...inputVarient() }">
                                                 <baseLabel text="Who are you called to be?" />
-                                                <input id="text" type="text" v-model="input.gratitude"
-                                                    placeholder="Leader, hard worker, etc..." required
+                                                <input id="text" type="text" v-model="input.username"
+                                                    placeholder="Leader, hard worker, etc..."
                                                     class="w-full rounded-xl border border-gray-600 bg-gray-700/50 py-3 px-4 text-lg text-white shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500" />
                                             </div>
 
                                             <div v-motion="{ ...inputVarient() }">
                                                 <baseLabel text="First Name" />
-                                                <input id="text" type="text" v-model="input.gratitude"
-                                                    placeholder="First name" required
+                                                <input id="text" type="text" v-model="input.first_name"
+                                                    placeholder="First name"
                                                     class="w-full rounded-xl border border-gray-600 bg-gray-700/50 py-3 px-4 text-lg text-white shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500" />
                                             </div>
 
                                             <div v-motion="{ ...inputVarient() }">
                                                 <baseLabel text="Last name" />
-                                                <input id="text" type="text" v-model="input.gratitude"
-                                                    placeholder="Last name" required
+                                                <input id="text" type="text" v-model="input.last_name"
+                                                    placeholder="Last name"
                                                     class="w-full rounded-xl border border-gray-600 bg-gray-700/50 py-3 px-4 text-lg text-white shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500" />
                                             </div>
 

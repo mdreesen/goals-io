@@ -29,6 +29,7 @@ async function log() {
   })
     .then(async () => {
       await refreshSession();
+      await refreshNuxtData();
 
       isLoading.value = false;
     })
@@ -85,7 +86,7 @@ async function log() {
 
             <UDrawer title="Log weight">
               <UButton label="Log weight" color="neutral" variant="subtle"
-                trailing-icon="material-symbols:bolt-rounded" />
+                trailing-icon="material-symbols:monitor-weight-outline-sharp" />
 
               <template #body>
                 <form @submit.prevent="log" class="space-y-6">

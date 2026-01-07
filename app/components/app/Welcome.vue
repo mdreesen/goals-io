@@ -1,8 +1,15 @@
 <script setup lang="ts">
-import type { User } from '~/types/auth';
 
-const { user, loggedIn } = useUserSession();
-const useUser = ref<User>(user?.value);
+const { loggedIn } = useUserSession();
+
+const props = defineProps({
+    data: {
+        type: Object,
+        default: () => { },
+        required: true
+    },
+});
+
 </script>
 
 <template>
@@ -13,9 +20,9 @@ const useUser = ref<User>(user?.value);
         </h2>
         <h2
             class="text-5xl text-center md:text-6xl font-extrabold text-transparent bg-clip-text bg-linear-to-r from-blue-400 via-purple-500 to-pink-500">
-            {{ useUser.first_name }}!
+            {{ props.data.first_name }}!
         </h2>
-        <baseDescription :text="useUser.username" />
+        <baseDescription :text="props.data.username ?? ''" />
     </div>
     <div v-else>
         <h2

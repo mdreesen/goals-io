@@ -13,7 +13,7 @@ const props = defineProps({
   },
 });
 
-const userDailyGoal = computed(() => Number(props.data?.latestWeight?.weight) / 2);
+const userDailyGoal = computed(() => Number(props.data?.latestWeight?.weight ?? 0) / 2);
 const userCurrentWater = computed(() => {
   if (props.data?.latestWater?.date !== formatDate()) return 0
   return Number(props.data?.latestWater?.water_intake) ?? 0

@@ -3,6 +3,8 @@
 definePageMeta({
     layout: 'authenticated',
 });
+const { data: profile, pending: pending_profile } = await useFetch('/api/user/profile', { lazy: true });
+
 const { data: books, pending: pending_books } = await useFetch('/api/charts/books', { lazy: true });
 // const { data: cold_soaks, pending: pending_cold_soaks } = await useFetch('/api/charts/coldsoaks', { lazy: true });
 const { data: water_intake, pending: pending_water } = await useFetch('/api/charts/water', { lazy: true });
@@ -16,8 +18,8 @@ const { data: stats, pending: pending_stats } = await useFetch('/api/stats', { l
 
 <template>
     <div>
-        <section>
-            <appWelcome />
+        <section v-if="!pending_profile">
+            <appWelcome :data="profile" />
         </section>
         <section>
             <baseHeader text="Your Overview" />

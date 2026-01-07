@@ -65,7 +65,7 @@ async function log() {
         <transition name="slide-up" mode="out-in">
 
           <UDrawer title="Log a new journal entry">
-            <UButton label="Add entry" color="neutral" variant="subtle" trailing-icon="material-symbols:bolt-rounded" />
+            <UButton label="Add entry" color="neutral" variant="subtle" trailing-icon="material-symbols:book-5" />
 
             <template #body>
               <form @submit.prevent="log" class="space-y-6">

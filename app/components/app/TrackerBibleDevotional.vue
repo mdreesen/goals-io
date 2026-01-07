@@ -58,7 +58,7 @@ async function log() {
             <baseCard :label="item.book_title"
               :text="`${item?.chapter ? `Chapter ${item?.chapter} •` : ''} Verse ${item?.verses ? item?.verses : ''}`"
               :date="item?.date"
-              icon="material-symbols:shield-spark-rounded" iconColor="bg-gray-500/60"
+              icon="material-symbols:shield-outline-rounded" iconColor="bg-gray-500/60"
               iconNav="material-symbols:arrow-forward-ios-rounded" />
           </nuxt-link>
         </transition>
@@ -72,7 +72,7 @@ async function log() {
 
           <UDrawer title="Log a new devotional entry">
             <UButton label="Add devotional entry" color="neutral" variant="subtle"
-              trailing-icon="material-symbols:bolt-rounded" />
+              trailing-icon="material-symbols:shield-spark-rounded" />
 
             <template #body>
               <form @submit.prevent="log" class="space-y-6">

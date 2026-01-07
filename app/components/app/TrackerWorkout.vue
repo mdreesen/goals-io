@@ -55,7 +55,7 @@ async function log() {
         <transition name="slide-up" mode="out-in">
           <nuxt-link class="flex flex-col justify-center w-full items-center"
             :to="`/dashboard/body/${[item._id]}/workout`">
-            <baseCard :label="item.type" :text="item.description" :date="item.date" icon="material-symbols:directions-run-rounded" iconColor="bg-blue-500/60"
+            <baseCard :label="item.type" :text="item.description" :date="item.date" icon="material-symbols:run-circle-rounded" iconColor="bg-blue-500/60"
               iconNav="material-symbols:arrow-forward-ios-rounded" />
           </nuxt-link>
         </transition>
@@ -72,7 +72,7 @@ async function log() {
 
             <UDrawer title="Log new workout">
               <UButton label="Add workout" color="neutral" variant="subtle"
-                trailing-icon="material-symbols:bolt-rounded" />
+                trailing-icon="material-symbols:directions-run-rounded" />
 
               <template #body>
                 <form @submit.prevent="log" class="space-y-6">
