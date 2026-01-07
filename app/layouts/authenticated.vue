@@ -2,7 +2,7 @@
 import { useSettings } from '~/store';
 
 const settingsStore = useSettings();
-const { data: profileData, pending: pending_profile, refresh: refresh_settings } = await useFetch(() => '/api/user/profile');
+const { data: profileData, pending: pending_profile, refresh: refresh_settings } = await useFetch(() => '/api/user/profile/settings');
 
 settingsStore.set(profileData.value?.settings);
 

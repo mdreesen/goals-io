@@ -65,7 +65,7 @@ async function log() {
       <template v-for="item in props.data.latestDataArr.reverse()">
         <transition name="slide-up" mode="out-in">
           <nuxt-link class="flex flex-col justify-center w-full items-center"
-            :to="`/dashboard/spirit/journal/${[item._id]}`">
+            :to="`/dashboard/body/${[item._id]}/weight`">
             <baseCard :label="`${item.weight} lbs`" :date="item.date" icon="material-symbols:monitor-weight" iconColor="bg-gray-500/60"
               iconNav="material-symbols:arrow-forward-ios-rounded" />
           </nuxt-link>

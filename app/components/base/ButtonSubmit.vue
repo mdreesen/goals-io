@@ -11,7 +11,6 @@ const props = defineProps({
     },
     isLoadingText: {
         type: String,
-        required: true,
         default: 'Saving...'
     }
 })

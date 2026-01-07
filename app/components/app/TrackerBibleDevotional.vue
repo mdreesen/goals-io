@@ -54,7 +54,7 @@ async function log() {
       <template v-for="item in props.data">
         <transition name="slide-up" mode="out-in">
           <nuxt-link class="flex flex-col justify-center w-full items-center"
-            :to="`/dashboard/spirit/bible/devotional/${[item._id]}`">
+            :to="`/dashboard/spirit/${[item._id]}/devotional`">
             <baseCard :label="item.book_title"
               :text="`${item?.chapter ? `Chapter ${item?.chapter} •` : ''} Verse ${item?.verses ? item?.verses : ''}`"
               :date="item?.date"

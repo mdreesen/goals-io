@@ -48,7 +48,7 @@ async function log() {
     <div class="container-cards">
       <template v-for="item in props.data">
         <transition name="slide-up" mode="out-in">
-          <nuxt-link class="flex flex-col justify-center w-full items-center" :to="`/dashboard/mind/gratitudes/${[item._id]}`">
+          <nuxt-link class="flex flex-col justify-center w-full items-center" :to="`/dashboard/mind/${[item._id]}/gratitudes`">
             <baseCard :text="item.description" icon="material-symbols:bolt-outline-rounded"
               iconNav="material-symbols:arrow-forward-ios-rounded" />
           </nuxt-link>
