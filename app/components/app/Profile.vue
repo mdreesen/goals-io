@@ -230,7 +230,7 @@ async function log() {
                     Sign Out
                 </button>
 
-                <appDeleteProfile />
+                <baseDeleteProfile />
             </div>
 
         </div>

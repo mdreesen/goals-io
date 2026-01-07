@@ -51,7 +51,7 @@ const { data: stats, pending: pending_stats } = await useFetch('/api/stats', { l
             <UContainer v-if="!pending_books && !pending_settings">
                 <section v-if="setting.bookSetting.value">
                     <baseSectionHeader text="Books" />
-                    <appChartBarGroup :data="books.chartData" barOneName="start_date" barTwoName="end_date"
+                    <baseChartBarGroup :data="books.chartData" barOneName="start_date" barTwoName="end_date"
                         barOneLabel="Start Date" barTwoLabel="End Date" />
                 </section>
             </UContainer>
@@ -59,14 +59,14 @@ const { data: stats, pending: pending_stats } = await useFetch('/api/stats', { l
             <!-- Cold Soak Tracking -->
             <!-- <UContainer>
                 <baseSectionHeader text="Cold Soaks" />
-                <appChartBar v-if="!pending_cold_soaks" :data="cold_soaks" barName="date" barLabel="Total" />
+                <baseChartBar v-if="!pending_cold_soaks" :data="cold_soaks" barName="date" barLabel="Total" />
             </UContainer> -->
 
             <!-- Water Tracking -->
             <UContainer v-if="!pending_water && !pending_settings">
                 <section v-if="setting.waterSetting.value">
                     <baseSectionHeader text="Water Intake" />
-                <appChartLine v-if="!pending_water" :data="water_intake" lineName="water_intake"
+                <baseChartLine v-if="!pending_water" :data="water_intake" lineName="water_intake"
                     lineLabel="Water total" />
                 </section>
             </UContainer>
@@ -75,7 +75,7 @@ const { data: stats, pending: pending_stats } = await useFetch('/api/stats', { l
             <UContainer v-if="!pending_weight && !pending_settings">
                 <section v-if="setting.weightSetting.value">
                     <baseSectionHeader text="Weight" />
-                    <appChartLine v-if="!pending_weight" :data="weight" lineName="weight" lineLabel="Weight" />
+                    <baseChartLine v-if="!pending_weight" :data="weight" lineName="weight" lineLabel="Weight" />
                 </section>
             </UContainer>
 
@@ -83,7 +83,7 @@ const { data: stats, pending: pending_stats } = await useFetch('/api/stats', { l
             <UContainer v-if="!pending_workouts && !pending_settings">
                 <section v-if="setting.workoutSetting.value">
                     <baseSectionHeader text="Workouts" />
-                    <appChartBar v-if="!pending_workouts" :data="workouts" barName="date" barLabel="Total" />
+                    <baseChartBar v-if="!pending_workouts" :data="workouts" barName="date" barLabel="Total" />
                 </section>
             </UContainer>
         </section>

@@ -88,6 +88,7 @@ async function delete_log() {
 
                 <div v-motion="{ ...inputVarient() }">
                     <label for="text" class="block text-sm font-medium text-gray-300 mb-1">Duration (in minutes)</label>
+                    <baseLabel text="Save for future reads" />
                     <input id="text" type="text" v-model="input.duration" placeholder="Example: 60" required
                         class="w-full rounded-xl border border-gray-600 bg-gray-700/50 py-3 px-4 text-lg text-white shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500" />
                 </div>
