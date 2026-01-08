@@ -2,14 +2,13 @@
     import { ref } from 'vue';
     import { useMotion } from '@vueuse/motion';
     import { formVarient, containerVarient, inputVarient } from '~/utils/varients';
-    import type { User } from '~/types/user';
     
     const formRef = ref();
     const message = ref('');
     const isLoading = ref(false);
     let errorMessage = ref('');
     
-    const { loggedIn, user, fetch: refreshSession } = useUserSession()
+    const { fetch: refreshSession } = useUserSession()
     
     const credentials = reactive({
       email: '',
@@ -25,7 +24,6 @@
         .then(async () => {
           await refreshSession();
     
-          // if (loggedIn) await navigateTo('/dashboard');
           await navigateTo('/dashboard');
     
           isLoading.value = false;
