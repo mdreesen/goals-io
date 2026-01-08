@@ -9,8 +9,8 @@ const { data: profileData, pending: pending_profile } = await useFetch('/api/use
 
 <template>
   <div class="container-categories">
-    <div>
-      <appProfile v-if="!pending_profile" :data="profileData" />
+    <div v-if="!pending_profile">
+      <appProfile :data="profileData" />
     </div>
   </div>
 </template>

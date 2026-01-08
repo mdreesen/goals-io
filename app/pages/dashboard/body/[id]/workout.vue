@@ -87,19 +87,19 @@ async function delete_log() {
                 </div>
 
                 <div v-motion="{ ...inputVarient() }">
-                    <label for="text" class="block text-sm font-medium text-gray-300 mb-1">Duration (in minutes)</label>
+                    <baseLabel text="Duration (in minutes)" />
                     <input id="text" type="text" v-model="input.duration" placeholder="Example: 60" required
                         class="w-full rounded-xl border border-gray-600 bg-gray-700/50 py-3 px-4 text-lg text-white shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500" />
                 </div>
 
                 <div v-motion="{ ...inputVarient() }">
-                    <label for="text" class="block text-sm font-medium text-gray-300 mb-1">Description</label>
+                    <baseLabel text="Description" />
                     <input id="text" type="text" v-model="input.description" placeholder="Legs, arms, core..." required
                         class="w-full rounded-xl border border-gray-600 bg-gray-700/50 py-3 px-4 text-lg text-white shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500" />
                 </div>
 
                 <div v-motion="{ ...inputVarient() }">
-                    <label for="text" class="block text-sm font-medium text-gray-300 mb-1">Sets</label>
+                    <baseLabel text="Sets" />
                     <textarea id="text" type="text" v-model="input.sets" placeholder="Your workout sets" required
                         class="w-full rounded-xl border border-gray-600 bg-gray-700/50 py-3 px-4 text-lg text-white shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500" />
                 </div>

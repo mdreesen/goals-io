@@ -66,21 +66,20 @@ useMotion(formRef, { ...formVarient() });
                 <!-- Login Form -->
                 <form @submit.prevent="handler" class="space-y-6">
                     <div v-motion="{ ...inputVarient() }">
-                        <label for="email" class="block text-sm font-medium text-gray-300 mb-1">Email</label>
+                        <baseLabel text="Email" />
                         <input id="email" type="email" v-model="credentials.email" placeholder="Email" required
                             class="w-full rounded-xl border border-gray-600 bg-gray-700/50 py-3 px-4 text-lg text-white shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500" />
                     </div>
 
                     <div v-motion="{ ...inputVarient() }">
-                        <label for="password" class="block text-sm font-medium text-gray-300 mb-1">Password</label>
+                        <baseLabel text="Password" />
                         <input id="password" type="password" v-model="credentials.password" placeholder="Password"
                             required
                             class="w-full rounded-xl border border-gray-600 bg-gray-700/50 py-3 px-4 text-lg text-white shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500" />
                     </div>
 
                     <div v-motion="{ ...inputVarient() }">
-                        <label for="password" class="block text-sm font-medium text-gray-300 mb-1">Confirm
-                            Password</label>
+                        <baseLabel text="Confirm password" />
                         <input id="confirm_password" type="password" v-model="credentials.confirm_password"
                             placeholder="Password" required
                             class="w-full rounded-xl border border-gray-600 bg-gray-700/50 py-3 px-4 text-lg text-white shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500" />
@@ -89,10 +88,11 @@ useMotion(formRef, { ...formVarient() });
                     <div v-motion="{ ...inputVarient() }" class="flex items-center space-x-2">
                         <input id="privacy" type="checkbox" v-model="credentials.privacy_policy" required
                             class="rounded-md border-gray-600 text-purple-500 focus:ring-purple-500 transition-colors duration-200" />
-                        <label for="privacy" class="text-sm text-gray-400">
-                            I agree to the <NuxtLink to="/privacy_policy"
+                            <div>
+                                <baseLabel text="I agree to the" />
+                                <NuxtLink to="/privacy_policy"
                                 class="text-blue-400 hover:underline transition-colors">Privacy Policy</NuxtLink>
-                        </label>
+                            </div>
                     </div>
 
                     <div v-motion="{ ...inputVarient() }">

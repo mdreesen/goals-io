@@ -79,14 +79,13 @@ useMotion(formRef, { ...formVarient() });
                 <form @submit.prevent="log" class="space-y-6">
 
                     <div v-motion="{ ...inputVarient() }">
-                        <label for="password" class="block text-sm font-medium text-gray-300 mb-1">Password</label>
+                        <baseLabel text="Password" />
                         <input id="password" type="password" v-model="input.password" placeholder="Password" required
                             class="w-full rounded-xl border border-gray-600 bg-gray-700/50 py-3 px-4 text-lg text-white shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500" />
                     </div>
 
                     <div v-motion="{ ...inputVarient() }">
-                        <label for="confirm_password" class="block text-sm font-medium text-gray-300 mb-1">Confirm
-                            password</label>
+                        <baseLabel text="Confirm password" />
                         <input id="confirm_password" type="password" v-model="input.confirm_password"
                             placeholder="Confirm password" required
                             class="w-full rounded-xl border border-gray-600 bg-gray-700/50 py-3 px-4 text-lg text-white shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500" />

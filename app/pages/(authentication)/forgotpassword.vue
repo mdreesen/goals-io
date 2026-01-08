@@ -2,14 +2,13 @@
     import { ref } from 'vue';
     import { useMotion } from '@vueuse/motion';
     import { formVarient, containerVarient, inputVarient } from '~/utils/varients';
-    import type { User } from '~/types/user';
     
     const formRef = ref();
     const message = ref('');
     const isLoading = ref(false);
     let errorMessage = ref('');
     
-    const { loggedIn, user, fetch: refreshSession } = useUserSession()
+    const { fetch: refreshSession } = useUserSession()
     
     const credentials = reactive({
       email: '',
@@ -25,7 +24,6 @@
         .then(async () => {
           await refreshSession();
     
-          // if (loggedIn) await navigateTo('/dashboard');
           await navigateTo('/dashboard');
     
           isLoading.value = false;
@@ -72,13 +70,13 @@
             <!-- Login Form -->
             <form @submit.prevent="login" class="space-y-6">
               <div v-motion="{ ...inputVarient() }">
-                <label for="email" class="block text-sm font-medium text-gray-300 mb-1">Email</label>
+                <baseLabel text="Email" />
                 <input id="email" type="email" v-model="credentials.email" placeholder="Email" required
                   class="w-full rounded-xl border border-gray-600 bg-gray-700/50 py-3 px-4 text-lg text-white shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500" />
               </div>
     
               <div v-motion="{ ...inputVarient() }">
-                <label for="password" class="block text-sm font-medium text-gray-300 mb-1">Password</label>
+                <baseLabel text="Password" />
                 <input id="password" type="password" v-model="credentials.password" placeholder="Password" required
                   class="w-full rounded-xl border border-gray-600 bg-gray-700/50 py-3 px-4 text-lg text-white shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500" />
               </div>
