@@ -19,6 +19,7 @@ await useFetch('/api/user/bible/devotional', { key: 'devotional' });
 await useFetch('/api/user/bible/sermon', { key: 'sermon' });
 
 await useFetch('/api/user/profile', { key: 'profile' });
+await useFetch('/api/user/profile/setting', { key: 'setting' });
 
 </script>
 
