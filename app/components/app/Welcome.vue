@@ -2,13 +2,7 @@
 
 const { loggedIn } = useUserSession();
 
-const props = defineProps({
-    data: {
-        type: Object,
-        default: () => { },
-        required: true
-    },
-});
+const { data: data } = useNuxtData('profile');
 
 </script>
 
@@ -20,9 +14,9 @@ const props = defineProps({
         </h2>
         <h2
             class="text-5xl text-center md:text-6xl font-extrabold text-transparent bg-clip-text bg-linear-to-r from-blue-400 via-purple-500 to-pink-500">
-            {{ props.data.first_name }}!
+            {{ data.first_name }}!
         </h2>
-        <baseDescription :text="props.data.username ?? ''" />
+        <baseDescription :text="data.username ?? ''" />
     </div>
     <div v-else>
         <h2
