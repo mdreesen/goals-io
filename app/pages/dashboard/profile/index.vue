@@ -3,13 +3,13 @@ definePageMeta({
   layout: 'authenticated',
 });
 
-const { pending: pending_profile } = await useFetch('/api/user/profile', { key: 'profile' });
+// const { pending: pending_profile } = await useFetch('/api/user/profile', { key: 'profile' });
 
 </script>
 
 <template>
   <div class="container-categories">
-    <div v-if="!pending_profile">
+    <div>
       <appProfile />
     </div>
   </div>

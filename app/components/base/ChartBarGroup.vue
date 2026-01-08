@@ -28,7 +28,6 @@ const props = defineProps({
   }
 });
 
-
 type ItemData = {
   month: string
   start_date?: number

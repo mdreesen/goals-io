@@ -16,34 +16,33 @@ const props = defineProps({
   collection: {
     type: String,
     default: '',
-  },
-  data: {
-    required: true,
   }
 });
 
+const { data: data } = useNuxtData('stats');
+
 const books = {
-  start: props.data?.lastestBooks?.bookCurrentStartedYear,
-  end: props.data?.lastestBooks?.bookCurrentEndedYear
+  start: data.value?.lastestBooks?.bookCurrentStartedYear,
+  end: data.value?.lastestBooks?.bookCurrentEndedYear
 };
 
 const coldSoak = {
-  date: props.data?.latestColdSoak?.date,
+  date: data.value?.latestColdSoak?.date,
 };
 
 const fasting = {
-  duration: props.data?.latestFasting?.duration,
-  isFasting: props.data?.latestFasting?.start
+  duration: data.value?.latestFasting?.duration,
+  isFasting: data.value?.latestFasting?.start
 };
 
 const dailyWater = {
-  water: props.data?.latestWater?.water_intake,
-  date: props.data?.latestWater?.date,
+  water: data.value?.latestWater?.water_intake,
+  date: data.value?.latestWater?.date,
 };
 
 const weight = {
-  weight: props.data?.latestWeight?.weight,
-  date: props.data?.latestWeight?.date,
+  weight: data.value?.latestWeight?.weight,
+  date: data.value?.latestWeight?.date,
 };
 </script>
 

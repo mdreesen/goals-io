@@ -12,16 +12,8 @@ export default defineNuxtConfig({
     '@nuxtjs/color-mode',
     'nuxt-charts',
     '@nuxt/ui',
-    '@pinia/nuxt',
     '@vite-pwa/nuxt',
-    'nuxt-time'
   ],
-  imports: {
-    dirs: ['store']
-  },
-  pinia: {
-    storesDirs: ['./store/**', './custom-folder/stores/**'],
-  },
   vite: {
     plugins: [tailwindcss()],
   },
