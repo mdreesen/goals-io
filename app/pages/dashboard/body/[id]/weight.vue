@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import type { WeightType } from '~/types/weight';
 
 const route = useRoute();
 
-const { data: data, pending: pending_data } = await useFetch(`/api/user/weight/${route.params.id}`);
+const { data: data, pending: pending_data } = await useFetch<WeightType>(`/api/user/weight/${route.params.id}`);
 const { fetch: refreshSession } = useUserSession();
 
 const isLoading = ref(false);

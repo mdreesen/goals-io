@@ -2,10 +2,12 @@
 import { ref } from 'vue';
 import { formatDate } from '~/utils/date';
 import { book_of_bible } from "~/utils/dropdowns/selections";
+import type { BibleType } from '~/types/bible';
 
 const route = useRoute();
 
-const { data: data, pending: pending_data } = await useFetch(`/api/user/bible/devotional/${route.params.id}`);
+const { data: data, pending: pending_data } = await useFetch<BibleType>(`/api/user/bible/devotional/${route.params.id}`);
+
 const { fetch: refreshSession } = useUserSession();
 
 const isLoading = ref(false);

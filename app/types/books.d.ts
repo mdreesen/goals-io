@@ -6,6 +6,7 @@ export interface BookType {
   book_title: string;
   book_author: string;
   book_image: string;
-  kind_of_book: string
-  // ... other booking properties
+  kind_of_book: string;
+  notes: string;
+  booklist: string;
 }

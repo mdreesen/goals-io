@@ -3,11 +3,11 @@ import { ref, watch } from 'vue';
 import { selection_book_kinds, selection_save } from '~/utils/dropdowns/selections';
 import { getLocalTimeZone, CalendarDate } from '@internationalized/date'
 import { useFormatDate, yearMonthDayFormat } from '~/utils/date';
-
+import type { BookType } from '~/types/books';
 
 const route = useRoute();
 
-const { data: data, pending: pending_data } = await useFetch(`/api/user/books/${route.params.id}`);
+const { data: data, pending: pending_data } = await useFetch<BookType>(`/api/user/books/${route.params.id}`);
 const { fetch: refreshSession } = useUserSession();
 
 const isLoading = ref(false);

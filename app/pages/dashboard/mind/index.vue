@@ -3,8 +3,6 @@ definePageMeta({
     layout: 'authenticated',
 });
 
-// const { pending: pending_books } = await useFetch('/api/user/books/books', { key: 'books' });
-// const { pending: pending_gratitude } = await useFetch('/api/user/gratitudes/gratitudes', { key: 'gratitudes' });
 </script>
 
 <template>

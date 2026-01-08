@@ -1,7 +1,7 @@
 export interface WeightType {
-  weight: String;
-  weight_date: String,
+  _id: string;
+  weight: string;
+  weight_date: string,
+  date: string,
   starting_weight: boolean,
-
-    // ... other booking properties
-  }
+}

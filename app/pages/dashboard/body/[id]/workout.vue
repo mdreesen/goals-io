@@ -2,10 +2,11 @@
 import { ref } from 'vue';
 import { formatDate } from '~/utils/date';
 import { workout } from '~/utils/dropdowns/selections';
+import type { WorkoutType } from '~/types/workout';
 
 const route = useRoute();
 
-const { data: data, pending: pending_data } = await useFetch(`/api/user/workout/${route.params.id}`);
+const { data: data, pending: pending_data } = await useFetch<WorkoutType>(`/api/user/workout/${route.params.id}`);
 const { fetch: refreshSession } = useUserSession();
 
 const isLoading = ref(false);

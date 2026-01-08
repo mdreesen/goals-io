@@ -2,11 +2,11 @@
 import { ref } from 'vue';
 import { formatDate } from '~/utils/date';
 import { mood } from "~/utils/dropdowns/selections";
-
+import type { JournalType } from '~/types/journal';
 
 const route = useRoute();
 
-const { data: data, pending: pending_data } = await useFetch(`/api/user/journal/${route.params.id}`);
+const { data: data, pending: pending_data } = await useFetch<JournalType>(`/api/user/journal/${route.params.id}`);
 const { fetch: refreshSession } = useUserSession();
 
 const isLoading = ref(false);

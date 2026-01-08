@@ -4,11 +4,6 @@ definePageMeta({
     layout: 'authenticated',
 });
 
-const { pending: pending_hydration } = await useFetch('/api/user/water/water', { key: 'hydration'});
-const { pending: pending_fasting } = await useFetch('/api/user/fasting/fasting', { key: 'fasting' });
-const { pending: pending_weight } = await useFetch('/api/user/weight/weight', { key: 'weight'});
-const { pending: pending_workout } = await useFetch('/api/user/workout/workout', { key: 'workout' });
-
 </script>
 
 <template>

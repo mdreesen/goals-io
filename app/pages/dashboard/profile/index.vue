@@ -3,8 +3,6 @@ definePageMeta({
   layout: 'authenticated',
 });
 
-// const { pending: pending_profile } = await useFetch('/api/user/profile', { key: 'profile' });
-
 </script>
 
 <template>
