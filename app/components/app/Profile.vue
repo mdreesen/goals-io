@@ -52,6 +52,7 @@ const toggleSetting = (item: any) => {
     })
         .then(async () => {
             await refreshSession();
+            await refreshNuxtData();
             isLoading.value = false
 
         })
