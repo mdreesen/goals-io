@@ -5,17 +5,11 @@ import { Flame, Droplets, Zap, Sparkles, Play, Square } from 'lucide-vue-next'
 
 const { fetch: refreshSession } = useUserSession();
 
-const props = defineProps({
-  data: {
-    type: Object,
-    default: () => { },
-    required: true
-  },
-});
+const { data } = useNuxtData('fasting');
 
 // --- State ---
-const isFasting = ref(props.data?.start)
-const startTime = ref<Date | null>(props.data?.start_date)
+const isFasting = ref(data.value.latestData?.start)
+const startTime = ref<Date | null>(data.value.latestData?.start_date)
 const currentTime = ref(new Date())
 const goalHours = ref(16) // Default 16:8 Intermittent Fasting
 const timerInterval = ref<NodeJS.Timeout | null>(null)
@@ -36,7 +30,7 @@ const elapsedTime = computed(() => {
   return differenceInSeconds(currentTime.value, startTime.value)
 })
 
-const useIsFasting = computed(() => props.data?.start);
+const useIsFasting = computed(() => data.value.latestData?.start);
 
 const progressPercentage = computed(() => {
   const totalSeconds = goalHours.value * 3600
@@ -68,7 +62,7 @@ const dashOffset = computed(() => {
 const toggleFast = () => {
   isLoading.value = true;
 
-  if (props.data.start) {
+  if (data.value.latestData.start) {
     // End Fast
     isFasting.value = false
     // startTime.value = null
@@ -76,7 +70,7 @@ const toggleFast = () => {
     $fetch('/api/user/fasting/fasting', {
       method: 'POST',
       body: {
-        _id: props.data?._id,
+        _id: data.value.latestData?._id,
         start_date: null,
         start: false,
         ended: true,
@@ -129,7 +123,7 @@ const toggleFast = () => {
 }
 
 onMounted(() => {
-  startTime.value = props.data.start_date
+  startTime.value = data.value.latestData.start_date
   isFasting.value = true
   timerInterval.value = setInterval(() => {
     currentTime.value = new Date()

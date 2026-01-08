@@ -1,21 +1,14 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
 
-const props = defineProps({
-  data: {
-    type: Object,
-    default: () => { },
-    required: true
-  },
-});
+const { data } = useNuxtData('weight');
 
 const isLoading = ref(false);
 let errorMessage = ref('');
 
-const currentWeight = computed(() => props.data?.latestData?.weight);
+const currentWeight = computed(() => data.value.latestData?.weight);
 
-const { fetch: refreshSession } = useUserSession()
-
+const { fetch: refreshSession } = useUserSession();
 
 const input = reactive({
   weight: '',
@@ -63,7 +56,7 @@ async function log() {
 
 
     <div class="container-cards">
-      <template v-for="item in props.data.latestDataArr.reverse()">
+      <template v-for="item in data.latestDataArr.reverse()">
         <transition name="slide-up" mode="out-in">
           <nuxt-link class="flex flex-col justify-center w-full items-center"
             :to="`/dashboard/body/${[item._id]}/weight`">

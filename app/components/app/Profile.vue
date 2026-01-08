@@ -8,13 +8,7 @@ definePageMeta({
     layout: 'authenticated',
 });
 
-const props = defineProps({
-    data: {
-        type: Object,
-        default: () => { },
-        required: true
-    },
-});
+const { data } = useNuxtData('profile');
 
 const { fetch: refreshSession } = useUserSession();
 
@@ -29,10 +23,10 @@ const input = reactive({
     last_name: ""
 });
 
-if (props.data) {
-    input.username = props.data.username;
-    input.first_name = props.data.first_name;
-    input.last_name = props.data.last_name;
+if (data.value) {
+    input.username = data.value?.username;
+    input.first_name = data.value?.first_name;
+    input.last_name = data.value?.last_name;
 };
 
 async function logout() {
@@ -167,7 +161,7 @@ async function log() {
                 <div
                     class="flex justify-between items-center p-4 sm:p-6 rounded-xl shadow-lg border border-gray-700 hover:bg-gray-700 transition duration-300">
                     <div class="flex flex-col gap-5">
-                        <div v-for="item in props.data.bodySettings">
+                        <div v-for="item in data.bodySettings">
                             <span class="text-sm text-gray-400 mt-1 max-w-lg">{{ item.title }}</span>
                             <USwitch @click="toggleSetting(item)" unchecked-icon="i-lucide-x"
                                 checked-icon="i-lucide-check" color="primary" v-model="item.value"
@@ -186,7 +180,7 @@ async function log() {
                 <div
                     class="flex justify-between items-center p-4 sm:p-6 rounded-xl shadow-lg border border-gray-700 hover:bg-gray-700 transition duration-300">
                     <div class="flex flex-col gap-5">
-                        <div v-for="item in props.data.mindSettings">
+                        <div v-for="item in data.mindSettings">
                             <span class="text-sm text-gray-400 mt-1 max-w-lg">{{ item.title }}</span>
                             <USwitch @click="toggleSetting(item)" unchecked-icon="i-lucide-x"
                                 checked-icon="i-lucide-check" color="info" v-model="item.value" :loading="isLoading" />
@@ -204,7 +198,7 @@ async function log() {
                 <div
                     class="flex justify-between items-center p-4 sm:p-6 rounded-xl shadow-lg border border-gray-700 hover:bg-gray-700 transition duration-300">
                     <div class="flex flex-col gap-5">
-                        <div v-for="item in props.data.spiritSettings">
+                        <div v-for="item in data.spiritSettings">
                             <span class="text-sm text-gray-400 mt-1 max-w-lg">{{ item.title }}</span>
                             <USwitch @click="toggleSetting(item)" unchecked-icon="i-lucide-x"
                                 checked-icon="i-lucide-check" color="neutral" v-model="item.value"

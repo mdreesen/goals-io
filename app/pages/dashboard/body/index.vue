@@ -4,10 +4,10 @@ definePageMeta({
     layout: 'authenticated',
 });
 
-const { data: latestHydrationData, pending: pending_hydration } = await useFetch('/api/user/water/water', { lazy: true });
-const { data: latestFastingData, pending: pending_fasting } = await useFetch('/api/user/fasting/fasting', { lazy: true });
-const { data: latestWeightData, pending: pending_weight } = await useFetch('/api/user/weight/weight', { lazy: true });
-const { data: latestWorkoutData, pending: pending_workout } = await useFetch('/api/user/workout/workout', { lazy: true });
+const { data: latestHydrationData, pending: pending_hydration } = await useFetch('/api/user/water/water', { key: 'hydration'});
+const { data: latestFastingData, pending: pending_fasting } = await useFetch('/api/user/fasting/fasting', { key: 'fasting' });
+const { data: latestWeightData, pending: pending_weight } = await useFetch('/api/user/weight/weight', { key: 'weight'});
+const { data: latestWorkoutData, pending: pending_workout } = await useFetch('/api/user/workout/workout', { key: 'workout' });
 
 </script>
 

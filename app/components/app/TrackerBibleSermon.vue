@@ -3,13 +3,7 @@ import { ref } from 'vue';
 import { formatDate } from '~/utils/date';
 import { book_of_bible } from "~/utils/dropdowns/selections";
 
-const props = defineProps({
-  data: {
-    type: Object,
-    default: () => { },
-    required: true
-  },
-});
+const { data } = useNuxtData('sermon');
 
 const { fetch: refreshSession } = useUserSession();
 
@@ -51,7 +45,7 @@ async function log() {
 <template>
   <div>
     <div class="container-cards">
-      <template v-for="item in props.data">
+      <template v-for="item in data">
         <transition name="slide-up" mode="out-in">
           <nuxt-link class="flex flex-col justify-center w-full items-center"
             :to="`/dashboard/spirit/${[item._id]}/sermon`">
