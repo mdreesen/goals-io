@@ -13,7 +13,7 @@ const isLoading = ref(false);
 let errorMessage = ref('');
 
 const input = reactive({
-    type: "Devotional",
+    type: "Sermon",
     book: "",
     chapter: "",
     verses: "",
@@ -30,7 +30,7 @@ if (data.value) {
 
 async function log() {
     isLoading.value = true;
-    $fetch(`/api/user/bible/devotional/${route.params.id}`, {
+    $fetch(`/api/user/bible/sermon/${route.params.id}`, {
         method: 'PUT',
         body: {
             ...input,
@@ -39,6 +39,7 @@ async function log() {
     })
         .then(async () => {
             await refreshSession();
+            await refreshNuxtData();
             await navigateTo('/dashboard/spirit');
 
             isLoading.value = false;

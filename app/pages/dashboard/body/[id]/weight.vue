@@ -29,6 +29,7 @@ async function log() {
     })
         .then(async () => {
             await refreshSession();
+            await refreshNuxtData();
             await navigateTo('/dashboard/body');
 
             isLoading.value = false;

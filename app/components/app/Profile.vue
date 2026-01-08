@@ -53,13 +53,13 @@ const toggleSetting = (item: any) => {
         .then(async () => {
             await refreshSession();
             await refreshNuxtData();
-            isLoading.value = false
-
+            
+            isLoading.value = false;
         })
         .catch(async (error) => {
             console.log(error);
             errorMessage.value = error.statusMessage;
-            isLoading.value = false
+            isLoading.value = false;
         });
 };
 

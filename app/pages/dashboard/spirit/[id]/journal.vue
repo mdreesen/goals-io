@@ -35,6 +35,7 @@ async function log() {
     })
         .then(async () => {
             await refreshSession();
+            await refreshNuxtData();
             await navigateTo('/dashboard/spirit');
 
             isLoading.value = false;
