@@ -3,13 +3,7 @@ import { ref } from 'vue';
 import { workout } from '~/utils/dropdowns/selections';
 import { formatDate } from '~/utils/date';
 
-const props = defineProps({
-  data: {
-    type: Object,
-    default: () => { },
-    required: true
-  },
-});
+const { data } = useNuxtData('workout');
 
 const isLoading = ref(false);
 let errorMessage = ref('');
@@ -51,7 +45,7 @@ async function log() {
   <div class="flex flex-col items-center justify-center w-full max-w-sm mx-auto font-sans">
 
     <div class="container-cards">
-      <template v-for="item in props.data?.latestData.reverse()">
+      <template v-for="item in data?.latestData.reverse()">
         <transition name="slide-up" mode="out-in">
           <nuxt-link class="flex flex-col justify-center w-full items-center"
             :to="`/dashboard/body/${[item._id]}/workout`">

@@ -4,13 +4,7 @@ import { selection_book_kinds, selection_save } from '~/utils/dropdowns/selectio
 import { getLocalTimeZone, today, CalendarDate } from '@internationalized/date'
 import { useFormatDate } from '~/utils/date';
 
-const props = defineProps({
-  data: {
-    type: Object,
-    default: () => { },
-    required: true
-  },
-});
+const { data } = useNuxtData('books');
 
 const isLoading = ref(false);
 let errorMessage = ref('');
@@ -57,14 +51,14 @@ async function log() {
 <template>
   <div class="relative flex flex-col w-full max-w-3xl mx-auto overflow-hidden">
 
-    <section v-if="props.data?.current.length >= 1">
+    <section v-if="data?.current.length >= 1">
       <baseSectionHeader text="Currently Reading" />
-      <baseCarousel :data="props.data?.current" />
+      <baseCarousel :data="data?.current" />
     </section>
 
-    <section v-if="props.data?.latestData.length >= 1">
+    <section v-if="data?.latestData.length >= 1">
       <baseSectionHeader text="Latest Reads" />
-      <baseCarousel :data="props.data?.latestData" />
+      <baseCarousel :data="data?.latestData" />
     </section>
 
     <div class="flex flex-col items-center justify-center w-full max-w-sm mx-auto p-8 font-sans">

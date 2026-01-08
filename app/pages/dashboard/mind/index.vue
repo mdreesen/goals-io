@@ -3,9 +3,8 @@ definePageMeta({
     layout: 'authenticated',
 });
 
-// const { data: affirmationData, pending: pending_affirmations } = await useFetch('/api/user/affirmations/affirmations', { lazy: true });
-const { data: bookData, pending: pending_books } = await useFetch('/api/user/books/books', { lazy: true });
-const { data: gratitudeData, pending: pending_gratitude } = await useFetch('/api/user/gratitudes/gratitudes', { lazy: true });
+const { data: bookData, pending: pending_books } = await useFetch('/api/user/books/books', { key: 'books' });
+const { data: gratitudeData, pending: pending_gratitude } = await useFetch('/api/user/gratitudes/gratitudes', { key: 'gratitudes' });
 </script>
 
 <template>
@@ -17,12 +16,12 @@ const { data: gratitudeData, pending: pending_gratitude } = await useFetch('/api
 
         <div>
             <baseHeader text="Books" />
-            <appTrackerBook v-if="!pending_books" :data="bookData"/>
+            <appTrackerBook v-if="!pending_books"/>
         </div>
 
         <div>
             <baseHeader text="Gratitudes" />
-            <appTrackerGratitude v-if="!pending_gratitude" :data="gratitudeData" />
+            <appTrackerGratitude v-if="!pending_gratitude" />
         </div>
 
         <!-- <div>

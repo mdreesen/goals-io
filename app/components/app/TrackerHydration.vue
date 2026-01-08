@@ -5,25 +5,19 @@ import { formatDate } from '~/utils/date';
 
 const { fetch: refreshSession } = useUserSession();
 
-const props = defineProps({
-  data: {
-    type: Object,
-    default: () => { },
-    required: true
-  },
-});
+const { data } = useNuxtData('hydration');
 
-const userDailyGoal = computed(() => Number(props.data?.latestWeight?.weight ?? 0) / 2);
+const userDailyGoal = computed(() => Number(data.value.latestWeight?.weight ?? 0) / 2);
 const userCurrentWater = computed(() => {
-  if (props.data?.latestWater?.date !== formatDate()) return 0
-  return Number(props.data?.latestWater?.water_intake) ?? 0
+  if (data.value.latestWater?.date !== formatDate()) return 0
+  return Number(data.value.latestWater?.water_intake) ?? 0
 });
 
 // --- State ---
 const currentOz = ref(userCurrentWater.value);
 const isLoading = ref(false);
 let errorMessage = ref('');
-const useLatestWater = ref(props?.data?.latestWater?.date ?? '00/00/00')
+const useLatestWater = ref(data.value?.latestWater?.date ?? '00/00/00')
 
 // --- Computed ---
 const percentage = computed(() => {
