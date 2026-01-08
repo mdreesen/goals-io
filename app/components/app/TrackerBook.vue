@@ -58,7 +58,7 @@ async function log() {
 
     <section v-if="data?.latestData.length >= 1">
       <baseSectionHeader text="Latest Reads" />
-      <baseCarousel :data="data?.latestData" />
+      <baseCarousel :data="data?.latestData.reverse()" />
     </section>
 
     <div class="flex flex-col items-center justify-center w-full max-w-sm mx-auto p-8 font-sans">
