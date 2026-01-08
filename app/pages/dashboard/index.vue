@@ -14,19 +14,17 @@ const { data: workouts, pending: pending_workouts } = await useFetch('/api/chart
 const { data: setting, pending: pending_settings } = await useFetch('/api/user/profile/setting', { lazy: true });
 
 const { data: stats, pending: pending_stats } = await useFetch('/api/stats', { lazy: true });
-
-console.log(setting.value)
 </script>
 
 <template>
-    <div v-if="!pending_profile && !pending_stats">
-        <section>
+    <div>
+        <section v-if="!pending_profile">
             <appWelcome :data="profile" />
         </section>
         <section>
             <baseHeader text="Your Overview" />
 
-            <div class="container-cards" v-if="!pending_stats && !pending_profile">
+            <div class="container-cards" v-if="!pending_stats && !pending_settings">
                 <baseCardOverview v-if="setting.bookSetting.value" text="Books"
                     color="bg-gradient-to-br from-green-600 to-green-700"
                     icon="material-symbols:book-ribbon-outline-rounded" collection="books" :data="stats" />
@@ -50,10 +48,10 @@ console.log(setting.value)
             <baseHeader text="Your Progress Charts" />
 
             <!-- Book Tracking -->
-            <UContainer v-if="!pending_books && !pending_settings">
+            <UContainer v-if="!pending_settings">
                 <section v-if="setting.bookSetting.value">
                     <baseSectionHeader text="Books" />
-                    <baseChartBarGroup :data="books.chartData" barOneName="start_date" barTwoName="end_date"
+                    <baseChartBarGroup v-if="!pending_books" :data="books.chartData" barOneName="start_date" barTwoName="end_date"
                         barOneLabel="Start Date" barTwoLabel="End Date" />
                 </section>
             </UContainer>
@@ -65,16 +63,16 @@ console.log(setting.value)
             </UContainer> -->
 
             <!-- Water Tracking -->
-            <UContainer v-if="!pending_water && !pending_settings">
+            <UContainer v-if="!pending_settings">
                 <section v-if="setting.waterSetting.value">
                     <baseSectionHeader text="Water Intake" />
-                <baseChartLine v-if="!pending_water" :data="water_intake" lineName="water_intake"
-                    lineLabel="Water total" />
+                    <baseChartLine v-if="!pending_water" :data="water_intake" lineName="water_intake"
+                        lineLabel="Water total" />
                 </section>
             </UContainer>
 
             <!-- Weight Tracking -->
-            <UContainer v-if="!pending_weight && !pending_settings">
+            <UContainer v-if="!pending_settings">
                 <section v-if="setting.weightSetting.value">
                     <baseSectionHeader text="Weight" />
                     <baseChartLine v-if="!pending_weight" :data="weight" lineName="weight" lineLabel="Weight" />
@@ -82,7 +80,7 @@ console.log(setting.value)
             </UContainer>
 
             <!-- Workout Tracking -->
-            <UContainer v-if="!pending_workouts && !pending_settings">
+            <UContainer v-if="!pending_settings">
                 <section v-if="setting.workoutSetting.value">
                     <baseSectionHeader text="Workouts" />
                     <baseChartBar v-if="!pending_workouts" :data="workouts" barName="date" barLabel="Total" />

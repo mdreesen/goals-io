@@ -5,6 +5,7 @@ import { Model } from 'mongoose';
 import UserModel from '../../../../lib/database/models/User';
 import { User } from '~/types/user';
 const User = UserModel as Model<User>;
+import type { WaterType } from '~/types/water';
 
 const bodySchema = z.object({
   water_intake: z.string(),
@@ -20,7 +21,7 @@ export default defineEventHandler(async (event) => {
     const data = user?.water ?? [];
 
     // Latest wieght and water intake
-    const latestData = data.reverse()[0];
+    const latestData = data.reverse()[0] as WaterType;
 
     const waterObj = {
       water_intake: water_intake,

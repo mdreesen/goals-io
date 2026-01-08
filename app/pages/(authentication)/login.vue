@@ -98,13 +98,13 @@ useMotion(formRef, { ...formVarient() });
         <!-- Login Form -->
         <form @submit.prevent="login" class="space-y-6">
           <div v-motion="{ ...inputVarient() }">
-            <label for="email" class="block text-sm font-medium text-gray-300 mb-1">Email</label>
+            <baseLabel text="Email" />
             <input id="email" type="email" v-model="credentials.email" placeholder="Email" required
               class="w-full rounded-xl border border-gray-600 bg-gray-700/50 py-3 px-4 text-lg text-white shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500" />
           </div>
 
           <div v-motion="{ ...inputVarient() }">
-            <label for="password" class="block text-sm font-medium text-gray-300 mb-1">Password</label>
+            <baseLabel text="Password" />
             <input id="password" type="password" v-model="credentials.password" placeholder="Password" required
               class="w-full rounded-xl border border-gray-600 bg-gray-700/50 py-3 px-4 text-lg text-white shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500" />
           </div>
@@ -122,13 +122,13 @@ useMotion(formRef, { ...formVarient() });
                     <form @submit.prevent="forgotpassword" class="space-y-6">
 
                       <div v-motion="{ ...inputVarient() }">
-                        <label for="email" class="block text-sm font-medium text-gray-300 mb-1">Email</label>
+                        <baseLabel text="Email" />
                         <input id="email" type="email" v-model="input.email" placeholder="Email" required
                           class="w-full rounded-xl border border-gray-600 bg-gray-700/50 py-3 px-4 text-lg text-white shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500" />
                       </div>
 
                       <div v-motion="{ ...inputVarient() }">
-                        <label for="text" class="block text-sm font-medium text-gray-300 mb-1">Question</label>
+                        <baseLabel text="Question" />
                         <input id="question" type="text" v-model="input.question" placeholder="What is 4 + 3" required
                           class="w-full rounded-xl border border-gray-600 bg-gray-700/50 py-3 px-4 text-lg text-white shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500" />
                       </div>
