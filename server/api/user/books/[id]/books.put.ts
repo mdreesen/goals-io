@@ -15,10 +15,11 @@ const bodySchema = z.object({
   book_end_date: z.string().nullable(),
   notes: z.string().nullable(),
   booklist: z.boolean().nullable(),
+  book_image: z.string().nullable()
 })
 
 export default defineEventHandler(async (event) => {
-  const { book_title, kind_of_book, book_author, book_start_date, book_end_date, notes, booklist } = await readValidatedBody(event, bodySchema.parse);
+  const { book_title, kind_of_book, book_author, book_start_date, book_end_date, notes, booklist, book_image } = await readValidatedBody(event, bodySchema.parse);
 
   const obj = {
     book_title: book_title,
@@ -28,15 +29,15 @@ export default defineEventHandler(async (event) => {
     book_end_date: book_end_date,
     notes: notes,
     booklist: booklist,
+    book_image: book_image
   };
 
   try {
     const id = getRouterParam(event, 'id');
 
-    const useImages = await images_books({ book_title: book_title, book_author: book_author });
     await User.findOneAndUpdate(
       { 'books._id': id },
-      { $set: { 'books.$': { ...obj, book_image: useImages } } },
+      { $set: { 'books.$': { ...obj } } },
       { new: true });
 
   } catch (error) {

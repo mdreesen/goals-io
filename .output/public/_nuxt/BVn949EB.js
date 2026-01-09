@@ -1,1 +1,0 @@
-import{e as n,c as o,o as r,t as s}from"./BEJcgv1L.js";const a={class:"font-sans text-4xl font-bold bg-clip-text text-transparent bg-linear-to-r from-purple-400 to-blue-400 flex justify-center mb-2"},c=n({__name:"Header",props:{text:{type:String,required:!0}},setup(t){const e=t;return(p,_)=>(r(),o("h2",a,s(e.text),1))}}),l=Object.assign(c,{__name:"BaseHeader"});export{l as _};

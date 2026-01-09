@@ -39,10 +39,7 @@ async function log() {
         }
     })
         .then(async () => {
-            await refreshSession();
-            await refreshNuxtData();
             await navigateTo('/dashboard/spirit');
-            isLoading.value = false;
         })
         .catch(async (error) => {
             toast.error("Failed to update", 'Try again');

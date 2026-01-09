@@ -59,11 +59,7 @@ async function delete_log() {
         body: input
     })
         .then(async () => {
-            await refreshSession();
-            await refreshNuxtData();
             await navigateTo('/dashboard/spirit');
-            isLoading.value = false;
-
         })
         .catch(async (error) => {
             toast.error("Failed to delete", 'Try again');

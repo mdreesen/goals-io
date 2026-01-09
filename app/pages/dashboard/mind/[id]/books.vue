@@ -62,10 +62,7 @@ async function log() {
         body: input
     })
         .then(async () => {
-            await refreshSession();
-            await refreshNuxtData();
             await navigateTo('/dashboard/mind');
-            isLoading.value = false;
         })
         .catch(async (error) => {
             toast.error("Failed to update", 'Try again');
@@ -84,10 +81,8 @@ async function delete_log() {
         .then(async () => {
             await refreshSession();
             await refreshNuxtData();
-            
-            isLoading.value = false;
             await navigateTo('/dashboard/mind');
-
+            isLoading.value = false;
         })
         .catch(async (error) => {
             toast.error("Failed to delete", 'Try again');
