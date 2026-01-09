@@ -15,6 +15,13 @@ export default defineNuxtConfig({
     '@vite-pwa/nuxt',
     'nuxt-notify'
   ],
+  app: {
+    head: {
+      script: [
+        { src: '/_vercel/insights/script.js', defer: true, async: true }
+      ]
+    }
+  },
   vite: {
     plugins: [tailwindcss()],
   },
