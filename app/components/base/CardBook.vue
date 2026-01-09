@@ -37,7 +37,7 @@ const props = defineProps({
     </template>
 
     <div>
-      <div class="flex flex-col justify-center items-center font-extrabold text-white">
+      <div class="flex flex-col justify-center items-center font-extrabold">
         <div class="overflow-hidden text-ellipsis items-center content-center flex">
           <baseIcon :iconName="props.icon" size="14" />
 
