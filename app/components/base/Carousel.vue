@@ -8,7 +8,7 @@ const props = defineProps({
         required: true
     },
 });
-console.log(props.data)
+
 function icons(str: string) {
     switch(true) {
         case str === 'Audiobook':
