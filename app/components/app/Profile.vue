@@ -14,9 +14,10 @@ const { fetch: refreshSession } = useUserSession();
 
 let errorMessage = ref('');
 const isLoading = ref(false);
-const open = ref(false)
+const open = ref(false);
 
 const { clear: clearSession } = useUserSession();
+const toast = useToast();
 
 const input = reactive({
     username: "",
@@ -54,10 +55,10 @@ const toggleSetting = (item: any) => {
         .then(async () => {
             await refreshSession();
             await refreshNuxtData();
-            
             isLoading.value = false;
         })
         .catch(async (error) => {
+            toast.error("Update failed", 'Try again');
             console.log(error);
             errorMessage.value = error.statusMessage;
             isLoading.value = false;
@@ -77,6 +78,7 @@ async function log() {
             isLoading.value = false;
         })
         .catch(async (error) => {
+            toast.error("Failed to update", 'Try again');
             console.log(error);
             errorMessage.value = error.statusMessage;
             isLoading.value = false;

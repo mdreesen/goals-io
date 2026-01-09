@@ -2,7 +2,7 @@
   "name": "nuxt-app",
   "type": "module",
   "private": true,
-  "version": "0.1.0.1",
+  "version": "0.1.0.2",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
@@ -13,6 +13,7 @@
   "dependencies": {
     "@internationalized/date": "^3.10.1",
     "@nuxt/image": "^1.11.0",
+    "@nuxt/kit": "^4.2.2",
     "@nuxt/ui": "^4.3.0",
     "@tailwindcss/vite": "^4.1.13",
     "@vite-pwa/nuxt": "^1.0.4",
@@ -25,6 +26,7 @@
     "nuxt": "^4.2.2",
     "nuxt-auth-utils": "^0.5.25",
     "nuxt-charts": "^0.2.4",
+    "nuxt-notify": "^1.1.4",
     "reka-ui": "^2.6.1",
     "resend": "^6.6.0",
     "tailwindcss": "^4.1.13",

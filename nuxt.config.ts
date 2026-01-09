@@ -13,6 +13,7 @@ export default defineNuxtConfig({
     'nuxt-charts',
     '@nuxt/ui',
     '@vite-pwa/nuxt',
+    'nuxt-notify'
   ],
   vite: {
     plugins: [tailwindcss()],
@@ -23,6 +24,13 @@ export default defineNuxtConfig({
   colorMode: {
     dataValue: 'theme',
     classSuffix: '', // Important for Tailwind CSS integration
+  },
+  notify: {
+    position: "top-right",
+    duration: 5000,
+    maxToasts: 5,
+    theme: "system",
+    showIcon: true,
   },
   pwa: {
     /* PWA options */

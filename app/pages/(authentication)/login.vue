@@ -2,14 +2,13 @@
 import { ref } from 'vue';
 import { useMotion } from '@vueuse/motion';
 import { formVarient, containerVarient, inputVarient } from '~/utils/varients';
-// import type { User } from '~/types/user';
 
 const formRef = ref();
-const message = ref('');
 const isLoading = ref(false);
 let errorMessage = ref('');
 
-const { fetch: refreshSession } = useUserSession()
+const { fetch: refreshSession } = useUserSession();
+const toast = useToast();
 
 const credentials = reactive({
   email: '',
@@ -32,6 +31,7 @@ async function login() {
       await navigateTo('/dashboard');
     })
     .catch(async (error) => {
+      toast.error("Log in failed", 'Try again');
       console.log(error);
       errorMessage.value = error.statusMessage;
       isLoading.value = false;
@@ -49,6 +49,7 @@ async function forgotpassword() {
     .then(async () => {
       await refreshSession();
       isLoading.value = false;
+      toast.success("Email sent", "Check you email and don't forget checking spam folder!");
     })
     .catch(async (error) => {
       console.log(error);
@@ -110,7 +111,7 @@ useMotion(formRef, { ...formVarient() });
 
               <transition name="slide-up" mode="out-in">
 
-                <UDrawer title="Reset your password">
+                <UDrawer title="Reset your password" :overlay="false">
                   <UButton label="Forgot password" color="neutral" variant="subtle" />
 
                   <template #body>

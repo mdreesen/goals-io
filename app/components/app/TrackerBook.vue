@@ -5,6 +5,7 @@ import { getLocalTimeZone, today, CalendarDate } from '@internationalized/date'
 import { useFormatDate } from '~/utils/date';
 
 const { data } = useNuxtData('books');
+const toast = useToast();
 
 const isLoading = ref(false);
 let errorMessage = ref('');
@@ -42,6 +43,7 @@ async function log() {
       isLoading.value = false;
     })
     .catch(async (error) => {
+      toast.error("Failed to create", 'Try again');
       console.log(error);
       errorMessage.value = error.statusMessage;
       isLoading.value = false;

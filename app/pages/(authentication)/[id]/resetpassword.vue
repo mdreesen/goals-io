@@ -4,13 +4,13 @@ import { useMotion } from '@vueuse/motion';
 import { formVarient, containerVarient, inputVarient } from '~/utils/varients';
 
 const formRef = ref();
-const message = ref('');
 const isLoading = ref(false);
 let errorMessage = ref('');
 
 const { fetch: refreshSession } = useUserSession();
 const route = useRoute();
 const tokenId = route.params.id;
+const toast = useToast();
 
 const input = reactive({
     password: '',
@@ -29,12 +29,11 @@ async function log() {
         .then(async () => {
             await refreshSession();
             await refreshNuxtData();
-
             await navigateTo('/login');
-
             isLoading.value = false;
         })
         .catch(async (error) => {
+            toast.error("Reset password failed", 'Try again');
             console.log(error);
             errorMessage.value = error.statusMessage;
             isLoading.value = false;

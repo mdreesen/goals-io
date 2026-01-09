@@ -6,10 +6,11 @@ import { book_of_bible } from "~/utils/dropdowns/selections";
 const { data } = useNuxtData('devotional');
 
 const { fetch: refreshSession } = useUserSession();
+const toast = useToast();
 
 const isLoading = ref(false);
 let errorMessage = ref('');
-const open = ref(false)
+const open = ref(false);
 
 const input = reactive({
   type: "Devotional",
@@ -35,6 +36,7 @@ async function log() {
       isLoading.value = false;
     })
     .catch(async (error) => {
+      toast.error("Failed to create", 'Try again');
       console.log(error);
       errorMessage.value = error.statusMessage;
       isLoading.value = false;

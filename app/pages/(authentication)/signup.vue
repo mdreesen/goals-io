@@ -8,7 +8,7 @@ const isLoading = ref(false);
 let errorMessage = ref('');
 
 const { fetch: refreshSession } = useUserSession();
-
+const toast = useToast();
 
 const credentials = reactive({
     email: '',
@@ -26,6 +26,7 @@ async function handler() {
         await navigateTo('/dashboard');
 
     } catch (error) {
+        toast.error("Sign up failed", 'Try again');
         console.log(error)
         errorMessage.value = error.statusMessage;
         isLoading.value = false;

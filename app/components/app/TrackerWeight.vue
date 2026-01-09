@@ -10,6 +10,7 @@ const open = ref(false)
 const currentWeight = computed(() => data.value.latestData?.weight);
 
 const { fetch: refreshSession } = useUserSession();
+const toast = useToast();
 
 const input = reactive({
   weight: '',
@@ -28,6 +29,7 @@ async function log() {
       isLoading.value = false;
     })
     .catch(async (error) => {
+      toast.error("Failed to create", 'Try again');
       console.log(error);
       errorMessage.value = error.statusMessage;
       isLoading.value = false;

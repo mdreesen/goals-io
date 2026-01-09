@@ -9,6 +9,7 @@ const route = useRoute();
 
 const { data: data, pending: pending_data } = await useFetch<BookType>(`/api/user/books/${route.params.id}`);
 const { fetch: refreshSession } = useUserSession();
+const toast = useToast();
 
 const isLoading = ref(false);
 let errorMessage = ref('');
@@ -64,10 +65,10 @@ async function log() {
             await refreshSession();
             await refreshNuxtData();
             await navigateTo('/dashboard/mind');
-
             isLoading.value = false;
         })
         .catch(async (error) => {
+            toast.error("Failed to update", 'Try again');
             console.log(error);
             errorMessage.value = error.statusMessage;
             isLoading.value = false;
@@ -89,6 +90,7 @@ async function delete_log() {
 
         })
         .catch(async (error) => {
+            toast.error("Failed to delete", 'Try again');
             console.log(error);
             errorMessage.value = error.statusMessage;
             isLoading.value = false;

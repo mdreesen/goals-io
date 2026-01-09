@@ -8,7 +8,8 @@
     const isLoading = ref(false);
     let errorMessage = ref('');
     
-    const { fetch: refreshSession } = useUserSession()
+    const { fetch: refreshSession } = useUserSession();
+    const toast = useToast();
     
     const credentials = reactive({
       email: '',
@@ -29,6 +30,7 @@
           isLoading.value = false;
         })
         .catch(async (error) => {
+          toast.error("Forgot password failed", 'Try again');
           console.log(error);
           errorMessage.value = error.statusMessage;
           isLoading.value = false;

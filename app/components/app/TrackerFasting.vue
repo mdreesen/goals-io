@@ -4,6 +4,7 @@ import { format, differenceInSeconds, addHours } from 'date-fns'
 import { Flame, Droplets, Zap, Sparkles, Square } from 'lucide-vue-next'
 
 const { fetch: refreshSession } = useUserSession();
+const toast = useToast();
 
 const { data } = useNuxtData('fasting');
 
@@ -85,6 +86,7 @@ const toggleFast = () => {
         isLoading.value = false;
       })
       .catch(async (error) => {
+        toast.error("Failed to update", 'Try again');
         console.log(error);
         errorMessage.value = error.statusMessage;
         isLoading.value = false;
@@ -114,6 +116,7 @@ const toggleFast = () => {
         isLoading.value = false;
       })
       .catch(async (error) => {
+        toast.error("Failed to create", 'Try again');
         console.log(error);
         errorMessage.value = error.statusMessage;
         isLoading.value = false;
