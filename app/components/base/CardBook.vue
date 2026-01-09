@@ -25,6 +25,10 @@ const props = defineProps({
     type: String,
     default: '',
   },
+  date: {
+    type: Object,
+    default: () => {},
+  },
 });
 </script>
 
@@ -37,14 +41,23 @@ const props = defineProps({
     </template>
 
     <div>
-      <div class="flex flex-col justify-center items-center font-extrabold">
+      <div class="flex flex-col justify-center items-center font-extrabold gap-1">
+
         <div class="overflow-hidden text-ellipsis items-center content-center flex">
           <baseIcon :iconName="props.icon" size="14" />
-
           <span class="ml-1 overflow-hidden text-ellipsis text-sm capitalize">{{ props.kind }}</span>
         </div>
-        <span class="text-sm font-bold text-ellipsis leading-tight line-clamp-2">{{ props.title }}</span>
-        <span class="m-0 text-xs leading-tight line-clamp-1">{{ props.author }}</span>
+
+        <div>
+          <span class="text-sm font-bold text-ellipsis leading-tight line-clamp-2">{{ props.title }}</span>
+          <span class="m-0 text-xs leading-tight line-clamp-1">{{ props.author }}</span>
+        </div>
+
+        <div>
+          <span v-if="props.date.date" class="m-0 text-xs leading-tight text-ellipsis line-clamp-1">Started {{props.date.date}}</span>
+          <span v-if="props.date.date_two" class="m-0 text-xs leading-tight text-ellipsis line-clamp-1">Ended {{props.date.date_two}}</span>
+        </div>
+
       </div>
     </div>
 

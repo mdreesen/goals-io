@@ -8,7 +8,7 @@ const props = defineProps({
         required: true
     },
 });
-
+console.log(props.data)
 function icons(str: string) {
     switch(true) {
         case str === 'Audiobook':
@@ -40,7 +40,7 @@ const useArrows = computed(() => props.data.length >= 3 ? true : false);
             <NuxtLink :to="`/dashboard/mind/${[item?._id]}/books`"
                 class="flex items-center w-full h-full text-2xl font-extrabold -x-2">
                 <baseCardBook :kind="item?.kind_of_book" :title="item?.book_title" :author="item?.book_author"
-                    :image="item?.book_image" :icon="icons(item?.kind_of_book)" />
+                    :image="item?.book_image" :date="{ date: item?.book_start_date, date_two: item?.book_end_date }" :icon="icons(item?.kind_of_book)" />
             </NuxtLink>
         </div>
     </UCarousel>
