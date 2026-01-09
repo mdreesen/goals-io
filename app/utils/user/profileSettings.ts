@@ -9,7 +9,7 @@ export function settings() {
         { setting: 'showGratitudes', title: 'Show Gratitudes', value: true },
         { setting: 'showHabits', title: 'Show Habits', value: true },
         { setting: 'showJournal', title: 'Show Journal', value: true },
-        { setting: 'showWaterIntake', title: 'Show Water Intake', value: true },
+        { setting: 'showWaterIntake', title: 'Show Hydration', value: true },
         { setting: 'showWeight', title: 'Show Weight', value: true },
         { setting: 'showWorkout', title: 'Show Workout', value: true },
         { setting: 'darkMode', title: 'Dark Mode', value: false },

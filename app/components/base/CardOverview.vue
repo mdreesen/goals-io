@@ -50,8 +50,8 @@ const weight = {
   <UCard variant="subtle" :class="`w-full max-w-lg divide-none ${props.color && props.color}`">
     <template #header>
       <div class="flex flex-col justify-center items-center">
-        <baseIcon v-if="props.icon" :iconName="props.icon" />
-        <span>{{ props.text }}</span>
+        <baseIcon v-if="props.icon" :iconName="props.icon" styles="text-white" />
+        <span class="text-white">{{ props.text }}</span>
       </div>
     </template>
 

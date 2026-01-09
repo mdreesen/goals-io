@@ -1,23 +1,25 @@
 <script setup lang="ts">
-    definePageMeta({
-        layout: 'authenticated',
-    });
+definePageMeta({
+    layout: 'authenticated',
+});
+
+const { data: data_setting } = useNuxtData('setting');
 
 </script>
 
 <template>
     <div class="container-categories">
-        <div>
+        <div v-if="data_setting.bibleSetting.value">
             <baseHeader text="Devotionals" />
             <appTrackerBibleDevotional />
         </div>
 
-        <div>
+        <div v-if="data_setting.bibleSetting.value">
             <baseHeader text="Sermons" />
             <appTrackerBibleSermon />
         </div>
 
-        <div>
+        <div v-if="data_setting.journalSetting.value">
             <baseHeader text="Journal" />
             <appTrackerJournal />
         </div>

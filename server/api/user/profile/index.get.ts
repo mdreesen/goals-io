@@ -5,7 +5,7 @@ export default defineEventHandler(async (event) => {
     const user = await loggedInUser(event);
     const data = user;
 
-    const bodyArr = ['showFasting', 'showWater', 'showWeight', 'showWorkout'];
+    const bodyArr = ['showFasting', 'showWaterIntake', 'showWeight', 'showWorkout'];
     const mindArr = ['showBooks', 'showGratitudes'];
     const spiritArr = ['showBible', 'showJournal'];
 
