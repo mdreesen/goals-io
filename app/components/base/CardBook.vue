@@ -41,7 +41,7 @@ const props = defineProps({
     </template>
 
     <div>
-      <div class="flex flex-col justify-center items-center font-extrabold gap-1">
+      <div class="flex flex-col justify-center items-center font-extrabold gap-2">
 
         <div class="overflow-hidden text-ellipsis items-center content-center flex">
           <baseIcon :iconName="props.icon" size="14" />
@@ -55,7 +55,10 @@ const props = defineProps({
 
         <div>
           <span v-if="props.date.date" class="m-0 text-xs leading-tight text-ellipsis line-clamp-1">Started {{props.date.date}}</span>
-          <span v-if="props.date.date_two" class="m-0 text-xs leading-tight text-ellipsis line-clamp-1">Ended {{props.date.date_two}}</span>
+          <div v-if="props.date.date_two" class="m-0 text-xs leading-tight text-ellipsis line-clamp-1">
+            <span class="pr-2">Ended</span>
+             {{props.date.date_two}}
+            </div>
         </div>
 
       </div>
