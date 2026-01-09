@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { format, differenceInSeconds, addHours } from 'date-fns'
-import { Flame, Droplets, Zap, Sparkles, Play, Square } from 'lucide-vue-next'
+import { Flame, Droplets, Zap, Sparkles, Square } from 'lucide-vue-next'
 
 const { fetch: refreshSession } = useUserSession();
 
@@ -64,8 +64,6 @@ const toggleFast = () => {
 
   if (data.value.latestData.start) {
     // End Fast
-    isFasting.value = false
-    // startTime.value = null
 
     $fetch('/api/user/fasting/fasting', {
       method: 'POST',
@@ -80,9 +78,10 @@ const toggleFast = () => {
       }
     })
       .then(async () => {
+        isFasting.value = false
         await refreshSession();
-        await refreshNuxtData();
-
+        await refreshNuxtData('fasting');
+        timerInterval.value = null;
         isLoading.value = false;
       })
       .catch(async (error) => {
@@ -94,7 +93,6 @@ const toggleFast = () => {
     if (timerInterval.value) clearInterval(timerInterval.value)
   } else {
     // Start Fast
-    isFasting.value = true
 
     isLoading.value = true;
     $fetch('/api/user/fasting/fasting', {
@@ -110,8 +108,9 @@ const toggleFast = () => {
       }
     })
       .then(async () => {
+        isFasting.value = true
         await refreshSession();
-        await refreshNuxtData();
+        await refreshNuxtData('fasting');
         isLoading.value = false;
       })
       .catch(async (error) => {
@@ -167,7 +166,7 @@ onUnmounted(() => {
             <component :is="currentStage.icon" class="w-4 h-4 animate-pulse" :class="currentStage.color" />
             <span class="text-xs font-bold uppercase tracking-widest text-zinc-400">{{ currentStage.name }}</span>
           </div>
-          <h1 class="text-5xl font-medium text-white tracking-tighter tabular-nums drop-shadow-lg">
+          <h1 class="text-5xl font-medium tracking-tighter tabular-nums drop-shadow-lg">
             {{ formattedTime }}
           </h1>
           <p class="text-zinc-500 text-xs mt-2">{{ currentStage.desc }}</p>

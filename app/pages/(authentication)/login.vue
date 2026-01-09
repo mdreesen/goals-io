@@ -2,14 +2,14 @@
 import { ref } from 'vue';
 import { useMotion } from '@vueuse/motion';
 import { formVarient, containerVarient, inputVarient } from '~/utils/varients';
-import type { User } from '~/types/user';
+// import type { User } from '~/types/user';
 
 const formRef = ref();
 const message = ref('');
 const isLoading = ref(false);
 let errorMessage = ref('');
 
-const { loggedIn, user, fetch: refreshSession } = useUserSession()
+const { fetch: refreshSession } = useUserSession()
 
 const credentials = reactive({
   email: '',
@@ -29,11 +29,7 @@ async function login() {
   })
     .then(async () => {
       await refreshSession();
-
-      // if (loggedIn) await navigateTo('/dashboard');
       await navigateTo('/dashboard');
-
-      isLoading.value = false;
     })
     .catch(async (error) => {
       console.log(error);
@@ -52,8 +48,6 @@ async function forgotpassword() {
   })
     .then(async () => {
       await refreshSession();
-      await refreshNuxtData();
-
       isLoading.value = false;
     })
     .catch(async (error) => {
@@ -109,7 +103,8 @@ useMotion(formRef, { ...formVarient() });
               class="w-full rounded-xl border border-gray-600 bg-gray-700/50 py-3 px-4 text-lg text-white shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500" />
           </div>
 
-          <div v-motion="{ ...inputVarient() }" class="flex flex-col items-center justify-center w-full max-w-sm mx-auto font-sans">
+          <div v-motion="{ ...inputVarient() }"
+            class="flex flex-col items-center justify-center w-full max-w-sm mx-auto font-sans">
 
             <div class="w-full relative flex justify-end">
 

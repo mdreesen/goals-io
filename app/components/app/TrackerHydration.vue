@@ -21,7 +21,7 @@ const useLatestWater = ref(data.value?.latestWater?.date ?? '00/00/00')
 
 // --- Computed ---
 const percentage = computed(() => {
-  return Math.min((userCurrentWater.value / userDailyGoal.value) * 100, 100);
+  return Math.min((userCurrentWater.value / userDailyGoal.value) * 100);
 });
 
 // Calculate wave position (inverted for CSS 'top')

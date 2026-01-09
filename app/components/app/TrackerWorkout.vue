@@ -7,6 +7,7 @@ const { data } = useNuxtData('workout');
 
 const isLoading = ref(false);
 let errorMessage = ref('');
+const open = ref(false)
 
 const { fetch: refreshSession } = useUserSession()
 
@@ -29,7 +30,7 @@ async function log() {
     .then(async () => {
       await refreshSession();
       await refreshNuxtData();
-
+      open.value = false;
       isLoading.value = false;
     })
     .catch(async (error) => {
@@ -65,7 +66,7 @@ async function log() {
 
           <transition name="slide-up" mode="out-in">
 
-            <UDrawer title="Log new workout">
+            <UDrawer title="Log new workout" v-model:open="open">
               <UButton label="Add workout" color="neutral" variant="subtle"
                 trailing-icon="material-symbols:directions-run-rounded" />
 

@@ -9,6 +9,7 @@ const { fetch: refreshSession } = useUserSession();
 
 const isLoading = ref(false);
 let errorMessage = ref('');
+const open = ref(false)
 
 const input = reactive({
   mood: "",
@@ -28,7 +29,7 @@ async function log() {
     .then(async () => {
       await refreshSession();
       await refreshNuxtData();
-
+      open.value = false;
       isLoading.value = false;
     })
     .catch(async (error) => {
@@ -58,7 +59,7 @@ async function log() {
 
         <transition name="slide-up" mode="out-in">
 
-          <UDrawer title="Log a new journal entry">
+          <UDrawer title="Log a new journal entry" v-model:open="open">
             <UButton label="Add entry" color="neutral" variant="subtle" trailing-icon="material-symbols:book-5" />
 
             <template #body>

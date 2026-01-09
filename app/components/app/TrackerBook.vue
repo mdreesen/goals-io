@@ -9,6 +9,7 @@ const { data } = useNuxtData('books');
 const isLoading = ref(false);
 let errorMessage = ref('');
 const formattedDate = ref();
+const open = ref(false)
 
 let date = ref(new CalendarDate(today(getLocalTimeZone()).year, today(getLocalTimeZone()).month, today(getLocalTimeZone()).day)) as any;
 
@@ -37,7 +38,7 @@ async function log() {
     .then(async () => {
       await refreshSession();
       await refreshNuxtData();
-
+      open.value = false;
       isLoading.value = false;
     })
     .catch(async (error) => {
@@ -67,7 +68,7 @@ async function log() {
 
         <transition name="slide-up" mode="out-in">
 
-          <UDrawer title="Log a new book">
+          <UDrawer title="Log a new book" v-model:open="open">
             <UButton label="Add Book" color="neutral" variant="subtle" trailing-icon="material-symbols:book-4-spark-rounded" />
 
             <template #body>

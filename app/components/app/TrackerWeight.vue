@@ -5,6 +5,7 @@ const { data } = useNuxtData('weight');
 
 const isLoading = ref(false);
 let errorMessage = ref('');
+const open = ref(false)
 
 const currentWeight = computed(() => data.value.latestData?.weight);
 
@@ -23,7 +24,7 @@ async function log() {
     .then(async () => {
       await refreshSession();
       await refreshNuxtData();
-
+      open.value = false;
       isLoading.value = false;
     })
     .catch(async (error) => {
@@ -77,7 +78,7 @@ async function log() {
 
           <transition name="slide-up" mode="out-in">
 
-            <UDrawer title="Log weight">
+            <UDrawer title="Log weight" v-model:open="open">
               <UButton label="Log weight" color="neutral" variant="subtle"
                 trailing-icon="material-symbols:monitor-weight-outline-sharp" />
 

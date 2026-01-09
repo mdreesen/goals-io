@@ -14,6 +14,7 @@ const { fetch: refreshSession } = useUserSession();
 
 let errorMessage = ref('');
 const isLoading = ref(false);
+const open = ref(false)
 
 const { clear: clearSession } = useUserSession();
 
@@ -72,7 +73,7 @@ async function log() {
         .then(async () => {
             await refreshSession();
             await refreshNuxtData();
-
+            open.value = false;
             isLoading.value = false;
         })
         .catch(async (error) => {
@@ -112,7 +113,7 @@ async function log() {
 
                             <transition name="slide-up" mode="out-in">
 
-                                <UDrawer title="Update user profile">
+                                <UDrawer title="Update user profile" v-model:open="open">
                                     <UButton label="Update profile" color="neutral" variant="subtle"
                                         trailing-icon="material-symbols:person-edit" />
 

@@ -8,6 +8,7 @@ const { fetch: refreshSession } = useUserSession();
 
 const isLoading = ref(false);
 let errorMessage = ref('');
+const open = ref(false)
 
 const input = reactive({
   gratitude: "",
@@ -25,7 +26,7 @@ async function log() {
     .then(async () => {
       await refreshSession();
       await refreshNuxtData();
-
+      open.value = false;
       isLoading.value = false;
     })
     .catch(async (error) => {
@@ -55,7 +56,7 @@ async function log() {
 
         <transition name="slide-up" mode="out-in">
 
-          <UDrawer title="Log a new gratitude">
+          <UDrawer title="Log a new gratitude" v-model:open="open">
             <UButton label="Add Gratitude" color="neutral" variant="subtle"
               trailing-icon="material-symbols:bolt-rounded" />
 
