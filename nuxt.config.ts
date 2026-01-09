@@ -91,12 +91,15 @@ export default defineNuxtConfig({
       prefer_related_applications: true,
     },
     workbox: {
-      'navigateFallback': '/login'
+      'navigateFallback': '/login',
+      globPatterns: ['**/*.{js,css,html,svg,png,ico}'],
+      cleanupOutdatedCaches: true,
+      clientsClaim: true,
     },
     devOptions: {
       enabled: true,
       type: 'module'
-    }
+    },
   },
   
   // @vueuse/motion/nuxt
