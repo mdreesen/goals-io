@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { formatDate } from '~/utils/date';
-
+import type { GratitudeType } from '~/types/gratitude';
 const route = useRoute();
 
-const { data: data, pending: pending_data } = await useFetch(`/api/user/gratitudes/${route.params.id}`);
+const { data: data, pending: pending_data } = await useFetch<GratitudeType>(`/api/user/gratitudes/${route.params.id}`);
 const { fetch: refreshSession } = useUserSession();
 const toast = useToast();
 

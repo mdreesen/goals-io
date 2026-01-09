@@ -32,7 +32,6 @@ async function log() {
             await refreshSession();
             await refreshNuxtData();
             await navigateTo('/dashboard/body');
-
             isLoading.value = false;
         })
         .catch(async (error) => {
@@ -51,10 +50,9 @@ async function delete_log() {
     })
         .then(async () => {
             await refreshSession();
-
-            isLoading.value = false;
+            await refreshNuxtData();
             await navigateTo('/dashboard/body');
-
+            isLoading.value = false;
         })
         .catch(async (error) => {
             toast.error("Failed to delete", 'Try again');
