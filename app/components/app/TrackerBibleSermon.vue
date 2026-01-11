@@ -13,7 +13,7 @@ let errorMessage = ref('');
 const open = ref(false)
 
 const input = reactive({
-  type: "Devotional",
+  type: "Sermon",
   book: "",
   chapter: "",
   verses: "",
