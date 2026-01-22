@@ -9,7 +9,7 @@ const { data: data_chart_hydration } = useNuxtData('chart_hydration');
 const { data: data_chart_weight } = useNuxtData('chart_weight');
 const { data: data_chart_workout } = useNuxtData('chart_workout');
 const { data: data_setting } = useNuxtData('setting');
-
+console.log(data_chart_weight.value)
 </script>
 
 <template>
@@ -40,25 +40,25 @@ const { data: data_setting } = useNuxtData('setting');
             <UContainer v-if="data_setting.bookSetting.value">
                 <baseSectionHeader text="Books" />
                 <baseChartBarGroup :data="data_chart_book.chartData" barOneName="start_date" barTwoName="end_date"
-                    barOneLabel="Start Date" barTwoLabel="End Date" />
+                    barOneLabel="Start Date" barTwoLabel="End Date" :dataYears="data_chart_book.years" />
             </UContainer>
 
             <!-- Water Tracking -->
             <UContainer v-if="data_setting.waterSetting.value">
                 <baseSectionHeader text="Water Intake" />
-                <baseChartLine :data="data_chart_hydration" lineName="water_intake" lineLabel="Water total" />
+                <baseChartLine :data="data_chart_hydration.chartData" lineName="water_intake" lineLabel="Water total" :dataYears="data_chart_hydration.years" />
             </UContainer>
 
             <!-- Weight Tracking -->
             <UContainer v-if="data_setting.weightSetting.value">
                 <baseSectionHeader text="Weight" />
-                <baseChartLine :data="data_chart_weight" lineName="weight" lineLabel="Weight" />
+                <baseChartLine :data="data_chart_weight.chartData" lineName="weight" lineLabel="Weight" :dataYears="data_chart_weight.years" />
             </UContainer>
 
             <!-- Workout Tracking -->
             <UContainer v-if="data_setting.workoutSetting.value">
                 <baseSectionHeader text="Workouts" />
-                <baseChartBar :data="data_chart_workout" barName="date" barLabel="Total" />
+                <baseChartBar :data="data_chart_workout.chartData" barName="date" barLabel="Total" :dataYears="data_chart_workout.years" />
             </UContainer>
         </section>
     </div>

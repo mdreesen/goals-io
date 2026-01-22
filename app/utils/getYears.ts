@@ -1,11 +1,9 @@
 
 export function years(data: Array<any>) {
-    const now = new Date();
-
+    // const now = new Date();
 
     const years = data?.map((item: any) => {
-        const dates = item?.book_start_date || item?.book_end_date;
-
+        const dates = item?.book_start_date || item?.book_end_date || item?.date;
 
         // Create a Date object from the string
         const date = new Date(dates);
@@ -17,13 +15,5 @@ export function years(data: Array<any>) {
 
     }).filter((item: any) => item);
 
-    const convertYears = [...new Set(years.sort())].reverse();
-
-    switch (true) {
-        case convertYears.length === 1:
-            return [now.getFullYear(), ...convertYears];
-            break
-        default:
-            return convertYears
-    };
+    return [...new Set(years.sort())].reverse();
 };

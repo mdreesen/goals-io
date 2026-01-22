@@ -16,6 +16,11 @@ const props = defineProps({
     type: String,
     required: true
   },
+
+  dataYears: {
+    type: Array,
+    default: () => [],
+  }
 });
 
 type ItemData = {
@@ -38,7 +43,10 @@ const yFormatter = (tick: number) => tick.toString()
 </script>
 
 <template>
-  <BarChart :data="useData" :height="300" :categories="categories" :y-axis="[props.barName as any]" :x-num-ticks="6"
-    :radius="4" :y-grid-line="true" :x-formatter="xFormatter" :y-formatter="yFormatter"
-    :legend-position="LegendPosition.Top" :hide-legend="false" />
+  <div>
+    <baseButtonYear :data="dataYears" />
+    <BarChart :data="useData" :height="300" :categories="categories" :y-axis="[props.barName as any]" :x-num-ticks="6"
+      :radius="4" :y-grid-line="true" :x-formatter="xFormatter" :y-formatter="yFormatter"
+      :legend-position="LegendPosition.Top" :hide-legend="false" />
+  </div>
 </template>

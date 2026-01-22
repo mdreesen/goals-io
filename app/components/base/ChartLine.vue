@@ -16,6 +16,11 @@ const props = defineProps({
     type: String,
     required: true
   },
+
+  dataYears: {
+    type: Array,
+    default: () => [],
+  }
 });
 
 type ItemData = {
@@ -36,7 +41,10 @@ const xFormatter = (tick: number, _i?: number, _ticks?: number[]): string => {
 </script>
 
 <template>
-  <LineChart :data="useData" :height="300" x-label="Date" :y-label="`${props.lineLabel}`" :categories="categories"
-    :y-num-ticks="4" :x-num-ticks="7" :x-formatter="xFormatter" :curve-type="CurveType.Basis"
-    :legend-position="LegendPosition.Top" :hide-legend="false" :y-grid-line="true" />
+  <div>
+    <baseButtonYear :data="dataYears" />
+    <LineChart :data="useData" :height="300" x-label="Date" :y-label="`${props.lineLabel}`" :categories="categories"
+      :y-num-ticks="4" :x-num-ticks="7" :x-formatter="xFormatter" :curve-type="CurveType.Basis"
+      :legend-position="LegendPosition.Top" :hide-legend="false" :y-grid-line="true" />
+  </div>
 </template>
