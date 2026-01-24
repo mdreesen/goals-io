@@ -46,7 +46,7 @@ const categories = {
   [props.barTwoName]: { name: props.barTwoLabel, color: '#0070fa' },
 };
 
-const xFormatter = (i: number): string => `${useData[i]?.month}`
+const xFormatter = (i: number): string => `${useData.value[i]?.month}`
 const yFormatter = (tick: number) => tick.toString();
 </script>
 

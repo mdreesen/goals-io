@@ -1,6 +1,6 @@
 {
   "name": "nuxt-app-prod",
-  "version": "0.1.0.3",
+  "version": "0.1.0.4",
   "type": "module",
   "private": true,
   "dependencies": {

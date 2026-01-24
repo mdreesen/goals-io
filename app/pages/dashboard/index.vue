@@ -1,7 +1,7 @@
 <script setup lang="ts">
-    import { watch, ref, computed } from 'vue';
-    import { monthStartEnd, monthStart, filterYear } from '~/utils/formatters/months';
-    import { useYear } from '~/stores/useYear';
+import { computed } from 'vue';
+import { monthStartEnd, monthStart, filterYear } from '~/utils/formatters/months';
+import { useYear } from '~/stores/useYear';
 
 definePageMeta({
     layout: 'authenticated',
@@ -53,10 +53,8 @@ const useWorkoutChart = computed(() => monthStart({ data: data_chart_workout.val
             <!-- Book Tracking -->
             <UContainer v-if="data_setting.bookSetting.value">
                 <baseSectionHeader text="Books" />
-                    <ClientOnly>
-                        <baseChartBarGroup :data="useBookChart" barOneName="start_date" barTwoName="end_date"
-                        barOneLabel="Start Date" barTwoLabel="End Date" :dataYears="data_chart_book.years" />
-                    </ClientOnly>
+                <baseChartBarGroup :data="useBookChart" barOneName="start_date" barTwoName="end_date"
+                    barOneLabel="Start Date" barTwoLabel="End Date" :dataYears="data_chart_book.years" />
             </UContainer>
 
             <!-- Water Tracking -->
