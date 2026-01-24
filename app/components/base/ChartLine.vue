@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { computed } from 'vue';
 
 const props = defineProps({
   data: {
@@ -19,7 +20,7 @@ const props = defineProps({
 
   dataYears: {
     type: Array,
-    default: () => [],
+      default: () => [],
   }
 });
 
@@ -29,14 +30,14 @@ type ItemData = {
   water_intake?: string,
 };
 
-const useData: ItemData[] = props.data as Array<ItemData>;
+const useData = computed(() => props.data as Array<ItemData>);
 
 const categories: Record<string, BulletLegendItemInterface> = {
   [props.lineName]: { name: `${props.lineLabel}`, color: '#60a5fa' },
 }
 
 const xFormatter = (tick: number, _i?: number, _ticks?: number[]): string => {
-  return useData[tick]?.date ?? ''
+  return useData.value[tick]?.date ?? ''
 }
 </script>
 

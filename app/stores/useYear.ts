@@ -14,7 +14,6 @@ export const useYear = defineStore('year', {
 
     actions: {
         set(year: number) {
-            console.log(year)
             this.year = year;
         }
     },

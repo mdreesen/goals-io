@@ -4,7 +4,8 @@ import { monthStart } from '~/utils/formatters/months';
 export default defineEventHandler(async (event) => {
   try {
     const user = await loggedInUser(event);
-    return monthStart({ data: user?.cold_soaks, startLabel: 'dateFormatted' });
+
+    return user?.cold_soaks
   } catch (error) {
     console.log(error);
     throw createError({

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-
+import { computed } from 'vue';
 const props = defineProps({
   data: {
     type: Array,
@@ -29,7 +29,7 @@ type ItemData = {
   date?: number
 }
 
-const useData: ItemData[] = props.data as Array<ItemData>;
+const useData = computed(() => props.data as Array<ItemData>);
 
 const categories = computed(() => ({
   [props.barName]: {
@@ -38,7 +38,7 @@ const categories = computed(() => ({
   },
 }))
 
-const xFormatter = (i: number): string => `${useData[i]?.month}`
+const xFormatter = (i: number): string => `${useData.value[i]?.month}`
 const yFormatter = (tick: number) => tick.toString()
 </script>
 

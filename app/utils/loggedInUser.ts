@@ -2,7 +2,7 @@ import { connectDB } from "../../lib/database/mongodb";
 import { Model } from 'mongoose';
 import UserModel from '../../lib/database/models/User';
 import type { User } from '~/types/user';
-import { sendRedirect } from 'h3';
+// import { sendRedirect } from 'h3';
 
 const User = UserModel as Model<User>;
 
@@ -28,7 +28,7 @@ export default defineEventHandler(async (event) => {
 
     } catch (error) {
         console.log(error);
-        sendRedirect(event, '/login', 302); 
+        // sendRedirect(event, '/login', 302); 
         throw createError({
             statusCode: 500,
             statusMessage: 'Something went wrong.'

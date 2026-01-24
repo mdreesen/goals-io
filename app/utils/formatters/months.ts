@@ -93,9 +93,7 @@ export function monthStartEnd({ data, startLabel, endLabel, year }) {
     ];
 };
 
-export function monthStart({ data, startLabel }) {
-    const store = useYear();
-    let year = store.year.toString();
+export function monthStart({ data, startLabel, year }) {
 
     // Month to current year
     const january_start = data.filter((item: any) => item?.[startLabel]?.includes('Jan') && item?.[startLabel]?.includes(year)).length;
@@ -163,9 +161,9 @@ export function monthStart({ data, startLabel }) {
     ];
 };
 
-export function filterYear(data: any) {
-    const now = new Date();
-    const year = now.getFullYear();
+export function filterYear({ data, year}) {
+    // const now = new Date();
+    // const year = now.getFullYear();
 
-    return data.filter((item: any) => item?.date.includes(year) ?? '');
+    return data?.filter((item: any) => item?.date.includes(year) ?? '') ?? [];
 }

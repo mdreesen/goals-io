@@ -20,7 +20,7 @@ export default defineEventHandler(async (event) => {
     });
 
     return {
-      chartData: filterYear(formatArray),
+      data: formatArray,
       years: years(user?.weight ?? [])
     }
   } catch (error) {

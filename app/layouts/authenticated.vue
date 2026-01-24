@@ -1,4 +1,5 @@
 <script setup lang="ts">
+await useFetch('/api/stats', { key: 'stats' });
 
 await useFetch('/api/charts/books', { key: 'chart_book' });
 await useFetch('/api/charts/water', { key: 'chart_hydration' });

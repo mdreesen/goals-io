@@ -1,6 +1,6 @@
 <script setup lang="ts">
-    import { computed, watch, ref } from 'vue';
-    import { monthStartEnd } from '~/utils/formatters/months';
+    import { watch, ref, computed } from 'vue';
+    import { monthStartEnd, monthStart, filterYear } from '~/utils/formatters/months';
     import { useYear } from '~/stores/useYear';
 
 definePageMeta({
@@ -15,15 +15,10 @@ const { data: data_chart_weight } = useNuxtData('chart_weight');
 const { data: data_chart_workout } = useNuxtData('chart_workout');
 const { data: data_setting } = useNuxtData('setting');
 
-const chartBooks = ref();
-
-watch(yearStore, () => {
-    console.log('watching this', yearStore.year)
-    chartBooks.value = monthStartEnd({ data: data_chart_book.value?.data, startLabel: 'book_start_date', endLabel: 'book_end_date', year: yearStore.year.toString() })
-    console.log(chartBooks.value)
-}, { immediate: true, deep: true });
-
-console.log('chartBooks', chartBooks.value);
+const useBookChart = computed(() => monthStartEnd({ data: data_chart_book.value?.data, startLabel: 'book_start_date', endLabel: 'book_end_date', year: yearStore.year.toString() }));
+const useHydrationChart = computed(() => filterYear({ data: data_chart_hydration.value?.data, year: yearStore.year.toString() }));
+const useWeightChart = computed(() => filterYear({ data: data_chart_weight.value?.data, year: yearStore.year.toString() }));
+const useWorkoutChart = computed(() => monthStart({ data: data_chart_workout.value?.data, startLabel: 'date', year: yearStore.year.toString() }));
 
 </script>
 
@@ -58,28 +53,30 @@ console.log('chartBooks', chartBooks.value);
             <!-- Book Tracking -->
             <UContainer v-if="data_setting.bookSetting.value">
                 <baseSectionHeader text="Books" />
-                <baseChartBarGroup :data="chartBooks" barOneName="start_date" barTwoName="end_date"
-                    barOneLabel="Start Date" barTwoLabel="End Date" :dataYears="data_chart_book.years" />
+                    <ClientOnly>
+                        <baseChartBarGroup :data="useBookChart" barOneName="start_date" barTwoName="end_date"
+                        barOneLabel="Start Date" barTwoLabel="End Date" :dataYears="data_chart_book.years" />
+                    </ClientOnly>
             </UContainer>
 
             <!-- Water Tracking -->
             <UContainer v-if="data_setting.waterSetting.value">
                 <baseSectionHeader text="Water Intake" />
-                <baseChartLine :data="data_chart_hydration.chartData" lineName="water_intake" lineLabel="Water total"
+                <baseChartLine :data="useHydrationChart" lineName="water_intake" lineLabel="Water total"
                     :dataYears="data_chart_hydration.years" />
             </UContainer>
 
             <!-- Weight Tracking -->
             <UContainer v-if="data_setting.weightSetting.value">
                 <baseSectionHeader text="Weight" />
-                <baseChartLine :data="data_chart_weight.chartData" lineName="weight" lineLabel="Weight"
+                <baseChartLine :data="useWeightChart" lineName="weight" lineLabel="Weight"
                     :dataYears="data_chart_weight.years" />
             </UContainer>
 
             <!-- Workout Tracking -->
             <UContainer v-if="data_setting.workoutSetting.value">
                 <baseSectionHeader text="Workouts" />
-                <baseChartBar :data="data_chart_workout.chartData" barName="date" barLabel="Total"
+                <baseChartBar :data="useWorkoutChart" barName="date" barLabel="Total"
                     :dataYears="data_chart_workout.years" />
             </UContainer>
         </section>

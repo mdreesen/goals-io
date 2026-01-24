@@ -15,7 +15,7 @@ const emit = defineEmits(['update:modelValue']);
 
 // --- State ---
 const store = useYear();
-const isOpen = ref(false)
+let isOpen = ref(false)
 const containerRef = ref<HTMLElement | null>(null)
 const listRef = ref<HTMLElement | null>(null);
 
@@ -30,7 +30,6 @@ const toggle = async () => {
 }
 
 const select = (year: number) => {
-    // emit('update:modelValue', year);
     store.set(year);
     isOpen.value = false
 }
@@ -56,7 +55,7 @@ onUnmounted(() => document.removeEventListener('click', closeOnClickOutside))
 </script>
 
 <template>
-    <div ref="containerRef" class="relative inline-block text-left font-sans select-none z-50">
+    <div ref="containerRef" class="relative inline-block text-left font-sans select-none z-10">
 
         <button @click="toggle"
             class="group flex items-center gap-2 pl-4 pr-3 py-2 backdrop-blur-sm border rounded-full transition-all duration-300 hover:bg-zinc-800"

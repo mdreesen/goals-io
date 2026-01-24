@@ -6,7 +6,7 @@ export default defineEventHandler(async (event) => {
   try {
     const user = await loggedInUser(event);
     return {
-      chartData: monthStart({ data: user?.workout, startLabel: 'date' }),
+      data: user?.workout,
       years: years(user?.workout ?? [])
     }
   } catch (error) {
