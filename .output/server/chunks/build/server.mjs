@@ -12,6 +12,7 @@ import { useForwardProps, Primitive, Slot, ToastProvider, ToastPortal, ToastView
 import { createTV } from 'tailwind-variants';
 import { getIconCSS } from '@iconify/utils/lib/css/icon';
 import { debounce } from 'perfect-debounce';
+import { SpeedInsights } from '@vercel/speed-insights/nuxt';
 import { u as useHead$1, h as headSymbol } from '../routes/renderer.mjs';
 import 'node:http';
 import 'node:https';
@@ -533,19 +534,19 @@ const _routes = [
     name: "dashboard",
     path: "/dashboard",
     meta: __nuxt_page_meta$4 || {},
-    component: () => import('./index-B4V1SEnq.mjs')
+    component: () => import('./index-Pi27eUJL.mjs')
   },
   {
     name: "dashboard-body",
     path: "/dashboard/body",
     meta: __nuxt_page_meta$3 || {},
-    component: () => import('./index-C32V0fJ-.mjs')
+    component: () => import('./index-D4CgtLNK.mjs')
   },
   {
     name: "dashboard-mind",
     path: "/dashboard/mind",
     meta: __nuxt_page_meta$2 || {},
-    component: () => import('./index-DbV3EGS3.mjs')
+    component: () => import('./index-EPE9fwot.mjs')
   },
   {
     name: "privacy_policy",
@@ -556,74 +557,74 @@ const _routes = [
     name: "index",
     path: "/",
     meta: { "middleware": ["auth"] },
-    component: () => import('./index-DRAOk8nu.mjs')
+    component: () => import('./index-z5YC1BI3.mjs')
   },
   {
     name: "login",
     path: "/login",
-    component: () => import('./login-C7zu8xGl.mjs')
+    component: () => import('./login-CFUO153s.mjs')
   },
   {
     name: "dashboard-spirit",
     path: "/dashboard/spirit",
     meta: __nuxt_page_meta$1 || {},
-    component: () => import('./index-DCrVZ1VW.mjs')
+    component: () => import('./index-Bq_JG_zD.mjs')
   },
   {
     name: "signup",
     path: "/signup",
-    component: () => import('./signup-CwbRdXOs.mjs')
+    component: () => import('./signup-Dj6GTboc.mjs')
   },
   {
     name: "dashboard-profile",
     path: "/dashboard/profile",
     meta: __nuxt_page_meta || {},
-    component: () => import('./index-c5Fv_Daw.mjs')
+    component: () => import('./index-C5tP9kzA.mjs')
   },
   {
     name: "dashboard-mind-id-books",
     path: "/dashboard/mind/:id()/books",
-    component: () => import('./books-3r_KDEYG.mjs')
+    component: () => import('./books-DCzvDAeS.mjs')
   },
   {
     name: "dashboard-body-id-weight",
     path: "/dashboard/body/:id()/weight",
-    component: () => import('./weight-CjcqV7vM.mjs')
+    component: () => import('./weight-BsMENkpZ.mjs')
   },
   {
     name: "dashboard-body-id-workout",
     path: "/dashboard/body/:id()/workout",
-    component: () => import('./workout-ClgYl9-B.mjs')
+    component: () => import('./workout-DV3VtTwO.mjs')
   },
   {
     name: "dashboard-spirit-id-sermon",
     path: "/dashboard/spirit/:id()/sermon",
-    component: () => import('./sermon-DGtI9Svk.mjs')
+    component: () => import('./sermon-DG4yxAXM.mjs')
   },
   {
     name: "dashboard-spirit-id-journal",
     path: "/dashboard/spirit/:id()/journal",
-    component: () => import('./journal-Dfg3l1BM.mjs')
+    component: () => import('./journal-C-ZcE1bU.mjs')
   },
   {
     name: "dashboard-mind-id-gratitudes",
     path: "/dashboard/mind/:id()/gratitudes",
-    component: () => import('./gratitudes-B_fE_AOH.mjs')
+    component: () => import('./gratitudes-BKUA1oq9.mjs')
   },
   {
     name: "forgotpassword",
     path: "/forgotpassword",
-    component: () => import('./forgotpassword-QsvzAEkb.mjs')
+    component: () => import('./forgotpassword-H0MI6a4I.mjs')
   },
   {
     name: "dashboard-spirit-id-devotional",
     path: "/dashboard/spirit/:id()/devotional",
-    component: () => import('./devotional-jVIVH7HZ.mjs')
+    component: () => import('./devotional-Cr2xNp1d.mjs')
   },
   {
     name: "id-resetpassword",
     path: "/:id()/resetpassword",
-    component: () => import('./resetpassword-mvD2U3Xl.mjs')
+    component: () => import('./resetpassword-DXIGbUfX.mjs')
   }
 ];
 const _wrapInTransition = (props, children) => {
@@ -744,7 +745,7 @@ const globalMiddleware = [
   manifest_45route_45rule
 ];
 const namedMiddleware = {
-  auth: () => import('./auth-DhK3C5on.mjs')
+  auth: () => import('./auth-DFPgLLMe.mjs')
 };
 const plugin$1 = /* @__PURE__ */ defineNuxtPlugin({
   name: "nuxt:router",
@@ -2022,7 +2023,7 @@ const plugin = /* @__PURE__ */ defineNuxtPlugin({
   }
 });
 const LazyIcon = defineAsyncComponent(() => Promise.resolve().then(() => index).then((r) => r["default"] || r.default || r));
-const LazyToastContainer = defineAsyncComponent(() => import('./ToastContainer-Nxh9uKJU.mjs').then((r) => r["default"] || r.default || r));
+const LazyToastContainer = defineAsyncComponent(() => import('./ToastContainer-D0eywinf.mjs').then((r) => r["default"] || r.default || r));
 const lazyGlobalComponents = [
   ["Icon", LazyIcon],
   ["ToastContainer", LazyToastContainer]
@@ -8021,7 +8022,7 @@ _sfc_main$3.setup = (props, ctx) => {
 };
 const __nuxt_component_0 = Object.assign(_sfc_main$3, { __name: "UApp" });
 const layouts = {
-  authenticated: defineAsyncComponent(() => import('./authenticated-DEzrK6kw.mjs').then((m) => m.default || m)),
+  authenticated: defineAsyncComponent(() => import('./authenticated-CN75mNjM.mjs').then((m) => m.default || m)),
   default: defineAsyncComponent(() => import('./default-X2IZVJnD.mjs').then((m) => m.default || m))
 };
 const LayoutLoader = defineComponent({
@@ -8271,10 +8272,12 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
               default: withCtx((_2, _push3, _parent3, _scopeId2) => {
                 if (_push3) {
                   _push3(ssrRenderComponent(_component_VitePwaManifest, null, null, _parent3, _scopeId2));
+                  _push3(ssrRenderComponent(unref(SpeedInsights), null, null, _parent3, _scopeId2));
                   _push3(ssrRenderComponent(_component_NuxtPage, null, null, _parent3, _scopeId2));
                 } else {
                   return [
                     createVNode(_component_VitePwaManifest),
+                    createVNode(unref(SpeedInsights)),
                     createVNode(_component_NuxtPage)
                   ];
                 }
@@ -8286,6 +8289,7 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
               createVNode(_component_NuxtLayout, null, {
                 default: withCtx(() => [
                   createVNode(_component_VitePwaManifest),
+                  createVNode(unref(SpeedInsights)),
                   createVNode(_component_NuxtPage)
                 ]),
                 _: 1
@@ -8319,8 +8323,8 @@ const _sfc_main$1 = {
     const statusMessage = _error.statusMessage ?? (is404 ? "Page Not Found" : "Internal Server Error");
     const description = _error.message || _error.toString();
     const stack = void 0;
-    const _Error404 = defineAsyncComponent(() => import('./error-404-CVW0zMUp.mjs'));
-    const _Error = defineAsyncComponent(() => import('./error-500-Pnh2mWSl.mjs'));
+    const _Error404 = defineAsyncComponent(() => import('./error-404-CVAZWf1v.mjs'));
+    const _Error = defineAsyncComponent(() => import('./error-500-oI9YTG0H.mjs'));
     const ErrorTemplate = is404 ? _Error404 : _Error;
     return (_ctx, _push, _parent, _attrs) => {
       _push(ssrRenderComponent(unref(ErrorTemplate), mergeProps({ statusCode: unref(statusCode), statusMessage: unref(statusMessage), description: unref(description), stack: unref(stack) }, _attrs), null, _parent));

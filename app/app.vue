@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { SpeedInsights } from '@vercel/speed-insights/nuxt';
+
   definePageMeta({
       middleware: ['auth'],
   });
@@ -9,6 +11,7 @@
     <UApp>
       <NuxtLayout>
         <VitePwaManifest/>
+        <SpeedInsights />
         <NuxtPage />
       </NuxtLayout>
     </UApp>
