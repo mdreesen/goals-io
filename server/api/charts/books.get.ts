@@ -1,13 +1,11 @@
 import loggedInUser from "~/utils/loggedInUser";
-import { monthStartEnd } from '~/utils/formatters/months';
 import { years } from '~/utils/getYears';
 export default defineEventHandler(async (event) => {
   try {
     const user = await loggedInUser(event);
-    const chartData = monthStartEnd({ data: user?.books, startLabel: 'book_start_date', endLabel: 'book_end_date' });
 
     return {
-      chartData: chartData,
+      data: user?.books,
       years: years(user?.books ?? [])
     }
   } catch (error) {

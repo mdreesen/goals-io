@@ -13,7 +13,8 @@ export default defineNuxtConfig({
     'nuxt-charts',
     '@nuxt/ui',
     '@vite-pwa/nuxt',
-    'nuxt-notify'
+    'nuxt-notify',
+    '@pinia/nuxt'
   ],
   app: {
     head: {

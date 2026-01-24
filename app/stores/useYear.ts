@@ -1,0 +1,20 @@
+import { defineStore } from 'pinia';
+
+type YearState = {
+    year: number
+};
+
+const isYear = () => {
+    const date = new Date();
+    return date.getFullYear();
+}
+
+export const useYear = defineStore('year', {
+    state: () => ({ year: isYear() }) as YearState,
+
+    actions: {
+        set(year: number) {
+            this.year = year;
+        }
+    },
+  })

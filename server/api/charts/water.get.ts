@@ -1,5 +1,6 @@
 import loggedInUser from "~/utils/loggedInUser";
 import { filterYear } from "~/utils/formatters/months";
+import { years } from '~/utils/getYears';
 
 export default defineEventHandler(async (event) => {
   try {
@@ -16,7 +17,10 @@ export default defineEventHandler(async (event) => {
       }
     });
 
-    return filterYear(formatArray);
+    return {
+      data: formatArray,
+      years: years(user?.water ?? [])
+    }
   } catch (error) {
     console.log(error);
     throw createError({
