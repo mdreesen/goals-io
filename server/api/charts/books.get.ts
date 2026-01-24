@@ -7,6 +7,7 @@ export default defineEventHandler(async (event) => {
     const chartData = monthStartEnd({ data: user?.books, startLabel: 'book_start_date', endLabel: 'book_end_date' });
 
     return {
+      data: user?.books,
       chartData: chartData,
       years: years(user?.books ?? [])
     }

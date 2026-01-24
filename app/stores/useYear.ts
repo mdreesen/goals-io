@@ -13,7 +13,7 @@ export const useYear = defineStore('year', {
     state: () => ({ year: isYear() }) as YearState,
 
     actions: {
-        setYear(year: number) {
+        set(year: number) {
             console.log(year)
             this.year = year;
         }

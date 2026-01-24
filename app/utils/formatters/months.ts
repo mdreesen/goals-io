@@ -1,10 +1,7 @@
 import { useYear } from '~/stores/useYear';
 
-export function monthStartEnd({ data, startLabel, endLabel }) {
-
-    const now = new Date();
-    const year = now.getFullYear();
-
+export function monthStartEnd({ data, startLabel, endLabel, year }) {
+    
     // Month to current year
     const january_start = data.filter((item: any) => item?.[startLabel]?.includes('Jan') && item?.[startLabel]?.includes(year)).length;
     const february_start = data.filter((item: any) => item?.[startLabel]?.includes('Feb') && item?.[startLabel]?.includes(year)).length;
@@ -97,8 +94,8 @@ export function monthStartEnd({ data, startLabel, endLabel }) {
 };
 
 export function monthStart({ data, startLabel }) {
-    const now = new Date();
-    const year = now.getFullYear();
+    const store = useYear();
+    let year = store.year.toString();
 
     // Month to current year
     const january_start = data.filter((item: any) => item?.[startLabel]?.includes('Jan') && item?.[startLabel]?.includes(year)).length;

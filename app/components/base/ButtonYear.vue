@@ -6,27 +6,18 @@ import { useYear } from '~/stores/useYear';
 // --- Props ---
 const props = defineProps({
     data: { type: Array, default: () => [] },
-    modelValue: { type: Number, required: true },
+    modelValue: { type: Number },
     startYear: { type: Number, default: 2020 },
     endYear: { type: Number, default: new Date().getFullYear() + 2 }
-})
+});
 
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits(['update:modelValue']);
 
 // --- State ---
+const store = useYear();
 const isOpen = ref(false)
 const containerRef = ref<HTMLElement | null>(null)
 const listRef = ref<HTMLElement | null>(null);
-
-// --- Computed Years ---
-// const years = computed(() => {
-//   const list = []
-//   // Descending order (Newest first)
-//   for (let y = props.endYear; y >= props.startYear; y--) {
-//     list.push(y)
-//   }
-//   return list
-// })
 
 // --- Actions ---
 const toggle = async () => {
@@ -39,8 +30,8 @@ const toggle = async () => {
 }
 
 const select = (year: number) => {
-    emit('update:modelValue', year);
-    useYear().set(year);
+    // emit('update:modelValue', year);
+    store.set(year);
     isOpen.value = false
 }
 
@@ -71,7 +62,7 @@ onUnmounted(() => document.removeEventListener('click', closeOnClickOutside))
             class="group flex items-center gap-2 pl-4 pr-3 py-2 backdrop-blur-sm border rounded-full transition-all duration-300 hover:bg-zinc-800"
             :class="{ 'bg-zinc-800 border-white/20': isOpen }">
             <span class="text-sm font-medium transition-colors tabular-nums">
-                {{ new Date().getFullYear() }}
+                {{ useYear().year }}
             </span>
             <ChevronDown class="w-4 h-4 transition-transform duration-300"
                 :class="{ '-rotate-180': isOpen }" />
