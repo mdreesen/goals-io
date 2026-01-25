@@ -534,7 +534,7 @@ const _routes = [
     name: "dashboard",
     path: "/dashboard",
     meta: __nuxt_page_meta$4 || {},
-    component: () => import('./index-Pi27eUJL.mjs')
+    component: () => import('./index-CnJr77Fn.mjs')
   },
   {
     name: "dashboard-body",

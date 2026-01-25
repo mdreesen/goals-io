@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { computed } from 'vue';
 
 const props = defineProps({
   text: {
@@ -44,13 +45,23 @@ const weight = {
   weight: data.value?.latestWeight?.weight,
   date: data.value?.latestWeight?.date,
 };
+
+const animateIcons = computed(() => {
+  switch (true) {
+    case props.collection === 'fasting' && fasting?.isFasting:
+      return 'animate-bounce';
+      break;
+    default:
+      return '';
+  }
+})
 </script>
 
 <template>
   <UCard variant="subtle" :class="`w-full max-w-lg divide-none ${props.color && props.color}`">
     <template #header>
       <div class="flex flex-col justify-center items-center">
-        <baseIcon v-if="props.icon" :iconName="props.icon" styles="text-white" />
+        <baseIcon v-if="props.icon" :iconName="props.icon" :styles="`text-white ${animateIcons}`" />
         <span class="text-white">{{ props.text }}</span>
       </div>
     </template>

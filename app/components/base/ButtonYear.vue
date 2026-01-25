@@ -18,7 +18,7 @@ const store = useYear();
 let isOpen = ref(false)
 const containerRef = ref<HTMLElement | null>(null)
 const listRef = ref<HTMLElement | null>(null);
-const useData = ref(props.data as Array<number>)
+const useData = ref(props.data as Array<number>);
 
 // --- Actions ---
 const toggle = async () => {
