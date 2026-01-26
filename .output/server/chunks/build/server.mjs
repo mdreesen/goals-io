@@ -514,6 +514,9 @@ const unhead_k2P3m_ZDyjlr2mMYnoDPwavjsDN8hBlk9cFai0bbopU = /* @__PURE__ */ defin
 function toArray$1(value) {
   return Array.isArray(value) ? value : [value];
 }
+const __nuxt_page_meta$5 = {
+  layout: "authenticated"
+};
 const __nuxt_page_meta$4 = {
   layout: "authenticated"
 };
@@ -533,25 +536,25 @@ const _routes = [
   {
     name: "dashboard",
     path: "/dashboard",
-    meta: __nuxt_page_meta$4 || {},
+    meta: __nuxt_page_meta$5 || {},
     component: () => import('./index-CnJr77Fn.mjs')
   },
   {
     name: "dashboard-body",
     path: "/dashboard/body",
-    meta: __nuxt_page_meta$3 || {},
+    meta: __nuxt_page_meta$4 || {},
     component: () => import('./index-D4CgtLNK.mjs')
   },
   {
     name: "dashboard-mind",
     path: "/dashboard/mind",
-    meta: __nuxt_page_meta$2 || {},
+    meta: __nuxt_page_meta$3 || {},
     component: () => import('./index-EPE9fwot.mjs')
   },
   {
-    name: "privacy_policy",
-    path: "/privacy_policy",
-    component: () => import('./index-DZYcuPub.mjs')
+    name: "privacy-policy",
+    path: "/privacy-policy",
+    component: () => import('./index-C18QGebv.mjs')
   },
   {
     name: "index",
@@ -567,19 +570,19 @@ const _routes = [
   {
     name: "dashboard-spirit",
     path: "/dashboard/spirit",
-    meta: __nuxt_page_meta$1 || {},
+    meta: __nuxt_page_meta$2 || {},
     component: () => import('./index-Bq_JG_zD.mjs')
   },
   {
     name: "signup",
     path: "/signup",
-    component: () => import('./signup-Dj6GTboc.mjs')
+    component: () => import('./signup-hi9qPEyG.mjs')
   },
   {
     name: "dashboard-profile",
     path: "/dashboard/profile",
-    meta: __nuxt_page_meta || {},
-    component: () => import('./index-C5tP9kzA.mjs')
+    meta: __nuxt_page_meta$1 || {},
+    component: () => import('./index-CNKyHMn7.mjs')
   },
   {
     name: "dashboard-mind-id-books",
@@ -610,6 +613,12 @@ const _routes = [
     name: "dashboard-mind-id-gratitudes",
     path: "/dashboard/mind/:id()/gratitudes",
     component: () => import('./gratitudes-BKUA1oq9.mjs')
+  },
+  {
+    name: "dashboard-privacy-policy",
+    path: "/dashboard/privacy-policy",
+    meta: __nuxt_page_meta || {},
+    component: () => import('./index-H1YnYi1P.mjs')
   },
   {
     name: "forgotpassword",

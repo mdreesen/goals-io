@@ -217,6 +217,7 @@ async function log() {
                 <span>Date: {{ formatDate() }}</span>
                 <span>Time zone: {{ timeZone() }}</span>
                 <span>Version: {{ packageJson.version }}</span>
+                <NuxtLink to="/dashboard/privacy-policy" class="underline">Privacy Policy</NuxtLink>
             </div>
 
             <!-- Action Button Example -->

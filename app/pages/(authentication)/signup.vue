@@ -91,7 +91,7 @@ useMotion(formRef, { ...formVarient() });
                             class="rounded-md border-gray-600 text-purple-500 focus:ring-purple-500 transition-colors duration-200" />
                             <div>
                                 <baseLabel text="I agree to the" />
-                                <NuxtLink to="/privacy_policy"
+                                <NuxtLink to="/privacy-policy"
                                 class="text-blue-400 hover:underline transition-colors">Privacy Policy</NuxtLink>
                             </div>
                     </div>
