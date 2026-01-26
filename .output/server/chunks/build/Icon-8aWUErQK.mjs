@@ -1,7 +1,7 @@
 import { useSlots, computed, unref, mergeProps, withCtx, createBlock, createCommentVNode, openBlock, renderSlot, defineComponent, useSSRContext } from 'vue';
 import { ssrRenderComponent, ssrRenderClass, ssrRenderSlot } from 'vue/server-renderer';
 import { Primitive } from 'reka-ui';
-import { f as useAppConfig, t as tv, j as __nuxt_component_0$1 } from './server.mjs';
+import { f as useAppConfig, t as tv, j as __nuxt_component_0$2 } from './server.mjs';
 
 const theme = {
   "slots": {
@@ -133,7 +133,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
   setup(__props) {
     const props = __props;
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_Icon = __nuxt_component_0$1;
+      const _component_Icon = __nuxt_component_0$2;
       _push(ssrRenderComponent(_component_Icon, mergeProps({
         class: props.styles,
         name: props.iconName,

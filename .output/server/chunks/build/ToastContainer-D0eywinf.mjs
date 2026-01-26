@@ -1,4 +1,4 @@
-import { w as useRuntimeConfig, j as __nuxt_component_0$1 } from './server.mjs';
+import { w as useRuntimeConfig, j as __nuxt_component_0$2 } from './server.mjs';
 import { computed, mergeProps, unref, ref, useSSRContext } from 'vue';
 import { ssrRenderAttrs, ssrRenderList, ssrRenderComponent, ssrRenderClass, ssrRenderAttr, ssrInterpolate, ssrRenderStyle } from 'vue/server-renderer';
 import { u as useToast } from './useToast-DbWOdwrP.mjs';
@@ -184,7 +184,7 @@ const _sfc_main$1 = {
       ].filter(Boolean).join(" ");
     };
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_Icon = __nuxt_component_0$1;
+      const _component_Icon = __nuxt_component_0$2;
       _push(`<li${ssrRenderAttrs(mergeProps({
         class: [toastClasses.value, "nuxt-notify-toast"]
       }, _attrs))}>`);
