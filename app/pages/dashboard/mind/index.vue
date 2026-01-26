@@ -16,12 +16,12 @@ const { data: data_setting } = useNuxtData('setting');
 
         <div v-if="data_setting.bookSetting.value">
             <baseHeader text="Books" />
-            <appTrackerBook/>
+            <LazyappTrackerBook hydrate-on-visible />
         </div>
 
         <div v-if="data_setting.gratitudeSetting.value">
             <baseHeader text="Gratitudes" />
-            <appTrackerGratitude />
+            <LazyappTrackerGratitude hydrate-on-visible />
         </div>
 
         <!-- <div>

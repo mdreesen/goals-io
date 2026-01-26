@@ -8,7 +8,6 @@ import type { BookType } from '~/types/books';
 const route = useRoute();
 
 const { data: data, pending: pending_data } = await useFetch<BookType>(`/api/user/books/${route.params.id}`);
-const { fetch: refreshSession } = useUserSession();
 const toast = useToast();
 
 const isLoading = ref(false);
@@ -93,7 +92,8 @@ async function delete_log() {
     <div v-if="!pending_data" class="relative flex flex-col w-full max-w-3xl p-3 mx-auto overflow-hidden">
 
         <div class="flex justify-center py-4">
-            <NuxtImg class="object-cover h-60" :src="data?.book_image" />
+            <NuxtImg class="object-cover h-60" :src="data?.book_image" format="webp" preload loading="eager"
+                fetch-priority="high" />
         </div>
 
         <transition name="slide-up" mode="out-in">

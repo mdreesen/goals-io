@@ -61,99 +61,101 @@ async function log() {
 </script>
 
 <template>
-  <div class="flex flex-col items-center justify-center w-full max-w-sm mx-auto p-8">
+  <ClientOnly>
+    <div class="flex flex-col items-center justify-center w-full max-w-sm mx-auto p-8">
 
-    <div class="relative w-64 h-64 group cursor-pointer select-none">
+      <div class="relative w-64 h-64 group cursor-pointer select-none">
 
-      <div class="absolute inset-0 rounded-full border border-neutral-800 transition-colors duration-500"
-        :class="{ 'border-emerald-500/30 shadow-[0_0_40px_rgba(16,185,129,0.2)]': isComplete }" />
-
-      <div
-        class="absolute inset-2 rounded-full overflow-hidden bg-neutral-900 border-4 border-neutral-900 shadow-inner isolation-isolate transform transition-transform active:scale-95 duration-200">
+        <div class="absolute inset-0 rounded-full border border-neutral-800 transition-colors duration-500"
+          :class="{ 'border-emerald-500/30 shadow-[0_0_40px_rgba(16,185,129,0.2)]': isComplete }" />
 
         <div
-          class="absolute inset-0 flex flex-col items-center justify-center z-10 mix-blend-difference pointer-events-none">
-          <span class="text-6xl font-bold text-white tabular-nums tracking-tighter">
-            {{ currentOz }}
-          </span>
-          <span class="text-sm font-medium text-neutral-400 mt-1">
-            Goal {{ userDailyGoal }} oz
-          </span>
-        </div>
+          class="absolute inset-2 rounded-full overflow-hidden bg-neutral-900 border-4 border-neutral-900 shadow-inner isolation-isolate transform transition-transform active:scale-95 duration-200">
 
-        <div class="absolute left-0 w-full h-full transition-all duration-1000 ease-in-out"
-          :style="{ top: `${wavePosition}%` }">
           <div
-            class="wave absolute left-1/2 -top-[160%] w-[200%] h-[200%] -ml-[100%] rounded-[40%] bg-white opacity-10 animate-spin-slow" />
-          <div
-            class="wave absolute left-1/2 -top-[165%] w-[200%] h-[200%] -ml-[100%] rounded-[45%] bg-blue-500 animate-spin-medium" />
-        </div>
-
-        <transition name="fade">
-          <div v-if="isComplete"
-            class="absolute inset-0 z-20 flex items-center justify-center bg-emerald-500/20 backdrop-blur-[2px]">
-            <div class="bg-emerald-500 text-black p-3 rounded-full shadow-lg animate-pop">
-              <Check class="w-8 h-8 stroke-3" />
-            </div>
+            class="absolute inset-0 flex flex-col items-center justify-center z-10 mix-blend-difference pointer-events-none">
+            <span class="text-6xl font-bold text-white tabular-nums tracking-tighter">
+              {{ currentOz }}
+            </span>
+            <span class="text-sm font-medium text-neutral-400 mt-1">
+              Goal {{ userDailyGoal }} oz
+            </span>
           </div>
-        </transition>
+
+          <div class="absolute left-0 w-full h-full transition-all duration-1000 ease-in-out"
+            :style="{ top: `${wavePosition}%` }">
+            <div
+              class="wave absolute left-1/2 -top-[160%] w-[200%] h-[200%] -ml-[100%] rounded-[40%] bg-white opacity-10 animate-spin-slow" />
+            <div
+              class="wave absolute left-1/2 -top-[165%] w-[200%] h-[200%] -ml-[100%] rounded-[45%] bg-blue-500 animate-spin-medium" />
+          </div>
+
+          <transition name="fade">
+            <div v-if="isComplete"
+              class="absolute inset-0 z-20 flex items-center justify-center bg-emerald-500/20 backdrop-blur-[2px]">
+              <div class="bg-emerald-500 text-black p-3 rounded-full shadow-lg animate-pop">
+                <Check class="w-8 h-8 stroke-3" />
+              </div>
+            </div>
+          </transition>
+
+        </div>
+      </div>
+
+      <div class="mt-12 w-full relative">
+
+        <Transition mode="out-in" name="slide-up">
+          <div class="flex flex-col items-center justify-center gap-8 w-full top-0 left-0">
+            <div class="flex items-center text-center gap-4">
+              <button @click.stop="adjustWater(-1)"
+                class="w-12 h-12 rounded-full flex items-center justify-center border border-neutral-800 text-neutral-500 hover:text-white hover:border-neutral-600 transition-colors focus:outline-none"
+                aria-label="Remove water">
+                <Minus class="w-5 h-5" />
+              </button>
+
+              <!-- Button for 8z.-->
+              <div>
+                <button @click.stop="adjustWater(8)"
+                  class="w-16 h-16 rounded-2xl bg-white text-black hover:bg-neutral-200 active:scale-90 transition-all duration-200 flex items-center justify-center shadow-[0_0_20px_rgba(255,255,255,0.1)]">
+                  <Plus class="w-8 h-8" />
+                </button>
+                <span class="text-[10px] text-neutral-500 font-medium">+8oz</span>
+              </div>
+
+              <!-- Button for 12z.-->
+              <div>
+                <button @click.stop="adjustWater(12)"
+                  class="w-16 h-16 rounded-2xl bg-white text-black hover:bg-neutral-200 active:scale-90 transition-all duration-200 flex items-center justify-center shadow-[0_0_20px_rgba(255,255,255,0.1)]">
+                  <Plus class="w-8 h-8" />
+                </button>
+                <span class="text-[10px] text-neutral-500 font-medium">+12oz</span>
+              </div>
+
+              <!-- Button for 18oz. -->
+              <div>
+                <button @click.stop="adjustWater(18)"
+                  class="w-16 h-16 rounded-2xl bg-white text-black hover:bg-neutral-200 active:scale-90 transition-all duration-200 flex items-center justify-center shadow-[0_0_20px_rgba(255,255,255,0.1)]">
+                  <Plus class="w-8 h-8" />
+                </button>
+                <span class="text-[10px] text-neutral-500 font-medium">+18oz</span>
+              </div>
+
+              <button @click.stop="adjustWater(1)"
+                class="w-12 h-12 rounded-full flex items-center justify-center border border-neutral-800 text-neutral-500 hover:text-white hover:border-neutral-600 transition-colors focus:outline-none"
+                aria-label="Remove water">
+                <Plus class="w-5 h-5" />
+              </button>
+            </div>
+
+            <form class="w-full" @submit.prevent="log">
+              <baseButtonSubmit text="Save" :isLoading="isLoading" />
+            </form>
+          </div>
+        </Transition>
 
       </div>
     </div>
-
-    <div class="mt-12 w-full relative">
-
-      <Transition mode="out-in" name="slide-up">
-        <div class="flex flex-col items-center justify-center gap-8 w-full top-0 left-0">
-          <div class="flex items-center text-center gap-4">
-            <button @click.stop="adjustWater(-1)"
-              class="w-12 h-12 rounded-full flex items-center justify-center border border-neutral-800 text-neutral-500 hover:text-white hover:border-neutral-600 transition-colors focus:outline-none"
-              aria-label="Remove water">
-              <Minus class="w-5 h-5" />
-            </button>
-
-            <!-- Button for 8z.-->
-            <div>
-              <button @click.stop="adjustWater(8)"
-                class="w-16 h-16 rounded-2xl bg-white text-black hover:bg-neutral-200 active:scale-90 transition-all duration-200 flex items-center justify-center shadow-[0_0_20px_rgba(255,255,255,0.1)]">
-                <Plus class="w-8 h-8" />
-              </button>
-              <span class="text-[10px] text-neutral-500 font-medium">+8oz</span>
-            </div>
-
-            <!-- Button for 12z.-->
-            <div>
-              <button @click.stop="adjustWater(12)"
-                class="w-16 h-16 rounded-2xl bg-white text-black hover:bg-neutral-200 active:scale-90 transition-all duration-200 flex items-center justify-center shadow-[0_0_20px_rgba(255,255,255,0.1)]">
-                <Plus class="w-8 h-8" />
-              </button>
-              <span class="text-[10px] text-neutral-500 font-medium">+12oz</span>
-            </div>
-
-            <!-- Button for 18oz. -->
-            <div>
-              <button @click.stop="adjustWater(18)"
-                class="w-16 h-16 rounded-2xl bg-white text-black hover:bg-neutral-200 active:scale-90 transition-all duration-200 flex items-center justify-center shadow-[0_0_20px_rgba(255,255,255,0.1)]">
-                <Plus class="w-8 h-8" />
-              </button>
-              <span class="text-[10px] text-neutral-500 font-medium">+18oz</span>
-            </div>
-
-            <button @click.stop="adjustWater(1)"
-              class="w-12 h-12 rounded-full flex items-center justify-center border border-neutral-800 text-neutral-500 hover:text-white hover:border-neutral-600 transition-colors focus:outline-none"
-              aria-label="Remove water">
-              <Plus class="w-5 h-5" />
-            </button>
-          </div>
-
-          <form class="w-full" @submit.prevent="log">
-            <baseButtonSubmit text="Save" :isLoading="isLoading" />
-          </form>
-        </div>
-      </Transition>
-
-    </div>
-  </div>
+  </ClientOnly>
 </template>
 
 <style scoped>

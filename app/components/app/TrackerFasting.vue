@@ -140,72 +140,75 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="flex flex-col items-center justify-center min-h-125 p-6 rounded-3xl relative overflow-hidden">
+  <ClientOnly>
 
-    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-64 h-64 rounded-full pointer-events-none"></div>
+    <div class="flex flex-col items-center justify-center min-h-125 p-6 rounded-3xl relative overflow-hidden">
 
-    <div class="relative w-75 h-75 flex items-center justify-center mb-8">
-      <svg class="w-full h-full transform -rotate-90 drop-shadow-[0_0_15px_rgba(99,102,241,0.3)]">
-        <circle cx="150" cy="150" :r="radius" stroke="currentColor" stroke-width="6" fill="transparent"
-          class="text-zinc-800" />
-        <circle cx="150" cy="150" :r="radius" stroke="url(#gradient)" stroke-width="8" fill="transparent"
-          stroke-linecap="round" class="transition-all duration-1000 ease-out"
-          :style="{ strokeDasharray: circumference, strokeDashoffset: dashOffset }" />
-        <defs>
-          <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#818cf8" />
-            <stop offset="100%" stop-color="#22d3ee" />
-          </linearGradient>
-        </defs>
-      </svg>
+      <div class="absolute top-0 left-1/2 -translate-x-1/2 w-64 h-64 rounded-full pointer-events-none"></div>
 
-      <div class="absolute inset-0 flex flex-col items-center justify-center z-20">
-        <div v-if="!useIsFasting" class="text-center animate-in fade-in zoom-in duration-500">
+      <div class="relative w-75 h-75 flex items-center justify-center mb-8">
+        <svg class="w-full h-full transform -rotate-90 drop-shadow-[0_0_15px_rgba(99,102,241,0.3)]">
+          <circle cx="150" cy="150" :r="radius" stroke="currentColor" stroke-width="6" fill="transparent"
+            class="text-zinc-800" />
+          <circle cx="150" cy="150" :r="radius" stroke="url(#gradient)" stroke-width="8" fill="transparent"
+            stroke-linecap="round" class="transition-all duration-1000 ease-out"
+            :style="{ strokeDasharray: circumference, strokeDashoffset: dashOffset }" />
+          <defs>
+            <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#818cf8" />
+              <stop offset="100%" stop-color="#22d3ee" />
+            </linearGradient>
+          </defs>
+        </svg>
 
-        </div>
+        <div class="absolute inset-0 flex flex-col items-center justify-center z-20">
+          <div v-if="!useIsFasting" class="text-center animate-in fade-in zoom-in duration-500">
 
-        <div v-else class="text-center">
-          <div class="flex items-center justify-center space-x-2 mb-2">
-            <component :is="currentStage.icon" class="w-4 h-4 animate-pulse" :class="currentStage.color" />
-            <span class="text-xs font-bold uppercase tracking-widest text-zinc-400">{{ currentStage.name }}</span>
           </div>
-          <h1 class="text-5xl font-medium tracking-tighter tabular-nums drop-shadow-lg">
-            {{ formattedTime }}
-          </h1>
-          <p class="text-zinc-500 text-xs mt-2">{{ currentStage.desc }}</p>
-        </div>
-      </div>
-    </div>
 
-    <div v-if="useIsFasting" class="w-full max-w-70 z-10">
-      <div
-        class="flex justify-between items-center mb-4 px-4 py-3 bg-white/5 backdrop-blur-md rounded-xl border border-white/5">
-        <div class="text-left">
-          <p class="text-[10px] text-zinc-500 uppercase font-bold">Goal</p>
-          <p class="text-zinc-200 font-medium">{{ goalHours }} Hours</p>
-        </div>
-        <div class="text-right">
-          <p class="text-[10px] text-zinc-500 uppercase font-bold">End Time</p>
-          <p class="text-zinc-200 font-medium">
-            {{ startTime ? format(addHours(startTime, goalHours), 'h:mm a') : '--:--' }}
-          </p>
+          <div v-else class="text-center">
+            <div class="flex items-center justify-center space-x-2 mb-2">
+              <component :is="currentStage.icon" class="w-4 h-4 animate-pulse" :class="currentStage.color" />
+              <span class="text-xs font-bold uppercase tracking-widest text-zinc-400">{{ currentStage.name }}</span>
+            </div>
+            <h1 class="text-5xl font-medium tracking-tighter tabular-nums drop-shadow-lg">
+              {{ formattedTime }}
+            </h1>
+            <p class="text-zinc-500 text-xs mt-2">{{ currentStage.desc }}</p>
+          </div>
         </div>
       </div>
 
-      <!-- <button v-if="!isLoading" @click="toggleFast"
+      <div v-if="useIsFasting" class="w-full max-w-70 z-10">
+        <div
+          class="flex justify-between items-center mb-4 px-4 py-3 bg-white/5 backdrop-blur-md rounded-xl border border-white/5">
+          <div class="text-left">
+            <p class="text-[10px] text-zinc-500 uppercase font-bold">Goal</p>
+            <p class="text-zinc-200 font-medium">{{ goalHours }} Hours</p>
+          </div>
+          <div class="text-right">
+            <p class="text-[10px] text-zinc-500 uppercase font-bold">End Time</p>
+            <p class="text-zinc-200 font-medium">
+              {{ startTime ? format(addHours(startTime, goalHours), 'h:mm a') : '--:--' }}
+            </p>
+          </div>
+        </div>
+
+        <!-- <button v-if="!isLoading" @click="toggleFast"
         class="w-full py-4 rounded-xl border border-red-500/20 bg-red-500/10 text-red-400 hover:bg-red-500/20 hover:text-red-300 transition-all text-sm font-semibold flex items-center justify-center gap-2">
         <Square class="w-4 h-4 fill-current" />
         End Fast
       </button> -->
+      </div>
+
+      <button v-if="!isLoading" @click="toggleFast"
+        :class="`w-full max-w-70 py-4 rounded-xl border ${useIsFasting ? 'border-red-500/20 bg-red-500/10 text-red-400 hover:bg-red-500/20 hover:text-red-300' : 'border-green-500/20 bg-green-500/10 text-green-400 hover:bg-green-500/20 hover:text-green-300'} transition-all text-sm font-semibold flex items-center justify-center gap-2`">
+        <Square class="w-4 h-4 fill-current" />
+        {{ !useIsFasting ? 'Start Fast' : 'End Fast' }}
+      </button>
+
     </div>
-
-    <button v-if="!isLoading" @click="toggleFast"
-      :class="`w-full max-w-70 py-4 rounded-xl border ${useIsFasting ? 'border-red-500/20 bg-red-500/10 text-red-400 hover:bg-red-500/20 hover:text-red-300' : 'border-green-500/20 bg-green-500/10 text-green-400 hover:bg-green-500/20 hover:text-green-300'} transition-all text-sm font-semibold flex items-center justify-center gap-2`">
-      <Square class="w-4 h-4 fill-current" />
-      {{ !useIsFasting ? 'Start Fast' : 'End Fast'}}
-    </button>
-
-  </div>
+  </ClientOnly>
 </template>
 
 <style scoped>

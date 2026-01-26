@@ -45,8 +45,10 @@ const yFormatter = (tick: number) => tick.toString()
 <template>
   <div>
     <baseButtonYear :data="dataYears" />
-    <BarChart :data="useData" :height="300" :categories="categories" :y-axis="[props.barName as any]" :x-num-ticks="6"
-      :radius="4" :y-grid-line="true" :x-formatter="xFormatter" :y-formatter="yFormatter"
-      :legend-position="LegendPosition.Top" :hide-legend="false" />
+    <ClientOnly>
+      <BarChart :data="useData" :height="300" :categories="categories" :y-axis="[props.barName as any]" :x-num-ticks="6"
+        :radius="4" :y-grid-line="true" :x-formatter="xFormatter" :y-formatter="yFormatter"
+        :legend-position="LegendPosition.Top" :hide-legend="false" />
+    </ClientOnly>
   </div>
 </template>

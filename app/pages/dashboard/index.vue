@@ -51,32 +51,32 @@ const useWorkoutChart = computed(() => monthStart({ data: data_chart_workout.val
             <baseHeader text="Your Progress Charts" />
 
             <!-- Book Tracking -->
-            <UContainer v-if="data_setting.bookSetting.value">
+            <LazyUContainer hydrate-on-visible v-if="data_setting.bookSetting.value">
                 <baseSectionHeader text="Books" />
                 <baseChartBarGroup :data="useBookChart" barOneName="start_date" barTwoName="end_date"
                     barOneLabel="Start Date" barTwoLabel="End Date" :dataYears="data_chart_book.years" />
-            </UContainer>
+            </LazyUContainer>
 
             <!-- Water Tracking -->
-            <UContainer v-if="data_setting.waterSetting.value">
+            <LazyUContainer hydrate-on-visible v-if="data_setting.waterSetting.value">
                 <baseSectionHeader text="Water Intake" />
                 <baseChartLine :data="useHydrationChart" lineName="water_intake" lineLabel="Water total"
                     :dataYears="data_chart_hydration.years" />
-            </UContainer>
+            </LazyUContainer>
 
             <!-- Weight Tracking -->
-            <UContainer v-if="data_setting.weightSetting.value">
+            <LazyUContainer hydrate-on-visible v-if="data_setting.weightSetting.value">
                 <baseSectionHeader text="Weight" />
                 <baseChartLine :data="useWeightChart" lineName="weight" lineLabel="Weight"
                     :dataYears="data_chart_weight.years" />
-            </UContainer>
+            </LazyUContainer>
 
             <!-- Workout Tracking -->
-            <UContainer v-if="data_setting.workoutSetting.value">
+            <LazyUContainer hydrate-on-visible v-if="data_setting.workoutSetting.value">
                 <baseSectionHeader text="Workouts" />
                 <baseChartBar :data="useWorkoutChart" barName="date" barLabel="Total"
                     :dataYears="data_chart_workout.years" />
-            </UContainer>
+            </LazyUContainer>
         </section>
     </div>
 </template>

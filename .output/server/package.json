@@ -1,6 +1,6 @@
 {
   "name": "nuxt-app-prod",
-  "version": "0.1.0.7",
+  "version": "0.1.0.8",
   "type": "module",
   "private": true,
   "dependencies": {
@@ -107,14 +107,6 @@
     "domhandler": "5.0.3",
     "domutils": "3.2.2",
     "elkjs": "0.10.2",
-    "embla-carousel": "8.6.0",
-    "embla-carousel-auto-height": "8.6.0",
-    "embla-carousel-auto-scroll": "8.6.0",
-    "embla-carousel-autoplay": "8.6.0",
-    "embla-carousel-class-names": "8.6.0",
-    "embla-carousel-fade": "8.6.0",
-    "embla-carousel-reactive-utils": "8.6.0",
-    "embla-carousel-vue": "8.6.0",
     "entities": "7.0.0",
     "estree-walker": "2.0.2",
     "etag": "1.8.1",

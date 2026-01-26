@@ -27,7 +27,7 @@ const props = defineProps({
   },
   date: {
     type: Object,
-    default: () => {},
+    default: () => { },
   },
 });
 </script>
@@ -36,7 +36,8 @@ const props = defineProps({
   <UCard variant="subtle" :class="`w-full h-68 max-w-lg divide-none ${props.color && props.color}`">
     <template #header>
       <div class="relative flex min-h-0 h-24 flex-auto">
-        <NuxtImg class="relative z-10 h-full w-full object-contain drop-shadow-md" :src="props.image" />
+        <NuxtImg class="relative z-10 h-full w-full object-contain drop-shadow-md" :src="props.image" format="webp"
+          preload loading="eager" fetch-priority="high" />
       </div>
     </template>
 
@@ -54,11 +55,12 @@ const props = defineProps({
         </div>
 
         <div>
-          <span v-if="props.date.date" class="m-0 text-xs leading-tight text-ellipsis line-clamp-1">Started {{props.date.date}}</span>
+          <span v-if="props.date.date" class="m-0 text-xs leading-tight text-ellipsis line-clamp-1">Started
+            {{ props.date.date }}</span>
           <div v-if="props.date.date_two" class="m-0 text-xs leading-tight text-ellipsis line-clamp-1">
             <span class="pr-2">Ended</span>
-             {{props.date.date_two}}
-            </div>
+            {{ props.date.date_two }}
+          </div>
         </div>
 
       </div>

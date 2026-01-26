@@ -11,17 +11,17 @@ const { data: data_setting } = useNuxtData('setting');
     <div class="container-categories">
         <div v-if="data_setting.bibleSetting.value">
             <baseHeader text="Devotionals" />
-            <appTrackerBibleDevotional />
+            <LazyappTrackerBibleDevotional hydrate-on-visible />
         </div>
 
         <div v-if="data_setting.bibleSetting.value">
             <baseHeader text="Sermons" />
-            <appTrackerBibleSermon />
+            <LazyappTrackerBibleSermon hydrate-on-visible />
         </div>
 
         <div v-if="data_setting.journalSetting.value">
             <baseHeader text="Journal" />
-            <appTrackerJournal />
+            <LazyappTrackerJournal hydrate-on-visible />
         </div>
     </div>
 </template>

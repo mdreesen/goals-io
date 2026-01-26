@@ -6,7 +6,7 @@ import type { BibleType } from '~/types/bible';
 
 const route = useRoute();
 
-const { data: data, pending: pending_data } = await useFetch<BibleType>(`/api/user/journal/${route.params.id}`);
+const { data: data, pending: pending_data } = await useFetch<BibleType>(`/api/user/bible/sermon/${route.params.id}`);
 const { fetch: refreshSession } = useUserSession();
 const toast = useToast();
 
