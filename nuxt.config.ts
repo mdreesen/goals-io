@@ -1,5 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 import tailwindcss from '@tailwindcss/vite';
+import legacy from '@vitejs/plugin-legacy';
 
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
@@ -24,7 +25,12 @@ export default defineNuxtConfig({
     }
   },
   vite: {
-    plugins: [tailwindcss()],
+    plugins: [
+      tailwindcss(),
+      legacy({
+        targets: ['defaults', 'not IE 11', 'safari >= 15'],
+      })
+    ],
   },
   typescript: {
     strict: false

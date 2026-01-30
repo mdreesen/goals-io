@@ -1,0 +1,1 @@
+System.register(["./DzOvJm9Y-legacy.js"],function(e,t){"use strict";var r,n,s;return{setters:[e=>{r=e.am,n=e.u,s=e.V}],execute:function(){e("default",r(()=>{const{loggedIn:e}=n();return e.value?s("/dashboard"):s("/login")}))}}});

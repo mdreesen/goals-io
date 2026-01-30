@@ -70,7 +70,7 @@ async function log() {
           :class="{ 'border-emerald-500/30 shadow-[0_0_40px_rgba(16,185,129,0.2)]': isComplete }" />
 
         <div
-          class="absolute inset-2 rounded-full overflow-hidden bg-neutral-900 border-4 border-neutral-900 shadow-inner isolation-isolate transform transition-transform active:scale-95 duration-200">
+          class="absolute inset-2 rounded-full overflow-hidden bg-neutral-900 border-4 border-neutral-900 shadow-inner transform transition-transform active:scale-95 duration-200">
 
           <div
             class="absolute inset-0 flex flex-col items-center justify-center z-10 mix-blend-difference pointer-events-none">
@@ -226,10 +226,6 @@ async function log() {
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
-}
-
-.isolation-isolate {
-  isolation: isolate;
 }
 
 /* Hide Input Number Arrows (Chrome, Safari, Edge, Opera) */

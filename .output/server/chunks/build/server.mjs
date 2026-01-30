@@ -543,7 +543,7 @@ const _routes = [
     name: "dashboard-body",
     path: "/dashboard/body",
     meta: __nuxt_page_meta$4 || {},
-    component: () => import('./index-GAzdiD84.mjs')
+    component: () => import('./index-CrTelSxk.mjs')
   },
   {
     name: "dashboard-mind",
@@ -582,7 +582,7 @@ const _routes = [
     name: "dashboard-profile",
     path: "/dashboard/profile",
     meta: __nuxt_page_meta$1 || {},
-    component: () => import('./index-D5lfTQTO.mjs')
+    component: () => import('./index-KRfUG_Aa.mjs')
   },
   {
     name: "dashboard-mind-id-books",
