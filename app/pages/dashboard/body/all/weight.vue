@@ -3,25 +3,20 @@ definePageMeta({
     layout: 'authenticated',
 });
 
-const { data: data_setting } = useNuxtData('setting');
-
+await useFetch('/api/user/weight/all', { key: 'all_weight' });
+const { data } = useNuxtData('all_weight');
 </script>
 
 <template>
-    <div class="container-categories">
-        <div v-if="data_setting.bibleSetting.value">
-            <baseHeader text="Devotionals" />
-            <LazyappTrackerBibleDevotional hydrate-on-visible />
-        </div>
-
-        <div v-if="data_setting.bibleSetting.value">
-            <baseHeader text="Sermons" />
-            <LazyappTrackerBibleSermon hydrate-on-visible />
-        </div>
-
-        <div v-if="data_setting.journalSetting.value">
-            <baseHeader text="Journal" />
-            <LazyappTrackerJournal hydrate-on-visible />
-        </div>
+    <div class="flex flex-col gap-4">
+        <template v-for="item in data">
+            <transition name="slide-up" mode="out-in">
+                <nuxt-link class="flex flex-col justify-center w-full items-center"
+                    :to="`/dashboard/body/${[item._id]}/weight`">
+                    <baseCard :label="`${item.weight} lbs`" :date="item.date" icon="material-symbols:monitor-weight"
+                        iconColor="bg-gray-500/60" iconNav="material-symbols:arrow-forward-ios-rounded" />
+                </nuxt-link>
+            </transition>
+        </template>
     </div>
 </template>

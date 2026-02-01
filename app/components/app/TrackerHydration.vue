@@ -147,7 +147,7 @@ async function log() {
               </button>
             </div>
 
-            <form class="w-full text-center" @submit.prevent="log">
+            <form class="w-full text-center  max-w-md" @submit.prevent="log">
               <baseButtonSubmit text="Save" :isLoading="isLoading" />
             </form>
           </div>

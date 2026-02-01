@@ -3,25 +3,20 @@ definePageMeta({
     layout: 'authenticated',
 });
 
-const { data: data_setting } = useNuxtData('setting');
-
+await useFetch('/api/user/journal/all', { key: 'all_entries' });
+const { data } = useNuxtData('all_entries');
 </script>
 
 <template>
-    <div class="container-categories">
-        <div v-if="data_setting.bibleSetting.value">
-            <baseHeader text="Devotionals" />
-            <LazyappTrackerBibleDevotional hydrate-on-visible />
-        </div>
-
-        <div v-if="data_setting.bibleSetting.value">
-            <baseHeader text="Sermons" />
-            <LazyappTrackerBibleSermon hydrate-on-visible />
-        </div>
-
-        <div v-if="data_setting.journalSetting.value">
-            <baseHeader text="Journal" />
-            <LazyappTrackerJournal hydrate-on-visible />
-        </div>
+    <div class="flex flex-col gap-4">
+        <template v-for="item in data">
+            <transition name="slide-up" mode="out-in">
+                <nuxt-link class="flex flex-col justify-center w-full items-center"
+                    :to="`/dashboard/spirit/${[item._id]}/journal`">
+                    <baseCard :text="item.title" icon="material-symbols:book-5-outline-rounded"
+                        iconColor="bg-green-500/60" iconNav="material-symbols:arrow-forward-ios-rounded" />
+                </nuxt-link>
+            </transition>
+        </template>
     </div>
 </template>

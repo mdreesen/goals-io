@@ -67,8 +67,10 @@ async function log() {
         <transition name="slide-up" mode="out-in">
 
           <UDrawer title="Log a new sermon entry" v-model:open="open">
+
             <baseButtonDrawer text="Add sermon entry" icon="material-symbols:shield-spark-rounded" />
-            <baseButtonNav path="/dashboard/spirit/all/devotionals" />
+            <baseButtonNav path="/dashboard/spirit/all/sermons" />
+
             <template #body>
               <form @submit.prevent="log" class="space-y-6">
 
