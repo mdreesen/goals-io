@@ -300,7 +300,7 @@ const _sfc_main = {
     const config = useRuntimeConfig();
     const containerClasses = computed(() => {
       const position = config.public?.notify?.position ?? "top-right";
-      const base = "fixed pointer-events-none w-full max-w-md sm:max-w-sm md:max-w-md flex flex-col";
+      const base = "fixed pointer-events-none w-full max-w-md sm:  md:max-w-md flex flex-col";
       const zIndex = "z-[99999]";
       const padding = "p-4";
       const positions = {

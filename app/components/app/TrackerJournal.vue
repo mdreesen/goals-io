@@ -48,21 +48,24 @@ async function log() {
     <div class="container-cards">
       <template v-for="item in data.reverse()">
         <transition name="slide-up" mode="out-in">
-          <nuxt-link class="flex flex-col justify-center w-full items-center" :to="`/dashboard/spirit/${[item._id]}/journal`">
+          <nuxt-link class="flex flex-col justify-center w-full items-center"
+            :to="`/dashboard/spirit/${[item._id]}/journal`">
             <baseCard :text="item.title" icon="material-symbols:book-5-outline-rounded" iconColor="bg-green-500/60"
               iconNav="material-symbols:arrow-forward-ios-rounded" />
           </nuxt-link>
         </transition>
       </template>
     </div>
-    <div class="flex flex-col items-center justify-center w-full max-w-sm mx-auto p-8 font-sans">
+    <div class="flex flex-col items-center justify-center w-full   mx-auto p-8 font-sans">
 
-      <div class="w-full relative mb-4 flex justify-center">
+      <div class="w-full relative mb-4 flex flex-col justify-center items-center gap-4">
 
         <transition name="slide-up" mode="out-in">
 
           <UDrawer title="Log a new journal entry" v-model:open="open">
-            <UButton label="Add entry" color="neutral" variant="subtle" trailing-icon="material-symbols:book-5" />
+
+            <baseButtonDrawer text="Add entry" icon="material-symbols:book-5" />
+            <baseButtonNav path="/dashboard/spirit/all/entries" />
 
             <template #body>
               <form @submit.prevent="log" class="space-y-6">

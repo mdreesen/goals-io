@@ -52,7 +52,7 @@ async function log() {
         </transition>
       </template>
     </div>
-    <div class="flex flex-col items-center justify-center w-full max-w-sm mx-auto p-8 font-sans">
+    <div class="flex flex-col items-center justify-center w-full   mx-auto p-8 font-sans">
 
       <div class="w-full relative mb-4 flex justify-center">
 
@@ -71,7 +71,7 @@ async function log() {
                     class="w-full rounded-xl border border-gray-600 bg-gray-700/50 py-3 px-4 text-lg text-white shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500" />
                 </div>
 
-                <div class="flex flex-col gap-8 pb-4">
+                <div class="flex flex-col items-center gap-8 pb-4">
                   <baseButtonSubmit text="Save" :isLoading="isLoading" />
                 </div>
               </form>

@@ -64,14 +64,16 @@ async function log() {
       <baseCarousel :data="data?.latestData.reverse()" />
     </section>
 
-    <div class="flex flex-col items-center justify-center w-full max-w-sm mx-auto p-8 font-sans">
+    <div class="flex flex-col items-center justify-center w-full   mx-auto p-8 font-sans">
 
-      <div class="w-full relative mb-4 flex justify-center">
+      <div class="w-full relative mb-4 flex flex-col justify-center items-center gap-4">
 
         <transition name="slide-up" mode="out-in">
 
           <UDrawer title="Log a new book" v-model:open="open">
-            <UButton label="Add Book" color="neutral" variant="subtle" trailing-icon="material-symbols:book-4-spark-rounded" />
+
+            <baseButtonDrawer text="Add book" icon="material-symbols:book-4-spark-rounded" />
+            <baseButtonNav path="/dashboard/mind/all/books" />
 
             <template #body>
               <form @submit.prevent="log" class="space-y-6">
@@ -121,7 +123,9 @@ async function log() {
                   <UInputDate v-model="date" icon="i-lucide-calendar" />
                 </div>
 
-                <baseButtonSubmit text="Save" :isLoading="isLoading" />
+                <div class="text-center">
+                  <baseButtonSubmit text="Save" :isLoading="isLoading" />
+                </div>
               </form>
             </template>
           </UDrawer>

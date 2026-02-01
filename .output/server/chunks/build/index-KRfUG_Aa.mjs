@@ -464,7 +464,7 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
       _push(`</button>`);
       ssrRenderTeleport(_push, (_push2) => {
         if (isOpen.value) {
-          _push2(`<div class="fixed inset-0 z-50 flex items-center justify-center px-6" data-v-7638c164><div class="absolute inset-0 bg-zinc-950/90 backdrop-blur-md" data-v-7638c164></div><div class="relative w-full max-w-sm bg-zinc-900 border border-white/10 rounded-4xl p-8 shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200" data-v-7638c164><button class="absolute top-4 right-4 p-2 text-zinc-600 hover:text-white transition-colors z-20" data-v-7638c164>`);
+          _push2(`<div class="fixed inset-0 z-50 flex items-center justify-center px-6" data-v-7638c164><div class="absolute inset-0 bg-zinc-950/90 backdrop-blur-md" data-v-7638c164></div><div class="relative w-full   bg-zinc-900 border border-white/10 rounded-4xl p-8 shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200" data-v-7638c164><button class="absolute top-4 right-4 p-2 text-zinc-600 hover:text-white transition-colors z-20" data-v-7638c164>`);
           _push2(ssrRenderComponent(unref(X), { class: "w-6 h-6" }, null, _parent));
           _push2(`</button><div class="relative z-10 flex flex-col items-center text-center" data-v-7638c164><div class="w-16 h-16 rounded-full bg-red-500/10 flex items-center justify-center mb-6 ring-1 ring-red-500/30" data-v-7638c164>`);
           _push2(ssrRenderComponent(unref(ShieldAlert), { class: "w-8 h-8 text-red-500" }, null, _parent));

@@ -40,7 +40,7 @@ async function log() {
 
 <template>
   <ClientOnly>
-    <div class="flex flex-col items-center justify-center w-full max-w-sm mx-auto font-sans">
+    <div class="flex flex-col items-center justify-center w-full   mx-auto font-sans">
 
       <div class="relative w-full flex flex-col items-center justify-center mb-10 group">
 
@@ -75,25 +75,28 @@ async function log() {
 
       <div class="w-full relative">
 
-        <div class="flex flex-col items-center justify-center w-full max-w-sm mx-auto p-8 font-sans">
+        <div class="flex flex-col items-center justify-center w-full   mx-auto p-8 font-sans">
 
-          <div class="w-full relative mb-4 flex justify-center">
+          <div class="w-full relative mb-4 flex flex-col justify-center items-center gap-4">
 
             <transition name="slide-up" mode="out-in">
 
               <UDrawer title="Log weight" v-model:open="open">
-                <UButton label="Log weight" color="neutral" variant="subtle"
-                  trailing-icon="material-symbols:monitor-weight-outline-sharp" />
+
+                <baseButtonDrawer text="Log weight" icon="material-symbols:monitor-weight-outline-sharp" />
+                <baseButtonNav path="/dashboard/body/all/weight" />
 
                 <template #body>
                   <form @submit.prevent="log" class="space-y-6">
                     <div v-motion="{ ...inputVarient() }">
                       <baseLabel text="Weight" />
-                      <input id="text" type="text" v-model="input.weight" placeholder="Example: 180.5" required
+                      <input id="text" type="number" v-model="input.weight" placeholder="Example: 180.5" required
                         class="w-full rounded-xl border border-gray-600 bg-gray-700/50 py-3 px-4 text-lg text-white shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500" />
                     </div>
 
-                    <baseButtonSubmit text="Save" :isLoading="isLoading" />
+                    <div class="text-center">
+                      <baseButtonSubmit text="Save" :isLoading="isLoading" />
+                    </div>
                   </form>
                 </template>
               </UDrawer>

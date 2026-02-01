@@ -82,7 +82,7 @@ useMotion(formRef, { ...formVarient() });
 
       <!-- Login Form Container -->
       <div ref="formRef"
-        class="relative z-20 w-full max-w-sm rounded-3xl border border-gray-700 bg-gray-800/50 p-8 shadow-2xl backdrop-blur-md space-y-6 transform transition-all duration-300">
+        class="relative z-20 w-full   rounded-3xl border border-gray-700 bg-gray-800/50 p-8 shadow-2xl backdrop-blur-md space-y-6 transform transition-all duration-300">
 
         <!-- Message Area -->
         <div v-if="errorMessage" class="text-center py-2 px-4 rounded-lg" :class="'bg-red-600/30 text-red-400'"
@@ -105,7 +105,7 @@ useMotion(formRef, { ...formVarient() });
           </div>
 
           <div v-motion="{ ...inputVarient() }"
-            class="flex flex-col items-center justify-center w-full max-w-sm mx-auto font-sans">
+            class="flex flex-col items-center justify-center w-full   mx-auto font-sans">
 
             <div class="w-full relative flex justify-end">
 

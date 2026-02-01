@@ -47,7 +47,7 @@ async function log() {
 <template>
   <ClientOnly>
 
-    <div class="flex flex-col items-center justify-center w-full max-w-sm mx-auto font-sans">
+    <div class="flex flex-col items-center justify-center w-full   mx-auto font-sans">
 
       <div class="container-cards">
         <template v-for="item in data?.latestData.reverse()">
@@ -64,15 +64,16 @@ async function log() {
 
       <div class="w-full relative">
 
-        <div class="flex flex-col items-center justify-center w-full max-w-sm mx-auto p-8 font-sans">
+        <div class="flex flex-col items-center justify-center w-full mx-auto p-8 font-sans">
 
-          <div class="w-full relative mb-4 flex justify-center">
+          <div class="w-full relative mb-4 flex flex-col justify-center items-center gap-4">
 
             <transition name="slide-up" mode="out-in">
 
               <UDrawer title="Log new workout" v-model:open="open">
-                <UButton label="Add workout" color="neutral" variant="subtle"
-                  trailing-icon="material-symbols:directions-run-rounded" />
+
+                <baseButtonDrawer text="Log workout" icon="material-symbols:directions-run-rounded" />
+                <baseButtonNav path="/dashboard/body/all/workouts" />
 
                 <template #body>
                   <form @submit.prevent="log" class="space-y-6">
@@ -88,7 +89,7 @@ async function log() {
 
                     <div v-motion="{ ...inputVarient() }">
                       <baseLabel text="Duration (in minutes)" />
-                      <input id="text" type="text" v-model="input.duration" placeholder="Example: 60" required
+                      <input id="text" type="number" v-model="input.duration" placeholder="Example: 60" required
                         class="w-full rounded-xl border border-gray-600 bg-gray-700/50 py-3 px-4 text-lg text-white shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500" />
                     </div>
 
@@ -105,7 +106,9 @@ async function log() {
                         class="w-full rounded-xl border border-gray-600 bg-gray-700/50 py-3 px-4 text-lg text-white shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500" />
                     </div>
 
-                    <baseButtonSubmit text="Save" :isLoading="isLoading" />
+                    <div class="text-center">
+                      <baseButtonSubmit text="Save" :isLoading="isLoading" />
+                    </div>
 
                   </form>
                 </template>

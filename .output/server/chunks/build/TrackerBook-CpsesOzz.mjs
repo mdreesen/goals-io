@@ -141,7 +141,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
       } else {
         _push(`<!---->`);
       }
-      _push(`<div class="flex flex-col items-center justify-center w-full max-w-sm mx-auto p-8 font-sans" data-v-468bb075><div class="w-full relative mb-4 flex justify-center" data-v-468bb075>`);
+      _push(`<div class="flex flex-col items-center justify-center w-full   mx-auto p-8 font-sans" data-v-468bb075><div class="w-full relative mb-4 flex justify-center" data-v-468bb075>`);
       _push(ssrRenderComponent(_component_UDrawer, {
         title: "Log a new book",
         open: open.value,
