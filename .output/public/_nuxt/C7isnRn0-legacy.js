@@ -1,1 +1,0 @@
-System.register(["./BVIICed7-legacy.js","./DzOvJm9Y-legacy.js"],function(e,t){"use strict";var r,u,n,s;return{setters:[e=>{r=e._},e=>{u=e.c,n=e.o,s=e.B}],execute:function(){e("default",r({},[["render",function(e,t){return n(),u("div",null,[s(e.$slots,"default")])}]]))}}});

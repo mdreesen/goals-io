@@ -117,7 +117,7 @@ onUnmounted(() => {
           <div @click="closeModal" class="absolute inset-0 bg-zinc-950/90 backdrop-blur-md"></div>
 
           <div
-            class="relative w-full max-w-sm bg-zinc-900 border border-white/10 rounded-4xl p-8 shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200">
+            class="relative w-full   bg-zinc-900 border border-white/10 rounded-4xl p-8 shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200">
             <button @click="closeModal"
               class="absolute top-4 right-4 p-2 text-zinc-600 hover:text-white transition-colors z-20">
               <X class="w-6 h-6" />

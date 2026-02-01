@@ -52,24 +52,24 @@ async function log() {
         <transition name="slide-up" mode="out-in">
           <nuxt-link class="flex flex-col justify-center w-full items-center"
             :to="`/dashboard/spirit/${[item._id]}/sermon`">
-              <baseCard :label="item.book_title"
+            <baseCard :label="item.book_title"
               :text="`${item?.chapter ? `Chapter ${item?.chapter} •` : ''} Verse ${item?.verses ? item?.verses : ''}`"
-              :date="item?.date"
-              icon="material-symbols:shield-outline-rounded" iconColor="bg-blue-500/60"
+              :date="item?.date" icon="material-symbols:shield-outline-rounded" iconColor="bg-blue-500/60"
               iconNav="material-symbols:arrow-forward-ios-rounded" />
           </nuxt-link>
         </transition>
       </template>
     </div>
-    <div class="flex flex-col items-center justify-center w-full max-w-sm mx-auto p-8 font-sans">
+    <div class="flex flex-col items-center justify-center w-full   mx-auto p-8 font-sans">
 
-      <div class="w-full relative mb-4 flex justify-center">
+      <div class="w-full relative mb-4 flex flex-col justify-center items-center gap-4">
 
         <transition name="slide-up" mode="out-in">
 
           <UDrawer title="Log a new sermon entry" v-model:open="open">
-            <UButton label="Add sermon entry" color="neutral" variant="subtle"
-              trailing-icon="material-symbols:shield-spark-rounded" />
+
+            <baseButtonDrawer text="Add sermon entry" icon="material-symbols:shield-spark-rounded" />
+            <baseButtonNav path="/dashboard/spirit/all/sermons" />
 
             <template #body>
               <form @submit.prevent="log" class="space-y-6">
@@ -102,7 +102,7 @@ async function log() {
                     class="w-full rounded-xl border border-gray-600 bg-gray-700/50 py-3 px-4 text-lg text-white shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500" />
                 </div>
 
-                <div class="flex flex-col gap-8 pb-4">
+                <div class="flex flex-col items-center gap-8 pb-4">
                   <baseButtonSubmit text="Save" :isLoading="isLoading" />
                 </div>
               </form>

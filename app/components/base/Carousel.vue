@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { BookType } from '~/types/books';
+import { iconsBook } from '~/utils/formatters/useIcons';
 
 const props = defineProps({
     data: {
@@ -8,22 +9,6 @@ const props = defineProps({
         required: true
     },
 });
-
-function icons(str: string) {
-    switch (true) {
-        case str === 'Audiobook':
-            return "material-symbols:headphones-rounded"
-            break
-        case str === 'Printed':
-            return "material-symbols:book-5-rounded";
-            break
-        case str === 'Ebook':
-            return "material-symbols:fullscreen-portrait-outline";
-            break
-        default:
-            return 'material-symbols:book-5-rounded';
-    }
-};
 
 const useArrows = computed(() => props.data.length >= 3 ? true : false);
 </script>
@@ -42,7 +27,7 @@ const useArrows = computed(() => props.data.length >= 3 ? true : false);
                     class="flex items-center w-full h-full text-2xl font-extrabold -x-2">
                     <baseCardBook :kind="item?.kind_of_book" :title="item?.book_title" :author="item?.book_author"
                         :image="item?.book_image" :date="{ date: item?.book_start_date, date_two: item?.book_end_date }"
-                        :icon="icons(item?.kind_of_book)" />
+                        :icon="iconsBook(item?.kind_of_book)" />
                 </NuxtLink>
             </div>
         </UCarousel>

@@ -37,7 +37,7 @@ const items = computed<NavigationMenuItem[]>(() => [{
             ASCΞND
           </span>
           <NuxtImg v-if="colorMode.value !== 'light'"
-            class="h-25 w-25 opacity-60 -left-14.5 relative rounded-full object-cover lg:hidden md:hidden"
+            class="h-25 w-25 opacity-60 -left-14.5 relative rounded-full object-cover lg:hidden"
             alt="White Raven Logo" format="webp" width="200px" height="200px" src="/images/logo_transparent_512x512.png"
             loading="lazy" fetch-priority="low" />
         </NuxtLink>

@@ -62,7 +62,7 @@ async function log() {
 
 <template>
   <ClientOnly>
-    <div class="flex flex-col items-center justify-center w-full max-w-sm mx-auto p-8">
+    <div class="flex flex-col items-center justify-center w-full   mx-auto p-8">
 
       <div class="relative w-64 h-64 group cursor-pointer select-none">
 
@@ -147,7 +147,7 @@ async function log() {
               </button>
             </div>
 
-            <form class="w-full" @submit.prevent="log">
+            <form class="w-full text-center  max-w-md" @submit.prevent="log">
               <baseButtonSubmit text="Save" :isLoading="isLoading" />
             </form>
           </div>
