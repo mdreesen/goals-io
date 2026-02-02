@@ -33,7 +33,7 @@ function formatDate() {
 
 const User = User$1;
 const bodySchema = z.object({
-  weight: z.string()
+  weight: z.number()
 });
 const weight_post = defineEventHandler(async (event) => {
   const { weight } = await readValidatedBody(event, bodySchema.parse);

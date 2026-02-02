@@ -8,7 +8,7 @@ import { User } from '~/types/user';
 const User = UserModel as Model<User>;
 
 const bodySchema = z.object({
-  weight: z.string()
+  weight: z.number()
 })
 
 export default defineEventHandler(async (event) => {

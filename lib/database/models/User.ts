@@ -91,7 +91,7 @@ const waterIntakeSchema = new Schema(
 
 const weightSchema = new Schema(
     {
-        weight: String || undefined,
+        weight: Number || String || undefined,
         date: String || undefined,
         weight_date: String || undefined,
     }, { timestamps: false });

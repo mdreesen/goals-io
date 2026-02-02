@@ -19,7 +19,7 @@ import 'mongoose';
 const User = User$1;
 const bodySchema = z.object({
   type: z.string(),
-  duration: z.string(),
+  duration: z.number(),
   description: z.string(),
   sets: z.string(),
   date: z.string()

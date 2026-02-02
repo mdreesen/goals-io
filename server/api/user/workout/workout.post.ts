@@ -8,7 +8,7 @@ const User = UserModel as Model<User>;
 
 const bodySchema = z.object({
   type: z.string(),
-  duration: z.string(),
+  duration: z.number(),
   description: z.string(),
   sets: z.string(),
   date: z.string()

@@ -561,7 +561,7 @@ const _routes = [
     name: "dashboard-body",
     path: "/dashboard/body",
     meta: __nuxt_page_meta$a || {},
-    component: () => import('./index-DkiYThtF.mjs')
+    component: () => import('./index-DCkjnDh9.mjs')
   },
   {
     name: "dashboard-mind",
@@ -600,7 +600,7 @@ const _routes = [
     name: "dashboard-profile",
     path: "/dashboard/profile",
     meta: __nuxt_page_meta$7 || {},
-    component: () => import('./index-BNZYUZAP.mjs')
+    component: () => import('./index-Fr3FUxqr.mjs')
   },
   {
     name: "dashboard-mind-all-books",
