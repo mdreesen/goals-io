@@ -3,7 +3,6 @@ import { ref } from 'vue';
 import { formatDate } from '~/utils/date';
 import { book_of_bible } from "~/utils/dropdowns/selections";
 
-await useFetch('/api/user/bible/sermon', { key: 'sermon' });
 const { data } = useNuxtData('sermon');
 
 const { fetch: refreshSession } = useUserSession();

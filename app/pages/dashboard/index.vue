@@ -9,12 +9,6 @@ definePageMeta({
 
 const yearStore = useYear();
 
-await useFetch('/api/charts/books', { key: 'chart_book' });
-await useFetch('/api/charts/water', { key: 'chart_hydration' });
-await useFetch('/api/charts/weight', { key: 'chart_weight' });
-await useFetch('/api/charts/workouts', { key: 'chart_workout' });
-await useFetch('/api/user/profile/setting', { key: 'setting' });
-
 const { data: data_chart_book } = useNuxtData('chart_book');
 const { data: data_chart_hydration } = useNuxtData('chart_hydration');
 const { data: data_chart_weight } = useNuxtData('chart_weight');

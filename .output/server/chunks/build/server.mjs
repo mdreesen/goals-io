@@ -570,19 +570,19 @@ const _routes = [
     name: "dashboard",
     path: "/dashboard",
     meta: __nuxt_page_meta$g || {},
-    component: () => import('./index-2CHxRZS3.mjs')
+    component: () => import('./index-1lCROzSy.mjs')
   },
   {
     name: "dashboard-body",
     path: "/dashboard/body",
     meta: __nuxt_page_meta$f || {},
-    component: () => import('./index-B4sECNwD.mjs')
+    component: () => import('./index-JN1GUQRH.mjs')
   },
   {
     name: "dashboard-mind",
     path: "/dashboard/mind",
     meta: __nuxt_page_meta$e || {},
-    component: () => import('./index-Dwt5RIK-.mjs')
+    component: () => import('./index-Y173_hMw.mjs')
   },
   {
     name: "privacy-policy",
@@ -604,7 +604,7 @@ const _routes = [
     name: "dashboard-spirit",
     path: "/dashboard/spirit",
     meta: __nuxt_page_meta$d || {},
-    component: () => import('./index-uc3aSqFn.mjs')
+    component: () => import('./index--eFfYQPd.mjs')
   },
   {
     name: "signup",
@@ -615,7 +615,7 @@ const _routes = [
     name: "dashboard-profile",
     path: "/dashboard/profile",
     meta: __nuxt_page_meta$c || {},
-    component: () => import('./index-jqwDMf6U.mjs')
+    component: () => import('./index-C9Xi5UrP.mjs')
   },
   {
     name: "dashboard-mind-all-books",
@@ -655,25 +655,25 @@ const _routes = [
     name: "dashboard-spirit-id-sermon",
     path: "/dashboard/spirit/:id()/sermon",
     meta: __nuxt_page_meta$7 || {},
-    component: () => import('./sermon-D58m3Xn9.mjs')
+    component: () => import('./sermon-BpnZ5y5S.mjs')
   },
   {
     name: "dashboard-spirit-all-entries",
     path: "/dashboard/spirit/all/entries",
     meta: __nuxt_page_meta$6 || {},
-    component: () => import('./entries-D8vIfGCv.mjs')
+    component: () => import('./entries-CjEIoRNg.mjs')
   },
   {
     name: "dashboard-spirit-all-sermons",
     path: "/dashboard/spirit/all/sermons",
     meta: __nuxt_page_meta$5 || {},
-    component: () => import('./sermons-C6uSOUWb.mjs')
+    component: () => import('./sermons-D8VK_hPp.mjs')
   },
   {
     name: "dashboard-spirit-id-journal",
     path: "/dashboard/spirit/:id()/journal",
     meta: __nuxt_page_meta$4 || {},
-    component: () => import('./journal-D4Al5rru.mjs')
+    component: () => import('./journal-Bj1t2761.mjs')
   },
   {
     name: "dashboard-mind-id-gratitudes",
@@ -696,13 +696,13 @@ const _routes = [
     name: "dashboard-spirit-id-devotional",
     path: "/dashboard/spirit/:id()/devotional",
     meta: __nuxt_page_meta$1 || {},
-    component: () => import('./devotional-B7DHt_7N.mjs')
+    component: () => import('./devotional-sPVsa87P.mjs')
   },
   {
     name: "dashboard-spirit-all-devotionals",
     path: "/dashboard/spirit/all/devotionals",
     meta: __nuxt_page_meta || {},
-    component: () => import('./devotionals-o-gSFo9Q.mjs')
+    component: () => import('./devotionals-xeHxvApc.mjs')
   },
   {
     name: "id-resetpassword",
@@ -8068,7 +8068,7 @@ _sfc_main$4.setup = (props, ctx) => {
 };
 const __nuxt_component_0$1 = Object.assign(_sfc_main$4, { __name: "UApp" });
 const layouts = {
-  authenticated: defineAsyncComponent(() => import('./authenticated-Dyu1EH1_.mjs').then((m) => m.default || m)),
+  authenticated: defineAsyncComponent(() => import('./authenticated-TY2BnssR.mjs').then((m) => m.default || m)),
   default: defineAsyncComponent(() => import('./default-X2IZVJnD.mjs').then((m) => m.default || m))
 };
 const LayoutLoader = defineComponent({

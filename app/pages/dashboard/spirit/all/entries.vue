@@ -3,7 +3,7 @@ definePageMeta({
     layout: 'authenticated',
 });
 
-await useFetch('/api/user/journal/all', { key: 'all_entries' });
+await useFetch('/api/user/journal/all', { key: 'all_entries', lazy: true });
 const { data } = useNuxtData('all_entries');
 </script>
 

@@ -10,7 +10,7 @@ definePageMeta({
 
 const route = useRoute();
 
-const { data: data, pending: pending_data } = await useFetch<BibleType>(`/api/user/bible/sermon/${route.params.id}`);
+const { data: data, pending: pending_data } = await useFetch<BibleType>(`/api/user/bible/sermon/${route.params.id}`, { lazy: true });
 const toast = useToast();
 
 const isLoading = ref(false);

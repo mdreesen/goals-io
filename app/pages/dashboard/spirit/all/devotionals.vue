@@ -3,7 +3,7 @@ definePageMeta({
     layout: 'authenticated',
 });
 
-await useFetch('/api/user/bible/devotional/all', { key: 'all_devotionals' });
+await useFetch('/api/user/bible/devotional/all', { key: 'all_devotionals', lazy: true });
 const { data } = useNuxtData('all_devotionals');
 </script>
 
