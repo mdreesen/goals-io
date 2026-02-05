@@ -621,13 +621,13 @@ const _routes = [
     name: "dashboard-mind-all-books",
     path: "/dashboard/mind/all/books",
     meta: __nuxt_page_meta$b || {},
-    component: () => import('./books-BgiF3QEa.mjs')
+    component: () => import('./books-DSyQThnc.mjs')
   },
   {
     name: "dashboard-body-all-weight",
     path: "/dashboard/body/all/weight",
     meta: __nuxt_page_meta$a || {},
-    component: () => import('./weight-ClLU7vrL.mjs')
+    component: () => import('./weight-CzjKZfKg.mjs')
   },
   {
     name: "dashboard-mind-id-books",
@@ -649,7 +649,7 @@ const _routes = [
     name: "dashboard-body-all-workouts",
     path: "/dashboard/body/all/workouts",
     meta: __nuxt_page_meta$8 || {},
-    component: () => import('./workouts-DnPw_mOi.mjs')
+    component: () => import('./workouts-BMgNSnRC.mjs')
   },
   {
     name: "dashboard-spirit-id-sermon",
@@ -661,13 +661,13 @@ const _routes = [
     name: "dashboard-spirit-all-entries",
     path: "/dashboard/spirit/all/entries",
     meta: __nuxt_page_meta$6 || {},
-    component: () => import('./entries-CjEIoRNg.mjs')
+    component: () => import('./entries-DkpiW3OD.mjs')
   },
   {
     name: "dashboard-spirit-all-sermons",
     path: "/dashboard/spirit/all/sermons",
     meta: __nuxt_page_meta$5 || {},
-    component: () => import('./sermons-D8VK_hPp.mjs')
+    component: () => import('./sermons-QGvSecKa.mjs')
   },
   {
     name: "dashboard-spirit-id-journal",
@@ -702,7 +702,7 @@ const _routes = [
     name: "dashboard-spirit-all-devotionals",
     path: "/dashboard/spirit/all/devotionals",
     meta: __nuxt_page_meta || {},
-    component: () => import('./devotionals-xeHxvApc.mjs')
+    component: () => import('./devotionals-B0lRdcSQ.mjs')
   },
   {
     name: "id-resetpassword",
@@ -8389,9 +8389,9 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
     return (_ctx, _push, _parent, _attrs) => {
       const _component_baseHeader = __nuxt_component_0;
       const _component_NuxtLink = __nuxt_component_0$4;
-      _push(`<div${ssrRenderAttrs(_attrs)}>`);
+      _push(`<div${ssrRenderAttrs(mergeProps({ class: "w-full text-center" }, _attrs))}>`);
       _push(ssrRenderComponent(_component_baseHeader, {
-        text: props.error.status.toString()
+        text: props.error?.status?.toString()
       }, null, _parent));
       _push(ssrRenderComponent(_component_NuxtLink, {
         to: "/login",

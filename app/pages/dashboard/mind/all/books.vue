@@ -10,7 +10,7 @@ const { data } = useNuxtData('all_books');
 </script>
 
 <template>
-    <div class="flex flex-col gap-4">
+    <div class="container-cards">
         <template v-for="item in data">
             <transition name="slide-up" mode="out-in">
                 <NuxtLink :to="`/dashboard/mind/${[item?._id]}/books`"

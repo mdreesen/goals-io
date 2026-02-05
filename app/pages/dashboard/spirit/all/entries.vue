@@ -8,7 +8,7 @@ const { data } = useNuxtData('all_entries');
 </script>
 
 <template>
-    <div class="flex flex-col gap-4">
+    <div class="container-cards">
         <template v-for="item in data">
             <transition name="slide-up" mode="out-in">
                 <nuxt-link class="flex flex-col justify-center w-full items-center"
