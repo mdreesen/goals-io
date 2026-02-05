@@ -5,7 +5,6 @@ import type { WeightType } from '~/types/weight';
 const route = useRoute();
 
 const { data: data, pending: pending_data } = await useFetch<WeightType>(`/api/user/weight/${route.params.id}`);
-const { fetch: refreshSession } = useUserSession();
 const toast = useToast();
 
 const isLoading = ref(false);

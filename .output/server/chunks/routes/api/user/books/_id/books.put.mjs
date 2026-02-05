@@ -1,6 +1,7 @@
 import { d as defineEventHandler, r as readValidatedBody, g as getRouterParam, c as createError } from '../../../../../nitro/nitro.mjs';
 import { z } from 'zod';
 import { U as User$1 } from '../../../../../_/User.mjs';
+import { f as formatDate } from '../../../../../_/date.mjs';
 import 'node:http';
 import 'node:https';
 import 'node:crypto';
@@ -16,33 +17,33 @@ import 'mongoose';
 
 const User = User$1;
 const bodySchema = z.object({
-  // _id: z.string().nullable(),
   book_title: z.string().nullable(),
   kind_of_book: z.string().nullable(),
   book_author: z.string().nullable(),
   book_start_date: z.string().nullable(),
-  book_end_date: z.string().nullable(),
   notes: z.string().nullable(),
   booklist: z.boolean().nullable(),
-  book_image: z.string().nullable()
+  book_image: z.string().nullable(),
+  status: z.union([z.string(), z.boolean()])
 });
 const books_put = defineEventHandler(async (event) => {
-  const { book_title, kind_of_book, book_author, book_start_date, book_end_date, notes, booklist, book_image } = await readValidatedBody(event, bodySchema.parse);
+  const { book_title, kind_of_book, book_author, book_start_date, notes, booklist, book_image, status } = await readValidatedBody(event, bodySchema.parse);
   const obj = {
     book_title,
     kind_of_book,
     book_author,
     book_start_date,
-    book_end_date,
     notes,
     booklist,
-    book_image
+    book_image,
+    status
   };
+  const completed = status && { book_end_date: formatDate() };
   try {
     const id = getRouterParam(event, "id");
     await User.findOneAndUpdate(
       { "books._id": id },
-      { $set: { "books.$": { ...obj } } },
+      { $set: { "books.$": { ...obj, ...completed } } },
       { new: true }
     );
   } catch (error) {

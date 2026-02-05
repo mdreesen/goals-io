@@ -6,9 +6,8 @@ import type { BookType } from '~/types/books';
 export default defineEventHandler(async (event) => {
   try {
     const user = await loggedInUser(event);
-    const latestBooks = user?.books?.reverse() ?? [];
     const bookOrder = user?.books ?? [];
-    const currentRead = user?.books?.filter((item: BookType) => !item?.book_end_date || item?.book_end_date === '') ?? [];
+    const currentRead = user?.books?.filter((item: BookType) => !item?.book_end_date || !item?.book_end_date) ?? [];
 
     function filterBooks(data: Array<any>) {
       return data?.filter((item: any) => item.booklist.includes('false') || !item.booklist);

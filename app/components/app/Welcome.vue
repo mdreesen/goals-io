@@ -2,6 +2,7 @@
 
 const { loggedIn } = useUserSession();
 
+await useFetch('/api/user/profile', { key: 'profile' });
 const { data: data } = useNuxtData('profile');
 
 </script>

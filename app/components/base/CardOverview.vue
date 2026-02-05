@@ -20,35 +20,36 @@ const props = defineProps({
   }
 });
 
+await useFetch('/api/stats', { key: 'stats' });
 const { data: data } = useNuxtData('stats');
 
 const books = {
-  start: data.value?.lastestBooks?.bookCurrentStartedYear,
-  end: data.value?.lastestBooks?.bookCurrentEndedYear
+  start: computed(() => data.value?.lastestBooks?.bookCurrentStartedYear),
+  end: computed(() => data.value?.lastestBooks?.bookCurrentEndedYear)
 };
 
 const coldSoak = {
-  date: data.value?.latestColdSoak?.date,
+  date: computed(() => data.value?.latestColdSoak?.date)
 };
 
 const fasting = {
-  duration: data.value?.latestFasting?.duration,
-  isFasting: data.value?.latestFasting?.start
+  duration: computed(() => data.value?.latestFasting?.duration),
+  isFasting: computed(() => data.value?.latestFasting?.start)
 };
 
 const dailyWater = {
-  water: data.value?.latestWater?.water_intake,
-  date: data.value?.latestWater?.date,
+  water: computed(() => data.value?.latestWater?.water_intake),
+  date: computed(() => data.value?.latestWater?.date)
 };
 
 const weight = {
-  weight: data.value?.latestWeight?.weight,
-  date: data.value?.latestWeight?.date,
+  weight: computed(() => data.value?.latestWeight?.weight),
+  date: computed(() => data.value?.latestWeight?.date)
 };
 
 const animateIcons = computed(() => {
   switch (true) {
-    case props.collection === 'fasting' && fasting?.isFasting:
+    case props.collection === 'fasting' && fasting?.isFasting.value:
       return 'animate-bounce';
       break;
     default:

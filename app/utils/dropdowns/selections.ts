@@ -28,6 +28,11 @@ export const selection_save = [
     { label: 'Save', value: true },
 ];
 
+export const selection_status_book = [
+    { label: 'Currently reading', value: false },
+    { label: 'Completed', value: true },
+];
+
 export const mood = [
     { label: "Neutral", value: "Neutral" },
     { label: "Happy", value: "Happy" },

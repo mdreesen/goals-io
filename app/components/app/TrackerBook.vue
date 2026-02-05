@@ -1,18 +1,15 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue';
-import { selection_book_kinds, selection_save } from '~/utils/dropdowns/selections';
-import { getLocalTimeZone, today, CalendarDate } from '@internationalized/date'
-import { useFormatDate } from '~/utils/date';
+import { ref } from 'vue';
+import { selection_book_kinds } from '~/utils/dropdowns/selections';
+import { formatDate } from '~/utils/date';
 
+await useFetch('/api/user/books/books', { key: 'books' });
 const { data } = useNuxtData('books');
 const toast = useToast();
 
 const isLoading = ref(false);
 let errorMessage = ref('');
-const formattedDate = ref();
 const open = ref(false)
-
-let date = ref(new CalendarDate(today(getLocalTimeZone()).year, today(getLocalTimeZone()).month, today(getLocalTimeZone()).day)) as any;
 
 const { fetch: refreshSession } = useUserSession();
 
@@ -20,15 +17,11 @@ const input = reactive({
   book_title: '',
   kind_of_book: '',
   book_author: '',
-  book_start_date: formattedDate.value,
+  book_start_date: formatDate(),
   notes: '',
-  booklist: '',
+  booklist: false,
+  status: false
 });
-
-watch(date, () => {
-  formattedDate.value = useFormatDate(date.value.toDate(getLocalTimeZone()));
-  input.book_start_date = formattedDate.value
-}, { immediate: true });
 
 async function log() {
   isLoading.value = true;
@@ -90,17 +83,6 @@ async function log() {
                 </div>
 
                 <div v-motion="{ ...inputVarient() }">
-                  <baseLabel text="Save for future reads" />
-                  <select id="status-select" v-model="input.booklist" required
-                    class="w-full rounded-xl border border-gray-600 bg-gray-700/50 py-3 px-4 text-lg text-white shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    <option value="" disabled selected hidden>Select</option>
-                    <option v-for="status in selection_save" :value="status.value" :key="status.label">
-                      {{ status.label }}
-                    </option>
-                  </select>
-                </div>
-
-                <div v-motion="{ ...inputVarient() }">
                   <baseLabel text="Title" />
                   <input id="text" type="text" v-model="input.book_title" placeholder="Title" required
                     class="w-full rounded-xl border border-gray-600 bg-gray-700/50 py-3 px-4 text-lg text-white shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500" />
@@ -116,11 +98,6 @@ async function log() {
                   <baseLabel text="Notes" />
                   <textarea id="text" type="text" v-model="input.notes" placeholder="Book notes"
                     class="w-full rounded-xl border border-gray-600 bg-gray-700/50 py-3 px-4 text-lg text-white shadow-lg transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                </div>
-
-                <div v-motion="{ ...inputVarient() }">
-                  <baseLabel text="Start" />
-                  <UInputDate v-model="date" icon="i-lucide-calendar" />
                 </div>
 
                 <div class="text-center">

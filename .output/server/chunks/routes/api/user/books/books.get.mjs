@@ -18,15 +18,14 @@ import '../../../../_/User.mjs';
 import 'zod';
 
 const books_get = defineEventHandler(async (event) => {
-  var _a, _b, _c, _d, _e;
+  var _a, _b, _c;
   try {
     let filterBooks = function(data) {
       return data == null ? void 0 : data.filter((item) => item.booklist.includes("false") || !item.booklist);
     };
     const user = await loggedInUser(event);
-    const latestBooks = (_b = (_a = user == null ? void 0 : user.books) == null ? void 0 : _a.reverse()) != null ? _b : [];
-    const bookOrder = (_c = user == null ? void 0 : user.books) != null ? _c : [];
-    const currentRead = (_e = (_d = user == null ? void 0 : user.books) == null ? void 0 : _d.filter((item) => !(item == null ? void 0 : item.book_end_date) || (item == null ? void 0 : item.book_end_date) === "")) != null ? _e : [];
+    const bookOrder = (_a = user == null ? void 0 : user.books) != null ? _a : [];
+    const currentRead = (_c = (_b = user == null ? void 0 : user.books) == null ? void 0 : _b.filter((item) => !(item == null ? void 0 : item.book_end_date) || !(item == null ? void 0 : item.book_end_date))) != null ? _c : [];
     ;
     return {
       latestData: latestData(10, bookOrder),

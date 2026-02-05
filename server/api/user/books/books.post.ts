@@ -14,10 +14,11 @@ const bodySchema = z.object({
   book_start_date: z.string().nullable(),
   notes: z.string().nullable(),
   booklist: z.boolean().nullable(),
+  status: z.union([z.string(), z.boolean()])
 })
 
 export default defineEventHandler(async (event) => {
-  const { book_title, kind_of_book, book_author, book_start_date, notes, booklist } = await readValidatedBody(event, bodySchema.parse);
+  const { book_title, kind_of_book, book_author, book_start_date, notes, booklist, status } = await readValidatedBody(event, bodySchema.parse);
 
   const obj = {
     book_title: book_title,
@@ -26,6 +27,7 @@ export default defineEventHandler(async (event) => {
     book_start_date: book_start_date,
     notes: notes,
     booklist: booklist,
+    status: status
   };
 
   try {

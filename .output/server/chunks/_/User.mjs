@@ -40,7 +40,8 @@ const bookSchema = new Schema(
     book_end_date: String || void 0,
     book_image: String || void 0,
     notes: String || void 0,
-    booklist: String || void 0
+    booklist: String || Boolean || void 0,
+    status: Boolean || String || void 0
   },
   { timestamps: false }
 );

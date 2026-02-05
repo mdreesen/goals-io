@@ -4,10 +4,13 @@ import { formatDate } from '~/utils/date';
 import { book_of_bible } from "~/utils/dropdowns/selections";
 import type { BibleType } from '~/types/bible';
 
+definePageMeta({
+    layout: 'authenticated',
+});
+
 const route = useRoute();
 
 const { data: data, pending: pending_data } = await useFetch<BibleType>(`/api/user/bible/sermon/${route.params.id}`);
-const { fetch: refreshSession } = useUserSession();
 const toast = useToast();
 
 const isLoading = ref(false);
@@ -56,10 +59,7 @@ async function delete_log() {
         body: input
     })
         .then(async () => {
-            await refreshSession();
-            await refreshNuxtData();
             await navigateTo('/dashboard/spirit');
-            isLoading.value = false;
         })
         .catch(async (error) => {
             toast.error("Failed to delete", 'Try again');

@@ -6,6 +6,7 @@ import { Flame, Droplets, Zap, Sparkles, Square } from 'lucide-vue-next'
 const { fetch: refreshSession } = useUserSession();
 const toast = useToast();
 
+await useFetch('/api/user/fasting/fasting', { key: 'fasting' });
 const { data } = useNuxtData('fasting');
 
 // --- State ---
@@ -125,10 +126,10 @@ const toggleFast = () => {
 }
 
 onMounted(() => {
-  startTime.value = data.value.latestData.start_date
-  isFasting.value = true
+  startTime.value = computed(() => data.value?.latestData?.start_date).value
+  isFasting.value = computed(() => true).value
   timerInterval.value = setInterval(() => {
-    currentTime.value = new Date()
+    currentTime.value = computed(() => new Date()).value
   }, 1000);
 })
 

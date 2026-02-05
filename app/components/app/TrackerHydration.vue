@@ -6,6 +6,7 @@ import { formatDate } from '~/utils/date';
 const { fetch: refreshSession } = useUserSession();
 const toast = useToast();
 
+await useFetch('/api/user/water/water', { key: 'hydration' });
 const { data } = useNuxtData('hydration');
 
 const userDailyGoal = computed(() => Number(data.value.latestWeight?.weight ?? 0) / 2);

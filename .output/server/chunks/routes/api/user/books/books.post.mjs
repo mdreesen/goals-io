@@ -45,17 +45,19 @@ const bodySchema = z.object({
   book_author: z.string().nullable(),
   book_start_date: z.string().nullable(),
   notes: z.string().nullable(),
-  booklist: z.boolean().nullable()
+  booklist: z.boolean().nullable(),
+  status: z.union([z.string(), z.boolean()])
 });
 const books_post = defineEventHandler(async (event) => {
-  const { book_title, kind_of_book, book_author, book_start_date, notes, booklist } = await readValidatedBody(event, bodySchema.parse);
+  const { book_title, kind_of_book, book_author, book_start_date, notes, booklist, status } = await readValidatedBody(event, bodySchema.parse);
   const obj = {
     book_title,
     kind_of_book,
     book_author,
     book_start_date,
     notes,
-    booklist
+    booklist,
+    status
   };
   try {
     const user = await loggedInUser(event);

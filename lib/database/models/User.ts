@@ -31,7 +31,8 @@ const bookSchema = new Schema(
         book_end_date: String || undefined,
         book_image: String || undefined,
         notes: String || undefined,
-        booklist: String || undefined
+        booklist: String || Boolean || undefined,
+        status: Boolean || String || undefined
     }, { timestamps: false });
 
 const coldSoakSchema = new Schema(

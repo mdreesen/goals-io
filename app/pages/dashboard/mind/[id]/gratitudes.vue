@@ -4,8 +4,11 @@ import { formatDate } from '~/utils/date';
 import type { GratitudeType } from '~/types/gratitude';
 const route = useRoute();
 
+definePageMeta({
+    layout: 'authenticated',
+});
+
 const { data: data, pending: pending_data } = await useFetch<GratitudeType>(`/api/user/gratitudes/${route.params.id}`);
-const { fetch: refreshSession } = useUserSession();
 const toast = useToast();
 
 const isLoading = ref(false);
@@ -29,10 +32,7 @@ async function log() {
         }
     })
         .then(async () => {
-            await refreshSession();
-            await refreshNuxtData();
             await navigateTo('/dashboard/mind');
-            isLoading.value = false;
         })
         .catch(async (error) => {
             toast.error("Failed to update", 'Try again');

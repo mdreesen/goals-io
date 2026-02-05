@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
 
+await useFetch('/api/user/weight/weight', { key: 'weight' });
 const { data } = useNuxtData('weight');
 
 const isLoading = ref(false);

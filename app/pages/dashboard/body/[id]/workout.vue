@@ -7,7 +7,6 @@ import type { WorkoutType } from '~/types/workout';
 const route = useRoute();
 
 const { data: data, pending: pending_data } = await useFetch<WorkoutType>(`/api/user/workout/${route.params.id}`);
-const { fetch: refreshSession } = useUserSession();
 const toast = useToast();
 
 const isLoading = ref(false);
@@ -37,10 +36,7 @@ async function log() {
         }
     })
         .then(async () => {
-            await refreshSession();
-            await refreshNuxtData();
             await navigateTo('/dashboard/body');
-            isLoading.value = false;
         })
         .catch(async (error) => {
             toast.error("Failed to update", 'Try again');

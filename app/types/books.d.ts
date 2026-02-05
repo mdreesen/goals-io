@@ -9,4 +9,5 @@ export interface BookType {
   kind_of_book: string;
   notes: string;
   booklist: string;
+  status: boolean | string
 }

@@ -2,7 +2,6 @@
 const props = defineProps({
     text: {
         type: String,
-        required: true,
         default: 'View All'
     },
     path: {

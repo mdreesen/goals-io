@@ -1,6 +1,7 @@
 import { d as defineEventHandler, r as readValidatedBody, c as createError } from '../../../../nitro/nitro.mjs';
 import { z } from 'zod';
 import { l as loggedInUser } from '../../../../_/loggedInUser.mjs';
+import { f as formatDate } from '../../../../_/date.mjs';
 import { U as User$1 } from '../../../../_/User.mjs';
 import 'node:http';
 import 'node:https';
@@ -15,21 +16,6 @@ import 'consola';
 import 'ipx';
 import '../../../../_/mongodb.mjs';
 import 'mongoose';
-
-function timeZone() {
-  return Intl.DateTimeFormat().resolvedOptions().timeZone;
-}
-function formatDate() {
-  return (/* @__PURE__ */ new Date()).toLocaleString("en-US", {
-    timeZone: timeZone(),
-    year: "numeric",
-    month: "long",
-    // 'numeric', '2-digit', 'short'
-    day: "numeric",
-    hour12: true
-    // true for AM/PM, false for 24-hour
-  });
-}
 
 const User = User$1;
 const bodySchema = z.object({

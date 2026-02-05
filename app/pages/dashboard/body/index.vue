@@ -4,6 +4,7 @@ definePageMeta({
     layout: 'authenticated',
 });
 
+await useFetch('/api/user/profile/setting', { key: 'setting' });
 const { data: data_setting } = useNuxtData('setting');
 
 </script>

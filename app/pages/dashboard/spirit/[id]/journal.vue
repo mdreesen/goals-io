@@ -4,10 +4,13 @@ import { formatDate } from '~/utils/date';
 import { mood } from "~/utils/dropdowns/selections";
 import type { JournalType } from '~/types/journal';
 
+definePageMeta({
+    layout: 'authenticated',
+});
+
 const route = useRoute();
 
 const { data: data, pending: pending_data } = await useFetch<JournalType>(`/api/user/journal/${route.params.id}`);
-const { fetch: refreshSession } = useUserSession();
 const toast = useToast();
 
 const isLoading = ref(false);
@@ -35,10 +38,7 @@ async function log() {
         }
     })
         .then(async () => {
-            await refreshSession();
-            await refreshNuxtData();
             await navigateTo('/dashboard/spirit');
-            isLoading.value = false;
         })
         .catch(async (error) => {
             toast.error("Failed to update", 'Try again');
