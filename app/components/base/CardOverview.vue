@@ -20,7 +20,7 @@ const props = defineProps({
   }
 });
 
-await useFetch('/api/stats', { key: 'stats' });
+await useFetch('/api/stats', { key: 'stats', lazy: true });
 const { data: data } = useNuxtData('stats');
 
 const books = {

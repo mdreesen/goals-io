@@ -570,19 +570,19 @@ const _routes = [
     name: "dashboard",
     path: "/dashboard",
     meta: __nuxt_page_meta$g || {},
-    component: () => import('./index-1lCROzSy.mjs')
+    component: () => import('./index-CG2HeBAo.mjs')
   },
   {
     name: "dashboard-body",
     path: "/dashboard/body",
     meta: __nuxt_page_meta$f || {},
-    component: () => import('./index-JN1GUQRH.mjs')
+    component: () => import('./index-2HjS1_c_.mjs')
   },
   {
     name: "dashboard-mind",
     path: "/dashboard/mind",
     meta: __nuxt_page_meta$e || {},
-    component: () => import('./index-Y173_hMw.mjs')
+    component: () => import('./index-zo-Pp9xN.mjs')
   },
   {
     name: "privacy-policy",
@@ -604,7 +604,7 @@ const _routes = [
     name: "dashboard-spirit",
     path: "/dashboard/spirit",
     meta: __nuxt_page_meta$d || {},
-    component: () => import('./index--eFfYQPd.mjs')
+    component: () => import('./index-01sGUReV.mjs')
   },
   {
     name: "signup",
@@ -615,7 +615,7 @@ const _routes = [
     name: "dashboard-profile",
     path: "/dashboard/profile",
     meta: __nuxt_page_meta$c || {},
-    component: () => import('./index-C9Xi5UrP.mjs')
+    component: () => import('./index-CaGj2h8d.mjs')
   },
   {
     name: "dashboard-mind-all-books",
@@ -8068,7 +8068,7 @@ _sfc_main$4.setup = (props, ctx) => {
 };
 const __nuxt_component_0$1 = Object.assign(_sfc_main$4, { __name: "UApp" });
 const layouts = {
-  authenticated: defineAsyncComponent(() => import('./authenticated-TY2BnssR.mjs').then((m) => m.default || m)),
+  authenticated: defineAsyncComponent(() => import('./authenticated-BwPsGhH3.mjs').then((m) => m.default || m)),
   default: defineAsyncComponent(() => import('./default-X2IZVJnD.mjs').then((m) => m.default || m))
 };
 const LayoutLoader = defineComponent({

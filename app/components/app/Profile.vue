@@ -8,6 +8,7 @@ definePageMeta({
     layout: 'authenticated',
 });
 
+await useFetch('/api/user/profile', { key: 'profile', lazy: true });
 const { data } = useNuxtData('profile');
 
 const { fetch: refreshSession } = useUserSession();

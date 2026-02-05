@@ -3,23 +3,24 @@ definePageMeta({
     layout: 'authenticated',
 });
 
+await useFetch('/api/user/profile/setting', { key: 'setting', lazy: true });
 const { data: data_setting } = useNuxtData('setting');
 
 </script>
 
 <template>
     <div class="container-categories">
-        <div v-if="data_setting.bibleSetting.value">
+        <div v-if="data_setting?.bibleSetting.value">
             <baseHeader text="Devotionals" />
             <LazyappTrackerBibleDevotional hydrate-on-visible />
         </div>
 
-        <div v-if="data_setting.bibleSetting.value">
+        <div v-if="data_setting?.bibleSetting.value">
             <baseHeader text="Sermons" />
             <LazyappTrackerBibleSermon hydrate-on-visible />
         </div>
 
-        <div v-if="data_setting.journalSetting.value">
+        <div v-if="data_setting?.journalSetting.value">
             <baseHeader text="Journal" />
             <LazyappTrackerJournal hydrate-on-visible />
         </div>

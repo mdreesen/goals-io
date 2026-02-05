@@ -3,6 +3,7 @@ import { ref } from 'vue';
 import { selection_book_kinds } from '~/utils/dropdowns/selections';
 import { formatDate } from '~/utils/date';
 
+await useFetch('/api/user/books/books', { key: 'books', lazy: true });
 const { data } = useNuxtData('books');
 const toast = useToast();
 

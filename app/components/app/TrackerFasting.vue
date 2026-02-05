@@ -6,6 +6,7 @@ import { Flame, Droplets, Zap, Sparkles, Square } from 'lucide-vue-next'
 const { fetch: refreshSession } = useUserSession();
 const toast = useToast();
 
+await useFetch('/api/user/fasting/fasting', { key: 'fasting', lazy: true });
 const { data } = useNuxtData('fasting');
 
 // --- State ---
