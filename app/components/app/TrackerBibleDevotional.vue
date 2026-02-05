@@ -3,7 +3,6 @@ import { ref } from 'vue';
 import { formatDate } from '~/utils/date';
 import { book_of_bible } from "~/utils/dropdowns/selections";
 
-await useFetch('/api/user/bible/devotional', { key: 'devotional', lazy: true });
 const { data } = useNuxtData('devotional');
 
 const { fetch: refreshSession } = useUserSession();

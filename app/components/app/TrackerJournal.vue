@@ -3,7 +3,6 @@ import { ref } from 'vue';
 import { formatDate } from '~/utils/date';
 import { mood } from "~/utils/dropdowns/selections";
 
-await useFetch('/api/user/journal/journal', { key: 'journal', lazy: true });
 const { data } = useNuxtData('journal');
 
 const { fetch: refreshSession } = useUserSession();

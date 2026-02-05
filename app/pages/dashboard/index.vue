@@ -8,11 +8,6 @@ definePageMeta({
 });
 
 const yearStore = useYear();
-await useFetch('/api/charts/books', { key: 'chart_book', lazy: true });
-await useFetch('/api/charts/water', { key: 'chart_hydration', lazy: true });
-await useFetch('/api/charts/weight', { key: 'chart_weight', lazy: true });
-await useFetch('/api/charts/workouts', { key: 'chart_workout', lazy: true });
-await useFetch('/api/user/profile/setting', { key: 'setting', lazy: true });
 
 const { data: data_chart_book } = useNuxtData('chart_book');
 const { data: data_chart_hydration } = useNuxtData('chart_hydration');

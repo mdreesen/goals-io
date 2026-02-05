@@ -570,19 +570,19 @@ const _routes = [
     name: "dashboard",
     path: "/dashboard",
     meta: __nuxt_page_meta$g || {},
-    component: () => import('./index-CG2HeBAo.mjs')
+    component: () => import('./index-Cf7hurVW.mjs')
   },
   {
     name: "dashboard-body",
     path: "/dashboard/body",
     meta: __nuxt_page_meta$f || {},
-    component: () => import('./index-2HjS1_c_.mjs')
+    component: () => import('./index-BmQjxQpD.mjs')
   },
   {
     name: "dashboard-mind",
     path: "/dashboard/mind",
     meta: __nuxt_page_meta$e || {},
-    component: () => import('./index-zo-Pp9xN.mjs')
+    component: () => import('./index-CgvtK5-2.mjs')
   },
   {
     name: "privacy-policy",
@@ -598,24 +598,24 @@ const _routes = [
   {
     name: "login",
     path: "/login",
-    component: () => import('./login-KcpgJdZA.mjs')
+    component: () => import('./login-cMeAkXYg.mjs')
   },
   {
     name: "dashboard-spirit",
     path: "/dashboard/spirit",
     meta: __nuxt_page_meta$d || {},
-    component: () => import('./index-01sGUReV.mjs')
+    component: () => import('./index-ClXZreVK.mjs')
   },
   {
     name: "signup",
     path: "/signup",
-    component: () => import('./signup-DYKihOex.mjs')
+    component: () => import('./signup-DAsjLXid.mjs')
   },
   {
     name: "dashboard-profile",
     path: "/dashboard/profile",
     meta: __nuxt_page_meta$c || {},
-    component: () => import('./index-CaGj2h8d.mjs')
+    component: () => import('./index-DTVrGU6t.mjs')
   },
   {
     name: "dashboard-mind-all-books",
@@ -633,17 +633,17 @@ const _routes = [
     name: "dashboard-mind-id-books",
     path: "/dashboard/mind/:id()/books",
     meta: __nuxt_page_meta$9 || {},
-    component: () => import('./books-DY0DdZAt.mjs')
+    component: () => import('./books-BnHi2iFr.mjs')
   },
   {
     name: "dashboard-body-id-weight",
     path: "/dashboard/body/:id()/weight",
-    component: () => import('./weight-CZXtWyK9.mjs')
+    component: () => import('./weight-BGMu8nC9.mjs')
   },
   {
     name: "dashboard-body-id-workout",
     path: "/dashboard/body/:id()/workout",
-    component: () => import('./workout-ChJjYdI1.mjs')
+    component: () => import('./workout-1Msx7GZb.mjs')
   },
   {
     name: "dashboard-body-all-workouts",
@@ -655,7 +655,7 @@ const _routes = [
     name: "dashboard-spirit-id-sermon",
     path: "/dashboard/spirit/:id()/sermon",
     meta: __nuxt_page_meta$7 || {},
-    component: () => import('./sermon-BpnZ5y5S.mjs')
+    component: () => import('./sermon-ByroWDKy.mjs')
   },
   {
     name: "dashboard-spirit-all-entries",
@@ -673,13 +673,13 @@ const _routes = [
     name: "dashboard-spirit-id-journal",
     path: "/dashboard/spirit/:id()/journal",
     meta: __nuxt_page_meta$4 || {},
-    component: () => import('./journal-Bj1t2761.mjs')
+    component: () => import('./journal-CHq2dCiU.mjs')
   },
   {
     name: "dashboard-mind-id-gratitudes",
     path: "/dashboard/mind/:id()/gratitudes",
     meta: __nuxt_page_meta$3 || {},
-    component: () => import('./gratitudes-CIpMisKN.mjs')
+    component: () => import('./gratitudes-DBalWrA4.mjs')
   },
   {
     name: "dashboard-privacy-policy",
@@ -690,13 +690,13 @@ const _routes = [
   {
     name: "forgotpassword",
     path: "/forgotpassword",
-    component: () => import('./forgotpassword-B6T1gRJ-.mjs')
+    component: () => import('./forgotpassword-DctKR4wI.mjs')
   },
   {
     name: "dashboard-spirit-id-devotional",
     path: "/dashboard/spirit/:id()/devotional",
     meta: __nuxt_page_meta$1 || {},
-    component: () => import('./devotional-sPVsa87P.mjs')
+    component: () => import('./devotional-E0p_tQX_.mjs')
   },
   {
     name: "dashboard-spirit-all-devotionals",
@@ -707,7 +707,7 @@ const _routes = [
   {
     name: "id-resetpassword",
     path: "/:id()/resetpassword",
-    component: () => import('./resetpassword-DoQIVDtj.mjs')
+    component: () => import('./resetpassword-YZNUjgrE.mjs')
   }
 ];
 const _wrapInTransition = (props, children) => {
@@ -8068,7 +8068,7 @@ _sfc_main$4.setup = (props, ctx) => {
 };
 const __nuxt_component_0$1 = Object.assign(_sfc_main$4, { __name: "UApp" });
 const layouts = {
-  authenticated: defineAsyncComponent(() => import('./authenticated-BwPsGhH3.mjs').then((m) => m.default || m)),
+  authenticated: defineAsyncComponent(() => import('./authenticated-TY2BnssR.mjs').then((m) => m.default || m)),
   default: defineAsyncComponent(() => import('./default-X2IZVJnD.mjs').then((m) => m.default || m))
 };
 const LayoutLoader = defineComponent({

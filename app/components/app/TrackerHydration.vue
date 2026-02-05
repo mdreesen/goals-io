@@ -61,7 +61,6 @@ async function log() {
 </script>
 
 <template>
-  <ClientOnly>
     <div class="flex flex-col items-center justify-center w-full   mx-auto p-8">
 
       <div class="relative w-64 h-64 group cursor-pointer select-none">
@@ -155,7 +154,6 @@ async function log() {
 
       </div>
     </div>
-  </ClientOnly>
 </template>
 
 <style scoped>

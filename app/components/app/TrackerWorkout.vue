@@ -3,7 +3,6 @@ import { ref } from 'vue';
 import { workout } from '~/utils/dropdowns/selections';
 import { formatDate } from '~/utils/date';
 
-await useFetch('/api/user/workout/workout', { key: 'workout', lazy: true });
 const { data } = useNuxtData('workout');
 
 const isLoading = ref(false);

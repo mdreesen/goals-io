@@ -2,7 +2,6 @@
 import { ref } from 'vue';
 import { formatDate } from '~/utils/date';
 
-await useFetch('/api/user/gratitudes/gratitudes', { key: 'gratitudes', lazy: true });
 const { data } = useNuxtData('gratitudes');
 
 const { fetch: refreshSession } = useUserSession();
