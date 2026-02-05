@@ -28,10 +28,6 @@ const books = {
   end: computed(() => data.value?.lastestBooks?.bookCurrentEndedYear)
 };
 
-const coldSoak = {
-  date: computed(() => data.value?.latestColdSoak?.date)
-};
-
 const fasting = {
   duration: computed(() => data.value?.latestFasting?.duration),
   isFasting: computed(() => data.value?.latestFasting?.start)
@@ -71,12 +67,6 @@ const animateIcons = computed(() => {
         <div class="flex flex-col justify-center items-center text-2xl font-extrabold text-white">
           <span>Started {{ books.start }} books</span>
           <span>Finished {{ books.end }} books</span>
-        </div>
-      </div>
-
-      <div v-if="collection === 'coldSoak'">
-        <div class="flex flex-col justify-center items-center text-2xl font-extrabold text-white">
-          <span>{{ coldSoak?.date }}</span>
         </div>
       </div>
 

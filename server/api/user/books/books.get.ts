@@ -2,7 +2,6 @@ import loggedInUser from '~/utils/loggedInUser';
 import { latestData } from '~/utils/formatters/latestData';
 import type { BookType } from '~/types/books';
 
-
 export default defineEventHandler(async (event) => {
   try {
     const user = await loggedInUser(event);

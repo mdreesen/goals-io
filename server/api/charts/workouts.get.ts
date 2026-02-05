@@ -1,5 +1,4 @@
 import loggedInUser from "~/utils/loggedInUser";
-import { monthStart } from '~/utils/formatters/months';
 import { years } from '~/utils/getYears';
 
 export default defineEventHandler(async (event) => {

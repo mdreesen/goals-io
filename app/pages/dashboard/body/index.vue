@@ -15,11 +15,6 @@ const { data: data_setting } = useNuxtData('setting');
             <appTrackerHydration />
         </div>
 
-        <!-- <div>
-            <baseHeader text="Cold Soak" />
-            <appTrackerColdSoak />
-        </div> -->
-
         <div v-if="data_setting?.fastingSetting.value">
             <baseHeader text="Fasting" />
             <appTrackerFasting />
