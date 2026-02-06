@@ -615,7 +615,7 @@ const _routes = [
     name: "dashboard-profile",
     path: "/dashboard/profile",
     meta: __nuxt_page_meta$c || {},
-    component: () => import('./index-DEtW00V0.mjs')
+    component: () => import('./index-DpM7SgUR.mjs')
   },
   {
     name: "dashboard-mind-all-books",
@@ -655,7 +655,7 @@ const _routes = [
     name: "dashboard-spirit-id-sermon",
     path: "/dashboard/spirit/:id()/sermon",
     meta: __nuxt_page_meta$7 || {},
-    component: () => import('./sermon-ByroWDKy.mjs')
+    component: () => import('./sermon-D_rUttwS.mjs')
   },
   {
     name: "dashboard-spirit-all-entries",
@@ -673,7 +673,7 @@ const _routes = [
     name: "dashboard-spirit-id-journal",
     path: "/dashboard/spirit/:id()/journal",
     meta: __nuxt_page_meta$4 || {},
-    component: () => import('./journal-CHq2dCiU.mjs')
+    component: () => import('./journal-AJyVTv2T.mjs')
   },
   {
     name: "dashboard-mind-id-gratitudes",
@@ -696,7 +696,7 @@ const _routes = [
     name: "dashboard-spirit-id-devotional",
     path: "/dashboard/spirit/:id()/devotional",
     meta: __nuxt_page_meta$1 || {},
-    component: () => import('./devotional-E0p_tQX_.mjs')
+    component: () => import('./devotional-_PT6h-FA.mjs')
   },
   {
     name: "dashboard-spirit-all-devotionals",
