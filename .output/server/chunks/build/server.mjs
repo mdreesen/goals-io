@@ -570,13 +570,13 @@ const _routes = [
     name: "dashboard",
     path: "/dashboard",
     meta: __nuxt_page_meta$g || {},
-    component: () => import('./index-CT_Kyo5y.mjs')
+    component: () => import('./index-B-B2zxWT.mjs')
   },
   {
     name: "dashboard-body",
     path: "/dashboard/body",
     meta: __nuxt_page_meta$f || {},
-    component: () => import('./index-BmQjxQpD.mjs')
+    component: () => import('./index-CdH45rAv.mjs')
   },
   {
     name: "dashboard-mind",
@@ -615,7 +615,7 @@ const _routes = [
     name: "dashboard-profile",
     path: "/dashboard/profile",
     meta: __nuxt_page_meta$c || {},
-    component: () => import('./index-DpM7SgUR.mjs')
+    component: () => import('./index-CubuwjRr.mjs')
   },
   {
     name: "dashboard-mind-all-books",

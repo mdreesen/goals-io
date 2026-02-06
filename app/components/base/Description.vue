@@ -8,5 +8,5 @@
 </script>
 
 <template>
-    <p class="text-xl font-bold px-[2rem] my-8 flex justify-center">{{ props.text }}</p>
+    <p class="text-xl font-bold px-8 my-8 flex justify-center">{{ props.text }}</p>
 </template>

@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
 import { format, differenceInSeconds, addHours } from 'date-fns'
 import { Flame, Droplets, Zap, Sparkles, Square } from 'lucide-vue-next'
 
 const { fetch: refreshSession } = useUserSession();
 const toast = useToast();
 
-const { data } = useNuxtData('fasting');
+let { data } = useNuxtData('fasting');
 
 // --- State ---
 const isFasting = ref(data.value.latestData?.start)
@@ -26,9 +26,10 @@ const stages = [
 ]
 
 // --- Computeds ---
+const difference = computed(() => differenceInSeconds(currentTime.value, startTime.value))
 const elapsedTime = computed(() => {
   if (!startTime.value) return 0
-  return differenceInSeconds(currentTime.value, startTime.value)
+  return difference.value
 })
 
 const useIsFasting = computed(() => data.value.latestData?.start);
@@ -50,7 +51,7 @@ const formattedTime = computed(() => {
   const m = Math.floor((elapsedTime.value % 3600) / 60).toString().padStart(2, '0')
   const s = (elapsedTime.value % 60).toString().padStart(2, '0')
   return `${h}:${m}:${s}`
-})
+});
 
 // --- SVG Arc Math ---
 const radius = 120
@@ -122,7 +123,13 @@ const toggleFast = () => {
         isLoading.value = false;
       });
   }
-}
+};
+
+// Need to watch for new data coming through
+watch(data, () => {
+  isFasting.value = data.value.latestData.start;
+  startTime.value = data.value.latestData?.start_date;
+})
 
 onMounted(() => {
   startTime.value = computed(() => data.value?.latestData?.start_date).value
