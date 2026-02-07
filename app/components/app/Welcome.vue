@@ -14,9 +14,9 @@ const { data: data } = useNuxtData('profile');
         </h2>
         <h2
             class="text-5xl text-center md:text-6xl font-extrabold text-transparent bg-clip-text bg-linear-to-r from-blue-400 via-purple-500 to-pink-500">
-            {{ data.first_name }}!
+            {{ data?.first_name }}!
         </h2>
-        <baseDescription :text="data.username ?? ''" />
+        <baseDescription :text="data?.username ?? ''" />
     </div>
     <div v-else>
         <h2

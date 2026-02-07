@@ -3,7 +3,6 @@ import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
 import { format, differenceInSeconds, addHours } from 'date-fns'
 import { Flame, Droplets, Zap, Sparkles, Square } from 'lucide-vue-next'
 
-const { fetch: refreshSession } = useUserSession();
 const toast = useToast();
 
 let { data } = useNuxtData('fasting');
@@ -81,7 +80,6 @@ const toggleFast = () => {
     })
       .then(async () => {
         isFasting.value = false
-        await refreshSession();
         await refreshNuxtData('fasting');
         timerInterval.value = null;
         isLoading.value = false;
@@ -112,7 +110,6 @@ const toggleFast = () => {
     })
       .then(async () => {
         isFasting.value = true
-        await refreshSession();
         await refreshNuxtData('fasting');
         isLoading.value = false;
       })

@@ -21,7 +21,11 @@ const index_get = defineEventHandler(async (event) => {
   const user = await loggedInUser(event);
   const data = (_a = user == null ? void 0 : user.settings) != null ? _a : [];
   function findSetting(str) {
-    return data == null ? void 0 : data.find((item) => item == null ? void 0 : item.setting.includes(str));
+    var _a2;
+    return (_a2 = data == null ? void 0 : data.find((item) => {
+      var _a3;
+      return (_a3 = item == null ? void 0 : item.setting.includes(str)) != null ? _a3 : {};
+    })) != null ? _a2 : [];
   }
   return {
     affirmationSetting: findSetting("showAffirmations"),

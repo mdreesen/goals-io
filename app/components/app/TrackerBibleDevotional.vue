@@ -5,7 +5,6 @@ import { book_of_bible } from "~/utils/dropdowns/selections";
 
 const { data } = useNuxtData('devotional');
 
-const { fetch: refreshSession } = useUserSession();
 const toast = useToast();
 
 const isLoading = ref(false);
@@ -30,8 +29,7 @@ async function log() {
     }
   })
     .then(async () => {
-      await refreshSession();
-      await refreshNuxtData();
+      await refreshNuxtData('devotional');
       open.value = false;
       isLoading.value = false;
     })

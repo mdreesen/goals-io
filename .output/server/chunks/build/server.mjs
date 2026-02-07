@@ -570,19 +570,19 @@ const _routes = [
     name: "dashboard",
     path: "/dashboard",
     meta: __nuxt_page_meta$g || {},
-    component: () => import('./index-B-B2zxWT.mjs')
+    component: () => import('./index-CPFthXXq.mjs')
   },
   {
     name: "dashboard-body",
     path: "/dashboard/body",
     meta: __nuxt_page_meta$f || {},
-    component: () => import('./index-CdH45rAv.mjs')
+    component: () => import('./index-DA5ddbA8.mjs')
   },
   {
     name: "dashboard-mind",
     path: "/dashboard/mind",
     meta: __nuxt_page_meta$e || {},
-    component: () => import('./index-CgvtK5-2.mjs')
+    component: () => import('./index-BQS9Cmy7.mjs')
   },
   {
     name: "privacy-policy",
@@ -604,7 +604,7 @@ const _routes = [
     name: "dashboard-spirit",
     path: "/dashboard/spirit",
     meta: __nuxt_page_meta$d || {},
-    component: () => import('./index-ClXZreVK.mjs')
+    component: () => import('./index-DhwnVeUx.mjs')
   },
   {
     name: "signup",
@@ -615,7 +615,7 @@ const _routes = [
     name: "dashboard-profile",
     path: "/dashboard/profile",
     meta: __nuxt_page_meta$c || {},
-    component: () => import('./index-CubuwjRr.mjs')
+    component: () => import('./index-DinjDEco.mjs')
   },
   {
     name: "dashboard-mind-all-books",
