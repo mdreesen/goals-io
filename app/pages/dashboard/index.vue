@@ -31,16 +31,16 @@ const useWorkoutChart = computed(() => monthStart({ data: data_chart_workout.val
             <baseHeader text="Your Overview" />
 
             <div class="container-cards">
-                <baseCardOverview v-if="data_setting.bookSetting.value" text="Books"
+                <baseCardOverview v-if="data_setting?.bookSetting.value" text="Books"
                     color="bg-gradient-to-br from-green-600 to-green-700"
                     icon="material-symbols:book-ribbon-outline-rounded" collection="books" />
-                <baseCardOverview v-if="data_setting.fastingSetting.value" text="Fasting"
+                <baseCardOverview v-if="data_setting?.fastingSetting.value" text="Fasting"
                     color="bg-gradient-to-br from-yellow-600 to-yellow-700"
                     icon="material-symbols:nest-clock-farsight-analog-outline-rounded" collection="fasting" />
-                <baseCardOverview v-if="data_setting.waterSetting.value" text="Daily Water"
+                <baseCardOverview v-if="data_setting?.waterSetting.value" text="Daily Water"
                     color="bg-gradient-to-br from-blue-600 to-blue-700"
                     icon="material-symbols:water-medium-outline-rounded" collection="dailyWater" />
-                <baseCardOverview v-if="data_setting.weightSetting.value" text="Weight"
+                <baseCardOverview v-if="data_setting?.weightSetting.value" text="Weight"
                     color="bg-gradient-to-br from-purple-600 to-purple-700"
                     icon="material-symbols:monitor-weight-outline" collection="weight" />
             </div>
@@ -51,28 +51,28 @@ const useWorkoutChart = computed(() => monthStart({ data: data_chart_workout.val
             <baseHeader text="Your Progress Charts" />
 
             <!-- Book Tracking -->
-            <LazyUContainer hydrate-on-visible v-if="data_setting.bookSetting.value">
+            <LazyUContainer hydrate-on-visible v-if="data_setting?.bookSetting.value">
                 <baseSectionHeader text="Books" />
                 <baseChartBarGroup :data="useBookChart" barOneName="start_date" barTwoName="end_date"
                     barOneLabel="Start Date" barTwoLabel="End Date" :dataYears="data_chart_book.years" />
             </LazyUContainer>
 
             <!-- Water Tracking -->
-            <LazyUContainer hydrate-on-visible v-if="data_setting.waterSetting.value">
+            <LazyUContainer hydrate-on-visible v-if="data_setting?.waterSetting.value">
                 <baseSectionHeader text="Water Intake" />
                 <baseChartLine :data="useHydrationChart" lineName="water_intake" lineLabel="Water total"
                     :dataYears="data_chart_hydration.years" />
             </LazyUContainer>
 
             <!-- Weight Tracking -->
-            <LazyUContainer hydrate-on-visible v-if="data_setting.weightSetting.value">
+            <LazyUContainer hydrate-on-visible v-if="data_setting?.weightSetting.value">
                 <baseSectionHeader text="Weight" />
                 <baseChartLine :data="useWeightChart" lineName="weight" lineLabel="Weight"
                     :dataYears="data_chart_weight.years" />
             </LazyUContainer>
 
             <!-- Workout Tracking -->
-            <LazyUContainer hydrate-on-visible v-if="data_setting.workoutSetting.value">
+            <LazyUContainer hydrate-on-visible v-if="data_setting?.workoutSetting.value">
                 <baseSectionHeader text="Workouts" />
                 <baseChartBar :data="useWorkoutChart" barName="date" barLabel="Total"
                     :dataYears="data_chart_workout.years" />

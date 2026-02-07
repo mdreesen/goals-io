@@ -6,7 +6,7 @@ export default defineEventHandler(async (event) => {
     const data = user?.settings ?? [];
 
     function findSetting(str: string) {
-        return data?.find((item: SettingType) => item?.setting.includes(str)) as unknown | SettingType
+        return data?.find((item: SettingType) => item?.setting.includes(str) ?? {}) as unknown | SettingType ?? [];
     };
 
     return {
