@@ -9,7 +9,6 @@ const open = ref(false)
 
 const currentWeight = computed(() => data.value.latestData?.weight);
 
-const { fetch: refreshSession } = useUserSession();
 const toast = useToast();
 
 const input = reactive({
@@ -23,8 +22,7 @@ async function log() {
     body: input
   })
     .then(async () => {
-      await refreshSession();
-      await refreshNuxtData();
+      await refreshNuxtData('weight');
       open.value = false;
       isLoading.value = false;
     })

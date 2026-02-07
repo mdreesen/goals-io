@@ -4,7 +4,6 @@ import { formatDate } from '~/utils/date';
 
 const { data } = useNuxtData('gratitudes');
 
-const { fetch: refreshSession } = useUserSession();
 const toast = useToast();
 
 const isLoading = ref(false);
@@ -25,8 +24,7 @@ async function log() {
     }
   })
     .then(async () => {
-      await refreshSession();
-      await refreshNuxtData();
+      await refreshNuxtData('gratitudes');
       open.value = false;
       isLoading.value = false;
     })

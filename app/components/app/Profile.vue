@@ -10,8 +10,6 @@ definePageMeta({
 
 const { data } = useNuxtData('profile');
 
-const { fetch: refreshSession } = useUserSession();
-
 let errorMessage = ref('');
 const isLoading = ref(false);
 const open = ref(false);
@@ -53,8 +51,7 @@ const toggleSetting = (item: any) => {
         }
     })
         .then(async () => {
-            await refreshSession();
-            await refreshNuxtData();
+            await refreshNuxtData('profile');
             isLoading.value = false;
         })
         .catch(async (error) => {
@@ -72,8 +69,7 @@ async function log() {
         body: input,
     })
         .then(async () => {
-            await refreshSession();
-            await refreshNuxtData();
+            await refreshNuxtData('profile');
             open.value = false;
             isLoading.value = false;
         })

@@ -9,7 +9,6 @@ const isLoading = ref(false);
 let errorMessage = ref('');
 const open = ref(false)
 
-const { fetch: refreshSession } = useUserSession();
 const toast = useToast();
 
 const input = reactive({
@@ -29,8 +28,7 @@ async function log() {
     }
   })
     .then(async () => {
-      await refreshSession();
-      await refreshNuxtData();
+      await refreshNuxtData('workout');
       open.value = false;
       isLoading.value = false;
     })

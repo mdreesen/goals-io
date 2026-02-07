@@ -10,8 +10,6 @@ const isLoading = ref(false);
 let errorMessage = ref('');
 const open = ref(false)
 
-const { fetch: refreshSession } = useUserSession();
-
 const input = reactive({
   book_title: '',
   kind_of_book: '',
@@ -29,8 +27,7 @@ async function log() {
     body: input
   })
     .then(async () => {
-      await refreshSession();
-      await refreshNuxtData();
+      await refreshNuxtData('books');
       open.value = false;
       isLoading.value = false;
     })

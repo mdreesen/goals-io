@@ -3,7 +3,6 @@ import { ref, computed } from 'vue';
 import { Plus, Minus, Check } from 'lucide-vue-next';
 import { formatDate } from '~/utils/date';
 
-const { fetch: refreshSession } = useUserSession();
 const toast = useToast();
 
 const { data } = useNuxtData('hydration');
@@ -46,8 +45,7 @@ async function log() {
     }
   })
     .then(async () => {
-      await refreshSession();
-      await refreshNuxtData();
+      await refreshNuxtData('hydration');
 
       isLoading.value = false;
     })
