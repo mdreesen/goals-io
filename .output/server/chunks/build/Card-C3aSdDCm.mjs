@@ -1,4 +1,4 @@
-import { _ as __nuxt_component_0$5 } from './server.mjs';
+import { _ as __nuxt_component_0$4 } from './server.mjs';
 import { defineComponent, useSSRContext } from 'vue';
 import { ssrRenderComponent } from 'vue/server-renderer';
 
@@ -37,7 +37,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
   },
   setup(__props) {
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_ClientOnly = __nuxt_component_0$5;
+      const _component_ClientOnly = __nuxt_component_0$4;
       _push(ssrRenderComponent(_component_ClientOnly, _attrs, {}, _parent));
     };
   }

@@ -25,22 +25,22 @@ const useWorkoutChart = computed(() => monthStart({ data: data_chart_workout.val
 <template>
     <div>
         <section>
-            <appWelcome />
+            <LazyAppWelcome />
         </section>
         <section>
             <baseHeader text="Your Overview" />
 
             <div class="container-cards">
-                <baseCardOverview v-if="data_setting?.bookSetting.value" text="Books"
+                <LazyBaseCardOverview v-if="data_setting?.bookSetting.value" text="Books"
                     color="bg-gradient-to-br from-green-600 to-green-700"
                     icon="material-symbols:book-ribbon-outline-rounded" collection="books" />
-                <baseCardOverview v-if="data_setting?.fastingSetting.value" text="Fasting"
+                <LazyBaseCardOverview v-if="data_setting?.fastingSetting.value" text="Fasting"
                     color="bg-gradient-to-br from-yellow-600 to-yellow-700"
                     icon="material-symbols:nest-clock-farsight-analog-outline-rounded" collection="fasting" />
-                <baseCardOverview v-if="data_setting?.waterSetting.value" text="Daily Water"
+                <LazyBaseCardOverview v-if="data_setting?.waterSetting.value" text="Daily Water"
                     color="bg-gradient-to-br from-blue-600 to-blue-700"
                     icon="material-symbols:water-medium-outline-rounded" collection="dailyWater" />
-                <baseCardOverview v-if="data_setting?.weightSetting.value" text="Weight"
+                <LazyBaseCardOverview v-if="data_setting?.weightSetting.value" text="Weight"
                     color="bg-gradient-to-br from-purple-600 to-purple-700"
                     icon="material-symbols:monitor-weight-outline" collection="weight" />
             </div>

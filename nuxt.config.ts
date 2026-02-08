@@ -14,7 +14,8 @@ export default defineNuxtConfig({
     '@nuxt/ui',
     '@vite-pwa/nuxt',
     'nuxt-notify',
-    '@pinia/nuxt'
+    '@pinia/nuxt',
+    'nuxt-vitalizer'
   ],
   app: {
     head: {
@@ -27,6 +28,11 @@ export default defineNuxtConfig({
     plugins: [
       tailwindcss()
     ],
+  },
+  vitalizer: {
+    // Remove the render-blocking entry CSS
+    disableStylesheets: 'entry',
+    disablePrefetchLinks: true
   },
   typescript: {
     strict: false

@@ -1,4 +1,4 @@
-import { d as _sfc_main$9, e as __nuxt_component_0$4 } from './server.mjs';
+import { d as _sfc_main$9, e as __nuxt_component_0$3 } from './server.mjs';
 import { defineComponent, mergeProps, withCtx, createVNode, useSSRContext } from 'vue';
 import { ssrRenderComponent } from 'vue/server-renderer';
 
@@ -53,7 +53,7 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
   setup(__props) {
     const props = __props;
     return (_ctx, _push, _parent, _attrs) => {
-      const _component_NuxtLink = __nuxt_component_0$4;
+      const _component_NuxtLink = __nuxt_component_0$3;
       const _component_UButton = _sfc_main$9;
       _push(ssrRenderComponent(_component_NuxtLink, mergeProps({
         to: props.path

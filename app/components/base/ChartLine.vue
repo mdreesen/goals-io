@@ -43,7 +43,7 @@ const xFormatter = (tick: number, _i?: number, _ticks?: number[]): string => {
 
 <template>
   <div>
-    <baseButtonYear :data="dataYears" />
+    <LazyBaseButtonYear :data="dataYears" />
     <ClientOnly>
       <LineChart :data="useData" :height="300" x-label="Date" :y-label="`${props.lineLabel}`" :categories="categories"
         :y-num-ticks="4" :x-num-ticks="7" :x-formatter="xFormatter" :curve-type="CurveType.Basis"

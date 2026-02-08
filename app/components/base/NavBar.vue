@@ -28,26 +28,24 @@ const items = computed<NavigationMenuItem[]>(() => [{
 </script>
 
 <template>
-  <ClientOnly>
-    <UHeader mode="slideover" class="border-none">
-      <template #title>
-        <!-- Logo/Brand Name -->
-        <NuxtLink to="/" class="flex items-center text-2xl font-extrabold h-10">
-          <span class="text-2xl font-bold">
-            ASCΞND
-          </span>
-          <NuxtImg v-if="colorMode.value !== 'light'"
-            class="h-25 w-25 opacity-60 -left-14.5 relative rounded-full object-cover lg:hidden"
-            alt="White Raven Logo" format="webp" width="200px" height="200px" src="/images/logo_transparent_512x512.png"
-            loading="lazy" fetch-priority="low" />
-        </NuxtLink>
-      </template>
+  <UHeader mode="slideover" class="border-none">
+    <template #title>
+      <!-- Logo/Brand Name -->
+      <NuxtLink to="/" class="flex items-center text-2xl font-extrabold h-10">
+        <span class="text-2xl font-bold">
+          ASCΞND
+        </span>
+        <NuxtImg v-if="colorMode.value !== 'light'"
+          class="h-25 w-25 opacity-60 -left-14.5 relative rounded-full object-cover lg:hidden" alt="White Raven Logo"
+          format="webp" width="200px" height="200px" src="/images/logo_transparent_512x512.png" loading="lazy"
+          fetch-priority="low" />
+      </NuxtLink>
+    </template>
 
-      <UNavigationMenu color="neutral" :items="items" />
+    <UNavigationMenu color="neutral" :items="items" />
 
-      <template #body>
-        <UNavigationMenu color="neutral" :items="items" orientation="vertical" class="-mx-2.5" />
-      </template>
-    </UHeader>
-  </ClientOnly>
+    <template #body>
+      <UNavigationMenu color="neutral" :items="items" orientation="vertical" class="-mx-2.5" />
+    </template>
+  </UHeader>
 </template>

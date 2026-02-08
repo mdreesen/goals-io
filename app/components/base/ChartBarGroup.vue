@@ -52,7 +52,7 @@ const yFormatter = (tick: number) => tick.toString();
 
 <template>
   <div>
-    <baseButtonYear :data="props.dataYears" />
+    <LazyBaseButtonYear :data="props.dataYears" />
     <ClientOnly>
       <BarChart :data="useData" :height="300" :categories="categories"
         :y-axis="[props.barOneName as any, props.barTwoName as any]" :group-padding="0" :bar-padding="0.2"
