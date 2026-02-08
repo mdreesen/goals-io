@@ -19,6 +19,13 @@ export default defineNuxtConfig({
   ],
   app: {
     head: {
+      title: 'Ascend', // default fallback title
+      htmlAttrs: {
+        lang: 'en',
+      },
+      link: [
+        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      ],
       script: [
         { src: '/_vercel/insights/script.js', defer: true, async: true }
       ]
@@ -53,7 +60,7 @@ export default defineNuxtConfig({
       name: 'Ascend',
       short_name: 'Ascend',
       description: 'Set goals. Achieve greatness.',
-      orientation: 'any',
+      orientation: 'natural',
       lang: 'en',
       display: 'standalone',
       background_color: '#272727',

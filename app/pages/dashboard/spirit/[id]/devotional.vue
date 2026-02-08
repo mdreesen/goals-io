@@ -4,11 +4,18 @@ import { formatDate } from '~/utils/date';
 import { book_of_bible } from "~/utils/dropdowns/selections";
 import type { BibleType } from '~/types/bible';
 
+const route = useRoute();
+
 definePageMeta({
     layout: 'authenticated',
 });
 
-const route = useRoute();
+useHead({
+    title: `Ascend | Devotional | ${route.params.id}`,
+    meta: [
+        { name: 'description', content: 'Ascend Devotional Dashboard.' },
+    ],
+});
 
 const { data: data, pending: pending_data } = await useFetch<BibleType>(`/api/user/bible/devotional/${route.params.id}`);
 const toast = useToast();

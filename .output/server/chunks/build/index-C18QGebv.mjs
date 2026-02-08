@@ -1,4 +1,4 @@
-import { mergeProps, useSSRContext } from 'vue';
+import { useSSRContext, mergeProps } from 'vue';
 import { ssrRenderAttrs } from 'vue/server-renderer';
 import { _ as _export_sfc } from './_plugin-vue_export-helper-1tPrXgE0.mjs';
 

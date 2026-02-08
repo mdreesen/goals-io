@@ -3,11 +3,18 @@ import { ref } from 'vue';
 import { selection_book_kinds, selection_status_book } from '~/utils/dropdowns/selections';
 import type { BookType } from '~/types/books';
 
+const route = useRoute();
+
 definePageMeta({
     layout: 'authenticated',
 });
 
-const route = useRoute();
+useHead({
+    title: `Ascend | Book | ${route.params.id}`,
+    meta: [
+        { name: 'description', content: 'Ascend Book Dashboard.' },
+    ],
+});
 
 const { data: data, pending: pending_data } = await useFetch<BookType>(`/api/user/books/${route.params.id}`);
 const toast = useToast();

@@ -4,6 +4,13 @@ definePageMeta({
     layout: 'authenticated',
 });
 
+useHead({
+    title: 'Ascend | Body',
+    meta: [
+        { name: 'description', content: 'Ascend Body Dashboard.' },
+    ],
+});
+
 const { data: data_setting } = useNuxtData('setting');
 
 </script>

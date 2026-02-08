@@ -2,10 +2,18 @@
 import { ref } from 'vue';
 import { formatDate } from '~/utils/date';
 import type { GratitudeType } from '~/types/gratitude';
+
 const route = useRoute();
 
 definePageMeta({
     layout: 'authenticated',
+});
+
+useHead({
+    title: `Ascend | Gratitude | ${route.params.id}`,
+    meta: [
+        { name: 'description', content: 'Ascend Gratitude Dashboard.' },
+    ],
 });
 
 const { data: data, pending: pending_data } = await useFetch<GratitudeType>(`/api/user/gratitudes/${route.params.id}`);

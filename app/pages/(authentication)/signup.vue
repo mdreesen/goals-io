@@ -3,6 +3,13 @@ import { ref } from 'vue';
 import { useMotion } from '@vueuse/motion';
 import { formVarient, containerVarient, inputVarient } from '~/utils/varients';
 
+useHead({
+    title: 'Ascend | Signup',
+    meta: [
+        { name: 'description', content: 'Ascend Signup.' },
+    ],
+});
+
 const formRef = ref();
 const isLoading = ref(false);
 let errorMessage = ref('');
@@ -89,11 +96,11 @@ useMotion(formRef, { ...formVarient() });
                     <div v-motion="{ ...inputVarient() }" class="flex items-center space-x-2">
                         <input id="privacy" type="checkbox" v-model="credentials.privacy_policy" required
                             class="rounded-md border-gray-600 text-purple-500 focus:ring-purple-500 transition-colors duration-200" />
-                            <div>
-                                <baseLabel text="I agree to the" />
-                                <NuxtLink to="/privacy-policy"
-                                class="text-blue-400 hover:underline transition-colors">Privacy Policy</NuxtLink>
-                            </div>
+                        <div>
+                            <baseLabel text="I agree to the" />
+                            <NuxtLink to="/privacy-policy" class="text-blue-400 hover:underline transition-colors">
+                                Privacy Policy</NuxtLink>
+                        </div>
                     </div>
 
                     <div v-motion="{ ...inputVarient() }">

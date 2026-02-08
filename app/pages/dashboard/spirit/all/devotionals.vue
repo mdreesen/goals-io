@@ -3,6 +3,13 @@ definePageMeta({
     layout: 'authenticated',
 });
 
+useHead({
+    title: 'Ascend | All | Devotionals',
+    meta: [
+        { name: 'description', content: 'Ascend All Devotionals Dashboard.' },
+    ],
+});
+
 await useFetch('/api/user/bible/devotional/all', { key: 'all_devotionals', lazy: true });
 const { data } = useNuxtData('all_devotionals');
 </script>

@@ -1,6 +1,14 @@
 <script setup lang="ts">
+
 definePageMeta({
     layout: 'authenticated',
+});
+
+useHead({
+    title: 'Ascend | All | Sermons',
+    meta: [
+        { name: 'description', content: 'Ascend All Sermons Dashboard.' },
+    ],
 });
 
 await useFetch('/api/user/bible/sermon/all', { key: 'all_sermons', lazy: true });

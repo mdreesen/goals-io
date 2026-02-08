@@ -1,1 +1,0 @@
-import{d as t,U as r,h as c,a as i,b as e,t as l,C as u,o as _,V as f}from"./Dwi1IfWL.js";const h=t({__name:"index",setup(m){const{user:a,clear:s}=r(),n=c(a?.value);async function o(){await s(),await f("/login")}return(p,d)=>(_(),i("div",null,[e("h1",null,"Welcome "+l(u(n)?.first_name),1),e("button",{onClick:o},"Logout")]))}});export{h as default};

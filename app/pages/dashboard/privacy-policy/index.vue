@@ -2,6 +2,13 @@
 definePageMeta({
     layout: 'authenticated',
 });
+
+useHead({
+  title: `Ascend | Privacy Policy`,
+  meta: [
+    { name: 'description', content: 'Ascend Privacy Policy Dashboard.' },
+  ],
+});
 </script>
 
 <template>

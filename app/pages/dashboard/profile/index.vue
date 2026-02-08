@@ -3,6 +3,13 @@ definePageMeta({
   layout: 'authenticated',
 });
 
+useHead({
+  title: `Ascend | Profile`,
+  meta: [
+    { name: 'description', content: 'Ascend Profile Dashboard.' },
+  ],
+});
+
 </script>
 
 <template>

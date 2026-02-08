@@ -3,6 +3,13 @@ definePageMeta({
     layout: 'authenticated',
 });
 
+useHead({
+    title: 'Ascend | All | Weight',
+    meta: [
+        { name: 'description', content: 'Ascend All Weight Dashboard.' },
+    ],
+});
+
 await useFetch('/api/user/weight/all', { key: 'all_weight' });
 const { data } = useNuxtData('all_weight');
 </script>

@@ -1,5 +1,10 @@
 <script setup lang="ts">
-// console.log(performance.now())
+const route = useRoute();
+
+useHead({
+    meta: [{ property: 'og:title', content: `Ascend - ${route.meta.title}` }],
+})
+
 await useFetch('/api/stats', { key: 'stats', lazy: true });
 
 await useFetch('/api/charts/books', { key: 'chart_book', lazy: true });
@@ -26,7 +31,7 @@ await useFetch('/api/user/profile/setting', { key: 'setting', lazy: true });
 
 <template>
     <baseNavBar />
-
-    <slot />
-    <!-- <AppFooter /> -->
+    <main>
+        <slot />
+    </main>
 </template>

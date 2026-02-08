@@ -4,6 +4,17 @@ import type { WeightType } from '~/types/weight';
 
 const route = useRoute();
 
+definePageMeta({
+    layout: 'authenticated',
+});
+
+useHead({
+    title: `Ascend | Weight | ${route.params.id}`,
+    meta: [
+        { name: 'description', content: 'Ascend Weight Dashboard.' },
+    ],
+});
+
 const { data: data, pending: pending_data } = await useFetch<WeightType>(`/api/user/weight/${route.params.id}`);
 const toast = useToast();
 

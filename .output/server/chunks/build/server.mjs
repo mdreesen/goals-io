@@ -1,4 +1,4 @@
-import process from 'node:process';globalThis._importMeta_=globalThis._importMeta_||{url:"file:///_entry.js",env:process.env};import { defineComponent, computed, mergeProps, unref, withCtx, renderSlot, createBlock, openBlock, inject, toValue, ref, watch, createVNode, resolveDynamicComponent, toDisplayString, toRef as toRef$1, isRef, shallowRef, getCurrentInstance, provide, cloneVNode, h, createElementBlock, useSlots, createCommentVNode, resolveComponent, hasInjectionContext, onServerPrefetch, getCurrentScope, onScopeDispose, mergeModels, useModel, createTextVNode, reactive, useAttrs, nextTick, defineAsyncComponent, Fragment, toRefs, useSSRContext, shallowReactive, Suspense, createApp, toRaw, readonly, customRef, renderList, useId, onErrorCaptured, effectScope, isReadonly, isShallow, isReactive, useTemplateRef, withModifiers, markRaw } from 'vue';
+import process from 'node:process';globalThis._importMeta_=globalThis._importMeta_||{url:"file:///_entry.js",env:process.env};import { defineComponent, toRef as toRef$1, inject, computed, mergeProps, unref, withCtx, renderSlot, createBlock, openBlock, toValue, ref, watch, createVNode, resolveDynamicComponent, toDisplayString, isRef, shallowRef, getCurrentInstance, provide, cloneVNode, h, createElementBlock, getCurrentScope, onScopeDispose, useSlots, createCommentVNode, resolveComponent, hasInjectionContext, onServerPrefetch, mergeModels, useModel, createTextVNode, reactive, useAttrs, nextTick, defineAsyncComponent, Fragment, toRefs, useSSRContext, shallowReactive, Suspense, createApp, toRaw, readonly, customRef, renderList, useId, onErrorCaptured, effectScope, isReadonly, isShallow, isReactive, useTemplateRef, withModifiers, markRaw } from 'vue';
 import { m as serialize, n as defu, o as parseQuery, q as klona, t as defuFn, v as hasProtocol, w as isScriptProtocol, x as joinURL, y as isEqual, z as appendResponseHeader, A as withQuery, B as sanitizeStatusCode, C as withTrailingSlash, D as withoutTrailingSlash, E as getContext, c as createError$1, F as withLeadingSlash, G as parseURL, $ as $fetch$1, H as baseURL, I as createHooks, J as executeAsync, K as encodeParam, L as encodePath, M as toRouteMatcher, N as createRouter$1 } from '../nitro/nitro.mjs';
 import { setActivePinia, createPinia, shouldHydrate } from 'pinia';
 import { useRoute as useRoute$1, RouterView, createMemoryHistory, createRouter, START_LOCATION } from 'vue-router';
@@ -514,6 +514,12 @@ const unhead_k2P3m_ZDyjlr2mMYnoDPwavjsDN8hBlk9cFai0bbopU = /* @__PURE__ */ defin
 function toArray$1(value) {
   return Array.isArray(value) ? value : [value];
 }
+const __nuxt_page_meta$i = {
+  layout: "authenticated"
+};
+const __nuxt_page_meta$h = {
+  layout: "authenticated"
+};
 const __nuxt_page_meta$g = {
   layout: "authenticated"
 };
@@ -569,20 +575,20 @@ const _routes = [
   {
     name: "dashboard",
     path: "/dashboard",
-    meta: __nuxt_page_meta$g || {},
-    component: () => import('./index-BZTIqTOD.mjs').then((n) => n.i)
+    meta: __nuxt_page_meta$i || {},
+    component: () => import('./index-BsqyuKkr.mjs').then((n) => n.i)
   },
   {
     name: "dashboard-body",
     path: "/dashboard/body",
-    meta: __nuxt_page_meta$f || {},
-    component: () => import('./index-BgqbESB5.mjs')
+    meta: __nuxt_page_meta$h || {},
+    component: () => import('./index-bZKMSfLA.mjs')
   },
   {
     name: "dashboard-mind",
     path: "/dashboard/mind",
-    meta: __nuxt_page_meta$e || {},
-    component: () => import('./index-Cv4fjXCz.mjs')
+    meta: __nuxt_page_meta$g || {},
+    component: () => import('./index-D-8C1Ut_.mjs')
   },
   {
     name: "privacy-policy",
@@ -593,121 +599,123 @@ const _routes = [
     name: "index",
     path: "/",
     meta: { "middleware": ["auth"] },
-    component: () => import('./index-DenoM0-_.mjs')
+    component: () => import('./index-I0xFc0ew.mjs')
   },
   {
     name: "login",
     path: "/login",
-    component: () => import('./login-BbNqtUJK.mjs')
+    component: () => import('./login-UlJ_73vS.mjs')
   },
   {
     name: "dashboard-spirit",
     path: "/dashboard/spirit",
-    meta: __nuxt_page_meta$d || {},
-    component: () => import('./index-ncUD6tVc.mjs')
+    meta: __nuxt_page_meta$f || {},
+    component: () => import('./index-CJIxdFT8.mjs')
   },
   {
     name: "signup",
     path: "/signup",
-    component: () => import('./signup-i9u4dvMt.mjs')
+    component: () => import('./signup-CSGi4-jr.mjs')
   },
   {
     name: "dashboard-profile",
     path: "/dashboard/profile",
-    meta: __nuxt_page_meta$c || {},
-    component: () => import('./index-Io7zjQcG.mjs')
+    meta: __nuxt_page_meta$e || {},
+    component: () => import('./index-BAlSB4aT.mjs')
   },
   {
     name: "dashboard-mind-all-books",
     path: "/dashboard/mind/all/books",
-    meta: __nuxt_page_meta$b || {},
-    component: () => import('./books-RrtDdIaK.mjs')
+    meta: __nuxt_page_meta$d || {},
+    component: () => import('./books-CJFxSihp.mjs')
   },
   {
     name: "dashboard-body-all-weight",
     path: "/dashboard/body/all/weight",
-    meta: __nuxt_page_meta$a || {},
-    component: () => import('./weight-D8DBwTHH.mjs')
+    meta: __nuxt_page_meta$c || {},
+    component: () => import('./weight-C_dw5T4A.mjs')
   },
   {
     name: "dashboard-mind-id-books",
     path: "/dashboard/mind/:id()/books",
-    meta: __nuxt_page_meta$9 || {},
-    component: () => import('./books-CNrtY38r.mjs')
+    meta: __nuxt_page_meta$b || {},
+    component: () => import('./books-DDPZuDTz.mjs')
   },
   {
     name: "dashboard-body-id-weight",
     path: "/dashboard/body/:id()/weight",
-    component: () => import('./weight-BZaCA8LS.mjs')
+    meta: __nuxt_page_meta$a || {},
+    component: () => import('./weight-wRdYBref.mjs')
   },
   {
     name: "dashboard-body-id-workout",
     path: "/dashboard/body/:id()/workout",
-    component: () => import('./workout-Bsh2UhoX.mjs')
+    meta: __nuxt_page_meta$9 || {},
+    component: () => import('./workout-B9Qv05jQ.mjs')
   },
   {
     name: "dashboard-body-all-workouts",
     path: "/dashboard/body/all/workouts",
     meta: __nuxt_page_meta$8 || {},
-    component: () => import('./workouts--UR4o80n.mjs')
+    component: () => import('./workouts-CxvzrKBi.mjs')
   },
   {
     name: "dashboard-spirit-id-sermon",
     path: "/dashboard/spirit/:id()/sermon",
     meta: __nuxt_page_meta$7 || {},
-    component: () => import('./sermon-34Pc5UBx.mjs')
+    component: () => import('./sermon-CuqGQ4NJ.mjs')
   },
   {
     name: "dashboard-spirit-all-entries",
     path: "/dashboard/spirit/all/entries",
     meta: __nuxt_page_meta$6 || {},
-    component: () => import('./entries-CucuBJEB.mjs')
+    component: () => import('./entries-CkvwtO2m.mjs')
   },
   {
     name: "dashboard-spirit-all-sermons",
     path: "/dashboard/spirit/all/sermons",
     meta: __nuxt_page_meta$5 || {},
-    component: () => import('./sermons-DH0ee6UG.mjs')
+    component: () => import('./sermons-gEP1lDL5.mjs')
   },
   {
     name: "dashboard-spirit-id-journal",
     path: "/dashboard/spirit/:id()/journal",
     meta: __nuxt_page_meta$4 || {},
-    component: () => import('./journal-VeXYUB1c.mjs')
+    component: () => import('./journal-CDX7RHsN.mjs')
   },
   {
     name: "dashboard-mind-id-gratitudes",
     path: "/dashboard/mind/:id()/gratitudes",
     meta: __nuxt_page_meta$3 || {},
-    component: () => import('./gratitudes-C_MjfC3y.mjs')
+    component: () => import('./gratitudes-qXtIpJhk.mjs')
   },
   {
     name: "dashboard-privacy-policy",
     path: "/dashboard/privacy-policy",
     meta: __nuxt_page_meta$2 || {},
-    component: () => import('./index-H1YnYi1P.mjs')
+    component: () => import('./index-B1BUJ11E.mjs')
   },
   {
     name: "forgotpassword",
     path: "/forgotpassword",
-    component: () => import('./forgotpassword-hrxP4w0V.mjs')
+    component: () => import('./forgotpassword-CgvQoQVB.mjs')
   },
   {
     name: "dashboard-spirit-id-devotional",
     path: "/dashboard/spirit/:id()/devotional",
     meta: __nuxt_page_meta$1 || {},
-    component: () => import('./devotional-CSz3jD3h.mjs')
+    component: () => import('./devotional-DF-AHwtT.mjs')
   },
   {
     name: "dashboard-spirit-all-devotionals",
     path: "/dashboard/spirit/all/devotionals",
     meta: __nuxt_page_meta || {},
-    component: () => import('./devotionals-CmkFICPW.mjs')
+    component: () => import('./devotionals-ChXltF-7.mjs')
   },
   {
     name: "id-resetpassword",
     path: "/:id()/resetpassword",
-    component: () => import('./resetpassword-CIZuYpJa.mjs')
+    component: () => import('./resetpassword-D2aWh0Ca.mjs')
   }
 ];
 const _wrapInTransition = (props, children) => {
@@ -828,7 +836,7 @@ const globalMiddleware = [
   manifest_45route_45rule
 ];
 const namedMiddleware = {
-  auth: () => import('./auth-DcMarMia.mjs')
+  auth: () => import('./auth-ZpgCIEx9.mjs')
 };
 const plugin$1 = /* @__PURE__ */ defineNuxtPlugin({
   name: "nuxt:router",
@@ -2106,7 +2114,7 @@ const plugin = /* @__PURE__ */ defineNuxtPlugin({
   }
 });
 const LazyIcon = defineAsyncComponent(() => Promise.resolve().then(() => index).then((r) => r["default"] || r.default || r));
-const LazyToastContainer = defineAsyncComponent(() => import('./ToastContainer-sUdB0uHD.mjs').then((r) => r["default"] || r.default || r));
+const LazyToastContainer = defineAsyncComponent(() => import('./ToastContainer-BrOfsoiP.mjs').then((r) => r["default"] || r.default || r));
 const lazyGlobalComponents = [
   ["Icon", LazyIcon],
   ["ToastContainer", LazyToastContainer]
@@ -8105,8 +8113,8 @@ _sfc_main$4.setup = (props, ctx) => {
 };
 const __nuxt_component_0$1 = Object.assign(_sfc_main$4, { __name: "UApp" });
 const layouts = {
-  authenticated: defineAsyncComponent(() => import('./authenticated-BCV1zWsW.mjs').then((m) => m.default || m)),
-  default: defineAsyncComponent(() => import('./default-X2IZVJnD.mjs').then((m) => m.default || m))
+  authenticated: defineAsyncComponent(() => import('./authenticated-B8hGoD2l.mjs').then((m) => m.default || m)),
+  default: defineAsyncComponent(() => import('./default-CpZuf_Ne.mjs').then((m) => m.default || m))
 };
 const LayoutLoader = defineComponent({
   name: "LayoutLoader",
@@ -8523,5 +8531,5 @@ let entry;
 }
 const entry_default = (ssrContext) => entry(ssrContext);
 
-export { getSlotChildrenText as A, _sfc_main$a as B, useFieldGroup as C, useComponentIcons as D, _sfc_main$c as E, createSharedComposable as F, isArrayOfArray as G, get as H, pickLinkProps as I, _sfc_main$b as J, useState as K, __nuxt_component_0$4 as _, __nuxt_component_0 as a, useUserSession as b, useMotion as c, _sfc_main$9 as d, entry_default as default, __nuxt_component_0$3 as e, useNuxtApp as f, useAppConfig as g, useFormField as h, _sfc_main$f as i, refreshNuxtData as j, __nuxt_component_2$1 as k, useRoute as l, useRuntimeConfig as m, navigateTo as n, usePortal as o, fetchDefaults as p, useAsyncData as q, reactivePick as r, useRequestFetch as s, tv as t, useNuxtData as u, __nuxt_component_0$2 as v, defineNuxtRouteMiddleware as w, makeDestructurable as x, camelize as y, useLocale as z };
+export { useLocale as A, getSlotChildrenText as B, _sfc_main$a as C, useFieldGroup as D, useComponentIcons as E, _sfc_main$c as F, createSharedComposable as G, isArrayOfArray as H, get as I, pickLinkProps as J, _sfc_main$b as K, useState as L, __nuxt_component_0$4 as _, useNuxtData as a, __nuxt_component_0 as b, useUserSession as c, useMotion as d, entry_default as default, _sfc_main$9 as e, __nuxt_component_0$3 as f, useNuxtApp as g, useAppConfig as h, useFormField as i, _sfc_main$f as j, refreshNuxtData as k, __nuxt_component_2$1 as l, useRoute as m, navigateTo as n, useRuntimeConfig as o, usePortal as p, fetchDefaults as q, reactivePick as r, useAsyncData as s, tv as t, useHead as u, useRequestFetch as v, __nuxt_component_0$2 as w, defineNuxtRouteMiddleware as x, makeDestructurable as y, camelize as z };
 //# sourceMappingURL=server.mjs.map

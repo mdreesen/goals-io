@@ -4,12 +4,19 @@ import { formatDate } from '~/utils/date';
 import { mood } from "~/utils/dropdowns/selections";
 import type { JournalType } from '~/types/journal';
 
+const route = useRoute();
+
 definePageMeta({
     layout: 'authenticated',
 });
 
-const route = useRoute();
+useHead({
+    title: `Ascend | Journal Entry | ${route.params.id}`,
+    meta: [
+        { name: 'description', content: 'Ascend Journal Entry Dashboard.' },
 
+    ],
+});
 const { data: data, pending: pending_data } = await useFetch<JournalType>(`/api/user/journal/${route.params.id}`);
 const toast = useToast();
 

@@ -3,6 +3,13 @@ definePageMeta({
     layout: 'authenticated',
 });
 
+useHead({
+    title: 'Ascend | All | Workouts',
+    meta: [
+        { name: 'description', content: 'Ascend All Workouts Dashboard.' },
+    ],
+});
+
 await useFetch('/api/user/workout/all', { key: 'all_workouts' });
 const { data } = useNuxtData('all_workouts');
 </script>

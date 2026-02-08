@@ -3,6 +3,13 @@ import { ref, reactive } from 'vue';
 import { useMotion } from '@vueuse/motion';
 import { formVarient, containerVarient, inputVarient } from '~/utils/varients';
 
+useHead({
+  title: 'Ascend | Login',
+  meta: [
+    { name: 'description', content: 'Ascend Login.' },
+  ],
+});
+
 const formRef = ref();
 const isLoading = ref(false);
 let errorMessage = ref('');

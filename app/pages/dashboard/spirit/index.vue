@@ -3,6 +3,13 @@ definePageMeta({
     layout: 'authenticated',
 });
 
+useHead({
+    title: 'Ascend | Spirit',
+    meta: [
+        { name: 'description', content: 'Ascend Spirit Dashboard.' },
+    ],
+});
+
 const { data: data_setting } = useNuxtData('setting');
 
 </script>

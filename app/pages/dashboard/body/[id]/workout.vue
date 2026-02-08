@@ -6,6 +6,17 @@ import type { WorkoutType } from '~/types/workout';
 
 const route = useRoute();
 
+definePageMeta({
+    layout: 'authenticated',
+});
+
+useHead({
+    title: `Ascend | Workout | ${route.params.id}`,
+    meta: [
+        { name: 'description', content: 'Ascend Workout Dashboard.' },
+    ],
+});
+
 const { data: data, pending: pending_data } = await useFetch<WorkoutType>(`/api/user/workout/${route.params.id}`);
 const toast = useToast();
 

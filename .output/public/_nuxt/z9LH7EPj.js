@@ -1,0 +1,1 @@
+import{d as a,al as o,I as s,a as n,p as r,o as l}from"./-oKnPsBe.js";const d=a({__name:"default",setup(u){const e=o();return s({meta:[{property:"og:title",content:`Ascend - ${e.meta.title}`}]}),(t,c)=>(l(),n("div",null,[r(t.$slots,"default")]))}});export{d as default};

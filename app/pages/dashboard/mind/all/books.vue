@@ -5,6 +5,13 @@ definePageMeta({
     layout: 'authenticated',
 });
 
+useHead({
+    title: `Ascend | Books`,
+    meta: [
+        { name: 'description', content: 'Ascend Books Dashboard.' },
+    ],
+});
+
 await useFetch('/api/user/books/all', { key: 'all_books' });
 const { data } = useNuxtData('all_books');
 </script>

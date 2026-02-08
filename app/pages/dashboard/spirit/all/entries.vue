@@ -3,6 +3,13 @@ definePageMeta({
     layout: 'authenticated',
 });
 
+useHead({
+    title: 'Ascend | All | Journal Entries',
+    meta: [
+        { name: 'description', content: 'Ascend All Journal Entries Dashboard.' },
+    ],
+});
+
 await useFetch('/api/user/journal/all', { key: 'all_entries', lazy: true });
 const { data } = useNuxtData('all_entries');
 </script>

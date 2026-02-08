@@ -3,6 +3,13 @@ definePageMeta({
     layout: 'authenticated',
 });
 
+useHead({
+    title: `Ascend | Mind`,
+    meta: [
+        { name: 'description', content: 'Ascend Mind Dashboard.' },
+    ],
+});
+
 const { data: data_setting } = useNuxtData('setting');
 
 </script>

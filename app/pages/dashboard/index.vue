@@ -7,6 +7,13 @@ definePageMeta({
     layout: 'authenticated',
 });
 
+useHead({
+    title: 'Ascend | Main',
+    meta: [
+        { name: 'description', content: 'Ascend Main Dashboard.' },
+    ],
+});
+
 const yearStore = useYear();
 
 const { data: data_chart_book } = useNuxtData('chart_book');
