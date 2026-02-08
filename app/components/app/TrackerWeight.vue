@@ -22,7 +22,7 @@ async function log() {
     body: input
   })
     .then(async () => {
-      await refreshNuxtData('weight');
+      await refreshNuxtData(['weight', 'chart_weight']);
       open.value = false;
       isLoading.value = false;
     })

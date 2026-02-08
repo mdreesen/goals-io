@@ -42,6 +42,7 @@ async function log() {
         }
     })
         .then(async () => {
+            await refreshNuxtData('sermon');
             await navigateTo('/dashboard/spirit');
         })
         .catch(async (error) => {
@@ -59,6 +60,7 @@ async function delete_log() {
         body: input
     })
         .then(async () => {
+            await refreshNuxtData('sermon');
             await navigateTo('/dashboard/spirit');
         })
         .catch(async (error) => {

@@ -28,6 +28,7 @@ async function log() {
         }
     })
         .then(async () => {
+            await refreshNuxtData(['weight', 'chart_weight']);
             await navigateTo('/dashboard/body');
         })
         .catch(async (error) => {
@@ -45,6 +46,7 @@ async function delete_log() {
         body: input
     })
         .then(async () => {
+            await refreshNuxtData(['weight', 'chart_weight']);
             await navigateTo('/dashboard/body');
         })
         .catch(async (error) => {

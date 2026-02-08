@@ -44,6 +44,7 @@ async function log() {
         body: input
     })
         .then(async () => {
+            await refreshNuxtData(['books', 'chart_book']);
             await navigateTo('/dashboard/mind');
         })
         .catch(async (error) => {
@@ -61,6 +62,7 @@ async function delete_log() {
         body: input
     })
         .then(async () => {
+            await refreshNuxtData(['books', 'chart_book']);
             await navigateTo('/dashboard/mind');
         })
         .catch(async (error) => {

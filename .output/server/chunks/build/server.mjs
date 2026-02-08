@@ -576,13 +576,13 @@ const _routes = [
     name: "dashboard-body",
     path: "/dashboard/body",
     meta: __nuxt_page_meta$f || {},
-    component: () => import('./index-DA5ddbA8.mjs')
+    component: () => import('./index-IAHl0FkR.mjs')
   },
   {
     name: "dashboard-mind",
     path: "/dashboard/mind",
     meta: __nuxt_page_meta$e || {},
-    component: () => import('./index-BQS9Cmy7.mjs')
+    component: () => import('./index-W_VonYdY.mjs')
   },
   {
     name: "privacy-policy",
@@ -615,7 +615,7 @@ const _routes = [
     name: "dashboard-profile",
     path: "/dashboard/profile",
     meta: __nuxt_page_meta$c || {},
-    component: () => import('./index-DinjDEco.mjs')
+    component: () => import('./index-Cx3C384z.mjs')
   },
   {
     name: "dashboard-mind-all-books",
@@ -633,17 +633,17 @@ const _routes = [
     name: "dashboard-mind-id-books",
     path: "/dashboard/mind/:id()/books",
     meta: __nuxt_page_meta$9 || {},
-    component: () => import('./books-BnHi2iFr.mjs')
+    component: () => import('./books-CuImh1Xh.mjs')
   },
   {
     name: "dashboard-body-id-weight",
     path: "/dashboard/body/:id()/weight",
-    component: () => import('./weight-BGMu8nC9.mjs')
+    component: () => import('./weight-CdoOLw7l.mjs')
   },
   {
     name: "dashboard-body-id-workout",
     path: "/dashboard/body/:id()/workout",
-    component: () => import('./workout-1Msx7GZb.mjs')
+    component: () => import('./workout-DBxEqYps.mjs')
   },
   {
     name: "dashboard-body-all-workouts",
@@ -655,7 +655,7 @@ const _routes = [
     name: "dashboard-spirit-id-sermon",
     path: "/dashboard/spirit/:id()/sermon",
     meta: __nuxt_page_meta$7 || {},
-    component: () => import('./sermon-D_rUttwS.mjs')
+    component: () => import('./sermon-CfLhpCIo.mjs')
   },
   {
     name: "dashboard-spirit-all-entries",
@@ -673,13 +673,13 @@ const _routes = [
     name: "dashboard-spirit-id-journal",
     path: "/dashboard/spirit/:id()/journal",
     meta: __nuxt_page_meta$4 || {},
-    component: () => import('./journal-AJyVTv2T.mjs')
+    component: () => import('./journal-DYqqJwz_.mjs')
   },
   {
     name: "dashboard-mind-id-gratitudes",
     path: "/dashboard/mind/:id()/gratitudes",
     meta: __nuxt_page_meta$3 || {},
-    component: () => import('./gratitudes-DBalWrA4.mjs')
+    component: () => import('./gratitudes-BkpxUYk6.mjs')
   },
   {
     name: "dashboard-privacy-policy",
@@ -696,7 +696,7 @@ const _routes = [
     name: "dashboard-spirit-id-devotional",
     path: "/dashboard/spirit/:id()/devotional",
     meta: __nuxt_page_meta$1 || {},
-    component: () => import('./devotional-_PT6h-FA.mjs')
+    component: () => import('./devotional-DtMr_IXH.mjs')
   },
   {
     name: "dashboard-spirit-all-devotionals",

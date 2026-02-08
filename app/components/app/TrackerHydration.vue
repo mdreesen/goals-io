@@ -45,7 +45,7 @@ async function log() {
     }
   })
     .then(async () => {
-      await refreshNuxtData('hydration');
+      await refreshNuxtData(['hydration', 'chart_hydration']);
 
       isLoading.value = false;
     })

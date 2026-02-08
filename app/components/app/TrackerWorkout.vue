@@ -28,7 +28,7 @@ async function log() {
     }
   })
     .then(async () => {
-      await refreshNuxtData('workout');
+      await refreshNuxtData(['workout', 'chart_workout']);
       open.value = false;
       isLoading.value = false;
     })
